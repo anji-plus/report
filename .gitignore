@@ -1,0 +1,7 @@
+.idea
+target
+*.iml
+/view/flutter/**/gen/*
+**/*.log
+dist
+logs

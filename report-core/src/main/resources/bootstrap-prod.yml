@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: gaea-business
+  cloud:
+    nacos:
+      server-addr: 10.108.142.118:8848
+      username: gaea
+      password: p@ss1234
+      config:
+        namespace: fe5a998f-1149-4f55-aa83-e7552279058c
+        file-extension: yaml
+      discovery:
+        namespace: fe5a998f-1149-4f55-aa83-e7552279058c
+generator:
+  enabled: false
+  workspace: /workspace/gaea
+  templatePath: template
