@@ -2,7 +2,7 @@ package com.anjiplus.template.gaea.business.modules.data.report.dao.entity;
 
 import com.anji.plus.gaea.annotation.Unique;
 import com.anji.plus.gaea.curd.entity.GaeaBaseEntity;
-import com.anjiplus.template.gaea.common.RespCommonCode;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,7 +21,7 @@ public class Report extends GaeaBaseEntity {
     private String reportName;
 
     @ApiModelProperty(value = "报表编码")
-    @Unique(code = RespCommonCode.REPORT_CODE_ISEXIST)
+    @Unique(code = ResponseCode.REPORT_CODE_ISEXIST)
     private String reportCode;
 
     @ApiModelProperty(value = "分组")

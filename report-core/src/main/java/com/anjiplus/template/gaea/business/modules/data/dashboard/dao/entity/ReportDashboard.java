@@ -2,15 +2,11 @@
 package com.anjiplus.template.gaea.business.modules.data.dashboard.dao.entity;
 
 import com.anji.plus.gaea.annotation.Unique;
-import com.anjiplus.template.gaea.common.RespCommonCode;
-import lombok.Data;
-import io.swagger.annotations.ApiModelProperty;
-
 import com.anji.plus.gaea.curd.entity.GaeaBaseEntity;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import javax.validation.constraints.*;
-import java.sql.Timestamp;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
 * @description 大屏设计 entity
@@ -21,7 +17,7 @@ import java.sql.Timestamp;
 @Data
 public class ReportDashboard extends GaeaBaseEntity {
     @ApiModelProperty(value = "报表编码")
-    @Unique(code = RespCommonCode.REPORT_CODE_ISEXIST)
+    @Unique(code = ResponseCode.REPORT_CODE_ISEXIST)
     private String reportCode;
 
     @ApiModelProperty(value = "看板标题")

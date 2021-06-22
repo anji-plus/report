@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anjiplus.template.gaea.business.modules.data.dataSetTransform.controller.dto.DataSetTransformDto;
 import com.anjiplus.template.gaea.business.modules.data.dataSetTransform.service.TransformStrategy;
-import com.anjiplus.template.gaea.common.RespCommonCode;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -56,7 +56,7 @@ public class JsTransformServiceImpl implements TransformStrategy {
             ScriptObjectMirror result = (ScriptObjectMirror) engine.get("result");
             return result.values().stream().map(o -> JSONObject.parseObject(JSONObject.toJSONString(o))).collect(Collectors.toList());
         } catch (Exception ex) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.EXECUTE_JS_ERROR, ex.getMessage());
+            throw BusinessExceptionBuilder.build(ResponseCode.EXECUTE_JS_ERROR, ex.getMessage());
         }
     }
 }

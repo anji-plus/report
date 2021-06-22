@@ -3,7 +3,7 @@ package com.anjiplus.template.gaea.business.modules.data.dataSet.dao.entity;
 
 import com.anji.plus.gaea.annotation.Unique;
 import com.anji.plus.gaea.curd.entity.GaeaBaseEntity;
-import com.anjiplus.template.gaea.common.RespCommonCode;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 public class DataSet extends GaeaBaseEntity {
     @ApiModelProperty(value = "数据集编码")
-    @Unique(code = RespCommonCode.SET_CODE_ISEXIST)
+    @Unique(code = ResponseCode.SET_CODE_ISEXIST)
     private String setCode;
 
     @ApiModelProperty(value = "数据集名称")

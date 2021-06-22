@@ -9,7 +9,7 @@ import com.anjiplus.template.gaea.business.modules.export.dao.GaeaExportMapper;
 import com.anjiplus.template.gaea.business.modules.export.dao.entity.GaeaExport;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.anjiplus.template.gaea.common.RespCommonCode;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anjiplus.template.gaea.common.util.StringPatternUtil;
@@ -74,14 +74,14 @@ public class GaeaFileServiceImpl implements GaeaFileService {
         try {
             String fileName = file.getOriginalFilename();
             if (StringUtils.isBlank(fileName)) {
-                throw BusinessExceptionBuilder.build(RespCommonCode.FILE_EMPTY_FILENAME);
+                throw BusinessExceptionBuilder.build(ResponseCode.FILE_EMPTY_FILENAME);
             }
             String suffixName = fileName.substring(fileName.lastIndexOf("."));
             //白名单校验(不区分大小写)
             List<String> list = new ArrayList<String>(Arrays.asList(whiteList.split("\\|")));
             list.addAll(list.stream().map(String::toUpperCase).collect(Collectors.toList()));
             if (!list.contains(suffixName)) {
-                throw BusinessExceptionBuilder.build(RespCommonCode.FILE_SUFFIX_UNSUPPORTED);
+                throw BusinessExceptionBuilder.build(ResponseCode.FILE_SUFFIX_UNSUPPORTED);
             }
             // 生成文件唯一性标识
             String fileId = UUID.randomUUID().toString();
@@ -104,7 +104,7 @@ public class GaeaFileServiceImpl implements GaeaFileService {
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             log.error("file upload error: {}", e);
-            throw BusinessExceptionBuilder.build(RespCommonCode.FILE_UPLOAD_ERROR);
+            throw BusinessExceptionBuilder.build(ResponseCode.FILE_UPLOAD_ERROR);
         }
     }
 
@@ -118,12 +118,12 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             queryWrapper.eq(GaeaFile::getFileId, fileId);
             GaeaFile gaeaFile = gaeaFileMapper.selectOne(queryWrapper);
             if (null == gaeaFile) {
-                throw BusinessExceptionBuilder.build(RespCommonCode.FILE_ONT_EXSIT);
+                throw BusinessExceptionBuilder.build(ResponseCode.FILE_ONT_EXSIT);
             }
             //解析文件路径、文件名和后缀
             String filePath = gaeaFile.getFilePath();
             if (StringUtils.isBlank(filePath)) {
-                throw BusinessExceptionBuilder.build(RespCommonCode.FILE_ONT_EXSIT);
+                throw BusinessExceptionBuilder.build(ResponseCode.FILE_ONT_EXSIT);
             }
             String filename = filePath.substring(filePath.lastIndexOf(File.separator));
             String fileSuffix = filename.substring(filename.lastIndexOf("."));

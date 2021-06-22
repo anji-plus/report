@@ -17,7 +17,7 @@ import com.anjiplus.template.gaea.business.modules.data.dataSource.dao.entity.Da
 import com.anjiplus.template.gaea.business.modules.data.dataSource.pool.constant.JdbcConstants;
 import com.anjiplus.template.gaea.business.modules.data.dataSource.pool.util.JdbcUtil;
 import com.anjiplus.template.gaea.business.modules.data.dataSource.service.DataSourceService;
-import com.anjiplus.template.gaea.common.RespCommonCode;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
@@ -99,7 +99,7 @@ public class DataSourceServiceImpl implements DataSourceService {
                 testHttp(dto);
                 break;
             default:
-                throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_TYPE_DOES_NOT_MATCH_TEMPORARILY);
+                throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_TYPE_DOES_NOT_MATCH_TEMPORARILY);
         }
         return true;
 
@@ -117,7 +117,7 @@ public class DataSourceServiceImpl implements DataSourceService {
             case JdbcConstants.HTTP:
                 return executeHttp(dto);
             default:
-                throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_TYPE_DOES_NOT_MATCH_TEMPORARILY);
+                throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_TYPE_DOES_NOT_MATCH_TEMPORARILY);
         }
     }
 
@@ -137,7 +137,7 @@ public class DataSourceServiceImpl implements DataSourceService {
             case JdbcConstants.MYSQL:
                 return mysqlTotal(sourceDto, dto);
             default:
-                throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_TYPE_DOES_NOT_MATCH_TEMPORARILY);
+                throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_TYPE_DOES_NOT_MATCH_TEMPORARILY);
         }
 
     }
@@ -174,10 +174,10 @@ public class DataSourceServiceImpl implements DataSourceService {
         try {
             exchange = restTemplate.exchange(dto.getApiUrl(), HttpMethod.valueOf(dto.getMethod()), entity, JSONObject.class);
         } catch (Exception e) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
+            throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
         }
         if (exchange.getStatusCode().isError()) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_CONNECTION_FAILED, exchange.getBody());
+            throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, exchange.getBody());
         }
         List<JSONObject> result;
         try {
@@ -200,7 +200,7 @@ public class DataSourceServiceImpl implements DataSourceService {
                 result.add(jsonObject);
             }
         } catch (Exception e) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.ANALYSIS_DATA_ERROR, e.getMessage());
+            throw BusinessExceptionBuilder.build(ResponseCode.ANALYSIS_DATA_ERROR, e.getMessage());
         }
         return result;
     }
@@ -229,19 +229,19 @@ public class DataSourceServiceImpl implements DataSourceService {
                         Object value = rs.getObject(t);
                         jo.put(t, value);
                     } catch (SQLException throwable) {
-                        throw BusinessExceptionBuilder.build(RespCommonCode.EXECUTE_SQL_ERROR, throwable.getMessage());
+                        throw BusinessExceptionBuilder.build(ResponseCode.EXECUTE_SQL_ERROR, throwable.getMessage());
                     }
                 });
                 list.add(jo);
             }
             return list;
         } catch (Exception throwable) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.EXECUTE_SQL_ERROR, throwable.getMessage());
+            throw BusinessExceptionBuilder.build(ResponseCode.EXECUTE_SQL_ERROR, throwable.getMessage());
         } finally {
             try {
                 pooledConnection.close();
             } catch (SQLException throwable) {
-                throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_CONNECTION_FAILED, throwable.getMessage());
+                throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, throwable.getMessage());
             }
         }
     }
@@ -260,10 +260,10 @@ public class DataSourceServiceImpl implements DataSourceService {
         try {
             exchange = restTemplate.exchange(dto.getApiUrl(), HttpMethod.valueOf(dto.getMethod()), entity, JSONObject.class);
         } catch (Exception e) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
+            throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
         }
         if (exchange.getStatusCode().isError()) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_CONNECTION_FAILED, exchange.getBody());
+            throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, exchange.getBody());
         }
         JSONObject body = exchange.getBody();
         List<JSONObject> result = new ArrayList<>();
@@ -284,7 +284,7 @@ public class DataSourceServiceImpl implements DataSourceService {
             log.info("数据库测试连接成功：{}", catalog);
             unPooledConnection.close();
         } catch (Exception e) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
+            throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
         }
     }
 
@@ -305,10 +305,10 @@ public class DataSourceServiceImpl implements DataSourceService {
         try {
             exchange = restTemplate.exchange(apiUrl, HttpMethod.valueOf(method), entity, Object.class);
             if (exchange.getStatusCode().isError()) {
-                throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_CONNECTION_FAILED, exchange.getBody());
+                throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, exchange.getBody());
             }
         } catch (RestClientException e) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
+            throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
         }
     }
 
@@ -330,10 +330,10 @@ public class DataSourceServiceImpl implements DataSourceService {
         try {
             exchange = restTemplate.exchange(apiUrl, HttpMethod.valueOf(method), entity, Object.class);
             if (exchange.getStatusCode().isError()) {
-                throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_CONNECTION_FAILED, exchange.getBody());
+                throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, exchange.getBody());
             }
         } catch (RestClientException e) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
+            throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
         }
 
     }

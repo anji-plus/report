@@ -8,7 +8,7 @@ import com.anjiplus.template.gaea.business.modules.data.dataSetParam.dao.DataSet
 import com.anjiplus.template.gaea.business.modules.data.dataSetParam.dao.entity.DataSetParam;
 import com.anjiplus.template.gaea.business.modules.data.dataSetParam.service.DataSetParamService;
 import com.anjiplus.template.gaea.business.modules.data.dataSetParam.util.ParamsResolverHelper;
-import com.anjiplus.template.gaea.common.RespCommonCode;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +60,7 @@ public class DataSetParamServiceImpl implements DataSetParamService {
             dynSentence = ParamsResolverHelper.resolveParams(contextData, dynSentence);
         }
         if (dynSentence.contains("${")) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.INCOMPLETE_PARAMETER_REPLACEMENT_VALUES, dynSentence);
+            throw BusinessExceptionBuilder.build(ResponseCode.INCOMPLETE_PARAMETER_REPLACEMENT_VALUES, dynSentence);
         }
         return dynSentence;
     }
@@ -102,7 +102,7 @@ public class DataSetParamServiceImpl implements DataSetParamService {
                 return Boolean.parseBoolean(engine.get("result").toString());
 
             } catch (Exception ex) {
-                throw BusinessExceptionBuilder.build(RespCommonCode.EXECUTE_JS_ERROR, ex.getMessage());
+                throw BusinessExceptionBuilder.build(ResponseCode.EXECUTE_JS_ERROR, ex.getMessage());
             }
 
         }

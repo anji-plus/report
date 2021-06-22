@@ -11,10 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2021-02-03
  */
 @EnabledGaeaConfiguration
-@SpringBootApplication(scanBasePackages = {
-        "com.anjiplus.template.gaea",
-        "com.anji.plus"
-})
+@SpringBootApplication
 @MapperScan(basePackages = {
         "com.anjiplus.template.gaea.business.modules.*.dao",
         "com.anjiplus.template.gaea.business.modules.*.**.dao",

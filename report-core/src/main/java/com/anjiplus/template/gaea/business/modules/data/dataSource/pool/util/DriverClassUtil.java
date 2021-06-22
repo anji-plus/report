@@ -1,7 +1,7 @@
 package com.anjiplus.template.gaea.business.modules.data.dataSource.pool.util;
 
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
-import com.anjiplus.template.gaea.common.RespCommonCode;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -62,7 +62,7 @@ public final class DriverClassUtil {
         try {
             Class.forName(driverClass);
         } catch (ClassNotFoundException e) {
-            throw BusinessExceptionBuilder.build(RespCommonCode.CLASS_NOT_FOUND, e.getMessage());
+            throw BusinessExceptionBuilder.build(ResponseCode.CLASS_NOT_FOUND, e.getMessage());
         }
     }
 
@@ -83,7 +83,7 @@ public final class DriverClassUtil {
             }
         }
 
-        throw BusinessExceptionBuilder.build(RespCommonCode.CLASS_NOT_FOUND, "Can't auto find match driver class for url: " + url);
+        throw BusinessExceptionBuilder.build(ResponseCode.CLASS_NOT_FOUND, "Can't auto find match driver class for url: " + url);
     }
 
 }

@@ -2,7 +2,7 @@ package com.anjiplus.template.gaea.business.modules.dict.dao.entity;
 
 import com.anji.plus.gaea.annotation.Unique;
 import com.anji.plus.gaea.curd.entity.GaeaBaseEntity;
-import com.anjiplus.template.gaea.common.RespCommonCode;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
@@ -22,7 +22,7 @@ public class GaeaDict extends GaeaBaseEntity implements Serializable {
     /**
      * 字典编码
      */
-    @Unique(code = RespCommonCode.DICCODE_ISEXIST)
+    @Unique(code = ResponseCode.DICCODE_ISEXIST)
     private String dictCode;
 
     /**
