@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.anji-plus</groupId>
+        <artifactId>spring-boot-gaea-parent</artifactId>
+        <version>1.0.0.RELEASE</version>
+    </parent>
+
+    <groupId>com.anjiplus.template.gaea</groupId>
+    <artifactId>template-gaea</artifactId>
+    <description>anjiplus-template-gaea</description>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>template-gaea</name>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>report-core</module>
+    </modules>
+
+    <properties>
+        <gaea.version>1.0.0-SNAPSHOT</gaea.version>
+        <gaea.security.version>1.0.0-SNAPSHOT</gaea.security.version>
+        <gaea.export.version>1.0.0-SNAPSHOT</gaea.export.version>
+        <gaea.generator.version>1.0.0-SNAPSHOT</gaea.generator.version>
+        <gaea.log.version>1.0.0-SNAPSHOT</gaea.log.version>
+        <maven.test.skip>true</maven.test.skip>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.anjiplus.template.gaea</groupId>
+                <artifactId>template-gaea-auth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anjiplus.template.gaea</groupId>
+                <artifactId>template-gaea-business</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anjiplus.template.gaea</groupId>
+                <artifactId>template-gaea-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.anjiplus.template.gaea</groupId>
+                <artifactId>template-gaea-generator</artifactId>
+                <version>${gaea.generator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.anji-plus</groupId>
+                <artifactId>spring-boot-gaea</artifactId>
+                <version>${gaea.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anji-plus</groupId>
+                <artifactId>spring-boot-starter-gaea-security</artifactId>
+                <version>${gaea.security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.anji-plus</groupId>
+                <artifactId>spring-boot-starter-gaea-export</artifactId>
+                <version>${gaea.export.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.anji-plus</groupId>
+                <artifactId>spring-boot-starter-gaea-log</artifactId>
+                <version>${gaea.log.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://nexus.anji-plus.com:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://nexus.anji-plus.com:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
