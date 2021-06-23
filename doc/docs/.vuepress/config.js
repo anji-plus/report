@@ -11,7 +11,8 @@ module.exports = {
         sidebarDepth: 2,
         nav: [
             {text: '首页', link: '/'},
-            {text: '文档', link: '/guide/'},
+            {text: '指南', link: '/guide/'},
+            {text: '操作手册', link: '/operation/'},
             {text: 'GitHub', link: 'https://github.com/anji-plus/report'},
             {text: 'Gitee', link: 'https://gitee.com/anji-plus/report'},
         ],
@@ -22,16 +23,10 @@ module.exports = {
                     collapsable: false,
                     children: [
                         {title: '介绍', path: '/guide/'},
-                        {title: '快速了解', path: '/guide/quickly'},
+                        {title: '快速入门', path: '/guide/quickly'},
                         {title: '项目介绍', path: '/guide/productintro'},
-                        {title: '系统运行', path: '/guide/deploy'},
-                        {title: '开发手册', path: '/guide/devdoc'}
+                        {title: '系统运行', path: '/guide/deploy'}
                     ]
-                },
-                {
-                    title: '盖亚底盘',
-                    collapsable: false,
-                    children: []
                 },
                 {
                     title: '其他',
@@ -40,6 +35,29 @@ module.exports = {
                         {title: '常见问题', path: '/guide/question'}
                     ]
                 }],
+            '/operation/': [
+                {
+                    title: '操作手册',
+                    collapsable: false,
+                    children: [
+                        {title: '数据源', path: '/operation/datasource'},
+                        {title: '数据集', path: '/operation/dataset'},
+                        {title: '大屏设计', path: '/operation/dashboard'},
+                        {title: '国际化', path: '/operation/i18n'},
+                        {title: '字典', path: '/operation/dict'},
+                    ]
+                }
+            ]
+        }
+    },
+    plugins: [
+        ['@vuepress/back-to-top', true],
+    ],
+    configureWebpack: {
+        resolve: {
+            alias: {
+                '@': '/.vuepress/public'
+            }
         }
     }
 }
