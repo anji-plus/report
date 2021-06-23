@@ -16,7 +16,7 @@
         <dependency>
             <groupId>com.anjiplus.template.gaea</groupId>
             <artifactId>template-gaea-common</artifactId>
-<!--            <exclusions>-->
+            <exclusions>
 <!--                <exclusion>-->
 <!--                    <groupId>com.alibaba.cloud</groupId>-->
 <!--                    <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
@@ -25,7 +25,11 @@
 <!--                    <groupId>com.alibaba.cloud</groupId>-->
 <!--                    <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
 <!--                </exclusion>-->
-<!--            </exclusions>-->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-redis</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -47,6 +51,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.10.6</version>
         </dependency>
 
 <!--        <dependency>-->

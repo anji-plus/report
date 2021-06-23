@@ -19,11 +19,13 @@ spring:
     url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: appuser@anji
-  redis:
-    host: 10.108.26.197
-    port: 6379
-    password: appuser@anji
-    database: 1
+# 禁用redis，使用ehcache
+#  redis:
+#    host: 10.108.26.197
+#    port: 6379
+#    password: appuser@anji
+#    database: 1
+
   flyway:
     baseline-on-migrate: true
     #数据库连接配置
