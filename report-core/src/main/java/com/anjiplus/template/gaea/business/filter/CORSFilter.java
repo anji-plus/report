@@ -1,8 +1,9 @@
 package com.anjiplus.template.gaea.business.filter;
 
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -10,7 +11,8 @@ import java.io.IOException;
 /**
  * Created by raodeming on 2021/6/24.
  */
-@Component
+@Configuration
+@WebFilter(filterName = "CorsFilter ")
 public class CORSFilter implements Filter {
 
     @Override
