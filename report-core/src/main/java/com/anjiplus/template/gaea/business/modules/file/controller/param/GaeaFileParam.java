@@ -15,17 +15,11 @@ import java.io.Serializable;
  */
 public class GaeaFileParam extends PageParam implements Serializable {
 
-    /**
-     * 文件在linux中的完整目录，比如/app/dist/export/excel/${fileid}.xlsx
-     */
-    @Query(QueryEnum.LIKE)
+    /** 模糊查询 */
+    @Query(value = QueryEnum.LIKE)
     private String filePath;
 
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
+    /** 模糊查询 */
+    @Query(value = QueryEnum.EQ)
+    private String fileType;
 }

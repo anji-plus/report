@@ -30,7 +30,7 @@ public class BusinessAutoConfiguration {
         return new ApplicationInitRunner();
     }
 
-    @Bean("gaeaCacheHelper")
+    @Bean
     public CacheHelper gaeaCacheHelper(){
         return new ReportCacheHelper();
     }

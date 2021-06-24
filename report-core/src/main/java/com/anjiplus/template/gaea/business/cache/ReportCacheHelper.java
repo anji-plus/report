@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 public class ReportCacheHelper implements CacheHelper, ApplicationContextAware {
 
@@ -24,7 +23,7 @@ public class ReportCacheHelper implements CacheHelper, ApplicationContextAware {
     public String stringGet(String key) {
         Cache.ValueWrapper valueWrapper = cache.get(key);
         if (valueWrapper != null) {
-            return (String)valueWrapper.get();
+            return (String) valueWrapper.get();
         }
         return CacheHelper.super.stringGet(key);
     }
@@ -38,7 +37,15 @@ public class ReportCacheHelper implements CacheHelper, ApplicationContextAware {
 
     @Override
     public boolean exist(String key) {
-        return cache.get(key)!=null;
+        String cacheHoldTime = stringGet(key + "_HoldTime");
+        if (cacheHoldTime != null && Long.parseLong(cacheHoldTime) > 0) {
+            if (Long.parseLong(cacheHoldTime) < System.currentTimeMillis()) {
+                delete(key + "_HoldTime");
+                delete(key);
+                return false;
+            }
+        }
+        return cache.get(key) != null;
     }
 
 
@@ -47,10 +54,6 @@ public class ReportCacheHelper implements CacheHelper, ApplicationContextAware {
         cache.put(key, value);
     }
 
-    @Override
-    public void stringSetExpire(String key, String value, long time, TimeUnit timeUnit) {
-        CacheHelper.super.stringSetExpire(key, value, time, timeUnit);
-    }
 
     @Override
     public String regKey(String key) {
@@ -59,7 +62,11 @@ public class ReportCacheHelper implements CacheHelper, ApplicationContextAware {
 
     @Override
     public void stringSetExpire(String key, String value, long seconds) {
-        CacheHelper.super.stringSetExpire(key, value, seconds);
+        stringSet(key, value);
+        if (seconds > 0) {
+            //缓存失效时间
+            stringSet(key + "_HoldTime", String.valueOf(System.currentTimeMillis() + seconds * 1000));
+        }
     }
 
     @Override
@@ -122,7 +129,9 @@ public class ReportCacheHelper implements CacheHelper, ApplicationContextAware {
 
     @Override
     public boolean delete(String key) {
-        cache.evict(key);
+        if (exist(key)) {
+            cache.evict(key);
+        }
         return true;
     }
 
@@ -136,6 +145,6 @@ public class ReportCacheHelper implements CacheHelper, ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         /*基于内存的本地缓存*/
-        cache = (Cache)applicationContext.getBean("ehCacheCache");
+        cache = (Cache) applicationContext.getBean("ehCacheCache");
     }
 }

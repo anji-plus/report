@@ -49,7 +49,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
     @Autowired
     private ReportMapper reportMapper;
 
-    @Value("${file.dist-path}")
+    @Value("${file.dist-path:''}")
     private String dictPath;
 
     @Autowired

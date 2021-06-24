@@ -6,6 +6,15 @@ package com.anjiplus.template.gaea.business.code;
  * @since 2021-02-22
  */
 public interface ResponseCode {
+    /**
+     * 用户名或者密码不正确
+     */
+    String LOGIN_ERROR = "login.error";
+
+    /**
+     * 用户token过期
+     */
+    String USER_TOKEN_EXPIRED = "User.token.expired";
 
     /**
      * 字典项重复
@@ -98,4 +107,5 @@ public interface ResponseCode {
     String SET_CODE_ISEXIST = "4008";
     String SOURCE_CODE_ISEXIST = "4009";
     String CLASS_NOT_FOUND = "4010";
+
 }

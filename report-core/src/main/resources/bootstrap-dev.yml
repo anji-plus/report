@@ -1,16 +1,16 @@
 spring:
   application:
     name: gaea-business
-  cloud:
-    nacos:
-      server-addr: 10.108.26.121:8848,10.108.26.145:8848
-      username: gaea
-      password: p@ss1234
+#  cloud:
+#    nacos:
+#      server-addr: 10.108.26.121:8848,10.108.26.145:8848
+#      username: gaea
+#      password: p@ss1234
 #      config:
 #        namespace: 5c6b6687-ad43-450f-88b6-e704ff78d83f
 #        file-extension: yaml
-      discovery:
-        namespace: 5c6b6687-ad43-450f-88b6-e704ff78d83f
+#      discovery:
+#        namespace: 5c6b6687-ad43-450f-88b6-e704ff78d83f
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   messages:
@@ -39,6 +39,11 @@ generator:
   templatePath: template
 server:
   port: 9092
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
 #  servlet:
 #    context-path: /business
 mybatis-plus:
