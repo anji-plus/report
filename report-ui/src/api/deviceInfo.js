@@ -2,7 +2,7 @@ import request from '@/utils/request'
 /** i18n版本*/
 export function add (data) {
   return request({
-    url: 'business/deviceInfo',
+    url: 'deviceInfo',
     method: 'post',
     data,
   })
@@ -10,7 +10,7 @@ export function add (data) {
 
 export function del (ids) {
   return request({
-    url: 'business/deviceInfo/' + ids,
+    url: 'deviceInfo/' + ids,
     method: 'delete',
     data: ids,
   })
@@ -18,7 +18,7 @@ export function del (ids) {
 
 export function edit (data) {
   return request({
-    url: 'business/deviceInfo',
+    url: 'deviceInfo',
     method: 'put',
     data,
   })
@@ -26,7 +26,7 @@ export function edit (data) {
 
 export function preview (data) {
   return request({
-    url: 'business/deviceInfo/' + data.id,
+    url: 'deviceInfo/' + data.id,
     method: 'get',
     params: data,
   })

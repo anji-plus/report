@@ -57,7 +57,7 @@ const screenConfig = {
         name: 'backgroundImage',
         required: false,
         placeholder: '',
-        value: 'http://10.108.26.197/business/file/download/adfc22ac-ed7f-4141-aeb9-ee81f16ac92d',
+        value: 'http://10.108.26.197//file/download/adfc22ac-ed7f-4141-aeb9-ee81f16ac92d',
       },
     ],
     data: [],

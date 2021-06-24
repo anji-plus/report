@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 保存大屏设计
 export function insertDashboard(data) {
   return request({
-    url: 'business/reportDashboard',
+    url: 'reportDashboard',
     method: 'post',
     data,
   })
@@ -12,7 +12,7 @@ export function insertDashboard(data) {
 // 预览、查询大屏详情
 export function detailDashboard(data) {
   return request({
-    url: 'business/reportDashboard/' + data,
+    url: 'reportDashboard/' + data,
     method: 'get',
   })
 }
@@ -20,7 +20,7 @@ export function detailDashboard(data) {
 // 数据集查询
 export function queryAllDataSet(data) {
   return request({
-    url: 'business/dataSet/queryAllDataSet',
+    url: 'dataSet/queryAllDataSet',
     method: 'get',
   })
 }
@@ -28,7 +28,7 @@ export function queryAllDataSet(data) {
 // 获取数据集信息
 export function detailBysetId(data) {
   return request({
-    url: 'business/dataSet/detailBysetId/' + data,
+    url: 'dataSet/detailBysetId/' + data,
     method: 'get',
   })
 }
@@ -36,7 +36,7 @@ export function detailBysetId(data) {
 // 获取动态数据
 export function getData(data) {
   return request({
-    url: 'business/reportDashboard/getData',
+    url: 'reportDashboard/getData',
     method: 'post',
     data,
   })

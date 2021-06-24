@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 设计报表
 export function design(data) {
   return request({
-    url: 'business/report/design',
+    url: 'report/design',
     method: 'post',
     data,
   })
@@ -12,7 +12,7 @@ export function design(data) {
 // 预览报表，渲染数据
 export function preview(data) {
   return request({
-    url: 'business/reportExcel/preview',
+    url: 'reportExcel/preview',
     method: 'post',
     data,
   })
@@ -21,7 +21,7 @@ export function preview(data) {
 // 导出报表
 export function exportExcel(data) {
   return request({
-    url: 'business/reportExcel/exportExcel',
+    url: 'reportExcel/exportExcel',
     method: 'post',
     data,
   })
@@ -30,7 +30,7 @@ export function exportExcel(data) {
 // 导出报表
 export function exportPdf(data) {
   return request({
-    url: 'business/reportExcel/exportPdf',
+    url: 'reportExcel/exportPdf',
     method: 'post',
     data,
   })
@@ -39,7 +39,7 @@ export function exportPdf(data) {
 //  获取所有数据集
 export function queryAllDataSet() {
   return request({
-    url: 'business/dataSet/queryAllDataSet',
+    url: 'dataSet/queryAllDataSet',
     method: 'get',
   })
 }
@@ -47,7 +47,7 @@ export function queryAllDataSet() {
 //  获取对应数据集的列集合
 export function detail(data) {
   return request({
-    url: 'business/dataSet/detailBysetId/' + data,
+    url: 'dataSet/detailBysetId/' + data,
     method: 'get',
   })
 }
@@ -55,7 +55,7 @@ export function detail(data) {
 //  获取对应数据集的列集合
 export function detailBysetCode(data) {
   return request({
-    url: 'business/dataSet/detailBysetCode/' + data,
+    url: 'dataSet/detailBysetCode/' + data,
     method: 'get',
   })
 }
@@ -63,7 +63,7 @@ export function detailBysetCode(data) {
 //  根据reportCode获取报表表格详情
 export function detailByReportCode(data) {
   return request({
-    url: 'business/reportExcel/detailByReportCode/' + data,
+    url: 'reportExcel/detailByReportCode/' + data,
     method: 'get',
   })
 }

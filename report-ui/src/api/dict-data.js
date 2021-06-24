@@ -14,13 +14,13 @@ import request from '@/utils/request'
  */
 export function getDictList(type) {
   return request({
-    url: `/business/gaeaDict/select/${type}`,
+    url: `/gaeaDict/select/${type}`,
     method: 'get',
   })
 }
 export function getDictCodes(project) {
   return request({
-    url: `/business/gaeaDict/selectAll/${project}`,
+    url: `/gaeaDict/selectAll/${project}`,
     method: 'get',
   })
 }

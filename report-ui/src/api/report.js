@@ -9,14 +9,14 @@ import { add, del, edit, preview } from '@/api/deviceInfo'
 // datasource
 export function pageList(params) {
   return request({
-    url: '/business/dataSource/pageList',
+    url: '/dataSource/pageList',
     method: 'get',
     params,
   })
 }
 export function dataSource(data) {
   return request({
-    url: '/business/dataSource/' + data.id,
+    url: '/dataSource/' + data.id,
     method: 'get',
     data,
   })
@@ -24,28 +24,28 @@ export function dataSource(data) {
 // delete datasource
 export function deleteDataSource(data) {
   return request({
-    url: '/business/dataSource/' + data.id,
+    url: '/dataSource/' + data.id,
     method: 'delete',
     data,
   })
 }
 export function testConnection(data) {
   return request({
-    url: '/business/dataSource/testConnection',
+    url: '/dataSource/testConnection',
     method: 'post',
     data,
   })
 }
 export function addDataSource(data) {
   return request({
-    url: '/business/dataSource',
+    url: '/dataSource',
     method: 'post',
     data,
   })
 }
 export function editDataSource(data) {
   return request({
-    url: '/business/dataSource',
+    url: '/dataSource',
     method: 'put',
     data,
   })
@@ -53,21 +53,21 @@ export function editDataSource(data) {
 // resultset
 export function dataSetPreview(data) {
   return request({
-    url: `/business/dataSet/detailBysetId/${data.id}`,
+    url: `/dataSet/detailBysetId/${data.id}`,
     method: 'get',
   })
 }
 
 export function addDataSet(data) {
   return request({
-    url: '/business/dataSet',
+    url: '/dataSet',
     method: 'post',
     data,
   })
 }
 export function editDataSet(data) {
   return request({
-    url: '/business/dataSet',
+    url: '/dataSet',
     method: 'put',
     data,
   })
@@ -75,7 +75,7 @@ export function editDataSet(data) {
 // delete dataset
 export function deleteDataSet(data) {
   return request({
-    url: '/business/dataSet/' + data.id,
+    url: '/dataSet/' + data.id,
     method: 'delete',
     data,
   })
@@ -83,7 +83,7 @@ export function deleteDataSet(data) {
 // 下拉数据源
 export function queryAllDataSourceSet(data) {
   return request({
-    url: '/business/dataSource/queryAllDataSource',
+    url: '/dataSource/queryAllDataSource',
     method: 'get',
     data,
   })
@@ -91,7 +91,7 @@ export function queryAllDataSourceSet(data) {
 // 数据集高级规则js验证
 export function verificationSet(data) {
   return request({
-    url: '/business/dataSetParam/verification',
+    url: '/dataSetParam/verification',
     method: 'post',
     data,
   })
@@ -99,7 +99,7 @@ export function verificationSet(data) {
 // 测试数据转换，以及返回数据table列表
 export function testTransformSet(data) {
   return request({
-    url: '/business/dataSet/testTransform',
+    url: '/dataSet/testTransform',
     method: 'post',
     data,
   })
@@ -108,7 +108,7 @@ export function testTransformSet(data) {
 // report
 export function reportPageList(params) {
   return request({
-    url: '/business/report/pageList',
+    url: '/report/pageList',
     method: 'get',
     params,
   })
@@ -116,7 +116,7 @@ export function reportPageList(params) {
 // report
 export function addReport(data) {
   return request({
-    url: '/business/report',
+    url: '/report',
     method: 'post',
     data,
   })
@@ -125,7 +125,7 @@ export function addReport(data) {
 // report
 export function editReport(data) {
   return request({
-    url: '/business/report',
+    url: '/report',
     method: 'put',
     data,
   })
@@ -134,7 +134,7 @@ export function editReport(data) {
 // report
 export function delReport(data) {
   return request({
-    url: '/business/report/delReport',
+    url: '/report/delReport',
     method: 'delete',
     data,
   })
@@ -143,7 +143,7 @@ export function delReport(data) {
 // report
 export function detailReport(id, accessKey) {
   return request({
-    url: `/business/report/${id}?accessKey=${accessKey}`,
+    url: `/report/${id}?accessKey=${accessKey}`,
     method: 'get',
   })
 }
@@ -151,7 +151,7 @@ export function detailReport(id, accessKey) {
 // reportExcel
 export function addReportExcel(data) {
   return request({
-    url: '/business/reportExcel',
+    url: '/reportExcel',
     method: 'post',
     data,
   })
@@ -160,7 +160,7 @@ export function addReportExcel(data) {
 // reportExcel
 export function editReportExcel(data) {
   return request({
-    url: '/business/reportExcel',
+    url: '/reportExcel',
     method: 'put',
     data,
   })

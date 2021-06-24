@@ -10,7 +10,7 @@ import request from '@/utils/request'
 // 数据字典接口
 export function dataDictionary(dictName) {
   return request({
-    url: `/business/gaeaDict/select/${dictName}`,
+    url: `/gaeaDict/select/${dictName}`,
     method: 'GET',
   })
 }
@@ -18,7 +18,7 @@ export function dataDictionary(dictName) {
 // 图片上传接口
 export function uploadImg(data) {
   return request({
-    url: '/business/file/upload',
+    url: '/file/upload',
     method: 'POST',
     data,
   })
