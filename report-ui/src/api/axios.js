@@ -17,7 +17,7 @@ service.interceptors.request.use(
   config => {
     // 在发送请求之前做些什么
     var token = getItem('token');
-    config.data = signUtil.sign(token, deepClone(config.data));
+    config = signUtil.sign(token, deepClone(config));
     // console.log(config, 'config')
     return config
   },

@@ -12,13 +12,13 @@ import request from '@/utils/request'
  * type参数 类型 String
  * type参数 格式 'type'
  */
-export function getDictList(type) {
+export function getDictList (type) {
   return request({
     url: `/gaeaDict/select/${type}`,
     method: 'get',
   })
 }
-export function getDictCodes(project) {
+export function getDictCodes (project) {
   return request({
     url: `/gaeaDict/selectAll/${project}`,
     method: 'get',
@@ -30,7 +30,7 @@ export function getDictCodes(project) {
  * typeList参数 类型 Array
  * typeList参数 格式 ['type1','type2',...]
  */
-export function getMultipleDictList(typeList) {
+export function getMultipleDictList (typeList) {
   const types = typeList + ''
   return request({
     url: `/v1/dict/types`,
@@ -44,7 +44,7 @@ export function getMultipleDictList(typeList) {
  * typeList参数 类型 Array
  * typeList参数 格式 ['type1','type2',...]
  */
-export function getBaseDataList(typeList) {
+export function getBaseDataList (typeList) {
   const types = typeList + ''
   return request({
     url: `/v1/master/types`,
