@@ -70,6 +70,5 @@ public class TokenFilter implements Filter {
     private void error(HttpServletResponse response) throws IOException {
         ResponseBean responseBean = ResponseBean.builder().code("500").message("The Token has expired").build();
         response.getWriter().print(JSONObject.toJSONString(responseBean));
-        response.getOutputStream().flush();
     }
 }

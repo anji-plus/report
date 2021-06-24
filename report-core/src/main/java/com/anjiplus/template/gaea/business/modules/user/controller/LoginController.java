@@ -31,4 +31,9 @@ public class LoginController {
     public ResponseBean login(@RequestBody @Validated GaeaUserDTO dto) {
         return ResponseBean.builder().data(userService.login(dto)).build();
     }
+
+    @PostMapping({"/health"})
+    public ResponseBean health() {
+        return ResponseBean.builder().build();
+    }
 }
