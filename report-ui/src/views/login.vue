@@ -28,7 +28,6 @@
             <br>
             <p class="title_name">在线大屏</p>
           </h3>
-          <!-- <lang-select class="set_language" /> -->
         </div>
         <div class="form_fields">
           <!-- 黄色条条 -->
@@ -74,7 +73,6 @@
                 <span class="show_pwd"
                       @click="showPwd">
                   查看
-                  <!-- <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" /> -->
                 </span>
               </el-form-item>
             </el-tooltip>
@@ -86,7 +84,6 @@
                    type="checkbox">
             <p>记住密码</p>
           </div>
-          <!-- <p>{{ $t('login.forgetPsw') }}</p> -->
         </div>
         <el-button :loading="loading"
                    type="primary"
@@ -162,7 +159,6 @@ export default {
     getPsw () {
       const cookVal = cookies.get(`u_${this.loginForm.username}`)
       this.loginForm.password = cookVal && Decrypt(cookVal)
-      console.log(this.loginForm)
     },
     // 滑动条块的top控制
     setTop (val) {
@@ -190,7 +186,6 @@ export default {
         if (valid) {
           this.$refs.verify.show()
         } else {
-          console.log('error submit!!')
           return false
         }
       })
@@ -214,7 +209,6 @@ export default {
           }
           this.loginApi()
         } else {
-          console.log('error submit!!')
           return false
         }
       })

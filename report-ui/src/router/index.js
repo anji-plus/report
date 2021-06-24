@@ -46,19 +46,55 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/report',
+    path: '/datasource',
     component: Layout,
     redirect: '/report/datasource',
+    name: '数据源',
+    meta: { title: '数据源', icon: 'iconnavicon-ywcs' },
+    children: [
+      { path: 'datasource', name: 'datasource', component: () => import('@/views/report/datasource/index'), meta: { title: '数据源', icon: 'iconeventbridgexiaoxishijianzongxian', keepAlive: true, isBack: true } },
+    ]
+  },
+  {
+    path: '/resultset',
+    component: Layout,
+    redirect: '/report/resultset',
+    name: '数据集',
+    meta: { title: '数据集', icon: 'iconnavicon-ywcs' },
+    children: [
+      { path: 'resultset', name: 'resultset', component: () => import('@/views/report/resultset/index'), meta: { title: '数据集', icon: 'iconalikafkaxiaoxiduilieKafka', keepAlive: true, isBack: true } },
+    ]
+  },
+  {
+    path: '/report',
+    component: Layout,
+    redirect: '/report/report',
     name: '报表管理',
     meta: { title: '报表管理', icon: 'iconnavicon-ywcs' },
     children: [
-      { path: 'datasource', name: 'datasource', component: () => import('@/views/report/datasource/index'), meta: { title: '数据源', icon: 'iconeventbridgexiaoxishijianzongxian', keepAlive: true, isBack: true } },
-      { path: 'resultset', name: 'resultset', component: () => import('@/views/report/resultset/index'), meta: { title: '数据集', icon: 'iconalikafkaxiaoxiduilieKafka', keepAlive: true, isBack: true } },
       { path: 'report', name: 'reportIndex', component: () => import('@/views/report/report/index'), meta: { title: '报表管理', icon: 'iconnavicon-ywcs', keepAlive: true, isBack: true } },
-      { path: 'bigscreen', name: 'bigscreen', component: () => import('@/views/report/bigscreen/index'), meta: { title: '大屏报表', icon: 'iconchufaqipeizhi-hui', keepAlive: true, isBack: true } },
-      { path: 'excelreport', name: 'excelreport', component: () => import('@/views/report/excelreport/index'), meta: { title: '表格报表', icon: 'iconliebiao', keepAlive: true, isBack: true } },
     ]
   },
+  {
+    path: '/bigscreen',
+    component: Layout,
+    redirect: '/report/bigscreen',
+    name: '大屏报表',
+    meta: { title: '大屏报表', icon: 'iconnavicon-ywcs' },
+    children: [
+      { path: 'bigscreen', name: 'bigscreen', component: () => import('@/views/report/bigscreen/index'), meta: { title: '大屏报表', icon: 'iconchufaqipeizhi-hui', keepAlive: true, isBack: true } },
+    ]
+  },
+  // {
+  //   path: '/report',
+  //   component: Layout,
+  //   redirect: '/report/excelreport',
+  //   name: '表格报表',
+  //   meta: { title: '表格报表', icon: 'iconnavicon-ywcs' },
+  //   children: [
+  //     { path: 'excelreport', name: 'excelreport', component: () => import('@/views/report/excelreport/index'), meta: { title: '表格报表', icon: 'iconliebiao', keepAlive: true, isBack: true } },
+  //   ]
+  // },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   { path: '*', redirect: '/index', hidden: true },
 ]

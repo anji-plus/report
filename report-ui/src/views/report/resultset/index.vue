@@ -17,6 +17,7 @@
           <el-form-item label="数据集名称"
                         label-width="120px">
             <el-input v-model.trim="query.setName"
+                      size="mini"
                       clearable
                       placeholder="数据源名称"
                       class="filter-item" />
@@ -30,6 +31,7 @@
           <el-form-item label="数据集编码"
                         label-width="120px">
             <el-input v-model.trim="query.setCode"
+                      size="mini"
                       clearable
                       placeholder="数据集编码"
                       class="filter-item" />
@@ -38,6 +40,7 @@
       </el-row>
     </el-form>
     <el-button type="primary"
+               size="mini"
                @click="addOrEditDataSet()">+ 新增</el-button>
 
     <!--表格渲染-->

@@ -5,16 +5,15 @@
  * @Last Modified time: 2021-03-04 10:46:26
  */
 import request from '@/utils/request'
-import { add, del, edit, preview } from '@/api/deviceInfo'
 // datasource
-export function pageList(params) {
+export function pageList (params) {
   return request({
     url: '/dataSource/pageList',
     method: 'get',
     params,
   })
 }
-export function dataSource(data) {
+export function dataSource (data) {
   return request({
     url: '/dataSource/' + data.id,
     method: 'get',
@@ -22,28 +21,28 @@ export function dataSource(data) {
   })
 }
 // delete datasource
-export function deleteDataSource(data) {
+export function deleteDataSource (data) {
   return request({
     url: '/dataSource/' + data.id,
     method: 'delete',
     data,
   })
 }
-export function testConnection(data) {
+export function testConnection (data) {
   return request({
     url: '/dataSource/testConnection',
     method: 'post',
     data,
   })
 }
-export function addDataSource(data) {
+export function addDataSource (data) {
   return request({
     url: '/dataSource',
     method: 'post',
     data,
   })
 }
-export function editDataSource(data) {
+export function editDataSource (data) {
   return request({
     url: '/dataSource',
     method: 'put',
@@ -51,21 +50,21 @@ export function editDataSource(data) {
   })
 }
 // resultset
-export function dataSetPreview(data) {
+export function dataSetPreview (data) {
   return request({
     url: `/dataSet/detailBysetId/${data.id}`,
     method: 'get',
   })
 }
 
-export function addDataSet(data) {
+export function addDataSet (data) {
   return request({
     url: '/dataSet',
     method: 'post',
     data,
   })
 }
-export function editDataSet(data) {
+export function editDataSet (data) {
   return request({
     url: '/dataSet',
     method: 'put',
@@ -73,7 +72,7 @@ export function editDataSet(data) {
   })
 }
 // delete dataset
-export function deleteDataSet(data) {
+export function deleteDataSet (data) {
   return request({
     url: '/dataSet/' + data.id,
     method: 'delete',
@@ -81,7 +80,7 @@ export function deleteDataSet(data) {
   })
 }
 // 下拉数据源
-export function queryAllDataSourceSet(data) {
+export function queryAllDataSourceSet (data) {
   return request({
     url: '/dataSource/queryAllDataSource',
     method: 'get',
@@ -89,7 +88,7 @@ export function queryAllDataSourceSet(data) {
   })
 }
 // 数据集高级规则js验证
-export function verificationSet(data) {
+export function verificationSet (data) {
   return request({
     url: '/dataSetParam/verification',
     method: 'post',
@@ -97,7 +96,7 @@ export function verificationSet(data) {
   })
 }
 // 测试数据转换，以及返回数据table列表
-export function testTransformSet(data) {
+export function testTransformSet (data) {
   return request({
     url: '/dataSet/testTransform',
     method: 'post',
@@ -106,7 +105,7 @@ export function testTransformSet(data) {
 }
 
 // report
-export function reportPageList(params) {
+export function reportPageList (params) {
   return request({
     url: '/report/pageList',
     method: 'get',
@@ -114,7 +113,7 @@ export function reportPageList(params) {
   })
 }
 // report
-export function addReport(data) {
+export function addReport (data) {
   return request({
     url: '/report',
     method: 'post',
@@ -123,7 +122,7 @@ export function addReport(data) {
 }
 
 // report
-export function editReport(data) {
+export function editReport (data) {
   return request({
     url: '/report',
     method: 'put',
@@ -132,7 +131,7 @@ export function editReport(data) {
 }
 
 // report
-export function delReport(data) {
+export function delReport (data) {
   return request({
     url: '/report/delReport',
     method: 'delete',
@@ -141,7 +140,7 @@ export function delReport(data) {
 }
 
 // report
-export function detailReport(id, accessKey) {
+export function detailReport (id, accessKey) {
   return request({
     url: `/report/${id}?accessKey=${accessKey}`,
     method: 'get',
@@ -149,7 +148,7 @@ export function detailReport(id, accessKey) {
 }
 
 // reportExcel
-export function addReportExcel(data) {
+export function addReportExcel (data) {
   return request({
     url: '/reportExcel',
     method: 'post',
@@ -158,13 +157,10 @@ export function addReportExcel(data) {
 }
 
 // reportExcel
-export function editReportExcel(data) {
+export function editReportExcel (data) {
   return request({
     url: '/reportExcel',
     method: 'put',
     data,
   })
 }
-
-
-export default { add, edit, del, preview }

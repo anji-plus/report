@@ -8,15 +8,15 @@
 import request from '@/utils/request'
 
 // 数据字典接口
-export function dataDictionary(dictName) {
+export function dataDictionary (dictName) {
   return request({
-    url: `/gaeaDict/select/${dictName}`,
+    url: '/gaeaDict/select/' + dictName,
     method: 'GET',
   })
 }
 
 // 图片上传接口
-export function uploadImg(data) {
+export function uploadImg (data) {
   return request({
     url: '/file/upload',
     method: 'POST',

@@ -20,6 +20,7 @@
           <el-form-item label="数据源名称"
                         label-width="120px">
             <el-input v-model.trim="params.sourceName"
+                      size="mini"
                       clearable
                       placeholder="数据源名称"
                       class="filter-item"
@@ -34,6 +35,7 @@
           <el-form-item label="数据源编码"
                         label-width="120px">
             <el-input v-model.trim="params.sourceCode"
+                      size="mini"
                       clearable
                       placeholder="数据源Code"
                       class="filter-item"
@@ -46,6 +48,7 @@
                 :lg="6"
                 :xl="4">
           <el-form-item label="数据源类型"
+                        size="mini"
                         label-width="120px">
             <Dictionary v-model="params.sourceType"
                         :updata-dict="params.sourceType"
@@ -58,14 +61,17 @@
                 :lg="4"
                 :xl="4">
           <el-button type="primary"
+                     size="mini"
                      @click="search('form')">查询</el-button>
           <el-button type="danger"
+                     size="mini"
                      @click="reset('form')">重置</el-button>
         </el-col>
       </el-row>
     </el-form>
     <el-button type="primary"
                icon="el-icon-plus"
+               size="mini"
                @click="showAddLogModel()">新增</el-button>
 
     <!--表格渲染-->

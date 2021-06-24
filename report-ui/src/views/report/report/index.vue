@@ -20,6 +20,7 @@
           <el-form-item label="名称"
                         label-width="120px">
             <el-input v-model="params.reportName"
+                      size="mini"
                       clearable
                       placeholder="名称"
                       class="filter-item" />
@@ -33,6 +34,7 @@
           <el-form-item label="报表编码"
                         label-width="120px">
             <el-input v-model="params.reportCode"
+                      size="mini"
                       clearable
                       placeholder="报表编码"
                       class="filter-item" />
@@ -44,10 +46,11 @@
                 :lg="6"
                 :xl="4">
           <el-form-item label="报表类型"
-                        label-width="120px">
-            <Dictionary v-model="params.reportType"
+                        label-width="120px"
+                        size="mini">
+            <!-- <Dictionary v-model="params.reportType"
                         :updata-dict="params.reportType"
-                        :dict-key="'REPORT_TYPE'" />
+                        :dict-key="'REPORT_TYPE'" /> -->
           </el-form-item>
         </el-col>
         <el-col :xs="24"
@@ -56,13 +59,16 @@
                 :lg="4"
                 :xl="4">
           <el-button type="primary"
+                     size="mini"
                      @click="search('form')">查询</el-button>
           <el-button type="danger"
+                     size="mini"
                      @click="reset('form')">重置</el-button>
         </el-col>
       </el-row>
     </el-form>
     <el-button type="primary"
+               size="mini"
                icon="el-icon-plus"
                @click="showAddReportModel()">新增</el-button>
 
@@ -214,7 +220,7 @@
 
 <script>
 import { dataDictionary } from '@/api/common'
-import { report, reportPageList, addReport, editReport, delReport } from '@/api/report'
+import { reportPageList, addReport, editReport, delReport } from '@/api/report'
 import Dictionary from '@/components/Dictionary/index'
 var typeData
 export default {
@@ -272,16 +278,16 @@ export default {
     typeData = this
   },
   created () {
-    this.$nextTick(() => {
-      dataDictionary('REPORT_GROUP').then((res) => {
-        this.dictionaryGroupOptions = res.data
-        this.dialogForm.reportGroup = this.dictionaryGroupOptions[0].text
-      })
-      dataDictionary('REPORT_TYPE').then((res) => {
-        this.dictionaryTypeOptions = res.data;
-        this.dialogForm.reportType = this.dictionaryTypeOptions[0].text
-      })
-    })
+    // this.$nextTick(() => {
+    //   dataDictionary('REPORT_GROUP').then((res) => {
+    //     this.dictionaryGroupOptions = res.data
+    //     this.dialogForm.reportGroup = this.dictionaryGroupOptions[0].text
+    //   })
+    //   dataDictionary('REPORT_TYPE').then((res) => {
+    //     this.dictionaryTypeOptions = res.data;
+    //     this.dialogForm.reportType = this.dictionaryTypeOptions[0].text
+    //   })
+    // })
     this.queryByPage()
 
   },
@@ -405,5 +411,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="scss"></style>
