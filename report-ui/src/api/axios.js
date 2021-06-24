@@ -9,7 +9,8 @@ const service = axios.create({
   withCredentials: false,
   timeout: 60000,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': getItem('token')
   }
 })
 

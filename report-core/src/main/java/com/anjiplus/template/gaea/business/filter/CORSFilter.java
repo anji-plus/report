@@ -1,10 +1,11 @@
 package com.anjiplus.template.gaea.business.filter;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -13,6 +14,7 @@ import java.io.IOException;
  */
 @Configuration
 @WebFilter(filterName = "CorsFilter ")
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter {
 
     @Override
@@ -26,11 +28,10 @@ public class CORSFilter implements Filter {
         // 设置允许跨域请求的方法
         res.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
         // 允许跨域请求包含content-type
-        res.addHeader("Access-Control-Allow-Headers", "Content-Type,X-CAF-Authorization-Token,sessionToken,X-TOKEN");
-        if (((HttpServletRequest) request).getMethod().equals("OPTIONS")) {
-            response.getWriter().println("ok");
-            return;
-        }
+        res.addHeader("Access-Control-Allow-Headers", "*");
+//        if (((HttpServletRequest) request).getMethod().equals("OPTIONS")) {
+//            response.getWriter().println("ok");
+//        }
         chain.doFilter(request, response);
     }
 
