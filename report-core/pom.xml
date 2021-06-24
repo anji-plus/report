@@ -9,7 +9,7 @@
         <relativePath>../</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>aj-report</artifactId>
+    <artifactId>report-core</artifactId>
     <name>aj-report</name>
 
     <dependencies>

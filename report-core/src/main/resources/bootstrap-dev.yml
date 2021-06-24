@@ -1,6 +1,15 @@
+server:
+  port: 9095
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+#  servlet:
+#    context-path: /business
 spring:
   application:
-    name: gaea-business
+    name: aj-report
 #  cloud:
 #    nacos:
 #      server-addr: 10.108.26.121:8848,10.108.26.145:8848
@@ -37,15 +46,6 @@ generator:
   enabled: true
   workspace: /workspace/gaea
   templatePath: template
-server:
-  port: 9092
-  servlet:
-    encoding:
-      charset: UTF-8
-      force: true
-      enabled: true
-#  servlet:
-#    context-path: /business
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
