@@ -7,10 +7,7 @@
     <el-menu :show-timeout="200"
              :default-active="$route.path"
              :collapse="isCollapse"
-             mode="vertical"
-             background-color="#fff"
-             text-color="#333"
-             active-text-color="#222">
+             mode="vertical">
       <sidebar-item v-for="route in routes"
                     :key="route.path"
                     :item="route"
@@ -57,6 +54,7 @@ export default {
   font-weight: 500;
   color: #333;
   font-size: 14px;
+  background: #fff;
 }
 .admin-title:hover {
   cursor: pointer;

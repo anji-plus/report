@@ -94,9 +94,15 @@
   .sidebar-container .el-submenu .el-menu-item {
     min-width: 180px !important;
     background-color: #fff !important;
+    
     &:hover {
       color: #406be0 !important;
       font-weight: bold; 
+    }
+  }
+  .sidebar-container .el-submenu .el-menu-item{
+    &.is-active{
+      background-color: #406be0;
     }
   }
   .el-menu--collapse .el-menu .el-submenu {
