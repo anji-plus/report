@@ -1,16 +1,16 @@
 spring:
   application:
     name: gaea-business
-  cloud:
-    nacos:
-      server-addr: 10.108.26.121:8848,10.108.26.145:8848
-      username: gaea
-      password: p@ss1234
+#  cloud:
+#    nacos:
+#      server-addr: 10.108.26.121:8848,10.108.26.145:8848
+#      username: gaea
+#      password: p@ss1234
 #      config:
 #        namespace: 5c6b6687-ad43-450f-88b6-e704ff78d83f
 #        file-extension: yaml
-      discovery:
-        namespace: 5c6b6687-ad43-450f-88b6-e704ff78d83f
+#      discovery:
+#        namespace: 5c6b6687-ad43-450f-88b6-e704ff78d83f
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   messages:
@@ -19,11 +19,13 @@ spring:
     url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: appuser@anji
-  redis:
-    host: 10.108.26.197
-    port: 6379
-    password: appuser@anji
-    database: 1
+# 禁用redis，使用ehcache
+#  redis:
+#    host: 10.108.26.197
+#    port: 6379
+#    password: appuser@anji
+#    database: 1
+
   flyway:
     baseline-on-migrate: true
     #数据库连接配置
@@ -37,6 +39,11 @@ generator:
   templatePath: template
 server:
   port: 9092
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
 #  servlet:
 #    context-path: /business
 mybatis-plus:

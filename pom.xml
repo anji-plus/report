@@ -21,7 +21,7 @@
     </modules>
 
     <properties>
-        <gaea.version>1.0.0-SNAPSHOT</gaea.version>
+        <gaea.version>2.0.0-SNAPSHOT</gaea.version>
         <gaea.security.version>1.0.0-SNAPSHOT</gaea.security.version>
         <gaea.export.version>1.0.0-SNAPSHOT</gaea.export.version>
         <gaea.generator.version>1.0.0-SNAPSHOT</gaea.generator.version>

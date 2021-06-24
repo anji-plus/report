@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.anjiplus.template.gaea.business.modules.data.dashboardwidget.dao.ReportDashboardWidgetMapper">
+<mapper namespace="com.anjiplus.template.gaea.business.modules.dashboardwidget.dao.ReportDashboardWidgetMapper">
 
-    <resultMap type="com.anjiplus.template.gaea.business.modules.data.dashboardwidget.dao.entity.ReportDashboardWidget" id="ReportDashboardWidgetMap">
+    <resultMap type="com.anjiplus.template.gaea.business.modules.dashboardwidget.dao.entity.ReportDashboardWidget" id="ReportDashboardWidgetMap">
         <!--jdbcType="{column.columnType}"-->
         <result property="id" column="id"  />
         <result property="reportCode" column="report_code"  />

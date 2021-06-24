@@ -24,7 +24,7 @@ public interface GaeaFileService extends GaeaBaseService<GaeaFileParam, GaeaFile
      * @param file
      * @return 文件访问路径
      */
-    String upload(MultipartFile file);
+    GaeaFile upload(MultipartFile file);
 
     /**
      * 根据fileId显示图片或者下载文件

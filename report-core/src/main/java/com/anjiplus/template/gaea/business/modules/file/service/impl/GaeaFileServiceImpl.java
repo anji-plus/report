@@ -1,20 +1,18 @@
 package com.anjiplus.template.gaea.business.modules.file.service.impl;
 
+import com.alibaba.excel.util.FileUtils;
 import com.anji.plus.gaea.constant.BaseOperationEnum;
+import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessException;
+import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
+import com.anjiplus.template.gaea.business.modules.file.util.StringPatternUtil;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.anjiplus.template.gaea.business.modules.file.dao.GaeaFileMapper;
 import com.anjiplus.template.gaea.business.modules.file.entity.GaeaFile;
 import com.anjiplus.template.gaea.business.modules.file.service.GaeaFileService;
-import com.anjiplus.template.gaea.business.modules.export.dao.GaeaExportMapper;
-import com.anjiplus.template.gaea.business.modules.export.dao.entity.GaeaExport;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.anjiplus.template.gaea.business.code.ResponseCode;
-import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
-import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
-import com.anjiplus.template.gaea.common.util.StringPatternUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,8 +58,6 @@ public class GaeaFileServiceImpl implements GaeaFileService {
 
     @Autowired
     private GaeaFileMapper gaeaFileMapper;
-    @Autowired
-    private GaeaExportMapper gaeaExportMapper;
 
     @Override
     public GaeaBaseMapper<GaeaFile> getMapper() {
@@ -70,15 +66,17 @@ public class GaeaFileServiceImpl implements GaeaFileService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public String upload(MultipartFile file) {
+    public GaeaFile upload(MultipartFile file) {
         try {
             String fileName = file.getOriginalFilename();
             if (StringUtils.isBlank(fileName)) {
                 throw BusinessExceptionBuilder.build(ResponseCode.FILE_EMPTY_FILENAME);
             }
+
             String suffixName = fileName.substring(fileName.lastIndexOf("."));
+            String fileInstruction = fileName.substring(0, fileName.lastIndexOf("."));
             //白名单校验(不区分大小写)
-            List<String> list = new ArrayList<String>(Arrays.asList(whiteList.split("\\|")));
+            List<String> list = new ArrayList<>(Arrays.asList(whiteList.split("\\|")));
             list.addAll(list.stream().map(String::toUpperCase).collect(Collectors.toList()));
             if (!list.contains(suffixName)) {
                 throw BusinessExceptionBuilder.build(ResponseCode.FILE_SUFFIX_UNSUPPORTED);
@@ -88,19 +86,25 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             String newFileName = fileId + suffixName;
             // 本地文件保存路径
             String filePath = dictPath + newFileName;
-            String urlPath = fileDownloadPath + File.separator + fileId;
+            String urlPath = fileDownloadPath + java.io.File.separator + fileId;
 
             GaeaFile gaeaFile = new GaeaFile();
             gaeaFile.setFilePath(filePath);
             gaeaFile.setFileId(fileId);
             gaeaFile.setUrlPath(urlPath);
+            gaeaFile.setFileType(suffixName.replace(".", ""));
+            gaeaFile.setFileInstruction(fileInstruction);
             gaeaFileMapper.insert(gaeaFile);
 
             //写文件 将文件保存/app/dictPath/upload/下
-            File dest = new File(dictPath + newFileName);
+            java.io.File dest = new java.io.File(dictPath + newFileName);
+            java.io.File parentFile = dest.getParentFile();
+            if (!parentFile.exists()) {
+                parentFile.mkdirs();
+            }
             file.transferTo(dest);
             // 将完整的http访问路径返回
-            return urlPath;
+            return gaeaFile;
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             log.error("file upload error: {}", e);
@@ -127,16 +131,7 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             }
             String filename = filePath.substring(filePath.lastIndexOf(File.separator));
             String fileSuffix = filename.substring(filename.lastIndexOf("."));
-            //特殊处理：如果是excel文件，则从t_export表中查询文件名
-            List list = Arrays.asList(excelSuffix.split("\\|"));
-            if (list.contains(fileSuffix)) {
-                LambdaQueryWrapper<GaeaExport> exportWrapper = Wrappers.lambdaQuery();
-                exportWrapper.eq(GaeaExport::getFileId, fileId);
-                GaeaExport exportPO = gaeaExportMapper.selectOne(exportWrapper);
-                if (null != exportPO) {
-                    filename = exportPO.getFileTitle() + fileSuffix;
-                }
-            }
+
             //根据文件后缀来判断，是显示图片\视频\音频，还是下载文件
             File file = new File(filePath);
             ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
