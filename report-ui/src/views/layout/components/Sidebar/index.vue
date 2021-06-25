@@ -2,7 +2,7 @@
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <div class="admin-title"
          @click="goBigScreen">
-      在线大屏
+      <b>在线大屏</b>
     </div>
     <el-menu :show-timeout="200"
              :default-active="$route.path"

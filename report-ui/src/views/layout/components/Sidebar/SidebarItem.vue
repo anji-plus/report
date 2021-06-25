@@ -130,7 +130,7 @@ export default {
   margin-right: 5px;
 }
 .el-menu-item i {
-  color: #333;
+  // color: #333;
   margin-right: 5px;
 }
 </style>

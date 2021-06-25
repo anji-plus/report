@@ -100,9 +100,9 @@
       font-weight: bold; 
     }
   }
-  .sidebar-container .el-submenu .el-menu-item{
+  .el-menu-item{
     &.is-active{
-      background-color: #406be0;
+      border-right:3px solid #409EFF;
     }
   }
   .el-menu--collapse .el-menu .el-submenu {
