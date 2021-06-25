@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
 *
-* @description 大屏看板数据渲染 dto
+* @description 大屏看板数据渲染 dto，已弃用
 * @author Raod
 * @date 2021-04-12 15:12:43.724
 **/
@@ -29,6 +29,11 @@ public class ReportDashboardWidgetValueDto implements Serializable {
 
     /** 组件的大小位置属性json */
     private JSONObject position;
+
+    private String options;
+
+    /** 自动刷新间隔秒 */
+    private Integer refreshSeconds;
 
     /** 0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG */
     private Integer enableFlag;

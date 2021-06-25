@@ -10,6 +10,7 @@
         <result property="data" column="data"  />
         <result property="collapse" column="collapse"  />
         <result property="position" column="position"  />
+        <result property="refreshSeconds" column="refresh_seconds"  />
         <result property="enableFlag" column="enable_flag"  />
         <result property="deleteFlag" column="delete_flag"  />
         <result property="sort" column="sort"  />

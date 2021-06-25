@@ -32,6 +32,11 @@ public class ReportDashboardWidget extends GaeaBaseEntity {
     @ApiModelProperty(value = "组件的大小位置属性json")
     private String position;
 
+    private String options;
+
+    @ApiModelProperty(value = "自动刷新间隔秒")
+    private Integer refreshSeconds;
+
     @ApiModelProperty(value = "0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG")
     private Integer enableFlag;
 

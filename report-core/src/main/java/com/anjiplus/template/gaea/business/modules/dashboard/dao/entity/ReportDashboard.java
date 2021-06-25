@@ -35,6 +35,9 @@ public class ReportDashboard extends GaeaBaseEntity {
     @ApiModelProperty(value = "背景图片")
     private String backgroundImage;
 
+    @ApiModelProperty(value = "列表缩略图")
+    private String previewImage;
+
     @ApiModelProperty(value = "工作台中的辅助线")
     private String presetLine;
 

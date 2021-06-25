@@ -36,7 +36,9 @@ public class TokenFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String uri = request.getRequestURI();
 
-        if (!uri.startsWith("/login")) {
+        if (!uri.startsWith("/login")
+                && !uri.startsWith("/static")
+                && !uri.contains("index.html")) {
 
             //获取token
             String authorization = request.getHeader("Authorization");
@@ -68,7 +70,7 @@ public class TokenFilter implements Filter {
     }
 
     private void error(HttpServletResponse response) throws IOException {
-        ResponseBean responseBean = ResponseBean.builder().code("500").message("The Token has expired").build();
+        ResponseBean responseBean = ResponseBean.builder().code("50014").message("The Token has expired").build();
         response.getWriter().print(JSONObject.toJSONString(responseBean));
     }
 }

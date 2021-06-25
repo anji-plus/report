@@ -88,6 +88,7 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
             analysisData(value);
             reportDashboardWidgetDto.setType(reportDashboardWidget.getType());
             reportDashboardWidgetDto.setValue(value);
+            reportDashboardWidgetDto.setOptions(JSONObject.parseObject(reportDashboardWidget.getOptions()));
             reportDashboardWidgetDtoList.add(reportDashboardWidgetDto);
         });
         reportDashboardDto.setWidgets(reportDashboardWidgetDtoList);
@@ -138,6 +139,7 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
             reportDashboardWidget.setData(value.getData() != null ? JSONObject.toJSONString(value.getData()) : "");
             reportDashboardWidget.setPosition(value.getPosition() != null ? JSONObject.toJSONString(value.getPosition()) : "");
             reportDashboardWidget.setCollapse(value.getCollapse() != null ? JSONObject.toJSONString(value.getCollapse()) : "");
+            reportDashboardWidget.setOptions(reportDashboardWidgetDto.getOptions() != null ? JSONObject.toJSONString(reportDashboardWidgetDto.getOptions()) : "");
             reportDashboardWidget.setEnableFlag(1);
             reportDashboardWidget.setDeleteFlag(0);
             reportDashboardWidget.setSort((long) (i + 1));

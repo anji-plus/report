@@ -10,7 +10,7 @@ server:
 spring:
   application:
     name: aj-report
-#  cloud:
+  #  cloud:
 #    nacos:
 #      server-addr: 10.108.26.121:8848,10.108.26.145:8848
 #      username: gaea

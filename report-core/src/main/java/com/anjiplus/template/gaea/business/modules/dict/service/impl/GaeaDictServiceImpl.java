@@ -124,6 +124,7 @@ public class GaeaDictServiceImpl implements GaeaDictService {
     public List<GaeaDictItem> findItems(List<String> dictCodes) {
 
         LambdaQueryWrapper<GaeaDictItem> gaeaDictItemQueryWrapper = Wrappers.lambdaQuery();
+        gaeaDictItemQueryWrapper.eq(GaeaDictItem::getEnabled, Enabled.YES.getValue());
         if (!CollectionUtils.isEmpty(dictCodes)) {
             gaeaDictItemQueryWrapper.in(GaeaDictItem::getDictCode, dictCodes);
         }

@@ -1,6 +1,7 @@
 
 package com.anjiplus.template.gaea.business.modules.dashboardwidget.controller.dto;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -24,5 +25,10 @@ public class ReportDashboardWidgetDto implements Serializable {
      * value
      */
     private ReportDashboardWidgetValueDto value;
+
+    /**
+     * options
+     */
+    private JSONObject options;
 
 }
