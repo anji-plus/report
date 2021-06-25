@@ -40,7 +40,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/access/accessAuthority',
     name: '首页',
-    meta: { title: '首页1', icon: 'iconhome2' },
+    meta: { title: '首页', icon: 'iconhome2' },
     children: [
       { path: '', name: 'accessUser', component: () => import('@/views/home/index'), meta: { title: '首页', icon: 'iconhome2', keepAlive: true, isBack: true } },
     ]
@@ -83,8 +83,6 @@ export const constantRouterMap = [
     meta: { title: '大屏报表', icon: 'iconnavicon-ywcs' },
     children: [
       { path: 'bigscreen', name: 'bigscreen', component: () => import('@/views/report/bigscreen/index'), meta: { title: '大屏报表', icon: 'iconchufaqipeizhi-hui', keepAlive: true, isBack: true } },
-      // { path: '/bigscreen/viewer', name: 'bigscreenViewer', component: () => import('@/views/report/bigscreen/viewer'), meta: { title: '预览', icon: 'i', keepAlive: false, isBack: true } },
-      // { path: '/bigscreen/designer', name: 'bigscreenDesigner', component: () => import('@/views/report/bigscreen/designer'), meta: { title: '设计', icon: 'i', keepAlive: false, isBack: true } },
     ]
   },
   { path: '/bigscreen/viewer', component: () => import('@/views/report/bigscreen/viewer'), hidden: true },

@@ -37,6 +37,18 @@
                       class="filter-item" />
           </el-form-item>
         </el-col>
+        <el-col :xs="24"
+                :sm="20"
+                :md="4"
+                :lg="4"
+                :xl="4">
+          <el-button type="primary"
+                     size="mini"
+                     @click="search('form')">查询</el-button>
+          <el-button type="danger"
+                     size="mini"
+                     @click="reset('form')">重置</el-button>
+        </el-col>
       </el-row>
     </el-form>
     <el-button type="primary"
@@ -45,6 +57,7 @@
 
     <!--表格渲染-->
     <el-table ref="table"
+              v-loading="listLoading"
               border
               :data="data"
               size="small"
@@ -392,6 +405,7 @@ export default {
   data () {
     return {
       data: [],
+      listLoading: true,
       permission: {
         add: ['admin', 'alipayConfig:add'],
         edit: ['admin', 'alipayConfig:edit'],
@@ -503,6 +517,32 @@ export default {
     this.getAllDataSourceSet()
   },
   methods: {
+    // 查询
+    search () {
+      this.params.pageNumber = 1
+      this.queryByPage()
+    },
+    // 重置
+    reset (formName) {
+      // this.$refs[formName].resetFields()
+      this.query.setName = ''
+      this.query.setCode = ''
+      this.params.pageNumber = 1
+      this.queryByPage()
+    },
+    async queryByPage () {
+      const res = await pageList(this.params)
+      if (res.code != '200') return
+      this.listLoading = true
+      this.data = res.data.records
+
+      this.totalCount = res.data.total
+      this.totalPage = res.data.pages
+      this.listLoading = false
+    },
+
+
+
     onJsonChange (value) { },
     onJsonSave (value) { },
     handleClose (done) {
