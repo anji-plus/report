@@ -1,61 +1,60 @@
 <template>
   <div>
-    <el-button type="primary" icon="el-icon-plus" plain @click="handleAddClick"
-      >新增</el-button
-    >
-    <el-table :data="formData" style="width: 100%">
-      <el-table-column prop="color" label="颜色" align="center">
+    <el-button type="primary"
+               icon="el-icon-plus"
+               plain
+               @click="handleAddClick">新增</el-button>
+    <el-table :data="formData"
+              style="width: 100%">
+      <el-table-column prop="color"
+                       label="颜色"
+                       align="center">
         <template slot-scope="scope">
-          <span class="color-box" :style="{ background: scope.row.color }" />
+          <span class="color-box"
+                :style="{ background: scope.row.color }" />
         </template>
       </el-table-column>
-      <el-table-column label="位置" align="center">
+      <el-table-column label="位置"
+                       align="center">
         <template slot-scope="scope">
-          <span
-            class="editor"
-            @click="handleEditorClick(scope.$index, scope.row)"
-          >
+          <span class="editor"
+                @click="handleEditorClick(scope.$index, scope.row)">
             <i class="el-icon-edit" /> 编辑
           </span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作"
+                       align="center">
         <template slot-scope="scope">
-          <span
-            class="editor"
-            @click="handleDeleteClick(scope.$index, scope.row)"
-          >
+          <span class="editor"
+                @click="handleDeleteClick(scope.$index, scope.row)">
             <i class="el-icon-delete" /> 删除
           </span>
         </template>
       </el-table-column>
     </el-table>
 
-    <el-dialog
-      title="新增"
-      :visible.sync="dialogVisible"
-      width="30%"
-      :before-close="handleClose"
-    >
+    <el-dialog title="新增"
+               :visible.sync="dialogVisible"
+               width="30%"
+               :before-close="handleClose">
       <el-form>
         <el-form-item label="颜色">
-          <el-input
-            v-model="colorValue"
-            style="width: 200px"
-            placeholder="请输入颜色"
-          >
+          <el-input v-model="colorValue"
+                    style="width: 200px"
+                    placeholder="请输入颜色">
             <template slot="append">
-              <el-color-picker
-                v-model="colorValue"
-                :predefine="predefineColors"
-              />
+              <el-color-picker v-model="colorValue"
+                               :predefine="predefineColors" />
             </template>
           </el-input>
         </el-form-item>
       </el-form>
-      <span slot="footer" class="dialog-footer">
+      <span slot="footer"
+            class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleSaveClick">确 定</el-button>
+        <el-button type="primary"
+                   @click="handleSaveClick">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -70,7 +69,7 @@ export default {
   props: {
     formData: Array
   },
-  data() {
+  data () {
     return {
       predefineColors: [
         "#ff4500",
@@ -87,21 +86,21 @@ export default {
       indexEditor: -1 // 编辑第几个数据
     };
   },
-  mounted() {},
+  mounted () { },
   methods: {
     // 弹出框关闭
-    handleClose() {
+    handleClose () {
       this.dialogVisible = false;
       this.colorValue = "";
     },
     // 新增
-    handleAddClick() {
+    handleAddClick () {
       this.colorValue = "";
       this.flag = true;
       this.dialogVisible = true;
     },
     // 确定
-    handleSaveClick() {
+    handleSaveClick () {
       if (this.flag) {
         // 新增
         const obj = {
@@ -117,14 +116,14 @@ export default {
       this.$emit("input", this.formData);
     },
     // 编辑
-    handleEditorClick(index, row) {
+    handleEditorClick (index, row) {
       this.flag = false;
       this.colorValue = row.color;
       this.dialogVisible = true;
       this.indexEditor = index;
     },
     // 删除
-    handleDeleteClick(index) {
+    handleDeleteClick (index) {
       this.formData.splice(index, 1);
     }
   }

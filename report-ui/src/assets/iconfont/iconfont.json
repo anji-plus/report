@@ -6,6 +6,160 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1990758",
+      "name": "excel",
+      "font_class": "excel",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "9445573",
+      "name": "保存",
+      "font_class": "baocun",
+      "unicode": "e737",
+      "unicode_decimal": 59191
+    },
+    {
+      "icon_id": "11920154",
+      "name": "关  闭",
+      "font_class": "guanbi",
+      "unicode": "e6c5",
+      "unicode_decimal": 59077
+    },
+    {
+      "icon_id": "16968592",
+      "name": "pdf",
+      "font_class": "pdf",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "21538118",
+      "name": "复制",
+      "font_class": "fuzhi",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "1066041",
+      "name": "020空心饼图",
+      "font_class": "020kongxinbingtu",
+      "unicode": "e78c",
+      "unicode_decimal": 59276
+    },
+    {
+      "icon_id": "2032219",
+      "name": "时间",
+      "font_class": "shijian",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "2721664",
+      "name": "保存",
+      "font_class": "save",
+      "unicode": "e6f6",
+      "unicode_decimal": 59126
+    },
+    {
+      "icon_id": "4803230",
+      "name": "图片",
+      "font_class": "tupian",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "5963559",
+      "name": "柱状图",
+      "font_class": "zhuzhuangtu",
+      "unicode": "e691",
+      "unicode_decimal": 59025
+    },
+    {
+      "icon_id": "6642296",
+      "name": "超链接",
+      "font_class": "chaolianjie",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "7732218",
+      "name": "文本",
+      "font_class": "ziyuan",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "9592086",
+      "name": "视频",
+      "font_class": "shipin",
+      "unicode": "ecc1",
+      "unicode_decimal": 60609
+    },
+    {
+      "icon_id": "12252496",
+      "name": "框架",
+      "font_class": "kuangjia",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "14717060",
+      "name": "预览",
+      "font_class": "yulan",
+      "unicode": "e728",
+      "unicode_decimal": 59176
+    },
+    {
+      "icon_id": "14728974",
+      "name": "横向文字",
+      "font_class": "hengxiangwenzi",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "15066193",
+      "name": "图表 _饼图",
+      "font_class": "icon_tubiao_bingtu",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "17247792",
+      "name": "漏斗图",
+      "font_class": "loudoutu",
+      "unicode": "e6d5",
+      "unicode_decimal": 59093
+    },
+    {
+      "icon_id": "21925168",
+      "name": "图表 折线图",
+      "font_class": "tubiaozhexiantu",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "22117888",
+      "name": "柱线图",
+      "font_class": "zhuxiantu",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "22300259",
+      "name": "图片",
+      "font_class": "tupian1",
+      "unicode": "e81d",
+      "unicode_decimal": 59421
+    },
+    {
+      "icon_id": "22398839",
+      "name": "仪表盘",
+      "font_class": "yibiaopan",
+      "unicode": "e706",
+      "unicode_decimal": 59142
+    },
+    {
       "icon_id": "18774317",
       "name": "返回",
       "font_class": "1",

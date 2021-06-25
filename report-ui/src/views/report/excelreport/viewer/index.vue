@@ -13,14 +13,14 @@
              download="xxx.xlsx">
             <el-button type="text"
                        @click="download('')">
-              <svg-icon icon-class="excel" />导出excel
+              <i class="iconfont iconexcel"></i>导出excel
             </el-button>
           </a>
           <a v-if="reportCode != null"
              download="xxx.pdf">
             <el-button type="text"
                        @click="download('gaea_template_pdf')">
-              <svg-icon icon-class="pdf" />导出pdf
+              <i class="iconfont iconpdf"></i>导出pdf
             </el-button>
           </a>
         </div>

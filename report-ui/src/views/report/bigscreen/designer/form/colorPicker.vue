@@ -5,9 +5,14 @@
  * @Last Modified time: 2021-4-8 11:04:24
  !-->
 <template>
-  <el-popover placement="right" trigger="click">
-    <Chrome v-model="colors" @input="updateValue" />
-    <el-input slot="reference" v-model="colors.hex" placeholder="颜色选择器">
+  <el-popover placement="right"
+              trigger="click">
+    <Chrome v-model="colors"
+            @input="updateValue" />
+    <el-input slot="reference"
+              v-model="colors.hex"
+              size="mini"
+              placeholder="颜色选择器">
       <template #append><i class="iconfont iconcolorSelector" /></template>
     </el-input>
   </el-popover>
@@ -30,7 +35,7 @@ export default {
       default: '',
     },
   },
-  data() {
+  data () {
     return {
       colors: {
         hex: '',
@@ -41,15 +46,15 @@ export default {
     }
   },
   watch: {
-    value(val) {
+    value (val) {
       this.colors.hex = val
     }
   },
-  mounted() {
+  mounted () {
     this.colors.hex = this.value
   },
   methods: {
-    updateValue(value) {
+    updateValue (value) {
       // this.colors = value
       this.$emit('input', value.hex)
       this.$emit('change', value.hex)

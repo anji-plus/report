@@ -190,3 +190,94 @@ a:hover {
 .el-input-group__append, .el-input-group__prepend{
   color: #333;
 }
+//avue
+.preview-form{
+  height: auto!important;
+  overflow-y: auto!important;
+}
+.x-spreadsheet-toolbar-btns{
+  margin-left: 30px !important;
+}
+.ml10{
+  margin-left: 10px;
+}
+
+.Customized .CodeMirror {
+  font-family: monospace;
+  height: 190px !important;
+  color: black;
+  direction: ltr;
+}
+.jsoneditor-vue{
+  height: 100%;
+}
+.printSet {
+  background-image: url('../images/bianzu.png') !important;
+  background-size: 19px;
+  background-position: left top;
+  background-repeat: no-repeat;
+  position: absolute;
+  opacity: 1!important;
+}
+.qrCodes {
+  background-image: url('../images/qrcode.png') !important;
+  background-size: 19px;
+  background-position: left top;
+  background-repeat: no-repeat;
+  position: absolute;
+  opacity: 1!important;
+}
+.barCodes {
+  background-image: url('../images/tiaoxingma.png') !important;
+  background-size: 19px;
+  background-position: left top;
+  background-repeat: no-repeat;
+  position: absolute;
+  opacity: 1!important;
+}
+.collapse-input-style {
+  .el-input__inner ,.el-textarea__inner{
+    background: #263445 !important;
+    border: 1px solid #3f5673;
+    color:#a8e3ff
+  }
+  .el-slider__runway{
+    height: 2px;
+    background-color:#5e6b82
+  }
+  .el-slider__bar{
+    height: 2px;
+  }
+  .el-slider__button-wrapper{
+    top: -17px;
+  }
+  .el-slider__button{
+    width: 14px;
+    height: 14px;
+  }
+  .el-switch__core{
+    background-color:#5e6b82;
+    border: 1px solid #3f5673;
+  }
+  .el-input-group__append, .el-input-group__prepend{
+    background: #5e6b82 !important;
+    border: 1px solid #3f5673;
+    color:#a8e3ff
+  }
+  .el-input-number__increase, .el-input-number__decrease{
+    background: #5e6b82 !important;
+    border: 1px solid #3f5673;
+    color:#a8e3ff
+  }
+  .el-input-number.is-controls-right .el-input-number__increase{
+    border-bottom: 1px solid #3f5673;
+  }
+  .el-input-number.is-controls-right .el-input-number__decrease{
+    border-left: 1px solid #3f5673;
+  }
+  .el-form-item__label {
+    font-size: 12px;
+    color: #bfcbd9!important;
+    font-weight: normal !important;
+  }
+}

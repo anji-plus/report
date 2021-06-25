@@ -71,7 +71,7 @@ const widgetTools = [
     code: 'widget-text',
     type: 'html',
     label: '文本',
-    icon: 'text',
+    icon: 'iconziyuan',
     options: {
       // 配置
       setup: [
@@ -196,7 +196,7 @@ const widgetTools = [
     code: 'widget-marquee',
     type: 'html',
     label: '滚动文本',
-    icon: 'marquee',
+    icon: 'iconhengxiangwenzi',
     options: {
       // 配置
       setup: [
@@ -334,7 +334,7 @@ const widgetTools = [
     code: 'widget-href',
     type: 'html',
     label: '超链接',
-    icon: 'href',
+    icon: 'iconchaolianjie',
     options: {
       // 配置
       setup: [
@@ -483,7 +483,7 @@ const widgetTools = [
     code: 'widget-time',
     type: 'html',
     label: '当前时间',
-    icon: 'time',
+    icon: 'iconshijian',
     options: {
       // 配置
       setup: [
@@ -614,7 +614,7 @@ const widgetTools = [
     code: 'widget-image',
     type: 'html',
     label: '图片',
-    icon: 'image',
+    icon: 'icontupian',
     options: {
       // 配置
       setup: [
@@ -788,7 +788,7 @@ const widgetTools = [
     code: 'widget-video',
     type: 'html',
     label: '视频',
-    icon: 'video',
+    icon: 'iconshipin',
     options: {
       // 配置
       setup: [
@@ -858,7 +858,7 @@ const widgetTools = [
     code: 'widget-iframe',
     type: 'html',
     label: '内联框架',
-    icon: 'iframe',
+    icon: 'iconkuangjia',
     options: {
       // 配置
       setup: [
@@ -929,7 +929,7 @@ const widgetTools = [
     code: 'widget-barchart',
     type: 'chart',
     label: '柱形图',
-    icon: 'barChart',
+    icon: 'iconzhuzhuangtu',
     options: {
       // 配置
       setup: [
@@ -1491,7 +1491,7 @@ const widgetTools = [
     code: 'widget-linechart',
     type: 'chart',
     label: '折线图',
-    icon: 'lineChart',
+    icon: 'icontubiaozhexiantu',
     options: {
       // 配置
       setup: [
@@ -2074,7 +2074,7 @@ const widgetTools = [
     code: 'widget-barlinechart',
     type: 'chart',
     label: '柱线图',
-    icon: 'barLineChart',
+    icon: 'iconzhuxiantu',
     options: {
       // 配置
       setup: [
@@ -2637,7 +2637,7 @@ const widgetTools = [
     code: 'widget-piechart',
     type: 'chart',
     label: '饼图',
-    icon: 'pieChart',
+    icon: 'iconicon_tubiao_bingtu',
     options: {
       // 配置
       setup: [
@@ -3011,7 +3011,7 @@ const widgetTools = [
     code: 'widget-hollow-piechart',
     type: 'chart',
     label: '空心饼图',
-    icon: 'hollowPieChart',
+    icon: 'icon020kongxinbingtu',
     options: {
       // 配置
       setup: [
@@ -3385,7 +3385,7 @@ const widgetTools = [
     code: 'widget-funnel',
     type: 'chart',
     label: '漏斗图',
-    icon: 'funnel',
+    icon: 'iconloudoutu',
     options: {
       // 配置
       setup: [
@@ -3751,7 +3751,7 @@ const widgetTools = [
     code: 'widget-gauge',
     type: 'chart',
     label: '仪表盘',
-    icon: 'speed',
+    icon: 'iconyibiaopan',
     options: {
       // 配置
       setup: [
@@ -3900,13 +3900,13 @@ const widgetTools = [
   // },
 ]
 
-const getToolByCode = function(code) {
+const getToolByCode = function (code) {
   // 获取大屏底层设置属性
   if (code == 'screen') {
     return screenConfig
   }
   // 获取组件
-  var item = widgetTools.find(function(item, index, arrs) {
+  var item = widgetTools.find(function (item, index, arrs) {
     return item.code === code
   })
   return item

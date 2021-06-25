@@ -55,8 +55,7 @@
                     placement="bottom-start">
           <el-button type="text"
                      @click="preview()">
-            <svg-icon icon-class="yulancopy"
-                      class="yulancopy" />
+            <i class="iconfont iconfuzhi"></i>
           </el-button>
         </el-tooltip>
         <el-tooltip class="item"
@@ -65,8 +64,7 @@
                     placement="bottom-start">
           <el-button type="text"
                      @click="save()">
-            <svg-icon icon-class="baocun"
-                      class="baocun" />
+            <i class="iconfont iconsave"></i>
           </el-button>
         </el-tooltip>
       </div>
