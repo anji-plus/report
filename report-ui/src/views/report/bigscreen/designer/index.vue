@@ -44,7 +44,7 @@
     <div class="layout-left-fold"
          :style="{ width: widthLeftForToolsHideButton + 'px' }"
          @click="toolIsShow = !toolIsShow">
-      <i class="iconfont iconfold" />
+      <i class="iconfont iconzhankai" />
     </div>
 
     <div class="layout-middle"
@@ -604,18 +604,24 @@ export default {
     display: -ms-flexbox;
     display: flex;
     height: 100%;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+    -webkit-box-align: bottom;
+    -ms-flex-align: bottom;
+    align-items: bottom;
     font-size: 12px;
     overflow: hidden;
-    background-color: #171b22;
+    background-color: #455766;
     cursor: pointer;
     i {
-      font-size: 40px;
-      width: 15px;
-      margin-left: -15px;
-      color: #bcc9d4;
+      font-size: 22px;
+      width: 18px;
+      height: 23px;
+      margin-left: 0px;
+      color: #5a83bb;
+      transform: rotate(180deg);
+      -ms-transform: rotate(180deg); /* IE 9 */
+      -moz-transform: rotate(180deg); /* Firefox */
+      -webkit-transform: rotate(180deg); /* Safari 和 Chrome */
+      -o-transform: rotate(180deg); /* Opera */
     }
   }
 
@@ -624,12 +630,10 @@ export default {
     position: relative;
     //width: calc(100% - 445px);
     height: 100%;
-    background-color: #4f4f4ff0;
+    background-color: #455766;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    border: 1px solid #dcdee2;
-    border-color: #e8eaec;
-    border-radius: 4px;
+    border: 1px solid #455766;
     align-items: center;
     vertical-align: middle;
     .top-button {
@@ -637,10 +641,10 @@ export default {
       flex-direction: row;
       height: 40px;
       line-height: 40px;
-      margin-left: 100px;
+      margin-left: 9px;
       .btn {
-        color: #409eff;
-        width: 53px;
+        color: #cde8ff;
+        width: 36px;
         text-align: center;
         display: block;
         cursor: pointer;
@@ -692,7 +696,7 @@ export default {
     }
     .el-tabs__content {
       background-color: #263445;
-      height: calc(100vh - 40px);
+      height: calc(100vh - 39px);
       overflow-x: hidden;
       overflow-y: auto;
       .el-tab-pane {
@@ -714,12 +718,12 @@ export default {
       }
 
       &::-webkit-scrollbar-track {
-        box-shadow: 1px 1px 5px rgba(55, 175, 255, 0.5) inset;
+        box-shadow: 1px 1px 5px rgba(116, 148, 170, 0.5) inset;
       }
       &::-webkit-scrollbar-thumb {
         min-height: 20px;
         background-clip: content-box;
-        box-shadow: 0 0 0 5px rgba(55, 175, 255, 0.5) inset;
+        box-shadow: 0 0 0 5px rgba(116, 148, 170, 0.5) inset;
       }
       &::-webkit-scrollbar-corner {
         background: transparent;

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "11990084",
+      "name": "展 开 ",
+      "font_class": "zhankai",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
       "icon_id": "1990758",
       "name": "excel",
       "font_class": "excel",
