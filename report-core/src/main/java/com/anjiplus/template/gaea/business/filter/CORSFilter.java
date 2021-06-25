@@ -1,5 +1,7 @@
 package com.anjiplus.template.gaea.business.filter;
 
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -11,6 +13,7 @@ import java.io.IOException;
  * Created by raodeming on 2021/6/24.
  */
 @Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter {
 
     @Override
