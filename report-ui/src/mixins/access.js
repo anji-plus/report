@@ -88,11 +88,6 @@ export default {
         return result
       }
     },
-    //深拷贝
-    deepClone(obj){
-		  var temp = JSON.stringify(obj);
-		  return JSON.parse(temp);
-    },
     
 		//从所有字典中，取某个字典的列表
 		getDict(dictname){

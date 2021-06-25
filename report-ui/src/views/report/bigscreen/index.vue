@@ -7,9 +7,7 @@
 <template>
   <div class="main-layout">
     <el-row :gutter="20">
-      <el-col v-for="item in list"
-              :key="item.id"
-              :span="6">
+      <el-col v-for="item in list" :key="item.id" :span="6">
         <div class="bg">
           <div class="rgba" />
           <div class="content">
@@ -17,14 +15,18 @@
             <footer>
               {{ item.time }}
               <div class="operation">
-                <el-button icon="el-icon-view"
-                           class="view"
-                           type="text"
-                           @click="viewDesign(item.id)" />
-                <el-button icon="el-icon-edit"
-                           class="edit"
-                           type="text"
-                           @click="openDesign(item.id)" />
+                <el-button
+                  icon="el-icon-view"
+                  class="view"
+                  type="text"
+                  @click="viewDesign(item.id)"
+                />
+                <el-button
+                  icon="el-icon-edit"
+                  class="edit"
+                  type="text"
+                  @click="openDesign(item.id)"
+                />
               </div>
             </footer>
           </div>
@@ -36,51 +38,57 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: "Login",
   components: {},
-  data () {
+  data() {
     return {
       list: [
         {
           id: 1,
-          name: '货物在途大屏',
-          time: '2021-3-19 17:54:00',
+          name: "货物在途大屏",
+          time: "2021-3-19 17:54:00"
         },
         {
           id: 2,
-          name: '仓库库容大屏',
-          time: '2021-3-19 17:54:00',
+          name: "仓库库容大屏",
+          time: "2021-3-19 17:54:00"
         },
         {
           id: 3,
-          name: '运输时效大屏',
-          time: '2021-3-19 17:54:00',
+          name: "运输时效大屏",
+          time: "2021-3-19 17:54:00"
         },
         {
           id: 4,
-          name: '运输时效大屏1',
-          time: '2021-3-19 17:54:00',
+          name: "运输时效大屏1",
+          time: "2021-3-19 17:54:00"
         },
         {
           id: 5,
-          name: '运输时效大屏2',
-          time: '2021-3-19 17:54:00',
-        },
-      ],
-    }
+          name: "运输时效大屏2",
+          time: "2021-3-19 17:54:00"
+        }
+      ]
+    };
   },
-  mounted () { },
+  mounted() {},
   methods: {
-    openDesign (reportId) {
-      var routeUrl = this.$router.resolve({ path: '/bigscreen/designer', query: { reportId: reportId } })
-      window.open(routeUrl.href, '_blank')
+    openDesign(reportId) {
+      var routeUrl = this.$router.resolve({
+        path: "/bigscreen/designer",
+        query: { reportId: reportId }
+      });
+      window.open(routeUrl.href, "_blank");
     },
-    viewDesign (reportId) {
-      var routeUrl = this.$router.resolve({ path: '/bigscreen/viewer', query: { reportId: reportId } })
-      window.open(routeUrl.href, '_blank')
-    },
-  },
-}
+    viewDesign(reportId) {
+      var routeUrl = this.$router.resolve({
+        path: "/bigscreen/viewer",
+        query: { reportId: reportId }
+      });
+      window.open(routeUrl.href, "_blank");
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">

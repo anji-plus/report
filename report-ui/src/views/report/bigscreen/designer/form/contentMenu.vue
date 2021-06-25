@@ -1,11 +1,6 @@
 <template>
-  <div v-show="visible"
-       class="contentmenu"
-       :style="styleObj">
-    <div class="contentmenu__item"
-         @click="deleteLayer">
-      <!-- <svg-icon icon-class="guanbi" />  -->删除图层
-    </div>
+  <div v-show="visible" class="contentmenu" :style="styleObj">
+    <div class="contentmenu__item" @click="deleteLayer"><svg-icon icon-class="guanbi" /> 删除图层</div>
   </div>
 </template>
 <script>
@@ -14,11 +9,11 @@ export default {
     styleObj: Object,
     visible: Boolean,
   },
-  data () {
+  data() {
     return {}
   },
   watch: {
-    visible (value) {
+    visible(value) {
       if (value) {
         document.body.addEventListener('click', this.closeMenu)
       } else {
@@ -27,10 +22,10 @@ export default {
     },
   },
   methods: {
-    closeMenu () {
+    closeMenu() {
       this.$emit('update:visible', false)
     },
-    deleteLayer () {
+    deleteLayer() {
       this.$confirm('是否删除所选图层?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
