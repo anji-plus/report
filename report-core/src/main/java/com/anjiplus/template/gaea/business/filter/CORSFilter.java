@@ -15,7 +15,6 @@ import java.io.IOException;
  */
 @Configuration
 @WebFilter(filterName = "CorsFilter ")
-@Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter {
 
     @Override
@@ -32,7 +31,7 @@ public class CORSFilter implements Filter {
         // 允许跨域请求包含content-type
         res.addHeader("Access-Control-Allow-Headers", "*");
         res.addHeader("Access-Control-Expose-Headers", "*");
-        chain.doFilter(request, response);
+        chain.doFilter(req, res);
     }
 
     @Override
