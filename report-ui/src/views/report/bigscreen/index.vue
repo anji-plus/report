@@ -72,11 +72,11 @@ export default {
   mounted () { },
   methods: {
     openDesign (reportId) {
-      var routeUrl = this.$router.resolve({ path: '/report/bigscreen/designer', query: { reportId: reportId } })
+      var routeUrl = this.$router.resolve({ path: '/bigscreen/designer', query: { reportId: reportId } })
       window.open(routeUrl.href, '_blank')
     },
     viewDesign (reportId) {
-      var routeUrl = this.$router.resolve({ path: '/report/bigscreen/viewer', query: { reportId: reportId } })
+      var routeUrl = this.$router.resolve({ path: '/bigscreen/viewer', query: { reportId: reportId } })
       window.open(routeUrl.href, '_blank')
     },
   },
@@ -102,11 +102,11 @@ export default {
   }
 
   .bg::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('../../../assets/images/charts.jpg');
+    background-image: url("../../../assets/images/charts.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: left top;

@@ -36,7 +36,6 @@ export default {
   data() {
     return {
       dataSetValue: '',
-
       dataSet: [], // 数据集
       userNameList: [], // 用户
       setParamList: [], // 对应的不同的图形数据参数

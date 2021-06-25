@@ -1,3 +1,4 @@
+/* eslint-disable vue/valid-v-for */
 <!--
  * @Author: lide1202@hotmail.com
  * @Date: 2021-4-6 11:04:24
@@ -8,130 +9,74 @@
   <div class="collapse-input-style">
     <el-form label-width="80px" label-position="left">
       <template v-for="(item, index) in options">
-        <el-form-item v-if="inputShow[item.name]" :key="index" :label="item.label" :prop="item.name" :required="item.required">
-          <el-input-number
-            v-if="item.type == 'el-input-number'"
-            v-model="formData[item.name]"
-            controls-position="right"
-            :placeholder="item.placeholder"
-            @change="changed($event, item.name)"
-          />
+        <div v-if="isShowForm(item, '[object Object]')" :key="index">
+          <el-form-item v-if="inputShow[item.name]" :label="item.label" :prop="item.name" :required="item.required">
+            <el-input-number v-if="item.type == 'el-input-number'" v-model="formData[item.name]" controls-position="right" :placeholder="item.placeholder" @change="changed($event, item.name)" />
 
-          <el-input
-            v-if="item.type == 'el-input-text'"
-            v-model.trim="formData[item.name]"
-            type="text"
-            placeholder="请输入内容"
-            clearable
-            @change="changed($event, item.name)"
-          />
+            <el-input v-if="item.type == 'el-input-text'" v-model.trim="formData[item.name]" type="text" placeholder="请输入内容" clearable @change="changed($event, item.name)" />
 
-          <el-input
-            v-if="item.type == 'el-input-textarea'"
-            v-model.trim="formData[item.name]"
-            type="textarea"
-            rows="2"
-            placeholder="请输入内容"
-            @change="changed($event, item.name)"
-          />
+            <el-input v-if="item.type == 'el-input-textarea'" v-model.trim="formData[item.name]" type="textarea" rows="2" placeholder="请输入内容" @change="changed($event, item.name)" />
 
-          <el-switch
-            v-if="item.type == 'el-switch'"
-            v-model="formData[item.name]"
-            placeholder="请输入内容"
-            @change="changed($event, item.name)"
-          />
+            <el-switch v-if="item.type == 'el-switch'" v-model="formData[item.name]" placeholder="请输入内容" @change="changed($event, item.name)" />
 
-          <ColorPicker
-            v-if="item.type == 'vue-color'"
-            v-model="formData[item.name]"
-            @change="(val) => changed(val, item.name)"
-          />
+            <ColorPicker v-if="item.type == 'vue-color'" v-model="formData[item.name]" @change="(val) => changed(val, item.name)" />
 
-          <el-upload
-            v-if="item.type == 'el-upload-picture'"
-            action="https://jsonplaceholder.typicode.com/posts/"
-            list-type="picture-card"
-          />
+            <el-upload v-if="item.type == 'el-upload-picture'" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" />
 
-          <el-radio-group
-            v-if="item.type == 'el-radio-group'"
-            v-model="formData[item.name]"
-            @change="(val) => changed(val, item.name)"
-          >
-            <el-radio
-              v-for="itemChild in item.selectOptions"
-              :key="itemChild.code"
-              :label="itemChild.code"
-            >{{ itemChild.name }}</el-radio>
-          </el-radio-group>
+            <el-radio-group v-if="item.type == 'el-radio-group'" v-model="formData[item.name]" @change="(val) => changed(val, item.name)">
+              <el-radio v-for="itemChild in item.selectOptions" :key="itemChild.code" :label="itemChild.code">{{ itemChild.name }}</el-radio>
+            </el-radio-group>
 
-          <el-select
-            v-if="item.type == 'el-select'"
-            v-model="formData[item.name]"
-            clearable
-            placeholder="请选择"
-            @change="(val) => changed(val, item.name)"
-          >
-            <el-option
-              v-for="itemChild in item.selectOptions"
-              :key="itemChild.code"
-              :label="itemChild.name"
-              :value="itemChild.code"
-            />
-          </el-select>
+            <el-select v-if="item.type == 'el-select'" v-model="formData[item.name]" clearable placeholder="请选择" @change="(val) => changed(val, item.name)">
+              <el-option v-for="itemChild in item.selectOptions" :key="itemChild.code" :label="itemChild.name" :value="itemChild.code" />
+            </el-select>
 
-          <el-slider
-            v-if="item.type == 'el-slider'"
-            v-model="formData[item.name]"
-            @change="(val) => changed(val, item.name)"
-          />
+            <el-slider v-if="item.type == 'el-slider'" v-model="formData[item.name]" @change="(val) => changed(val, item.name)" />
 
-          <el-button
-            v-if="item.type == 'el-button'"
-            type="primary"
-            plain
-            @click="addStaticData"
-          >编辑</el-button>
+            <el-button v-if="item.type == 'el-button'" type="primary" plain @click="addStaticData">编辑</el-button>
 
-          <!-- 弹窗 -->
-          <el-dialog
-            title="代码编辑"
-            :visible.sync="dialogVisibleStaticData"
-            width="50%"
-            :before-close="handleClose"
-          >
-            <codemirror
-              v-model.trim="formData[item.name]"
-              class="code-mirror"
-              :options="optionsJavascript"
-              style="height: 190px"
-            />
-            <span
-              slot="footer"
-              class="dialog-footer"
-            >
-              <el-button @click="dialogVisibleStaticData = false">取 消</el-button>
-              <el-button
-                type="primary"
-                @click="saveData"
-              >确 定</el-button>
-            </span>
-          </el-dialog>
-        </el-form-item>
-      </template>
-      <!-- 自定义组件 -->
-      <template v-for="item in options">
-        <div :key="item.name">
-          <dynamicComponents
-            v-if="item.type == 'dycustComponents' && inputShow[item.name]"
-            v-model="formData[item.name]"
-            :chart-type="item.chartType"
-          />
-          <customColorComponents
-            v-if="item.type == 'customColor' && inputShow[item.name]"
-            v-model="formData[item.name]"
-          />
+            <!-- 弹窗 -->
+            <el-dialog title="代码编辑" :visible.sync="dialogVisibleStaticData" width="50%" :before-close="handleClose">
+              <codemirror v-model.trim="formData[item.name]" class="code-mirror" :options="optionsJavascript" style="height: 190px" />
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisibleStaticData = false">取 消</el-button>
+                <el-button type="primary" @click="saveData">确 定</el-button>
+              </span>
+            </el-dialog>
+          </el-form-item>
+          <dynamicComponents v-if="item.type == 'dycustComponents' && inputShow[item.name]" v-model="formData[item.name]" :chart-type="item.chartType" />
+        </div>
+        <div v-else-if="isShowForm(item, '[object Array]')" :key="'a-' + index">
+          <el-collapse accordion>
+            <el-collapse-item v-for="(itemChild, indexChild) in item" :key="indexChild" :title="itemChild.name" :name="indexChild">
+              <template v-for="(itemChildList, idx) in itemChild.list">
+                <el-form-item :key="idx" :label="itemChildList.label" :prop="itemChildList.name" :required="itemChildList.required">
+                  <el-input-number v-if="itemChildList.type == 'el-input-number'" v-model="formData[itemChildList.name]" controls-position="right" :placeholder="itemChildList.placeholder" @change="changed($event, itemChildList.name)" />
+
+                  <el-input v-if="itemChildList.type == 'el-input-text'" v-model.trim="formData[itemChildList.name]" type="text" placeholder="请输入内容" clearable @change="changed($event, itemChildList.name)" />
+
+                  <el-input v-if="itemChildList.type == 'el-input-textarea'" v-model.trim="formData[itemChildList.name]" type="textarea" rows="2" placeholder="请输入内容" @change="changed($event, itemChildList.name)" />
+
+                  <el-switch v-if="itemChildList.type == 'el-switch'" v-model="formData[itemChildList.name]" placeholder="请输入内容" @change="changed($event, itemChildList.name)" />
+
+                  <ColorPicker v-if="itemChildList.type == 'vue-color'" v-model="formData[itemChildList.name]" @change="(val) => changed(val, itemChildList.name)" />
+
+                  <el-upload v-if="itemChildList.type == 'el-upload-picture'" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" />
+
+                  <el-radio-group v-if="itemChildList.type == 'el-radio-group'" v-model="formData[itemChildList.name]" @change="(val) => changed(val, itemChildList.name)">
+                    <el-radio v-for="it in itemChildList.selectOptions" :key="it.code" :label="it.code">{{ it.name }}</el-radio>
+                  </el-radio-group>
+
+                  <el-select v-if="itemChildList.type == 'el-select'" v-model="formData[itemChildList.name]" clearable placeholder="请选择" @change="(val) => changed(val, itemChildList.name)">
+                    <el-option v-for="it in itemChildList.selectOptions" :key="it.code" :label="it.name" :value="it.code" />
+                  </el-select>
+
+                  <el-slider v-if="itemChildList.type == 'el-slider'" v-model="formData[itemChildList.name]" @change="(val) => changed(val, itemChildList.name)" />
+                </el-form-item>
+                <customColorComponents v-if="itemChildList.type == 'customColor'" :key="'b-' + idx" v-model="formData[itemChildList.name]" />
+              </template>
+            </el-collapse-item>
+          </el-collapse>
         </div>
       </template>
     </el-form>
@@ -150,7 +95,6 @@ import 'codemirror/mode/sql/sql.js'
 import 'codemirror/mode/shell/shell.js'
 import dynamicComponents from './dynamicComponents.vue'
 import customColorComponents from './customColorComponents'
-import vueJsonEditor from 'vue-json-editor'
 export default {
   name: 'DynamicForm',
   components: {
@@ -158,8 +102,6 @@ export default {
     codemirror,
     dynamicComponents,
     customColorComponents,
-    // eslint-disable-next-line vue/no-unused-components
-    vueJsonEditor
   },
   model: {
     prop: 'value',
@@ -169,7 +111,7 @@ export default {
     options: Array,
     value: {
       type: [Object],
-      default: () => { },
+      default: () => {},
     },
   },
   data() {
@@ -194,7 +136,6 @@ export default {
   },
   watch: {
     value(newValue, oldValue) {
-      console.log(newValue)
       this.formData = newValue || {}
     },
     options() {
@@ -265,10 +206,24 @@ export default {
     setDefaultValue() {
       if (this.options && this.options.length > 0) {
         for (let i = 0; i < this.options.length; i++) {
-          this.formData[this.options[i].name] = this.deepClone(this.options[i].value)
+          const obj = this.options[i]
+          if (Object.prototype.toString.call(obj) == '[object Object]') {
+            this.formData[this.options[i].name] = this.deepClone(this.options[i].value)
+          } else if (Object.prototype.toString.call(obj) == '[object Array]') {
+            for (let j = 0; j < obj.length; j++) {
+              const list = obj[j].list
+              list.forEach((el) => {
+                this.formData[el.name] = el.value
+              })
+            }
+          }
         }
         this.formData = Object.assign({}, this.formData)
       }
+    },
+    // 是否显示 那种格式
+    isShowForm(val, type) {
+      return Object.prototype.toString.call(val) == type
     },
   },
 }
@@ -282,5 +237,25 @@ export default {
 .code-mirror {
   width: 100%;
   height: 100% !important;
+}
+.el-collapse {
+  border-top: none;
+  border-bottom: none;
+}
+/deep/.el-collapse-item__header {
+  height: 40px;
+  line-height: 40px;
+  background: transparent;
+  color: #bcc9d4;
+  font-weight: 300;
+  font-size: 12px;
+  border-color: #282e3a;
+}
+/deep/.el-collapse-item__wrap {
+  background: transparent;
+  border: none;
+}
+/deep/.el-collapse-item__content {
+  padding-bottom: 0;
 }
 </style>

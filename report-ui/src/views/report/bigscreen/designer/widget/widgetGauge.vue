@@ -61,6 +61,7 @@ export default {
         height: this.optionsStyle.height + 'px',
         left: this.optionsStyle.left + 'px',
         top: this.optionsStyle.top + 'px',
+        background: this.optionsSetup.background,
       }
     },
   },
@@ -106,7 +107,7 @@ export default {
     staticDataFn(val) {
       const unit = JSON.parse(val).unit
       const series = this.options.series
-      for (let key in series) {
+      for (const key in series) {
         series[key].detail.formatter = `{value}${unit}`
         series[key].data[0] = {
           value: JSON.parse(val).value,
@@ -117,7 +118,7 @@ export default {
     dynamicDataFn(val) {
       if (!val) return
       const series = this.options.series
-      for (let key in series) {
+      for (const key in series) {
         series[key].detail.formatter = `{value}${val.unit}`
         series[key].data[0] = {
           value: val.value,

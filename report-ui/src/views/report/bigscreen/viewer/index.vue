@@ -7,7 +7,10 @@
 <template>
   <div class="layout">
     <div :style="bigScreenStyle">
-      <widget v-for="(widget, index) in widgets" :key="index" v-model="widget.value" :type="widget.type" />
+      <widget v-for="(widget, index) in widgets"
+              :key="index"
+              v-model="widget.value"
+              :type="widget.type" />
     </div>
   </div>
 </template>
@@ -20,7 +23,7 @@ export default {
   components: {
     widget,
   },
-  data() {
+  data () {
     return {
       list: [
         {
@@ -94,11 +97,11 @@ export default {
       widgets: [],
     }
   },
-  mounted() {
+  mounted () {
     this.getData()
   },
   methods: {
-    async getData() {
+    async getData () {
       const reportCode = this.$route.query.reportCode
       const { code, data } = await detailDashboard(reportCode)
       if (code != 200) return

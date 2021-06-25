@@ -1,7 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options"
-             autoresize />
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 
@@ -13,7 +12,7 @@ export default {
     value: Object,
     ispreview: Boolean,
   },
-  data () {
+  data() {
     return {
       options: {
         grid: {},
@@ -48,49 +47,51 @@ export default {
             type: 'bar',
             barGap: '0%',
             itemStyle: {
-              borderRadius: null
-            }
+              borderRadius: null,
+            },
           },
         ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
-      optionsCollapse: {}, // 图标属性
+      optionsSetup: {},
     }
   },
   computed: {
-    styleObj () {
+    styleObj() {
       return {
         position: this.ispreview ? 'absolute' : 'static',
         width: this.optionsStyle.width + 'px',
         height: this.optionsStyle.height + 'px',
         left: this.optionsStyle.left + 'px',
         top: this.optionsStyle.top + 'px',
+        background: this.optionsSetup.background,
       }
     },
   },
   watch: {
     value: {
-      handler (val) {
+      handler(val) {
+        console.log(val)
         this.optionsStyle = val.position
         this.optionsData = val.data
-        this.optionsCollapse = val.collapse
+        this.optionsCollapse = val.setup
         this.optionsSetup = val.setup
         this.editorOptions()
       },
       deep: true,
     },
   },
-  mounted () {
+  mounted() {
     this.optionsStyle = this.value.position
     this.optionsData = this.value.data
-    this.optionsCollapse = this.value.collapse
+    this.optionsCollapse = this.value.setup
     this.optionsSetup = this.value.setup
     this.editorOptions()
   },
   methods: {
     // 修改图标options属性
-    editorOptions () {
+    editorOptions() {
       this.setOptionsTitle()
       this.setOptionsX()
       this.setOptionsY()
@@ -102,11 +103,12 @@ export default {
       this.setOptionsData()
     },
     // 标题修改
-    setOptionsTitle () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsTitle() {
+      const optionsCollapse = this.optionsSetup
       const title = {}
       title.text = optionsCollapse.titleText
-      title.textAlign = optionsCollapse.textAlign
+      title.show = optionsCollapse.isNoTitle
+      title.left = optionsCollapse.textAlign
       title.textStyle = {
         color: optionsCollapse.textColor,
         fontSize: optionsCollapse.textFontSize,
@@ -122,8 +124,8 @@ export default {
       this.options.title = title
     },
     // X轴设置
-    setOptionsX () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsX() {
+      const optionsCollapse = this.optionsSetup
       const xAxis = {
         type: 'category',
         show: optionsCollapse.hideX, // 坐标轴是否显示
@@ -136,19 +138,25 @@ export default {
         inverse: optionsCollapse.reversalX, // 轴反转
         axisLabel: {
           show: true,
-          interval: optionsCollapse.textInterval,// 文字角度
-          rotate: optionsCollapse.textAngle,// 文字角度
+          interval: optionsCollapse.textInterval, // 文字角度
+          rotate: optionsCollapse.textAngle, // 文字角度
           textStyle: {
             color: optionsCollapse.Xcolor, // x轴 坐标文字颜色
             fontSize: optionsCollapse.fontSizeX,
+          },
+        },
+        axisLine: {
+          show: true,
+          lineStyle: {
+            color: '#fff',
           },
         },
       }
       this.options.xAxis = xAxis
     },
     // Y轴设置
-    setOptionsY () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsY() {
+      const optionsCollapse = this.optionsSetup
       const yAxis = {
         type: 'value',
         show: optionsCollapse.isShowY, // 坐标轴是否显示
@@ -165,13 +173,22 @@ export default {
             fontSize: optionsCollapse.fontSizeY,
           },
         },
+        splitLine: {
+          show: false,
+        },
+        axisLine: {
+          show: true,
+          lineStyle: {
+            color: '#fff',
+          },
+        },
       }
 
       this.options.yAxis = yAxis
     },
     // 数值设定 or 柱体设置
-    setOptionsTop () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsTop() {
+      const optionsCollapse = this.optionsSetup
       const series = this.options.series
 
       for (const key in series) {
@@ -191,8 +208,8 @@ export default {
       this.options.series = series
     },
     // tooltip 设置
-    setOptionsTooltip () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsTooltip() {
+      const optionsCollapse = this.optionsSetup
       const tooltip = {
         trigger: 'item',
         show: true,
@@ -203,21 +220,21 @@ export default {
       }
       this.options.tooltip = tooltip
     },
-    //边距设置
-    setOptionsMargin () {
-      const optionsCollapse = this.optionsCollapse
+    // 边距设置
+    setOptionsMargin() {
+      const optionsCollapse = this.optionsSetup
       const grid = {
         left: optionsCollapse.marginLeft,
         right: optionsCollapse.marginRight,
         bottom: optionsCollapse.marginBottom,
         top: optionsCollapse.marginTop,
-        containLabel: true
+        containLabel: true,
       }
       this.options.grid = grid
     },
     // 图例操作 legend
-    setOptionsLegend () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsLegend() {
+      const optionsCollapse = this.optionsSetup
       const legend = this.options.legend
       legend.show = optionsCollapse.isShowLegend
       legend.left = optionsCollapse.lateralPosition == 'left' ? 0 : 'auto'
@@ -232,23 +249,23 @@ export default {
       legend.itemWidth = optionsCollapse.lengedWidth
     },
     // 图例颜色修改
-    setOptionsColor () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsColor() {
+      const optionsCollapse = this.optionsSetup
       const customColor = optionsCollapse.customColor
       if (!customColor) return
-      let arrColor = []
+      const arrColor = []
       for (let i = 0; i < customColor.length; i++) {
         arrColor.push(customColor[i].color)
       }
-      let itemStyle = {
+      const itemStyle = {
         normal: {
           color: (params) => {
             return arrColor[params.dataIndex]
           },
-          barBorderRadius: optionsCollapse.radius
-        }
+          barBorderRadius: optionsCollapse.radius,
+        },
       }
-      for (let key in this.options.series) {
+      for (const key in this.options.series) {
         if (this.options.series[key].type == 'bar') {
           this.options.series[key].itemStyle = itemStyle
         }
@@ -256,13 +273,15 @@ export default {
       this.options = Object.assign({}, this.options)
     },
     // 数据解析
-    setOptionsData () {
+    setOptionsData() {
       const optionsSetup = this.optionsSetup
+      console.log(optionsSetup)
       const optionsData = this.optionsData // 数据类型 静态 or 动态
+      console.log(optionsData)
       optionsData.dataType == 'staticData' ? this.staticDataFn(optionsData.staticData, optionsSetup) : this.dynamicDataFn(optionsData.dynamicData, optionsSetup)
     },
     // 静态数据
-    staticDataFn (val, optionsSetup) {
+    staticDataFn(val, optionsSetup) {
       const staticData = JSON.parse(val)
       // x轴
       if (optionsSetup.verticalShow) {
@@ -278,14 +297,15 @@ export default {
       }
       // series
       const series = this.options.series
-      for (let i in series) {
+      for (const i in series) {
         if (series[i].type == 'bar') {
           series[i].data = staticData.series[0].data
         }
       }
     },
     // 动态数据
-    dynamicDataFn (val, optionsSetup) {
+    dynamicDataFn(val, optionsSetup) {
+      console.log(val)
       if (!val) return
       // x轴
       if (optionsSetup.verticalShow) {
@@ -302,7 +322,7 @@ export default {
 
       // series
       const series = this.options.series
-      for (let i in series) {
+      for (const i in series) {
         if (series[i].type == 'bar') {
           series[i].data = val.series[i].data
         }

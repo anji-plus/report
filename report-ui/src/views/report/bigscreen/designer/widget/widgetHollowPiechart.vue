@@ -1,7 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options"
-             autoresize />
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 
@@ -13,7 +12,7 @@ export default {
     value: Object,
     ispreview: Boolean,
   },
-  data () {
+  data() {
     return {
       options: {
         color: [],
@@ -53,39 +52,43 @@ export default {
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
+      optionsSetup: {},
     }
   },
   computed: {
-    styleObj () {
+    styleObj() {
       return {
         position: this.ispreview ? 'absolute' : 'static',
         width: this.optionsStyle.width + 'px',
         height: this.optionsStyle.height + 'px',
         left: this.optionsStyle.left + 'px',
         top: this.optionsStyle.top + 'px',
+        background: this.optionsSetup.background,
       }
     },
   },
   watch: {
     value: {
-      handler (val) {
+      handler(val) {
         this.optionsStyle = val.position
         this.optionsData = val.data
         this.optionsCollapse = val.collapse
+        this.optionsSetup = val.setup
         this.editorOptions()
       },
       deep: true,
     },
   },
-  created () {
+  created() {
     this.optionsStyle = this.value.position
     this.optionsData = this.value.data
     this.optionsCollapse = this.value.collapse
+    this.optionsSetup = this.value.setup
     this.editorOptions()
   },
   methods: {
     // 修改图标options属性
-    editorOptions () {
+    editorOptions() {
       this.setOptionsTitle()
       this.setOptionsValue()
       this.setOptionsTooltip()
@@ -94,12 +97,12 @@ export default {
       this.setOptionsData()
     },
     // 标题设置
-    setOptionsTitle () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsTitle() {
+      const optionsCollapse = this.optionsSetup
       const title = {}
       title.show = optionsCollapse.isNoTitle
       title.text = optionsCollapse.titleText
-      title.textAlign = optionsCollapse.textAlign
+      title.left = optionsCollapse.textAlign
       title.textStyle = {
         color: optionsCollapse.textColor,
         fontSize: optionsCollapse.textFontSize,
@@ -115,8 +118,8 @@ export default {
       this.options.title = title
     },
     // 数值设定
-    setOptionsValue () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsValue() {
+      const optionsCollapse = this.optionsSetup
       const series = this.options.series
       const numberValue = optionsCollapse.numberValue ? '{c}' : ''
       const percentage = optionsCollapse.percentage ? '({d})%' : ''
@@ -143,8 +146,8 @@ export default {
       }
     },
     // 提示语设置 tooltip
-    setOptionsTooltip () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsTooltip() {
+      const optionsCollapse = this.optionsSetup
       const tooltip = {
         trigger: 'item',
         show: true,
@@ -156,8 +159,8 @@ export default {
       this.options.tooltip = tooltip
     },
     // 图例操作 legend
-    setOptionsLegend () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsLegend() {
+      const optionsCollapse = this.optionsSetup
       const legend = this.options.legend
       legend.show = optionsCollapse.isShowLegend
       legend.left = optionsCollapse.lateralPosition == 'left' ? 0 : 'auto'
@@ -172,32 +175,32 @@ export default {
       legend.itemWidth = optionsCollapse.lengedWidth
     },
     // 图例颜色修改
-    setOptionsColor () {
-      const optionsCollapse = this.optionsCollapse
+    setOptionsColor() {
+      const optionsCollapse = this.optionsSetup
       const customColor = optionsCollapse.customColor
       if (!customColor) return
-      let arrColor = []
+      const arrColor = []
       for (let i = 0; i < customColor.length; i++) {
         arrColor.push(customColor[i].color)
       }
       this.options.color = arrColor
       this.options = Object.assign({}, this.options)
     },
-    setOptionsData () {
+    setOptionsData() {
       const optionsData = this.optionsData // 数据类型 静态 or 动态
       optionsData.dataType == 'staticData' ? this.staticDataFn(optionsData.staticData) : this.dynamicDataFn(optionsData.dynamicData)
     },
-    staticDataFn (val) {
+    staticDataFn(val) {
       const staticData = JSON.parse(val)
-      for (let key in this.options.series) {
+      for (const key in this.options.series) {
         if (this.options.series[key].type == 'pie') {
           this.options.series[key].data = staticData
         }
       }
     },
-    dynamicDataFn (val) {
+    dynamicDataFn(val) {
       if (!val) return
-      for (let key in this.options.series) {
+      for (const key in this.options.series) {
         if (this.options.series[key].type == 'pie') {
           this.options.series[key].data = val
         }

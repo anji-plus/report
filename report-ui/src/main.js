@@ -14,6 +14,13 @@ import router from './router'
 import store from './store'
 import * as filter from './filter'
 import mixins from '@/mixins'
+import echarts from 'echarts';
+// 全局定义echarts
+import ECharts from 'vue-echarts'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/tooltip'
+// import 'echarts-gl'
+Vue.component('v-chart', ECharts)
 
 // permission control
 import '@/permission'

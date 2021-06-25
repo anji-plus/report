@@ -340,7 +340,7 @@ export default {
         window.open(routeUrl.href, '_blank')
       } else {
         // eslint-disable-next-line no-redeclare
-        var routeUrl = this.$router.resolve({ path: '/report/bigscreen/viewer', query: { reportCode: val.reportCode } })
+        var routeUrl = this.$router.resolve({ path: '/bigscreen/viewer', query: { reportCode: val.reportCode } })
         window.open(routeUrl.href, '_blank')
       }
     },
@@ -351,7 +351,7 @@ export default {
         window.open(routeUrl.href, '_blank')
       } else {
         // eslint-disable-next-line no-redeclare
-        var routeUrl = this.$router.resolve({ path: '/report/bigscreen/designer', query: { reportCode: val.reportCode, reportId: val.id, accessKey: val.accessKey } })
+        var routeUrl = this.$router.resolve({ path: '/bigscreen/designer', query: { reportCode: val.reportCode, reportId: val.id, accessKey: val.accessKey } })
         window.open(routeUrl.href, '_blank')
       }
     },
