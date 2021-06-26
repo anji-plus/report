@@ -55,6 +55,7 @@ import widgetSlider from './widgetSlider.vue'
 import widgetVideo from './widgetVideo.vue'
 import WidgetIframe from './widgetIframe.vue'
 import widgetBarchart from './widgetBarchart.vue'
+import widgetGradientColorBarchart from './bar/widgetGradientColorBarchart.vue'
 import widgetLinechart from './widgetLinechart.vue'
 import widgetBarlinechart from './widgetBarlinechart'
 import WidgetPiechart from './widgetPiechart.vue'
@@ -75,6 +76,7 @@ export default {
     widgetVideo,
     WidgetIframe,
     widgetBarchart,
+    widgetGradientColorBarchart,
     widgetLinechart,
     widgetBarlinechart,
     WidgetPiechart,
