@@ -9,7 +9,7 @@
     <el-form ref="form"
              :model="params"
              :rules="rules"
-             label-width="100px">
+             label-width="120px">
       <!-- 搜索 -->
       <el-row :gutter="10">
         <el-col :xs="24"
@@ -17,8 +17,7 @@
                 :md="12"
                 :lg="6"
                 :xl="4">
-          <el-form-item label="数据源名称"
-                        label-width="120px">
+          <el-form-item label="数据源名称">
             <el-input v-model.trim="params.sourceName"
                       size="mini"
                       clearable
@@ -32,8 +31,7 @@
                 :md="12"
                 :lg="6"
                 :xl="4">
-          <el-form-item label="数据源编码"
-                        label-width="120px">
+          <el-form-item label="数据源编码">
             <el-input v-model.trim="params.sourceCode"
                       size="mini"
                       clearable
@@ -48,8 +46,7 @@
                 :lg="6"
                 :xl="4">
           <el-form-item label="数据源类型"
-                        size="mini"
-                        label-width="120px">
+                        size="mini">
             <Dictionary v-model="params.sourceType"
                         :updata-dict="params.sourceType"
                         :dict-key="'SOURCE_TYPE'" />
@@ -77,7 +74,8 @@
     <!--表格渲染-->
     <el-table v-loading="listLoading"
               border
-              :data="list" class="mt10"
+              :data="list"
+              class="mt10"
               element-loading-text="Loading"
               style="width: 100%">
       <el-table-column align="center"

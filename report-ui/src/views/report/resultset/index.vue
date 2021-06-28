@@ -61,6 +61,7 @@
               border
               :data="data"
               size="small"
+              class="mt10"
               style="width: 100%">
       <el-table-column align="center"
                        label="序号"

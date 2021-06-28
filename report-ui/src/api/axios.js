@@ -35,7 +35,7 @@ service.interceptors.response.use(
     if (res.code == 200) {
       return res
     }
-    else if (res.code == '0024') {
+    else if (res.code == '50014') {
       //登录超时或被登出，弹确认框，用户确认后，跳转到登录页面
       MessageBox({
         message: "当前登录已失效或异地登录，请重新登录",

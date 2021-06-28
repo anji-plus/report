@@ -9,7 +9,7 @@
     <el-form ref="form"
              :model="params"
              :rules="rules"
-             label-width="100px">
+             label-width="120px">
       <!-- 搜索 -->
       <el-row :gutter="10">
         <el-col :xs="24"
@@ -17,8 +17,7 @@
                 :md="12"
                 :lg="6"
                 :xl="4">
-          <el-form-item label="名称"
-                        label-width="120px">
+          <el-form-item label="名称">
             <el-input v-model="params.reportName"
                       size="mini"
                       clearable
@@ -31,8 +30,7 @@
                 :md="12"
                 :lg="6"
                 :xl="4">
-          <el-form-item label="报表编码"
-                        label-width="120px">
+          <el-form-item label="报表编码">
             <el-input v-model="params.reportCode"
                       size="mini"
                       clearable
@@ -40,19 +38,18 @@
                       class="filter-item" />
           </el-form-item>
         </el-col>
-        <el-col :xs="24"
+        <!-- <el-col :xs="24"
                 :sm="20"
                 :md="12"
                 :lg="6"
                 :xl="4">
-          <el-form-item label="报表类型"
-                        label-width="120px"
+          <el-form-item label="报表类型" 
                         size="mini">
-            <!-- <Dictionary v-model="params.reportType"
+            <Dictionary v-model="params.reportType"
                         :updata-dict="params.reportType"
-                        :dict-key="'REPORT_TYPE'" /> -->
+                        :dict-key="'REPORT_TYPE'" />
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <el-col :xs="24"
                 :sm="20"
                 :md="4"
@@ -83,21 +80,21 @@
                        label="序号"
                        type="index"
                        min-width="40" />
-      <el-table-column label="报表类型">
+      <!-- <el-table-column label="报表类型">
         <template slot-scope="scope">
           {{scope.row.reportType | reportTableType}}
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column prop="reportName"
                        label="名称" />
       <el-table-column prop="reportCode"
                        label="报表编码" />
-      <el-table-column prop="reportGroup"
+      <!-- <el-table-column prop="reportGroup"
                        label="分组">
         <template slot-scope="scope">
           {{scope.row.reportGroup | filterPushType}}
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column prop="reportDesc"
                        label="备注" />
       <el-table-column prop="createByView"
