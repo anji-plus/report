@@ -1,6 +1,11 @@
 <template>
   <div>
-    <el-button type="primary" icon="el-icon-plus" plain @click="handleAddClick"
+    <el-button
+      type="primary"
+      size="mini"
+      icon="el-icon-plus"
+      plain
+      @click="handleAddClick"
       >新增</el-button
     >
     <el-table :data="formData" style="width: 100%">
@@ -43,19 +48,23 @@
             v-model="colorValue"
             style="width: 200px"
             placeholder="请输入颜色"
+            size="mini"
           >
             <template slot="append">
               <el-color-picker
                 v-model="colorValue"
                 :predefine="predefineColors"
+                size="mini"
               />
             </template>
           </el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleSaveClick">确 定</el-button>
+        <el-button size="mini" @click="dialogVisible = false">取 消</el-button>
+        <el-button size="mini" type="primary" @click="handleSaveClick"
+          >确 定</el-button
+        >
       </span>
     </el-dialog>
   </div>

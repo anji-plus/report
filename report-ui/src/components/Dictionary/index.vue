@@ -6,57 +6,68 @@
  */
 !-->
 <template>
-  <el-select v-model="dictionary" placeholder="请选择" clearable @change="selectChange">
-    <el-option v-for="item in dictionaryOptions" :key="item.id" :label="item.text" :value="item.id" />
+  <el-select
+    v-model="dictionary"
+    placeholder="请选择"
+    clearable
+    @change="selectChange"
+    size="mini"
+  >
+    <el-option
+      v-for="item in dictionaryOptions"
+      :key="item.id"
+      :label="item.text"
+      :value="item.id"
+    />
   </el-select>
 </template>
 
 <script>
-import { getDictList } from '@/api/dict-data' // 获取数据字典
+import { getDictList } from "@/api/dict-data"; // 获取数据字典
 export default {
-  name: 'GetDictionary',
+  name: "GetDictionary",
   props: {
     dictKey: String, // 字典code
-    updataDict: String, // 回显绑定的值
+    updataDict: String // 回显绑定的值
   },
   data() {
     return {
-      dictionary: '', // 绑定选中的值
-      dictionaryOptions: [], // 拉下字典选项
-    }
+      dictionary: "", // 绑定选中的值
+      dictionaryOptions: [] // 拉下字典选项
+    };
   },
   watch: {
     dictKey: {
       immediate: true,
       handler() {
-        this.getSystem()
-      },
+        this.getSystem();
+      }
     },
     updataDict: {
       immediate: true,
       handler() {
-        this.dictionary = this.updataDict
-      },
-    },
+        this.dictionary = this.updataDict;
+      }
+    }
   },
   created() {
-    this.getSystem()
+    this.getSystem();
   },
   mounted() {
-    this.dictionary = this.updataDict
+    this.dictionary = this.updataDict;
   },
   methods: {
     // 获取数据字典
     async getSystem() {
-      const { code, data } = await getDictList(this.dictKey)
-      if (code != '200') return
-      this.dictionaryOptions = data
+      const { code, data } = await getDictList(this.dictKey);
+      if (code != "200") return;
+      this.dictionaryOptions = data;
     },
     selectChange(val) {
-      this.$emit('input', val)
-    },
-  },
-}
+      this.$emit("input", val);
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
