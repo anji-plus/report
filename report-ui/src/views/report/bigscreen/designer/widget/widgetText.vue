@@ -10,52 +10,53 @@
 
 <script>
 export default {
-  name: 'WidgetText',
+  name: "WidgetText",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean,
+    ispreview: Boolean
   },
   data() {
     return {
-      options: {},
-    }
+      options: {}
+    };
   },
   computed: {
     transStyle() {
-      return this.objToOne(this.options)
+      return this.objToOne(this.options);
     },
     styleColor() {
+      console.log(this.transStyle);
       return {
-        position: this.ispreview ? 'absolute' : 'static',
+        position: this.ispreview ? "absolute" : "static",
         color: this.transStyle.color,
-        'font-weight': this.transStyle.fontWeight,
+        "font-weight": this.transStyle.fontWeight,
         text: this.transStyle.text,
-        'font-size': this.transStyle.fontSize + 'px',
-        'letter-spacing': this.transStyle.letterSpacing + 'em',
+        "font-size": this.transStyle.fontSize + "px",
+        "letter-spacing": this.transStyle.letterSpacing + "em",
         background: this.transStyle.background,
-        'text-align': this.transStyle.textAlign,
-        width: this.transStyle.width + 'px',
-        height: this.transStyle.height + 'px',
-        left: this.transStyle.left + 'px',
-        top: this.transStyle.top + 'px',
-        right: this.transStyle.right + 'px',
-      }
-    },
+        "text-align": this.transStyle.textAlign,
+        width: this.transStyle.width + "px",
+        height: this.transStyle.height + "px",
+        left: this.transStyle.left + "px",
+        top: this.transStyle.top + "px",
+        right: this.transStyle.right + "px"
+      };
+    }
   },
   watch: {
     value: {
       handler(val) {
-        this.options = val
+        this.options = val;
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   mounted() {
-    this.options = this.value
+    this.options = this.value;
   },
-  methods: {},
-}
+  methods: {}
+};
 </script>
 
 <style scoped lang="scss">
