@@ -5,47 +5,21 @@
  * @Last Modified time: 2021-3-13 11:04:24
  !-->
 <template>
-  <!-- <vue-draggable-resizable class="vue-draggalbe" :w="data.position.width" :h="data.position.height" :x="data.position.left" :y="data.position.top" :z="data.position.zIndex" :parent="true" :is-conflict-check="true" :snap="true" :resizable="true" :draggable="true" :prevent-deactivation="false" :active="true" :snap-tolerance="20" :class-name="'widget-container'" :class-name-active="'widget-active'" @activated="onActivated(index)" @resizestop="onResizstop" @dragstop="onDragstop">
+  <avue-draggable
+    :width="widgetsWidth"
+    :height="widgetsHeight"
+    :left="widgetsLeft"
+    :top="widgetsTop"
+    ref="draggable"
+    :index="index"
+    @focus="handleFocus"
+    @blur="handleBlur"
+  >
     <component :is="type" :value="value" />
-  </vue-draggable-resizable> -->
-  <div @click.stop>
-    <vue-drag-resize
-      :w="widgetsWidth"
-      :h="widgetsHeight"
-      :x="widgetsLeft"
-      :y="widgetsTop"
-      :z="widgetsZIndex"
-      :minw="10"
-      :minh="10"
-      :parent-w="bigscreen.bigscreenWidth"
-      :parent-h="bigscreen.bigscreenHeight"
-      :snap-tolerance="20"
-      :is-conflict-check="true"
-      :class-name="'widget-container'"
-      :class-name-active="'widget-active'"
-      :prevent-deactivation="false"
-      :is-active="true"
-      :is-draggable="true"
-      :is-resizable="true"
-      :parent-limitation="true"
-      :snap-to-grid="false"
-      :aspect-ratio="false"
-      @clicked="onActivated(index)"
-      @activated="onActivated(index)"
-      @dragstop="ev => onDragstop(ev, index)"
-      @resizing="ev => onResizing(ev, index)"
-    >
-      <component :is="type" :value="value" />
-    </vue-drag-resize>
-  </div>
+  </avue-draggable>
 </template>
 
 <script>
-// 大屏设计页面的拖拽插件 https://gitee.com/charact/vue-draggable-resizable-gorkys#dragstop
-// import VueDraggableResizable from 'vue-draggable-resizable-gorkys'
-// import 'vue-draggable-resizable-gorkys/dist/VueDraggableResizable.css'
-import VueDragResize from "vue-drag-resize";
-
 import widgetHref from "./widgetHref.vue";
 import widgetText from "./widgetText.vue";
 import WidgetMarquee from "./widgetMarquee.vue";
@@ -65,8 +39,6 @@ import WidgetGauge from "./widgetGauge.vue";
 export default {
   name: "Widget",
   components: {
-    // VueDraggableResizable,
-    VueDragResize,
     widgetHref,
     widgetText,
     WidgetMarquee,
@@ -129,14 +101,15 @@ export default {
   },
   mounted() {},
   methods: {
-    onActivated(index) {
-      this.$emit("onActivated", index);
+    //获取焦点
+    handleFocus({ index, left, top, width, height }) {
+      // console.log(index, left, top, width, height);
     },
-    onDragstop(obj, index) {
-      this.$emit("onActivated", { index, obj });
-    },
-    onResizing(obj, index) {
-      this.$emit("onActivated", { index, obj });
+    //失去焦点
+    handleBlur({ index, left, top, width, height }) {
+      console.log({ index, left, top, width, height });
+      this.$emit("onActivated", { index, left, top, width, height });
+      this.$refs.draggable.setActive(true);
     }
   }
 };
@@ -152,5 +125,8 @@ export default {
   cursor: move;
   border: 1px dashed #09f;
   background-color: rgba(115, 170, 229, 0.5);
+}
+.avue-draggable {
+  padding: 0 !important;
 }
 </style>
