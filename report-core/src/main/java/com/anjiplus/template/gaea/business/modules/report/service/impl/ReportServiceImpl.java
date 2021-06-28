@@ -1,15 +1,12 @@
 package com.anjiplus.template.gaea.business.modules.report.service.impl;
 
+import com.anji.plus.gaea.constant.BaseOperationEnum;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
+import com.anji.plus.gaea.exception.BusinessException;
 import com.anjiplus.template.gaea.business.modules.report.controller.dto.ReportDto;
 import com.anjiplus.template.gaea.business.modules.report.dao.ReportMapper;
 import com.anjiplus.template.gaea.business.modules.report.dao.entity.Report;
 import com.anjiplus.template.gaea.business.modules.report.service.ReportService;
-import com.anjiplus.template.gaea.business.modules.reportexcel.dao.ReportExcelMapper;
-import com.anjiplus.template.gaea.business.modules.reportexcel.dao.entity.ReportExcel;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReportServiceImpl implements ReportService {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ReportMapper reportMapper;
-
-    @Autowired
-    private ReportExcelMapper reportExcelMapper;
 
     @Override
     public GaeaBaseMapper<Report> getMapper() {
@@ -38,8 +31,11 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void delReport(ReportDto reportDto) {
         deleteById(reportDto.getId());
-        QueryWrapper<ReportExcel> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("report_code" , reportDto.getReportCode());
-        reportExcelMapper.delete(queryWrapper);
+    }
+
+    @Override
+    public void processBeforeOperation(Report entity, BaseOperationEnum operationEnum) throws BusinessException {
+        //目前只有大屏一种类型
+        entity.setReportType("report_screen");
     }
 }

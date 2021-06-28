@@ -36,6 +36,7 @@ import WidgetPiechart from "./widgetPiechart.vue";
 import WidgetHollowPiechart from "./widgetHollowPiechart.vue";
 import WidgetFunnel from "./widgetFunnel.vue";
 import WidgetGauge from "./widgetGauge.vue";
+import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRoseArea";
 export default {
   name: "Widget",
   components: {
@@ -54,7 +55,8 @@ export default {
     WidgetPiechart,
     WidgetHollowPiechart,
     WidgetFunnel,
-    WidgetGauge
+    WidgetGauge,
+    WidgetPieNightingaleRoseArea
   },
   model: {
     prop: "value",
@@ -101,11 +103,9 @@ export default {
   },
   mounted() {},
   methods: {
-    //获取焦点
     handleFocus({ index, left, top, width, height }) {
       // console.log(index, left, top, width, height);
     },
-    //失去焦点
     handleBlur({ index, left, top, width, height }) {
       this.$emit("onActivated", { index, left, top, width, height });
       this.$refs.draggable.setActive(true);

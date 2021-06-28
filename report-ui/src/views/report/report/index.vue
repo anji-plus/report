@@ -43,7 +43,7 @@
                 :md="12"
                 :lg="6"
                 :xl="4">
-          <el-form-item label="报表类型" 
+          <el-form-item label="报表类型"
                         size="mini">
             <Dictionary v-model="params.reportType"
                         :updata-dict="params.reportType"
@@ -97,11 +97,11 @@
       </el-table-column> -->
       <el-table-column prop="reportDesc"
                        label="备注" />
-      <el-table-column prop="createByView"
+      <el-table-column prop="createBy"
                        label="创建人" />
       <el-table-column prop="createTime"
                        label="创建时间" />
-      <el-table-column prop="updateByView"
+      <el-table-column prop="updateBy"
                        label="更新人" />
       <el-table-column prop="updateTime"
                        label="更新时间" />
