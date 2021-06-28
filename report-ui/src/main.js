@@ -27,6 +27,10 @@ import '@/permission'
 
 import '@/extend'
 
+import Avue from '@smallwei/avue';
+import '@smallwei/avue/lib/index.css';
+Vue.use(Avue);
+
 // enable element zh-cn
 Vue.use(ElementUI, { zhLocale })
 

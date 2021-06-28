@@ -26,7 +26,6 @@ export default {
       return this.objToOne(this.options);
     },
     styleColor() {
-      console.log(this.transStyle);
       return {
         position: this.ispreview ? "absolute" : "static",
         color: this.transStyle.color,

@@ -84,6 +84,7 @@
           width: bigscreenWidthInWorkbench + 'px',
           height: bigscreenHeightInWorkbench + 'px'
         }"
+        @mousedown="handleMouseDown"
       >
         <vue-ruler-tool
           v-model="dashboard.presetLine"
@@ -110,9 +111,10 @@
               'background-origin': 'initial',
               'background-clip': 'initial'
             }"
-            @click="setOptionsOnClickScreen"
+            @click.self="setOptionsOnClickScreen"
           >
             <widget
+              ref="widgets"
               v-for="(widget, index) in widgets"
               :key="index"
               v-model="widget.value"
@@ -121,6 +123,7 @@
               :bigscreen="{ bigscreenWidth, bigscreenHeight }"
               @onActivated="setOptionsOnClickWidget"
               @contextmenu.prevent.native="rightClick($event, index)"
+              @click.prevent.native="widgetsClick(index)"
             />
           </div>
         </vue-ruler-tool>
@@ -519,27 +522,41 @@ export default {
     },
 
     // 如果是点击某个组件，获取该组件的配置项
-    setOptionsOnClickWidget(index) {
-      // 选中不同的组件 右侧都显示第一栏
-      this.activeName = "first";
-      this.screenCode = "";
-      if (typeof index == "number") {
-        if (index < 0 || index >= this.widgets.length) {
-          return;
-        }
-        this.widgetIndex = index;
-        this.widgetOptions = this.deepClone(this.widgets[index]["options"]);
+    setOptionsOnClickWidget(obj) {
+      if (obj.index < 0 || obj.index >= this.widgets.length) {
         return;
-      } else {
-        // 执行传递过来的值
-        this.widgets[index.index].value.position = index.obj;
+      }
+      this.widgetIndex = obj.index;
+      this.widgetOptions = this.deepClone(this.widgets[obj.index]["options"]);
+      this.widgets[obj.index].value.position = obj;
+      this.widgets[obj.index].options.position.forEach(el => {
+        for (const key in obj) {
+          if (el.name == key) {
+            el.value = obj[key];
+          }
+        }
+      });
+      console.log(this.widgets);
+    },
+    widgetsClick(index) {
+      const draggableArr = this.$refs.widgets;
+      for (let i = 0; i < draggableArr.length; i++) {
+        if (i == index) {
+          this.$refs.widgets[i].$refs.draggable.setActive(true);
+        } else {
+          this.$refs.widgets[i].$refs.draggable.setActive(false);
+        }
       }
     },
-
+    handleMouseDown() {
+      console.log(1);
+      const draggableArr = this.$refs.widgets;
+      for (let i = 0; i < draggableArr.length; i++) {
+        this.$refs.widgets[i].$refs.draggable.setActive(false);
+      }
+    },
     // 将当前选中的组件，右侧属性值更新
     widgetValueChanged(key, val) {
-      console.log(key);
-      console.log(val);
       /* 更新指定 this.widgets 中第 this.widgetIndex 个组件的value
       widgets: [{
         type: 'widget-text',
@@ -559,7 +576,6 @@ export default {
           this.setDefaultValue(this.widgets[i].options[key], val);
         }
       }
-      console.log(this.widgets);
     },
     rightClick(event, index) {
       this.rightClickIndex = index;
