@@ -88,13 +88,13 @@
                        label="数据源名称[编码]" />
       <el-table-column prop="sourceDesc"
                        label="数据源描述" />
-      <el-table-column prop="createByView"
+      <el-table-column prop="createBy"
                        label="创建人"
                        width="100" />
       <el-table-column prop="createTime"
                        label="创建时间"
                        width="140" />
-      <el-table-column prop="updateByView"
+      <el-table-column prop="updateBy"
                        label="修改人"
                        width="100" />
       <el-table-column prop="updateTime"

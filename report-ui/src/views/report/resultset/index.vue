@@ -78,13 +78,13 @@
           <el-button @click="isShowCaseResult(scope.row)">查看</el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="createByView"
+      <el-table-column prop="createBy"
                        width="100"
                        label="创建人" />
       <el-table-column prop="createTime"
                        width="140"
                        label="创建人" />
-      <el-table-column prop="updateByView"
+      <el-table-column prop="updateBy"
                        width="100"
                        label="更新人" />
       <el-table-column prop="updateTime"
@@ -390,7 +390,7 @@
   </div>
 </template>
 
-<script>  
+<script>
 import { queryAllDataSourceSet, verificationSet, testTransformSet, dataSetPreview, addDataSet, editDataSet, deleteDataSet, dataSetPageList } from '@/api/report'
 import Dictionary from '@/components/Dictionary/index'
 import { codemirror } from 'vue-codemirror' // 引入codeMirror全局实例
