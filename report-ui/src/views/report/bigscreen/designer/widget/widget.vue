@@ -32,8 +32,8 @@
       :aspect-ratio="false"
       @clicked="onActivated(index)"
       @activated="onActivated(index)"
-      @dragstop="(ev) => onDragstop(ev, index)"
-      @resizing="(ev) => onResizing(ev, index)"
+      @dragstop="ev => onDragstop(ev, index)"
+      @resizing="ev => onResizing(ev, index)"
     >
       <component :is="type" :value="value" />
     </vue-drag-resize>
@@ -44,26 +44,26 @@
 // 大屏设计页面的拖拽插件 https://gitee.com/charact/vue-draggable-resizable-gorkys#dragstop
 // import VueDraggableResizable from 'vue-draggable-resizable-gorkys'
 // import 'vue-draggable-resizable-gorkys/dist/VueDraggableResizable.css'
-import VueDragResize from 'vue-drag-resize'
+import VueDragResize from "vue-drag-resize";
 
-import widgetHref from './widgetHref.vue'
-import widgetText from './widgetText.vue'
-import WidgetMarquee from './widgetMarquee.vue'
-import widgetTime from './widgetTime.vue'
-import widgetImage from './widgetImage.vue'
-import widgetSlider from './widgetSlider.vue'
-import widgetVideo from './widgetVideo.vue'
-import WidgetIframe from './widgetIframe.vue'
-import widgetBarchart from './widgetBarchart.vue'
-import widgetGradientColorBarchart from './bar/widgetGradientColorBarchart.vue'
-import widgetLinechart from './widgetLinechart.vue'
-import widgetBarlinechart from './widgetBarlinechart'
-import WidgetPiechart from './widgetPiechart.vue'
-import WidgetHollowPiechart from './widgetHollowPiechart.vue'
-import WidgetFunnel from './widgetFunnel.vue'
-import WidgetGauge from './widgetGauge.vue'
+import widgetHref from "./widgetHref.vue";
+import widgetText from "./widgetText.vue";
+import WidgetMarquee from "./widgetMarquee.vue";
+import widgetTime from "./widgetTime.vue";
+import widgetImage from "./widgetImage.vue";
+import widgetSlider from "./widgetSlider.vue";
+import widgetVideo from "./widgetVideo.vue";
+import WidgetIframe from "./widgetIframe.vue";
+import widgetBarchart from "./widgetBarchart.vue";
+import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
+import widgetLinechart from "./widgetLinechart.vue";
+import widgetBarlinechart from "./widgetBarlinechart";
+import WidgetPiechart from "./widgetPiechart.vue";
+import WidgetHollowPiechart from "./widgetHollowPiechart.vue";
+import WidgetFunnel from "./widgetFunnel.vue";
+import WidgetGauge from "./widgetGauge.vue";
 export default {
-  name: 'Widget',
+  name: "Widget",
   components: {
     // VueDraggableResizable,
     VueDragResize,
@@ -82,11 +82,11 @@ export default {
     WidgetPiechart,
     WidgetHollowPiechart,
     WidgetFunnel,
-    WidgetGauge,
+    WidgetGauge
   },
   model: {
-    prop: 'value',
-    event: 'input',
+    prop: "value",
+    event: "input"
   },
   props: {
     /*
@@ -98,48 +98,48 @@ export default {
     bigscreen: Object,
     value: {
       type: [Object],
-      default: () => {},
-    },
+      default: () => {}
+    }
   },
   data() {
     return {
       data: {
         setup: {},
         data: {},
-        position: {},
-      },
-    }
+        position: {}
+      }
+    };
   },
   computed: {
     widgetsWidth() {
-      return this.value.position.width
+      return this.value.position.width;
     },
     widgetsHeight() {
-      return this.value.position.height
+      return this.value.position.height;
     },
     widgetsLeft() {
-      return this.value.position.left
+      return this.value.position.left;
     },
     widgetsTop() {
-      return this.value.position.top
+      return this.value.position.top;
     },
     widgetsZIndex() {
-      return this.value.position.zIndex
-    },
+      return this.value.position.zIndex || 1;
+    }
   },
   mounted() {},
   methods: {
     onActivated(index) {
-      this.$emit('onActivated', index)
+      this.$emit("onActivated", index);
     },
     onDragstop(obj, index) {
-      this.$emit('onActivated', { index, obj })
+      this.$emit("onActivated", { index, obj });
     },
     onResizing(obj, index) {
-      this.$emit('onActivated', { index, obj })
-    },
-  },
-}
+      this.$emit("onActivated", { index, obj });
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
