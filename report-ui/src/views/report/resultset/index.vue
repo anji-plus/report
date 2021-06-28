@@ -390,15 +390,15 @@
 </template>
 
 <script>  
-import { queryAllDataSourceSet, verificationSet, testTransformSet, dataSetPreview, addDataSet, editDataSet, deleteDataSet } from '@/api/report'
+import { queryAllDataSourceSet, verificationSet, testTransformSet, dataSetPreview, addDataSet, editDataSet, deleteDataSet, dataSetPageList } from '@/api/report'
 import Dictionary from '@/components/Dictionary/index'
 import { codemirror } from 'vue-codemirror' // 引入codeMirror全局实例
 import 'codemirror/lib/codemirror.css' // 核心样式
 import 'codemirror/theme/cobalt.css' // 引入主题后还需要在 options 中指定主题才会生效
-
+import vueJsonEditor from 'vue-json-editor'
 export default {
   name: 'Support',
-  components: { Dictionary, codemirror },
+  components: { Dictionary, codemirror, vueJsonEditor },
 
   dicts: ['pricing_method'],
 
@@ -512,7 +512,9 @@ export default {
   watch: {},
   // 在生命周期 beforeCreate里面改变this指向
   beforeCreate: function () { },
-  mounted () { },
+  mounted () {
+    this.queryByPage()
+  },
   created () {
     this.getAllDataSourceSet()
   },
@@ -531,7 +533,15 @@ export default {
       this.queryByPage()
     },
     async queryByPage () {
-      const res = await pageList(this.params)
+      let params = {
+        page: 0,
+        size: 10,
+        sort: "update_time",
+        order: "DESC",
+        pageNumber: 1,
+        pageSize: 10
+      }
+      const res = await dataSetPageList(params)
       if (res.code != '200') return
       this.listLoading = true
       this.data = res.data.records

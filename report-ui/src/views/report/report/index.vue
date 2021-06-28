@@ -77,6 +77,7 @@
               border
               :data="list"
               element-loading-text="Loading"
+              class="mt10"
               style="width: 100%">
       <el-table-column align="center"
                        label="序号"
@@ -149,7 +150,7 @@
                   :md="6"
                   :lg="6"
                   :xl="6">
-            <el-form-item label="报表类型">
+            <!-- <el-form-item label="报表类型">
               <el-select v-model="dialogForm.reportType"
                          placeholder="报表类型"
                          clearable>
@@ -158,7 +159,7 @@
                            :label="item.text"
                            :value="item.id" />
               </el-select>
-            </el-form-item>
+            </el-form-item> -->
           </el-col>
           <el-col :xs="24"
                   :sm="20"
@@ -187,7 +188,7 @@
                   :md="6"
                   :lg="6"
                   :xl="6">
-            <el-form-item label="分组">
+            <!-- <el-form-item label="分组">
               <el-select v-model="dialogForm.reportGroup"
                          placeholder="请选择"
                          clearable>
@@ -196,7 +197,7 @@
                            :label="item.text"
                            :value="item.id" />
               </el-select>
-            </el-form-item>
+            </el-form-item> -->
           </el-col>
         </el-row>
         <el-col :span="24">
@@ -247,7 +248,7 @@ export default {
       params: {
         reportCode: '',
         reportName: '',
-        reportType: '',
+        // reportType: '',
         pageNumber: 1,
         pageSize: 10,
         order: 'DESC',
@@ -256,8 +257,8 @@ export default {
       dialogForm: {
         reportName: '',
         reportCode: '',
-        reportType: '',
-        reportGroup: '',
+        // reportType: '',
+        // reportGroup: '',
         reportDesc: '',
       },
       basicDialog: false,
@@ -302,7 +303,7 @@ export default {
       this.$refs[formName].resetFields()
       this.params.reportName = ''
       this.params.reportCode = ''
-      this.params.reportType = ''
+      // this.params.reportType = ''
       this.params.pageNumber = 1
       this.queryByPage()
     },
@@ -326,7 +327,7 @@ export default {
         this.dialogForm = {
           reportName: '',
           reportCode: '',
-          reportType: '',
+          // reportType: '',
           reportDesc: '',
         }
       } else {
@@ -335,25 +336,25 @@ export default {
     },
     // 预览
     preview (val) {
-      if (val.reportType === 'report_excel') {
-        var routeUrl = this.$router.resolve({ path: '/report/excelreport/viewer', query: { reportCode: val.reportCode } })
-        window.open(routeUrl.href, '_blank')
-      } else {
-        // eslint-disable-next-line no-redeclare
-        var routeUrl = this.$router.resolve({ path: '/bigscreen/viewer', query: { reportCode: val.reportCode } })
-        window.open(routeUrl.href, '_blank')
-      }
+      // if (val.reportType === 'report_excel') {
+      //   var routeUrl = this.$router.resolve({ path: '/report/excelreport/viewer', query: { reportCode: val.reportCode } })
+      //   window.open(routeUrl.href, '_blank')
+      // } else {
+      // eslint-disable-next-line no-redeclare
+      var routeUrl = this.$router.resolve({ path: '/bigscreen/viewer', query: { reportCode: val.reportCode } })
+      window.open(routeUrl.href, '_blank')
+      // }
     },
     // 设计
     design (val) {
-      if (val.reportType === 'report_excel') {
-        var routeUrl = this.$router.resolve({ path: '/report/excelreport/designer', query: { reportCode: val.reportCode, reportId: val.id, accessKey: val.accessKey } })
-        window.open(routeUrl.href, '_blank')
-      } else {
-        // eslint-disable-next-line no-redeclare
-        var routeUrl = this.$router.resolve({ path: '/bigscreen/designer', query: { reportCode: val.reportCode, reportId: val.id, accessKey: val.accessKey } })
-        window.open(routeUrl.href, '_blank')
-      }
+      // if (val.reportType === 'report_excel') {
+      //   var routeUrl = this.$router.resolve({ path: '/report/excelreport/designer', query: { reportCode: val.reportCode, reportId: val.id, accessKey: val.accessKey } })
+      //   window.open(routeUrl.href, '_blank')
+      // } else {
+      // eslint-disable-next-line no-redeclare
+      var routeUrl = this.$router.resolve({ path: '/bigscreen/designer', query: { reportCode: val.reportCode, reportId: val.id, accessKey: val.accessKey } })
+      window.open(routeUrl.href, '_blank')
+      // }
     },
     // 删除
     async delReport (val) {
