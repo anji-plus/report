@@ -5,11 +5,6 @@ import com.anjiplus.template.gaea.business.modules.report.controller.dto.ReportD
 import com.anjiplus.template.gaea.business.modules.report.dao.ReportMapper;
 import com.anjiplus.template.gaea.business.modules.report.dao.entity.Report;
 import com.anjiplus.template.gaea.business.modules.report.service.ReportService;
-import com.anjiplus.template.gaea.business.modules.reportexcel.dao.ReportExcelMapper;
-import com.anjiplus.template.gaea.business.modules.reportexcel.dao.entity.ReportExcel;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +17,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReportServiceImpl implements ReportService {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ReportMapper reportMapper;
-
-    @Autowired
-    private ReportExcelMapper reportExcelMapper;
 
     @Override
     public GaeaBaseMapper<Report> getMapper() {
@@ -38,8 +29,5 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void delReport(ReportDto reportDto) {
         deleteById(reportDto.getId());
-        QueryWrapper<ReportExcel> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("report_code" , reportDto.getReportCode());
-        reportExcelMapper.delete(queryWrapper);
     }
 }
