@@ -80,21 +80,21 @@
                        label="序号"
                        type="index"
                        min-width="40" />
-      <el-table-column label="报表类型">
+      <!-- <el-table-column label="报表类型">
         <template slot-scope="scope">
           {{scope.row.reportType | reportTableType}}
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column prop="reportName"
                        label="名称" />
       <el-table-column prop="reportCode"
                        label="报表编码" />
-      <el-table-column prop="reportGroup"
+      <!-- <el-table-column prop="reportGroup"
                        label="分组">
         <template slot-scope="scope">
           {{scope.row.reportGroup | filterPushType}}
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column prop="reportDesc"
                        label="备注" />
       <el-table-column prop="createByView"
@@ -409,13 +409,3 @@ export default {
   },
 }
 </script>
-<style scoped>
-.el-form-item__label {
-  line-height: 30px !important;
-  height: 30px;
-}
-.el-form-item__content {
-  line-height: 30px !important;
-  height: 30px;
-}
-</style>
