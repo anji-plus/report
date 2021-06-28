@@ -2,7 +2,9 @@
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <div class="admin-title"
          @click="goBigScreen">
-      <b>在线大屏</b>
+      <img src="../../../../../static/logo-dp.png"
+           width="50"
+           class="mt10" />
     </div>
     <el-menu :show-timeout="200"
              :default-active="$route.path"

@@ -260,7 +260,7 @@
                               <!-- //自定义高级规则？ -->
                               <codemirror v-model.trim="transformScript"
                                           :options="optionsJavascript"
-                                          style="height:290px" />
+                                          style="height:190px" />
                             </div>
                           </div>
                           <div v-else>
@@ -888,12 +888,6 @@ export default {
   div.jsoneditor {
     height: 400px !important;
   }
-}
-.codemirror {
-  width: 100%;
-  height: 200px;
-  margin: 0;
-  overflow: auto;
 }
 .title {
   width: 100%;

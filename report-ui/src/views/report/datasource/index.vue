@@ -77,7 +77,7 @@
     <!--表格渲染-->
     <el-table v-loading="listLoading"
               border
-              :data="list"
+              :data="list" class="mt10"
               element-loading-text="Loading"
               style="width: 100%">
       <el-table-column align="center"
@@ -366,7 +366,12 @@ export default {
       this.dialogForm.sourceConfig = JSON.stringify(newList)
       testConnection(this.dialogForm).then((data) => {
         if (data.code == '200') {
-          this.testReplyCode = data.code
+          this.testReplyCode = data.code;
+          this.$message({
+            message: '测试成功！',
+            type: 'success'
+          });
+
         } else {
           this.testReplyCode = null
         }

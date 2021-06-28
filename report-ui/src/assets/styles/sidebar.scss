@@ -55,10 +55,14 @@
   }
   .hideSidebar {
     .sidebar-container {
-      width: 36px !important;
+      width: 56px !important;
+      .iconfont {
+        font-size: 24px;
+        margin-left: 5px;
+      }
     }
     .main-container {
-      margin-left: 36px;
+      margin-left:56px;
     }
     .submenu-title-noDropdown {
       padding-left: 10px !important;
