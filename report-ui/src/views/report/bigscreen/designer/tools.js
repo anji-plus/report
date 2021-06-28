@@ -1507,14 +1507,6 @@ const widgetTools = [
           value: '柱状图',
         },
         {
-          type: 'el-switch',
-          label: '竖展示',
-          name: 'verticalShow',
-          required: false,
-          placeholder: '',
-          value: false,
-        },
-        {
           type: 'vue-color',
           label: '背景颜色',
           name: 'background',
@@ -1523,35 +1515,6 @@ const widgetTools = [
           value: ''
         },
         [
-          // {
-          //   name: '柱体设置',
-          //   list: [
-          //     {
-          //       type: 'el-slider',
-          //       label: '最大宽度',
-          //       name: 'maxWidth',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 10,
-          //     },
-          //     {
-          //       type: 'el-slider',
-          //       label: '圆角',
-          //       name: 'radius',
-          //       require: false,
-          //       placeholder: '',
-          //       value: 5,
-          //     },
-          //     {
-          //       type: 'el-slider',
-          //       label: '最小高度',
-          //       name: 'minHeight',
-          //       require: false,
-          //       placeholder: '',
-          //       value: 0,
-          //     },
-          //   ],
-          // },
           {
             name: '标题设置',
             list: [
@@ -1654,325 +1617,200 @@ const widgetTools = [
               },
             ],
           },
-          // {
-          //   name: 'X轴设置',
-          //   list: [
-          //     {
-          //       type: 'el-input-text',
-          //       label: '名称',
-          //       name: 'xName',
-          //       required: false,
-          //       placeholder: '',
-          //       value: ''
-          //     },
-          //     {
-          //       type: 'el-switch',
-          //       label: '显示',
-          //       name: 'hideX',
-          //       required: false,
-          //       placeholder: '',
-          //       value: true,
-          //     },
-          //     {
-          //       type: 'vue-color',
-          //       label: '坐标名颜色',
-          //       name: 'xNameColor',
-          //       required: false,
-          //       placeholder: '',
-          //       value: '#fff'
-          //     },
-          //     {
-          //       type: 'el-input-number',
-          //       label: '字体大小',
-          //       name: 'xNameFontSize',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 12
-          //     },
-          //     {
-          //       type: 'el-slider',
-          //       label: '文字角度',
-          //       name: 'textAngle',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 0
-          //     },
-          //     {
-          //       type: 'el-input-number',
-          //       label: '文字间隔',
-          //       name: 'textInterval',
-          //       required: false,
-          //       placeholder: '',
-          //       value: ''
-          //     },
-          //     {
-          //       type: 'el-switch',
-          //       label: '轴反转',
-          //       name: 'reversalX',
-          //       required: false,
-          //       placeholder: '',
-          //       value: ''
-          //     },
-          //     {
-          //       type: 'vue-color',
-          //       label: '颜色',
-          //       name: 'Xcolor',
-          //       required: false,
-          //       placeholder: '',
-          //       value: '#fff',
-          //     },
-          //     {
-          //       type: 'el-input-number',
-          //       label: '字号',
-          //       name: 'fontSizeX',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 12,
-          //     },
-          //   ],
-          // },
-          // {
-          //   name: 'Y轴设置',
-          //   list: [
-          //     {
-          //       type: 'el-input-text',
-          //       label: '名称',
-          //       name: 'textNameY',
-          //       require: false,
-          //       placeholder: '',
-          //       value: ''
-          //     },
-          //     {
-          //       type: 'el-switch',
-          //       label: '显示',
-          //       name: 'isShowY',
-          //       require: false,
-          //       placeholder: '',
-          //       value: true,
-          //     },
-          //     {
-          //       type: 'vue-color',
-          //       label: '坐标名颜色',
-          //       name: 'NameColorY',
-          //       required: false,
-          //       placeholder: '',
-          //       value: '#fff',
-          //     },
-          //     {
-          //       type: 'el-input-number',
-          //       label: '字体大小',
-          //       name: 'NameFontSizeY',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 12,
-          //     },
-          //     {
-          //       type: 'el-switch',
-          //       label: '轴反转',
-          //       name: 'reversalY',
-          //       required: false,
-          //       placeholder: '',
-          //       value: false
-          //     },
-          //     {
-          //       type: 'vue-color',
-          //       label: '颜色',
-          //       name: 'colorY',
-          //       required: false,
-          //       placeholder: '',
-          //       value: '#fff',
-          //     },
-          //     {
-          //       type: 'el-input-number',
-          //       label: '字号',
-          //       name: 'fontSizeY',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 12,
-          //     },
-          //   ],
-          // },
-          // {
-          //   name: '数值设定',
-          //   list: [
-          //     {
-          //       type: 'el-switch',
-          //       label: '显示',
-          //       name: 'isShow',
-          //       required: false,
-          //       placeholder: '',
-          //       value: false
-          //     },
-          //     {
-          //       type: 'el-input-number',
-          //       label: '字体大小',
-          //       name: 'fontSize',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 14
-          //     },
-          //     {
-          //       type: 'vue-color',
-          //       label: '字体颜色',
-          //       name: 'subTextColor',
-          //       required: false,
-          //       placeholder: '',
-          //       value: '#fff'
-          //     },
-          //     {
-          //       type: 'el-select',
-          //       label: '字体粗细',
-          //       name: 'fontWeight',
-          //       required: false,
-          //       placeholder: '',
-          //       selectOptions: [
-          //         { code: 'normal', name: '正常' },
-          //         { code: 'bold', name: '粗体' },
-          //         { code: 'bolder', name: '特粗体' },
-          //         { code: 'lighter', name: '细体' }
-          //       ],
-          //       value: 'normal'
-          //     },
-          //   ],
-          // },
-          // {
-          //   name: '提示语设置',
-          //   list: [
-          //     {
-          //       type: 'el-input-number',
-          //       label: '字体大小',
-          //       name: 'fontSize',
-          //       required: false,
-          //       placeholder: '',
-          //     },
-          //     {
-          //       type: 'vue-color',
-          //       label: '字体颜色',
-          //       name: 'lineColor',
-          //       required: false,
-          //       placeholder: '',
-          //     },
-          //   ],
-          // },
-          // {
-          //   name: '坐标轴边距设置',
-          //   list: [
-          //     {
-          //       type: 'el-slider',
-          //       label: '左边距(像素)',
-          //       name: 'marginLeft',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 10,
-          //     }, {
-          //       type: 'el-slider',
-          //       label: '顶边距(像素)',
-          //       name: 'marginTop',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 50,
-          //     }, {
-          //       type: 'el-slider',
-          //       label: '右边距(像素)',
-          //       name: 'marginRight',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 40,
-          //     }, {
-          //       type: 'el-slider',
-          //       label: '底边距(像素)',
-          //       name: 'marginBottom',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 10,
-          //     },
-          //   ],
-          // },
-          // {
-          //   name: '图例操作',
-          //   list: [
-          //     {
-          //       type: 'el-switch',
-          //       label: '图例',
-          //       name: 'isShowLegend',
-          //       required: false,
-          //       placeholder: '',
-          //       value: true,
-          //     },
-          //     {
-          //       type: 'vue-color',
-          //       label: '字体颜色',
-          //       name: 'lengedColor',
-          //       required: false,
-          //       placeholder: '',
-          //       value: '#fff',
-          //     },
-          //     {
-          //       type: 'el-input-number',
-          //       label: '字体大小',
-          //       name: 'lengedFontSize',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 16,
-          //     },
-          //     {
-          //       type: 'el-input-number',
-          //       label: '图例宽度',
-          //       name: 'lengedWidth',
-          //       required: false,
-          //       placeholder: '',
-          //       value: 15,
-          //     },
-          //     {
-          //       type: 'el-select',
-          //       label: '横向位置',
-          //       name: 'lateralPosition',
-          //       required: false,
-          //       placeholder: '',
-          //       selectOptions: [
-          //         { code: 'left', name: '左对齐' },
-          //         { code: 'right', name: '右对齐' },
-          //       ],
-          //       value: ''
-          //     },
-          //     {
-          //       type: 'el-select',
-          //       label: '纵向位置',
-          //       name: 'longitudinalPosition',
-          //       required: false,
-          //       placeholder: '',
-          //       selectOptions: [
-          //         { code: 'top', name: '顶部' },
-          //         { code: 'bottom', name: '底部' },
-          //       ],
-          //       value: ''
-          //     },
-          //     {
-          //       type: 'el-select',
-          //       label: '布局前置',
-          //       name: 'layoutFront',
-          //       required: false,
-          //       placeholder: '',
-          //       selectOptions: [
-          //         { code: 'vertical', name: '竖排' },
-          //         { code: 'horizontal', name: '横排' },
-          //       ],
-          //       value: ''
-          //     },
-          //   ],
-          // },
-          // {
-          //   name: '自定义配色',
-          //   list: [
-          //     {
-          //       type: 'customColor',
-          //       label: '',
-          //       name: 'customColor',
-          //       required: false,
-          //       value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
-          //     },
-          //   ],
-          // },
+          {
+            name: 'X轴设置',
+            list: [
+              {
+                type: 'el-input-text',
+                label: '名称',
+                name: 'xName',
+                required: false,
+                placeholder: '',
+                value: ''
+              },
+              {
+                type: 'el-switch',
+                label: '显示',
+                name: 'hideX',
+                required: false,
+                placeholder: '',
+                value: true,
+              },
+              {
+                type: 'vue-color',
+                label: '坐标名颜色',
+                name: 'xNameColor',
+                required: false,
+                placeholder: '',
+                value: '#fff'
+              },
+              {
+                type: 'el-input-number',
+                label: '字体大小',
+                name: 'xNameFontSize',
+                required: false,
+                placeholder: '',
+                value: 12
+              },
+              {
+                type: 'el-slider',
+                label: '文字角度',
+                name: 'textAngle',
+                required: false,
+                placeholder: '',
+                value: 0
+              },
+              {
+                type: 'el-input-number',
+                label: '文字间隔',
+                name: 'textInterval',
+                required: false,
+                placeholder: '',
+                value: ''
+              },
+              {
+                type: 'el-switch',
+                label: '轴反转',
+                name: 'reversalX',
+                required: false,
+                placeholder: '',
+                value: ''
+              },
+              {
+                type: 'vue-color',
+                label: '颜色',
+                name: 'Xcolor',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              },
+              {
+                type: 'el-input-number',
+                label: '字号',
+                name: 'fontSizeX',
+                required: false,
+                placeholder: '',
+                value: 12,
+              },
+            ],
+          },
+          {
+            name: 'Y轴设置',
+            list: [
+              {
+                type: 'el-input-text',
+                label: '名称',
+                name: 'textNameY',
+                require: false,
+                placeholder: '',
+                value: ''
+              },
+              {
+                type: 'el-switch',
+                label: '显示',
+                name: 'isShowY',
+                require: false,
+                placeholder: '',
+                value: true,
+              },
+              {
+                type: 'vue-color',
+                label: '坐标名颜色',
+                name: 'NameColorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              },
+              {
+                type: 'el-input-number',
+                label: '字体大小',
+                name: 'NameFontSizeY',
+                required: false,
+                placeholder: '',
+                value: 12,
+              },
+              {
+                type: 'el-switch',
+                label: '轴反转',
+                name: 'reversalY',
+                required: false,
+                placeholder: '',
+                value: false
+              },
+              {
+                type: 'vue-color',
+                label: '颜色',
+                name: 'colorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              },
+              {
+                type: 'el-input-number',
+                label: '字号',
+                name: 'fontSizeY',
+                required: false,
+                placeholder: '',
+                value: 12,
+              },
+            ],
+          },
+          {
+            name: '坐标轴边距设置',
+            list: [
+              {
+                type: 'el-slider',
+                label: '左边距(像素)',
+                name: 'marginLeft',
+                required: false,
+                placeholder: '',
+                value: 10,
+              }, {
+                type: 'el-slider',
+                label: '顶边距(像素)',
+                name: 'marginTop',
+                required: false,
+                placeholder: '',
+                value: 50,
+              }, {
+                type: 'el-slider',
+                label: '右边距(像素)',
+                name: 'marginRight',
+                required: false,
+                placeholder: '',
+                value: 40,
+              }, {
+                type: 'el-slider',
+                label: '底边距(像素)',
+                name: 'marginBottom',
+                required: false,
+                placeholder: '',
+                value: 10,
+              },
+            ],
+          },
+          {
+            name: '渐变色',
+            list: [
+              {
+                type: 'vue-color',
+                label: '0%处',
+                name: 'barStart',
+                required: false,
+                placeholder: '',
+                value: '#00F4FFFF'
+              },
+              {
+                type: 'vue-color',
+                label: '100%处',
+                name: 'barEnd',
+                required: false,
+                placeholder: '',
+                value: '#004DA7FF'
+              },
+
+            ],
+          },
         ],
       ],
       // 数据

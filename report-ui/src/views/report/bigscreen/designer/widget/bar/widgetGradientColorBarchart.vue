@@ -16,7 +16,7 @@
     data() {
       return {
         options: {
-          backgroundColor: '#00265f',
+          // backgroundColor: '#00265f',
           "title": {
             "text": "政策补贴额度",
             x: "center",
@@ -176,13 +176,13 @@
       // 修改图标options属性
       editorOptions() {
         this.setOptionsTitle()
-        // this.setOptionsX()
-        // this.setOptionsY()
+        this.setOptionsX()
+        this.setOptionsY()
         // this.setOptionsTop()
         // this.setOptionsTooltip()
-        // this.setOptionsMargin()
+        this.setOptionsMargin()
         // this.setOptionsLegend()
-        // this.setOptionsColor()
+        this.setOptionsColor()
         this.setOptionsData()
       },
       // 标题修改
@@ -331,29 +331,17 @@
         }
         legend.itemWidth = optionsCollapse.lengedWidth
       },
-      // 图例颜色修改
+      // 渐变色
       setOptionsColor() {
         const optionsCollapse = this.optionsSetup
-        const customColor = optionsCollapse.customColor
-        if (!customColor) return
-        const arrColor = []
-        for (let i = 0; i < customColor.length; i++) {
-          arrColor.push(customColor[i].color)
-        }
-        const itemStyle = {
-          normal: {
-            color: (params) => {
-              return arrColor[params.dataIndex]
-            },
-            barBorderRadius: optionsCollapse.radius,
-          },
-        }
-        for (const key in this.options.series) {
-          if (this.options.series[key].type == 'bar') {
-            this.options.series[key].itemStyle = itemStyle
-          }
-        }
-        this.options = Object.assign({}, this.options)
+        const barStart = {}
+        barStart['offset'] = 0
+        barStart['color'] = optionsCollapse.barStart
+        const barEnd = {}
+        barStart['offset'] = 1
+        barStart['color'] = optionsCollapse.barEnd
+        // this.options.series[0].itemStyle.normal.color = new echarts.graphic.LinearGradient(0, 0, 0, 1,[ barStart, barEnd], false)
+
       },
       // 数据解析
       setOptionsData() {
@@ -419,8 +407,6 @@
   .echarts {
     width: 100%;
     height: 100%;
-    min-width: 200px;
-    min-height: 200px;
     overflow: hidden;
   }
 </style>
