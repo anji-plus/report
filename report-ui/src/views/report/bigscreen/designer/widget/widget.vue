@@ -107,7 +107,6 @@ export default {
     },
     //失去焦点
     handleBlur({ index, left, top, width, height }) {
-      console.log({ index, left, top, width, height });
       this.$emit("onActivated", { index, left, top, width, height });
       this.$refs.draggable.setActive(true);
     }

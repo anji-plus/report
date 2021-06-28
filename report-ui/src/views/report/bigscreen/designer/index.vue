@@ -84,6 +84,7 @@
           width: bigscreenWidthInWorkbench + 'px',
           height: bigscreenHeightInWorkbench + 'px'
         }"
+        @mousedown="handleMouseDown"
       >
         <vue-ruler-tool
           v-model="dashboard.presetLine"
@@ -545,6 +546,13 @@ export default {
         } else {
           this.$refs.widgets[i].$refs.draggable.setActive(false);
         }
+      }
+    },
+    handleMouseDown() {
+      console.log(1);
+      const draggableArr = this.$refs.widgets;
+      for (let i = 0; i < draggableArr.length; i++) {
+        this.$refs.widgets[i].$refs.draggable.setActive(false);
       }
     },
     // 将当前选中的组件，右侧属性值更新

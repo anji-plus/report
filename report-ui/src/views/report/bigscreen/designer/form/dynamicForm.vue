@@ -308,7 +308,6 @@ export default {
       this.formData = newValue || {};
     },
     options(val) {
-      console.log(val);
       this.setDefaultValue();
       this.isShowData();
     }
