@@ -1,4 +1,3 @@
-/* eslint-disable vue/valid-v-for */
 <!--
  * @Author: lide1202@hotmail.com
  * @Date: 2021-4-6 11:04:24
@@ -242,6 +241,7 @@
                   v-if="itemChildList.type == 'customColor'"
                   :key="'b-' + idx"
                   v-model="formData[itemChildList.name]"
+                  @change="changed($event, itemChildList.name)"
                 />
               </template>
             </el-collapse-item>
