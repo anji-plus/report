@@ -98,7 +98,7 @@ export const constantRouterMap = [
   //   ]
   // },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
-  { path: '*', redirect: '/index', hidden: true },
+  { path: '*', redirect: '/login', hidden: true },
 ]
 
 export default new Router({

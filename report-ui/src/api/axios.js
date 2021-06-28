@@ -17,13 +17,10 @@ service.interceptors.request.use(
   config => {
     // 在发送请求之前做些什么
     var token = getItem('token');
-    // config = signUtil.sign(token, deepClone(config));
-    console.log(config, 'config')
     return config
   },
   error => {
-    // Do something with request error
-    console.log(error) // for debug
+    // Do something with request error 
     Promise.reject(error)
   }
 )
@@ -35,6 +32,7 @@ service.interceptors.response.use(
     if (res.code == 200) {
       return res
     }
+
     else if (res.code == '50014') {
       //登录超时或被登出，弹确认框，用户确认后，跳转到登录页面
       MessageBox({
@@ -45,7 +43,6 @@ service.interceptors.response.use(
         sessionStorage.clear();
         localStorage.clear();
         delItem('token')
-        // location.reload();
         window.location.href = "/";
       }).catch(err => {
       })
