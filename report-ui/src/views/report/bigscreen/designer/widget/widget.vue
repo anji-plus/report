@@ -36,6 +36,7 @@ import WidgetPiechart from "./widgetPiechart.vue";
 import WidgetHollowPiechart from "./widgetHollowPiechart.vue";
 import WidgetFunnel from "./widgetFunnel.vue";
 import WidgetGauge from "./widgetGauge.vue";
+import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRoseArea";
 export default {
   name: "Widget",
   components: {
@@ -54,7 +55,8 @@ export default {
     WidgetPiechart,
     WidgetHollowPiechart,
     WidgetFunnel,
-    WidgetGauge
+    WidgetGauge,
+    WidgetPieNightingaleRoseArea
   },
   model: {
     prop: "value",
