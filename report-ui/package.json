@@ -34,6 +34,7 @@
     "vue-color": "^2.8.1",
     "vue-drag-resize": "^1.5.4",
     "vue-echarts": "^5.0.0-beta.0",
+    "vue-json-editor": "^1.4.3",
     "vue-router": "3.0.1",
     "vue-ruler-tool": "^1.2.4",
     "vuedraggable": "^2.24.1",

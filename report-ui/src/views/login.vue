@@ -72,7 +72,7 @@
                           @keyup.native="checkCapslock" />
                 <span class="show_pwd"
                       @click="showPwd">
-                  查看
+                  <i class="el-icon-view" />
                 </span>
               </el-form-item>
             </el-tooltip>

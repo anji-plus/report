@@ -164,3 +164,11 @@ export function editReportExcel (data) {
     data,
   })
 }
+// /dataSet/pageList
+export function dataSetPageList (data) {
+  return request({
+    url: '/dataSet/pageList',
+    method: 'GET',
+    data,
+  })
+}
