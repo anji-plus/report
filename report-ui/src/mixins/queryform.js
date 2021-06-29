@@ -1,4 +1,5 @@
 import miment from 'miment'
+import {getData} from '@/api/bigscreen'
 export default {
   data() {
     return {
@@ -52,7 +53,7 @@ export default {
         // disabledDate(time){
         //   return time.getTime() > Date.now() 
         // }
-      }
+      },
     }
   },
   computed: {
@@ -91,6 +92,104 @@ export default {
     },
     handlerInputchange(val){
       this.parseParamsBySelectInput(this.selectInput.keyname, val)
+    },
+    // 查询echarts 数据
+    queryEchartsData(params) {
+      return new Promise(async(resolve) => {
+        const { code, data } = await getData(params);
+        if(code != 200) return
+        const analysisData = this.analysisChartsData(params,  data);
+        resolve(analysisData)
+      })
+    },
+    // 解析不同图标的数据
+    analysisChartsData(params, data) {
+      // widget-barchart 柱线图、widget-linechart 折线图、 widget-barlinechart 柱线图、widget-piechart 饼图、widget-hollow-piechart 空心饼图
+      // widget-funnel 漏斗图  widget-gauge 仪表盘
+      const chartType = params.chartType
+      if (
+        chartType == "widget-barchart" ||
+        chartType == "widget-linechart" ||
+        chartType == "widget-barlinechart"
+      ) {
+        return this.barOrLineChartFn(params.chartProperties, data);
+      } else if (
+        chartType == "widget-piechart" ||
+        chartType == "widget-hollow-piechart" ||
+        chartType == "widget-funnel"
+      ) {
+        return this.piechartFn(params.chartProperties, data);
+      } else if (chartType == "widget-gauge") {
+        return this.gaugeFn(params.chartProperties, data);
+      } else {
+      }
+    },
+    // 柱状图、折线图、折柱图
+    barOrLineChartFn(chartProperties, data) {
+      const ananysicData = {};
+      const xAxisList = [];
+      const series = [];
+      for (const key in chartProperties) {
+        const obj = {};
+        const seriesData = [];
+        const value = chartProperties[key];
+        obj["type"] = value;
+        for (let i = 0; i < data.length; i++) {
+          if (value.startsWith("xAxis")) {
+            // 代表为x轴
+            xAxisList[i] = data[i][key];
+          } else {
+            // 其他的均为series展示数据
+            seriesData[i] = data[i][key];
+          }
+        }
+        obj["data"] = seriesData;
+        if (!obj["type"].startsWith("xAxis")) {
+          series.push(obj);
+        }
+      }
+      ananysicData["xAxis"] = xAxisList;
+      ananysicData["series"] = series;
+      // console.log(ananysicData, '结果数据')
+      return ananysicData;
+    },
+    // 饼图或者空心饼图或者漏斗图
+    piechartFn(chartProperties, data) {
+      const ananysicData = [];
+      for (let i = 0; i < data.length; i++) {
+        const obj = {};
+        for (const key in chartProperties) {
+          const value = chartProperties[key];
+          if (value === "name") {
+            obj["name"] = data[i][key];
+          } else {
+            obj["value"] = data[i][key];
+          }
+        }
+        ananysicData.push(obj);
+      }
+      // console.log(ananysicData, '结果数据')
+      return ananysicData;
+    },
+    gaugeFn(chartProperties, data) {
+      const ananysicData = [];
+      for (let i = 0; i < data.length; i++) {
+        const obj = {};
+        for (const key in chartProperties) {
+          const value = chartProperties[key];
+          if (value === "name") {
+            obj["name"] = data[i][key];
+          } else {
+            obj["value"] = data[i][key];
+          }
+        }
+        if (!obj["unit"]) {
+          obj["unit"] = "%";
+        }
+        ananysicData.push(obj);
+      }
+      // console.log(ananysicData, '结果数据')
+      return ananysicData[0];
     }
   },
   watch: {

@@ -1449,11 +1449,11 @@ const widgetTools = [
         },
         {
           type: 'el-input-number',
-          label: '刷新时间(秒)',
+          label: '刷新时间(毫秒)',
           name: 'refreshTime',
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
-          value: 30
+          value: 5000
         },
         {
           type: 'el-button',
