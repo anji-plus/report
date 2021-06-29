@@ -135,6 +135,7 @@
             v-if="item.type == 'dycustComponents' && inputShow[item.name]"
             v-model="formData[item.name]"
             :chart-type="item.chartType"
+            @change="changed($event, item.name)"
           />
         </div>
         <div v-else-if="isShowForm(item, '[object Array]')" :key="'a-' + index">

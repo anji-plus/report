@@ -108,10 +108,12 @@ export default {
         chartProperties: this.chartProperties,
         contextData
       };
+      console.log(params);
       const { code, data } = await getData(params);
       const analysisData = this.analysisChartsData(data);
       console.log(analysisData);
       this.$emit("input", analysisData);
+      this.$emit("change", params);
       if (code != "200") return;
     },
     selectParams(val, key) {
@@ -168,7 +170,6 @@ export default {
       // console.log(ananysicData, '结果数据')
       return ananysicData;
     },
-
     // 饼图或者空心饼图或者漏斗图
     piechartFn(data) {
       const ananysicData = [];
