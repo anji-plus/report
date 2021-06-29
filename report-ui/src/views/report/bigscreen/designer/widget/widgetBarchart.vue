@@ -152,11 +152,11 @@ export default {
           }
         },
         splitLine: {
-            show: optionsCollapse.isShowSplitLineX,
-            lineStyle: {
-                color: optionsCollapse.splitLineColorX
-            },
-        },
+          show: optionsCollapse.isShowSplitLineX,
+          lineStyle: {
+            color: optionsCollapse.splitLineColorX
+          }
+        }
       };
       this.options.xAxis = xAxis;
     },
@@ -189,11 +189,11 @@ export default {
           }
         },
         splitLine: {
-            show: optionsCollapse.isShowSplitLineY,
-            lineStyle: {
-                color: optionsCollapse.splitLineColorY
-            },
-        },
+          show: optionsCollapse.isShowSplitLineY,
+          lineStyle: {
+            color: optionsCollapse.splitLineColorY
+          }
+        }
       };
 
       this.options.yAxis = yAxis;
@@ -289,7 +289,6 @@ export default {
     setOptionsData() {
       const optionsSetup = this.optionsSetup;
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
-      console.log(optionsData);
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(

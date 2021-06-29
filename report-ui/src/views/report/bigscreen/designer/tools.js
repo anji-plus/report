@@ -4853,7 +4853,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#ED0E0E' }, { color: '#6CCD17' }, { color: '#172CCD' }, { color: '#B817CD' }, { color: '#AFCD17' }],
+                value: [{ color: '#FF801C' }, { color: '#F5FF46' }, { color: '#00FE65' }, { color: '#00FEFF' }, { color: '#ffa800' }]
               },
             ],
           },
