@@ -121,7 +121,7 @@ const widgetTools = [
           name: 'background',
           required: false,
           placeholder: '',
-          value: 'rgba(115,170,229,.1)',
+          value: 'rgba(115,170,229,.0)',
         },
         {
           type: 'el-select',
@@ -1178,7 +1178,7 @@ const widgetTools = [
                 name: 'isShowSplitLineX',
                 require: false,
                 placeholder: '',
-                value: true,
+                value: false,
               },
               {
                 type: 'vue-color',
@@ -1263,7 +1263,7 @@ const widgetTools = [
                 name: 'isShowSplitLineY',
                 require: false,
                 placeholder: '',
-                value: true,
+                value: false,
               }, {
                 type: 'vue-color',
                 label: '分割线颜色',
@@ -1762,7 +1762,7 @@ const widgetTools = [
                 name: 'isShowSplitLineX',
                 require: false,
                 placeholder: '',
-                value: true,
+                value: false,
               },
               {
                 type: 'vue-color',
@@ -1848,7 +1848,7 @@ const widgetTools = [
                 name: 'isShowSplitLineY',
                 require: false,
                 placeholder: '',
-                value: true,
+                value: false,
               }, {
                 type: 'vue-color',
                 label: '分割线颜色',
@@ -1938,6 +1938,14 @@ const widgetTools = [
             },
           ],
           value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
         },
         {
           type: 'el-button',
@@ -2267,7 +2275,7 @@ const widgetTools = [
                 name: 'isShowSplitLineX',
                 require: false,
                 placeholder: '',
-                value: true,
+                value: false,
               },
               {
                 type: 'vue-color',
@@ -2353,7 +2361,7 @@ const widgetTools = [
                 name: 'isShowSplitLineY',
                 require: false,
                 placeholder: '',
-                value: true,
+                value: false,
               }, {
                 type: 'vue-color',
                 label: '分割线颜色',
@@ -2573,6 +2581,14 @@ const widgetTools = [
             },
           ],
           value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
         },
         {
           type: 'el-button',
@@ -2928,7 +2944,7 @@ const widgetTools = [
                 name: 'isShowSplitLineX',
                 require: false,
                 placeholder: '',
-                value: true,
+                value: false,
               },
               {
                 type: 'vue-color',
@@ -3014,7 +3030,7 @@ const widgetTools = [
                 name: 'isShowSplitLineY',
                 require: false,
                 placeholder: '',
-                value: true,
+                value: false,
               }, {
                 type: 'vue-color',
                 label: '分割线颜色',
@@ -3185,6 +3201,14 @@ const widgetTools = [
             },
           ],
           value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
         },
         {
           type: 'el-button',
@@ -3532,7 +3556,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#ED0E0E' }, { color: '#6CCD17' }, { color: '#172CCD' }, { color: '#B817CD' }, { color: '#AFCD17' }],
+                value: [{ color: '#0CD2E6' }, { color: '#00BFA5' }, { color: '#FFC722' }, { color: '#886EFF' }, { color: '#008DEC' }],
               },
             ],
           },
@@ -3558,6 +3582,14 @@ const widgetTools = [
             },
           ],
           value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
         },
         {
           type: 'el-button',
@@ -3906,7 +3938,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#ED0E0E' }, { color: '#6CCD17' }, { color: '#172CCD' }, { color: '#B817CD' }, { color: '#AFCD17' }],
+                value: [{ color: '#0CD2E6' }, { color: '#00BFA5' }, { color: '#FFC722' }, { color: '#886EFF' }, { color: '#008DEC' }],
               },
             ],
           },
@@ -3932,6 +3964,14 @@ const widgetTools = [
             },
           ],
           value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
         },
         {
           type: 'el-button',
@@ -4300,6 +4340,14 @@ const widgetTools = [
           value: 'staticData',
         },
         {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
+        },
+        {
           type: 'el-button',
           label: '静态数据',
           name: 'staticData',
@@ -4443,6 +4491,14 @@ const widgetTools = [
             },
           ],
           value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
         },
         {
           type: 'el-button',
@@ -4823,6 +4879,14 @@ const widgetTools = [
             },
           ],
           value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
         },
         {
           type: 'el-button',

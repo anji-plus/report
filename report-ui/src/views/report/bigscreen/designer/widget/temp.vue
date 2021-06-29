@@ -22,10 +22,12 @@ import WidgetIframe from './widgetIframe.vue'
 import widgetBarchart from './widgetBarchart.vue'
 import widgetLinechart from './widgetLinechart.vue'
 import widgetBarlinechart from './widgetBarlinechart'
+import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
 import WidgetPiechart from './widgetPiechart.vue'
 import WidgetHollowPiechart from './widgetHollowPiechart.vue'
 import WidgetFunnel from './widgetFunnel.vue'
 import WidgetGauge from './widgetGauge.vue'
+import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRoseArea";
 export default {
   name: 'WidgetTemp',
   components: {
@@ -38,12 +40,14 @@ export default {
     widgetVideo,
     WidgetIframe,
     widgetBarchart,
+    widgetGradientColorBarchart,
     widgetLinechart,
     widgetBarlinechart,
     WidgetPiechart,
     WidgetHollowPiechart,
     WidgetFunnel,
     WidgetGauge,
+    WidgetPieNightingaleRoseArea
   },
   model: {
     prop: 'value',

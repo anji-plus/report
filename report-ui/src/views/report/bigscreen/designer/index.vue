@@ -641,8 +641,8 @@ export default {
 
 <style scoped lang="scss">
 .is-active {
-  background: #409eff !important;
-  color: #373d41 !important;
+  background: #31455d !important;
+  color: #bfcbd9 !important;
 }
 .layout {
   display: -webkit-box;
@@ -777,7 +777,7 @@ export default {
     .el-tabs__header {
       .el-tabs__nav {
         .el-tabs__item {
-          background-color: #304156;
+          background-color: #31455d;
           border: 0px;
         }
         .el-tabs__item.is-active {
