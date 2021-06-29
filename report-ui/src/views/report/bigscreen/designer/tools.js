@@ -4315,8 +4315,8 @@ const widgetTools = [
   {
     code: 'WidgetPieNightingaleRoseArea',
     type: 'chart',
-    label: '饼图-南丁格尔-面积',
-    icon: 'iconicon_tubiao_bingtu',
+    label: '南丁格尔玫瑰图',
+    icon: 'iconnandinggeermeiguitu',
     options: {
       // 配置
       setup: [
