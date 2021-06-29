@@ -1,6 +1,7 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart :options="options"
+             autoresize />
   </div>
 </template>
 
@@ -12,7 +13,7 @@ export default {
     value: Object,
     ispreview: Boolean
   },
-  data() {
+  data () {
     return {
       options: {
         grid: {},
@@ -58,7 +59,7 @@ export default {
     };
   },
   computed: {
-    styleObj() {
+    styleObj () {
       return {
         position: this.ispreview ? "absolute" : "static",
         width: this.optionsStyle.width + "px",
@@ -71,7 +72,7 @@ export default {
   },
   watch: {
     value: {
-      handler(val) {
+      handler (val) {
         console.log(val);
         this.optionsStyle = val.position;
         this.optionsData = val.data;
@@ -82,7 +83,7 @@ export default {
       deep: true
     }
   },
-  mounted() {
+  mounted () {
     this.optionsStyle = this.value.position;
     this.optionsData = this.value.data;
     this.optionsCollapse = this.value.setup;
@@ -91,7 +92,7 @@ export default {
   },
   methods: {
     // 修改图标options属性
-    editorOptions() {
+    editorOptions () {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
@@ -103,7 +104,7 @@ export default {
       this.setOptionsData();
     },
     // 标题修改
-    setOptionsTitle() {
+    setOptionsTitle () {
       const optionsCollapse = this.optionsSetup;
       const title = {};
       title.text = optionsCollapse.titleText;
@@ -124,7 +125,7 @@ export default {
       this.options.title = title;
     },
     // X轴设置
-    setOptionsX() {
+    setOptionsX () {
       const optionsCollapse = this.optionsSetup;
       const xAxis = {
         type: "category",
@@ -148,14 +149,14 @@ export default {
         axisLine: {
           show: true,
           lineStyle: {
-            color: "#fff"
+            color: optionsCollapse.lineColorX
           }
         }
       };
       this.options.xAxis = xAxis;
     },
     // Y轴设置
-    setOptionsY() {
+    setOptionsY () {
       const optionsCollapse = this.optionsSetup;
       const yAxis = {
         type: "value",
@@ -179,7 +180,7 @@ export default {
         axisLine: {
           show: true,
           lineStyle: {
-            color: "#fff"
+            color: optionsCollapse.lineColorY
           }
         }
       };
@@ -187,7 +188,7 @@ export default {
       this.options.yAxis = yAxis;
     },
     // 数值设定 or 柱体设置
-    setOptionsTop() {
+    setOptionsTop () {
       const optionsCollapse = this.optionsSetup;
       const series = this.options.series;
 
@@ -208,7 +209,7 @@ export default {
       this.options.series = series;
     },
     // tooltip 设置
-    setOptionsTooltip() {
+    setOptionsTooltip () {
       const optionsCollapse = this.optionsSetup;
       const tooltip = {
         trigger: "item",
@@ -221,7 +222,7 @@ export default {
       this.options.tooltip = tooltip;
     },
     // 边距设置
-    setOptionsMargin() {
+    setOptionsMargin () {
       const optionsCollapse = this.optionsSetup;
       const grid = {
         left: optionsCollapse.marginLeft,
@@ -233,7 +234,7 @@ export default {
       this.options.grid = grid;
     },
     // 图例操作 legend
-    setOptionsLegend() {
+    setOptionsLegend () {
       const optionsCollapse = this.optionsSetup;
       const legend = this.options.legend;
       legend.show = optionsCollapse.isShowLegend;
@@ -250,7 +251,7 @@ export default {
       legend.itemWidth = optionsCollapse.lengedWidth;
     },
     // 图例颜色修改
-    setOptionsColor() {
+    setOptionsColor () {
       const optionsCollapse = this.optionsSetup;
       const customColor = optionsCollapse.customColor;
       if (!customColor) return;
@@ -274,7 +275,7 @@ export default {
       this.options = Object.assign({}, this.options);
     },
     // 数据解析
-    setOptionsData() {
+    setOptionsData () {
       const optionsSetup = this.optionsSetup;
       console.log(optionsSetup);
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
@@ -284,7 +285,7 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsSetup);
     },
     // 静态数据
-    staticDataFn(val, optionsSetup) {
+    staticDataFn (val, optionsSetup) {
       const staticData = JSON.parse(val);
       // x轴
       if (optionsSetup.verticalShow) {
@@ -307,7 +308,7 @@ export default {
       }
     },
     // 动态数据
-    dynamicDataFn(val, optionsSetup) {
+    dynamicDataFn (val, optionsSetup) {
       if (!val) return;
       // x轴
       if (optionsSetup.verticalShow) {

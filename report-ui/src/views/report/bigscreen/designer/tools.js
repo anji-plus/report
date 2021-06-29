@@ -1164,6 +1164,14 @@ const widgetTools = [
                 placeholder: '',
                 value: 12,
               },
+              {
+                type: 'vue-color',
+                label: '轴颜色',
+                name: 'lineColorX',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              }
             ],
           },
           {
@@ -1225,6 +1233,14 @@ const widgetTools = [
                 placeholder: '',
                 value: 12,
               },
+              {
+                type: 'vue-color',
+                label: '轴颜色',
+                name: 'lineColorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              }
             ],
           },
           {
@@ -1700,6 +1716,14 @@ const widgetTools = [
                 placeholder: '',
                 value: 12,
               },
+              {
+                type: 'vue-color',
+                label: '轴颜色',
+                name: 'lineColorX',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              }
             ],
           },
           {
@@ -1761,6 +1785,14 @@ const widgetTools = [
                 placeholder: '',
                 value: 12,
               },
+              {
+                type: 'vue-color',
+                label: '轴颜色',
+                name: 'lineColorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              }
             ],
           },
           {
@@ -2156,6 +2188,14 @@ const widgetTools = [
                 placeholder: '',
                 value: 12,
               },
+              {
+                type: 'vue-color',
+                label: '轴颜色',
+                name: 'lineColorX',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              }
             ],
           },
           {
@@ -2217,6 +2257,14 @@ const widgetTools = [
                 placeholder: '',
                 value: 12,
               },
+              {
+                type: 'vue-color',
+                label: '轴颜色',
+                name: 'lineColorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              }
             ],
           },
           {
@@ -2766,6 +2814,14 @@ const widgetTools = [
                 placeholder: '',
                 value: 16,
               },
+              {
+                type: 'vue-color',
+                label: '轴颜色',
+                name: 'lineColorX',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              }
             ],
           },
           {
@@ -2827,6 +2883,14 @@ const widgetTools = [
                 placeholder: '',
                 value: 12,
               },
+              {
+                type: 'vue-color',
+                label: '轴颜色',
+                name: 'lineColorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              }
             ],
           },
           {
