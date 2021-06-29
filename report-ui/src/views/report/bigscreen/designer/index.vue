@@ -317,7 +317,6 @@ export default {
     handlerLayerWidget(val) {
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
-        console.log(getToolByCode(val[i].type));
         const obj = {};
         obj.icon = getToolByCode(val[i].type).icon;
         const options = val[i].options["setup"];
@@ -554,7 +553,6 @@ export default {
         return;
       }
       this.widgetIndex = obj.index;
-      this.widgetOptions = this.deepClone(this.widgets[obj.index]["options"]);
       this.widgets[obj.index].value.position = obj;
       this.widgets[obj.index].options.position.forEach(el => {
         for (const key in obj) {
@@ -563,6 +561,7 @@ export default {
           }
         }
       });
+      this.widgetOptions = this.deepClone(this.widgets[obj.index]["options"]);
     },
     widgetsClick(index) {
       const draggableArr = this.$refs.widgets;
