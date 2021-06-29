@@ -52,7 +52,6 @@
               placeholder="请输入内容"
               @change="changed($event, item.name)"
             />
-
             <ColorPicker
               v-if="item.type == 'vue-color'"
               v-model="formData[item.name]"
