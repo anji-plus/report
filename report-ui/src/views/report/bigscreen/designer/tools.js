@@ -121,7 +121,7 @@ const widgetTools = [
           name: 'background',
           required: false,
           placeholder: '',
-          value: 'rgba(115,170,229,.1)',
+          value: 'rgba(115,170,229,.0)',
         },
         {
           type: 'el-select',
