@@ -545,6 +545,7 @@ export default {
 
     // 如果是点击某个组件，获取该组件的配置项
     setOptionsOnClickWidget(obj) {
+      this.screenCode = "";
       if (typeof obj == "number") {
         this.widgetOptions = this.deepClone(this.widgets[obj]["options"]);
         return;
@@ -609,7 +610,6 @@ export default {
     },
     deletelayer() {
       this.widgets.splice(this.rightClickIndex, 1);
-      // console.log(this.widgets);
     },
     setDefaultValue(options, val) {
       for (let i = 0; i < options.length; i++) {
