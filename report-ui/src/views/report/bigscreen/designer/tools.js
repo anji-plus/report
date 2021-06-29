@@ -1940,6 +1940,14 @@ const widgetTools = [
           value: 'staticData',
         },
         {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
+        },
+        {
           type: 'el-button',
           label: '静态数据',
           name: 'staticData',
@@ -2575,6 +2583,14 @@ const widgetTools = [
           value: 'staticData',
         },
         {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
+        },
+        {
           type: 'el-button',
           label: '静态数据',
           name: 'staticData',
@@ -3187,6 +3203,14 @@ const widgetTools = [
           value: 'staticData',
         },
         {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
+        },
+        {
           type: 'el-button',
           label: '静态数据',
           name: 'staticData',
@@ -3558,6 +3582,14 @@ const widgetTools = [
             },
           ],
           value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
         },
         {
           type: 'el-button',
@@ -3934,6 +3966,14 @@ const widgetTools = [
           value: 'staticData',
         },
         {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
+        },
+        {
           type: 'el-button',
           label: '静态数据',
           name: 'staticData',
@@ -4300,6 +4340,14 @@ const widgetTools = [
           value: 'staticData',
         },
         {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
+        },
+        {
           type: 'el-button',
           label: '静态数据',
           name: 'staticData',
@@ -4443,6 +4491,14 @@ const widgetTools = [
             },
           ],
           value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
         },
         {
           type: 'el-button',
@@ -4823,6 +4879,14 @@ const widgetTools = [
             },
           ],
           value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
         },
         {
           type: 'el-button',
