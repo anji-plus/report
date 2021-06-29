@@ -121,13 +121,12 @@
                size="small"
                label-width="100px">
         <el-row :gutter="10">
-
           <el-col :xs="24"
                   :sm="20"
-                  :md="4"
-                  :lg="4"
-                  :xl="4">
-            <el-form-item label-width="0"
+                  :md="6"
+                  :lg="6"
+                  :xl="6">
+            <el-form-item label="数据源"
                           prop="sourceCode">
               <el-select v-model.trim="formData.sourceCode"
                          class="organisation"
@@ -142,9 +141,43 @@
           </el-col>
           <el-col :xs="24"
                   :sm="20"
+                  :md="8"
+                  :lg="8"
+                  :xl="8">
+            <el-form-item label="数据集名称"
+                          prop="setName">
+              <el-input v-model.trim="formData.setName"
+                        size="mini" />
+            </el-form-item>
+          </el-col>
+          <el-col :xs="24"
+                  :sm="20"
+                  :md="8"
+                  :lg="8"
+                  :xl="8">
+            <el-form-item label="数据集编码"
+                          prop="setCode">
+              <el-input v-model.trim="formData.setCode"
+                        size="mini" />
+            </el-form-item>
+          </el-col>
+          <el-col :xs="24"
+                  :sm="20"
                   :md="22"
                   :lg="22"
                   :xl="22">
+            <el-form-item label="数据集描述">
+              <el-input v-model.trim="formData.setDesc"
+                        size="mini" />
+            </el-form-item>
+          </el-col>
+
+          <el-col :xs="24"
+                  :sm="20"
+                  :md="22"
+                  :lg="22"
+                  :xl="22"
+                  class="code-mirror-form">
             <el-form-item label="查询SQL或请求体"
                           label-width="140px">
               <div class="codemirror">
@@ -884,6 +917,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.code-mirror-form {
+  /deep/.el-form-item__content {
+    height: 200px;
+    overflow: hidden;
+  }
+}
 .my-editor {
   height: 400px;
   div.jsoneditor {

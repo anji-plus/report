@@ -158,6 +158,12 @@ export default {
             color: optionsCollapse.lineColorX,
           },
         },
+        splitLine: {
+            show: optionsCollapse.isShowSplitLineX,
+            lineStyle: {
+                color: optionsCollapse.splitLineColorX
+            },
+        },
       }
       this.options.xAxis = xAxis
     },
@@ -188,6 +194,12 @@ export default {
           lineStyle: {
             color: optionsCollapse.lineColorY,
           },
+        },
+        splitLine: {
+            show: optionsCollapse.isShowSplitLineY,
+            lineStyle: {
+                color: optionsCollapse.splitLineColorY
+            },
         },
       }
 

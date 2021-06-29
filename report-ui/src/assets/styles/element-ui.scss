@@ -24,13 +24,14 @@
   margin: 0 auto;
   
   .el-dialog__header{
-    background-color: rgb(48, 77, 167); 
-    color: #fff;
+    background-color: #fff; 
+    color: #333;
+    border-bottom: 1px solid #eee;
     .el-dialog__title{
-      color: #fff;
+      color: #333;
     }
     .el-dialog__headerbtn i {
-      color: #fff;
+      color: #333;
     }
   }
 }
