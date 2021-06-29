@@ -1,36 +1,53 @@
-# AJ-Report
+## Online experience
+#### &emsp;  Computer online experience: [https://report.anji-plus.com/](https://report.anji-plus.com/ "链接")  &emsp;account：guest  password：guest
+#### &emsp;  Online documents: [https://report.anji-plus.com/#/doc](https://report.anji-plus.com/#/doc "doc")<br>
+#### &emsp;  issues: [https://gitee.com/anji-plus/report/issues](https://gitee.com/anji-plus/report/issues "issue")
 
-#### Description
-大屏设计
+## Function overview
+#### &emsp;  Component introduction
+&emsp;&emsp; （AJ-Report）is a visual drag edit, intuitive, cool, with a sense of science and technology chart tool full open source project.
 
-#### Software Architecture
-Software architecture description
-
-#### Installation
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Instructions
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Contribution
-
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+The built-in basic functions include data source, data set, report management, and some screenshots of the project are shown below.。<br>
 
 
-#### Gitee Feature
+## Packaging directory
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+```
+├── bin                                           
+│   ├── logs                                     
+│   ├── cache                                    
+│   ├── startup.cmd
+│   ├── shutdown.cmd
+│   ├── startup.sh
+│   └── shutdown.sh
+├── config                                       
+├── lib                                          
+├── target                                       
+```
+
+## System directory
+```
+├── doc                                          
+│   ├── docs
+│   ├── package.json
+│   └── README.md
+├── pom.xml                                      
+├── report-core                                  
+│   ├── pom.xml                                  
+│   └── README.md
+├── report-ui                                    
+├── LICENSE
+├── README.md
+```
+
+
+## Short term plan
+#### &emsp;  Enrich more chart components
+
+## technical support
+If you have any questions, please submit to [Issue](https://gitee.com/anji-plus/report/issues)
+
+#### Open source is not easy, please, star ☺
+
+
+

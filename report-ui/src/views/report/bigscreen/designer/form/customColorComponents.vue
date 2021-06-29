@@ -167,8 +167,8 @@ export default {
 /deep/.el-table::before {
   height: 0;
 }
-/deep/.el-form-item--mini .el-color-picker--mini,
-/deep/.el-form-item--mini .el-color-picker--mini .el-color-picker__trigger {
+/deep/.el-color-picker--mini,
+/deep/.el-color-picker--mini .el-color-picker__trigger {
   width: 23px;
   height: 23px;
 }
