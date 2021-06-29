@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "16466332",
+      "name": "仪表盘-抄表",
+      "font_class": "yibiaopan-chaobiao",
+      "unicode": "e72e",
+      "unicode_decimal": 59182
+    },
+    {
+      "icon_id": "15872322",
+      "name": "南丁格尔玫瑰图",
+      "font_class": "nandinggeermeiguitu",
+      "unicode": "e851",
+      "unicode_decimal": 59473
+    },
+    {
       "icon_id": "11990084",
       "name": "展 开 ",
       "font_class": "zhankai",

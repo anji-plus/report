@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 1513211 */
-  src: url('iconfont.woff2?t=1624613153423') format('woff2'),
-       url('iconfont.woff?t=1624613153423') format('woff'),
-       url('iconfont.ttf?t=1624613153423') format('truetype');
+  src: url('iconfont.woff2?t=1624933667537') format('woff2'),
+       url('iconfont.woff?t=1624933667537') format('woff'),
+       url('iconfont.ttf?t=1624933667537') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.iconyibiaopan-chaobiao:before {
+  content: "\e72e";
+}
+
+.iconnandinggeermeiguitu:before {
+  content: "\e851";
 }
 
 .iconzhankai:before {
