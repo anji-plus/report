@@ -1,37 +1,51 @@
-# AJ-Report
+## 在线体验
+#### &emsp;  电脑在线体验: [https://report.anji-plus.com/](https://report.anji-plus.com/ "链接")  &emsp;体验账号：guest  密码：guest
+#### &emsp;  在线文档: [https://report.anji-plus.com/#/doc](https://report.anji-plus.com/#/doc "doc")<br>
+#### &emsp;  在线提问: [https://gitee.com/anji-plus/report/issues](https://gitee.com/anji-plus/report/issues "issue")
 
-#### 介绍
-大屏设计
-
-#### 软件架构
-软件架构说明
-
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+## 功能概述
+#### &emsp;  组件介绍
+&emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。
+内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
 
 
-#### 特技
+## 打包目录
+```
+├── bin                                           启动命令脚本
+│   ├── logs                                      启动日志目录
+│   ├── cache                                     本地缓存目录
+│   ├── startup.cmd
+│   ├── shutdown.cmd
+│   ├── startup.sh
+│   └── shutdown.sh
+├── config                                        配置文件目录
+├── lib                                           自定义扩展包
+├── target                                        report-core核心包
+```
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+## 系统目录
+```
+├── doc                                           文档源码
+│   ├── docs
+│   ├── package.json
+│   └── README.md
+├── pom.xml                                       父pom，jar版本管理
+├── report-core                                   java源码
+│   ├── pom.xml                                   gaea父pom，jar版本管理
+│   └── README.md
+├── report-ui                                     前端vue源码
+├── LICENSE
+├── README.md
+```
+
+
+## 近期计划
+#### &emsp;  丰富更多图表组件
+
+## 技术支持
+如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues)
+
+#### 开源不易，劳烦各位star ☺
+
+
+
