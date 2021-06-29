@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "13087633",
+      "name": "个性装扮",
+      "font_class": "gexingzhuangban",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
       "icon_id": "16466332",
       "name": "仪表盘-抄表",
       "font_class": "yibiaopan-chaobiao",
