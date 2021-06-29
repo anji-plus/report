@@ -585,12 +585,12 @@ export default {
     widgetValueChanged(key, val) {
       if (this.screenCode == "screen") {
         this.dashboard = this.deepClone(val);
-      }
-
-      for (let i = 0; i < this.widgets.length; i++) {
-        if (this.widgetIndex == i) {
-          this.widgets[i].value[key] = this.deepClone(val);
-          this.setDefaultValue(this.widgets[i].options[key], val);
+      } else {
+        for (let i = 0; i < this.widgets.length; i++) {
+          if (this.widgetIndex == i) {
+            this.widgets[i].value[key] = this.deepClone(val);
+            this.setDefaultValue(this.widgets[i].options[key], val);
+          }
         }
       }
     },
