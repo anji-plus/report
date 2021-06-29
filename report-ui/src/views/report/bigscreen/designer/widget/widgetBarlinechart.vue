@@ -192,6 +192,12 @@ export default {
             color: optionsCollapse.lineColorX,
           },
         },
+        splitLine: {
+            show: optionsCollapse.isShowSplitLineX,
+            lineStyle: {
+                color: optionsCollapse.splitLineColorX
+            },
+        },
       }
       this.options.xAxis = xAxis
     },
@@ -224,6 +230,12 @@ export default {
               color: '#fff',
             },
           },
+          splitLine: {
+            show: optionsCollapse.isShowSplitLineY,
+            lineStyle: {
+                color: optionsCollapse.splitLineColorY
+            },
+        },
         },
         {
           type: 'value',
@@ -250,6 +262,12 @@ export default {
               color: optionsCollapse.lineColorY,
             },
           },
+          splitLine: {
+            show: true,
+            lineStyle: {
+                color: optionsCollapse.splitLineColorY
+            },
+        },
         },
       ]
 

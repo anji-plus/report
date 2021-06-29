@@ -121,7 +121,7 @@ const widgetTools = [
           name: 'background',
           required: false,
           placeholder: '',
-          value: 'rgba(115,170,229,.5)',
+          value: 'rgba(115,170,229,.1)',
         },
         {
           type: 'el-select',
@@ -1171,6 +1171,23 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#fff',
+              },
+              {
+                type: 'el-switch',
+                label: '分割线显示',
+                name: 'isShowSplitLineX',
+                require: false,
+                placeholder: '',
+                value: true,
+              },
+              {
+                type: 'vue-color',
+                label: '分割线颜色',
+                name: 'splitLineColorX',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+
               }
             ],
           },
@@ -1240,6 +1257,21 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#fff',
+              }, {
+                type: 'el-switch',
+                label: '分割线显示',
+                name: 'isShowSplitLineY',
+                require: false,
+                placeholder: '',
+                value: true,
+              }, {
+                type: 'vue-color',
+                label: '分割线颜色',
+                name: 'splitLineColorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+
               }
             ],
           },
@@ -1723,6 +1755,23 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#fff',
+              },
+              {
+                type: 'el-switch',
+                label: '分割线显示',
+                name: 'isShowSplitLineX',
+                require: false,
+                placeholder: '',
+                value: true,
+              },
+              {
+                type: 'vue-color',
+                label: '分割线颜色',
+                name: 'splitLineColorX',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+
               }
             ],
           },
@@ -1792,6 +1841,22 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#fff',
+              },
+              {
+                type: 'el-switch',
+                label: '分割线显示',
+                name: 'isShowSplitLineY',
+                require: false,
+                placeholder: '',
+                value: true,
+              }, {
+                type: 'vue-color',
+                label: '分割线颜色',
+                name: 'splitLineColorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+
               }
             ],
           },
@@ -2195,6 +2260,23 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#fff',
+              },
+              {
+                type: 'el-switch',
+                label: '分割线显示',
+                name: 'isShowSplitLineX',
+                require: false,
+                placeholder: '',
+                value: true,
+              },
+              {
+                type: 'vue-color',
+                label: '分割线颜色',
+                name: 'splitLineColorX',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+
               }
             ],
           },
@@ -2264,6 +2346,22 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#fff',
+              },
+              {
+                type: 'el-switch',
+                label: '分割线显示',
+                name: 'isShowSplitLineY',
+                require: false,
+                placeholder: '',
+                value: true,
+              }, {
+                type: 'vue-color',
+                label: '分割线颜色',
+                name: 'splitLineColorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+
               }
             ],
           },
@@ -2823,6 +2921,23 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#fff',
+              },
+              {
+                type: 'el-switch',
+                label: '分割线显示',
+                name: 'isShowSplitLineX',
+                require: false,
+                placeholder: '',
+                value: true,
+              },
+              {
+                type: 'vue-color',
+                label: '分割线颜色',
+                name: 'splitLineColorX',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+
               }
             ],
           },
@@ -2892,6 +3007,22 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#fff',
+              },
+              {
+                type: 'el-switch',
+                label: '分割线显示',
+                name: 'isShowSplitLineY',
+                require: false,
+                placeholder: '',
+                value: true,
+              }, {
+                type: 'vue-color',
+                label: '分割线颜色',
+                name: 'splitLineColorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+
               }
             ],
           },
