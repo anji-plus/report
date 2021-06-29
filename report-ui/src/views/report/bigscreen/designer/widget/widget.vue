@@ -101,7 +101,8 @@ export default {
       return this.value.position.zIndex || 1;
     }
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     handleFocus({ index, left, top, width, height }) {},
     handleBlur({ index, left, top, width, height }) {
