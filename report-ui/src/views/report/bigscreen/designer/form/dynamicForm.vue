@@ -104,6 +104,7 @@
             <el-button
               v-if="item.type == 'el-button'"
               type="primary"
+              size="mini"
               plain
               @click="addStaticData"
               >编辑</el-button
@@ -311,12 +312,6 @@ export default {
       this.setDefaultValue();
       this.isShowData();
     }
-    // formData: {
-    //   handler () {
-    //     this.$emit('onChanged', this.formData)
-    //   },
-    //   deep: true,
-    // },
   },
   created() {
     this.isShowData();

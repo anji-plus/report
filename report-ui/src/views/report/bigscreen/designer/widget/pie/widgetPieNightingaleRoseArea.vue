@@ -22,17 +22,14 @@ export default {
         toolbox: {
           show: true,
           feature: {
-            mark: {show: true},
-            dataView: {show: true, readOnly: false},
-            restore: {show: true},
-            saveAsImage: {show: true}
+            mark: {show: true}
           }
         },
         series: [
           {
             name: '面积模式',
             type: 'pie',
-            radius: [50, 250],
+            radius: ["10%", "50%"],
             center: ['50%', '50%'],
             roseType: 'area',
             itemStyle: {
@@ -335,8 +332,6 @@ export default {
 .echarts {
   width: 100%;
   height: 100%;
-  min-width: 200px;
-  min-height: 200px;
   overflow: hidden;
 }
 </style>

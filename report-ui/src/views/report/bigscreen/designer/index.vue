@@ -34,6 +34,8 @@
             v-for="(item, index) in layerWidget"
             :key="index"
             class="tools-item"
+            :class="widgetIndex == index ? 'is-active' : ''"
+            @click="layerClick(index)"
           >
             <span class="tools-item-icon">
               <i class="iconfont" :class="item.icon"></i>
@@ -123,7 +125,7 @@
               :bigscreen="{ bigscreenWidth, bigscreenHeight }"
               @onActivated="setOptionsOnClickWidget"
               @contextmenu.prevent.native="rightClick($event, index)"
-              @click.prevent.native="widgetsClick(index)"
+              @mousedown.prevent.native="widgetsClick(index)"
             />
           </div>
         </vue-ruler-tool>
@@ -197,6 +199,7 @@ export default {
   },
   data() {
     return {
+      layerWidget: [],
       widgetTools: widgetTools, // 左侧工具栏的组件图标，将js变量加入到当前作用域
       widthLeftForTools: 200, // 左侧工具栏宽度
       widthLeftForToolsHideButton: 15, // 左侧工具栏折叠按钮宽度
@@ -292,13 +295,14 @@ export default {
     },
     bigscreenHeightInWorkbench() {
       return this.getPXUnderScale(this.bigscreenHeight);
-    },
-    layerWidget() {
-      const layerWidgetArr = [];
-      for (let i = 0; i < this.widgets.length; i++) {
-        layerWidgetArr.push(getToolByCode(this.widgets[i].type));
-      }
-      return layerWidgetArr;
+    }
+  },
+  watch: {
+    widgets: {
+      handler(val) {
+        this.handlerLayerWidget(val);
+      },
+      deep: true
     }
   },
   mounted() {
@@ -310,6 +314,21 @@ export default {
     this.widgets = [];
   },
   methods: {
+    handlerLayerWidget(val) {
+      const layerWidgetArr = [];
+      for (let i = 0; i < val.length; i++) {
+        const obj = {};
+        obj.icon = getToolByCode(val[i].type).icon;
+        const options = val[i].options["setup"];
+        options.forEach(el => {
+          if (el.name == "layerName") {
+            obj.label = el.value;
+          }
+        });
+        layerWidgetArr.push(obj);
+      }
+      this.layerWidget = layerWidgetArr;
+    },
     async initEchartData() {
       const reportCode = this.$route.query.reportCode;
       const { code, data } = await detailDashboard(reportCode);
@@ -512,7 +531,10 @@ export default {
       }
       return widgetJson;
     },
-
+    layerClick(index) {
+      this.widgetIndex = index;
+      this.widgetsClick(index);
+    },
     // 如果是点击大屏设计器中的底层，加载大屏底层属性
     setOptionsOnClickScreen() {
       this.screenCode = "screen";
@@ -523,11 +545,15 @@ export default {
 
     // 如果是点击某个组件，获取该组件的配置项
     setOptionsOnClickWidget(obj) {
+      this.screenCode = "";
+      if (typeof obj == "number") {
+        this.widgetOptions = this.deepClone(this.widgets[obj]["options"]);
+        return;
+      }
       if (obj.index < 0 || obj.index >= this.widgets.length) {
         return;
       }
       this.widgetIndex = obj.index;
-      this.widgetOptions = this.deepClone(this.widgets[obj.index]["options"]);
       this.widgets[obj.index].value.position = obj;
       this.widgets[obj.index].options.position.forEach(el => {
         for (const key in obj) {
@@ -536,7 +562,7 @@ export default {
           }
         }
       });
-      console.log(this.widgets);
+      this.widgetOptions = this.deepClone(this.widgets[obj.index]["options"]);
     },
     widgetsClick(index) {
       const draggableArr = this.$refs.widgets;
@@ -547,9 +573,9 @@ export default {
           this.$refs.widgets[i].$refs.draggable.setActive(false);
         }
       }
+      this.setOptionsOnClickWidget(index);
     },
     handleMouseDown() {
-      console.log(1);
       const draggableArr = this.$refs.widgets;
       for (let i = 0; i < draggableArr.length; i++) {
         this.$refs.widgets[i].$refs.draggable.setActive(false);
@@ -557,15 +583,6 @@ export default {
     },
     // 将当前选中的组件，右侧属性值更新
     widgetValueChanged(key, val) {
-      /* 更新指定 this.widgets 中第 this.widgetIndex 个组件的value
-      widgets: [{
-        type: 'widget-text',
-        value: {
-          setup:{},
-          data: {},
-          position: {}
-        }
-      }]*/
       if (this.screenCode == "screen") {
         this.dashboard = this.deepClone(val);
       }
@@ -593,7 +610,6 @@ export default {
     },
     deletelayer() {
       this.widgets.splice(this.rightClickIndex, 1);
-      // console.log(this.widgets);
     },
     setDefaultValue(options, val) {
       for (let i = 0; i < options.length; i++) {
@@ -624,6 +640,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.is-active {
+  background: #409eff !important;
+  color: #373d41 !important;
+}
 .layout {
   display: -webkit-box;
   display: -ms-flexbox;
