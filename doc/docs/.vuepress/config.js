@@ -24,8 +24,7 @@ module.exports = {
                     children: [
                         {title: '介绍', path: '/guide/'},
                         {title: '快速入门', path: '/guide/quickly'},
-                        {title: '项目介绍', path: '/guide/productintro'},
-                        {title: '系统运行', path: '/guide/deploy'}
+                        // {title: '系统运行', path: '/guide/deploy'}
                     ]
                 },
                 {
