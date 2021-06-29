@@ -427,6 +427,8 @@
 import { queryAllDataSourceSet, verificationSet, testTransformSet, dataSetPreview, addDataSet, editDataSet, deleteDataSet, dataSetPageList } from '@/api/report'
 import Dictionary from '@/components/Dictionary/index'
 import { codemirror } from 'vue-codemirror' // 引入codeMirror全局实例
+import 'codemirror/mode/sql/sql.js'
+import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/lib/codemirror.css' // 核心样式
 import 'codemirror/theme/cobalt.css' // 引入主题后还需要在 options 中指定主题才会生效
 import vueJsonEditor from 'vue-json-editor'
@@ -466,7 +468,6 @@ export default {
         lineNumbers: true, // 显示行号
         line: true,
         styleActiveLine: true, // 高亮选中行
-
         hintOptions: {
           completeSingle: true, // 当匹配只有一项的时候是否自动补全
         },
