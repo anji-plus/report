@@ -286,7 +286,7 @@
                         </div>
                         <el-dialog :title="dialogTitle"
                                    :visible.sync="dialogSwitchVisible"
-                                   width="45%"
+                                   width="60%"
                                    min-height="400px"
                                    append-to-body>
                           <div v-if="isItemFilterType.transformType == 'js'">
@@ -294,7 +294,7 @@
                               <!-- //自定义高级规则？ -->
                               <codemirror v-model.trim="transformScript"
                                           :options="optionsJavascript"
-                                          style="height:190px" />
+                                          style="height: 210px;overflow: hidden;" />
                             </div>
                           </div>
                           <div v-else>
@@ -388,20 +388,21 @@
     </el-dialog>
     <el-dialog :title="title"
                :visible.sync="dialogPermissionVisible"
-               width="30%">
+               width="60%">
       <div class="codemirror">
         <!-- //自定义高级规则？ -->
         <codemirror v-model.trim="validationRules"
                     :options="optionsJavascript"
-                    style="height: 190px" />
+                    style="height: 210px;overflow: hidden;" />
       </div>
       <span slot="footer"
             class="dialog-footer">
         <el-button type="warning"
                    @click="testResultset">测试</el-button>
-        <el-button @click="dialogPermissionVisible = false">关闭</el-button>
+
         <el-button type="primary"
                    @click="dialogValidationRules">保存</el-button>
+        <el-button @click="dialogPermissionVisible = false">关闭</el-button>
       </span>
     </el-dialog>
     <el-dialog :title="caseResultTitle"
