@@ -298,7 +298,7 @@ export default {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(optionsData.dynamicData);
+        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
       const staticData = JSON.parse(val);
@@ -312,8 +312,24 @@ export default {
         }
       }
     },
-    dynamicDataFn(val) {
+    dynamicDataFn(val, refreshTime) {
       if (!val) return;
+      if (this.ispreview) {
+        this.getEchartData(val);
+        this.flagInter = setInterval(() => {
+          this.getEchartData(val);
+        }, refreshTime);
+      } else {
+        this.getEchartData(val);
+      }
+    },
+    getEchartData(val) {
+      const data = this.queryEchartsData(val);
+      data.then(res => {
+        this.renderingFn(res);
+      });
+    },
+    renderingFn(val) {
       // x轴
       this.options.xAxis.data = val.xAxis;
       // series
