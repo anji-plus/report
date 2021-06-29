@@ -2367,7 +2367,8 @@ const widgetTools = [
                 value: 10,
               },
             ],
-          }, {
+          },
+          {
             name: '图例操作',
             list: [
               {
@@ -2439,7 +2440,8 @@ const widgetTools = [
                 value: ''
               },
             ],
-          }, {
+          },
+          {
             name: '自定义配色',
             list: [
               {
@@ -2447,7 +2449,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#ED0E0E' }, { color: '#6CCD17' }, { color: '#172CCD' }, { color: '#B817CD' }, { color: '#AFCD17' }],
+                value: [{ color: '#1E90FF' }],
               },
             ],
           },

@@ -117,12 +117,19 @@
               width="50%"
               :before-close="handleClose"
             >
-              <codemirror
-                v-model.trim="formData[item.name]"
-                class="code-mirror"
-                :options="optionsJavascript"
-                style="height: 190px"
-              />
+<!--              <codemirror-->
+<!--                v-model.trim="formData[item.name]"-->
+<!--                class="code-mirror"-->
+<!--                :options="optionsJavascript"-->
+<!--                style="height: 190px"-->
+<!--              />-->
+              <vue-json-editor v-model="formData[item.name]"
+                               :show-btns="false"
+                               :mode="'code'"
+                               lang="zh"
+                               class="my-editor"
+                               @json-change="onJsonChange"
+                               @json-save="onJsonSave" />
               <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisibleStaticData = false"
                   >取 消</el-button
@@ -135,6 +142,7 @@
             v-if="item.type == 'dycustComponents' && inputShow[item.name]"
             v-model="formData[item.name]"
             :chart-type="item.chartType"
+            @change="changed($event, item.name)"
           />
         </div>
         <div v-else-if="isShowForm(item, '[object Array]')" :key="'a-' + index">
@@ -255,7 +263,7 @@
 
 <script>
 import ColorPicker from "./colorPicker.vue";
-import { codemirror } from "vue-codemirror"; // 引入codeMirror全局实例
+import vueJsonEditor from 'vue-json-editor'
 import "codemirror/lib/codemirror.css"; // 核心样式
 import "codemirror/theme/cobalt.css"; // 引入主题后还需要在 options 中指定主题才会生效
 // language
@@ -269,7 +277,7 @@ export default {
   name: "DynamicForm",
   components: {
     ColorPicker,
-    codemirror,
+    vueJsonEditor,
     dynamicComponents,
     customColorComponents
   },
@@ -336,6 +344,8 @@ export default {
         }
       }
     },
+    onJsonChange (value) { },
+    onJsonSave (value) { },
     saveData() {
       this.$emit("onChanged", this.formData);
       this.dialogVisibleStaticData = false;
