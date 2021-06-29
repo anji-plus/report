@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form label-width="80px" label-position="left">
+    <el-form label-width="100px" label-position="left">
       <el-form-item label="数据集">
         <el-select
           size="mini"
