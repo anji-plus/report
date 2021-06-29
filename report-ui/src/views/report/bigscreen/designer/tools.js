@@ -1432,6 +1432,14 @@ const widgetTools = [
           value: 'staticData',
         },
         {
+          type: 'el-input-number',
+          label: '刷新时间(秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 30
+        },
+        {
           type: 'el-button',
           label: '静态数据',
           name: 'staticData',

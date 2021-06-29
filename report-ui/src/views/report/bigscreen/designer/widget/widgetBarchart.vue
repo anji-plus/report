@@ -72,6 +72,7 @@ export default {
   watch: {
     value: {
       handler(val) {
+        console.log(val);
         this.optionsStyle = val.position;
         this.optionsData = val.data;
         this.optionsCollapse = val.setup;
@@ -275,7 +276,9 @@ export default {
     // 数据解析
     setOptionsData() {
       const optionsSetup = this.optionsSetup;
+      console.log(optionsSetup);
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      console.log(optionsData);
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(optionsData.dynamicData, optionsSetup);

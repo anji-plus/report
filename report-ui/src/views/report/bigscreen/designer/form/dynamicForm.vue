@@ -10,7 +10,7 @@
       <template v-for="(item, index) in options">
         <div v-if="isShowForm(item, '[object Object]')" :key="index">
           <el-form-item
-            v-if="inputShow[item.name]"
+            v-if="inputShow[item.name] && item.type != 'dycustComponents'"
             :label="item.label"
             :prop="item.name"
             :required="item.required"
