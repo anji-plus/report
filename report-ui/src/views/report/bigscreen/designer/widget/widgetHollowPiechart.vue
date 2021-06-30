@@ -201,7 +201,7 @@ export default {
         }
       }
     },
-    dynamicDataFn(val) {
+    dynamicDataFn(val, refreshTime) {
       if (!val) return;
       if (this.ispreview) {
         this.getEchartData(val);
