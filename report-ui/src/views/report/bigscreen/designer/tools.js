@@ -4568,7 +4568,7 @@ const widgetTools = [
     code: 'widget-map',
     type: 'chart',
     label: '中国地图',
-    icon: 'chinaMapChart',
+    icon: 'iconzhongguoditu',
     options: {
       setup: [
         {
