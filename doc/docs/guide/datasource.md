@@ -16,9 +16,15 @@
 - 只有测试通过的数据源才可以保存
 
 
-![An image](../picture/img.png)
+![An image](../picture/datasource/img.png)
 
 
+
+## 扩展
+- 以kudu impala 为例，在lib文件夹下加入kudu impala相关的JDBC连接相关的包，如图
+- 在数据库中新增数据源类型，参考数据源类型(上方)
+
+![An image](../picture/datasource/kudu-impala-lib.png)
 
 
   
