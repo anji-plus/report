@@ -93,23 +93,6 @@
             </li>
           </ul>
         </span>
-        <span class="btn">
-          <ul class="nav">
-            <li><i class="el-icon-refresh"></i><i class="el-icon-arrow-down"></i>
-              <ul>
-                <li>
-                  <div><i class="el-icon-refresh-left mr10"></i>10秒</div>
-                </li>
-                <li>
-                  <div><i class="el-icon-refresh-left mr10"></i>60秒</div>
-                </li>
-                <li>
-                  <div><i class="el-icon-refresh-left mr10"></i>300秒</div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </span>
       </div>
       <div class="workbench-container"
            :style="{
@@ -755,7 +738,7 @@ export default {
       margin-left: 9px;
       .btn {
         color: #788994;
-        width: 45px;
+        width: 55px;
         text-align: center;
         display: block;
         cursor: pointer;
@@ -820,7 +803,7 @@ export default {
           border: 0px;
         }
         .el-tabs__item.is-active {
-          background-color: #263445;
+          background-color: #31455d;
         }
       }
     }
@@ -896,7 +879,7 @@ li {
   clear: both;
 }
 .nav li {
-  width: 45px;
+  width: 55px;
   text-align: center;
   position: relative;
 }
