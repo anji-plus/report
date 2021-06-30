@@ -29,6 +29,7 @@ import WidgetFunnel from "./widgetFunnel.vue";
 import WidgetGauge from "./widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRoseArea";
 import widgetTable from "./widgetTable.vue";
+import widgetMap from "./widgetMap.vue";
 export default {
   name: "WidgetTemp",
   components: {
@@ -49,7 +50,8 @@ export default {
     WidgetFunnel,
     WidgetGauge,
     WidgetPieNightingaleRoseArea,
-    widgetTable
+    widgetTable,
+    widgetMap
   },
   model: {
     prop: "value",
