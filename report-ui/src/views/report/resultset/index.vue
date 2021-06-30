@@ -97,11 +97,12 @@
           <el-button size="mini"
                      type="text"
                      @click="addOrEditDataSet(scope.row)">编辑</el-button>
-          <el-popconfirm :title="'确定删除' + scope.row.setName + '吗？'"
-                         @onConfirm="delect(scope.row)">
-            <el-button slot="reference"
-                       type="text">删除</el-button>
-          </el-popconfirm>
+          <!-- <el-popconfirm :title="'确定删除' + scope.row.setName + '吗？'"
+                         @onConfirm="delect(scope.row)"> -->
+          <el-button slot="reference"
+                     type="text"
+                     @click="delect(scope.row)">删除</el-button>
+          <!-- </el-popconfirm> -->
         </template>
       </el-table-column>
     </el-table>
@@ -614,10 +615,29 @@ export default {
       this.caseResultTitle = item.setName
       this.caseResultContent = JSON.parse(item.caseResult)
     },
-    async delect (row) {
-      this.visible = false
-      const { code, data } = await deleteDataSet(row)
-      if (code != '200') return
+    delect (row) {
+      this.$confirm('确定删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+        .then(async () => {
+          this.$emit('deletelayer')
+          this.visible = false
+          const { code, data } = await deleteDataSet(row)
+          if (code != '200') return
+          this.queryByPage()
+          this.$message({
+            type: 'success',
+            message: '删除成功!',
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除',
+          })
+        })
     },
     // 编辑数据集,获取单条数据详情
     addOrEditDataSet (row) {
@@ -901,9 +921,11 @@ export default {
             if (this.dialogFormVisibleTitle === '新增数据集') {
               const { code } = await addDataSet(this.formData)
               if (code != '200') return
+              this.queryByPage()
             } else {
               const { code } = await editDataSet(this.formData)
               if (code != '200') return
+              this.queryByPage()
             }
             this.dialogFormVisible = false
           } else {

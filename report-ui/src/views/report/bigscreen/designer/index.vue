@@ -59,21 +59,15 @@
                 <li>
                   <div><i class="el-icon-full-screen mr10"></i>边框 <i class="el-icon-arrow-right ml20"></i></div>
                   <ul class="three-level">
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
+                    <li><a href="#">122222222</a></li>
+                    <li><a href="#">222222222222312</a></li>
+                    <li><a href="#">3ewwwwwrwerwer</a></li>
                   </ul>
                 </li>
                 <li>
                   <div><i class="el-icon-magic-stick mr10"></i>装饰<i class="el-icon-arrow-right ml20"></i></div>
                   <ul class="three-level">
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
+                    <!-- <li><a href="#">4</a></li> -->
                   </ul>
                 </li>
               </ul>
@@ -866,7 +860,7 @@ li {
 }
 
 .nav ul {
-  display: none;
+  // display: none;
   background: #00113a;
   position: absolute;
   z-index: 10000;
@@ -881,14 +875,21 @@ li {
   display: block;
 }
 .nav > li > .three-level > li > a {
-  width: 10em;
+  width: 100%;
   padding-left: 1em;
   padding-right: 1em;
   background-color: #0f2030;
 }
-// .nav li .three-level li {
-//   display: none;
-// }
+.nav li .three-level {
+  padding: 10px 20px;
+}
+.nav li .three-level li {
+  width: 33.333%;
+  height: 80px;
+  float: left;
+  height: 80px;
+  display: inline-block;
+}
 .nav > li > ul > li:hover > a {
   display: block;
   background-color: #182e42;

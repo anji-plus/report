@@ -106,11 +106,12 @@
         <template slot-scope="scope">
           <el-button type="text"
                      @click="showAddLogModel(scope.row)">编辑</el-button>
-          <el-popconfirm :title="'确定删除' + scope.row.sourceNameCode + '吗？'"
-                         @onConfirm="delData(scope.row)">
-            <el-button slot="reference"
-                       type="text">删除</el-button>
-          </el-popconfirm>
+          <!-- <el-popconfirm :title="'确定删除' + scope.row.sourceNameCode + '吗？'"
+                         @onConfirm="delData(scope.row)"> -->
+          <el-button slot="reference"
+                     @click="delData(scope.row)"
+                     type="text">删除</el-button>
+          <!-- </el-popconfirm> -->
         </template>
       </el-table-column>
     </el-table>
@@ -376,9 +377,29 @@ export default {
       })
     },
     async delData (val) {
-      const { code } = await deleteDataSource(val)
-      if (code != '200') return
-      this.queryByPage()
+      this.$confirm('确定删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+        .then(async () => {
+          this.$emit('deletelayer')
+          this.visible = false
+          const { code, data } = await deleteDataSource(val)
+          if (code != '200') return
+          this.queryByPage()
+          this.$message({
+            type: 'success',
+            message: '删除成功!',
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除',
+          })
+        })
+
     },
     // 提交
     async UserConfirm (formName) {
