@@ -899,8 +899,9 @@ li {
   top: 0;
 }
 .nav > li:last-child > ul > li > ul {
-  left: -100%;
+  left: 140px;
   top: 0;
+  width: 400px;
 }
 .nav > li > ul > li:hover > ul {
   display: block;
