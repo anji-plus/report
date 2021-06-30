@@ -439,8 +439,6 @@ export default {
 .echarts {
   width: 100%;
   height: 100%;
-  min-width: 200px;
-  min-height: 200px;
   overflow: hidden;
 }
 </style>
