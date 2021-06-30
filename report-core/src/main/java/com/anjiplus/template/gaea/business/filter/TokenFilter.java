@@ -57,6 +57,26 @@ public class TokenFilter implements Filter {
 
             //延长有效期
             cacheHelper.stringSetExpire(username, authorization, 3600);
+
+
+            //在线体验版本
+            if (username.equals("guest")
+                    && !uri.endsWith("/dataSet/testTransform")
+                    && !uri.endsWith("/reportDashboard/getData")
+                    && !uri.startsWith("/dict")
+                    && !uri.startsWith("/dict")
+            ) {
+                //不允许删除
+                String method = request.getMethod();
+                if ("post".equalsIgnoreCase(method)
+                        || "put".equalsIgnoreCase(method)
+                        || "delete".equalsIgnoreCase(method)
+                ) {
+                    ResponseBean responseBean = ResponseBean.builder().code("50001").message("在线体验版本，不允许此操作。请自行下载本地运行").build();
+                    response.getWriter().print(JSONObject.toJSONString(responseBean));
+                    return;
+                }
+            }
         }
 
         //执行

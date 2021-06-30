@@ -67,7 +67,9 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
         ReportDashboardObjectDto result = new ReportDashboardObjectDto();
         ReportDashboardDto reportDashboardDto = new ReportDashboardDto();
         ReportDashboard reportDashboard = this.selectOne("report_code", reportCode);
-        GaeaAssert.notNull(reportDashboard, ResponseCode.RULE_CONTENT_NOT_EXIST, "reportDashboard");
+        if (null == reportDashboard) {
+            return new ReportDashboardObjectDto();
+        }
         GaeaBeanUtils.copyAndFormatter(reportDashboard, reportDashboardDto);
 
         List<ReportDashboardWidget> list = reportDashboardWidgetService.list(

@@ -9,7 +9,7 @@
 内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
 
 ##数据流程图
-![An image](../picture/img.png)
+![An image](docs/picture/datasource/img.png)
 
 ## 打包目录
 ```
