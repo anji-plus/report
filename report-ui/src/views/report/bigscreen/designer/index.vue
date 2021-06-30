@@ -46,15 +46,34 @@
     <div class="layout-left-fold"
          :style="{ width: widthLeftForToolsHideButton + 'px' }"
          @click="toolIsShow = !toolIsShow">
-      <i class="iconfont iconzhankai" />
+      <i class="el-icon-arrow-right" />
     </div>
 
     <div class="layout-middle"
          :style="{ width: middleWidth + 'px', height: middleHeight + 'px' }">
       <div class="top-button">
-        <span class="btn border-right">
+
+        <span class="btn">
+          <el-tooltip class="item"
+                      effect="dark"
+                      content="保存"
+                      placement="bottom">
+            <i class="iconfont iconsave"
+               @click="saveData"></i>
+          </el-tooltip>
+        </span>
+        <span class="btn">
+          <el-tooltip class="item"
+                      effect="dark"
+                      content="预览"
+                      placement="bottom">
+            <i class="iconfont iconyulan"
+               @click="viewScreen"></i>
+          </el-tooltip>
+        </span>
+        <span class="btn border-left">
           <ul class="nav">
-            <li><i class="el-icon-brush"></i>
+            <li><i class="el-icon-brush"></i><i class="el-icon-arrow-down"></i>
               <ul>
                 <li>
                   <div><i class="el-icon-full-screen mr10"></i>边框 <i class="el-icon-arrow-right ml20"></i></div>
@@ -75,22 +94,21 @@
           </ul>
         </span>
         <span class="btn">
-          <el-tooltip class="item"
-                      effect="dark"
-                      content="保存"
-                      placement="bottom">
-            <i class="iconfont iconsave"
-               @click="saveData"></i>
-          </el-tooltip>
-        </span>
-        <span class="btn">
-          <el-tooltip class="item"
-                      effect="dark"
-                      content="预览"
-                      placement="bottom">
-            <i class="iconfont iconyulan"
-               @click="viewScreen"></i>
-          </el-tooltip>
+          <ul class="nav">
+            <li><i class="el-icon-refresh"></i><i class="el-icon-arrow-down"></i>
+              <ul>
+                <li>
+                  <div><i class="el-icon-refresh-left mr10"></i>10秒</div>
+                </li>
+                <li>
+                  <div><i class="el-icon-refresh-left mr10"></i>60秒</div>
+                </li>
+                <li>
+                  <div><i class="el-icon-refresh-left mr10"></i>300秒</div>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </span>
       </div>
       <div class="workbench-container"
@@ -640,7 +658,13 @@ export default {
   margin-left: 20px;
 }
 .border-right {
-  border-right: 1px solid #566876;
+  border-right: 1px solid #273b4d;
+}
+.border-left {
+  border-left: 1px solid #273b4d;
+}
+.el-icon-arrow-down {
+  font-size: 10px;
 }
 .is-active {
   background: #31455d !important;
@@ -697,24 +721,18 @@ export default {
     display: -ms-flexbox;
     display: flex;
     height: 100%;
-    -webkit-box-align: bottom;
-    -ms-flex-align: bottom;
-    align-items: bottom;
+
     font-size: 12px;
     overflow: hidden;
-    background-color: #455766;
+    background-color: #242a30;
     cursor: pointer;
+    padding-top: 26%;
     i {
-      font-size: 22px;
+      font-size: 18px;
       width: 18px;
       height: 23px;
       margin-left: 0px;
-      color: #5a83bb;
-      transform: rotate(180deg);
-      -ms-transform: rotate(180deg); /* IE 9 */
-      -moz-transform: rotate(180deg); /* Firefox */
-      -webkit-transform: rotate(180deg); /* Safari 和 Chrome */
-      -o-transform: rotate(180deg); /* Opera */
+      color: #bfcbd9;
     }
   }
 
@@ -723,10 +741,10 @@ export default {
     position: relative;
     //width: calc(100% - 445px);
     height: 100%;
-    background-color: #455766;
+    background-color: rgb(36, 42, 48);
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    border: 1px solid #455766;
+    border: 1px solid rgb(36, 42, 48);
     align-items: center;
     vertical-align: middle;
     .top-button {
@@ -736,11 +754,30 @@ export default {
       line-height: 40px;
       margin-left: 9px;
       .btn {
-        color: #cde8ff;
-        width: 36px;
+        color: #788994;
+        width: 45px;
         text-align: center;
         display: block;
         cursor: pointer;
+        .el-icon-arrow-down {
+          transform: rotate(0deg);
+          -ms-transform: rotate(0deg); /* IE 9 */
+          -moz-transform: rotate(0deg); /* Firefox */
+          -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
+          -o-transform: rotate(0deg); /* Opera */
+          transition: all 0.4s ease-in-out;
+        }
+        &:hover {
+          background: rgb(25, 29, 34);
+          .el-icon-arrow-down {
+            transform: rotate(180deg);
+            -ms-transform: rotate(180deg); /* IE 9 */
+            -moz-transform: rotate(180deg); /* Firefox */
+            -webkit-transform: rotate(180deg); /* Safari 和 Chrome */
+            -o-transform: rotate(180deg); /* Opera */
+            transition: all 0.4s ease-in-out;
+          }
+        }
       }
     }
     .workbench-container {
@@ -779,7 +816,7 @@ export default {
     .el-tabs__header {
       .el-tabs__nav {
         .el-tabs__item {
-          background-color: #31455d;
+          background-color: #242f3b;
           border: 0px;
         }
         .el-tabs__item.is-active {
@@ -788,7 +825,7 @@ export default {
       }
     }
     .el-tabs__content {
-      background-color: #263445;
+      background-color: #242a30;
       height: calc(100vh - 39px);
       overflow-x: hidden;
       overflow-y: auto;
@@ -859,7 +896,7 @@ li {
   clear: both;
 }
 .nav li {
-  width: 40px;
+  width: 45px;
   text-align: center;
   position: relative;
 }
@@ -871,7 +908,7 @@ li {
   text-decoration: none;
 }
 .nav li:hover {
-  color: #6dc5ff;
+  color: #788994;
 }
 .nav li ul {
   visibility: hidden;
@@ -881,7 +918,7 @@ li {
   top: 38px;
   left: 0;
   padding: 0;
-  background-color: #263445;
+  background-color: rgb(36, 42, 48);
   opacity: 0;
   _margin: 0;
   width: 120px;
@@ -891,6 +928,9 @@ li {
   opacity: 1;
   visibility: visible;
   margin: 0;
+  li:hover {
+    background-color: rgb(25, 29, 34);
+  }
 }
 .nav ul li {
   float: left;
@@ -906,6 +946,7 @@ li {
   float: none;
   height: 120px;
   border: 1px solid #30445c;
+  background-color: rgb(25, 29, 34);
   transition: all 0.2s ease-in-out;
 }
 .nav ul a:hover {
@@ -921,7 +962,6 @@ li {
   height: 300px;
   overflow: auto;
   padding: 10px;
-  box-shadow: -1px 0 0 #30445c;
   _margin: 0;
 }
 .nav ul ul li {
@@ -930,5 +970,11 @@ li {
   margin-right: 3px;
   display: block;
   float: left;
+}
+/deep/.vue-ruler-h {
+  opacity: 0.3;
+}
+/deep/.vue-ruler-v {
+  opacity: 0.3;
 }
 </style>

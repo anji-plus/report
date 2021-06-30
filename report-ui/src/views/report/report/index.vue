@@ -140,14 +140,15 @@
                :model="dialogForm"
                :rules="rules"
                size="small"
+               style="min-height:200px"
                label-width="100px">
         <el-row :gutter="10">
-          <el-col :xs="24"
+          <!-- <el-col :xs="24"
                   :sm="20"
                   :md="6"
                   :lg="6"
-                  :xl="6">
-            <!-- <el-form-item label="报表类型">
+                  :xl="6"> -->
+          <!-- <el-form-item label="报表类型">
               <el-select v-model="dialogForm.reportType"
                          placeholder="报表类型"
                          clearable>
@@ -157,12 +158,12 @@
                            :value="item.id" />
               </el-select>
             </el-form-item> -->
-          </el-col>
+          <!-- </el-col> -->
           <el-col :xs="24"
                   :sm="20"
-                  :md="7"
-                  :lg="7"
-                  :xl="7">
+                  :md="12"
+                  :lg="12"
+                  :xl="12">
             <el-form-item label="名称"
                           prop="reportName">
               <el-input v-model="dialogForm.reportName" />
@@ -170,22 +171,22 @@
           </el-col>
           <el-col :xs="24"
                   :sm="20"
-                  :md="7"
-                  :lg="7"
-                  :xl="7">
+                  :md="12"
+                  :lg="12"
+                  :xl="12">
             <el-form-item label="报表编码"
                           prop="reportCode">
               <el-input v-model="dialogForm.reportCode" />
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row>
+        <!-- <el-row>
           <el-col :xs="24"
                   :sm="20"
                   :md="6"
                   :lg="6"
                   :xl="6">
-            <!-- <el-form-item label="分组">
+            <el-form-item label="分组">
               <el-select v-model="dialogForm.reportGroup"
                          placeholder="请选择"
                          clearable>
@@ -194,9 +195,9 @@
                            :label="item.text"
                            :value="item.id" />
               </el-select>
-            </el-form-item> -->
+            </el-form-item>
           </el-col>
-        </el-row>
+        </el-row> -->
         <el-col :span="24">
           <el-form-item label="备注">
             <el-input v-model="dialogForm.reportDesc"
