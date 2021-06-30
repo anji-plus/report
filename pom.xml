@@ -23,9 +23,9 @@
     <properties>
         <gaea.version>6.0.0-SNAPSHOT</gaea.version>
         <gaea.security.version>1.0.0-SNAPSHOT</gaea.security.version>
-        <gaea.export.version>1.0.0-SNAPSHOT</gaea.export.version>
+        <gaea.export.version>1.0.0.RELEASE</gaea.export.version>
         <gaea.generator.version>1.0.0-SNAPSHOT</gaea.generator.version>
-        <gaea.log.version>1.0.0-SNAPSHOT</gaea.log.version>
+        <gaea.log.version>1.0.0.RELEASE</gaea.log.version>
         <maven.test.skip>true</maven.test.skip>
     </properties>
 

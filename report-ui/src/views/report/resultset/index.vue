@@ -14,12 +14,12 @@
                 :md="6"
                 :lg="6"
                 :xl="6">
-          <el-form-item label="数据集名称"
+          <el-form-item label="数据集编码"
                         label-width="120px">
-            <el-input v-model.trim="query.setName"
+            <el-input v-model.trim="query.setCode"
                       size="mini"
                       clearable
-                      placeholder="数据源名称"
+                      placeholder="数据集编码"
                       class="filter-item" />
           </el-form-item>
         </el-col>
@@ -28,12 +28,12 @@
                 :md="6"
                 :lg="6"
                 :xl="6">
-          <el-form-item label="数据集编码"
+          <el-form-item label="数据集名称"
                         label-width="120px">
-            <el-input v-model.trim="query.setCode"
+            <el-input v-model.trim="query.setName"
                       size="mini"
                       clearable
-                      placeholder="数据集编码"
+                      placeholder="数据源名称"
                       class="filter-item" />
           </el-form-item>
         </el-col>
@@ -97,16 +97,25 @@
           <el-button size="mini"
                      type="text"
                      @click="addOrEditDataSet(scope.row)">编辑</el-button>
-          <el-popconfirm :title="'确定删除' + scope.row.setName + '吗？'"
-                         @onConfirm="delect(scope.row)">
-            <el-button slot="reference"
-                       type="text">删除</el-button>
-          </el-popconfirm>
+          <!-- <el-popconfirm :title="'确定删除' + scope.row.setName + '吗？'"
+                         @onConfirm="delect(scope.row)"> -->
+          <el-button slot="reference"
+                     type="text"
+                     @click="delect(scope.row)">删除</el-button>
+          <!-- </el-popconfirm> -->
         </template>
       </el-table-column>
     </el-table>
     <!--分页组件-->
-    <!-- <pagination /> -->
+    <div class="block">
+      <el-pagination :total="totalCount"
+                     :page-sizes="[10, 20, 50, 100]"
+                     :page-size="params.pageSize"
+                     :current-page="params.pageNumber"
+                     layout="total, sizes, prev, pager, next, jumper"
+                     @size-change="handleSizeChange"
+                     @current-change="handleCurrentChange" />
+    </div>
 
     <!--表单组件-->
     <el-dialog :visible.sync="dialogFormVisible"
@@ -119,7 +128,7 @@
                :model="formData"
                :rules="formRules"
                size="small"
-               label-width="100px">
+               label-width="130px">
         <el-row :gutter="10">
           <el-col :xs="24"
                   :sm="20"
@@ -144,9 +153,9 @@
                   :md="8"
                   :lg="8"
                   :xl="8">
-            <el-form-item label="数据集名称"
-                          prop="setName">
-              <el-input v-model.trim="formData.setName"
+            <el-form-item label="数据集编码"
+                          prop="setCode">
+              <el-input v-model.trim="formData.setCode"
                         size="mini" />
             </el-form-item>
           </el-col>
@@ -155,9 +164,9 @@
                   :md="8"
                   :lg="8"
                   :xl="8">
-            <el-form-item label="数据集编码"
-                          prop="setCode">
-              <el-input v-model.trim="formData.setCode"
+            <el-form-item label="数据集名称"
+                          prop="setName">
+              <el-input v-model.trim="formData.setName"
                         size="mini" />
             </el-form-item>
           </el-col>
@@ -178,8 +187,7 @@
                   :lg="22"
                   :xl="22"
                   class="code-mirror-form">
-            <el-form-item label="查询SQL或请求体"
-                          label-width="140px">
+            <el-form-item label="查询SQL或请求体">
               <div class="codemirror">
                 <codemirror v-model.trim="formData.dynSentence"
                             :options="optionsSql"
@@ -498,6 +506,8 @@ export default {
         }`,
       itemFilterScriptId: '',
       title: '自定义高级规则',
+      totalCount: 0,
+      totalPage: 0,
       params: {
         pageNumber: 1,
         pageSize: 10,
@@ -570,24 +580,30 @@ export default {
     },
     async queryByPage () {
       let params = {
-        page: 0,
-        size: 10,
+        page: this.params.pageNumber,
+        size: this.params.pageSize,
         sort: "update_time",
         order: "DESC",
-        pageNumber: 1,
-        pageSize: 10
+        pageNumber: this.params.pageNumber,
+        pageSize: this.params.pageSize
       }
       const res = await dataSetPageList(params)
       if (res.code != '200') return
       this.listLoading = true
       this.data = res.data.records
-
       this.totalCount = res.data.total
       this.totalPage = res.data.pages
       this.listLoading = false
     },
 
-
+    handleSizeChange (val) {
+      this.params.pageSize = val
+      this.queryByPage()
+    },
+    handleCurrentChange (val) {
+      this.params.pageNumber = val
+      this.queryByPage()
+    },
 
     onJsonChange (value) { },
     onJsonSave (value) { },
@@ -599,10 +615,29 @@ export default {
       this.caseResultTitle = item.setName
       this.caseResultContent = JSON.parse(item.caseResult)
     },
-    async delect (row) {
-      this.visible = false
-      const { code, data } = await deleteDataSet(row)
-      if (code != '200') return
+    delect (row) {
+      this.$confirm('确定删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+        .then(async () => {
+          this.$emit('deletelayer')
+          this.visible = false
+          const { code, data } = await deleteDataSet(row)
+          if (code != '200') return
+          this.queryByPage()
+          this.$message({
+            type: 'success',
+            message: '删除成功!',
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除',
+          })
+        })
     },
     // 编辑数据集,获取单条数据详情
     addOrEditDataSet (row) {
@@ -886,9 +921,11 @@ export default {
             if (this.dialogFormVisibleTitle === '新增数据集') {
               const { code } = await addDataSet(this.formData)
               if (code != '200') return
+              this.queryByPage()
             } else {
               const { code } = await editDataSet(this.formData)
               if (code != '200') return
+              this.queryByPage()
             }
             this.dialogFormVisible = false
           } else {

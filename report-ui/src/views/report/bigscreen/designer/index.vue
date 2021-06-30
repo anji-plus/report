@@ -59,21 +59,15 @@
                 <li>
                   <div><i class="el-icon-full-screen mr10"></i>边框 <i class="el-icon-arrow-right ml20"></i></div>
                   <ul class="three-level">
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
+                    <li><a href="#">边框1</a></li>
+                    <li><a href="#">边框2</a></li>
+                    <li><a href="#">边框3</a></li>
                   </ul>
                 </li>
                 <li>
                   <div><i class="el-icon-magic-stick mr10"></i>装饰<i class="el-icon-arrow-right ml20"></i></div>
                   <ul class="three-level">
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
-                    <li><a href="#">三级菜单项</a></li>
+                    <li><a href="#">装饰1</a></li>
                   </ul>
                 </li>
               </ul>
@@ -848,73 +842,93 @@ li {
   padding: 0;
 }
 .nav {
+  width: 40px;
+  padding: 0;
+  list-style: none;
+  /* overflow: hidden; */
 }
-.nav > li {
-  display: inline-block;
+.nav {
+  zoom: 1;
+}
+.nav:before,
+.nav:after {
+  content: "";
+  display: table;
+}
+.nav:after {
+  clear: both;
+}
+.nav li {
+  width: 40px;
+  text-align: center;
   position: relative;
 }
-.nav > li > a {
+.nav li a {
+  float: left;
+  padding: 12px 30px;
+  color: #999;
+  font: bold 12px;
   text-decoration: none;
 }
-.nav > li:hover > a {
-  color: rgb(0, 136, 214);
+.nav li:hover {
+  color: #6dc5ff;
 }
-.nav a {
-  color: #cde8ff;
-  display: block;
-  text-decoration: none;
-}
-
-.nav ul {
-  display: none;
-  background: #00113a;
+.nav li ul {
+  visibility: hidden;
   position: absolute;
-  z-index: 10000;
+  z-index: 1000;
+  list-style: none;
+  top: 38px;
+  left: 0;
+  padding: 0;
+  background-color: #263445;
+  opacity: 0;
+  _margin: 0;
   width: 120px;
-  margin-left: -20px;
+  transition: all 0.2s ease-in-out;
+}
+.nav li:hover > ul {
+  opacity: 1;
+  visibility: visible;
+  margin: 0;
 }
 .nav ul li {
-  position: relative;
+  float: left;
+  display: block;
+  border: 0;
+  width: 100%;
   font-size: 12px;
 }
-.nav > li:hover > ul {
+.nav ul a {
+  padding: 10px;
+  width: 100%;
   display: block;
+  float: none;
+  height: 120px;
+  border: 1px solid #30445c;
+  transition: all 0.2s ease-in-out;
 }
-.nav > li > .three-level > li > a {
-  width: 10em;
-  padding-left: 1em;
-  padding-right: 1em;
-  background-color: #0f2030;
+.nav ul a:hover {
+  border: 1px solid #3c5e88;
 }
-// .nav li .three-level li {
-//   display: none;
-// }
-.nav > li > ul > li:hover > a {
-  display: block;
-  background-color: #182e42;
-  color: #fff;
+.nav ul li:first-child > a:hover:before {
+  border-bottom-color: #04acec;
 }
-.nav > li > ul > li > ul {
-  left: 100%;
+.nav ul ul {
   top: 0;
+  left: 120px;
+  width: 400px;
+  height: 300px;
+  overflow: auto;
+  padding: 10px;
+  box-shadow: -1px 0 0 #30445c;
+  _margin: 0;
 }
-.nav > li:last-child > ul > li > ul {
-  left: -100%;
-  top: 0;
-}
-.nav > li > ul > li:hover > ul {
+.nav ul ul li {
+  width: 120px;
+  height: 120px;
+  margin-right: 3px;
   display: block;
-}
-.nav > li > ul > li > ul > li > a {
-  padding-top: 0.4em;
-  padding-bottom: 0.4em;
-  width: 10em;
-  padding-left: 1em;
-  padding-right: 1em;
-  background-color: rgb(50, 50, 50);
-}
-.nav > li > ul > li > ul > li:hover > a {
-  background-color: rgb(255, 255, 0);
-  color: rgb(0, 0, 0);
+  float: left;
 }
 </style>
