@@ -44,6 +44,21 @@ const screenConfig = {
         placeholder: '',
         value: '#000',
       },
+      {
+        type: 'el-select',
+        label: '刷新频率',
+        name: 'fontWeight',
+        required: false,
+        placeholder: '',
+        selectOptions: [
+          { code: '10', name: '10秒' },
+          { code: '30', name: '30秒' },
+          { code: '60', name: '1分' },
+          { code: '120', name: '2分' },
+          { code: '300', name: '5分' }
+        ],
+        value: '300'
+      },
       // {
       //   type: 'el-upload-picture',
       //   label: '背景图片',
