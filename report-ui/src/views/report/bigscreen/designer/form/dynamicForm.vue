@@ -10,7 +10,11 @@
       <template v-for="(item, index) in options">
         <div v-if="isShowForm(item, '[object Object]')" :key="index">
           <el-form-item
-            v-if="inputShow[item.name] && item.type != 'dycustComponents'"
+            v-if="
+              inputShow[item.name] &&
+                item.type != 'dycustComponents' &&
+                item.type != 'dynamic-add-table'
+            "
             :label="item.label"
             :prop="item.name"
             :required="item.required"
@@ -145,6 +149,11 @@
             :chart-type="item.chartType"
             @change="changed($event, item.name)"
           />
+          <dynamic-add-table
+            v-if="item.type == 'dynamic-add-table' && inputShow[item.name]"
+            v-model="formData[item.name]"
+            @change="changed($event, item.name)"
+          />
         </div>
         <div v-else-if="isShowForm(item, '[object Array]')" :key="'a-' + index">
           <el-collapse accordion>
@@ -274,13 +283,15 @@ import "codemirror/mode/sql/sql.js";
 import "codemirror/mode/shell/shell.js";
 import dynamicComponents from "./dynamicComponents.vue";
 import customColorComponents from "./customColorComponents";
+import dynamicAddTable from "./dynamicAddTable.vue";
 export default {
   name: "DynamicForm",
   components: {
     ColorPicker,
     vueJsonEditor,
     dynamicComponents,
-    customColorComponents
+    customColorComponents,
+    dynamicAddTable
   },
   model: {
     prop: "value",
