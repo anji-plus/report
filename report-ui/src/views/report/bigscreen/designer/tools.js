@@ -848,12 +848,17 @@ const widgetTools = [
       ],
     },
   },
-  // {
-  //   code: 'widget-table',
-  //   type: 'html',
-  //   label: '表格',
-  //   icon: 'table',
-  // },
+  {
+    code: 'widget-table',
+    type: 'html',
+    label: '表格',
+    icon: 'iconbiaoge',
+    options: {
+      setup: [],
+      data: [],
+      position: []
+    }
+  },
   {
     code: 'widget-iframe',
     type: 'html',
@@ -4559,12 +4564,59 @@ const widgetTools = [
       ],
     },
   },
-  // {
-  //   code: 'widget-china-map',
-  //   type: 'chart',
-  //   label: '中国地图',
-  //   icon: 'chinaMapChart',
-  // },
+  {
+    code: 'widget-map',
+    type: 'chart',
+    label: '中国地图',
+    icon: 'chinaMapChart',
+    options: {
+      setup: [
+        {
+          type: 'el-input-text',
+          label: '图层名称',
+          name: 'layerName',
+          required: false,
+          placeholder: '',
+          value: '迁徙图',
+        },
+      ],
+      data: [],
+      position: [
+        {
+          type: 'el-input-number',
+          label: '左边距',
+          name: 'left',
+          required: false,
+          placeholder: 'px',
+          value: 0,
+        },
+        {
+          type: 'el-input-number',
+          label: '上边距',
+          name: 'top',
+          required: false,
+          placeholder: 'px',
+          value: 0,
+        },
+        {
+          type: 'el-input-number',
+          label: '宽度',
+          name: 'width',
+          required: false,
+          placeholder: '该容器在1920px大屏中的宽度',
+          value: 600,
+        },
+        {
+          type: 'el-input-number',
+          label: '高度',
+          name: 'height',
+          required: false,
+          placeholder: '该容器在1080px大屏中的高度',
+          value: 400,
+        },
+      ]
+    }
+  },
   {
     code: 'WidgetPieNightingaleRoseArea',
     type: 'chart',

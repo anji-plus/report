@@ -11,25 +11,26 @@
 </template>
 
 <script>
-import widgetHref from './widgetHref.vue'
-import widgetText from './widgetText.vue'
-import WidgetMarquee from './widgetMarquee.vue'
-import widgetTime from './widgetTime.vue'
-import widgetImage from './widgetImage.vue'
-import widgetSlider from './widgetSlider.vue'
-import widgetVideo from './widgetVideo.vue'
-import WidgetIframe from './widgetIframe.vue'
-import widgetBarchart from './widgetBarchart.vue'
-import widgetLinechart from './widgetLinechart.vue'
-import widgetBarlinechart from './widgetBarlinechart'
+import widgetHref from "./widgetHref.vue";
+import widgetText from "./widgetText.vue";
+import WidgetMarquee from "./widgetMarquee.vue";
+import widgetTime from "./widgetTime.vue";
+import widgetImage from "./widgetImage.vue";
+import widgetSlider from "./widgetSlider.vue";
+import widgetVideo from "./widgetVideo.vue";
+import WidgetIframe from "./widgetIframe.vue";
+import widgetBarchart from "./widgetBarchart.vue";
+import widgetLinechart from "./widgetLinechart.vue";
+import widgetBarlinechart from "./widgetBarlinechart";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
-import WidgetPiechart from './widgetPiechart.vue'
-import WidgetHollowPiechart from './widgetHollowPiechart.vue'
-import WidgetFunnel from './widgetFunnel.vue'
-import WidgetGauge from './widgetGauge.vue'
+import WidgetPiechart from "./widgetPiechart.vue";
+import WidgetHollowPiechart from "./widgetHollowPiechart.vue";
+import WidgetFunnel from "./widgetFunnel.vue";
+import WidgetGauge from "./widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRoseArea";
+import widgetTable from "./widgetTable.vue";
 export default {
-  name: 'WidgetTemp',
+  name: "WidgetTemp",
   components: {
     widgetHref,
     widgetText,
@@ -47,25 +48,26 @@ export default {
     WidgetHollowPiechart,
     WidgetFunnel,
     WidgetGauge,
-    WidgetPieNightingaleRoseArea
+    WidgetPieNightingaleRoseArea,
+    widgetTable
   },
   model: {
-    prop: 'value',
-    event: 'input',
+    prop: "value",
+    event: "input"
   },
   props: {
     type: String,
     value: {
       type: [Object],
-      default: () => {},
-    },
+      default: () => {}
+    }
   },
   data() {
-    return {}
+    return {};
   },
   mounted() {},
-  methods: {},
-}
+  methods: {}
+};
 </script>
 
 <style scoped lang="scss"></style>
