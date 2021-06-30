@@ -1,6 +1,6 @@
 module.exports = {
-    base: '/doc/',
-    title: '大屏设计',
+    base: '/report-doc/',
+    title: 'AJ-Report',
     description: '使用拖拽快速生成动态大屏报表',
     dest: 'dist',
     lastUpdated: 'Last Updated',

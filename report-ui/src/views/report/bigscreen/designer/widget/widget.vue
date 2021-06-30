@@ -37,6 +37,8 @@ import WidgetHollowPiechart from "./widgetHollowPiechart.vue";
 import WidgetFunnel from "./widgetFunnel.vue";
 import WidgetGauge from "./widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRoseArea";
+import widgetTable from "./widgetTable.vue";
+import widgetMap from "./widgetMap.vue";
 export default {
   name: "Widget",
   components: {
@@ -56,7 +58,9 @@ export default {
     WidgetHollowPiechart,
     WidgetFunnel,
     WidgetGauge,
-    WidgetPieNightingaleRoseArea
+    WidgetPieNightingaleRoseArea,
+    widgetTable,
+    widgetMap
   },
   model: {
     prop: "value",
@@ -101,8 +105,7 @@ export default {
       return this.value.position.zIndex || 1;
     }
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     handleFocus({ index, left, top, width, height }) {},
     handleBlur({ index, left, top, width, height }) {
