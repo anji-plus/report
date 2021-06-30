@@ -10,6 +10,7 @@
       <el-color-picker
         v-model="colorValue"
         :predefine="predefineColors"
+        show-alpha
         size="mini"
         @change="changeColor"
       />
