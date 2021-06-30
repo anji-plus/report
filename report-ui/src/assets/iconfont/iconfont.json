@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "22378736",
+      "name": "中国地图",
+      "font_class": "zhongguoditu",
+      "unicode": "e738",
+      "unicode_decimal": 59192
+    },
+    {
       "icon_id": "21338828",
       "name": "表格",
       "font_class": "biaoge",
