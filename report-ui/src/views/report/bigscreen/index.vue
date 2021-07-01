@@ -11,21 +11,21 @@
         <div class="bg">
           <div class="rgba" />
           <div class="content">
-            <header>{{ item.name }}</header>
+            <header>{{ item.reportName }}</header>
             <footer>
-              {{ item.time }}
+              {{ item.updateTime }}
               <div class="operation">
                 <el-button
                   icon="el-icon-view"
                   class="view"
                   type="text"
-                  @click="viewDesign(item.id)"
+                  @click="viewDesign(item)"
                 />
                 <el-button
                   icon="el-icon-edit"
                   class="edit"
                   type="text"
-                  @click="openDesign(item.id)"
+                  @click="openDesign(item)"
                 />
               </div>
             </footer>
@@ -33,59 +33,71 @@
         </div>
       </el-col>
     </el-row>
+    <div class="block">
+      <el-pagination :total="totalCount"
+                     :page-sizes="[10, 20, 50, 100]"
+                     :page-size="params.pageSize"
+                     :current-page="params.pageNumber"
+                     layout="total, sizes, prev, pager, next, jumper"
+                     @size-change="handleSizeChange"
+                     @current-change="handleCurrentChange" />
+    </div>
   </div>
 </template>
 
 <script>
+import { reportPageList } from '@/api/report'
 export default {
   name: "Login",
   components: {},
   data() {
     return {
-      list: [
-        {
-          id: 1,
-          name: "货物在途大屏",
-          time: "2021-3-19 17:54:00"
-        },
-        {
-          id: 2,
-          name: "仓库库容大屏",
-          time: "2021-3-19 17:54:00"
-        },
-        {
-          id: 3,
-          name: "运输时效大屏",
-          time: "2021-3-19 17:54:00"
-        },
-        {
-          id: 4,
-          name: "运输时效大屏1",
-          time: "2021-3-19 17:54:00"
-        },
-        {
-          id: 5,
-          name: "运输时效大屏2",
-          time: "2021-3-19 17:54:00"
-        }
-      ]
+      list: [],
+      totalCount: 0,
+      totalPage: 0,
+      params: {
+        reportCode: '',
+        reportName: '',
+        // reportType: '',
+        pageNumber: 1,
+        pageSize: 8,
+        order: 'DESC',
+        sort: 'update_time',
+      },
     };
   },
   mounted() {},
+  created() {
+    this.queryByPage()
+  },
   methods: {
-    openDesign(reportId) {
-      var routeUrl = this.$router.resolve({
-        path: "/bigscreen/designer",
-        query: { reportId: reportId }
-      });
-      window.open(routeUrl.href, "_blank");
+    async queryByPage () {
+      const res = await reportPageList(this.params)
+      if (res.code != '200') return
+      this.listLoading = true
+      this.list = res.data.records
+      this.list.forEach((value) => {
+        value['reportNameCode'] = value.reportName + '[' + value.reportCode + ']'
+      })
+      this.totalCount = res.data.total
+      this.totalPage = res.data.pages
+      this.listLoading = false
     },
-    viewDesign(reportId) {
-      var routeUrl = this.$router.resolve({
-        path: "/bigscreen/viewer",
-        query: { reportId: reportId }
-      });
-      window.open(routeUrl.href, "_blank");
+    handleSizeChange (val) {
+      this.params.pageSize = val
+      this.queryByPage()
+    },
+    handleCurrentChange (val) {
+      this.params.pageNumber = val
+      this.queryByPage()
+    },
+    openDesign(val) {
+      var routeUrl = this.$router.resolve({ path: '/bigscreen/designer', query: { reportCode: val.reportCode, reportId: val.id, accessKey: val.accessKey } })
+      window.open(routeUrl.href, '_blank')
+    },
+    viewDesign(val) {
+      var routeUrl = this.$router.resolve({ path: '/bigscreen/viewer', query: { reportCode: val.reportCode } })
+      window.open(routeUrl.href, '_blank')
     }
   }
 };
