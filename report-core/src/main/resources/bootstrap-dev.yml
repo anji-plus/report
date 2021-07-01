@@ -1,5 +1,5 @@
 server:
-  port:
+  port: 9095
   servlet:
     encoding:
       charset: UTF-8
@@ -93,5 +93,5 @@ file:
   dist-path: /app/disk/upload/
   white-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi
   excelSuffix: .xlsx|.xls|.csv
-  downloadPath: http://10.108.26.197/business/file/download
+  downloadPath: http://10.108.26.197:9095/file/download
 
