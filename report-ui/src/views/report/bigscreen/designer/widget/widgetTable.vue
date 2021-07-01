@@ -15,6 +15,12 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      list: [{ name: 123 }]
+    };
+  }
+};
 </script>
 <style lang="scss" scoped></style>
