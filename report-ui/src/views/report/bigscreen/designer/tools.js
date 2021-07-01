@@ -666,12 +666,12 @@ const widgetTools = [
           value: '0'
         },
         {
-          type: 'el-input-text',
+          type: 'custom-upload',
           label: '图片地址',
           name: 'imageAdress',
           required: false,
           placeholder: '',
-          value: 'http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095508.jpg',
+          value: [{url: 'http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095508.jpg'}],
         },
         {
           type: 'vue-color',

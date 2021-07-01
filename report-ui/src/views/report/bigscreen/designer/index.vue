@@ -6,21 +6,23 @@
  !-->
 <template>
   <div class="layout">
-    <div v-if="toolIsShow"
-         class="layout-left"
-         :style="{ width: widthLeftForTools + 'px' }">
-      <el-tabs type="border-card"
-               :stretch="true">
+    <div
+      v-if="toolIsShow"
+      class="layout-left"
+      :style="{ width: widthLeftForTools + 'px' }"
+    >
+      <el-tabs type="border-card" :stretch="true">
         <!-- 左侧组件栏-->
         <el-tab-pane label="工具栏">
           <!-- <el-divider content-position="center">html</el-divider>-->
-          <draggable v-for="widget in widgetTools"
-                     :key="widget.code"
-                     @end="evt => widgetOnDragged(evt, widget.code)">
+          <draggable
+            v-for="widget in widgetTools"
+            :key="widget.code"
+            @end="evt => widgetOnDragged(evt, widget.code)"
+          >
             <div class="tools-item">
               <span class="tools-item-icon">
-                <i class="iconfont"
-                   :class="widget.icon"></i>
+                <i class="iconfont" :class="widget.icon"></i>
               </span>
               <span class="tools-item-text">{{ widget.label }}</span>
             </div>
@@ -28,14 +30,15 @@
         </el-tab-pane>
         <!-- 左侧图层-->
         <el-tab-pane label="图层">
-          <div v-for="(item, index) in layerWidget"
-               :key="index"
-               class="tools-item"
-               :class="widgetIndex == index ? 'is-active' : ''"
-               @click="layerClick(index)">
+          <div
+            v-for="(item, index) in layerWidget"
+            :key="index"
+            class="tools-item"
+            :class="widgetIndex == index ? 'is-active' : ''"
+            @click="layerClick(index)"
+          >
             <span class="tools-item-icon">
-              <i class="iconfont"
-                 :class="item.icon"></i>
+              <i class="iconfont" :class="item.icon"></i>
             </span>
             <span class="tools-item-text">{{ item.label }}</span>
           </div>
@@ -43,40 +46,49 @@
       </el-tabs>
     </div>
 
-    <div class="layout-left-fold"
-         :style="{ width: widthLeftForToolsHideButton + 'px' }"
-         @click="toolIsShow = !toolIsShow">
+    <div
+      class="layout-left-fold"
+      :style="{ width: widthLeftForToolsHideButton + 'px' }"
+      @click="toolIsShow = !toolIsShow"
+    >
       <i class="el-icon-arrow-right" />
     </div>
 
-    <div class="layout-middle"
-         :style="{ width: middleWidth + 'px', height: middleHeight + 'px' }">
+    <div
+      class="layout-middle"
+      :style="{ width: middleWidth + 'px', height: middleHeight + 'px' }"
+    >
       <div class="top-button">
-
         <span class="btn">
-          <el-tooltip class="item"
-                      effect="dark"
-                      content="保存"
-                      placement="bottom">
-            <i class="iconfont iconsave"
-               @click="saveData"></i>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="保存"
+            placement="bottom"
+          >
+            <i class="iconfont iconsave" @click="saveData"></i>
           </el-tooltip>
         </span>
         <span class="btn">
-          <el-tooltip class="item"
-                      effect="dark"
-                      content="预览"
-                      placement="bottom">
-            <i class="iconfont iconyulan"
-               @click="viewScreen"></i>
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="预览"
+            placement="bottom"
+          >
+            <i class="iconfont iconyulan" @click="viewScreen"></i>
           </el-tooltip>
         </span>
         <span class="btn border-left">
           <ul class="nav">
-            <li><i class="el-icon-brush"></i><i class="el-icon-arrow-down"></i>
+            <li>
+              <i class="el-icon-brush"></i><i class="el-icon-arrow-down"></i>
               <ul>
                 <li>
-                  <div><i class="el-icon-full-screen mr10"></i>边框 <i class="el-icon-arrow-right ml20"></i></div>
+                  <div>
+                    <i class="el-icon-full-screen mr10"></i>边框
+                    <i class="el-icon-arrow-right ml20"></i>
+                  </div>
                   <ul class="three-level">
                     <li><a href="#">边框1</a></li>
                     <li><a href="#">边框2</a></li>
@@ -84,7 +96,11 @@
                   </ul>
                 </li>
                 <li>
-                  <div><i class="el-icon-magic-stick mr10"></i>装饰<i class="el-icon-arrow-right ml20"></i></div>
+                  <div>
+                    <i class="el-icon-magic-stick mr10"></i>装饰<i
+                      class="el-icon-arrow-right ml20"
+                    ></i>
+                  </div>
                   <ul class="three-level">
                     <li><a href="#">装饰1</a></li>
                   </ul>
@@ -94,22 +110,27 @@
           </ul>
         </span>
       </div>
-      <div class="workbench-container"
-           :style="{
+      <div
+        class="workbench-container"
+        :style="{
           width: bigscreenWidthInWorkbench + 'px',
           height: bigscreenHeightInWorkbench + 'px'
         }"
-           @mousedown="handleMouseDown">
-        <vue-ruler-tool v-model="dashboard.presetLine"
-                        class="vueRuler"
-                        :step-length="50"
-                        :parent="true"
-                        :position="'relative'"
-                        :is-scale-revise="true"
-                        :visible.sync="dashboard.presetLineVisible">
-          <div id="workbench"
-               class="workbench"
-               :style="{
+        @mousedown="handleMouseDown"
+      >
+        <vue-ruler-tool
+          v-model="dashboard.presetLine"
+          class="vueRuler"
+          :step-length="50"
+          :parent="true"
+          :position="'relative'"
+          :is-scale-revise="true"
+          :visible.sync="dashboard.presetLineVisible"
+        >
+          <div
+            id="workbench"
+            class="workbench"
+            :style="{
               transform: workbenchTransform,
               width: bigscreenWidth + 'px',
               height: bigscreenHeight + 'px',
@@ -122,56 +143,70 @@
               'background-origin': 'initial',
               'background-clip': 'initial'
             }"
-               @click.self="setOptionsOnClickScreen">
-            <widget ref="widgets"
-                    v-for="(widget, index) in widgets"
-                    :key="index"
-                    v-model="widget.value"
-                    :index="index"
-                    :type="widget.type"
-                    :bigscreen="{ bigscreenWidth, bigscreenHeight }"
-                    @onActivated="setOptionsOnClickWidget"
-                    @contextmenu.prevent.native="rightClick($event, index)"
-                    @mousedown.prevent.native="widgetsClick(index)" />
+            @click.self="setOptionsOnClickScreen"
+          >
+            <widget
+              ref="widgets"
+              v-for="(widget, index) in widgets"
+              :key="index"
+              v-model="widget.value"
+              :index="index"
+              :type="widget.type"
+              :bigscreen="{ bigscreenWidth, bigscreenHeight }"
+              @onActivated="setOptionsOnClickWidget"
+              @contextmenu.prevent.native="rightClick($event, index)"
+              @mousedown.prevent.native="widgetsClick(index)"
+            />
           </div>
         </vue-ruler-tool>
       </div>
     </div>
 
-    <div class="layout-right"
-         :style="{ width: widthLeftForOptions + 'px' }">
-      <el-tabs v-model="activeName"
-               type="border-card"
-               :stretch="true">
-        <el-tab-pane v-if="
+    <div class="layout-right" :style="{ width: widthLeftForOptions + 'px' }">
+      <el-tabs v-model="activeName" type="border-card" :stretch="true">
+        <el-tab-pane
+          v-if="
             isNotNull(widgetOptions.setup) || isNotNull(widgetOptions.collapse)
           "
-                     name="first"
-                     label="配置">
-          <dynamicForm ref="formData"
-                       :options="widgetOptions.setup"
-                       @onChanged="val => widgetValueChanged('setup', val)" />
+          name="first"
+          label="配置"
+        >
+          <dynamicForm
+            ref="formData"
+            :options="widgetOptions.setup"
+            @onChanged="val => widgetValueChanged('setup', val)"
+          />
         </el-tab-pane>
-        <el-tab-pane v-if="isNotNull(widgetOptions.data)"
-                     name="second"
-                     label="数据">
-          <dynamicForm ref="formData"
-                       :options="widgetOptions.data"
-                       @onChanged="val => widgetValueChanged('data', val)" />
+        <el-tab-pane
+          v-if="isNotNull(widgetOptions.data)"
+          name="second"
+          label="数据"
+        >
+          <dynamicForm
+            ref="formData"
+            :options="widgetOptions.data"
+            @onChanged="val => widgetValueChanged('data', val)"
+          />
         </el-tab-pane>
-        <el-tab-pane v-if="isNotNull(widgetOptions.position)"
-                     name="third"
-                     label="坐标">
-          <dynamicForm ref="formData"
-                       :options="widgetOptions.position"
-                       @onChanged="val => widgetValueChanged('position', val)" />
+        <el-tab-pane
+          v-if="isNotNull(widgetOptions.position)"
+          name="third"
+          label="坐标"
+        >
+          <dynamicForm
+            ref="formData"
+            :options="widgetOptions.position"
+            @onChanged="val => widgetValueChanged('position', val)"
+          />
         </el-tab-pane>
       </el-tabs>
     </div>
 
-    <content-menu :visible.sync="visibleContentMenu"
-                  :style-obj="styleObj"
-                  @deletelayer="deletelayer" />
+    <content-menu
+      :visible.sync="visibleContentMenu"
+      :style-obj="styleObj"
+      @deletelayer="deletelayer"
+    />
   </div>
 </template>
 
@@ -192,7 +227,7 @@ export default {
     dynamicForm,
     contentMenu
   },
-  data () {
+  data() {
     return {
       layerWidget: [],
       widgetTools: widgetTools, // 左侧工具栏的组件图标，将js变量加入到当前作用域
@@ -259,7 +294,7 @@ export default {
   },
   computed: {
     // 左侧折叠切换时，动态计算中间区的宽度
-    middleWidth () {
+    middleWidth() {
       var widthLeftAndRight = 0;
       if (this.toolIsShow) {
         widthLeftAndRight += this.widthLeftForTools; // 左侧工具栏宽度
@@ -270,36 +305,37 @@ export default {
       var middleWidth = this.bodyWidth - widthLeftAndRight;
       return middleWidth;
     },
-    middleHeight () {
+    middleHeight() {
       return this.bodyHeight;
     },
     // 设计台按大屏的缩放比例
-    bigscreenScaleInWorkbench () {
+    bigscreenScaleInWorkbench() {
       var widthScale = this.middleWidth / this.bigscreenWidth;
       var heightScale = this.middleHeight / this.bigscreenHeight;
       return Math.min(widthScale, heightScale);
     },
-    workbenchTransform () {
-      return `scale(${this.bigscreenScaleInWorkbench}, ${this.bigscreenScaleInWorkbench
-        })`;
+    workbenchTransform() {
+      return `scale(${this.bigscreenScaleInWorkbench}, ${
+        this.bigscreenScaleInWorkbench
+      })`;
     },
     // 大屏在设计模式的大小
-    bigscreenWidthInWorkbench () {
+    bigscreenWidthInWorkbench() {
       return this.getPXUnderScale(this.bigscreenWidth);
     },
-    bigscreenHeightInWorkbench () {
+    bigscreenHeightInWorkbench() {
       return this.getPXUnderScale(this.bigscreenHeight);
     }
   },
   watch: {
     widgets: {
-      handler (val) {
+      handler(val) {
         this.handlerLayerWidget(val);
       },
       deep: true
     }
   },
-  mounted () {
+  mounted() {
     // 一进入时，加载屏幕配置属性
     this.setOptionsOnClickScreen();
 
@@ -308,7 +344,7 @@ export default {
     this.widgets = [];
   },
   methods: {
-    handlerLayerWidget (val) {
+    handlerLayerWidget(val) {
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
         const obj = {};
@@ -323,7 +359,7 @@ export default {
       }
       this.layerWidget = layerWidgetArr;
     },
-    async initEchartData () {
+    async initEchartData() {
       const reportCode = this.$route.query.reportCode;
       const { code, data } = await detailDashboard(reportCode);
       if (code != 200) return;
@@ -332,7 +368,7 @@ export default {
       this.widgets = processData;
       this.dashboard = screenData;
     },
-    handleBigScreen (data) {
+    handleBigScreen(data) {
       const optionScreen = this.deepClone(getToolByCode("screen").options);
       const setup = optionScreen.setup;
       for (const key in data) {
@@ -350,7 +386,7 @@ export default {
         width: data.width
       };
     },
-    handleInitEchartsData (data) {
+    handleInitEchartsData(data) {
       const widgets = data.dashboard.widgets;
       const widgetsData = [];
       for (let i = 0; i < widgets.length; i++) {
@@ -370,7 +406,7 @@ export default {
       }
       return widgetsData;
     },
-    handleOptionsData (data, option) {
+    handleOptionsData(data, option) {
       for (const key in data.setup) {
         for (let i = 0; i < option.setup.length; i++) {
           let item = option.setup[i];
@@ -409,7 +445,7 @@ export default {
       return option;
     },
     // 保存数据
-    async saveData () {
+    async saveData() {
       if (!this.widgets || this.widgets.length == 0) {
         this.$message.error("请添加组件");
         return;
@@ -431,7 +467,7 @@ export default {
       }
     },
     // 预览
-    viewScreen () {
+    viewScreen() {
       var routeUrl = this.$router.resolve({
         path: "/bigscreen/viewer",
         query: { reportCode: this.$route.query.reportCode }
@@ -439,12 +475,12 @@ export default {
       window.open(routeUrl.href, "_blank");
     },
     // 在缩放模式下的大小
-    getPXUnderScale (px) {
+    getPXUnderScale(px) {
       return this.bigscreenScaleInWorkbench * px;
     },
 
     // 拖动一个组件放到工作区中去，在拖动结束时，放到工作区对应的坐标点上去
-    widgetOnDragged (evt, widgetCode) {
+    widgetOnDragged(evt, widgetCode) {
       var widgetType = widgetCode;
 
       // 获取结束坐标和列名
@@ -485,7 +521,7 @@ export default {
     },
 
     // 对组件默认值处理
-    handleDefaultValue (widgetJson) {
+    handleDefaultValue(widgetJson) {
       for (const key in widgetJson) {
         if (key == "options") {
           // collapse、data、position、setup
@@ -525,12 +561,12 @@ export default {
       }
       return widgetJson;
     },
-    layerClick (index) {
+    layerClick(index) {
       this.widgetIndex = index;
       this.widgetsClick(index);
     },
     // 如果是点击大屏设计器中的底层，加载大屏底层属性
-    setOptionsOnClickScreen () {
+    setOptionsOnClickScreen() {
       this.screenCode = "screen";
       // 选中不同的组件 右侧都显示第一栏
       this.activeName = "first";
@@ -538,7 +574,7 @@ export default {
     },
 
     // 如果是点击某个组件，获取该组件的配置项
-    setOptionsOnClickWidget (obj) {
+    setOptionsOnClickWidget(obj) {
       this.screenCode = "";
       if (typeof obj == "number") {
         this.widgetOptions = this.deepClone(this.widgets[obj]["options"]);
@@ -558,7 +594,7 @@ export default {
       });
       this.widgetOptions = this.deepClone(this.widgets[obj.index]["options"]);
     },
-    widgetsClick (index) {
+    widgetsClick(index) {
       const draggableArr = this.$refs.widgets;
       for (let i = 0; i < draggableArr.length; i++) {
         if (i == index) {
@@ -569,14 +605,14 @@ export default {
       }
       this.setOptionsOnClickWidget(index);
     },
-    handleMouseDown () {
+    handleMouseDown() {
       const draggableArr = this.$refs.widgets;
       for (let i = 0; i < draggableArr.length; i++) {
         this.$refs.widgets[i].$refs.draggable.setActive(false);
       }
     },
     // 将当前选中的组件，右侧属性值更新
-    widgetValueChanged (key, val) {
+    widgetValueChanged(key, val) {
       if (this.screenCode == "screen") {
         this.dashboard = this.deepClone(val);
       } else {
@@ -588,7 +624,7 @@ export default {
         }
       }
     },
-    rightClick (event, index) {
+    rightClick(event, index) {
       this.rightClickIndex = index;
       const left = event.clientX;
       const top = event.clientY;
@@ -602,10 +638,10 @@ export default {
       this.visibleContentMenu = true;
       return false;
     },
-    deletelayer () {
+    deletelayer() {
       this.widgets.splice(this.rightClickIndex, 1);
     },
-    setDefaultValue (options, val) {
+    setDefaultValue(options, val) {
       for (let i = 0; i < options.length; i++) {
         if (Object.prototype.toString.call(options[i]) == "[object Object]") {
           for (const k in val) {

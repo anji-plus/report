@@ -61,12 +61,10 @@
               v-model="formData[item.name]"
               @change="val => changed(val, item.name)"
             />
-
-            <el-upload
-              v-if="item.type == 'el-upload-picture'"
-              size="mini"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              list-type="picture-card"
+            <customUpload
+              v-if="item.type == 'custom-upload'"
+              v-model="formData[item.name]"
+              @change="changed($event, item.name)"
             />
 
             <el-radio-group
@@ -284,6 +282,7 @@ import "codemirror/mode/shell/shell.js";
 import dynamicComponents from "./dynamicComponents.vue";
 import customColorComponents from "./customColorComponents";
 import dynamicAddTable from "./dynamicAddTable.vue";
+import customUpload from "./customUpload.vue";
 export default {
   name: "DynamicForm",
   components: {
@@ -291,7 +290,8 @@ export default {
     vueJsonEditor,
     dynamicComponents,
     customColorComponents,
-    dynamicAddTable
+    dynamicAddTable,
+    customUpload
   },
   model: {
     prop: "value",
