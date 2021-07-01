@@ -38,6 +38,7 @@ public class TokenFilter implements Filter {
 
         if (!uri.startsWith("/login")
                 && !uri.startsWith("/static")
+                && !uri.startsWith("/file/download/")
                 && !uri.contains("index.html")) {
 
             //获取token
