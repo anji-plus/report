@@ -14,7 +14,6 @@
     :index="index"
     @focus="handleFocus"
     @blur="handleBlur"
-    :z-index="index"
   >
     <component :is="type" :value="value" />
   </avue-draggable>

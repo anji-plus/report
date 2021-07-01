@@ -365,6 +365,8 @@ export default {
       if (code != 200) return;
       const processData = this.handleInitEchartsData(data);
       const screenData = this.handleBigScreen(data.dashboard);
+      console.log(screenData);
+      console.log(processData);
       this.widgets = processData;
       this.dashboard = screenData;
     },
@@ -395,7 +397,6 @@ export default {
         obj.value = {
           setup: widgets[i].value.setup,
           data: widgets[i].value.data,
-          collapse: widgets[i].value.collapse,
           position: widgets[i].value.position
         };
         const tool = this.deepClone(getToolByCode(widgets[i].type));

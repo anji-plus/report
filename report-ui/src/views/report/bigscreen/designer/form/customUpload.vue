@@ -34,11 +34,6 @@ export default {
       fileList: []
     };
   },
-  watch: {
-    value(val) {
-      console.log(val);
-    }
-  },
   created() {
     this.fileList = this.value;
   },

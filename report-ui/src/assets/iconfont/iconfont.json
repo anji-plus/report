@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "182207",
+      "name": "上",
+      "font_class": "jinlingyingcaiwangtubiao01",
+      "unicode": "e724",
+      "unicode_decimal": 59172
+    },
+    {
+      "icon_id": "2773923",
+      "name": "下",
+      "font_class": "left-copy",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "4653465",
+      "name": "复制",
+      "font_class": "fuzhi1",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
       "icon_id": "22378736",
       "name": "中国地图",
       "font_class": "zhongguoditu",
