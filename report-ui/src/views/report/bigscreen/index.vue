@@ -44,7 +44,7 @@
     <el-row :gutter="20">
       <el-col v-for="item in list" :key="item.id" :span="6">
         <div class="bg">
-          <img class="bg-img" src="../../../assets/images/charts.jpg" alt="" />
+          <img class="bg-img" :src="item.reportImage == null ? require('../../../assets/images/charts.jpg') : item.reportImage" alt="" />
           <div class="content">
             <header>{{ item.reportName }}</header>
             <footer>
@@ -90,6 +90,7 @@ export default {
   data() {
     return {
       list: [],
+      rules: {},
       totalCount: 0,
       totalPage: 0,
       params: {

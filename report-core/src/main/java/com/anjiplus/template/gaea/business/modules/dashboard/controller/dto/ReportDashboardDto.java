@@ -35,8 +35,6 @@ public class ReportDashboardDto extends GaeaBaseDTO implements Serializable {
     /** 背景图片 */
     private String backgroundImage;
 
-    private String previewImage;
-
     /** 工作台中的辅助线 */
     private String presetLine;
 
