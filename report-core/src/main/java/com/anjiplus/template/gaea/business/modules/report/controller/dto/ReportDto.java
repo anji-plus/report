@@ -41,4 +41,7 @@ public class ReportDto extends GaeaBaseDTO implements Serializable {
     /** 数据总计 */
     private long total;
 
+    /** 报表缩略图 */
+    private String reportImage;
+
 }

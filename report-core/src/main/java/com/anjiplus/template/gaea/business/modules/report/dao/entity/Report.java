@@ -33,6 +33,9 @@ public class Report extends GaeaBaseEntity {
     @ApiModelProperty(value = "报表类型")
     private String reportType;
 
+    @ApiModelProperty(value = "报表缩略图")
+    private String reportImage;
+
     @ApiModelProperty(value = "0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG")
     private Integer enableFlag;
 
