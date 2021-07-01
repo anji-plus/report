@@ -38,7 +38,7 @@ export default {
             type: "category",
             data: [],
             axisLabel: {
-              show: true,
+              show: false,
               textStyle: {
                 color: "#fff"
               }
@@ -220,9 +220,6 @@ export default {
               fontSize: optionsCollapse.fontSizeY
             }
           },
-          splitLine: {
-            show: false
-          },
           axisLine: {
             show: true,
             lineStyle: {
@@ -252,9 +249,6 @@ export default {
               fontSize: optionsCollapse.fontSizeY
             }
           },
-          splitLine: {
-            show: false
-          },
           axisLine: {
             show: true,
             lineStyle: {
@@ -262,7 +256,7 @@ export default {
             }
           },
           splitLine: {
-            show: true,
+            show: false,
             lineStyle: {
               color: optionsCollapse.splitLineColorY
             }

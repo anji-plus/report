@@ -2733,7 +2733,7 @@ const widgetTools = [
                 name: 'pointSize',
                 required: false,
                 placeholder: '',
-                value: 10,
+                value: 5,
               },
               {
                 type: 'el-switch',
@@ -2765,10 +2765,11 @@ const widgetTools = [
                 name: 'lineWidth',
                 required: false,
                 placeholder: '',
-                value: 4,
+                value: 3,
               },
             ],
-          }, {
+          },
+          {
             name: '柱体设置',
             list: [
               {
@@ -2796,7 +2797,8 @@ const widgetTools = [
                 value: 0,
               },
             ],
-          }, {
+          },
+          {
             name: '标题设置',
             list: [
               {
@@ -3105,7 +3107,8 @@ const widgetTools = [
                 value: '#fff'
               },
             ],
-          }, {
+          },
+          {
             name: '坐标轴边距设置',
             list: [
               {
@@ -3138,7 +3141,8 @@ const widgetTools = [
                 value: 10,
               },
             ],
-          }, {
+          },
+          {
             name: '图例操作',
             list: [
               {
@@ -3210,7 +3214,8 @@ const widgetTools = [
                 value: ''
               },
             ],
-          }, {
+          },
+          {
             name: '自定义配色',
             list: [
               {
@@ -3218,7 +3223,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#ED0E0E' }, { color: '#6CCD17' }],
+                value: [{ color: '#00F4FFFF' }, { color: '#42fffd' }],
               },
             ],
           },
@@ -4355,7 +4360,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#ED0E0E' }, { color: '#6CCD17' }, { color: '#172CCD' }, { color: '#B817CD' }, { color: '#AFCD17' }],
+                value: [{ color: '#0CD2E6' }, { color: '#00BFA5' }, { color: '#FFC722' }, { color: '#886EFF' }, { color: '#008DEC' }],
               },
             ],
           },
