@@ -2740,7 +2740,7 @@ const widgetTools = [
                 name: 'pointSize',
                 required: false,
                 placeholder: '',
-                value: 10,
+                value: 5,
               },
               {
                 type: 'el-switch',
@@ -2772,10 +2772,11 @@ const widgetTools = [
                 name: 'lineWidth',
                 required: false,
                 placeholder: '',
-                value: 4,
+                value: 3,
               },
             ],
-          }, {
+          },
+          {
             name: '柱体设置',
             list: [
               {
@@ -2803,7 +2804,8 @@ const widgetTools = [
                 value: 0,
               },
             ],
-          }, {
+          },
+          {
             name: '标题设置',
             list: [
               {
@@ -3228,7 +3230,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#004DA7FF' }, { color: '#00F4FFFF' }],
+                value: [{ color: '#00F4FFFF' }, { color: '#42fffd' }],
               },
             ],
           },
