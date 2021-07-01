@@ -155,7 +155,7 @@
                   :xl="8">
             <el-form-item label="数据集编码"
                           prop="setCode">
-              <el-input v-model.trim="formData.setCode"
+              <el-input :disabled="updataDisabled" v-model.trim="formData.setCode"
                         size="mini" />
             </el-form-item>
           </el-col>

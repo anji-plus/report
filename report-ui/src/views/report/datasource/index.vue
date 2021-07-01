@@ -162,8 +162,8 @@
                   :xl="7">
             <el-form-item label="数据源编码"
                           prop="sourceCode"
-                          :disabled="updataDisabled">
-              <el-input v-model.trim="dialogForm.sourceCode" />
+                          >
+              <el-input :disabled="updataDisabled" v-model.trim="dialogForm.sourceCode" />
             </el-form-item>
           </el-col>
           <el-col :xs="24"

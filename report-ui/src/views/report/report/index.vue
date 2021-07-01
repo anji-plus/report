@@ -176,7 +176,7 @@
                   :xl="12">
             <el-form-item label="报表编码"
                           prop="reportCode">
-              <el-input v-model="dialogForm.reportCode" />
+              <el-input :disabled="reportCodeDisable" v-model="dialogForm.reportCode" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -206,6 +206,20 @@
                       show-word-limit />
           </el-form-item>
         </el-col>
+        <el-col :span="24">
+          <el-form-item label="缩略图">
+            <el-upload
+              class="avatar-uploader"
+              :action="requestUrl"
+              :headers="headers"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload">
+              <img v-if="dialogForm.reportImage" :src="dialogForm.reportImage == null ? require('../../../assets/images/charts.jpg') : dialogForm.reportImage " class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+        </el-col>
       </el-form>
       <div slot="footer"
            class="dialog-footer">
@@ -219,6 +233,7 @@
 
 <script>
 import { dataDictionary } from '@/api/common'
+import { getToken } from "@/utils/auth";
 import { reportPageList, addReport, editReport, delReport } from '@/api/report'
 import Dictionary from '@/components/Dictionary/index'
 var typeData
@@ -258,6 +273,7 @@ export default {
         // reportType: '',
         // reportGroup: '',
         reportDesc: '',
+        reportImage: '',
       },
       basicDialog: false,
       listLoading: true,
@@ -267,6 +283,11 @@ export default {
       dictionaryTypeOptions: [], // 报表类型
       dictionaryGroupOptions: [], // 报表分组
       rules: {},
+      reportCodeDisable: false,
+      requestUrl: process.env.BASE_API + "/file/upload",
+      headers: {
+        Authorization: getToken()
+      },
 
     }
   },
@@ -277,16 +298,6 @@ export default {
     typeData = this
   },
   created () {
-    // this.$nextTick(() => {
-    //   dataDictionary('REPORT_GROUP').then((res) => {
-    //     this.dictionaryGroupOptions = res.data
-    //     this.dialogForm.reportGroup = this.dictionaryGroupOptions[0].text
-    //   })
-    //   dataDictionary('REPORT_TYPE').then((res) => {
-    //     this.dictionaryTypeOptions = res.data;
-    //     this.dialogForm.reportType = this.dictionaryTypeOptions[0].text
-    //   })
-    // })
     this.queryByPage()
 
   },
@@ -318,38 +329,40 @@ export default {
       this.listLoading = false
     },
 
+    handleAvatarSuccess(res) {
+      this.dialogForm.reportImage = res.data.urlPath
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      return true;
+    },
+
     // 打开模态框
     showAddReportModel (val) {
       this.basicDialog = true
       if (val === undefined) {
+        this.reportCodeDisable = false
         this.dialogForm = {
           reportName: '',
           reportCode: '',
           // reportType: '',
           reportDesc: '',
+          reportImage: ''
         }
       } else {
         this.dialogForm = val
+        this.reportCodeDisable = true
       }
     },
     // 预览
     preview (val) {
-      // if (val.reportType === 'report_excel') {
-      //   var routeUrl = this.$router.resolve({ path: '/report/excelreport/viewer', query: { reportCode: val.reportCode } })
-      //   window.open(routeUrl.href, '_blank')
-      // } else {
-      // eslint-disable-next-line no-redeclare
       var routeUrl = this.$router.resolve({ path: '/bigscreen/viewer', query: { reportCode: val.reportCode } })
       window.open(routeUrl.href, '_blank')
       // }
     },
     // 设计
     design (val) {
-      // if (val.reportType === 'report_excel') {
-      //   var routeUrl = this.$router.resolve({ path: '/report/excelreport/designer', query: { reportCode: val.reportCode, reportId: val.id, accessKey: val.accessKey } })
-      //   window.open(routeUrl.href, '_blank')
-      // } else {
-      // eslint-disable-next-line no-redeclare
       var routeUrl = this.$router.resolve({ path: '/bigscreen/designer', query: { reportCode: val.reportCode, reportId: val.id, accessKey: val.accessKey } })
       window.open(routeUrl.href, '_blank')
       // }
@@ -392,6 +405,7 @@ export default {
     },
     // 提交
     UserConfirm () {
+      debugger
       this.$refs.form.validate(async (valid, obj) => {
         if (valid) {
           if (this.dialogForm.id == undefined) {
@@ -410,3 +424,29 @@ export default {
   },
 }
 </script>
+
+<style>
+.avatar-uploader .el-upload {
+  /*border: 1px dashed #d9d9d9;*/
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 30%;
+  height: 30%;
+  display: block;
+}
+</style>
