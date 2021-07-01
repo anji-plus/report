@@ -30,18 +30,22 @@
         </el-tab-pane>
         <!-- 左侧图层-->
         <el-tab-pane label="图层">
-          <div
-            v-for="(item, index) in layerWidget"
-            :key="index"
-            class="tools-item"
-            :class="widgetIndex == index ? 'is-active' : ''"
-            @click="layerClick(index)"
-          >
-            <span class="tools-item-icon">
-              <i class="iconfont" :class="item.icon"></i>
-            </span>
-            <span class="tools-item-text">{{ item.label }}</span>
-          </div>
+          <draggable v-model="layerWidget">
+            <transition-group>
+              <div
+                v-for="(item, index) in layerWidget"
+                :key="'item' + index"
+                class="tools-item"
+                :class="widgetIndex == index ? 'is-active' : ''"
+                @click="layerClick(index)"
+              >
+                <span class="tools-item-icon">
+                  <i class="iconfont" :class="item.icon"></i>
+                </span>
+                <span class="tools-item-text">{{ item.label }}</span>
+              </div>
+            </transition-group>
+          </draggable>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -206,6 +210,11 @@
       :visible.sync="visibleContentMenu"
       :style-obj="styleObj"
       @deletelayer="deletelayer"
+      @copylayer="copylayer"
+      @istopLayer="istopLayer"
+      @setlowLayer="setlowLayer"
+      @moveupLayer="moveupLayer"
+      @movedownLayer="movedownLayer"
     />
   </div>
 </template>
@@ -639,9 +648,6 @@ export default {
       this.visibleContentMenu = true;
       return false;
     },
-    deletelayer() {
-      this.widgets.splice(this.rightClickIndex, 1);
-    },
     setDefaultValue(options, val) {
       for (let i = 0; i < options.length; i++) {
         if (Object.prototype.toString.call(options[i]) == "[object Object]") {
@@ -665,7 +671,21 @@ export default {
           }
         }
       }
-    }
+    },
+    // 删除
+    deletelayer() {
+      this.widgets.splice(this.rightClickIndex, 1);
+    },
+    // 复制
+    copylayer() {},
+    // 置顶
+    istopLayer() {},
+    // 置低
+    setlowLayer() {},
+    // 上移一层
+    moveupLayer() {},
+    // 下移一层
+    movedownLayer() {}
   }
 };
 </script>

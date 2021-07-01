@@ -3,19 +3,19 @@
     <div class="contentmenu__item" @click="deleteLayer">
       <i class="iconfont iconguanbi"></i> 删除图层
     </div>
-    <div class="contentmenu__item" @click="deleteLayer">
+    <div class="contentmenu__item" @click="copyLayer">
       <i class="iconfont iconfuzhi1"></i> 复制图层
     </div>
-    <div class="contentmenu__item" @click="deleteLayer">
+    <div class="contentmenu__item" @click="istopLayer">
       <i class="iconfont iconjinlingyingcaiwangtubiao01"></i> 置顶图层
     </div>
-    <div class="contentmenu__item" @click="deleteLayer">
-      <i class="iconfont iconleft-copy"></i> 置地图层
+    <div class="contentmenu__item" @click="setlowLayer">
+      <i class="iconfont iconleft-copy"></i> 置低图层
     </div>
-    <div class="contentmenu__item" @click="deleteLayer">
+    <div class="contentmenu__item" @click="moveupLayer">
       <i class="iconfont iconjinlingyingcaiwangtubiao01"></i> 上移一层
     </div>
-    <div class="contentmenu__item" @click="deleteLayer">
+    <div class="contentmenu__item" @click="movedownLayer">
       <i class="iconfont iconleft-copy"></i> 下移一层
     </div>
   </div>
@@ -61,6 +61,21 @@ export default {
             message: "已取消删除"
           });
         });
+    },
+    copyLayer() {
+      this.$emit("copylayer");
+    },
+    istopLayer() {
+      this.$emit("istopLayer");
+    },
+    setlowLayer() {
+      this.$emit("setlowLayer");
+    },
+    moveupLayer() {
+      this.$emit("moveupLayer");
+    },
+    movedownLayer() {
+      this.$emit("movedownLayer");
     }
   }
 };

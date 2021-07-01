@@ -6,56 +6,45 @@
  !-->
 <template>
   <div class="main-layout">
-    <el-form ref="form"
-             :model="params"
-             :rules="rules"
-             label-width="120px">
+    <el-form ref="form" :model="params" :rules="rules" label-width="120px">
       <!-- 搜索 -->
       <el-row :gutter="10">
-        <el-col :xs="24"
-                :sm="20"
-                :md="12"
-                :lg="6"
-                :xl="4">
+        <el-col :xs="24" :sm="20" :md="12" :lg="6" :xl="4">
           <el-form-item label="名称">
-            <el-input v-model="params.reportName"
-                      size="mini"
-                      clearable
-                      placeholder="名称"
-                      class="filter-item" />
+            <el-input
+              v-model="params.reportName"
+              size="mini"
+              clearable
+              placeholder="名称"
+              class="filter-item"
+            />
           </el-form-item>
         </el-col>
-        <el-col :xs="24"
-                :sm="20"
-                :md="12"
-                :lg="6"
-                :xl="4">
+        <el-col :xs="24" :sm="20" :md="12" :lg="6" :xl="4">
           <el-form-item label="报表编码">
-            <el-input v-model="params.reportCode"
-                      size="mini"
-                      clearable
-                      placeholder="报表编码"
-                      class="filter-item" />
+            <el-input
+              v-model="params.reportCode"
+              size="mini"
+              clearable
+              placeholder="报表编码"
+              class="filter-item"
+            />
           </el-form-item>
         </el-col>
-        <el-col :xs="24"
-                :sm="20"
-                :md="4"
-                :lg="4"
-                :xl="4">
-          <el-button type="primary"
-                     size="mini"
-                     @click="search('form')">查询</el-button>
-          <el-button type="danger"
-                     size="mini"
-                     @click="reset('form')">重置</el-button>
+        <el-col :xs="24" :sm="20" :md="4" :lg="4" :xl="4">
+          <el-button type="primary" size="mini" @click="search('form')"
+            >查询</el-button
+          >
+          <el-button type="danger" size="mini" @click="reset('form')"
+            >重置</el-button
+          >
         </el-col>
       </el-row>
     </el-form>
     <el-row :gutter="20">
       <el-col v-for="item in list" :key="item.id" :span="6">
         <div class="bg">
-          <div class="rgba" />
+          <img class="bg-img" src="../../../assets/images/charts.jpg" alt="" />
           <div class="content">
             <header>{{ item.reportName }}</header>
             <footer>
@@ -80,19 +69,21 @@
       </el-col>
     </el-row>
     <div class="block">
-      <el-pagination :total="totalCount"
-                     :page-sizes="[10, 20, 50, 100]"
-                     :page-size="params.pageSize"
-                     :current-page="params.pageNumber"
-                     layout="total, sizes, prev, pager, next, jumper"
-                     @size-change="handleSizeChange"
-                     @current-change="handleCurrentChange" />
+      <el-pagination
+        :total="totalCount"
+        :page-sizes="[10, 20, 50, 100]"
+        :page-size="params.pageSize"
+        :current-page="params.pageNumber"
+        layout="total, sizes, prev, pager, next, jumper"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { reportPageList } from '@/api/report'
+import { reportPageList } from "@/api/report";
 export default {
   name: "Login",
   components: {},
@@ -102,61 +93,72 @@ export default {
       totalCount: 0,
       totalPage: 0,
       params: {
-        reportCode: '',
-        reportName: '',
+        reportCode: "",
+        reportName: "",
         // reportType: '',
         pageNumber: 1,
         pageSize: 8,
-        order: 'DESC',
-        sort: 'update_time',
-      },
+        order: "DESC",
+        sort: "update_time"
+      }
     };
   },
   mounted() {},
   created() {
-    this.queryByPage()
+    this.queryByPage();
   },
   methods: {
     // 查询
-    search () {
-      this.params.pageNumber = 1
-      this.queryByPage()
+    search() {
+      this.params.pageNumber = 1;
+      this.queryByPage();
     },
     // 重置
-    reset (formName) {
-      this.$refs[formName].resetFields()
-      this.params.reportName = ''
-      this.params.reportCode = ''
-      this.params.pageNumber = 1
-      this.queryByPage()
+    reset(formName) {
+      this.$refs[formName].resetFields();
+      this.params.reportName = "";
+      this.params.reportCode = "";
+      this.params.pageNumber = 1;
+      this.queryByPage();
     },
-    async queryByPage () {
-      const res = await reportPageList(this.params)
-      if (res.code != '200') return
-      this.listLoading = true
-      this.list = res.data.records
-      this.list.forEach((value) => {
-        value['reportNameCode'] = value.reportName + '[' + value.reportCode + ']'
-      })
-      this.totalCount = res.data.total
-      this.totalPage = res.data.pages
-      this.listLoading = false
+    async queryByPage() {
+      const res = await reportPageList(this.params);
+      if (res.code != "200") return;
+      this.listLoading = true;
+      this.list = res.data.records;
+      this.list.forEach(value => {
+        value["reportNameCode"] =
+          value.reportName + "[" + value.reportCode + "]";
+      });
+      this.totalCount = res.data.total;
+      this.totalPage = res.data.pages;
+      this.listLoading = false;
     },
-    handleSizeChange (val) {
-      this.params.pageSize = val
-      this.queryByPage()
+    handleSizeChange(val) {
+      this.params.pageSize = val;
+      this.queryByPage();
     },
-    handleCurrentChange (val) {
-      this.params.pageNumber = val
-      this.queryByPage()
+    handleCurrentChange(val) {
+      this.params.pageNumber = val;
+      this.queryByPage();
     },
     openDesign(val) {
-      var routeUrl = this.$router.resolve({ path: '/bigscreen/designer', query: { reportCode: val.reportCode, reportId: val.id, accessKey: val.accessKey } })
-      window.open(routeUrl.href, '_blank')
+      var routeUrl = this.$router.resolve({
+        path: "/bigscreen/designer",
+        query: {
+          reportCode: val.reportCode,
+          reportId: val.id,
+          accessKey: val.accessKey
+        }
+      });
+      window.open(routeUrl.href, "_blank");
     },
     viewDesign(val) {
-      var routeUrl = this.$router.resolve({ path: '/bigscreen/viewer', query: { reportCode: val.reportCode } })
-      window.open(routeUrl.href, '_blank')
+      var routeUrl = this.$router.resolve({
+        path: "/bigscreen/viewer",
+        query: { reportCode: val.reportCode }
+      });
+      window.open(routeUrl.href, "_blank");
     }
   }
 };
@@ -181,15 +183,10 @@ export default {
     border: 12px solid white;
   }
 
-  .bg::before {
-    content: "";
+  .bg .bg-img {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url("../../../assets/images/charts.jpg");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: left top;
     filter: blur(6px);
     z-index: 2;
   }
