@@ -3112,7 +3112,8 @@ const widgetTools = [
                 value: '#fff'
               },
             ],
-          }, {
+          },
+          {
             name: '坐标轴边距设置',
             list: [
               {
@@ -3145,7 +3146,8 @@ const widgetTools = [
                 value: 10,
               },
             ],
-          }, {
+          },
+          {
             name: '图例操作',
             list: [
               {
@@ -3217,7 +3219,8 @@ const widgetTools = [
                 value: ''
               },
             ],
-          }, {
+          },
+          {
             name: '自定义配色',
             list: [
               {
@@ -3225,7 +3228,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#ED0E0E' }, { color: '#6CCD17' }],
+                value: [{ color: '#004DA7FF' }, { color: '#00F4FFFF' }],
               },
             ],
           },
@@ -4362,7 +4365,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#ED0E0E' }, { color: '#6CCD17' }, { color: '#172CCD' }, { color: '#B817CD' }, { color: '#AFCD17' }],
+                value: [{ color: '#0CD2E6' }, { color: '#00BFA5' }, { color: '#FFC722' }, { color: '#886EFF' }, { color: '#008DEC' }],
               },
             ],
           },
