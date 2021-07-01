@@ -44,21 +44,6 @@ const screenConfig = {
         placeholder: '',
         value: '#000',
       },
-      {
-        type: 'el-select',
-        label: '刷新频率',
-        name: 'fontWeight',
-        required: false,
-        placeholder: '',
-        selectOptions: [
-          { code: '10', name: '10秒' },
-          { code: '30', name: '30秒' },
-          { code: '60', name: '1分' },
-          { code: '120', name: '2分' },
-          { code: '300', name: '5分' }
-        ],
-        value: '300'
-      },
       // {
       //   type: 'el-upload-picture',
       //   label: '背景图片',
@@ -67,12 +52,12 @@ const screenConfig = {
       //   placeholder: '',
       // },
       {
-        type: 'el-input-text',
+        type: 'custom-upload',
         label: '图片地址',
         name: 'backgroundImage',
         required: false,
         placeholder: '',
-        value: 'http://10.108.26.197/business/file/download/adfc22ac-ed7f-4141-aeb9-ee81f16ac92d',
+        value: [{url: 'http://10.108.26.197/business/file/download/adfc22ac-ed7f-4141-aeb9-ee81f16ac92d'}],
       },
     ],
     data: [],
