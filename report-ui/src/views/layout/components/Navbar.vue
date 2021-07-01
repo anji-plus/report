@@ -17,58 +17,11 @@
                           class="user-dropdown">
           <el-dropdown-item divided>
             <span style="display:block;"
-                  @click="helpCenter">帮助中心</span>
-          </el-dropdown-item>
-          <el-dropdown-item divided>
-            <span style="display:block;"
-                  @click="updatePassword">修改密码</span>
-          </el-dropdown-item>
-          <el-dropdown-item divided>
-            <span style="display:block;"
                   @click="logout">注销登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </el-menu>
-    <!-- 修改密码弹框 -->
-    <el-dialog title="修改密码"
-               :visible.sync="wordVisible"
-               width="40%"
-               :close-on-click-modal='false'
-               top="20vh"
-               class="password-box">
-      <el-form ref="form"
-               :model="form"
-               label-width="100px"
-               :rules="rules"
-               :close-on-click-modal="false">
-        <el-form-item label="原密码"
-                      prop="oldPassword">
-          <el-input v-model.trim="form.oldPassword"
-                    type="password"
-                    autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="新密码"
-                      prop="password">
-          <el-input v-model.trim="form.password"
-                    type="password"
-                    autocomplete="off"></el-input>
-          <!-- <span class="password-tips"><i class="el-icon-warning-outline"> 密码至少8位,切包含大写、小写字母、数字、特殊字符中的3种</i></span> -->
-        </el-form-item>
-        <el-form-item label="确认新密码"
-                      prop="confirmPassword">
-          <el-input v-model.trim="form.confirmPassword"
-                    type="password"
-                    autocomplete="off"></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer"
-            class="dialog-footer">
-        <el-button @click="wordVisible = false">取 消</el-button>
-        <el-button type="primary"
-                   @click="confrimUpdate">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 

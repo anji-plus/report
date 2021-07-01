@@ -2,10 +2,6 @@
   <div class="container">
     <div class="header">
       <el-row class="top">
-        <el-col :span="12" class="left">
-          <span><img src="../../../static/logo1.png" width="100"></span>
-          <span>帮助中心</span>
-        </el-col>
         <el-col :span="12" class="right">
           <span @click="goHome">首页</span>
         </el-col>
@@ -18,8 +14,8 @@
     </div>
     <div class="main">
       <div class="slider-left">
-        <div class="item" 
-          :class="index==active?'active':''" 
+        <div class="item"
+          :class="index==active?'active':''"
           v-for="(item, index) in sliderList" :key="index"
           @click="changeSelect(index, item)"
         >
