@@ -10,7 +10,7 @@
       <i class="iconfont iconjinlingyingcaiwangtubiao01"></i> 置顶图层
     </div>
     <div class="contentmenu__item" @click="setlowLayer">
-      <i class="iconfont iconleft-copy"></i> 置低图层
+      <i class="iconfont iconleft-copy"></i> 置底图层
     </div>
     <div class="contentmenu__item" @click="moveupLayer">
       <i class="iconfont iconjinlingyingcaiwangtubiao01"></i> 上移一层

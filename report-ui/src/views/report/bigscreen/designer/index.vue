@@ -30,7 +30,11 @@
         </el-tab-pane>
         <!-- 左侧图层-->
         <el-tab-pane label="图层">
-          <draggable v-model="layerWidget">
+          <draggable
+            v-model="layerWidget"
+            @update="datadragEnd"
+            :options="{ animation: 300 }"
+          >
             <transition-group>
               <div
                 v-for="(item, index) in layerWidget"
@@ -672,20 +676,61 @@ export default {
         }
       }
     },
+    datadragEnd(evt) {
+      evt.preventDefault();
+      this.widgets = this.swapArr(this.widgets, evt.oldIndex, evt.newIndex);
+    },
+    // 数组 元素互换位置
+    swapArr(arr, oldIndex, newIndex) {
+      arr[oldIndex] = arr.splice(newIndex, 1, arr[oldIndex])[0];
+      return arr;
+    },
     // 删除
     deletelayer() {
       this.widgets.splice(this.rightClickIndex, 1);
     },
     // 复制
-    copylayer() {},
+    copylayer() {
+      const obj = this.deepClone(this.widgets[this.rightClickIndex]);
+      this.widgets.splice(this.widgets.length, 0, obj);
+    },
     // 置顶
-    istopLayer() {},
-    // 置低
-    setlowLayer() {},
+    istopLayer() {
+      if (this.rightClickIndex != 0) {
+        this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
+      }
+    },
+    // 置底
+    setlowLayer() {
+      if (this.rightClickIndex + 1 < this.widgets.length) {
+        const temp = this.widgets.splice(this.rightClickIndex, 1)[0];
+        this.widgets.push(temp);
+      }
+    },
     // 上移一层
-    moveupLayer() {},
+    moveupLayer() {
+      if (this.rightClickIndex != 0) {
+        this.widgets[this.rightClickIndex] = this.widgets.splice(
+          this.rightClickIndex - 1,
+          1,
+          this.widgets[this.rightClickIndex]
+        )[0];
+      } else {
+        this.widgets.push(this.widgets.shift());
+      }
+    },
     // 下移一层
-    movedownLayer() {}
+    movedownLayer() {
+      if (this.rightClickIndex != this.widgets.length - 1) {
+        this.widgets[this.rightClickIndex] = this.widgets.splice(
+          this.rightClickIndex + 1,
+          1,
+          this.widgets[this.rightClickIndex]
+        )[0];
+      } else {
+        this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
+      }
+    }
   }
 };
 </script>
