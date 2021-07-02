@@ -41,7 +41,7 @@
                 :sm="20"
                 :md="4"
                 :lg="4"
-                :xl="4">
+                :xl="4" class="query">
           <el-button type="primary"
                      size="mini"
                      @click="search('form')">查询</el-button>
@@ -1088,5 +1088,8 @@ export default {
   height: 220px;
   overflow-y: auto;
   padding: 10px;
+}
+.query{
+  margin-top: 5px;
 }
 </style>
