@@ -250,6 +250,7 @@ export default {
       widthLeftForTools: 200, // 左侧工具栏宽度
       widthLeftForToolsHideButton: 15, // 左侧工具栏折叠按钮宽度
       widthLeftForOptions: 300, // 右侧属性配置区
+      widthPaddingTools: 18,
       toolIsShow: true, // 左侧工具栏是否显示
 
       bigscreenWidth: 1920, // 大屏设计的大小
@@ -327,8 +328,10 @@ export default {
     },
     // 设计台按大屏的缩放比例
     bigscreenScaleInWorkbench() {
-      var widthScale = (this.middleWidth - 18) / this.bigscreenWidth;
-      var heightScale = (this.middleHeight - 18) / this.bigscreenHeight;
+      var widthScale =
+        (this.middleWidth - this.widthPaddingTools) / this.bigscreenWidth;
+      var heightScale =
+        (this.middleHeight - this.widthPaddingTools) / this.bigscreenHeight;
       return Math.min(widthScale, heightScale);
     },
     workbenchTransform() {
@@ -338,10 +341,12 @@ export default {
     },
     // 大屏在设计模式的大小
     bigscreenWidthInWorkbench() {
-      return this.getPXUnderScale(this.bigscreenWidth) + 18;
+      return this.getPXUnderScale(this.bigscreenWidth) + this.widthPaddingTools;
     },
     bigscreenHeightInWorkbench() {
-      return this.getPXUnderScale(this.bigscreenHeight) + 18;
+      return (
+        this.getPXUnderScale(this.bigscreenHeight) + this.widthPaddingTools
+      );
     }
   },
   watch: {
