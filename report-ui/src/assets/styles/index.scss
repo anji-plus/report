@@ -13,13 +13,27 @@ body {
     Microsoft YaHei, Arial, sans-serif;
 }
 
-label {
-  font-weight: 700;
-}
-
 html {
   height: 100%;
   box-sizing: border-box;
+  /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+  -ms-overflow-style: none;
+  /*火狐下隐藏滚动条*/
+  scrollbar-width: none;
+}
+// 谷歌浏览器去滚动条
+html::-webkit-scrollbar {
+  display: none;
+}
+.el-image-viewer__close {
+  color: #fff;
+}
+#app {
+  height: 100%;
+}
+
+label {
+  font-weight: 700;
 }
 
 #app {
