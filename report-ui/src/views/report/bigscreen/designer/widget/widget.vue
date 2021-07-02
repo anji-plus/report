@@ -121,8 +121,6 @@ export default {
 .vue-draggalbe {
   position: absolute;
 }
-.widget-container {
-}
 .widget-active {
   cursor: move;
   border: 1px dashed #09f;

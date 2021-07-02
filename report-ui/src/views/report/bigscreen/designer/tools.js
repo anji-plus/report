@@ -45,7 +45,7 @@ const screenConfig = {
         value: '#000',
       },
       {
-        type: 'el-input-text',
+        type: 'custom-upload',
         label: '图片地址',
         name: 'backgroundImage',
         required: false,
@@ -649,7 +649,7 @@ const widgetTools = [
           name: 'imageAdress',
           required: false,
           placeholder: '',
-          value: 'http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095508.jpg',
+          value: 'http://10.108.26.197:9095/file/download/fd20d563-00aa-45e2-b5db-aff951f814ec',
         },
         {
           type: 'vue-color',
@@ -919,7 +919,7 @@ const widgetTools = [
           name: 'iframeAdress',
           required: false,
           placeholder: '',
-          value: 'http://www.baidu.com',
+          value: 'https://report.anji-plus.com/index.html',
         },
       ],
       // 数据
@@ -1189,7 +1189,7 @@ const widgetTools = [
                 name: 'reversalX',
                 required: false,
                 placeholder: '',
-                value: ''
+                value: false
               },
               {
                 type: 'vue-color',

@@ -250,6 +250,7 @@ export default {
       widthLeftForTools: 200, // 左侧工具栏宽度
       widthLeftForToolsHideButton: 15, // 左侧工具栏折叠按钮宽度
       widthLeftForOptions: 300, // 右侧属性配置区
+      widthPaddingTools: 18,
       toolIsShow: true, // 左侧工具栏是否显示
 
       bigscreenWidth: 1920, // 大屏设计的大小
@@ -319,7 +320,6 @@ export default {
       widthLeftAndRight += this.widthLeftForOptions; // 右侧配置栏宽度
 
       var middleWidth = this.bodyWidth - widthLeftAndRight;
-      console.log(middleWidth, this.bodyWidth, widthLeftAndRight);
       return middleWidth;
     },
     middleHeight() {
@@ -327,8 +327,10 @@ export default {
     },
     // 设计台按大屏的缩放比例
     bigscreenScaleInWorkbench() {
-      var widthScale = this.middleWidth / this.bigscreenWidth;
-      var heightScale = this.middleHeight / this.bigscreenHeight;
+      var widthScale =
+        (this.middleWidth - this.widthPaddingTools) / this.bigscreenWidth;
+      var heightScale =
+        (this.middleHeight - this.widthPaddingTools) / this.bigscreenHeight;
       return Math.min(widthScale, heightScale);
     },
     workbenchTransform() {
@@ -338,10 +340,12 @@ export default {
     },
     // 大屏在设计模式的大小
     bigscreenWidthInWorkbench() {
-      return this.getPXUnderScale(this.bigscreenWidth);
+      return this.getPXUnderScale(this.bigscreenWidth) + this.widthPaddingTools;
     },
     bigscreenHeightInWorkbench() {
-      return this.getPXUnderScale(this.bigscreenHeight);
+      return (
+        this.getPXUnderScale(this.bigscreenHeight) + this.widthPaddingTools
+      );
     }
   },
   watch: {
@@ -885,6 +889,7 @@ export default {
       padding: 0;
       .vueRuler {
         width: 100%;
+        padding: 18px 0px 0px 18px;
       }
       .workbench {
         background-color: #1e1e1e;
