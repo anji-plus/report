@@ -357,13 +357,9 @@ export default {
     }
   },
   mounted() {
-    // 一进入时，加载屏幕配置属性
-    this.setOptionsOnClickScreen();
-
     // 如果是新的设计工作台
     this.initEchartData();
     this.widgets = [];
-
     window.addEventListener("mouseup", () => {
       this.grade = false;
     });
@@ -394,7 +390,7 @@ export default {
       this.dashboard = screenData;
     },
     handleBigScreen(data) {
-      const optionScreen = this.deepClone(getToolByCode("screen").options);
+      const optionScreen = getToolByCode("screen").options;
       const setup = optionScreen.setup;
       for (const key in data) {
         for (let i = 0; i < setup.length; i++) {
@@ -403,6 +399,7 @@ export default {
           }
         }
       }
+      this.setOptionsOnClickScreen();
       return {
         backgroundColor: (data && data.backgroundColor) || "",
         backgroundImage: (data && data.backgroundImage) || "",
