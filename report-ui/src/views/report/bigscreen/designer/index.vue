@@ -705,15 +705,15 @@ export default {
     },
     // 置顶
     istopLayer() {
-      if (this.rightClickIndex != 0) {
-        this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
+      if (this.rightClickIndex + 1 < this.widgets.length) {
+        const temp = this.widgets.splice(this.rightClickIndex, 1)[0];
+        this.widgets.push(temp);
       }
     },
     // 置底
     setlowLayer() {
-      if (this.rightClickIndex + 1 < this.widgets.length) {
-        const temp = this.widgets.splice(this.rightClickIndex, 1)[0];
-        this.widgets.push(temp);
+      if (this.rightClickIndex != 0) {
+        this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
       }
     },
     // 上移一层
