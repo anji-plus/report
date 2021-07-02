@@ -320,7 +320,6 @@ export default {
       widthLeftAndRight += this.widthLeftForOptions; // 右侧配置栏宽度
 
       var middleWidth = this.bodyWidth - widthLeftAndRight;
-      console.log(middleWidth, this.bodyWidth, widthLeftAndRight);
       return middleWidth;
     },
     middleHeight() {
