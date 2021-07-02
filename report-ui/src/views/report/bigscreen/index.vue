@@ -71,7 +71,7 @@
     <div class="block">
       <el-pagination
         :total="totalCount"
-        :page-sizes="[10, 20, 50, 100]"
+        :page-sizes="[8, 20, 50, 100]"
         :page-size="params.pageSize"
         :current-page="params.pageNumber"
         layout="total, sizes, prev, pager, next, jumper"
