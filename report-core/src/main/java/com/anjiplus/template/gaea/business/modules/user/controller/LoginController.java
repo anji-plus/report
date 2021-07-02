@@ -38,9 +38,4 @@ public class LoginController {
         return ResponseBean.builder().build();
     }
 
-
-    @RequestMapping({"/", "index.html"})
-    public String index() {
-        return "/index";
-    }
 }

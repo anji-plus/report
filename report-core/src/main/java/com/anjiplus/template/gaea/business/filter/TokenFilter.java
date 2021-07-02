@@ -37,6 +37,7 @@ public class TokenFilter implements Filter {
         String uri = request.getRequestURI();
 
         if (!uri.startsWith("/login")
+                && !uri.startsWith("/favicon.ico")
                 && !uri.startsWith("/static")
                 && !uri.startsWith("/file/download/")
                 && !uri.contains("index.html")) {

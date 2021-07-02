@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="LOG_HOME" value="./logs"/>
-    <property name="LOG_NAME" value="ai-report"/>
+    <property name="LOG_NAME" value="aj-report"/>
 
     <!--控制台-->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -25,9 +25,6 @@
             <pattern>%d{MM-dd HH:mm:ss.SSS} |-%-5level %logger{36}:%L - %m%n</pattern>
         </layout>
     </appender>
-
-    <!--    nacos心跳日志关闭    -->
-    <logger name="com.alibaba.nacos.client.config.impl.ClientWorker" level="off" />
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />
