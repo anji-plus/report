@@ -57,7 +57,6 @@ export default {
   watch: {
     value: {
       handler(val) {
-        console.log(val);
         this.options = val;
       },
       deep: true

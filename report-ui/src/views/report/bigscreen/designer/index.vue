@@ -153,6 +153,7 @@
             }"
             @click.self="setOptionsOnClickScreen"
           >
+            <div v-if="grade" class="bg-grid"></div>
             <widget
               ref="widgets"
               v-for="(widget, index) in widgets"
@@ -164,6 +165,7 @@
               @onActivated="setOptionsOnClickWidget"
               @contextmenu.prevent.native="rightClick($event, index)"
               @mousedown.prevent.native="widgetsClick(index)"
+              @mouseup.prevent.native="widgetsMouseup"
             />
           </div>
         </vue-ruler-tool>
@@ -242,6 +244,7 @@ export default {
   },
   data() {
     return {
+      grade: false,
       layerWidget: [],
       widgetTools: widgetTools, // 左侧工具栏的组件图标，将js变量加入到当前作用域
       widthLeftForTools: 200, // 左侧工具栏宽度
@@ -355,6 +358,10 @@ export default {
     // 如果是新的设计工作台
     this.initEchartData();
     this.widgets = [];
+
+    window.addEventListener("mouseup", () => {
+      this.grade = false;
+    });
   },
   methods: {
     handlerLayerWidget(val) {
@@ -378,8 +385,6 @@ export default {
       if (code != 200) return;
       const processData = this.handleInitEchartsData(data);
       const screenData = this.handleBigScreen(data.dashboard);
-      console.log(screenData);
-      console.log(processData);
       this.widgets = processData;
       this.dashboard = screenData;
     },
@@ -618,6 +623,10 @@ export default {
         }
       }
       this.setOptionsOnClickWidget(index);
+      this.grade = true;
+    },
+    widgetsMouseup(e) {
+      this.grade = false;
     },
     handleMouseDown() {
       const draggableArr = this.$refs.widgets;
@@ -887,6 +896,20 @@ export default {
         transform-origin: 0 0;
         margin: 0;
         padding: 0;
+      }
+      .bg-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: 30px 30px, 30px 30px;
+        background-image: linear-gradient(
+            hsla(0, 0%, 100%, 0.1) 1px,
+            transparent 0
+          ),
+          linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) 1px, transparent 0);
+        // z-index: 2;
       }
     }
   }
