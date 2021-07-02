@@ -649,7 +649,7 @@ const widgetTools = [
           name: 'imageAdress',
           required: false,
           placeholder: '',
-          value: [{url: 'http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095508.jpg'}],
+          value: 'http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095508.jpg',
         },
         {
           type: 'vue-color',

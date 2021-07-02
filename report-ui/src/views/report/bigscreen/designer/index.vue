@@ -319,6 +319,7 @@ export default {
       widthLeftAndRight += this.widthLeftForOptions; // 右侧配置栏宽度
 
       var middleWidth = this.bodyWidth - widthLeftAndRight;
+      console.log(middleWidth, this.bodyWidth, widthLeftAndRight);
       return middleWidth;
     },
     middleHeight() {
@@ -399,15 +400,15 @@ export default {
         }
       }
       return {
-        backgroundColor: data.backgroundColor,
-        backgroundImage: data.backgroundImage,
-        height: data.height,
-        title: data.title,
-        width: data.width
+        backgroundColor: (data && data.backgroundColor) || "",
+        backgroundImage: (data && data.backgroundImage) || "",
+        height: (data && data.height) || "",
+        title: (data && data.title) || "",
+        width: (data && data.width) || ""
       };
     },
     handleInitEchartsData(data) {
-      const widgets = data.dashboard.widgets;
+      const widgets = data.dashboard ? data.dashboard.widgets : [];
       const widgetsData = [];
       for (let i = 0; i < widgets.length; i++) {
         var obj = {};

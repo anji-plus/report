@@ -45,10 +45,7 @@ export default {
     },
     imgStyle() {
       return {
-        imageAdress:
-          this.options.setup.imageAdress.length > 0
-            ? this.options.setup.imageAdress[0].url
-            : "",
+        imageAdress: this.transStyle.imageAdress,
         "border-radius": this.transStyle.borderRadius + "px",
         opacity: this.transStyle.transparency / 100
       };

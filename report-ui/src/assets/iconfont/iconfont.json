@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "15461480",
+      "name": "文件",
+      "font_class": "folder-o",
+      "unicode": "e70f",
+      "unicode_decimal": 59151
+    },
+    {
       "icon_id": "182207",
       "name": "上",
       "font_class": "jinlingyingcaiwangtubiao01",
