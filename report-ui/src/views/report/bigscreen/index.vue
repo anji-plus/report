@@ -44,7 +44,7 @@
     <el-row :gutter="20">
       <el-col v-for="item in list" :key="item.id" :span="6">
         <div class="bg">
-          <img class="bg-img" :src="item.reportImage == null ? require('../../../assets/images/charts.jpg') : item.reportImage" alt="" />
+          <img class="bg-img" :src="(item.reportImage == null || item.reportImage == '') ? require('../../../assets/images/charts.jpg') : item.reportImage" alt="" />
           <div class="content">
             <header>{{ item.reportName }}</header>
             <footer>
