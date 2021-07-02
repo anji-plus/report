@@ -327,8 +327,8 @@ export default {
     },
     // 设计台按大屏的缩放比例
     bigscreenScaleInWorkbench() {
-      var widthScale = this.middleWidth / this.bigscreenWidth;
-      var heightScale = this.middleHeight / this.bigscreenHeight;
+      var widthScale = (this.middleWidth - 18) / this.bigscreenWidth;
+      var heightScale = (this.middleHeight - 18) / this.bigscreenHeight;
       return Math.min(widthScale, heightScale);
     },
     workbenchTransform() {
@@ -338,10 +338,10 @@ export default {
     },
     // 大屏在设计模式的大小
     bigscreenWidthInWorkbench() {
-      return this.getPXUnderScale(this.bigscreenWidth);
+      return this.getPXUnderScale(this.bigscreenWidth) + 18;
     },
     bigscreenHeightInWorkbench() {
-      return this.getPXUnderScale(this.bigscreenHeight);
+      return this.getPXUnderScale(this.bigscreenHeight) + 18;
     }
   },
   watch: {
@@ -885,6 +885,7 @@ export default {
       padding: 0;
       .vueRuler {
         width: 100%;
+        padding: 18px 0px 0px 18px;
       }
       .workbench {
         background-color: #1e1e1e;
