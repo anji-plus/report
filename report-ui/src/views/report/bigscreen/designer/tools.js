@@ -50,7 +50,7 @@ const screenConfig = {
         name: 'backgroundImage',
         required: false,
         placeholder: '',
-        value: 'http://10.108.26.197/business/file/download/adfc22ac-ed7f-4141-aeb9-ee81f16ac92d',
+        value: 'https://report.anji-plus.com/file/download/bf566e48-ccad-40e1-8ee9-228427e5466b',
       },
     ],
     data: [],
