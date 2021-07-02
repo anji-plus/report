@@ -8,24 +8,23 @@
   <div class="login_container">
     <!-- 顶部logo -->
     <div class="login_title">
-      <img src="@/assets/images/home-logo.png"
-           alt="logo">
+      <img src="@/assets/images/home-logo.png" alt="logo" />
     </div>
     <div class="login_contant">
-      <img src="@/assets/images/login.png"
-           alt="image"
-           class="login_img">
-      <el-form ref="loginForm"
-               :model="loginForm"
-               :rules="loginRules"
-               class="login_form"
-               autocomplete="on"
-               label-position="left"
-               @keyup.enter.native="handleLogin">
+      <img src="@/assets/images/login.png" alt="image" class="login_img" />
+      <el-form
+        ref="loginForm"
+        :model="loginForm"
+        :rules="loginRules"
+        class="login_form"
+        autocomplete="on"
+        label-position="left"
+        @keyup.enter.native="handleLogin"
+      >
         <div class="title_container">
           <h3 class="title">
             HELLO,
-            <br>
+            <br />
             <p class="title_name">在线大屏</p>
           </h3>
         </div>
@@ -37,41 +36,48 @@
           <div>
             <p>用户名</p>
             <el-form-item prop="username">
-              <el-input ref="username"
-                        v-model="loginForm.username"
-                        placeholder="用户名"
-                        name="username"
-                        type="text"
-                        tabindex="1"
-                        autocomplete="on"
-                        @focus="setTop('0')"
-                        @change="getPsw" />
+              <el-input
+                ref="username"
+                v-model="loginForm.username"
+                placeholder="用户名"
+                name="username"
+                type="text"
+                tabindex="1"
+                autocomplete="on"
+                @focus="setTop('0')"
+                @change="getPsw"
+              />
             </el-form-item>
           </div>
           <div>
             <p>密码</p>
-            <input name="password"
-                   type="password"
-                   autocomplete="off"
-                   class="take">
-            <el-tooltip v-model="capsTooltip"
-                        content="Caps lock is On"
-                        placement="right"
-                        manual>
+            <input
+              name="password"
+              type="password"
+              autocomplete="off"
+              class="take"
+            />
+            <el-tooltip
+              v-model="capsTooltip"
+              content="Caps lock is On"
+              placement="right"
+              manual
+            >
               <el-form-item prop="password">
-                <el-input :key="passwordType"
-                          ref="password"
-                          v-model="loginForm.password"
-                          :type="passwordType"
-                          placeholder="用户密码"
-                          name="password"
-                          tabindex="2"
-                          autocomplete="on"
-                          @blur="capsTooltip = false"
-                          @focus="setTop('50')"
-                          @keyup.native="checkCapslock" />
-                <span class="show_pwd"
-                      @click="showPwd">
+                <el-input
+                  :key="passwordType"
+                  ref="password"
+                  v-model="loginForm.password"
+                  :type="passwordType"
+                  placeholder="用户密码"
+                  name="password"
+                  tabindex="2"
+                  autocomplete="on"
+                  @blur="capsTooltip = false"
+                  @focus="setTop('50')"
+                  @keyup.native="checkCapslock"
+                />
+                <span class="show_pwd" @click="showPwd">
                   <i class="el-icon-view" />
                 </span>
               </el-form-item>
@@ -80,168 +86,180 @@
         </div>
         <div class="control">
           <div class="remember">
-            <input v-model="rememberPsw"
-                   type="checkbox">
+            <input v-model="rememberPsw" type="checkbox" />
             <p>记住密码</p>
           </div>
         </div>
-        <el-button :loading="loading"
-                   type="primary"
-                   class="login_btn"
-                   @click.native.prevent="handleLogin">登录</el-button>
+        <el-button
+          :loading="loading"
+          type="primary"
+          class="login_btn"
+          @click.native.prevent="handleLogin"
+          >登录</el-button
+        >
       </el-form>
     </div>
     <!--  验证码  -->
-    <Verify v-if="needCaptcha"
-            ref="verify"
-            :captcha-type="'blockPuzzle'"
-            :img-size="{ width: '400px', height: '200px' }"
-            @success="verifylogin" />
+    <Verify
+      v-if="needCaptcha"
+      ref="verify"
+      :captcha-type="'blockPuzzle'"
+      :img-size="{ width: '400px', height: '200px' }"
+      @success="verifylogin"
+    />
   </div>
 </template>
 
-<script> 
-import Verify from '@/components/verifition/Verify'
-import cookies from 'js-cookie'
-import { Decrypt, Encrypt } from '@/utils/index'
-import { login } from '@/api/login'
-import { transPsw } from '@/utils/encrypted'
-import { setItem, getItem } from '@/utils/storage';
+<script>
+import Verify from "@/components/verifition/Verify";
+import cookies from "js-cookie";
+import { Decrypt, Encrypt } from "@/utils/index";
+import { login } from "@/api/login";
+import { transPsw } from "@/utils/encrypted";
+import { setItem, getItem } from "@/utils/storage";
 export default {
-  name: 'Login',
+  name: "Login",
   components: {
-    Verify,
+    Verify
   },
-  data () {
+  data() {
     return {
-      activeTop: '-50%', // 色条滑块控制
+      activeTop: "-50%", // 色条滑块控制
       rememberPsw: false, // 记住密码选择框
       loginForm: {
-        username: 'admin',
-        password: '123456',
-        verifyCode: '',
+        username: "guest",
+        password: "guest",
+        verifyCode: ""
       }, // 登录表单
       loginRules: {
-        username: [{ required: true, message: '用户名必填', trigger: 'blur' }],
-        password: [{ required: true, message: '用户密码必填', trigger: 'blur' }],
+        username: [{ required: true, message: "用户名必填", trigger: "blur" }],
+        password: [{ required: true, message: "用户密码必填", trigger: "blur" }]
       }, // 登录表单验证
-      passwordType: 'password', // 用来控制查看密码操作时的输入框类型
+      passwordType: "password", // 用来控制查看密码操作时的输入框类型
       capsTooltip: false, // 键盘大写是否打开
       loading: false, // 登录loding
       redirect: undefined, // 记录重定向地址
       otherQuery: {}, // 记录重定向地址中的参数
-      needCaptcha: false,
-    }
+      needCaptcha: false
+    };
   },
   watch: {
     $route: {
       // 监听路由获取上个路由（from）的地址和参数
-      handler: function (route) {
-        const query = route.query
+      handler: function(route) {
+        const query = route.query;
         if (query) {
-          this.redirect = query.redirect
-          this.otherQuery = this.getOtherQuery(query)
+          this.redirect = query.redirect;
+          this.otherQuery = this.getOtherQuery(query);
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
-  mounted () {
+  mounted() {
     // 获取焦点
-    if (this.loginForm.username === '') {
-      this.$refs.username.focus()
-    } else if (this.loginForm.password === '') {
-      this.$refs.password.focus()
+    if (this.loginForm.username === "") {
+      this.$refs.username.focus();
+    } else if (this.loginForm.password === "") {
+      this.$refs.password.focus();
     }
   },
   methods: {
     // 获取存储的密码并解密
-    getPsw () {
-      const cookVal = cookies.get(`u_${this.loginForm.username}`)
-      this.loginForm.password = cookVal && Decrypt(cookVal)
+    getPsw() {
+      const cookVal = cookies.get(`u_${this.loginForm.username}`);
+      this.loginForm.password = cookVal && Decrypt(cookVal);
     },
     // 滑动条块的top控制
-    setTop (val) {
-      this.activeTop = val
+    setTop(val) {
+      this.activeTop = val;
     },
     // 检测大写锁定键是否开启
-    checkCapslock (e) {
-      const { key } = e
-      this.capsTooltip = key && key.length === 1 && key >= 'A' && key <= 'Z'
+    checkCapslock(e) {
+      const { key } = e;
+      this.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
     },
     // 查看密码
-    showPwd () {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
+    showPwd() {
+      if (this.passwordType === "password") {
+        this.passwordType = "";
       } else {
-        this.passwordType = 'password'
+        this.passwordType = "password";
       }
       this.$nextTick(() => {
-        this.$refs.password.focus()
-      })
+        this.$refs.password.focus();
+      });
     },
     // 滑动验证码
-    useVerify () {
-      this.$refs.loginForm.validate((valid) => {
+    useVerify() {
+      this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.$refs.verify.show()
+          this.$refs.verify.show();
         } else {
-          return false
+          return false;
         }
-      })
+      });
     },
     // 验证成功的回调
-    verifylogin (params) {
-      this.loginForm.verifyCode = params.captchaVerification
+    verifylogin(params) {
+      this.loginForm.verifyCode = params.captchaVerification;
       if (this.loginForm.verifyCode) {
-        this.loginApi()
+        this.loginApi();
       }
     },
     // 登录操作
-    handleLogin () {
-      this.$refs.loginForm.validate((valid) => {
+    handleLogin() {
+      this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true
+          this.loading = true;
           // 登录失败次数过多需要展示滑动验证码
           if (this.needCaptcha) {
-            this.useVerify()
-            return
+            this.useVerify();
+            return;
           }
-          this.loginApi()
+          this.loginApi();
         } else {
-          return false
+          return false;
         }
-      })
+      });
     },
-    async loginApi () {
+    async loginApi() {
       let obj = {
         username: this.loginForm.username,
         password: transPsw(this.loginForm.password),
         verifyCode: ""
-      }
-      const { code, data } = await login(obj)
-      if (code != '200') return
-      setItem("token", data.token)
-      this.loading = false
+      };
+      const { code, data } = await login(obj);
+      if (code != "200") return;
+      setItem("token", data.token);
+      this.loading = false;
       // 选中记住密码时 把密码存到cookie里,时效15天
-      this.rememberPsw && cookies.set(`u_${this.loginForm.username}`, Encrypt(this.loginForm.password), { expires: 15 })
+      this.rememberPsw &&
+        cookies.set(
+          `u_${this.loginForm.username}`,
+          Encrypt(this.loginForm.password),
+          { expires: 15 }
+        );
       if (data && data.captcha) {
-        this.needCaptcha = true
+        this.needCaptcha = true;
       } else {
-        this.needCaptcha = false
-        this.$router.push({ path: this.redirect || '/index', query: this.otherQuery })
+        this.needCaptcha = false;
+        this.$router.push({
+          path: this.redirect || "/index",
+          query: this.otherQuery
+        });
       }
     },
-    getOtherQuery (query) {
+    getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
-        if (cur !== 'redirect') {
-          acc[cur] = query[cur]
+        if (cur !== "redirect") {
+          acc[cur] = query[cur];
         }
-        return acc
-      }, {})
-    },
-  },
-}
+        return acc;
+      }, {});
+    }
+  }
+};
 </script>
 
 <style lang="scss">
