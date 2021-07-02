@@ -1,6 +1,6 @@
 ## 在线体验
-#### &emsp;  电脑在线体验: [https://report.anji-plus.com/](https://report.anji-plus.com/ "链接")  &emsp;体验账号：guest  密码：guest
-#### &emsp;  在线文档: [https://report.anji-plus.com/#/doc](https://report.anji-plus.com/#/doc "doc")<br>
+#### &emsp;  电脑在线体验: [https://report.anji-plus.com/index.html](https://report.anji-plus.com/index.html "链接")  &emsp;体验账号：guest  密码：guest
+#### &emsp;  在线文档: [https://report.anji-plus.com/report-doc/](https://report.anji-plus.com/report-doc/ "doc")<br>
 #### &emsp;  在线提问: [https://gitee.com/anji-plus/report/issues](https://gitee.com/anji-plus/report/issues "issue")
 
 ## 功能概述
