@@ -184,6 +184,17 @@ const widgetTools = [
           relactiveDomValue: 'staticData',
           value: '文本框',
         },
+        {
+          type: 'dycustComponents',
+          label: '',
+          name: 'dynamicData',
+          required: false,
+          placeholder: 'px',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          chartType: 'widget-barchart',
+          value: '',
+        },
       ],
 
       // 坐标
