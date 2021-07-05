@@ -146,7 +146,45 @@ const widgetTools = [
       ],
 
       // 数据
-      data: [],
+      data: [
+        {
+          type: 'el-radio-group',
+          label: '数据类型',
+          name: 'dataType',
+          require: false,
+          placeholder: '',
+          selectValue: true,
+          selectOptions: [
+            {
+              code: 'staticData',
+              name: '静态数据',
+            },
+            {
+              code: 'dynamicData',
+              name: '动态数据',
+            },
+          ],
+          value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
+        },
+        {
+          type: 'el-button',
+          label: '静态数据',
+          name: 'staticData',
+          required: false,
+          placeholder: 'px',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'staticData',
+          value: '文本框',
+        },
+      ],
 
       // 坐标
       position: [
@@ -841,62 +879,62 @@ const widgetTools = [
       ],
     },
   },
-  // {
-  //   code: 'widget-table',
-  //   type: 'html',
-  //   label: '表格',
-  //   icon: 'iconbiaoge',
-  //   options: {
-  //     setup: [
-  //       {
-  //         type: 'el-input-text',
-  //         label: '图层名称',
-  //         name: 'layerName',
-  //         required: false,
-  //         placeholder: '',
-  //         value: '表格',
-  //       },
-  //       {
-  //         type: 'dynamic-add-table',
-  //       }
-  //     ],
-  //     data: [],
-  //     position: [
-  //       {
-  //         type: 'el-input-number',
-  //         label: '左边距',
-  //         name: 'left',
-  //         required: false,
-  //         placeholder: 'px',
-  //         value: 0,
-  //       },
-  //       {
-  //         type: 'el-input-number',
-  //         label: '上边距',
-  //         name: 'top',
-  //         required: false,
-  //         placeholder: 'px',
-  //         value: 0,
-  //       },
-  //       {
-  //         type: 'el-input-number',
-  //         label: '宽度',
-  //         name: 'width',
-  //         required: false,
-  //         placeholder: '该容器在1920px大屏中的宽度',
-  //         value: 600,
-  //       },
-  //       {
-  //         type: 'el-input-number',
-  //         label: '高度',
-  //         name: 'height',
-  //         required: false,
-  //         placeholder: '该容器在1080px大屏中的高度',
-  //         value: 300,
-  //       },
-  //     ]
-  //   }
-  // },
+  {
+    code: 'widget-table',
+    type: 'html',
+    label: '表格',
+    icon: 'iconbiaoge',
+    options: {
+      setup: [
+        {
+          type: 'el-input-text',
+          label: '图层名称',
+          name: 'layerName',
+          required: false,
+          placeholder: '',
+          value: '表格',
+        },
+        {
+          type: 'dynamic-add-table',
+        }
+      ],
+      data: [],
+      position: [
+        {
+          type: 'el-input-number',
+          label: '左边距',
+          name: 'left',
+          required: false,
+          placeholder: 'px',
+          value: 0,
+        },
+        {
+          type: 'el-input-number',
+          label: '上边距',
+          name: 'top',
+          required: false,
+          placeholder: 'px',
+          value: 0,
+        },
+        {
+          type: 'el-input-number',
+          label: '宽度',
+          name: 'width',
+          required: false,
+          placeholder: '该容器在1920px大屏中的宽度',
+          value: 600,
+        },
+        {
+          type: 'el-input-number',
+          label: '高度',
+          name: 'height',
+          required: false,
+          placeholder: '该容器在1080px大屏中的高度',
+          value: 300,
+        },
+      ]
+    }
+  },
   {
     code: 'widget-iframe',
     type: 'html',
