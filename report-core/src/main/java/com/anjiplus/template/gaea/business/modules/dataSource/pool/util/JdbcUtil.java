@@ -1,5 +1,6 @@
 package com.anjiplus.template.gaea.business.modules.dataSource.pool.util;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.anjiplus.template.gaea.business.modules.dataSource.controller.dto.DataSourceDto;
 import com.anjiplus.template.gaea.business.modules.dataSource.pool.datasource.PooledDataSource;
 import com.anjiplus.template.gaea.business.modules.dataSource.pool.datasource.UnPooledDataSource;
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -18,33 +20,34 @@ import java.util.concurrent.locks.ReentrantLock;
 @Slf4j
 public class JdbcUtil {
 
-    private static Lock lock = new ReentrantLock();
-
-    private static Lock deleteLock = new ReentrantLock();
-
     //所有数据源的连接池存在map里
-    static Map<Long, PooledDataSource> map = new HashMap<>();
+    static Map<Long, DruidDataSource> map = new ConcurrentHashMap<>();
 
-    public static PooledDataSource getJdbcConnectionPool(DataSourceDto dataSource) {
+    public static DruidDataSource getJdbcConnectionPool(DataSourceDto dataSource) {
         if (map.containsKey(dataSource.getId())) {
             return map.get(dataSource.getId());
         } else {
-            lock.lock();
             try {
-                log.debug(Thread.currentThread().getName() + "获取锁");
                 if (!map.containsKey(dataSource.getId())) {
-                    PooledDataSource pool = new PooledDataSource();
-                    pool.setJdbcUrl(dataSource.getJdbcUrl());
-                    pool.setUser(dataSource.getUsername());
+                    DruidDataSource pool = new DruidDataSource();
+                    pool.setUrl(dataSource.getJdbcUrl());
+                    pool.setUsername(dataSource.getUsername());
                     pool.setPassword(dataSource.getPassword());
-                    pool.setDriverClass(dataSource.getDriverName());
-                    pool.init();
+                    pool.setDriverClassName(dataSource.getDriverName());
+
+                    //下面都是可选的配置
+                    pool.setInitialSize(10);  //初始连接数，默认0
+                    pool.setMaxActive(30);  //最大连接数，默认8
+                    pool.setMinIdle(10);  //最小闲置数
+                    pool.setMaxWait(2000);  //获取连接的最大等待时间，单位毫秒
+                    pool.setPoolPreparedStatements(true); //缓存PreparedStatement，默认false
+                    pool.setMaxOpenPreparedStatements(20); //缓存PreparedStatement的最大数量，默认-1（不缓存）。大于0时会自动开启缓存PreparedStatement，所以可以省略上一句代码
+
                     map.put(dataSource.getId(), pool);
                     log.info("创建连接池成功：{}", dataSource.getJdbcUrl());
                 }
                 return map.get(dataSource.getId());
             }  finally {
-                lock.unlock();
             }
         }
     }
@@ -54,18 +57,15 @@ public class JdbcUtil {
      * @param id
      */
     public static void removeJdbcConnectionPool(Long id) {
-        deleteLock.lock();
         try {
-            PooledDataSource pool = map.get(id);
+            DruidDataSource pool = map.get(id);
             if (pool != null) {
                 map.remove(id);
             }
         } catch (Exception e) {
             log.error(e.toString());
         } finally {
-            deleteLock.unlock();
         }
-
     }
 
     /**
@@ -75,7 +75,7 @@ public class JdbcUtil {
      * @throws SQLException
      */
     public static Connection getPooledConnection(DataSourceDto dataSource) throws SQLException {
-        PooledDataSource pool = getJdbcConnectionPool(dataSource);
+        DruidDataSource pool = getJdbcConnectionPool(dataSource);
         return pool.getConnection();
     }
 

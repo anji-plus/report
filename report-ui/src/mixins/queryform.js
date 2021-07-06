@@ -1,5 +1,6 @@
 import miment from 'miment'
 import {getData} from '@/api/bigscreen'
+
 export default {
   data() {
     return {
@@ -10,7 +11,7 @@ export default {
       },
 
       //日期时间快捷选项
-      datetimeRangePickerOptions:{
+      datetimeRangePickerOptions: {
         shortcuts: [{
           text: '今天',
           onClick(picker) {
@@ -18,14 +19,14 @@ export default {
             const start = new Date(new Date(new Date().getTime()).setHours(0, 0, 0, 0));
             picker.$emit('pick', [start, end]);
           }
-        },{
+        }, {
           text: '昨天',
           onClick(picker) {
-            const start=new Date(new Date(new Date().getTime()-24*60*60*1000).setHours(0, 0, 0, 0));
-            const end=new Date(new Date(new Date().getTime()-24*60*60*1000).setHours(23, 59, 59, 999));
+            const start = new Date(new Date(new Date().getTime() - 24 * 60 * 60 * 1000).setHours(0, 0, 0, 0));
+            const end = new Date(new Date(new Date().getTime() - 24 * 60 * 60 * 1000).setHours(23, 59, 59, 999));
             picker.$emit('pick', [start, end]);
           }
-        },{
+        }, {
           text: '最近一周',
           onClick(picker) {
             const end = new Date();
@@ -51,13 +52,12 @@ export default {
           }
         }],
         // disabledDate(time){
-        //   return time.getTime() > Date.now() 
+        //   return time.getTime() > Date.now()
         // }
       },
     }
   },
-  computed: {
-  },
+  computed: {},
   created() {
   },
   mounted() {
@@ -66,8 +66,8 @@ export default {
   },
   methods: {
     // 搜索重置搜索页码
-    search(){
-      this.params.currentPage=1;
+    search() {
+      this.params.currentPage = 1;
       this.queryByPage();
     },
     // 把selectInput中的值赋到params查询对象中
@@ -80,7 +80,7 @@ export default {
       //   console.warn('params has no field:' + keyname)
       //   return
       // }
-      if (keyword !== undefined ) {
+      if (keyword !== undefined) {
         this.params[keyname] = keyword.trim()
       }
     },
@@ -90,22 +90,24 @@ export default {
         data[k] = null
       }
     },
-    handlerInputchange(val){
+    handlerInputchange(val) {
       this.parseParamsBySelectInput(this.selectInput.keyname, val)
     },
     // 查询echarts 数据
     queryEchartsData(params) {
-      return new Promise(async(resolve) => {
-        const { code, data } = await getData(params);
-        if(code != 200) return
-        const analysisData = this.analysisChartsData(params,  data);
+      return new Promise(async (resolve) => {
+        const {code, data} = await getData(params);
+        if (code != 200) return
+        const analysisData = this.analysisChartsData(params, data);
         resolve(analysisData)
       })
     },
     // 解析不同图标的数据
     analysisChartsData(params, data) {
-      // widget-barchart 柱线图、widget-linechart 折线图、 widget-barlinechart 柱线图、widget-piechart 饼图、widget-hollow-piechart 空心饼图
-      // widget-funnel 漏斗图  widget-gauge 仪表盘
+      // widget-barchart 柱线图、widget-linechart 折线图、 widget-barlinechart 柱线图
+      // widget-piechart 饼图、widget-hollow-piechart 空心饼图、widget-funnel 漏斗图
+      // widget-gauge 仪表盘
+      // widget-text 文本框
       const chartType = params.chartType
       if (
         chartType == "widget-barchart" ||
@@ -121,7 +123,10 @@ export default {
         return this.piechartFn(params.chartProperties, data);
       } else if (chartType == "widget-gauge") {
         return this.gaugeFn(params.chartProperties, data);
+      } else if (chartType == "widget-text") {
+        return this.widgettext(params.chartProperties, data)
       } else {
+
       }
     },
     // 柱状图、折线图、折柱图
@@ -190,7 +195,23 @@ export default {
       }
       // console.log(ananysicData, '结果数据')
       return ananysicData[0];
-    }
+    },
+    widgettext(chartProperties, data) {
+      const ananysicData = [];
+      for (let i = 0; i < data.length; i++) {
+        const obj = {};
+        for (const key in chartProperties) {
+          const value = chartProperties[key];
+          if (value === "name") {
+            //obj["name"] = data[i][key];
+          } else {
+            obj["value"] = data[i][key];
+          }
+        }
+        ananysicData.push(obj);
+      }
+      return ananysicData;
+    },
   },
   watch: {
     'selectInput.keyname'(newVal, oldVal) {
@@ -200,7 +221,7 @@ export default {
       this.parseParamsBySelectInput(newVal, this.selectInput.keyword)
     },
     'selectInput.keyword'(newVal, oldVal) {
-      if (!this.selectInput.keyname) return 
+      if (!this.selectInput.keyname) return
       this.parseParamsBySelectInput(this.selectInput.keyname, newVal)
     }
     // 'selectInput.keyword'(newVal, oldVal) {
