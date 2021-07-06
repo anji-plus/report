@@ -31,6 +31,9 @@ import Avue from '@smallwei/avue';
 import '@smallwei/avue/lib/index.css';
 Vue.use(Avue);
 
+import VueSuperSlide from 'vue-superslide'
+Vue.use(VueSuperSlide)
+
 // enable element zh-cn
 Vue.use(ElementUI, { zhLocale })
 

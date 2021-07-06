@@ -37,6 +37,7 @@
     "vue-json-editor": "^1.4.3",
     "vue-router": "3.0.1",
     "vue-ruler-tool": "^1.2.4",
+    "vue-superslide": "^0.1.1",
     "vuedraggable": "^2.24.1",
     "vuex": "3.0.1"
   },
