@@ -3,8 +3,10 @@ package com.anjiplus.template.gaea.business.modules.dataSource.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.anji.plus.gaea.constant.BaseOperationEnum;
 import com.anji.plus.gaea.constant.Enabled;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
+import com.anji.plus.gaea.exception.BusinessException;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anji.plus.gaea.utils.GaeaAssert;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
@@ -379,5 +381,19 @@ public class DataSourceServiceImpl implements DataSourceService {
         dto.setBody(body);
     }
 
-
+    /**
+     * 操作后续处理
+     *
+     * @param entity
+     * @param operationEnum 操作类型
+     * @throws BusinessException 阻止程序继续执行或回滚事务
+     */
+    @Override
+    public void processAfterOperation(DataSource entity, BaseOperationEnum operationEnum) throws BusinessException {
+        switch (operationEnum){
+            case DELETE:
+                JdbcUtil.removeJdbcConnectionPool(entity.getId());
+                break;
+        }
+    }
 }
