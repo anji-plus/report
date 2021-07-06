@@ -124,7 +124,7 @@ export default {
       } else if (chartType == "widget-gauge") {
         return this.gaugeFn(params.chartProperties, data);
       } else if (chartType == "widget-text") {
-        return this.text(params.chartProperties, data)
+        return this.widgettext(params.chartProperties, data)
       } else {
 
       }
@@ -195,24 +195,23 @@ export default {
       }
       // console.log(ananysicData, '结果数据')
       return ananysicData[0];
-    }
-  },
-  text(chartProperties, data) {
-    debugger
-    const ananysicData = [];
-    for (let i = 0; i < data.length; i++) {
-      const obj = {};
-      for (const key in chartProperties) {
-        const value = chartProperties[key];
-        if (value === "name") {
-          //obj["name"] = data[i][key];
-        } else {
-          obj["value"] = data[i][key];
+    },
+    widgettext(chartProperties, data) {
+      const ananysicData = [];
+      for (let i = 0; i < data.length; i++) {
+        const obj = {};
+        for (const key in chartProperties) {
+          const value = chartProperties[key];
+          if (value === "name") {
+            //obj["name"] = data[i][key];
+          } else {
+            obj["value"] = data[i][key];
+          }
         }
+        ananysicData.push(obj);
       }
-      ananysicData.push(obj);
-    }
-    return ananysicData;
+      return ananysicData;
+    },
   },
   watch: {
     'selectInput.keyname'(newVal, oldVal) {
