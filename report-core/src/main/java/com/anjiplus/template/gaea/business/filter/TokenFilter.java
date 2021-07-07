@@ -36,6 +36,10 @@ public class TokenFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String uri = request.getRequestURI();
 
+        if(uri.equals("/")){
+            response.sendRedirect("/index.html");
+            return;
+        }
         if (!uri.startsWith("/login")
                 && !uri.startsWith("/static")
                 && !uri.startsWith("/file/download/")

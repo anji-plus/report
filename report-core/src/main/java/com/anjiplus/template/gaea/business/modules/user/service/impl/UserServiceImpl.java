@@ -12,6 +12,7 @@ import com.anjiplus.template.gaea.business.modules.user.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ import java.util.Map;
  * Created by raodeming on 2021/6/23.
  */
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -58,6 +60,7 @@ public class UserServiceImpl implements UserService {
             String token = jwtBean.createToken(username, uuid);
             cacheHelper.stringSetExpire(username, token, 3600);
             map.put("token", token);
+            map.put("username", username);
         }
 
         return map;
@@ -79,7 +82,7 @@ public class UserServiceImpl implements UserService {
             }
             return result.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("{}",e);
         }
         return "";
     }
