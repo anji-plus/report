@@ -1,23 +1,21 @@
 <template>
   <div>
-    <el-menu class="navbar"
-             mode="horizontal">
-      <hamburger :toggle-click="toggleSideBar"
-                 :is-active="sidebar.opened"
-                 class="hamburger-container" />
+    <el-menu class="navbar" mode="horizontal">
+      <hamburger
+        :toggle-click="toggleSideBar"
+        :is-active="sidebar.opened"
+        class="hamburger-container"
+      />
       <breadcrumb />
-      <el-dropdown class="avatar-container"
-                   trigger="click">
+      <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <i class="icon iconfont iconyonghu user" />
-          <span class="user-name">{{userName}}</span>
+          <span class="user-name">{{ userName }}</span>
           <i class="el-icon-caret-bottom" />
         </div>
-        <el-dropdown-menu slot="dropdown"
-                          class="user-dropdown">
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <el-dropdown-item divided>
-            <span style="display:block;"
-                  @click="logout">注销登录</span>
+            <span style="display:block;" @click="logout">注销登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -26,21 +24,21 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
-import { getItem, delItem, getStorageItem } from "@/utils/storage"
-import { aesEncrypt } from '@/utils/aes'
-import { reqUpdatePassword } from "@/api/login"
+import { mapGetters } from "vuex";
+import Breadcrumb from "@/components/Breadcrumb";
+import Hamburger from "@/components/Hamburger";
+import { getItem, delItem, getStorageItem } from "@/utils/storage";
+import { aesEncrypt } from "@/utils/aes";
+import { reqUpdatePassword } from "@/api/login";
 
 export default {
-  data () {
+  data() {
     // 确认密码
     var validatePass3 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'));
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
       } else if (value !== this.form.password) {
-        callback(new Error('两次输入密码不一致!'));
+        callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
       }
@@ -54,105 +52,103 @@ export default {
     // };
     const validateOldPass = (rule, value, callback) => {
       if (value.length < 6 || value.length > 30) {
-        callback(new Error('请输入原密码'))
+        callback(new Error("请输入原密码"));
       } else {
-        callback()
+        callback();
       }
     };
     return {
-      userName: '',
+      userName: "",
       wordVisible: false, //修改密码弹框
       form: {
-        oldPassword: '',
-        password: '',
-        confirmPassword: ''
+        oldPassword: "",
+        password: "",
+        confirmPassword: ""
       },
       rules: {
         oldPassword: [
-          { required: true, validator: validateOldPass, trigger: 'blur' }
+          { required: true, validator: validateOldPass, trigger: "blur" }
         ],
         password: [
-          { required: true, message: '请选择新密码', trigger: 'blur' }
+          { required: true, message: "请选择新密码", trigger: "blur" }
         ],
         confirmPassword: [
-          { required: true, validator: validatePass3, trigger: 'blur' }
+          { required: true, validator: validatePass3, trigger: "blur" }
         ]
       }
-    }
+    };
   },
   components: {
     Breadcrumb,
     Hamburger
   },
   computed: {
-    ...mapGetters([
-      'sidebar'
-    ])
+    ...mapGetters(["sidebar"])
   },
-  created () {
-    this.userName = "admin"
+  created() {
+    this.userName = getItem("username");
   },
   methods: {
-    toggleSideBar () {
-      this.$store.dispatch('ToggleSideBar')
+    toggleSideBar() {
+      this.$store.dispatch("ToggleSideBar");
     },
-    logout () {
-      this.$confirm('确定要退出吗', '温馨提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+    logout() {
+      this.$confirm("确定要退出吗", "温馨提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       }).then(() => {
-        delItem('token')
-        sessionStorage.clear()
-        localStorage.clear()
-        this.$router.push('/login')
-      })
+        delItem("token");
+        sessionStorage.clear();
+        localStorage.clear();
+        this.$router.push("/login");
+      });
     },
     // 修改密码
-    updatePassword () {
-      this.wordVisible = true
+    updatePassword() {
+      this.wordVisible = true;
       this.$nextTick(() => {
         this.$refs.form && this.$refs.form.resetFields();
-      })
+      });
     },
     // 发送请求 确认修改
-    confrimUpdate () {
-      this.$refs.form.validate((valid) => {
+    confrimUpdate() {
+      this.$refs.form.validate(valid => {
         if (valid) {
-          const { oldPassword, password, confirmPassword } = this.form
+          const { oldPassword, password, confirmPassword } = this.form;
           let data = {
             oldPassword: aesEncrypt(oldPassword),
             password: aesEncrypt(password),
-            confirmPassword: aesEncrypt(confirmPassword),
-          }
+            confirmPassword: aesEncrypt(confirmPassword)
+          };
           reqUpdatePassword(data).then(res => {
             if (res.repCode == "0000") {
-              this.wordVisible = false
-              this.$message.success("修改密码成功,请重新登录")
-              sessionStorage.clear()
-              localStorage.clear()
-              delItem('token')
-              this.$router.push('/login')
+              this.wordVisible = false;
+              this.$message.success("修改密码成功,请重新登录");
+              sessionStorage.clear();
+              localStorage.clear();
+              delItem("token");
+              this.$router.push("/login");
             }
-          })
+          });
         } else {
           return false;
         }
       });
     },
-    helpCenter () {
-      let helpCategory = JSON.parse(localStorage.getItem('helpCategory'))
+    helpCenter() {
+      let helpCategory = JSON.parse(localStorage.getItem("helpCategory"));
       this.$router.push({
-        path: '/helpCenList/list',
+        path: "/helpCenList/list",
         query: {
           id: 0,
           val: helpCategory[0].value,
           title: helpCategory[0].label
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
@@ -224,4 +220,3 @@ export default {
   margin-top: 0;
 }
 </style>
-

@@ -51,7 +51,7 @@ service.interceptors.response.use(
     }
     else {
       Message({
-        message: res.repMsg,
+        message: res.repMsg || res.message,
         type: 'error',
         duration: 3 * 1000
       })

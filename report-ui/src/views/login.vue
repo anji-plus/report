@@ -230,8 +230,10 @@ export default {
         verifyCode: ""
       };
       const { code, data } = await login(obj);
+      console.log(data);
       if (code != "200") return;
       setItem("token", data.token);
+      setItem("username", data.username);
       this.loading = false;
       // 选中记住密码时 把密码存到cookie里,时效15天
       this.rememberPsw &&
