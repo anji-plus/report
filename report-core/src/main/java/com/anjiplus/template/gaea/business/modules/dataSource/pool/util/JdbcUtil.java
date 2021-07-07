@@ -42,7 +42,8 @@ public class JdbcUtil {
                     pool.setMaxWait(2000);  //获取连接的最大等待时间，单位毫秒
                     pool.setPoolPreparedStatements(true); //缓存PreparedStatement，默认false
                     pool.setMaxOpenPreparedStatements(20); //缓存PreparedStatement的最大数量，默认-1（不缓存）。大于0时会自动开启缓存PreparedStatement，所以可以省略上一句代码
-
+                    pool.setConnectionErrorRetryAttempts(0);
+                    pool.setBreakAfterAcquireFailure(true);
                     map.put(dataSource.getId(), pool);
                     log.info("创建连接池成功：{}", dataSource.getJdbcUrl());
                 }
@@ -63,7 +64,7 @@ public class JdbcUtil {
                 map.remove(id);
             }
         } catch (Exception e) {
-            log.error(e.toString());
+            log.error("{}",e);
         } finally {
         }
     }

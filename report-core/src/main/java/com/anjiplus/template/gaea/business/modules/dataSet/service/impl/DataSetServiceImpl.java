@@ -25,6 +25,7 @@ import com.anjiplus.template.gaea.business.modules.dataSource.service.DataSource
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ import java.util.stream.Collectors;
 **/
 @Service
 //@RequiredArgsConstructor
+@Slf4j
 public class DataSetServiceImpl implements DataSetService {
 
     @Autowired
@@ -128,6 +130,7 @@ public class DataSetServiceImpl implements DataSetService {
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                 dto.setSetParamList(jsonObject.keySet());
             } catch (Exception e) {
+                log.error("{}",e);
             }
         }
         return dto;
