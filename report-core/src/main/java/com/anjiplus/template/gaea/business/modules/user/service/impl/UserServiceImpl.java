@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService {
         //将登录信息缓存,默认一小时
         if (cacheHelper.exist(username)) {
             map.put("token", cacheHelper.stringGet(username));
+            map.put("username", username);
         } else {
             String uuid = GaeaUtils.UUID();
             String token = jwtBean.createToken(username, uuid);
