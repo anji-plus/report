@@ -70,8 +70,9 @@
 -   丰富更多图表组件
 
 ## 技术支持
-如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues)
-<img src="https://images.gitee.com/uploads/images/2021/0707/154657_c27241c3_1728982.jpeg" width = "200" height = "200"/>
+**如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
+微信群：<br>
+<img src="https://images.gitee.com/uploads/images/2021/0707/154657_c27241c3_1728982.jpeg" width = "200" height = "200" align=left/>
 #### 开源不易，劳烦各位star ☺
 
 
