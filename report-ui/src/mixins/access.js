@@ -6,6 +6,10 @@ export default {
     }
   },
   computed: {
+    username: function(){
+      var username = getItem('username')
+      return username
+    },
     getUser: function(){
       // var user = getItem('user');
       var user =JSON.parse(localStorage.getItem('user')) 
