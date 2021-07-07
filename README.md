@@ -71,7 +71,7 @@
 
 ## 技术支持
 如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues)
-
+<img src="https://images.gitee.com/uploads/images/2021/0707/154657_c27241c3_1728982.jpeg" width = "200" height = "200"/>
 #### 开源不易，劳烦各位star ☺
 
 
