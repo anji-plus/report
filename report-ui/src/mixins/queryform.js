@@ -108,6 +108,7 @@ export default {
       // widget-piechart 饼图、widget-hollow-piechart 空心饼图、widget-funnel 漏斗图
       // widget-gauge 仪表盘
       // widget-text 文本框
+      // widge-table 表格(数据不要转)
       const chartType = params.chartType
       if (
         chartType == "widget-barchart" ||
@@ -126,7 +127,7 @@ export default {
       } else if (chartType == "widget-text") {
         return this.widgettext(params.chartProperties, data)
       } else {
-
+        return data
       }
     },
     // 柱状图、折线图、折柱图

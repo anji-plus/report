@@ -129,13 +129,29 @@ export default {
       console.log(tableData);
       tableData.dataType == "staticData"
         ? this.handlerStaticData(tableData.staticData)
-        : this.handlerDymaicData();
+        : this.handlerDymaicData(tableData.dynamicData, tableData.refreshTime);
     },
     handlerStaticData(data) {
       console.log(data);
       this.list = data;
     },
-    handlerDymaicData() {},
+    handlerDymaicData(data, refreshTime) {
+      if (!data) return;
+      if (this.ispreview) {
+        this.getEchartData(data);
+        this.flagInter = setInterval(() => {
+          this.getEchartData(data);
+        }, refreshTime);
+      } else {
+        this.getEchartData(data);
+      }
+    },
+    getEchartData(val) {
+      const data = this.queryEchartsData(val);
+      data.then(res => {
+        this.list = res;
+      });
+    },
     // vue hack 之强制刷新组件
     hackResetFun() {
       this.hackReset = false;
@@ -172,6 +188,9 @@ export default {
 .title > div {
   height: 50px;
   line-height: 50px;
+  width: 100%;
+}
+.txtScroll-top .bd {
   width: 100%;
 }
 .txtScroll-top .infoList li {

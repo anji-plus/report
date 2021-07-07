@@ -1105,7 +1105,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
-          chartType: 'widget-barchart',
+          chartType: 'widget-table',
           value: '',
         },
       ],

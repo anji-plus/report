@@ -150,6 +150,7 @@
           <dynamic-add-table
             v-if="item.type == 'dynamic-add-table' && inputShow[item.name]"
             v-model="formData[item.name]"
+            :chart-type="item.chartType"
             @change="changed($event, item.name)"
           />
         </div>
