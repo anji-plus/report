@@ -10,6 +10,10 @@ server:
 spring:
   application:
     name: aj-report
+  #上传图片大小限制为10MB
+  servlet:
+    multipart:
+      max-file-size: 10MB
   #  cloud:
 #    nacos:
 #      server-addr: 10.108.26.121:8848,10.108.26.145:8848
