@@ -7,6 +7,8 @@ import com.anji.plus.gaea.cache.CacheHelper;
 import com.anji.plus.gaea.utils.JwtBean;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -19,6 +21,7 @@ import java.io.IOException;
  * Created by raodeming on 2021/6/24.
  */
 @Component
+@Order(Integer.MIN_VALUE + 99)
 public class TokenFilter implements Filter {
     @Autowired
     private CacheHelper cacheHelper;

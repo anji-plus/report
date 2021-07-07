@@ -54,44 +54,16 @@ mybatis-plus:
     - classpath*:/mapper/**/*.xml
     - classpath*:/modeler-mybatis-mappings/**/*.xml
 
-  gaea:
-    subscribes:
-      security:
-        enabled: true
-      push:
-        enabled: true
-        sms:
-          aliyun:
-            access-key-id:
-            secret:
-      audit-log:
-        enabled: true
-        callback-url: http://127.0.0.1:9091/log/callback
-      export:
-        enabled: true
-
-  #  邮箱发送配置
-  mail:
-    #    host不配置会注入失败
-    host: smtp.163.com
-    default-encoding: utf-8
-    protocol: smtp
-    properties:
-      mail:
-        smtp:
-          connectiontimeout: 5000
-          timeout: 3000
-
 management:
   endpoints:
     web:
       base-path: /
 logging:
-  level:
-    com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder: debug
+  config: classpath:logback.xml
 file:
   dist-path: /app/disk/upload/
   white-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi
   excelSuffix: .xlsx|.xls|.csv
   downloadPath: http://10.108.26.197:9095/file/download
+
 

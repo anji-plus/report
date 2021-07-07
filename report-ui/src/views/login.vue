@@ -1,8 +1,8 @@
 <!--
- * @Author: zyk 
- * @Date: 2020-07-13 11:04:24 
- * @Last Modified by:   zyk 
- * @Last Modified time: 2020-07-13 11:04:24 
+ * @Author: zyk
+ * @Date: 2020-07-13 11:04:24
+ * @Last Modified by:   zyk
+ * @Last Modified time: 2020-07-13 11:04:24
  !-->
 <template>
   <div class="login_container">
@@ -127,8 +127,8 @@ export default {
       activeTop: "-50%", // 色条滑块控制
       rememberPsw: false, // 记住密码选择框
       loginForm: {
-        username: "guest",
-        password: "guest",
+        username: "admin",
+        password: "123456",
         verifyCode: ""
       }, // 登录表单
       loginRules: {
@@ -231,10 +231,10 @@ export default {
       };
       const { code, data } = await login(obj);
       console.log(data);
+      this.loading = false;
       if (code != "200") return;
       setItem("token", data.token);
       setItem("username", data.username);
-      this.loading = false;
       // 选中记住密码时 把密码存到cookie里,时效15天
       this.rememberPsw &&
         cookies.set(
