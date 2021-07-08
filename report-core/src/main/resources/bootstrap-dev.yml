@@ -42,6 +42,8 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     placeholder-replacement: false
+    init-sqls:
+      - CREATE DATABASE IF NOT EXISTS `aj_report` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 generator:
   enabled: true
   workspace: /workspace/gaea
