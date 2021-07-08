@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import echarts from "echarts";
 export default {
   name: "WidgetPieNightingaleRoseArea", //南丁格尔玫瑰图面积模式 参考：https://echarts.apache.org/examples/zh/editor.html?c=pie-roseType-simple
   components: {},
@@ -28,7 +27,7 @@ export default {
         },
         series: [
           {
-            name: "面积模式",
+            //name: "面积模式",
             type: "pie",
             radius: ["10%", "50%"],
             center: ["50%", "50%"],
@@ -36,21 +35,13 @@ export default {
             itemStyle: {
               borderRadius: 8
             },
-            data: [
-              { value: 40, name: "rose 1" },
-              { value: 38, name: "rose 2" },
-              { value: 32, name: "rose 3" },
-              { value: 30, name: "rose 4" },
-              { value: 28, name: "rose 5" },
-              { value: 26, name: "rose 6" },
-              { value: 22, name: "rose 7" },
-              { value: 18, name: "rose 8" }
-            ]
+            data: []
           }
         ]
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
+      optionsCollapse: {}, // 图标属性
       optionsSetup: {}
     };
   },
@@ -90,13 +81,10 @@ export default {
     // 修改图标options属性
     editorOptions () {
       this.setOptionsTitle();
-      // this.setOptionsX()
-      // this.setOptionsY()
-      // this.setOptionsTop()
-      // this.setOptionsTooltip()
-      // this.setOptionsMargin()
-      // this.setOptionsLegend()
-      // this.setOptionsColor()
+      this.setOptionsValue();
+      this.setOptionsTooltip();
+      this.setOptionsLegend();
+      this.setOptionsColor();
       this.setOptionsData();
     },
     // 标题修改
@@ -117,104 +105,35 @@ export default {
         fontWeight: optionsCollapse.subTextFontWeight,
         fontSize: optionsCollapse.subTextFontSize
       };
-
       this.options.title = title;
     },
-    // X轴设置
-    setOptionsX () {
-      const optionsCollapse = this.optionsSetup;
-      const xAxis = {
-        type: "category",
-        show: optionsCollapse.hideX, // 坐标轴是否显示
-        name: optionsCollapse.xName, // 坐标轴名称
-        nameTextStyle: {
-          color: optionsCollapse.xNameColor,
-          fontSize: optionsCollapse.xNameFontSize
-        },
-        nameRotate: optionsCollapse.textAngle, // 文字角度
-        inverse: optionsCollapse.reversalX, // 轴反转
-        axisLabel: {
-          show: true,
-          interval: optionsCollapse.textInterval, // 文字角度
-          rotate: optionsCollapse.textAngle, // 文字角度
-          textStyle: {
-            color: optionsCollapse.Xcolor, // x轴 坐标文字颜色
-            fontSize: optionsCollapse.fontSizeX
-          }
-        },
-        axisLine: {
-          show: true,
-          lineStyle: {
-            color: optionsCollapse.lineColorX
-          }
-        },
-        splitLine: {
-            show: optionsCollapse.isShowSplitLineX,
-            lineStyle: {
-                color: optionsCollapse.splitLineColorX
-            },
-        },
-      };
-      this.options.xAxis = xAxis;
-    },
-    // Y轴设置
-    setOptionsY () {
-      const optionsCollapse = this.optionsSetup;
-      const yAxis = {
-        type: "value",
-        show: optionsCollapse.isShowY, // 坐标轴是否显示
-        name: optionsCollapse.textNameY, // 坐标轴名称
-        nameTextStyle: {
-          color: optionsCollapse.NameColorY,
-          fontSize: optionsCollapse.NameFontSizeY
-        },
-        inverse: optionsCollapse.reversalY, // 轴反转
-        axisLabel: {
-          show: true,
-          textStyle: {
-            color: optionsCollapse.colorY, // x轴 坐标文字颜色
-            fontSize: optionsCollapse.fontSizeY
-          }
-        },
-        splitLine: {
-          show: false
-        },
-        axisLine: {
-          show: true,
-          lineStyle: {
-            color: optionsCollapse.lineColorY
-          }
-        },
-        splitLine: {
-            show: optionsCollapse.isShowSplitLineY,
-            lineStyle: {
-                color: optionsCollapse.splitLineColorY
-            },
-        },
-      };
-
-      this.options.yAxis = yAxis;
-    },
-    // 数值设定 or 柱体设置
-    setOptionsTop () {
+    // 数值设定
+    setOptionsValue() {
       const optionsCollapse = this.optionsSetup;
       const series = this.options.series;
-
-      for (const key in series) {
-        if (series[key].type == "bar") {
-          series[key].label = {
-            show: optionsCollapse.isShow,
-            position: "top",
-            distance: 10,
-            fontSize: optionsCollapse.fontSize,
+      const numberValue = optionsCollapse.numberValue ? "{c}" : "";
+      const percentage = optionsCollapse.percentage ? "({d})%" : "";
+      const label = {
+        show: optionsCollapse.isShow,
+        formatter: `{a|{b}：${numberValue} ${percentage}}`,
+        rich: {
+          a: {
+            padding: [-30, 15, -20, 15],
             color: optionsCollapse.subTextColor,
+            fontSize: optionsCollapse.fontSize,
             fontWeight: optionsCollapse.fontWeight
-          };
-          series[key].barWidth = optionsCollapse.maxWidth;
-          series[key].barMinHeight = optionsCollapse.minHeight;
+          }
+        },
+        fontSize: optionsCollapse.fontSize,
+
+        fontWeight: optionsCollapse.optionsCollapse
+      };
+      for (const key in series) {
+        if (series[key].type == "pie") {
+          series[key].label = label;
+          series[key].labelLine = { show: optionsCollapse.isShow };
         }
       }
-      this.options.series = series;
     },
     // tooltip 设置
     setOptionsTooltip () {
@@ -259,7 +178,7 @@ export default {
       legend.itemWidth = optionsCollapse.lengedWidth;
     },
     // 图例颜色修改
-    setOptionsColor () {
+    setOptionsColor() {
       const optionsCollapse = this.optionsSetup;
       const customColor = optionsCollapse.customColor;
       if (!customColor) return;
@@ -267,76 +186,45 @@ export default {
       for (let i = 0; i < customColor.length; i++) {
         arrColor.push(customColor[i].color);
       }
-      const itemStyle = {
-        normal: {
-          color: params => {
-            return arrColor[params.dataIndex];
-          },
-          barBorderRadius: optionsCollapse.radius
-        }
-      };
-      for (const key in this.options.series) {
-        if (this.options.series[key].type == "bar") {
-          this.options.series[key].itemStyle = itemStyle;
-        }
-      }
+      this.options.color = arrColor;
       this.options = Object.assign({}, this.options);
     },
     // 数据解析
-    setOptionsData () {
-      const optionsSetup = this.optionsSetup;
-      console.log(optionsSetup);
+    setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
-      console.log(optionsData);
       optionsData.dataType == "staticData"
-        ? this.staticDataFn(optionsData.staticData, optionsSetup)
-        : this.dynamicDataFn(optionsData.dynamicData, optionsSetup);
+        ? this.staticDataFn(optionsData.staticData)
+        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
-    // 静态数据
-    staticDataFn (val, optionsSetup) {
+    staticDataFn(val) {
       const staticData = JSON.parse(val);
-      // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = staticData.categories;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = staticData.categories;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-      }
-      // series
-      const series = this.options.series;
-      for (const i in series) {
-        if (series[i].type == "bar") {
-          series[i].data = staticData.series[0].data;
+      for (const key in this.options.series) {
+        if (this.options.series[key].type == "pie") {
+          this.options.series[key].data = staticData;
         }
       }
     },
-    // 动态数据
-    dynamicDataFn (val, optionsSetup) {
-      console.log(val);
+    dynamicDataFn(val, refreshTime) {
       if (!val) return;
-      // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = val.xAxis;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
+      if (this.ispreview) {
+        this.getEchartData(val);
+        this.flagInter = setInterval(() => {
+          this.getEchartData(val);
+        }, refreshTime);
       } else {
-        this.options.xAxis.data = val.xAxis;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
+        this.getEchartData(val);
       }
-
-      // series
-      const series = this.options.series;
-      for (const i in series) {
-        if (series[i].type == "bar") {
-          series[i].data = val.series[i].data;
+    },
+    getEchartData(val) {
+      const data = this.queryEchartsData(val);
+      data.then(res => {
+        this.renderingFn(res);
+      });
+    },
+    renderingFn(val) {
+      for (const key in this.options.series) {
+        if (this.options.series[key].type == "pie") {
+          this.options.series[key].data = val;
         }
       }
     }
