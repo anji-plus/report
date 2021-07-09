@@ -5135,7 +5135,7 @@ const widgetTools = [
                 value: '#fff',
               },
               {
-                type: 'el-input-text',
+                type: 'el-input-number',
                 label: '字体大小',
                 name: 'lengedFontSize',
                 required: false,
