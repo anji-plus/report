@@ -190,38 +190,6 @@ export default {
       this.options = Object.assign({}, this.options);
     },
     // 数据解析
-    setOptionsData () {
-      const optionsSetup = this.optionsSetup;
-      console.log(optionsSetup);
-      const optionsData = this.optionsData; // 数据类型 静态 or 动态
-      console.log(optionsData);
-      optionsData.dataType == "staticData"
-        ? this.staticDataFn(optionsData.staticData, optionsSetup)
-        : this.dynamicDataFn(optionsData.dynamicData, optionsSetup);
-    },
-    // 静态数据
-    staticDataFn (val, optionsSetup) {
-      const staticData = JSON.parse(val);
-      // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = staticData.categories;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = staticData.categories;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-      }
-      // series
-      const series = this.options.series;
-      for (const i in series) {
-        if (series[i].type == "bar") {
-          series[i].data = staticData.series[0].data;
-        }
-      }
-    },
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
