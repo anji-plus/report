@@ -185,9 +185,6 @@ export default {
             fontSize: optionsCollapse.fontSizeY
           }
         },
-        splitLine: {
-          show: false
-        },
         axisLine: {
           show: true,
           lineStyle: {

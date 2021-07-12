@@ -19,6 +19,7 @@ import echarts from 'echarts';
 import ECharts from 'vue-echarts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/component/tooltip'
+//import 'echarts-liquidfill'
 // import 'echarts-gl'
 Vue.component('v-chart', ECharts)
 

@@ -30,6 +30,7 @@ import WidgetGauge from "./widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRoseArea";
 import widgetTable from "./widgetTable.vue";
 import widgetMap from "./widgetMap.vue";
+import widgetPiePercentageChart from "./pie/widgetPiePercentageChart";
 export default {
   name: "WidgetTemp",
   components: {
@@ -51,7 +52,8 @@ export default {
     WidgetGauge,
     WidgetPieNightingaleRoseArea,
     widgetTable,
-    widgetMap
+    widgetMap,
+    widgetPiePercentageChart
   },
   model: {
     prop: "value",
