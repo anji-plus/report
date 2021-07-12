@@ -16,7 +16,7 @@ export default {
     return {
       angle: 0,
       options: {
-        backgroundColor: '#061740',
+        //backgroundColor: '#061740',
         title: {
           text: '{nums|' + this.value2() + '}{percent|%}',
           x: 'center',
@@ -347,7 +347,7 @@ export default {
   methods: {
     // 修改图标options属性
     editorOptions() {
-      // this.setOptionsTitle();
+       this.setOptionsTitle();
       // this.setOptionsValue();
       // this.setOptionsTooltip();
       // this.setOptionsLegend();

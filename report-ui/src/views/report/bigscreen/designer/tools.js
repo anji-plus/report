@@ -5417,7 +5417,7 @@ const widgetTools = [
               },
             ],
           },
-          {
+/*          {
             name: '数值设定',
             list: [
               {
@@ -5475,7 +5475,7 @@ const widgetTools = [
                 value: 'normal'
               },
             ],
-          },
+          },*/
           {
             name: '提示语设置',
             list: [
@@ -5570,7 +5570,7 @@ const widgetTools = [
               },
             ],
           },
-          {
+/*          {
             name: '自定义配色',
             list: [
               {
@@ -5581,7 +5581,7 @@ const widgetTools = [
                 value: [{ color: '#FF801C' }, { color: '#F5FF46' }, { color: '#00FE65' }, { color: '#00FEFF' }, { color: '#ffa800' }]
               },
             ],
-          },
+          },*/
         ],
       ],
       // 数据
