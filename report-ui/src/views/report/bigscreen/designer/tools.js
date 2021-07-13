@@ -5324,7 +5324,7 @@ const widgetTools = [
                 name: 'isNoTitle',
                 required: false,
                 placeholder: '',
-                value: true
+                value: true,
               },
               {
                 type: 'el-input-text',
@@ -5332,7 +5332,7 @@ const widgetTools = [
                 name: 'titleText',
                 required: false,
                 placeholder: '',
-                value: ''
+                value: '',
               },
               {
                 type: 'vue-color',
@@ -5340,7 +5340,7 @@ const widgetTools = [
                 name: 'textColor',
                 required: false,
                 placeholder: '',
-                value: '#fff'
+                value: '#FFD700'
               },
               {
                 type: 'el-select',
@@ -5375,95 +5375,33 @@ const widgetTools = [
                   { code: 'left', name: '左对齐' },
                   { code: 'right', name: '右对齐' },
                 ],
-                value: 'left'
-              },
-              {
-                type: 'el-input-text',
-                label: '副标题',
-                name: 'subText',
-                required: false,
-                placeholder: '',
-                value: ''
-              },
-              {
-                type: 'vue-color',
-                label: '字体颜色',
-                name: 'subTextColor',
-                required: false,
-                placeholder: '',
-                value: ''
-              },
-              {
-                type: 'el-select',
-                label: '字体粗细',
-                name: 'subTextFontWeight',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
-                ],
-                value: 'normal'
-              },
-              {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'subTextFontSize',
-                required: false,
-                placeholder: '',
-                value: 12
-              },
+                value: 'center'
+              }
             ],
           },
-/*          {
-            name: '数值设定',
+          {
+            name: '数值设置',
             list: [
               {
-                type: 'el-switch',
-                label: '显示',
-                name: 'isShow',
+                type: 'vue-color',
+                label: '数值颜色',
+                name: 'textColor',
                 required: false,
                 placeholder: '',
-                value: true,
-              },
-              {
-                type: 'el-switch',
-                label: '数值',
-                name: 'numberValue',
-                require: false,
-                placeholder: '',
-                value: true,
-              },
-              {
-                type: 'el-switch',
-                label: '百分比',
-                name: 'percentage',
-                require: false,
-                placeholder: '',
-                value: false,
+                value: '#fff'
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
-                name: 'fontSize',
+                label: '数值字体',
+                name: 'textFontSize',
                 required: false,
                 placeholder: '',
-                value: 14,
-              },
-              {
-                type: 'vue-color',
-                label: '字体颜色',
-                name: 'subTextColor',
-                required: false,
-                placeholder: '',
-                value: ''
+                value: 60
               },
               {
                 type: 'el-select',
                 label: '字体粗细',
-                name: 'fontWeight',
+                name: 'textFontWeight',
                 required: false,
                 placeholder: '',
                 selectOptions: [
@@ -5474,27 +5412,36 @@ const widgetTools = [
                 ],
                 value: 'normal'
               },
-            ],
-          },*/
-          {
-            name: '提示语设置',
-            list: [
-              {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'fontSize',
-                required: false,
-                placeholder: '',
-                value: 12
-              },
               {
                 type: 'vue-color',
-                label: '网格线颜色',
-                name: 'lineColor',
+                label: '%号颜色',
+                name: 'textPerColor',
                 required: false,
                 placeholder: '',
-                value: ''
+                value: '#fff'
               },
+              {
+                type: 'el-input-number',
+                label: '%号字体',
+                name: 'textPerFontSize',
+                required: false,
+                placeholder: '',
+                value: 30
+              },
+              {
+                type: 'el-select',
+                label: '字体粗细',
+                name: 'textPerFontWeight',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  { code: 'normal', name: '正常' },
+                  { code: 'bold', name: '粗体' },
+                  { code: 'bolder', name: '特粗体' },
+                  { code: 'lighter', name: '细体' }
+                ],
+                value: 'normal'
+              }
             ],
           },
           {
@@ -5570,18 +5517,6 @@ const widgetTools = [
               },
             ],
           },
-/*          {
-            name: '自定义配色',
-            list: [
-              {
-                type: 'customColor',
-                label: '',
-                name: 'customColor',
-                required: false,
-                value: [{ color: '#FF801C' }, { color: '#F5FF46' }, { color: '#00FE65' }, { color: '#00FEFF' }, { color: '#ffa800' }]
-              },
-            ],
-          },*/
         ],
       ],
       // 数据
@@ -5621,7 +5556,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: '[{"value": 1048,"name": "搜索引擎"},{"value": 735, "name": "直接访问"},{"value": 580, "name": "邮件营销"},{"value": 484,"name":"联盟广告"},{"value":300,"name":"视频广告"}]',
+          value: 60,
         },
         {
           type: 'dycustComponents',

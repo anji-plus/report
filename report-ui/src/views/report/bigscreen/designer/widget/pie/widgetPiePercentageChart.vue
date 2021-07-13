@@ -18,7 +18,7 @@ export default {
       options: {
         //backgroundColor: '#061740',
         title: {
-          text: '{nums|' + this.value2() + '}{percent|%}',
+          text: '{nums|' + 60 + '}{percent|%}',
           x: 'center',
           y: 'center',
           textStyle: {
@@ -29,7 +29,7 @@ export default {
               },
               percent: {
                 fontSize: 30,
-                color: '#ffffff',
+                color: '#29EEF3',
               },
             },
           },
@@ -183,7 +183,7 @@ export default {
             data: [0],
           },
           {
-            name: 'ring5', //绿点
+            //name: 'ring5', //绿点
             type: 'custom',
             coordinateSystem: 'none',
             renderItem: (params, api) => {
@@ -223,7 +223,7 @@ export default {
             },
             data: [
               {
-                value: this.value2(),
+                value: 60,
                 name: '',
                 itemStyle: {
                   normal: {
@@ -244,7 +244,7 @@ export default {
                 },
               },
               {
-                value: 100 - this.value2(),
+                value: 40,
                 name: '',
                 label: {
                   normal: {
@@ -260,13 +260,13 @@ export default {
             ],
           },
           {
-            name: '',
+            name: 'percent',
             type: 'gauge',
             radius: '58%',
             center: ['50%', '50%'],
             startAngle: 0,
             endAngle: 359.9,
-            splitNumber: 8,
+            splitNumber: -1,
             hoverAnimation: true,
             axisTick: {
               show: false,
@@ -291,20 +291,18 @@ export default {
             },
             detail: {
               show: false,
+              textStyle: {
+                fontSize: 12
+              }
             },
-            data: [
-              {
-                value: 0,
-                name: '',
-              },
-            ],
+            data: [],
           },
         ],
       },
-      /*    optionsStyle: {}, // 样式
-            optionsData: {}, // 数据
-            optionsCollapse: {}, // 图标属性
-            optionsSetup: {}*/
+      optionsStyle: {}, // 样式
+      optionsData: {}, // 数据
+      optionsCollapse: {}, // 图标属性
+      optionsSetup: {}
     };
   },
   computed: {
@@ -339,22 +337,12 @@ export default {
     this.editorOptions();
   },
   mounted() {
-/*    setInterval(() => {
-      //this.angle = this.angle + 3
-      //myChart.setOption(option,true)
-    }, 100);*/
+    /*    setInterval(() => {
+          //this.angle = this.angle + 3
+          //myChart.setOption(option,true)
+        }, 100);*/
   },
   methods: {
-    // 修改图标options属性
-    editorOptions() {
-       this.setOptionsTitle();
-      // this.setOptionsValue();
-      // this.setOptionsTooltip();
-      // this.setOptionsLegend();
-      // this.setOptionsColor();
-      // this.setOptionsData();
-
-    },
     //轴point设置
     getCirlPoint(x0, y0, r, x) {
       let x1 = x0 + r * Math.cos((x * Math.PI) / 180);
@@ -364,113 +352,98 @@ export default {
         y: y1,
       };
     },
-    value2(){
-      return 50;
+    editorOptions() {
+      //this.setOptionsTitle();
+      //this.setOptionsTooltip();
+      //this.setOptionsLegend();
+      //this.setOptionsColor();
+      this.setOptionsData();
     },
-    // 标题设置
     setOptionsTitle() {
       const optionsCollapse = this.optionsSetup;
-      const title = {};
-      title.show = optionsCollapse.isNoTitle;
-      title.text = optionsCollapse.titleText;
-      title.left = optionsCollapse.textAlign;
-      title.textStyle = {
-        color: optionsCollapse.textColor,
-        fontSize: optionsCollapse.textFontSize,
-        fontWeight: optionsCollapse.textFontWeight
+      const title = this.options.title;
+      title.x = "center";
+      title.y = "center";
+      const rich = {
+        nums: {
+          fontSize: optionsCollapse.textFontSize,
+          color: optionsCollapse.textColor
+        },
+        percent: {
+          fontSize: optionsCollapse.textPerFontSize,
+          color: optionsCollapse.textPerColor
+        }
       };
-      title.subtext = optionsCollapse.subText;
-      title.subtextStyle = {
-        color: optionsCollapse.subTextColor,
-        fontWeight: optionsCollapse.subTextFontWeight,
-        fontSize: optionsCollapse.subTextFontSize
-      };
-
+      title.textStyle['rich'] = rich;
       this.options.title = title;
     },
-    // 数值设定
-    setOptionsValue() {
-      const optionsCollapse = this.optionsSetup;
+    setOptions() {
+      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      const numberValue = optionsCollapse.numberValue ? "{c}" : "";
-      const percentage = optionsCollapse.percentage ? "({d})%" : "";
-      const label = {
-        show: optionsCollapse.isShow,
-        formatter: `{a|{b}：${numberValue} ${percentage}}`,
-        rich: {
-          a: {
-            padding: [-30, 15, -20, 15],
-            color: optionsCollapse.subTextColor,
-            fontSize: optionsCollapse.fontSize,
-            fontWeight: optionsCollapse.fontWeight
-          }
-        },
-        fontSize: optionsCollapse.fontSize,
-
-        fontWeight: optionsCollapse.optionsCollapse
-      };
       for (const key in series) {
-        if (series[key].type == "pie") {
-          series[key].label = label;
-          series[key].labelLine = {show: optionsCollapse.isShow};
+        if (series[key].type == "gauge") {
+          series[key].axisLine.lineStyle.width = optionsSetup.tickMarkWeight;
+          series[key].axisLabel.show = optionsSetup.showScaleValue;
+          series[key].axisLabel.fontSize = optionsSetup.scaleFontSize;
+          series[key].axisTick.show = optionsSetup.showTickMarks;
+          series[key].detail.textStyle.fontSize = optionsSetup.targetFontSize;
         }
       }
     },
-    // 提示语设置 tooltip
-    setOptionsTooltip() {
-      const optionsCollapse = this.optionsSetup;
-      const tooltip = {
-        trigger: "item",
-        show: true,
-        textStyle: {
-          color: optionsCollapse.lineColor,
-          fontSize: optionsCollapse.fontSize
-        }
-      };
-      this.options.tooltip = tooltip;
+    setOptionPer(val) {
+      const data = this.options.series[6]['data'];
+      data.forEach((ev, index) => {
+        if (index == 0) {
+          ev.value = val
+          const itemStyle = {
+            normal: {
+              color: {
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: '#4FADFD', // 0% 处的颜色
+                  },
+                  {
+                    offset: 1,
+                    color: '#28E8FA', // 100% 处的颜色
+                  },
+                ]
+              }
+            }
+          };
+          data['itemStyle'] = itemStyle
+        } else if (index == 1){
+          ev.value = (100 - val)
+          const label = {
+            normal: {
+              show: false,
+            },
+          };
+          const itemStyle = {
+            normal: {
+              color: '#173164',
+            },
+          };
+          data['label'] = label;
+          data['itemStyle'] = itemStyle;
+        }else{};
+      })
+      console.log(data)
     },
-    // 图例操作 legend
-    setOptionsLegend() {
-      const optionsCollapse = this.optionsSetup;
-      const legend = this.options.legend;
-      legend.show = optionsCollapse.isShowLegend;
-      legend.left = optionsCollapse.lateralPosition == "left" ? 0 : "auto";
-      legend.right = optionsCollapse.lateralPosition == "right" ? 0 : "auto";
-      legend.top = optionsCollapse.longitudinalPosition == "top" ? 0 : "auto";
-      legend.bottom =
-        optionsCollapse.longitudinalPosition == "bottom" ? 0 : "auto";
-      legend.orient = optionsCollapse.layoutFront;
-      legend.textStyle = {
-        color: optionsCollapse.lengedColor,
-        fontSize: optionsCollapse.fontSize
-      };
-      legend.itemWidth = optionsCollapse.lengedWidth;
-    },
-    // 图例颜色修改
-    setOptionsColor() {
-      const optionsCollapse = this.optionsSetup;
-      const customColor = optionsCollapse.customColor;
-      if (!customColor) return;
-      const arrColor = [];
-      for (let i = 0; i < customColor.length; i++) {
-        arrColor.push(customColor[i].color);
-      }
-      this.options.color = arrColor;
-      this.options = Object.assign({}, this.options);
-    },
+    // 数据解析
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
+        : this.dynamicDataFn(
+        optionsData.dynamicData,
+        optionsData.refreshTime
+        );
     },
     staticDataFn(val) {
-      const staticData = JSON.parse(val);
-      for (const key in this.options.series) {
-        if (this.options.series[key].type == "pie") {
-          this.options.series[key].data = staticData;
-        }
-      }
+      const title = this.options.title;
+      title.text = '{nums|' + val + '}{percent|%}';
+      this.setOptionPer(val)
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -486,15 +459,9 @@ export default {
     getEchartData(val) {
       const data = this.queryEchartsData(val);
       data.then(res => {
-        this.renderingFn(res);
+        this.styleColor.text = res[0].value
+        this.$forceUpdate();
       });
-    },
-    renderingFn(val) {
-      for (const key in this.options.series) {
-        if (this.options.series[key].type == "pie") {
-          this.options.series[key].data = val;
-        }
-      }
     }
   }
 };
