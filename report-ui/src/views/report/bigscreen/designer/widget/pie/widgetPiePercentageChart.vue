@@ -353,7 +353,7 @@ export default {
       };
     },
     editorOptions() {
-      //this.setOptionsTitle();
+      this.setOptionsTitle();
       //this.setOptionsTooltip();
       //this.setOptionsLegend();
       //this.setOptionsColor();
@@ -366,12 +366,14 @@ export default {
       title.y = "center";
       const rich = {
         nums: {
-          fontSize: optionsCollapse.textFontSize,
-          color: optionsCollapse.textColor
+          fontSize: optionsCollapse.textNumFontSize,
+          color: optionsCollapse.textNumColor,
+          fontWeight: optionsCollapse.textNumFontWeight
         },
         percent: {
           fontSize: optionsCollapse.textPerFontSize,
-          color: optionsCollapse.textPerColor
+          color: optionsCollapse.textPerColor,
+          fontWeight: optionsCollapse.textPerFontWeight
         }
       };
       title.textStyle['rich'] = rich;

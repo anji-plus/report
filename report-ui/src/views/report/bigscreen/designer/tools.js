@@ -5315,7 +5315,7 @@ const widgetTools = [
           value: ''
         },
         [
-          {
+          /*{
             name: '标题设置',
             list: [
               {
@@ -5378,14 +5378,14 @@ const widgetTools = [
                 value: 'center'
               }
             ],
-          },
+          },*/
           {
             name: '数值设置',
             list: [
               {
                 type: 'vue-color',
                 label: '数值颜色',
-                name: 'textColor',
+                name: 'textNumColor',
                 required: false,
                 placeholder: '',
                 value: '#fff'
@@ -5393,15 +5393,15 @@ const widgetTools = [
               {
                 type: 'el-input-number',
                 label: '数值字体',
-                name: 'textFontSize',
+                name: 'textNumFontSize',
                 required: false,
                 placeholder: '',
-                value: 60
+                value: 40
               },
               {
                 type: 'el-select',
                 label: '字体粗细',
-                name: 'textFontWeight',
+                name: 'textNumFontWeight',
                 required: false,
                 placeholder: '',
                 selectOptions: [
@@ -5426,7 +5426,7 @@ const widgetTools = [
                 name: 'textPerFontSize',
                 required: false,
                 placeholder: '',
-                value: 30
+                value: 20
               },
               {
                 type: 'el-select',
@@ -5444,7 +5444,7 @@ const widgetTools = [
               }
             ],
           },
-          {
+          /*{
             name: '图例操作',
             list: [
               {
@@ -5516,7 +5516,7 @@ const widgetTools = [
                 value: ''
               },
             ],
-          },
+          },*/
         ],
       ],
       // 数据
