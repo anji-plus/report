@@ -123,10 +123,10 @@ const widgetTools = [
           required: false,
           placeholder: '',
           selectOptions: [
-            { code: 'normal', name: '正常' },
-            { code: 'bold', name: '粗体' },
-            { code: 'bolder', name: '特粗体' },
-            { code: 'lighter', name: '细体' }
+            {code: 'normal', name: '正常'},
+            {code: 'bold', name: '粗体'},
+            {code: 'bolder', name: '特粗体'},
+            {code: 'lighter', name: '细体'}
           ],
           value: 'normal'
         },
@@ -137,9 +137,9 @@ const widgetTools = [
           required: false,
           placeholder: '',
           selectOptions: [
-            { code: 'center', name: '居中' },
-            { code: 'left', name: '左对齐' },
-            { code: 'right', name: '右对齐' },
+            {code: 'center', name: '居中'},
+            {code: 'left', name: '左对齐'},
+            {code: 'right', name: '右对齐'},
           ],
           value: 'center'
         },
@@ -297,10 +297,10 @@ const widgetTools = [
           required: false,
           placeholder: '',
           selectOptions: [
-            { code: 'normal', name: '正常' },
-            { code: 'bold', name: '粗体' },
-            { code: 'bolder', name: '特粗体' },
-            { code: 'lighter', name: '细体' }
+            {code: 'normal', name: '正常'},
+            {code: 'bold', name: '粗体'},
+            {code: 'bolder', name: '特粗体'},
+            {code: 'lighter', name: '细体'}
           ],
           value: 'normal'
         },
@@ -311,9 +311,9 @@ const widgetTools = [
           required: false,
           placeholder: '',
           selectOptions: [
-            { code: 'center', name: '居中' },
-            { code: 'left', name: '左对齐' },
-            { code: 'right', name: '右对齐' },
+            {code: 'center', name: '居中'},
+            {code: 'left', name: '左对齐'},
+            {code: 'right', name: '右对齐'},
           ],
           value: 'center'
         },
@@ -435,10 +435,10 @@ const widgetTools = [
           required: false,
           placeholder: '',
           selectOptions: [
-            { code: 'normal', name: '正常' },
-            { code: 'bold', name: '粗体' },
-            { code: 'bolder', name: '特粗体' },
-            { code: 'lighter', name: '细体' }
+            {code: 'normal', name: '正常'},
+            {code: 'bold', name: '粗体'},
+            {code: 'bolder', name: '特粗体'},
+            {code: 'lighter', name: '细体'}
           ],
           value: 'normal'
         },
@@ -449,9 +449,9 @@ const widgetTools = [
           required: false,
           placeholder: '',
           selectOptions: [
-            { code: 'center', name: '居中' },
-            { code: 'left', name: '左对齐' },
-            { code: 'right', name: '右对齐' },
+            {code: 'center', name: '居中'},
+            {code: 'left', name: '左对齐'},
+            {code: 'right', name: '右对齐'},
           ],
           value: 'center'
         },
@@ -544,12 +544,12 @@ const widgetTools = [
           required: false,
           placeholder: '',
           selectOptions: [
-            { code: 'yyyy-MM-dd', name: '日期' },
-            { code: 'yyyy-MM-dd hh:mm', name: '日期+时分' },
-            { code: 'yyyy-MM-dd hh:mm:ss', name: '日期+时分秒' },
-            { code: 'MM-dd', name: '日期无年' },
-            { code: 'hh:mm', name: '时分' },
-            { code: 'hh:mm:ss', name: '时分秒' },
+            {code: 'yyyy-MM-dd', name: '日期'},
+            {code: 'yyyy-MM-dd hh:mm', name: '日期+时分'},
+            {code: 'yyyy-MM-dd hh:mm:ss', name: '日期+时分秒'},
+            {code: 'MM-dd', name: '日期无年'},
+            {code: 'hh:mm', name: '时分'},
+            {code: 'hh:mm:ss', name: '时分秒'},
           ],
           value: 'yyyy-MM-dd hh:mm:ss'
         },
@@ -592,10 +592,10 @@ const widgetTools = [
           required: false,
           placeholder: '',
           selectOptions: [
-            { code: 'normal', name: '正常' },
-            { code: 'bold', name: '粗体' },
-            { code: 'bolder', name: '特粗体' },
-            { code: 'lighter', name: '细体' }
+            {code: 'normal', name: '正常'},
+            {code: 'bold', name: '粗体'},
+            {code: 'bolder', name: '特粗体'},
+            {code: 'lighter', name: '细体'}
           ],
           value: 'normal'
         },
@@ -606,9 +606,9 @@ const widgetTools = [
           required: false,
           placeholder: '',
           selectOptions: [
-            { code: 'center', name: '居中' },
-            { code: 'left', name: '左对齐' },
-            { code: 'right', name: '右对齐' },
+            {code: 'center', name: '居中'},
+            {code: 'left', name: '左对齐'},
+            {code: 'right', name: '右对齐'},
           ],
           value: 'left'
         },
@@ -912,9 +912,9 @@ const widgetTools = [
           required: false,
           placeholder: '',
           selectOptions: [
-            { code: 'center', name: '居中' },
-            { code: 'left', name: '左对齐' },
-            { code: 'right', name: '右对齐' },
+            {code: 'center', name: '居中'},
+            {code: 'left', name: '左对齐'},
+            {code: 'right', name: '右对齐'},
           ],
           value: 'center'
         },
@@ -1048,7 +1048,11 @@ const widgetTools = [
           name: 'dynamicAddTable',
           required: false,
           placeholder: '',
-          value: [{name: '日期', key: 'date', width: 200},{name: '姓名', key: 'name', width: 200}, {name: '地址', key: 'address', width: '200'}]
+          value: [{name: '日期', key: 'date', width: 200}, {name: '姓名', key: 'name', width: 200}, {
+            name: '地址',
+            key: 'address',
+            width: '200'
+          }]
         }
       ],
       data: [
@@ -1088,13 +1092,13 @@ const widgetTools = [
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: [
-            {date: '2016-05-02',name: '王小虎',address: '上海市普陀区金沙江路 1518 弄'},
-            {date: '2016-05-02',name: '王小虎',address: '上海市普陀区金沙江路 1518 弄'},
-            {date: '2016-05-02',name: '王小虎',address: '上海市普陀区金沙江路 1518 弄'},
-            {date: '2016-05-02',name: '王小虎',address: '上海市普陀区金沙江路 1518 弄'},
-            {date: '2016-05-02',name: '王小虎',address: '上海市普陀区金沙江路 1518 弄'},
-            {date: '2016-05-02',name: '王小虎',address: '上海市普陀区金沙江路 1518 弄'},
-            {date: '2016-05-02',name: '王小虎',address: '上海市普陀区金沙江路 1518 弄'},
+            {date: '2016-05-02', name: '王小虎', address: '上海市普陀区金沙江路 1518 弄'},
+            {date: '2016-05-02', name: '王小虎', address: '上海市普陀区金沙江路 1518 弄'},
+            {date: '2016-05-02', name: '王小虎', address: '上海市普陀区金沙江路 1518 弄'},
+            {date: '2016-05-02', name: '王小虎', address: '上海市普陀区金沙江路 1518 弄'},
+            {date: '2016-05-02', name: '王小虎', address: '上海市普陀区金沙江路 1518 弄'},
+            {date: '2016-05-02', name: '王小虎', address: '上海市普陀区金沙江路 1518 弄'},
+            {date: '2016-05-02', name: '王小虎', address: '上海市普陀区金沙江路 1518 弄'},
           ],
         },
         {
@@ -1312,10 +1316,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -1334,9 +1338,9 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'center', name: '居中' },
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'center', name: '居中'},
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: 'center'
               },
@@ -1363,10 +1367,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -1600,10 +1604,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -1704,8 +1708,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: ''
               },
@@ -1716,8 +1720,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'top', name: '顶部' },
-                  { code: 'bottom', name: '底部' },
+                  {code: 'top', name: '顶部'},
+                  {code: 'bottom', name: '底部'},
                 ],
                 value: ''
               },
@@ -1728,8 +1732,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'vertical', name: '竖排' },
-                  { code: 'horizontal', name: '横排' },
+                  {code: 'vertical', name: '竖排'},
+                  {code: 'horizontal', name: '横排'},
                 ],
                 value: ''
               },
@@ -1743,7 +1747,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
+                value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
               },
             ],
           },
@@ -1896,10 +1900,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -1918,9 +1922,9 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'center', name: '居中' },
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'center', name: '居中'},
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: 'center'
               },
@@ -1947,10 +1951,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -2409,10 +2413,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -2431,9 +2435,9 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'center', name: '居中' },
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'center', name: '居中'},
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: 'center'
               },
@@ -2460,10 +2464,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -2698,10 +2702,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -2807,8 +2811,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: 'left'
               },
@@ -2819,8 +2823,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'top', name: '顶部' },
-                  { code: 'bottom', name: '底部' },
+                  {code: 'top', name: '顶部'},
+                  {code: 'bottom', name: '底部'},
                 ],
                 value: ''
               },
@@ -2831,8 +2835,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'vertical', name: '竖排' },
-                  { code: 'horizontal', name: '横排' },
+                  {code: 'vertical', name: '竖排'},
+                  {code: 'horizontal', name: '横排'},
                 ],
                 value: ''
               },
@@ -2846,7 +2850,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#1E90FF' }],
+                value: [{color: '#1E90FF'}],
               },
             ],
           },
@@ -3080,10 +3084,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -3102,9 +3106,9 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'center', name: '居中' },
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'center', name: '居中'},
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: 'left'
               },
@@ -3131,10 +3135,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -3432,8 +3436,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: ''
               },
@@ -3444,8 +3448,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'top', name: '顶部' },
-                  { code: 'bottom', name: '底部' },
+                  {code: 'top', name: '顶部'},
+                  {code: 'bottom', name: '底部'},
                 ],
                 value: ''
               },
@@ -3456,8 +3460,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'vertical', name: '竖排' },
-                  { code: 'horizontal', name: '横排' },
+                  {code: 'vertical', name: '竖排'},
+                  {code: 'horizontal', name: '横排'},
                 ],
                 value: ''
               },
@@ -3471,7 +3475,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#00F4FFFF' }, { color: '#42fffd' }],
+                value: [{color: '#00F4FFFF'}, {color: '#42fffd'}],
               },
             ],
           },
@@ -3623,10 +3627,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -3645,9 +3649,9 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'center', name: '居中' },
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'center', name: '居中'},
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: 'left'
               },
@@ -3674,10 +3678,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -3741,10 +3745,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -3813,8 +3817,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: ''
               },
@@ -3825,8 +3829,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'top', name: '顶部' },
-                  { code: 'bottom', name: '底部' },
+                  {code: 'top', name: '顶部'},
+                  {code: 'bottom', name: '底部'},
                 ],
                 value: ''
               },
@@ -3837,8 +3841,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'vertical', name: '竖排' },
-                  { code: 'horizontal', name: '横排' },
+                  {code: 'vertical', name: '竖排'},
+                  {code: 'horizontal', name: '横排'},
                 ],
                 value: ''
               },
@@ -3852,7 +3856,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#0CD2E6' }, { color: '#00BFA5' }, { color: '#FFC722' }, { color: '#886EFF' }, { color: '#008DEC' }],
+                value: [{color: '#0CD2E6'}, {color: '#00BFA5'}, {color: '#FFC722'}, {color: '#886EFF'}, {color: '#008DEC'}],
               },
             ],
           },
@@ -4005,10 +4009,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -4027,9 +4031,9 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'center', name: '居中' },
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'center', name: '居中'},
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: 'left'
               },
@@ -4056,10 +4060,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -4123,10 +4127,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -4195,8 +4199,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: ''
               },
@@ -4207,8 +4211,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'top', name: '顶部' },
-                  { code: 'bottom', name: '底部' },
+                  {code: 'top', name: '顶部'},
+                  {code: 'bottom', name: '底部'},
                 ],
                 value: ''
               },
@@ -4219,8 +4223,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'vertical', name: '竖排' },
-                  { code: 'horizontal', name: '横排' },
+                  {code: 'vertical', name: '竖排'},
+                  {code: 'horizontal', name: '横排'},
                 ],
                 value: ''
               },
@@ -4234,7 +4238,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#0CD2E6' }, { color: '#00BFA5' }, { color: '#FFC722' }, { color: '#886EFF' }, { color: '#008DEC' }],
+                value: [{color: '#0CD2E6'}, {color: '#00BFA5'}, {color: '#FFC722'}, {color: '#886EFF'}, {color: '#008DEC'}],
               },
             ],
           },
@@ -4387,10 +4391,10 @@ const widgetTools = [
                 require: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -4438,10 +4442,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -4460,9 +4464,9 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'center', name: '居中' },
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'center', name: '居中'},
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: 'left'
               },
@@ -4489,10 +4493,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -4569,8 +4573,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: ''
               },
@@ -4581,8 +4585,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'top', name: '顶部' },
-                  { code: 'bottom', name: '底部' },
+                  {code: 'top', name: '顶部'},
+                  {code: 'bottom', name: '底部'},
                 ],
                 value: ''
               },
@@ -4593,8 +4597,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'vertical', name: '竖排' },
-                  { code: 'horizontal', name: '横排' },
+                  {code: 'vertical', name: '竖排'},
+                  {code: 'horizontal', name: '横排'},
                 ],
                 value: ''
               },
@@ -4608,7 +4612,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#0CD2E6' }, { color: '#00BFA5' }, { color: '#FFC722' }, { color: '#886EFF' }, { color: '#008DEC' }],
+                value: [{color: '#0CD2E6'}, {color: '#00BFA5'}, {color: '#FFC722'}, {color: '#886EFF'}, {color: '#008DEC'}],
               },
             ],
           },
@@ -4967,10 +4971,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -4989,9 +4993,9 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'center', name: '居中' },
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'center', name: '居中'},
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: 'left'
               },
@@ -5018,10 +5022,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -5085,10 +5089,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -5157,8 +5161,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
                 ],
                 value: ''
               },
@@ -5169,8 +5173,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'top', name: '顶部' },
-                  { code: 'bottom', name: '底部' },
+                  {code: 'top', name: '顶部'},
+                  {code: 'bottom', name: '底部'},
                 ],
                 value: ''
               },
@@ -5181,8 +5185,8 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'vertical', name: '竖排' },
-                  { code: 'horizontal', name: '横排' },
+                  {code: 'vertical', name: '竖排'},
+                  {code: 'horizontal', name: '横排'},
                 ],
                 value: ''
               },
@@ -5196,7 +5200,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{ color: '#FF801C' }, { color: '#F5FF46' }, { color: '#00FE65' }, { color: '#00FEFF' }, { color: '#ffa800' }]
+                value: [{color: '#FF801C'}, {color: '#F5FF46'}, {color: '#00FE65'}, {color: '#00FEFF'}, {color: '#ffa800'}]
               },
             ],
           },
@@ -5405,10 +5409,10 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               },
@@ -5435,14 +5439,67 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
                 ],
                 value: 'normal'
               }
             ],
+          },
+          {
+            name: '圆环设置',
+            list: [
+/*              {
+                type: 'vue-color',
+                label: '0%处',
+                name: 'colorStart',
+                required: false,
+                placeholder: '',
+                value: '#4FADFD'
+              },
+              {
+                type: 'vue-color',
+                label: '100%处',
+                name: 'colorEnd',
+                required: false,
+                placeholder: '',
+                value: '#28E8FA'
+              },*/
+              {
+                type: 'el-input-number',
+                label: '刻度数量',
+                name: 'lineNumber',
+                required: false,
+                placeholder: '',
+                value: 8
+              },
+              {
+                type: 'el-input-number',
+                label: '刻度长度',
+                name: 'lineLength',
+                required: false,
+                placeholder: '',
+                value: 15
+              },
+              {
+                type: 'el-input-number',
+                label: '刻度宽度',
+                name: 'lineWidth',
+                required: false,
+                placeholder: '',
+                value: 5
+              },
+              {
+                type: 'vue-color',
+                label: '刻度颜色',
+                name: 'lineColor',
+                required: false,
+                placeholder: '',
+                value: '#061740'
+              },
+            ]
           },
           /*{
             name: '图例操作',
@@ -5621,4 +5678,4 @@ const getToolByCode = function (code) {
   return item
 }
 
-export { widgetTools, getToolByCode }
+export {widgetTools, getToolByCode}

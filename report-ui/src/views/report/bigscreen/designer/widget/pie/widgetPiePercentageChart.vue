@@ -266,13 +266,13 @@ export default {
             center: ['50%', '50%'],
             startAngle: 0,
             endAngle: 359.9,
-            splitNumber: -1,
+            splitNumber: 8,
             hoverAnimation: true,
             axisTick: {
               show: false,
             },
             splitLine: {
-              length: 60,
+              length: 15,
               lineStyle: {
                 width: 5,
                 color: '#061740',
@@ -291,9 +291,6 @@ export default {
             },
             detail: {
               show: false,
-              textStyle: {
-                fontSize: 12
-              }
             },
             data: [],
           },
@@ -337,10 +334,10 @@ export default {
     this.editorOptions();
   },
   mounted() {
-    /*    setInterval(() => {
-          //this.angle = this.angle + 3
-          //myChart.setOption(option,true)
-        }, 100);*/
+/*        setInterval(() => {
+          this.angle = this.angle + 3
+          myChart.setOption(option,true)
+        }, 1000);*/
   },
   methods: {
     //轴point设置
@@ -358,6 +355,7 @@ export default {
       //this.setOptionsLegend();
       //this.setOptionsColor();
       this.setOptionsData();
+      this.setOptionLine();
     },
     setOptionsTitle() {
       const optionsCollapse = this.optionsSetup;
@@ -392,7 +390,9 @@ export default {
         }
       }
     },
-    setOptionPer(val) {
+    //圆环0-100%颜色
+    /*setOptionPerData(val) {
+      const optionsSetup = this.optionsSetup;
       const data = this.options.series[6]['data'];
       data.forEach((ev, index) => {
         if (index == 0) {
@@ -403,18 +403,18 @@ export default {
                 colorStops: [
                   {
                     offset: 0,
-                    color: '#4FADFD', // 0% 处的颜色
+                    color: optionsSetup.colorStart, // 0% 处的颜色
                   },
                   {
                     offset: 1,
-                    color: '#28E8FA', // 100% 处的颜色
+                    color: optionsSetup.colorEnd, // 100% 处的颜色
                   },
                 ]
               }
             }
           };
           data['itemStyle'] = itemStyle
-        } else if (index == 1){
+        } else if (index == 1) {
           ev.value = (100 - val)
           const label = {
             normal: {
@@ -422,15 +422,28 @@ export default {
             },
           };
           const itemStyle = {
-            normal: {
+            /!*normal: {
               color: '#173164',
-            },
+            },*!/
           };
           data['label'] = label;
           data['itemStyle'] = itemStyle;
-        }else{};
+        } else {
+        }
+        ;
       })
-      console.log(data)
+    },*/
+    setOptionLine() {
+      const optionsSetup = this.optionsSetup;
+      const line = this.options.series[7]['splitLine'];
+      const num = this.options.series[7];
+      num.splitNumber = optionsSetup.lineNumber;
+      line.length = optionsSetup.lineLength;
+      const lineStyle = {
+        width: optionsSetup.lineWidth,
+        color: optionsSetup.lineColor,
+      };
+      line['lineStyle'] = lineStyle
     },
     // 数据解析
     setOptionsData() {
@@ -445,7 +458,7 @@ export default {
     staticDataFn(val) {
       const title = this.options.title;
       title.text = '{nums|' + val + '}{percent|%}';
-      this.setOptionPer(val)
+      //this.setOptionPerData(val)
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -461,8 +474,9 @@ export default {
     getEchartData(val) {
       const data = this.queryEchartsData(val);
       data.then(res => {
-        this.styleColor.text = res[0].value
-        this.$forceUpdate();
+        this.options.title.text = '{nums|' + res[0].value + '}{percent|%}'
+        //this.$forceUpdate();
+        console.log(res[0].value)
       });
     }
   }
