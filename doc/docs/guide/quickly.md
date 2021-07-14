@@ -6,6 +6,21 @@
  第四步，访问 http://localhost:9095/index.html
 ```
 
+## 源码打包
+```js
+ 第一步，cd report-ui
+    npm install
+    npm run build
+ 第二步，cd report-core/src/main/resources/static
+    将第一步打包文件dist文件夹下所有文件copy到当前目录
+ 第三步，cd cd report-core
+    不可使用install，install会报错的
+    mvn clean package -Dmaven.test.skip=true
+ 第四步，启动 java -jar report-core-1.0.0-SNAPSHOT.jar
+
+也可以前后端分开单独部署，前端部署nginx，后端jar
+```
+
 ## 系统特性
 1. 最新最稳定的技术栈；
 2. 支持多数据源配置
