@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "15338097",
+      "name": "百分比",
+      "font_class": "baifenbi",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
       "icon_id": "15461480",
       "name": "文件",
       "font_class": "folder-o",

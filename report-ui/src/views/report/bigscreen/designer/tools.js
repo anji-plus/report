@@ -5298,7 +5298,7 @@ const widgetTools = [
     code: 'widgetPiePercentageChart',
     type: 'chart',
     label: '百分比图',
-    icon: 'iconnandinggeermeiguitu',
+    icon: 'iconbaifenbi',
     options: {
       // 配置
       setup: [
