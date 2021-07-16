@@ -62,7 +62,7 @@ export default {
         },
         series: [
           {
-            //name: 'ring5',
+            //name: '环1',
             type: 'custom',
             coordinateSystem: 'none',
             renderItem: (params, api) => {
@@ -86,7 +86,7 @@ export default {
             data: [0],
           },
           {
-            //name: 'ring5',
+            //name: '环2',
             type: 'custom',
             coordinateSystem: 'none',
             renderItem: (params, api) => {
@@ -110,7 +110,7 @@ export default {
             data: [0],
           },
           {
-            //name: 'ring5',
+            //name: '环3',
             type: 'custom',
             coordinateSystem: 'none',
             renderItem: (params, api) => {
@@ -134,7 +134,7 @@ export default {
             data: [0],
           },
           {
-            //name: 'ring5',
+            //name: '环4',
             type: 'custom',
             coordinateSystem: 'none',
             renderItem: (params, api) => {
@@ -158,7 +158,7 @@ export default {
             data: [0],
           },
           {
-            //name: 'ring5',
+            //name: '绿点1',
             type: 'custom',
             coordinateSystem: 'none',
             renderItem: (params, api) => {
@@ -183,7 +183,7 @@ export default {
             data: [0],
           },
           {
-            //name: 'ring5', //绿点
+            //name: '绿点2',
             type: 'custom',
             coordinateSystem: 'none',
             renderItem: (params, api) => {
@@ -208,7 +208,7 @@ export default {
             data: [0],
           },
           {
-            name: 'ring5',
+            //name: '圆环',
             type: 'pie',
             radius: ['58%', '45%'],
             silent: true,
