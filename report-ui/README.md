@@ -7,6 +7,7 @@ npm run dev
 ```
 npm install
 npm run build:prod
+编译结果：report/report-ui/dist目录
 ```
 ### 前端技术
 - [npm](https://www.npmjs.com/)：node.js的包管理工具，用于统一管理我们前端项目中需要用到的包、插件、工具、命令等，便于开发和维护。
