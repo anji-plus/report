@@ -130,7 +130,7 @@ public class DataSetServiceImpl implements DataSetService {
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                 dto.setSetParamList(jsonObject.keySet());
             } catch (Exception e) {
-                log.error("{}",e);
+                log.error("error",e);
             }
         }
         return dto;

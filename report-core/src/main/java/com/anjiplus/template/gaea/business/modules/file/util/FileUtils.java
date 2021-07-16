@@ -23,7 +23,7 @@ public class FileUtils {
             bos.close();
             buffer = bos.toByteArray();
         } catch (IOException e) {
-            log.error("{}", e);
+            log.error("error", e);
         }
         return buffer;
     }

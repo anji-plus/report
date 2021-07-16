@@ -94,6 +94,7 @@ public class DataSourceServiceImpl implements DataSourceService {
                 break;
             case JdbcConstants.MYSQL:
             case JdbcConstants.KUDU_IMAPLA:
+            case JdbcConstants.ORACLE:
                 testRelationalDb(dto);
                 break;
             case JdbcConstants.HTTP:
@@ -115,6 +116,7 @@ public class DataSourceServiceImpl implements DataSourceService {
                 return executeElasticsearchSql(dto);
             case JdbcConstants.MYSQL:
             case JdbcConstants.KUDU_IMAPLA:
+            case JdbcConstants.ORACLE:
                 return executeRelationalDb(dto);
             case JdbcConstants.HTTP:
                 return executeHttp(dto);
@@ -176,7 +178,7 @@ public class DataSourceServiceImpl implements DataSourceService {
         try {
             exchange = restTemplate.exchange(dto.getApiUrl(), HttpMethod.valueOf(dto.getMethod()), entity, JSONObject.class);
         } catch (Exception e) {
-            log.error("{}",e);
+            log.error("error",e);
             throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
         }
         if (exchange.getStatusCode().isError()) {
@@ -203,7 +205,7 @@ public class DataSourceServiceImpl implements DataSourceService {
                 result.add(jsonObject);
             }
         } catch (Exception e) {
-            log.error("{}",e);
+            log.error("error",e);
             throw BusinessExceptionBuilder.build(ResponseCode.ANALYSIS_DATA_ERROR, e.getMessage());
         }
         return result;
@@ -233,7 +235,7 @@ public class DataSourceServiceImpl implements DataSourceService {
                         Object value = rs.getObject(t);
                         jo.put(t, value);
                     } catch (SQLException throwable) {
-                        log.error("{}",throwable);
+                        log.error("error",throwable);
                         throw BusinessExceptionBuilder.build(ResponseCode.EXECUTE_SQL_ERROR, throwable.getMessage());
                     }
                 });
@@ -241,7 +243,7 @@ public class DataSourceServiceImpl implements DataSourceService {
             }
             return list;
         } catch (Exception throwable) {
-            log.error("{}",throwable);
+            log.error("error",throwable);
             throw BusinessExceptionBuilder.build(ResponseCode.EXECUTE_SQL_ERROR, throwable.getMessage());
         } finally {
             try {
@@ -249,7 +251,7 @@ public class DataSourceServiceImpl implements DataSourceService {
                     pooledConnection.close();
                 }
             } catch (SQLException throwable) {
-                log.error("{}",throwable);
+                log.error("error",throwable);
                 throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, throwable.getMessage());
             }
         }
@@ -269,7 +271,7 @@ public class DataSourceServiceImpl implements DataSourceService {
         try {
             exchange = restTemplate.exchange(dto.getApiUrl(), HttpMethod.valueOf(dto.getMethod()), entity, JSONObject.class);
         } catch (Exception e) {
-            log.error("{}",e);
+            log.error("error",e);
             throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
         }
         if (exchange.getStatusCode().isError()) {
@@ -294,7 +296,7 @@ public class DataSourceServiceImpl implements DataSourceService {
             log.info("数据库测试连接成功：{}", catalog);
             unPooledConnection.close();
         } catch (Exception e) {
-            log.error("{}",e);
+            log.error("error",e);
             throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
         }
     }
@@ -400,10 +402,6 @@ public class DataSourceServiceImpl implements DataSourceService {
      */
     @Override
     public void processAfterOperation(DataSource entity, BaseOperationEnum operationEnum) throws BusinessException {
-        switch (operationEnum){
-            case DELETE:
-                JdbcUtil.removeJdbcConnectionPool(entity.getId());
-                break;
-        }
+        JdbcUtil.removeJdbcConnectionPool(entity.getId());
     }
 }

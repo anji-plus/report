@@ -61,10 +61,11 @@ public class JdbcUtil {
         try {
             DruidDataSource pool = map.get(id);
             if (pool != null) {
+                log.info("remove pool success, datasourceId:{}", id);
                 map.remove(id);
             }
         } catch (Exception e) {
-            log.error("{}",e);
+            log.error("error",e);
         } finally {
         }
     }

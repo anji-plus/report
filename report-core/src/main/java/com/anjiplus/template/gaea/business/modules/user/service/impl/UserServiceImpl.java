@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
             }
             return result.toString();
         } catch (Exception e) {
-            log.error("{}",e);
+            log.error("error",e);
         }
         return "";
     }
