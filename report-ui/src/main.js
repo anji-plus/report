@@ -26,8 +26,6 @@ Vue.component('v-chart', ECharts)
 // permission control
 import '@/permission'
 
-import '@/extend'
-
 import Avue from '@smallwei/avue';
 import '@smallwei/avue/lib/index.css';
 Vue.use(Avue);
