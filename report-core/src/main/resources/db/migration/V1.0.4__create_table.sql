@@ -3,6 +3,7 @@
 */
 use aj_report_init;
 
+drop table if exists `aj_report_common2`;
 CREATE TABLE `aj_report_common2` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -16,6 +17,7 @@ INSERT INTO `aj_report_init`.`aj_report_common2`(`name`, `nums`) VALUES ('西安
 INSERT INTO `aj_report_init`.`aj_report_common2`(`name`, `nums`) VALUES ('河南', 50);
 INSERT INTO `aj_report_init`.`aj_report_common2`(`name`, `nums`) VALUES ('武汉', 20);
 
+drop table if exists `aj_report_common3`;
 CREATE TABLE `aj_report_common3` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `time` varchar(255) DEFAULT NULL,
@@ -37,6 +39,7 @@ INSERT INTO `aj_report_init`.`aj_report_common3`(`time`, `collect`, `start`) VAL
 INSERT INTO `aj_report_init`.`aj_report_common3`(`time`, `collect`, `start`) VALUES ('11月', 35, 34);
 INSERT INTO `aj_report_init`.`aj_report_common3`(`time`, `collect`, `start`) VALUES ('12月', 27, 23);
 
+drop table if exists `aj_report_table`;
 CREATE TABLE `aj_report_table` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date DEFAULT NULL,
@@ -54,6 +57,7 @@ INSERT INTO `aj_report_init`.`aj_report_table`(`date`, `name`, `code`, `address`
 INSERT INTO `aj_report_init`.`aj_report_table`(`date`, `name`, `code`, `address`) VALUES ('2021-05-06', '上汽运输', 'A00000006', '这是一条测试表格事件6');
 INSERT INTO `aj_report_init`.`aj_report_table`(`date`, `name`, `code`, `address`) VALUES ('2021-05-07', '上汽大众', 'A00000007', '这是一条测试表格事件7');
 
+drop table if exists `aj_report_nums`;
 CREATE TABLE `aj_report_nums` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `inter` int(11) DEFAULT NULL,
