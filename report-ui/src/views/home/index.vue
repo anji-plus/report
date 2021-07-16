@@ -1,9 +1,5 @@
 <template>
   <div class="index-container">
-    <!-- <div class="left-top"></div>
-    <div class="left-bottom"></div>
-    <div class="right-top"></div>
-    <div class="right-bottom"></div> -->
     <el-row align="middle" justify="center">
       <el-col :span="24" :offset="0" class="position">
         <div class="center"></div>
@@ -53,48 +49,6 @@ export default {
     margin-bottom: 0;
     position: absolute;
     top: 67px;
-  }
-  .left-top,
-  .left-bottom,
-  .right-top,
-  .right-bottom {
-    position: absolute;
-  }
-  .left-top {
-    left: 0;
-    top: 0;
-    z-index: 1;
-    width: 223px;
-    height: 291px;
-    background: url('../../../static/index-top-left.png');
-    background-size: 100% 100%;
-  }
-  .left-bottom {
-    left: 0;
-    bottom: 0;
-    z-index: 2;
-    width: 461px;
-    height: 236px;
-    background: url('../../../static/index-bottom-left.png');
-    background-size: 100% 100%;
-  }
-  .right-top {
-    right: 0;
-    top: 0;
-    z-index: 31;
-    width: 346px;
-    height: 309px;
-    background: url('../../../static/index-top-right.png');
-    background-size: 100% 100%;
-  }
-  .right-bottom {
-    right: 0;
-    bottom: 0;
-    z-index: 4;
-    width: 463px;
-    height: 320px;
-    background: url('../../../static/index-bottom-right.png');
-    background-size: 100% 100%;
   }
   .center {
     width: 100%;
