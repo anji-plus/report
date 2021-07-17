@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 **/
 @RestController
 @Api(tags = "大屏设计管理")
+@Permission(code = "bigScreenManage", name = "大屏报表")
 @RequestMapping("/reportDashboard")
 public class ReportDashboardController {
 
@@ -31,7 +32,7 @@ public class ReportDashboardController {
      * @return
      */
     @GetMapping({"/{reportCode}"})
-    @Permission(code = "DETAIL", name = "明细")
+    @Permission(code = "view", name = "查看大屏")
     public ResponseBean detail(@PathVariable("reportCode") String reportCode) {
         return ResponseBean.builder().data(reportDashboardService.getDetail(reportCode)).build();
     }
@@ -42,7 +43,7 @@ public class ReportDashboardController {
      * @return
      */
     @PostMapping
-    @Permission(code = "INSERT", name = "新增")
+    @Permission(code = "design", name = "设计大屏")
     @GaeaAuditLog(pageTitle = "新增")
     public ResponseBean insert(@RequestBody ReportDashboardObjectDto dto) {
         reportDashboardService.insertDashboard(dto);
@@ -56,7 +57,7 @@ public class ReportDashboardController {
      * @return
      */
     @PostMapping("/getData")
-    @Permission(code = "DETAIL", name = "明细图表数据")
+    @Permission(code = "view", name = "查看大屏")
     public ResponseBean getData(@RequestBody ChartDto dto) {
         return ResponseBean.builder().data(reportDashboardService.getChartData(dto)).build();
     }
