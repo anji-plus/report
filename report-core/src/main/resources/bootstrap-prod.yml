@@ -15,3 +15,7 @@ generator:
   enabled: false
   workspace: /workspace/gaea
   templatePath: template
+  
+customer:
+  # 跳过token验证和权限验证的url清单
+  skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html
