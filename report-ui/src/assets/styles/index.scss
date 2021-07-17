@@ -310,3 +310,41 @@ a:hover {
 //   line-height: 30px !important;
 //   height: 30px;
 // }
+
+//自定义表格特殊类型 文字背景
+// 'highway': 'table-primary',
+// 'railway': 'table-success',
+// 'waterway': 'table-info',
+// 'airtransport': 'table-warning',
+// 'multimodal': 'table-danger'
+.table-primary,.table-success,.table-info,.table-warning,.table-danger{
+  border-radius:3px;
+  padding: 2px 5px;
+  border-width: 1px;
+  border-style: solid;
+}
+.table-primary{
+  background: rgba(32, 182, 249, .1);
+  border-color: rgba(32, 182, 249, .2);
+  color: rgb(32, 182, 249);
+}
+.table-success{
+  background: rgba(0, 226, 68, .1);
+  border-color: rgba(0, 226, 68, 0.2);
+  color: rgb(0, 226, 68);
+}
+.table-info{
+  background: rgba(216, 216, 216, .1);
+  border-color: rgba(216, 216, 216, .2);
+  color: rgb(216, 216, 216);
+}
+.table-warning{
+  background: rgba(255, 216, 40, .1);
+  border-color: rgba(255, 216, 40, .2);
+  color: rgb(241, 185, 0);
+}
+.table-danger{
+  background: rgba(249, 32, 32, .1);
+  border-color: rgba(249, 32, 32, .2);
+  color: rgb(249, 32, 32);
+}

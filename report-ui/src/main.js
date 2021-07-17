@@ -23,8 +23,17 @@ import 'echarts/lib/component/tooltip'
 // import 'echarts-gl'
 Vue.component('v-chart', ECharts)
 
+// anji component
+import anjiCrud from '@/components/AnjiPlus/anji-crud/anji-crud'
+import anjiSelect from '@/components/AnjiPlus/anji-select'
+Vue.component('anji-crud', anjiCrud)
+Vue.component('anji-select', anjiSelect)
+
 // permission control
 import '@/permission'
+// 按钮权限的指令
+import permission from '@/components/Permission/index'
+Vue.use(permission)
 
 import Avue from '@smallwei/avue';
 import '@smallwei/avue/lib/index.css';
@@ -43,6 +52,10 @@ Object.keys(filter).forEach(key => {
 
 // register global mixins.
 Vue.mixin(mixins)
+
+
+// 分页的全局size配置;
+Vue.prototype.$pageSizeAll = [10, 50, 100, 200, 500]
 
 Vue.config.productionTip = false
 

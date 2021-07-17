@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 export default {
   data () {
     return {
@@ -5,11 +6,11 @@ export default {
   },
   computed: {
     // 网页高度
-    bodyWidth() {
+    bodyWidth () {
       return document.body.clientWidth
     },
     // 网页宽度
-    bodyHeight() {
+    bodyHeight () {
       return document.body.clientHeight
     },
   },
@@ -20,6 +21,12 @@ export default {
   destroyed () {
   },
   methods: {
+    setCookies (key, val, option) {
+      if (option == null) {
+        option = { expires: 15 }
+      }
+      Cookies.set(key, val, option)
+    },
     goBack () {
       this.$router.go(-1)
     },
@@ -95,7 +102,7 @@ export default {
       }
     },
     // 获取对象类型
-    getObjectType(obj) {
+    getObjectType (obj) {
       var toString = Object.prototype.toString
       var map = {
         '[object Boolean]': 'boolean',
@@ -114,21 +121,41 @@ export default {
       }
       return map[toString.call(obj)]
     },
-    isNumber(obj) {
+    isNumber (obj) {
       return this.getObjectType(obj) == 'number'
     },
-    isString(obj) {
+    isString (obj) {
       return this.getObjectType(obj) == 'string'
     },
-
-    hasOwn(obj, key) {
+    isArray (obj) {
+      return this.getObjectType(obj) == 'array'
+    },
+    hasOwn (obj, key) {
       return Object.prototype.hasOwnProperty.call(obj, key)
     },
 
-    isNotNull(val) {
+    isNotBlank (val) {
+      return !this.isBlank(val)
+    },
+    isBlank (val) {
+      if (this.isNull(val)) {
+        return true
+      }
+      if (typeof val === 'string') {
+        return val.trim() == ''
+      }
+      if (typeof val === 'object') {
+        for (var key in val) {
+          return false
+        }
+        return true
+      }
+      return false
+    },
+    isNotNull (val) {
       return !this.isNull(val)
     },
-    isNull(val) {
+    isNull (val) {
       // 特殊判断
       if (val && parseInt(val) === 0) return false
       const list = ['$parent']
@@ -154,7 +181,7 @@ export default {
     },
 
     // 对象深拷贝
-    deepClone(data) {
+    deepClone (data) {
       var type = this.getObjectType(data)
       var obj
       if (type === 'array') {
@@ -190,7 +217,7 @@ export default {
     },
 
     // 合并json
-    mergeObject() {
+    mergeObject () {
       var target = arguments[0] || {}
       var deep = false
       var arr = Array.prototype.slice.call(arguments)
@@ -233,7 +260,7 @@ export default {
     },
 
     // 获取dom在屏幕中的top和left
-    getDomTopLeftById(id) {
+    getDomTopLeftById (id) {
       var dom = document.getElementById(id)
       var top = 0
       var left = 0
@@ -243,7 +270,7 @@ export default {
       }
       return { top: top, left: left }
     },
-    objToOne(obj) {
+    objToOne (obj) {
       var tmpData = {}
       for (var index in obj) {
         if (typeof obj[index] == 'object') {
@@ -254,6 +281,69 @@ export default {
         }
       }
       return tmpData
+    },
+    urlEncode (val) {
+      return encodeURIComponent(val)
+    },
+    urlDecode (val) {
+      return decodeURIComponent(val)
+    },
+    urlEncodeObject (obj, ingoreFields) {
+      if (toString.call(obj) != '[object Object]') {
+        return obj
+      }
+      var result = {}
+      for (var key in obj) {
+        if (this.isBlank(obj[key])) {
+          continue
+        }
+        if (ingoreFields != null && ingoreFields.indexOf(key) >= 0) {
+          result[key] = obj[key]
+        } else {
+          result[key] = this.urlEncode(obj[key])
+        }
+      }
+      return result
+    },
+
+    // 根据数据字典，查询指定字典dict指定值code的，返回整个dictItem{id, text, extend}
+    getDictItemByCode (dict, code) {
+      var dicts = JSON.parse(localStorage.getItem('gaeaDict'))
+      if (!dicts.hasOwnProperty(dict)) {
+        return null
+      }
+      var dictItems = dicts[dict]
+      for (var i = 0; i < dictItems.length; i++) {
+        var dictItem = dictItems[i]
+        if (typeof (code) == 'number') {
+          code = code.toString()
+        }
+        if (dictItem['id'].toString() == code) {
+          return dictItem
+        }
+      }
+      return null
+    },
+    // 根据数据字典，查询指定字典dict指定值code的dictItem.text
+    getDictLabelByCode (dict, code) {
+      var dictItem = this.getDictItemByCode(dict, code)
+      if (dictItem != null) {
+        return dictItem['text']
+      } else {
+        return ''
+      }
+    },
+    // 根据数据字典，查询指定字典dict指定值code的dictItem.extend
+    getDictExtendByCode (dict, code) {
+      var dictItem = this.getDictItemByCode(dict, code)
+      if (dictItem == null) {
+        return null
+      }
+      var extend = dictItem['extend']
+      if (extend == null || extend.trim() == 'null') {
+        return null
+      }
+      return dictItem['extend']
     },
   }
 }
