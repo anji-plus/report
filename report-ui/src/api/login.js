@@ -1,9 +1,8 @@
 import request from './axios'
 
 export function login (data) {
-  console.log(data)
   return request({
-    url: '/login',
+    url: 'accessUser/login',
     method: 'post',
     data
   })
@@ -11,7 +10,7 @@ export function login (data) {
 
 export function logout () {
   return request({
-    url: '/accessUser/logout',
+    url: 'accessUser/logout',
     method: 'post'
   })
 }
@@ -22,11 +21,3 @@ export const reqUpdatePassword = data => request({
   method: 'post',
   data: data
 })
-
-export function queryForCodeSelect (params = {}) {
-  return request({
-    url: '/auth-service/dict/queryForCodeSelect',
-    method: 'post',
-    data: params
-  })
-}

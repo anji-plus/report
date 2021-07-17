@@ -8,11 +8,20 @@
   <div class="login_container">
     <!-- 顶部logo -->
     <div class="login_title">
-      <img src="@/assets/images/home-logo.png" alt="logo" />
+      <img src="@/assets/images/home-logo.png"
+           alt="logo" />
     </div>
     <div class="login_contant">
-      <img src="@/assets/images/login.png" alt="image" class="login_img" />
-      <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login_form" autocomplete="on" label-position="left" @keyup.enter.native="handleLogin">
+      <img src="@/assets/images/login.png"
+           alt="image"
+           class="login_img" />
+      <el-form ref="loginForm"
+               :model="loginForm"
+               :rules="loginRules"
+               class="login_form"
+               autocomplete="on"
+               label-position="left"
+               @keyup.enter.native="handleLogin">
         <div class="title_container">
           <h3 class="title">
             HELLO,
@@ -27,17 +36,42 @@
           <b />
           <div>
             <p>用户名</p>
-            <el-form-item prop="username">
-              <el-input ref="username" v-model="loginForm.username" placeholder="用户名" name="username" type="text" tabindex="1" autocomplete="on" @focus="setTop('0')" @change="getPsw" />
+            <el-form-item prop="loginName">
+              <el-input ref="loginName"
+                        v-model="loginForm.loginName"
+                        placeholder="用户名"
+                        name="loginName"
+                        type="text"
+                        tabindex="1"
+                        autocomplete="on"
+                        @focus="setTop('0')"
+                        @change="getPsw" />
             </el-form-item>
           </div>
           <div>
             <p>密码</p>
-            <input name="password" type="password" autocomplete="off" class="take" />
-            <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
+            <input name="password"
+                   type="password"
+                   autocomplete="off"
+                   class="take" />
+            <el-tooltip v-model="capsTooltip"
+                        content="Caps lock is On"
+                        placement="right"
+                        manual>
               <el-form-item prop="password">
-                <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType" placeholder="用户密码" name="password" tabindex="2" autocomplete="on" @blur="capsTooltip = false" @focus="setTop('50')" @keyup.native="checkCapslock" />
-                <span class="show_pwd" @click="showPwd">
+                <el-input :key="passwordType"
+                          ref="password"
+                          v-model="loginForm.password"
+                          :type="passwordType"
+                          placeholder="用户密码"
+                          name="password"
+                          tabindex="2"
+                          autocomplete="on"
+                          @blur="capsTooltip = false"
+                          @focus="setTop('50')"
+                          @keyup.native="checkCapslock" />
+                <span class="show_pwd"
+                      @click="showPwd">
                   <i class="el-icon-view" />
                 </span>
               </el-form-item>
@@ -46,15 +80,23 @@
         </div>
         <div class="control">
           <div class="remember">
-            <input v-model="rememberPsw" type="checkbox" />
+            <input v-model="rememberPsw"
+                   type="checkbox" />
             <p>记住密码</p>
           </div>
         </div>
-        <el-button :loading="loading" type="primary" class="login_btn" @click.native.prevent="handleLogin">登录</el-button>
+        <el-button :loading="loading"
+                   type="primary"
+                   class="login_btn"
+                   @click.native.prevent="handleLogin">登录</el-button>
       </el-form>
     </div>
     <!--  验证码  -->
-    <Verify v-if="needCaptcha" ref="verify" :captcha-type="'blockPuzzle'" :img-size="{ width: '400px', height: '200px' }" @success="verifylogin" />
+    <Verify v-if="needCaptcha"
+            ref="verify"
+            :captcha-type="'blockPuzzle'"
+            :img-size="{ width: '400px', height: '200px' }"
+            @success="verifylogin" />
   </div>
 </template>
 
@@ -70,17 +112,17 @@ export default {
   components: {
     Verify,
   },
-  data() {
+  data () {
     return {
       activeTop: '-50%', // 色条滑块控制
       rememberPsw: false, // 记住密码选择框
       loginForm: {
-        username: 'admin',
+        loginName: 'admin',
         password: '123456',
         verifyCode: '',
       }, // 登录表单
       loginRules: {
-        username: [{ required: true, message: '用户名必填', trigger: 'blur' }],
+        loginName: [{ required: true, message: '用户名必填', trigger: 'blur' }],
         password: [
           { required: true, message: '用户密码必填', trigger: 'blur' },
         ],
@@ -106,31 +148,31 @@ export default {
       immediate: true,
     },
   },
-  mounted() {
+  mounted () {
     // 获取焦点
-    if (this.loginForm.username === '') {
-      this.$refs.username.focus()
+    if (this.loginForm.loginName === '') {
+      this.$refs.loginName.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
     }
   },
   methods: {
     // 获取存储的密码并解密
-    getPsw() {
-      const cookVal = cookies.get(`u_${this.loginForm.username}`)
+    getPsw () {
+      const cookVal = cookies.get(`u_${this.loginForm.loginName}`)
       this.loginForm.password = cookVal && Decrypt(cookVal)
     },
     // 滑动条块的top控制
-    setTop(val) {
+    setTop (val) {
       this.activeTop = val
     },
     // 检测大写锁定键是否开启
-    checkCapslock(e) {
+    checkCapslock (e) {
       const { key } = e
       this.capsTooltip = key && key.length === 1 && key >= 'A' && key <= 'Z'
     },
     // 查看密码
-    showPwd() {
+    showPwd () {
       if (this.passwordType === 'password') {
         this.passwordType = ''
       } else {
@@ -141,7 +183,7 @@ export default {
       })
     },
     // 滑动验证码
-    useVerify() {
+    useVerify () {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.$refs.verify.show()
@@ -151,14 +193,14 @@ export default {
       })
     },
     // 验证成功的回调
-    verifylogin(params) {
+    verifylogin (params) {
       this.loginForm.verifyCode = params.captchaVerification
       if (this.loginForm.verifyCode) {
         this.loginApi()
       }
     },
     // 登录操作
-    handleLogin() {
+    handleLogin () {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
@@ -173,9 +215,9 @@ export default {
         }
       })
     },
-    async loginApi() {
+    async loginApi () {
       let obj = {
-        username: this.loginForm.username,
+        loginName: this.loginForm.loginName,
         password: transPsw(this.loginForm.password),
         verifyCode: '',
       }
@@ -184,11 +226,11 @@ export default {
       this.loading = false
       if (code != '200') return
       setItem('token', data.token)
-      setItem('username', data.username)
+      setItem('loginName', data.loginName)
       // 选中记住密码时 把密码存到cookie里,时效15天
       this.rememberPsw &&
         cookies.set(
-          `u_${this.loginForm.username}`,
+          `u_${this.loginForm.loginName}`,
           Encrypt(this.loginForm.password),
           { expires: 15 }
         )
@@ -202,7 +244,7 @@ export default {
         })
       }
     },
-    getOtherQuery(query) {
+    getOtherQuery (query) {
       return Object.keys(query).reduce((acc, cur) => {
         if (cur !== 'redirect') {
           acc[cur] = query[cur]
@@ -381,7 +423,7 @@ export default {
             height: 14px;
           }
           & > input:checked::before {
-            content: '\2713';
+            content: "\2713";
             background-color: #f5ab1b;
             position: absolute;
             top: 0;

@@ -1,17 +1,23 @@
 <template>
   <div>
-    <el-menu class="navbar" mode="horizontal">
-      <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container" />
+    <el-menu class="navbar"
+             mode="horizontal">
+      <hamburger :toggle-click="toggleSideBar"
+                 :is-active="sidebar.opened"
+                 class="hamburger-container" />
       <breadcrumb />
-      <el-dropdown class="avatar-container" trigger="click">
+      <el-dropdown class="avatar-container"
+                   trigger="click">
         <div class="avatar-wrapper">
           <i class="icon iconfont iconyonghu user" />
-          <span class="user-name">{{ username }}</span>
+          <span class="user-name">{{ operator }}</span>
           <i class="el-icon-caret-bottom" />
         </div>
-        <el-dropdown-menu slot="dropdown" class="user-dropdown">
+        <el-dropdown-menu slot="dropdown"
+                          class="user-dropdown">
           <el-dropdown-item divided>
-            <span style="display:block;" @click="logout">注销登录</span>
+            <span style="display:block;"
+                  @click="logout">注销登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -28,7 +34,7 @@ import { aesEncrypt } from '@/utils/aes'
 import { reqUpdatePassword } from '@/api/login'
 
 export default {
-  data() {
+  data () {
     // 确认密码
     var validatePass3 = (rule, value, callback) => {
       if (value === '') {
@@ -80,12 +86,12 @@ export default {
   computed: {
     ...mapGetters(['sidebar']),
   },
-  created() {},
+  created () { },
   methods: {
-    toggleSideBar() {
+    toggleSideBar () {
       this.$store.dispatch('ToggleSideBar')
     },
-    logout() {
+    logout () {
       this.$confirm('确定要退出吗', '温馨提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -98,14 +104,14 @@ export default {
       })
     },
     // 修改密码
-    updatePassword() {
+    updatePassword () {
       this.wordVisible = true
       this.$nextTick(() => {
         this.$refs.form && this.$refs.form.resetFields()
       })
     },
     // 发送请求 确认修改
-    confrimUpdate() {
+    confrimUpdate () {
       this.$refs.form.validate((valid) => {
         if (valid) {
           const { oldPassword, password, confirmPassword } = this.form
@@ -129,7 +135,7 @@ export default {
         }
       })
     },
-    helpCenter() {
+    helpCenter () {
       let helpCategory = JSON.parse(localStorage.getItem('helpCategory'))
       this.$router.push({
         path: '/helpCenList/list',
