@@ -46,6 +46,17 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/access',
+    component: Layout,
+    name: 'access',
+    meta: { title: '用户权限', icon: 'icondfzq-' },
+    children: [
+      { path: 'authority', name: 'authority', component: () => import('@/views/accessAuthority/index'), meta: { title: '权限管理', icon: 'iconquanxian', keepAlive: true, isBack: true } },
+      { path: 'role', name: 'role', component: () => import('@/views/accessRole/index'), meta: { title: '角色管理', icon: 'iconjiaose1', keepAlive: true, isBack: true } },
+      { path: 'user', name: 'user', component: () => import('@/views/accessUser/index'), meta: { title: '用户管理', icon: 'iconyonghu', keepAlive: true, isBack: true } },
+    ]
+  },
+  {
     path: '/datasource',
     component: Layout,
     redirect: '/report/datasource',
