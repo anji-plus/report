@@ -94,4 +94,5 @@ public class GaeaDictItemServiceImpl implements GaeaDictItemService {
         Map<String, String> data = list.stream().collect(Collectors.toMap(GaeaDictItem::getItemValue, GaeaDictItem::getItemName, (v1, v2) -> v2));
         return data;
     }
+
 }
