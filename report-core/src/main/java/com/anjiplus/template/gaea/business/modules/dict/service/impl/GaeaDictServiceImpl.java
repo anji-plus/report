@@ -156,4 +156,29 @@ public class GaeaDictServiceImpl implements GaeaDictService {
 
         return GaeaUtils.formatKeyValue(dictMap);
     }
+
+
+    @Override
+    public Map<String, List<KeyValue>> all(String language) {
+        LambdaQueryWrapper<GaeaDictItem> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(GaeaDictItem::getEnabled, Enabled.YES.getValue())
+                .eq(GaeaDictItem::getLocale, language)
+                .orderByAsc(GaeaDictItem::getSort);
+
+        List<GaeaDictItem> list = gaeaDictItemMapper.selectList(wrapper);
+        Map<String, List<KeyValue>> all = list.stream().collect(
+                Collectors.groupingBy(
+                        GaeaDictItem::getDictCode,
+                        Collectors.mapping(dictItemEntity -> {
+                            Object itemValue = null;
+                            try{
+                                itemValue = Integer.parseInt(dictItemEntity.getItemValue());
+                            }catch (Exception e){
+                                itemValue = dictItemEntity.getItemValue();
+                            }
+                            return new KeyValue(itemValue, dictItemEntity.getItemName(), dictItemEntity.getItemExtend());
+                        },Collectors.toList())));
+        return all;
+    }
+
 }
