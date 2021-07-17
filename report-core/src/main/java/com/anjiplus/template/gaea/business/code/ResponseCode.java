@@ -6,6 +6,13 @@ package com.anjiplus.template.gaea.business.code;
  * @since 2021-02-22
  */
 public interface ResponseCode {
+
+    String Not_Null = "field.not.null";
+    String Not_Empty = "field.not.empty";
+    String MIN = "field.min";
+    String MAX = "field.max";
+    String DICT_ERROR = "field.dict.error";
+    
     /**
      * 用户名或者密码不正确
      */
