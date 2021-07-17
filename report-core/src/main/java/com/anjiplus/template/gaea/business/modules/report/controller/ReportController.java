@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Api(tags = "报表数据管理")
+@Permission(code = "reportManage", name = "报表管理")
 @RequestMapping("/report")
 public class ReportController extends GaeaBaseController<ReportParam, Report, ReportDto> {
 
@@ -47,7 +48,7 @@ public class ReportController extends GaeaBaseController<ReportParam, Report, Re
 
     @DeleteMapping("/delReport")
     @Permission(
-            code = "DELETE",
+            code = "delete",
             name = "删除"
     )
     @GaeaAuditLog(
