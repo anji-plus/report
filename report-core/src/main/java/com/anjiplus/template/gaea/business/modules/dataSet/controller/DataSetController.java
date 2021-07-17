@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 **/
 @RestController
 @Api(tags = "数据集管理")
+@Permission(code = "resultsetManage", name = "数据集管理")
 @RequestMapping("/dataSet")
 public class DataSetController extends GaeaBaseController<DataSetParam, DataSet, DataSetDto> {
 
@@ -50,10 +51,7 @@ public class DataSetController extends GaeaBaseController<DataSetParam, DataSet,
     }
 
     @GetMapping("/detailBysetId/{id}")
-    @Permission(
-            code = "DETAIL",
-            name = "明细"
-    )
+    @Permission( code = "query", name = "明细" )
     public ResponseBean detailBysetId(@PathVariable("id") Long id) {
         this.logger.info("{}根据ID查询服务开始，id为：{}", this.getClass().getSimpleName(), id);
         ResponseBean responseBean = this.responseSuccessWithData(dataSetService.detailSet(id));
@@ -62,10 +60,7 @@ public class DataSetController extends GaeaBaseController<DataSetParam, DataSet,
     }
 
     @GetMapping({"/detailBysetCode/{setCode}"})
-    @Permission(
-            code = "DETAIL",
-            name = "明细"
-    )
+    @Permission( code = "query", name = "明细" )
     @AccessKey
     public ResponseBean detailBysetCode(@PathVariable("setCode") String setCode) {
         this.logger.info("{}根据setCode查询服务开始，setCode为：{}", this.getClass().getSimpleName(), setCode);
@@ -76,7 +71,7 @@ public class DataSetController extends GaeaBaseController<DataSetParam, DataSet,
 
     @PostMapping
     @Permission(
-            code = "INSERT",
+            code = "insert",
             name = "新增"
     )
     @GaeaAuditLog(
@@ -92,7 +87,7 @@ public class DataSetController extends GaeaBaseController<DataSetParam, DataSet,
 
     @PutMapping
     @Permission(
-            code = "UPDATE",
+            code = "update",
             name = "更新"
     )
     @GaeaAuditLog(
@@ -110,7 +105,7 @@ public class DataSetController extends GaeaBaseController<DataSetParam, DataSet,
 
     @DeleteMapping({"/{id}"})
     @Permission(
-            code = "DELETE",
+            code = "delete",
             name = "删除"
     )
     @GaeaAuditLog(
@@ -130,6 +125,7 @@ public class DataSetController extends GaeaBaseController<DataSetParam, DataSet,
      * @return
      */
     @PostMapping("/testTransform")
+    @Permission( code = "query", name = "明细" )
     public ResponseBean testTransform(@Validated @RequestBody DataSetTestTransformParam param) {
         DataSetDto dto = new DataSetDto();
         BeanUtils.copyProperties(param, dto);
