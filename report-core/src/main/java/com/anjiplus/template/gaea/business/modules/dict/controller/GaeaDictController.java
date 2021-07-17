@@ -96,4 +96,18 @@ public class GaeaDictController extends GaeaBaseController<GaeaDictParam, GaeaDi
         Collection<KeyValue> keyValues = gaeaDictService.selectTypeCode(project,language);
         return responseSuccessWithData(keyValues);
     }
+
+    /**
+     * 获取所有字典
+     * @return
+     */
+    @GetMapping("/all")
+    public ResponseBean all(){
+        Locale locale = LocaleContextHolder.getLocale();
+        //语言
+        String language = locale.getLanguage();
+
+        Map<String, List<KeyValue>> all = gaeaDictService.all(language);
+        return responseSuccessWithData(all);
+    }
 }
