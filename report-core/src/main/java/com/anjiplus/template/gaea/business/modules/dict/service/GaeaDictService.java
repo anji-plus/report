@@ -8,6 +8,7 @@ import com.anjiplus.template.gaea.business.modules.dict.dao.entity.GaeaDictItem;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (GaeaDict)Service
@@ -44,4 +45,12 @@ public interface GaeaDictService extends GaeaBaseService<GaeaDictParam, GaeaDict
      * @return
      */
     Collection<KeyValue> selectTypeCode(String system, String language);
+
+
+    /**
+     * 获取所有数据字典
+     * @param language
+     * @return
+     */
+    Map<String, List<KeyValue>> all(String language);
 }
