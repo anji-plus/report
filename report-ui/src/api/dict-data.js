@@ -52,3 +52,27 @@ export function getBaseDataList (typeList) {
     params: { types },
   })
 }
+
+// 查询所有数据字典接口
+export function getAllDict() {
+  return request({
+    url: '/gaeaDict/all',
+    method: 'GET',
+  })
+}
+
+// 将所有接口初始化到浏览器本地缓存
+export function initDictToLocalstorage(callback) {
+  getAllDict().then((res) => {
+    if (res.code != 200) {
+      console.error('初始化数据字典到local storage失败: ' + res.message)
+      return
+    }
+
+    // 保存数据字典到localStorage
+    localStorage.setItem('gaeaDict', JSON.stringify(res.data))
+    if (callback != null) {
+      callback()
+    }
+  })
+}
