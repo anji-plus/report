@@ -14,6 +14,7 @@
 
 <script>
   import request from '@/api/axios'
+  import { getStorageItem } from '@/utils/storage'
   export default {
     props: {
       value: {
@@ -90,7 +91,7 @@
     mounted () {},
     methods: {
       getListFromBaseCode() {
-        let basecode = JSON.parse(localStorage.getItem('queryForCodeSelect'))
+        let basecode = getStorageItem('queryForCodeSelect')
         let list = []
         if (!basecode.hasOwnProperty(this.dictname)) {
           return []
