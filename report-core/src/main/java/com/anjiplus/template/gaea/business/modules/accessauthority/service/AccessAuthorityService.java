@@ -21,4 +21,9 @@ public interface AccessAuthorityService extends GaeaBaseService<AccessAuthorityP
      * @return
      */
     List<TreeNode> getAuthorityTree(String loginName, boolean withActionNode);
+
+    /**
+     * 扫描所有mvc url的需要权限码，建立拦截体系
+     */
+    void scanGaeaSecurityAuthorities();
 }

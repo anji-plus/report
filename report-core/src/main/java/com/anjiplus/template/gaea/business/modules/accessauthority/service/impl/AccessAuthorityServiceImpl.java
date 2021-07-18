@@ -1,8 +1,13 @@
 
 package com.anjiplus.template.gaea.business.modules.accessauthority.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.anji.plus.gaea.bean.TreeNode;
+import com.anji.plus.gaea.cache.CacheHelper;
+import com.anji.plus.gaea.constant.Enabled;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
+import com.anji.plus.gaea.init.InitRequestUrlMappings;
+import com.anjiplus.template.gaea.business.constant.BusinessConstant;
 import com.anjiplus.template.gaea.business.modules.accessauthority.dao.entity.AccessAuthority;
 import com.anjiplus.template.gaea.business.modules.accessauthority.service.AccessAuthorityService;
 import com.anjiplus.template.gaea.business.modules.accessauthority.dao.AccessAuthorityMapper;
@@ -13,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,6 +30,12 @@ import java.util.stream.Collectors;
 **/
 @Service
 public class AccessAuthorityServiceImpl implements AccessAuthorityService {
+
+    @Autowired
+    private InitRequestUrlMappings initRequestUrlMappings;
+
+    @Autowired
+    private CacheHelper cacheHelper;
 
     @Autowired
     private AccessAuthorityMapper accessAuthorityMapper;
@@ -101,5 +113,28 @@ public class AccessAuthorityServiceImpl implements AccessAuthorityService {
         });
 
         return parentNodes;
+    }
+
+    @Override
+    public void scanGaeaSecurityAuthorities() {
+        /* 获取当前应用中所有的请求信息
+        {
+            "applicationName": "aj-report",
+            "authCode": "authorityManage:query",
+            "authName": "权限管理查询",
+            "beanName": "accessAuthorityController",
+            "menuCode": "authorityManage",
+            "path": "GET#/accessAuthority/menuTree"
+        }*/
+        List<InitRequestUrlMappings.RequestInfo> requestInfos = initRequestUrlMappings.getRequestInfos(Enabled.YES.getValue());
+
+        // key="GET#/accessAuthority/menuTree" value="authorityManage:query"
+        Map<String, String>  securityAuthorityMap = new HashMap<String, String>();
+        requestInfos.stream().forEach(requestInfo -> {
+            securityAuthorityMap.put(requestInfo.getPath(), requestInfo.getAuthCode());
+        });
+
+        // 将key存入到缓存中
+        cacheHelper.hashSet(BusinessConstant.GAEA_SECURITY_AUTHORITIES, securityAuthorityMap);
     }
 }
