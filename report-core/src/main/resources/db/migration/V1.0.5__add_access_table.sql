@@ -1,34 +1,65 @@
 use aj_report;
 
 -- ----------------------------
---  Table structure for `access_authority`
+-- Table structure for access_authority
 -- ----------------------------
 DROP TABLE IF EXISTS `access_authority`;
-CREATE TABLE `access_authority` (
+CREATE TABLE `access_authority`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `parent_target` varchar(64) COLLATE utf8_bin DEFAULT NULL COMMENT '父ID',
-  `target` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '菜单代码',
-  `target_name` varchar(128) COLLATE utf8_bin NOT NULL COMMENT '菜单名称',
-  `action` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '按钮代码',
-  `action_name` varchar(128) COLLATE utf8_bin NOT NULL COMMENT '按钮名称',
-  `sort` int(8) DEFAULT NULL,
-  `enable_flag` int(1) NOT NULL DEFAULT '1' COMMENT '0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG',
-  `delete_flag` int(1) DEFAULT '0' COMMENT ' 0--未删除 1--已删除 DIC_NAME=DEL_FLAG',
-  `create_by` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '创建人',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `update_by` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '修改人',
-  `update_time` datetime NOT NULL COMMENT '修改时间',
-  `version` tinyint(8) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `TA_uniq_index` (`target`,`action`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='运营权限表';
+  `parent_target` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '父ID',
+  `target` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '菜单代码',
+  `target_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '菜单名称',
+  `action` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '按钮代码',
+  `action_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '按钮名称',
+  `sort` int(8) NULL DEFAULT NULL,
+  `enable_flag` int(1) NOT NULL DEFAULT 1 COMMENT '0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG',
+  `delete_flag` int(1) NULL DEFAULT 0 COMMENT ' 0--未删除 1--已删除 DIC_NAME=DEL_FLAG',
+  `create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '创建人',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '修改人',
+  `update_time` datetime(0) NOT NULL COMMENT '修改时间',
+  `version` tinyint(8) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `TA_uniq_index`(`target`, `action`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 233 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '运营权限表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
---  Records of `access_authority`
+-- Records of access_authority
 -- ----------------------------
-BEGIN;
-INSERT INTO `access_authority` VALUES ('1', null, 'access', '用户权限', '', '', '10', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('2', null, 'report', '报表设计', '', '', '20', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('101', 'access', 'authorityManage', '权限管理', 'insert', '新增权限', '101', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('102', 'access', 'authorityManage', '权限管理', 'update', '修改权限', '102', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('103', 'access', 'authorityManage', '权限管理', 'delete', '删除权限', '103', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('104', 'access', 'authorityManage', '权限管理', 'query', '查询权限', '104', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('105', 'access', 'roleManage', '角色管理', 'insert', '新建角色', '105', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2021-07-17 20:41:46', '2'), ('106', 'access', 'roleManage', '角色管理', 'update', '修改角色', '106', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('107', 'access', 'roleManage', '角色管理', 'delete', '删除角色', '107', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('108', 'access', 'roleManage', '角色管理', 'query', '查询角色', '108', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('109', 'access', 'roleManage', '角色管理', 'grantAuthority', '分配权限', '109', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('110', 'access', 'userManage', '用户管理', 'insert', '新增用户', '110', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('111', 'access', 'userManage', '用户管理', 'update', '修改用户', '111', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('112', 'access', 'userManage', '用户管理', 'delete', '删除用户', '112', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('113', 'access', 'userManage', '用户管理', 'query', '查询用户', '113', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('114', 'access', 'userManage', '用户管理', 'resetPassword', '重置密码', '114', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('115', 'access', 'userManage', '用户管理', 'grantRole', '分配角色', '115', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('200', 'report', 'datasourceManage', '数据源管理', 'insert', '新建数据源', '200', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('201', 'report', 'datasourceManage', '数据源管理', 'update', '修改数据源', '201', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('202', 'report', 'datasourceManage', '数据源管理', 'delete', '删除数据源', '202', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('203', 'report', 'datasourceManage', '数据源管理', 'query', '查询数据源', '203', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('204', 'report', 'resultsetManage', '数据集管理', 'insert', '新建数据集', '204', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('205', 'report', 'resultsetManage', '数据集管理', 'update', '修改数据集', '205', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('206', 'report', 'resultsetManage', '数据集管理', 'delete', '删除数据集', '206', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('207', 'report', 'resultsetManage', '数据集管理', 'query', '查询数据集', '207', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('221', 'report', 'reportManage', '报表管理', 'insert', '新建报表', '204', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('222', 'report', 'reportManage', '报表管理', 'update', '修改报表', '205', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('223', 'report', 'reportManage', '报表管理', 'delete', '删除报表', '206', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('224', 'report', 'reportManage', '报表管理', 'query', '查询报表', '207', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('231', 'report', 'bigScreenManage', '大屏报表', 'design', '设计大屏', '204', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1'), ('232', 'report', 'bigScreenManage', '大屏报表', 'view', '查看大屏', '205', '1', '0', 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', '1');
-COMMIT;
+INSERT INTO `access_authority` VALUES (1, NULL, 'access', '用户权限', '', '', 1, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (2, NULL, 'report', '报表设计', '', '', 2, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (101, 'access', 'authorityManage', '权限管理', 'insert', '新增权限', 101, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (102, 'access', 'authorityManage', '权限管理', 'update', '修改权限', 102, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (103, 'access', 'authorityManage', '权限管理', 'delete', '删除权限', 103, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (104, 'access', 'authorityManage', '权限管理', 'query', '查询权限', 104, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (105, 'access', 'roleManage', '角色管理', 'insert', '新建角色', 105, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2021-07-17 20:41:46', 2);
+INSERT INTO `access_authority` VALUES (106, 'access', 'roleManage', '角色管理', 'update', '修改角色', 106, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (107, 'access', 'roleManage', '角色管理', 'delete', '删除角色', 107, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (108, 'access', 'roleManage', '角色管理', 'query', '查询角色', 108, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (109, 'access', 'roleManage', '角色管理', 'grantAuthority', '分配权限', 109, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (110, 'access', 'userManage', '用户管理', 'insert', '新增用户', 110, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (111, 'access', 'userManage', '用户管理', 'update', '修改用户', 111, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (112, 'access', 'userManage', '用户管理', 'delete', '删除用户', 112, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (113, 'access', 'userManage', '用户管理', 'query', '查询用户', 113, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (114, 'access', 'userManage', '用户管理', 'resetPassword', '重置密码', 114, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (115, 'access', 'userManage', '用户管理', 'grantRole', '分配角色', 115, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (200, 'report', 'datasourceManage', '数据源管理', 'insert', '新建数据源', 200, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (201, 'report', 'datasourceManage', '数据源管理', 'update', '修改数据源', 201, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (202, 'report', 'datasourceManage', '数据源管理', 'delete', '删除数据源', 202, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (203, 'report', 'datasourceManage', '数据源管理', 'query', '查询数据源', 203, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (204, 'report', 'resultsetManage', '数据集管理', 'insert', '新建数据集', 204, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (205, 'report', 'resultsetManage', '数据集管理', 'update', '修改数据集', 205, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (206, 'report', 'resultsetManage', '数据集管理', 'delete', '删除数据集', 206, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (207, 'report', 'resultsetManage', '数据集管理', 'query', '查询数据集', 207, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (221, 'report', 'reportManage', '报表管理', 'insert', '新建报表', 221, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (222, 'report', 'reportManage', '报表管理', 'update', '修改报表', 222, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (223, 'report', 'reportManage', '报表管理', 'delete', '删除报表', 223, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (224, 'report', 'reportManage', '报表管理', 'query', '查询报表', 224, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (231, 'report', 'bigScreenManage', '大屏报表', 'share', '分享报表', 231, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (232, 'report', 'bigScreenManage', '大屏报表', 'view', '查看大屏', 232, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `access_authority` VALUES (233, 'report', 'bigScreenManage', '大屏报表', 'design', '设计大屏', 233, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- ----------------------------
 --  Table structure for `access_role`
@@ -56,23 +87,73 @@ INSERT INTO `access_role` VALUES ('1', 'root', '超级管理员', '1', '0', 'roo
 COMMIT;
 
 -- ----------------------------
---  Table structure for `access_role_authority`
+-- Table structure for access_role_authority
 -- ----------------------------
 DROP TABLE IF EXISTS `access_role_authority`;
-CREATE TABLE `access_role_authority` (
+CREATE TABLE `access_role_authority`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `role_code` varchar(32) COLLATE utf8_bin NOT NULL COMMENT '角色名称',
-  `target` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '权限目标',
-  `action` varchar(64) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=460 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='运营角色权限表';
+  `role_code` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '角色名称',
+  `target` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '权限目标',
+  `action` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 510 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '运营角色权限表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
---  Records of `access_role_authority`
+-- Records of access_role_authority
 -- ----------------------------
-BEGIN;
-INSERT INTO `access_role_authority` VALUES ('413', 'root', 'authorityManage', 'insert'), ('414', 'root', 'authorityManage', 'update'), ('415', 'root', 'authorityManage', 'delete'), ('416', 'root', 'authorityManage', 'query'), ('417', 'root', 'roleManage', 'insert'), ('418', 'root', 'roleManage', 'update'), ('419', 'root', 'roleManage', 'delete'), ('420', 'root', 'roleManage', 'query'), ('421', 'root', 'roleManage', 'grantAuthority'), ('422', 'root', 'userManage', 'insert'), ('423', 'root', 'userManage', 'update'), ('424', 'root', 'userManage', 'delete'), ('425', 'root', 'userManage', 'query'), ('426', 'root', 'userManage', 'resetPassword'), ('427', 'root', 'userManage', 'grantRole'), ('428', 'root', 'datasourceManage', 'insert'), ('429', 'root', 'datasourceManage', 'update'), ('430', 'root', 'datasourceManage', 'delete'), ('431', 'root', 'datasourceManage', 'query'), ('432', 'root', 'resultsetManage', 'insert'), ('433', 'root', 'resultsetManage', 'update'), ('434', 'root', 'resultsetManage', 'delete'), ('435', 'root', 'resultsetManage', 'query'), ('436', 'root', 'reportManage', 'insert'), ('437', 'root', 'reportManage', 'update'), ('438', 'root', 'reportManage', 'delete'), ('439', 'root', 'reportManage', 'query'), ('440', 'root', 'bigScreenManage', 'design'), ('441', 'root', 'bigScreenManage', 'view'), ('442', 'viewer', 'datasourceManage', 'query'), ('443', 'viewer', 'resultsetManage', 'query'), ('444', 'viewer', 'reportManage', 'query'), ('445', 'viewer', 'bigScreenManage', 'view'), ('446', 'designer', 'datasourceManage', 'insert'), ('447', 'designer', 'datasourceManage', 'update'), ('448', 'designer', 'datasourceManage', 'delete'), ('449', 'designer', 'datasourceManage', 'query'), ('450', 'designer', 'resultsetManage', 'insert'), ('451', 'designer', 'resultsetManage', 'update'), ('452', 'designer', 'resultsetManage', 'delete'), ('453', 'designer', 'resultsetManage', 'query'), ('454', 'designer', 'reportManage', 'insert'), ('455', 'designer', 'reportManage', 'update'), ('456', 'designer', 'reportManage', 'delete'), ('457', 'designer', 'reportManage', 'query'), ('458', 'designer', 'bigScreenManage', 'design'), ('459', 'designer', 'bigScreenManage', 'view');
-COMMIT;
+INSERT INTO `access_role_authority` VALUES (460, 'viewer', 'datasourceManage', 'query');
+INSERT INTO `access_role_authority` VALUES (461, 'viewer', 'resultsetManage', 'query');
+INSERT INTO `access_role_authority` VALUES (462, 'viewer', 'reportManage', 'query');
+INSERT INTO `access_role_authority` VALUES (463, 'viewer', 'bigScreenManage', 'share');
+INSERT INTO `access_role_authority` VALUES (464, 'viewer', 'bigScreenManage', 'view');
+INSERT INTO `access_role_authority` VALUES (465, 'designer', 'datasourceManage', 'insert');
+INSERT INTO `access_role_authority` VALUES (466, 'designer', 'datasourceManage', 'update');
+INSERT INTO `access_role_authority` VALUES (467, 'designer', 'datasourceManage', 'delete');
+INSERT INTO `access_role_authority` VALUES (468, 'designer', 'datasourceManage', 'query');
+INSERT INTO `access_role_authority` VALUES (469, 'designer', 'resultsetManage', 'insert');
+INSERT INTO `access_role_authority` VALUES (470, 'designer', 'resultsetManage', 'update');
+INSERT INTO `access_role_authority` VALUES (471, 'designer', 'resultsetManage', 'delete');
+INSERT INTO `access_role_authority` VALUES (472, 'designer', 'resultsetManage', 'query');
+INSERT INTO `access_role_authority` VALUES (473, 'designer', 'reportManage', 'insert');
+INSERT INTO `access_role_authority` VALUES (474, 'designer', 'reportManage', 'update');
+INSERT INTO `access_role_authority` VALUES (475, 'designer', 'reportManage', 'delete');
+INSERT INTO `access_role_authority` VALUES (476, 'designer', 'reportManage', 'query');
+INSERT INTO `access_role_authority` VALUES (477, 'designer', 'bigScreenManage', 'share');
+INSERT INTO `access_role_authority` VALUES (478, 'designer', 'bigScreenManage', 'view');
+INSERT INTO `access_role_authority` VALUES (479, 'designer', 'bigScreenManage', 'design');
+INSERT INTO `access_role_authority` VALUES (480, 'root', 'authorityManage', 'insert');
+INSERT INTO `access_role_authority` VALUES (481, 'root', 'authorityManage', 'update');
+INSERT INTO `access_role_authority` VALUES (482, 'root', 'authorityManage', 'delete');
+INSERT INTO `access_role_authority` VALUES (483, 'root', 'authorityManage', 'query');
+INSERT INTO `access_role_authority` VALUES (484, 'root', 'roleManage', 'insert');
+INSERT INTO `access_role_authority` VALUES (485, 'root', 'roleManage', 'update');
+INSERT INTO `access_role_authority` VALUES (486, 'root', 'roleManage', 'delete');
+INSERT INTO `access_role_authority` VALUES (487, 'root', 'roleManage', 'query');
+INSERT INTO `access_role_authority` VALUES (488, 'root', 'roleManage', 'grantAuthority');
+INSERT INTO `access_role_authority` VALUES (489, 'root', 'userManage', 'insert');
+INSERT INTO `access_role_authority` VALUES (490, 'root', 'userManage', 'update');
+INSERT INTO `access_role_authority` VALUES (491, 'root', 'userManage', 'delete');
+INSERT INTO `access_role_authority` VALUES (492, 'root', 'userManage', 'query');
+INSERT INTO `access_role_authority` VALUES (493, 'root', 'userManage', 'resetPassword');
+INSERT INTO `access_role_authority` VALUES (494, 'root', 'userManage', 'grantRole');
+INSERT INTO `access_role_authority` VALUES (495, 'root', 'datasourceManage', 'insert');
+INSERT INTO `access_role_authority` VALUES (496, 'root', 'datasourceManage', 'update');
+INSERT INTO `access_role_authority` VALUES (497, 'root', 'datasourceManage', 'delete');
+INSERT INTO `access_role_authority` VALUES (498, 'root', 'datasourceManage', 'query');
+INSERT INTO `access_role_authority` VALUES (499, 'root', 'resultsetManage', 'insert');
+INSERT INTO `access_role_authority` VALUES (500, 'root', 'resultsetManage', 'update');
+INSERT INTO `access_role_authority` VALUES (501, 'root', 'resultsetManage', 'delete');
+INSERT INTO `access_role_authority` VALUES (502, 'root', 'resultsetManage', 'query');
+INSERT INTO `access_role_authority` VALUES (503, 'root', 'reportManage', 'insert');
+INSERT INTO `access_role_authority` VALUES (504, 'root', 'reportManage', 'update');
+INSERT INTO `access_role_authority` VALUES (505, 'root', 'reportManage', 'delete');
+INSERT INTO `access_role_authority` VALUES (506, 'root', 'reportManage', 'query');
+INSERT INTO `access_role_authority` VALUES (507, 'root', 'bigScreenManage', 'share');
+INSERT INTO `access_role_authority` VALUES (508, 'root', 'bigScreenManage', 'view');
+INSERT INTO `access_role_authority` VALUES (509, 'root', 'bigScreenManage', 'design');
+
+SET FOREIGN_KEY_CHECKS = 1;
+
 
 -- ----------------------------
 --  Table structure for `access_user`
