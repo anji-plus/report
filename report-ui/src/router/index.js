@@ -42,7 +42,7 @@ export const constantRouterMap = [
     name: '首页',
     meta: { title: '首页', icon: 'iconhome2' },
     children: [
-      { path: '', name: 'accessUser', component: () => import('@/views/home/index'), meta: { title: '首页', icon: 'iconhome2', keepAlive: true, isBack: true } },
+      { path: '', name: 'accessUser', component: () => import('@/views/home/index'), meta: { title: '首页', icon: 'iconhome2', keepAlive: true, isBack: true, requireAuth: true } },
     ]
   },
   {
