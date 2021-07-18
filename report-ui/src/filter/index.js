@@ -1,5 +1,5 @@
-import { setItem, getItem } from '@/utils/storage';
 
+import { getStorageItem } from '@/utils/storage';
 // 字典
 export function basecode(value, dicName) {
   if (value === undefined || value === null) {
@@ -9,7 +9,7 @@ export function basecode(value, dicName) {
     return value
   }
 
-  var basecode = JSON.parse(localStorage.getItem('queryForCodeSelect'))
+  var basecode = getStorageItem('queryForCodeSelect')
   var dictList = basecode[dicName]
   var dictLabel = value
   for (var i = 0; i < dictList.length; i++) {
