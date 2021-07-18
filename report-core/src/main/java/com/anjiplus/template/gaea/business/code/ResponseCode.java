@@ -12,7 +12,8 @@ public interface ResponseCode {
     String MIN = "field.min";
     String MAX = "field.max";
     String DICT_ERROR = "field.dict.error";
-    
+
+    String USER_PASSWORD_ERROR = "User.password.error";
     /**
      * 用户名或者密码不正确
      */
