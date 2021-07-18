@@ -53,6 +53,7 @@
 
 <script>
 import request from '@/utils/request'
+import { getStorageItem } from '@/utils/storage';
 export default {
   props: {
     dictCode: null, // 当传入dictCode时，可以不用传递url
@@ -204,7 +205,7 @@ export default {
     },
     // 从本地localStorage取 gaeaDict
     getOptionsFromLocalStorage () {
-      var dicts = JSON.parse(localStorage.getItem('gaeaDict'))
+      var dicts = getStorageItem('gaeaDict')
       var options = []
       if (!dicts.hasOwnProperty(this.dictCode)) {
         return []
