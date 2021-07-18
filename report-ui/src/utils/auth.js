@@ -1,24 +1,24 @@
-import Cookies from 'js-cookie'
+import { getStorageItem, setStorageItem, delStorageItem } from '@/utils/storage'
 
 const TokenKey = 'token'
-const AccessUserKey = 'accessUser'
+const AccessUserKey = 'gaeaUser'
 
 export function getToken() {
-  return Cookies.get(TokenKey)
+  return getStorageItem(TokenKey)
 }
 export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+  return setStorageItem(TokenKey, token)
 }
 export function delToken() {
-  return Cookies.remove(TokenKey)
+  return delStorageItem(TokenKey)
 }
 
 export function getAccessUser() {
-  return Cookies.getJSON(AccessUserKey)
+  return getStorageItem(AccessUserKey)
 }
 export function setAccessUser(accessUser) {
-  return Cookies.set(AccessUserKey, accessUser)
+  return setStorageItem(AccessUserKey, accessUser)
 }
 export function delAccessUser() {
-  return Cookies.remove(AccessUserKey)
+  return delStorageItem(AccessUserKey)
 }
