@@ -73,23 +73,23 @@ export default {
         buttons: {
           query: {
             api: accessAuthorityList,
-            permission: 'AccessAuthority:PAGE'
+            permission: 'authorityManage:query'
           },
           queryByPrimarykey: {
             api: accessAuthorityDetail,
-            permission: 'AccessAuthority:detail'
+            permission: 'authorityManage:query'
           },
           add: {
             api: accessAuthorityAdd,
-            permission: 'AccessAuthority:insert'
+            permission: 'authorityManage:insert'
           },
           delete: {
             api: accessAuthorityDeleteBatch,
-            permission: 'AccessAuthority:delete'
+            permission: 'authorityManage:delete'
           },
           edit: {
             api: accessAuthorityUpdate,
-            permission: 'AccessAuthority:update'
+            permission: 'authorityManage:update'
           },
         },
         // 表格列
