@@ -11,33 +11,17 @@
       <el-row :gutter="10">
         <el-col :xs="24" :sm="20" :md="12" :lg="6" :xl="4">
           <el-form-item label="名称">
-            <el-input
-              v-model="params.reportName"
-              size="mini"
-              clearable
-              placeholder="名称"
-              class="filter-item"
-            />
+            <el-input v-model="params.reportName" size="mini" clearable placeholder="名称" class="filter-item" />
           </el-form-item>
         </el-col>
         <el-col :xs="24" :sm="20" :md="12" :lg="6" :xl="4">
           <el-form-item label="报表编码">
-            <el-input
-              v-model="params.reportCode"
-              size="mini"
-              clearable
-              placeholder="报表编码"
-              class="filter-item"
-            />
+            <el-input v-model="params.reportCode" size="mini" clearable placeholder="报表编码" class="filter-item" />
           </el-form-item>
         </el-col>
         <el-col :xs="24" :sm="20" :md="4" :lg="4" :xl="4">
-          <el-button type="primary" size="mini" @click="search('form')"
-            >查询</el-button
-          >
-          <el-button type="danger" size="mini" @click="reset('form')"
-            >重置</el-button
-          >
+          <el-button type="primary" size="mini" @click="search('form')">查询</el-button>
+          <el-button type="danger" size="mini" @click="reset('form')">重置</el-button>
         </el-col>
       </el-row>
     </el-form>
@@ -50,18 +34,8 @@
             <footer>
               {{ item.updateTime }}
               <div class="operation">
-                <el-button
-                  icon="el-icon-view"
-                  class="view"
-                  type="text"
-                  @click="viewDesign(item)"
-                />
-                <el-button
-                  icon="el-icon-edit"
-                  class="edit"
-                  type="text"
-                  @click="openDesign(item)"
-                />
+                <el-button icon="el-icon-view" class="view" type="text" @click="viewDesign(item)" v-permission="'bigScreenManage:view'"/>
+                <el-button icon="el-icon-edit" class="edit" type="text" @click="openDesign(item)" v-permission="'bigScreenManage:design'"/>
               </div>
             </footer>
           </div>
@@ -69,23 +43,15 @@
       </el-col>
     </el-row>
     <div class="block">
-      <el-pagination
-        :total="totalCount"
-        :page-sizes="[8, 20, 50, 100]"
-        :page-size="params.pageSize"
-        :current-page="params.pageNumber"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      />
+      <el-pagination :total="totalCount" :page-sizes="[8, 20, 50, 100]" :page-size="params.pageSize" :current-page="params.pageNumber" layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
     </div>
   </div>
 </template>
 
 <script>
-import { reportPageList } from "@/api/report";
+import { reportPageList } from '@/api/report'
 export default {
-  name: "Login",
+  name: 'Login',
   components: {},
   data() {
     return {
@@ -94,75 +60,75 @@ export default {
       totalCount: 0,
       totalPage: 0,
       params: {
-        reportCode: "",
-        reportName: "",
+        reportCode: '',
+        reportName: '',
         // reportType: '',
         pageNumber: 1,
         pageSize: 8,
-        order: "DESC",
-        sort: "update_time"
-      }
-    };
+        order: 'DESC',
+        sort: 'update_time',
+      },
+    }
   },
   mounted() {},
   created() {
-    this.queryByPage();
+    this.queryByPage()
   },
   methods: {
     // 查询
     search() {
-      this.params.pageNumber = 1;
-      this.queryByPage();
+      this.params.pageNumber = 1
+      this.queryByPage()
     },
     // 重置
     reset(formName) {
-      this.$refs[formName].resetFields();
-      this.params.reportName = "";
-      this.params.reportCode = "";
-      this.params.pageNumber = 1;
-      this.queryByPage();
+      this.$refs[formName].resetFields()
+      this.params.reportName = ''
+      this.params.reportCode = ''
+      this.params.pageNumber = 1
+      this.queryByPage()
     },
     async queryByPage() {
-      const res = await reportPageList(this.params);
-      if (res.code != "200") return;
-      this.listLoading = true;
-      this.list = res.data.records;
-      this.list.forEach(value => {
-        value["reportNameCode"] =
-          value.reportName + "[" + value.reportCode + "]";
-      });
-      this.totalCount = res.data.total;
-      this.totalPage = res.data.pages;
-      this.listLoading = false;
+      const res = await reportPageList(this.params)
+      if (res.code != '200') return
+      this.listLoading = true
+      this.list = res.data.records
+      this.list.forEach((value) => {
+        value['reportNameCode'] =
+          value.reportName + '[' + value.reportCode + ']'
+      })
+      this.totalCount = res.data.total
+      this.totalPage = res.data.pages
+      this.listLoading = false
     },
     handleSizeChange(val) {
-      this.params.pageSize = val;
-      this.queryByPage();
+      this.params.pageSize = val
+      this.queryByPage()
     },
     handleCurrentChange(val) {
-      this.params.pageNumber = val;
-      this.queryByPage();
+      this.params.pageNumber = val
+      this.queryByPage()
     },
     openDesign(val) {
       var routeUrl = this.$router.resolve({
-        path: "/bigscreen/designer",
+        path: '/bigscreen/designer',
         query: {
           reportCode: val.reportCode,
           reportId: val.id,
-          accessKey: val.accessKey
-        }
-      });
-      window.open(routeUrl.href, "_blank");
+          accessKey: val.accessKey,
+        },
+      })
+      window.open(routeUrl.href, '_blank')
     },
     viewDesign(val) {
       var routeUrl = this.$router.resolve({
-        path: "/bigscreen/viewer",
-        query: { reportCode: val.reportCode }
-      });
-      window.open(routeUrl.href, "_blank");
-    }
-  }
-};
+        path: '/bigscreen/viewer',
+        query: { reportCode: val.reportCode },
+      })
+      window.open(routeUrl.href, '_blank')
+    },
+  },
+}
 </script>
 
 <style scoped lang="scss">
