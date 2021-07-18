@@ -28,4 +28,9 @@
         delete_flag,enable_flag,create_by,create_time,update_by,update_time,version
     </sql>
 
+    <select id="queryAuthoritiesByLoginName" resultType="java.lang.String" parameterType="java.lang.String">
+        select distinct concat(target,':',action) from access_role_authority where role_code in (
+            select role_code from access_user_role where login_name=#{loginName}
+        )
+    </select>
 </mapper>
