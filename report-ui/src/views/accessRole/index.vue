@@ -62,23 +62,23 @@ export default {
         buttons: {
           query: {
             api: accessRoleList,
-            permission: 'AccessRole:PAGE'
+            permission: 'roleManage:query'
           },
           queryByPrimarykey: {
             api: accessRoleDetail,
-            permission: 'AccessRole:detail'
+            permission: 'roleManage:query'
           },
           add: {
             api: accessRoleAdd,
-            permission: 'AccessRole:insert'
+            permission: 'roleManage:insert'
           },
           delete: {
             api: accessRoleDeleteBatch,
-            permission: 'AccessRole:delete'
+            permission: 'roleManage:delete'
           },
           edit: {
             api: accessRoleUpdate,
-            permission: 'AccessRole:update'
+            permission: 'roleManage:update'
           },
         },
         // 表格列
