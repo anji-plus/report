@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import store from '../store'
-import { delItem } from "@/utils/storage"
 import { getToken } from '@/utils/auth'
 // 创建axios实例
 const service = axios.create({
@@ -39,7 +38,6 @@ service.interceptors.response.use(
           type: 'warning'
         }
       ).then(() => {
-        delItem('token')
         sessionStorage.clear()
         localStorage.clear()
         window.location.href = "/";
