@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Message, MessageBox } from 'element-ui';
-import { setItem, getItem, delItem } from '@/utils/storage';
+import { delItem } from '@/utils/storage';
 
 axios.defaults.baseURL = process.env.BASE_API
 // axios.defaults.baseURL = 'http://10.108.12.23:8080'   // 德明本地
@@ -33,7 +33,6 @@ service.interceptors.response.use(
         console.log(1)
         sessionStorage.clear();
         localStorage.clear();
-        delItem('token')
         // location.reload();
         window.location.href = "/";
       }).catch(err => {
