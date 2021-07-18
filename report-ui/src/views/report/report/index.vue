@@ -62,6 +62,7 @@
       <el-table-column prop="updateTime" label="更新时间" />
       <el-table-column label="操作" width="200px" align="center">
         <template slot-scope="scope">
+          <el-button type="text" @click="share(scope.row)" v-permission="'bigScreenManage:share'">分享</el-button>
           <el-button type="text" @click="preview(scope.row)" v-permission="'bigScreenManage:view'">预览</el-button>
           <el-button type="text" @click="design(scope.row)" v-permission="'bigScreenManage:design'">设计</el-button>
           <el-button type="text" @click="showAddReportModel(scope.row)" v-permission="'reportManage:update'">编辑</el-button>
@@ -144,6 +145,7 @@
         <el-button type="primary" @click="UserConfirm">保存</el-button>
       </div>
     </el-dialog>
+    <Share :visib="visibleForShareDialog" :reportCode="reportCodeForShareDialog" @handleClose="visibleForShareDialog = false" />
   </div>
 </template>
 
@@ -152,10 +154,11 @@ import { dataDictionary } from '@/api/common'
 import { getToken } from '@/utils/auth'
 import { reportPageList, addReport, editReport, delReport } from '@/api/report'
 import Dictionary from '@/components/Dictionary/index'
+import Share from '@/views/report/report/components/share'
 var typeData
 export default {
   name: 'Report',
-  components: { Dictionary },
+  components: { Dictionary, Share },
   filters: {
     filterPushType(val) {
       for (var i = 0; i < typeData.dictionaryGroupOptions.length; i++) {
@@ -204,6 +207,10 @@ export default {
       headers: {
         Authorization: getToken(),
       },
+
+      // 分享
+      visibleForShareDialog: false,
+      reportCodeForShareDialog: '',
     }
   },
 
@@ -269,6 +276,11 @@ export default {
         this.dialogForm = val
         this.reportCodeDisable = true
       }
+    },
+    // 分享
+    share(val) {
+      this.reportCodeForShareDialog = val.reportCode
+      this.visibleForShareDialog = true
     },
     // 预览
     preview(val) {
