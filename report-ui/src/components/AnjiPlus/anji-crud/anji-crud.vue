@@ -248,7 +248,6 @@ export default {
     } else {
       this.hasRowCustomButton = false
     }
-    console.log(`是否有自定义行按钮: ${this.hasRowCustomButton}`)
   },
   methods: {
     queryFormFieldSpan(item) {

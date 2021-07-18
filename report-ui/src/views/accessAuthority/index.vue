@@ -1,6 +1,5 @@
 <template>
-  <anji-crud ref="listPage"
-             :option="crudOption">
+  <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
     </template>
 
@@ -18,10 +17,16 @@
   </anji-crud>
 </template>
 <script>
-import { accessAuthorityList, accessAuthorityAdd, accessAuthorityDeleteBatch, accessAuthorityUpdate, accessAuthorityDetail } from '@/api/accessAuthority'
+import {
+  accessAuthorityList,
+  accessAuthorityAdd,
+  accessAuthorityDeleteBatch,
+  accessAuthorityUpdate,
+  accessAuthorityDetail,
+} from '@/api/accessAuthority'
 export default {
   name: 'AccessAuthority',
-  data () {
+  data() {
     return {
       crudOption: {
         // 使用菜单做为页面标题
@@ -46,7 +51,7 @@ export default {
               dictCode: 'ENABLE_FLAG',
             },
             label: '启用状态',
-            field: 'enableFlag'
+            field: 'enableFlag',
           },
           {
             inputType: 'input',
@@ -73,23 +78,23 @@ export default {
         buttons: {
           query: {
             api: accessAuthorityList,
-            permission: 'authorityManage:query'
+            permission: 'authorityManage:query',
           },
           queryByPrimarykey: {
             api: accessAuthorityDetail,
-            permission: 'authorityManage:query'
+            permission: 'authorityManage:query',
           },
           add: {
             api: accessAuthorityAdd,
-            permission: 'authorityManage:insert'
+            permission: 'authorityManage:insert',
           },
           delete: {
             api: accessAuthorityDeleteBatch,
-            permission: 'authorityManage:delete'
+            permission: 'authorityManage:delete',
           },
           edit: {
             api: accessAuthorityUpdate,
-            permission: 'authorityManage:update'
+            permission: 'authorityManage:update',
           },
         },
         // 表格列
@@ -102,7 +107,7 @@ export default {
             editHide: true, // 编辑弹框中不显示
           },
           {
-            label: '菜单代码',//目标菜单
+            label: '菜单代码', //目标菜单
             placeholder: '',
             field: 'target',
             editField: 'target',
@@ -110,12 +115,12 @@ export default {
             inputType: 'input',
             rules: [
               { required: true, message: '目标菜单必填', trigger: 'blur' },
-              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' }
+              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
           {
-            label: '菜单名称',//目标菜单名称
+            label: '菜单名称', //目标菜单名称
             placeholder: '',
             field: 'targetName',
             sortable: true,
@@ -127,12 +132,12 @@ export default {
             inputType: 'input',
             rules: [
               { required: true, message: '目标菜单名称必填', trigger: 'blur' },
-              { min: 1, max: 128, message: '不超过128个字符', trigger: 'blur' }
+              { min: 1, max: 128, message: '不超过128个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
           {
-            label: '按钮代码',//目标按钮
+            label: '按钮代码', //目标按钮
             placeholder: '',
             field: 'action',
             tableHide: true, // 表格中不显示
@@ -141,12 +146,12 @@ export default {
             inputType: 'input',
             rules: [
               { required: true, message: '目标必填', trigger: 'blur' },
-              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' }
+              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
           {
-            label: '按钮名称',//目标按钮名称
+            label: '按钮名称', //目标按钮名称
             placeholder: '',
             field: 'actionName',
             fieldTableRowRenderer: (row) => {
@@ -158,12 +163,12 @@ export default {
             inputType: 'input',
             rules: [
               { required: true, message: '目标按钮名称必填', trigger: 'blur' },
-              { min: 1, max: 128, message: '不超过128个字符', trigger: 'blur' }
+              { min: 1, max: 128, message: '不超过128个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
           {
-            label: '启用状态',//0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG
+            label: '启用状态', //0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG
             placeholder: '',
             field: 'enableFlag',
             fieldTableRowRenderer: (row) => {
@@ -176,7 +181,7 @@ export default {
             },
             colorStyle: {
               0: 'table-danger', //key为editField渲染的值（字典的提交值）'红色': 'danger','蓝色': 'primary','绿色': 'success','黄色': 'warning','灰色': 'info','白色'：''
-              1: 'table-success'
+              1: 'table-success',
             },
             rules: [
               { required: true, message: '启用状态必填', trigger: 'blur' },
@@ -184,13 +189,12 @@ export default {
             disabled: false,
           },
           {
-            label: '排序',//
+            label: '排序', //
             placeholder: '',
             field: 'sort',
             editField: 'sort',
             inputType: 'input',
-            rules: [
-            ],
+            rules: [],
             disabled: false,
           },
 
@@ -239,9 +243,8 @@ export default {
     }
   },
 
-  created () { },
-  methods: {
-  }
+  created() {},
+  methods: {},
 }
 </script>
 

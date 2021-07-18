@@ -4,7 +4,8 @@
     </template>
 
     <template slot="rowButton" slot-scope="props">
-      <el-button type="text" @click="handleOpenDialogSetRoleForUser(props)">授予角色</el-button>
+      <el-button type="text" @click="handleOpenDialogSetRoleForUser(props)" v-permission="'userManage:grantRole'">分配角色</el-button>
+      <!--<el-button type="text" @click="handleOpenDialogSetRoleForUser(props)" v-permission="'userManage:resetPassword'">重置密码</el-button>-->
     </template>
     <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
     <template v-slot:pageSection>

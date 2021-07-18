@@ -1,31 +1,32 @@
 <template>
-  <anji-crud ref="listPage"
-             :option="crudOption">
+  <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
     </template>
 
-    <template slot="rowButton"
-              slot-scope="props">
-      <el-button type="text"
-                 @click="handleOpenDialogSetAuthorityForRole(props)">设定权限</el-button>
+    <template slot="rowButton" slot-scope="props">
+      <el-button type="text" @click="handleOpenDialogSetAuthorityForRole(props)" v-permission="'roleManage:grantAuthority'">分配权限</el-button>
     </template>
     <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
     <template v-slot:pageSection>
-      <RoleAuthority :role-code="roleCode"
-                     :visib="dialogVisibleSetAuthorityForRole"
-                     @handleClose="dialogVisibleSetAuthorityForRole = false" />
+      <RoleAuthority :role-code="roleCode" :visib="dialogVisibleSetAuthorityForRole" @handleClose="dialogVisibleSetAuthorityForRole = false" />
     </template>
   </anji-crud>
 </template>
 <script>
-import { accessRoleList, accessRoleAdd, accessRoleDeleteBatch, accessRoleUpdate, accessRoleDetail } from '@/api/accessRole'
+import {
+  accessRoleList,
+  accessRoleAdd,
+  accessRoleDeleteBatch,
+  accessRoleUpdate,
+  accessRoleDetail,
+} from '@/api/accessRole'
 import RoleAuthority from '@/views/accessRole/components/RoleAuthority'
 export default {
   name: 'AccessRole',
   components: {
     RoleAuthority: RoleAuthority,
   },
-  data () {
+  data() {
     return {
       // 选中一个角色，点设定权限时，弹出对话框
       dialogVisibleSetAuthorityForRole: false,
@@ -42,12 +43,12 @@ export default {
           {
             inputType: 'input',
             label: '角色编码',
-            field: 'roleCode'
+            field: 'roleCode',
           },
           {
             inputType: 'input',
             label: '角色名称',
-            field: 'roleName'
+            field: 'roleName',
           },
           {
             inputType: 'anji-select', //form表单类型 input|input-number|anji-select(传递url或者dictCode)|anji-tree(左侧树)|date|datetime|datetimerange
@@ -62,23 +63,23 @@ export default {
         buttons: {
           query: {
             api: accessRoleList,
-            permission: 'roleManage:query'
+            permission: 'roleManage:query',
           },
           queryByPrimarykey: {
             api: accessRoleDetail,
-            permission: 'roleManage:query'
+            permission: 'roleManage:query',
           },
           add: {
             api: accessRoleAdd,
-            permission: 'roleManage:insert'
+            permission: 'roleManage:insert',
           },
           delete: {
             api: accessRoleDeleteBatch,
-            permission: 'roleManage:delete'
+            permission: 'roleManage:delete',
           },
           edit: {
             api: accessRoleUpdate,
-            permission: 'roleManage:update'
+            permission: 'roleManage:update',
           },
         },
         // 表格列
@@ -99,7 +100,7 @@ export default {
             inputType: 'input',
             rules: [
               { required: true, message: '角色编码必填', trigger: 'blur' },
-              { min: 1, max: 32, message: '不超过32个字符', trigger: 'blur' }
+              { min: 1, max: 32, message: '不超过32个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
@@ -114,12 +115,12 @@ export default {
             inputType: 'input',
             rules: [
               { required: true, message: '角色名称必填', trigger: 'blur' },
-              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' }
+              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
           {
-            label: '启用状态',//0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG
+            label: '启用状态', //0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG
             placeholder: '',
             field: 'enableFlag',
             fieldTableRowRenderer: (row) => {
@@ -132,7 +133,7 @@ export default {
             },
             colorStyle: {
               0: 'table-danger', //key为editField渲染的值（字典的提交值）'红色': 'danger','蓝色': 'primary','绿色': 'success','黄色': 'warning','灰色': 'info','白色'：''
-              1: 'table-success'
+              1: 'table-success',
             },
             rules: [
               { required: true, message: '启用状态必填', trigger: 'blur' },
@@ -180,13 +181,13 @@ export default {
       },
     }
   },
-  created () { },
+  created() {},
   methods: {
-    handleOpenDialogSetAuthorityForRole (props) {
+    handleOpenDialogSetAuthorityForRole(props) {
       this.roleCode = props.msg.roleCode
       this.dialogVisibleSetAuthorityForRole = true
     },
-  }
+  },
 }
 </script>
 
