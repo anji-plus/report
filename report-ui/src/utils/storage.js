@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-export function setItem(k, v) {
+export function setCookie(k, v) {
   if(typeof(v) == "undefined" || v == null){
     return;
   }
@@ -12,7 +12,7 @@ export function setItem(k, v) {
   Cookies.get(k, val)
 }
 
-export function getItem(k) {
+export function getCookie(k) {
   var val = Cookies.get(k);
   try{
     //如果是number boolean jsonstring是不会报错的
@@ -21,7 +21,7 @@ export function getItem(k) {
     return val;
   }
 }
-export function delItem(k) {
+export function delCookie(k) {
   Cookies.remove(k);
 }
 
