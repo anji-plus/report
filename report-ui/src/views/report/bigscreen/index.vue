@@ -34,6 +34,7 @@
             <footer>
               {{ item.updateTime }}
               <div class="operation">
+                <el-button icon="el-icon-share" class="view" type="text" @click="share(item)" v-permission="'bigScreenManage:share'"/>
                 <el-button icon="el-icon-view" class="view" type="text" @click="viewDesign(item)" v-permission="'bigScreenManage:view'"/>
                 <el-button icon="el-icon-edit" class="edit" type="text" @click="openDesign(item)" v-permission="'bigScreenManage:design'"/>
               </div>
@@ -45,14 +46,16 @@
     <div class="block">
       <el-pagination :total="totalCount" :page-sizes="[8, 20, 50, 100]" :page-size="params.pageSize" :current-page="params.pageNumber" layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
     </div>
+    <Share :visib="visibleForShareDialog" :reportCode="reportCodeForShareDialog" @handleClose="visibleForShareDialog = false" />
   </div>
 </template>
 
 <script>
+import Share from '@/views/report/report/components/share'
 import { reportPageList } from '@/api/report'
 export default {
   name: 'Login',
-  components: {},
+  components: {Share},
   data() {
     return {
       list: [],
@@ -68,6 +71,9 @@ export default {
         order: 'DESC',
         sort: 'update_time',
       },
+      // 分享
+      visibleForShareDialog: false,
+      reportCodeForShareDialog: '',
     }
   },
   mounted() {},
@@ -108,6 +114,11 @@ export default {
     handleCurrentChange(val) {
       this.params.pageNumber = val
       this.queryByPage()
+    },
+    // 分享
+    share(val) {
+      this.reportCodeForShareDialog = val.reportCode
+      this.visibleForShareDialog = true
     },
     openDesign(val) {
       var routeUrl = this.$router.resolve({
