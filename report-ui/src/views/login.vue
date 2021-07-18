@@ -106,7 +106,7 @@ import cookies from 'js-cookie'
 import { Decrypt, Encrypt } from '@/utils/index'
 import { login } from '@/api/login'
 import { transPsw } from '@/utils/encrypted'
-import { setItem, getItem } from '@/utils/storage'
+import { setToken, setAccessUser } from "@/utils/auth";
 export default {
   name: 'Login',
   components: {
@@ -225,8 +225,8 @@ export default {
       console.log(data)
       this.loading = false
       if (code != '200') return
-      setItem('token', data.token)
-      setItem('loginName', data.loginName)
+      setToken(data.token)
+      setAccessUser(data)
       // 选中记住密码时 把密码存到cookie里,时效15天
       this.rememberPsw &&
         cookies.set(
