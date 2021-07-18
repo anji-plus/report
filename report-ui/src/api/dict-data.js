@@ -5,6 +5,7 @@
  * @Last Modified time: 2020-12-15 15:34:34
  */
 import request from '@/utils/request'
+import { setStorageItem } from '@/utils/storage'
 // 数据字典和基础数据查询的相关接口
 
 /**
@@ -70,7 +71,7 @@ export function initDictToLocalstorage(callback) {
     }
 
     // 保存数据字典到localStorage
-    localStorage.setItem('gaeaDict', JSON.stringify(res.data))
+    setStorageItem('gaeaDict', res.data)
     if (callback != null) {
       callback()
     }
