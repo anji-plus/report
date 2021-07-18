@@ -28,31 +28,31 @@ import Layout from '../views/layout/Layout'
 export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login'), hidden: true },
   {
-    path: '/index', component: Layout, redirect: '/access/accessAuthority', name: '首页', meta: { title: '首页', icon: 'iconhome2' },
+    path: '/index', component: Layout, name: 'index', meta: { title: '首页', icon: 'iconhome2' },
     children: [
-      { path: '', name: 'accessUser', component: () => import('@/views/home/index'), meta: { title: '首页', icon: 'iconhome2', keepAlive: true, isBack: true, requireAuth: true } },
+      { path: '', component: () => import('@/views/home/index'), meta: { title: '首页', icon: 'iconhome2', keepAlive: true, requireAuth: true } },
     ]
   },
   {
-    path: '/access', component: Layout, name: 'access', meta: { title: '用户权限', icon: 'icondfzq-' },
+    path: '/access', name: 'access', component: Layout, meta: { title: '用户权限', icon: 'icondfzq-', requireAuth: true, permission: 'authorityManage|roleManage|userManage' },
     children: [
-      { path: 'authority', name: 'authority', component: () => import('@/views/accessAuthority/index'), meta: { title: '权限管理', icon: 'iconquanxian', keepAlive: true, isBack: true } },
-      { path: 'role', name: 'role', component: () => import('@/views/accessRole/index'), meta: { title: '角色管理', icon: 'iconjiaose1', keepAlive: true, isBack: true } },
-      { path: 'user', name: 'user', component: () => import('@/views/accessUser/index'), meta: { title: '用户管理', icon: 'iconyonghu', keepAlive: true, isBack: true } },
+      { path: 'authority', name: 'authority', component: () => import('@/views/accessAuthority/index'), meta: { title: '权限管理', icon: 'iconquanxian', keepAlive: true, requireAuth: true, permission: 'authorityManage'} },
+      { path: 'role', name: 'role', component: () => import('@/views/accessRole/index'), meta: { title: '角色管理', icon: 'iconjiaose1', keepAlive: true, requireAuth: true, permission: 'roleManage'} },
+      { path: 'user', name: 'user', component: () => import('@/views/accessUser/index'), meta: { title: '用户管理', icon: 'iconyonghu', keepAlive: true, requireAuth: true, permission: 'userManage'} },
     ]
   },
   {
-    path: '/report', component: Layout, name: '报表设计', meta: { title: '报表设计', icon: 'iconnavicon-ywcs' },
+    path: '/report', name: 'report', component: Layout, meta: { title: '报表设计', icon: 'iconnavicon-ywcs', requireAuth: true, permission: 'datasourceManage|resultsetManage|reportManage|bigScreenManage' },
     children: [
-      { path: 'datasource', name: 'datasource', component: () => import('@/views/report/datasource/index'), meta: { title: '数据源', icon: 'iconeventbridgexiaoxishijianzongxian', keepAlive: true, isBack: true } },
-      { path: 'resultset', name: 'resultset', component: () => import('@/views/report/resultset/index'), meta: { title: '数据集', icon: 'iconalikafkaxiaoxiduilieKafka', keepAlive: true, isBack: true } },
-      { path: 'report', name: 'reportIndex', component: () => import('@/views/report/report/index'), meta: { title: '报表管理', icon: 'iconnavicon-ywcs', keepAlive: true, isBack: true } },
-      { path: 'bigscreen', name: 'bigscreen', component: () => import('@/views/report/bigscreen/index'), meta: { title: '大屏报表', icon: 'iconchufaqipeizhi-hui', keepAlive: true, isBack: true },       },
-      //{ path: 'excelreport', name: 'excelreport', component: () => import('@/views/report/excelreport/index'), meta: { title: '表格报表', icon: 'iconliebiao', keepAlive: true, isBack: true } },
+      { path: 'datasource', name: 'datasource', component: () => import('@/views/report/datasource/index'), meta: { title: '数据源', icon: 'iconeventbridgexiaoxishijianzongxian', keepAlive: true, requireAuth: true, permission: 'datasourceManage'} },
+      { path: 'resultset', name: 'resultset', component: () => import('@/views/report/resultset/index'), meta: { title: '数据集', icon: 'iconalikafkaxiaoxiduilieKafka', keepAlive: true, requireAuth: true, permission: 'resultsetManage'} },
+      { path: 'report', name: 'reportIndex', component: () => import('@/views/report/report/index'), meta: { title: '报表管理', icon: 'iconnavicon-ywcs', keepAlive: true, requireAuth: true, permission: 'reportManage'} },
+      { path: 'bigscreen', name: 'bigscreen', component: () => import('@/views/report/bigscreen/index'), meta: { title: '大屏报表', icon: 'iconchufaqipeizhi-hui', keepAlive: true, requireAuth: true, permission: 'bigScreenManage'},       },
+      //{ path: 'excelreport', name: 'excelreport', component: () => import('@/views/report/excelreport/index'), meta: { title: '表格报表', icon: 'iconliebiao', keepAlive: true, requireAuth: true, permission: 'excelManage'} },
     ]
   },
-  { path: '/bigscreen/viewer', component: () => import('@/views/report/bigscreen/viewer'), hidden: true },
-  { path: '/bigscreen/designer', component: () => import('@/views/report/bigscreen/designer'), hidden: true },
+  { path: '/bigscreen/viewer', component: () => import('@/views/report/bigscreen/viewer'), hidden: true, meta: { requireAuth: true }},
+  { path: '/bigscreen/designer', component: () => import('@/views/report/bigscreen/designer'), hidden: true, meta: { requireAuth: true }},
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   { path: '*', redirect: '/login', hidden: true },
   /*
