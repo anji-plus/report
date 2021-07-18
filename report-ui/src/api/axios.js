@@ -1,9 +1,5 @@
 import axios from 'axios';
 import { Message, MessageBox } from 'element-ui';
-import { getItem, delItem } from '@/utils/storage';
-import signUtil from '@/utils/signUtil';
-import { deepClone } from "@/utils"
-
 axios.defaults.baseURL = process.env.BASE_API
 const service = axios.create({
   withCredentials: false,
@@ -15,8 +11,6 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
-    // 在发送请求之前做些什么
-    var token = getItem('token');
     return config
   },
   error => {
@@ -42,7 +36,6 @@ service.interceptors.response.use(
       }).then(() => {
         sessionStorage.clear();
         localStorage.clear();
-        delItem('token')
         window.location.href = "/";
       }).catch(err => {
       })
