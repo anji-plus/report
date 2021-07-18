@@ -1,81 +1,32 @@
 <template>
   <div :class="[hasTreeFieldInQueryForm ? 'page-container' : 'app-container']">
-    <div v-if="hasTreeFieldInQueryForm"
-         class="left-container">
-      <AnjiTree ref="queryFormTree"
-                v-model.trim="queryParams[queryFormTreeField.field]"
-                :is-open="queryFormTreeField.anjiTreeOption.isOpen"
-                :enable-filter="queryFormTreeField.anjiTreeOption.enableFilter"
-                :label-name="queryFormTreeField.label"
-                :url="queryFormTreeField.anjiTreeOption.url"
-                @node-click="handleTreeNodeCheck" />
+    <div v-if="hasTreeFieldInQueryForm" class="left-container">
+      <AnjiTree ref="queryFormTree" v-model.trim="queryParams[queryFormTreeField.field]" :is-open="queryFormTreeField.anjiTreeOption.isOpen" :enable-filter="queryFormTreeField.anjiTreeOption.enableFilter" :label-name="queryFormTreeField.label" :url="queryFormTreeField.anjiTreeOption.url" @node-click="handleTreeNodeCheck" />
     </div>
     <div class="right-container">
       <!-- 查询表单开始 -->
-      <el-form ref="formSearch"
-               :model="queryParams"
-               label-width="100px">
+      <el-form ref="formSearch" :model="queryParams" label-width="100px" v-permission="option.buttons.query.permission">
         <el-row>
-          <el-col v-for="(item, index) in queryFormFieldExcludeTree"
-                  :key="item.field"
-                  :span="queryFormFieldSpan(item)">
-            <el-form-item v-if="index <= 2 || (index > 2 && queryParams.showMoreSearch)"
-                          :label="item.label"
-                          :rules="item.rules"
-                          :prop="item.field">
+          <el-col v-for="(item, index) in queryFormFieldExcludeTree" :key="item.field" :span="queryFormFieldSpan(item)">
+            <el-form-item v-if="index <= 2 || (index > 2 && queryParams.showMoreSearch)" :label="item.label" :rules="item.rules" :prop="item.field">
               <!-- 输入框 -->
-              <el-input v-if="item.inputType == 'input' || item.inputType == 'input-number'"
-                        v-model.trim="queryParams[item.field]"
-                        :placeholder="item.placeholder || '请输入'"
-                        :clearable="item.clearable !== false"
-                        :disabled="item.disabled"
-                        @change="(value) => queryFormChange(item.field, value)" />
+              <el-input v-if="item.inputType == 'input' || item.inputType == 'input-number'" v-model.trim="queryParams[item.field]" :placeholder="item.placeholder || '请输入'" :clearable="item.clearable !== false" :disabled="item.disabled" @change="(value) => queryFormChange(item.field, value)" />
               <!-- 开关 -->
-              <el-switch v-else-if="item.inputType == 'switch'"
-                         v-model.trim="queryParams[item.field]"
-                         :disabled="item.disabled"
-                         :active-value="item.switchOption.disableValue"
-                         :inactive-value="item.switchOption.enableValue"
-                         active-color="#5887fb"
-                         inactive-color="#ccc"
-                         @change="(value) => queryFormChange(item.field, value)" />
+              <el-switch v-else-if="item.inputType == 'switch'" v-model.trim="queryParams[item.field]" :disabled="item.disabled" :active-value="item.switchOption.disableValue" :inactive-value="item.switchOption.enableValue" active-color="#5887fb" inactive-color="#ccc" @change="(value) => queryFormChange(item.field, value)" />
               <!-- 下拉框 -->
-              <anji-select v-else-if="item.inputType == 'anji-select'"
-                           v-model.trim="queryParams[item.field]"
-                           :multiple="item.anjiSelectOption.multiple"
-                           :dict-code="item.anjiSelectOption.dictCode"
-                           :url="item.anjiSelectOption.url"
-                           :method="item.anjiSelectOption.method"
-                           :query-param="item.anjiSelectOption.queryParam"
-                           :option="item.anjiSelectOption.option"
-                           :label="item.anjiSelectOption.label"
-                           :disabled-options="item.anjiSelectOption.disabledOptions"
-                           :disabled="item.disabled"
-                           :merge-label="item.anjiSelectOption.mergeLabel"
-                           @change="(value) => queryFormChange(item.field, value)" />
+              <anji-select v-else-if="item.inputType == 'anji-select'" v-model.trim="queryParams[item.field]" :multiple="item.anjiSelectOption.multiple" :dict-code="item.anjiSelectOption.dictCode" :url="item.anjiSelectOption.url" :method="item.anjiSelectOption.method" :query-param="item.anjiSelectOption.queryParam" :option="item.anjiSelectOption.option" :label="item.anjiSelectOption.label" :disabled-options="item.anjiSelectOption.disabledOptions" :disabled="item.disabled"
+                :merge-label="item.anjiSelectOption.mergeLabel" @change="(value) => queryFormChange(item.field, value)" />
               <!-- 日期时间框  -->
-              <el-date-picker v-else-if="item.inputType.indexOf('date') >= 0"
-                              v-model="queryParams[item.field]"
-                              style="width: 100%"
-                              :placeholder="item.placeholder || '请选择'"
-                              :type="item.inputType"
-                              :clearable="item.clearable !== false"
-                              @change="(value) => queryFormChange(item.field, value)" />
+              <el-date-picker v-else-if="item.inputType.indexOf('date') >= 0" v-model="queryParams[item.field]" style="width: 100%" :placeholder="item.placeholder || '请选择'" :type="item.inputType" :clearable="item.clearable !== false" @change="(value) => queryFormChange(item.field, value)" />
               <!-- 待扩展的表单类型，请自行扩展 -->
-              <el-input v-else
-                        placeholder="组件不支持此类型表单请至组件内部自行扩展"
-                        disabled />
+              <el-input v-else placeholder="组件不支持此类型表单请至组件内部自行扩展" disabled />
             </el-form-item>
           </el-col>
 
-          <el-col :span="6"
-                  style="text-align: center">
-            <el-button type="primary"
-                       @click="handleQueryForm('query')">查询</el-button>
-            <el-button type="danger"
-                       @click="handleResetForm()">重置</el-button>
-            <a style="margin-left: 8px"
-               @click="handleToggleMoreSearch">
+          <el-col :span="6" style="text-align: center">
+            <el-button type="primary" @click="handleQueryForm('query')">查询</el-button>
+            <el-button type="danger" @click="handleResetForm()">重置</el-button>
+            <a style="margin-left: 8px" @click="handleToggleMoreSearch">
               {{ queryParams.showMoreSearch == true ? '收起' : '展开' }}
               <i :class="queryParams.showMoreSearch ? 'el-icon-arrow-up' : 'el-icon-arrow-down'" />
             </a>
@@ -86,82 +37,46 @@
 
       <!-- 批量操作 -->
       <slot name="buttonLeftOnTable" />
-      <el-button v-if="option.buttons.add.isShow == undefined ? true : option.buttons.add.isShow"
-                 v-permission="option.buttons.add.permission"
-                 type="primary"
-                 icon="el-icon-plus"
-                 @click="handleOpenEditView('add')">新增</el-button>
-      <el-button v-if="option.buttons.delete.isShow == undefined ? true : option.buttons.delete.isShow"
-                 v-permission="option.buttons.delete.permission"
-                 :disabled="disableBatchDelete"
-                 type="danger"
-                 icon="el-icon-delete"
-                 @click="handleDeleteBatch()">删除</el-button>
+      <el-button v-if="option.buttons.add.isShow == undefined ? true : option.buttons.add.isShow" v-permission="option.buttons.add.permission" type="primary" icon="el-icon-plus" @click="handleOpenEditView('add')">新增</el-button>
+      <el-button v-if="option.buttons.delete.isShow == undefined ? true : option.buttons.delete.isShow" v-permission="option.buttons.delete.permission" :disabled="disableBatchDelete" type="danger" icon="el-icon-delete" @click="handleDeleteBatch()">删除</el-button>
 
       <!-- 表格开始 -->
-      <el-table :data="records"
-                border
-                @selection-change="handleSelectionChange"
-                @sort-change="handleSortChange">
+      <el-table :data="records" border @selection-change="handleSelectionChange" @sort-change="handleSortChange">
         <!--多选-->
-        <el-table-column fixed
-                         type="selection"
-                         width="50"
-                         align="center" />
+        <el-table-column fixed type="selection" width="50" align="center" />
         <!--隐藏列-->
-        <el-table-column v-if="tableExpandColumns.length > 0"
-                         type="expand">
+        <el-table-column v-if="tableExpandColumns.length > 0" type="expand">
           <template slot-scope="scope">
-            <p v-for="item in tableExpandColumns"
-               :key="item.field"
-               class="table-expand-item">
+            <p v-for="item in tableExpandColumns" :key="item.field" class="table-expand-item">
               <span class="titel"> {{ item.label }}: </span>
               <span>{{ scope.row[item.field] }}</span>
             </p>
           </template>
         </el-table-column>
         <!--序号-->
-        <el-table-column label="序号"
-                         min-width="50"
-                         align="center">
+        <el-table-column label="序号" min-width="50" align="center">
           <template slot-scope="scope">
             {{ queryParams.pageSize * (queryParams.pageNumber - 1) + scope.$index + 1 }}
           </template>
         </el-table-column>
 
         <template v-for="item in option.columns">
-          <el-table-column v-if="item.tableHide != true && item.columnType != 'expand'"
-                           :key="item.field"
-                           :prop="item.field"
-                           :label="fieldLabel(item)"
-                           :min-width="item.minWidth || 110"
-                           :sortable="item.sortable"
-                           :show-overflow-tooltip="true"
-                           align="center">
+          <el-table-column v-if="item.tableHide != true && item.columnType != 'expand'" :key="item.field" :prop="item.field" :label="fieldLabel(item)" :min-width="item.minWidth || 110" :sortable="item.sortable" :show-overflow-tooltip="true" align="center">
             <template slot-scope="scope">
               <div v-if="item.columnType == 'imgPreview'">
                 <!-- 图片缩略图-->
-                <el-image style="width: 25%; height: 50%"
-                          fit="contain"
-                          :src="scope.row[item.field]"
-                          :preview-src-list="[scope.row[item.field]]" />
+                <el-image style="width: 25%; height: 50%" fit="contain" :src="scope.row[item.field]" :preview-src-list="[scope.row[item.field]]" />
               </div>
               <div v-else>
                 <span v-if="item.inputType == 'switch' && !item.colorStyle">
-                  <el-switch v-model.trim="scope.row[item.field]"
-                             :active-value="1"
-                             :inactive-value="0"
-                             active-color="#5887fb"
-                             inactive-color="#ccc"
-                             @change="switchChange(scope.row, item.switchOption)" />
+                  <el-switch v-model.trim="scope.row[item.field]" :active-value="1" :inactive-value="0" active-color="#5887fb" inactive-color="#ccc" @change="switchChange(scope.row, item.switchOption)" />
                 </span>
                 <!-- 带单位 -->
                 <span v-else-if="item.inputType == 'anji-input'">{{ fieldValueByAnjiInput(scope.row[item.field], item) }}</span>
                 <!--表格 a 合并 b上-->
                 <span v-else-if="item.mergeColumn">{{ scope.row[item.field] }}({{ scope.row[item.mergeColumn] }})</span>
                 <!-- 没有单位 -->
-                <span v-else-if="item.colorStyle"
-                      :class="item.colorStyle[scope.row[item.editField]]">{{ fieldValueByRowRenderer(scope.row, item) }}</span>
+                <span v-else-if="item.colorStyle" :class="item.colorStyle[scope.row[item.editField]]">{{ fieldValueByRowRenderer(scope.row, item) }}</span>
                 <span v-else>{{ fieldValueByRowRenderer(scope.row, item) }}</span>
                 <!-- 正常展示模式
                 <div v-if="!item.custom">
@@ -177,32 +92,18 @@
           </el-table-column>
         </template>
         <!--操作栏-->
-        <el-table-column align="center"
-                         fixed="right"
-                         label="操作"
-                         :width="option.buttons.customButton && option.buttons.customButton.operationWidth ? option.buttons.customButton.operationWidth : 100">
+        <el-table-column align="center" fixed="right" label="操作" :width="option.buttons.customButton && option.buttons.customButton.operationWidth ? option.buttons.customButton.operationWidth : 100">
           <template slot-scope="scope">
-            <slot name="edit"
-                  :msg="scope.row" />
-            <el-button v-if="option.buttons.edit.isShow == undefined ? true : option.buttons.edit.isShow"
-                       type="text"
-                       size="small"
-                       @click="handleOpenEditView('edit', scope.row)">编辑</el-button>
-            <el-button v-if="hasRowCustomButton == false && option.buttons.delete.isShow == undefined ? true : option.buttons.edit.isShow"
-                       type="text"
-                       size="small"
-                       @click="handleDeleteBatch(scope.row)">删除</el-button>
-            <el-dropdown v-if="hasRowCustomButton"
-                         trigger="click">
+            <slot name="edit" :msg="scope.row" />
+            <el-button v-if="(option.buttons.query.isShow == undefined ? true : option.buttons.query.isShow) && hasPermission(option.buttons.edit.permission) == false" type="text" size="small" @click="handleOpenEditView('view', scope.row)" v-permission="option.buttons.query.permission" >查看</el-button>
+            <el-button v-if="option.buttons.edit.isShow == undefined ? true : option.buttons.edit.isShow" type="text" size="small" @click="handleOpenEditView('edit', scope.row)" v-permission="option.buttons.edit.permission" >编辑</el-button>
+            <el-button v-if="hasRowCustomButton == false && option.buttons.delete.isShow == undefined ? true : option.buttons.edit.isShow" type="text" size="small" @click="handleDeleteBatch(scope.row)" v-permission="option.buttons.delete.permission" >删除</el-button>
+            <el-dropdown v-if="hasRowCustomButton" trigger="click">
               <span class="el-dropdown-link"> 更多<i class="el-icon-caret-bottom el-icon--right" /> </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item class="clearfix">
-                  <slot name="rowButton"
-                        :msg="scope.row" />
-                  <el-button v-if="option.buttons.delete.isShow == undefined ? true : option.buttons.edit.isShow"
-                             type="text"
-                             size="small"
-                             @click="handleDeleteBatch(scope.row)">删除</el-button>
+                  <slot name="rowButton" :msg="scope.row" />
+                  <el-button v-if="option.buttons.delete.isShow == undefined ? true : option.buttons.edit.isShow" type="text" size="small" @click="handleDeleteBatch(scope.row)" v-permission="option.buttons.delete.permission" >删除</el-button>
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -210,36 +111,20 @@
         </el-table-column>
       </el-table>
       <div class="pagination">
-        <el-pagination v-show="total > 0"
-                       background
-                       :current-page.sync="queryParams.pageNumber"
-                       :page-sizes="$pageSizeAll"
-                       :page-size="queryParams.pageSize"
-                       layout="total, prev, pager, next, jumper, sizes"
-                       :total="total"
-                       @size-change="handleSizeChange"
-                       @current-change="handleCurrentChange" />
+        <el-pagination v-show="total > 0" background :current-page.sync="queryParams.pageNumber" :page-sizes="$pageSizeAll" :page-size="queryParams.pageSize" layout="total, prev, pager, next, jumper, sizes" :total="total" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
         <div>
-          <slot name="tableSelectionBtn"
-                :selection="checkRecords" />
+          <slot name="tableSelectionBtn" :selection="checkRecords" />
         </div>
       </div>
 
       <!-- 表格结束 -->
 
-      <EditDialog ref="edit"
-                  :option="option"
-                  :model-type="editDialogModelType"
-                  :visible="editDialogOpen"
-                  :row-data="editDialogRowData"
-                  @closeEvent="editDialogClosedEvent">
+      <EditDialog ref="edit" :option="option" :model-type="editDialogModelType" :visible="editDialogOpen" :row-data="editDialogRowData" @closeEvent="editDialogClosedEvent">
         <template v-slot:customCard>
           <slot name="cardInEditPage" />
         </template>
-        <template slot="editBtn"
-                  slot-scope="scope">
-          <slot name="editBtnPage"
-                :rowData="scope" />
+        <template slot="editBtn" slot-scope="scope">
+          <slot name="editBtnPage" :rowData="scope" />
         </template>
       </EditDialog>
     </div>
@@ -272,12 +157,12 @@ export default {
           },
           // 表格列
           columns: [],
-          queryFormChange: (fileName, val) => { },
+          queryFormChange: (fileName, val) => {},
         }
       },
     },
   },
-  data () {
+  data() {
     return {
       // 查询表单提交的值
       queryParams: {
@@ -302,42 +187,52 @@ export default {
   },
   computed: {
     // 左侧树形查询条件
-    queryFormTreeField () {
-      var treeField = this.option.queryFormFields.find((item) => item['inputType'] == 'anji-tree')
+    queryFormTreeField() {
+      var treeField = this.option.queryFormFields.find(
+        (item) => item['inputType'] == 'anji-tree'
+      )
       return treeField
     },
     // 查询条件里是否有树形控件
-    hasTreeFieldInQueryForm () {
+    hasTreeFieldInQueryForm() {
       return this.isNotBlank(this.queryFormTreeField)
     },
     // 不包含树形控件的查询条件
-    queryFormFieldExcludeTree () {
-      var treeFields = this.option.queryFormFields.filter((item) => item['inputType'] != 'anji-tree')
+    queryFormFieldExcludeTree() {
+      var treeFields = this.option.queryFormFields.filter(
+        (item) => item['inputType'] != 'anji-tree'
+      )
       return treeFields
     },
     // 主键的列名
-    primaryKeyFieldName () {
-      var primaryKey = this.option.columns.find((item) => item['primaryKey'] == true)
+    primaryKeyFieldName() {
+      var primaryKey = this.option.columns.find(
+        (item) => item['primaryKey'] == true
+      )
       if (primaryKey != null) {
         return primaryKey['field']
       } else {
         return null
-        console.warn('在columns中查找primaryKey=true失败，会导致查询详情和删除失败')
+        console.warn(
+          '在columns中查找primaryKey=true失败，会导致查询详情和删除失败'
+        )
       }
     },
 
     // 表格中可展开的列
-    tableExpandColumns () {
-      var expandColumns = this.option.columns.filter((item) => item['columnType'] == 'expand')
+    tableExpandColumns() {
+      var expandColumns = this.option.columns.filter(
+        (item) => item['columnType'] == 'expand'
+      )
       return expandColumns
     },
 
     // 是否可以批量删除
-    disableBatchDelete () {
+    disableBatchDelete() {
       return this.checkRecords.length <= 0
     },
   },
-  created () {
+  created() {
     // 为查询框中所有input加上默认值
     this.option.queryFormFields.forEach((item) => {
       // 动态添加属性
@@ -347,7 +242,7 @@ export default {
     this.handleQueryForm('query')
     this.queryFormChange()
   },
-  mounted () {
+  mounted() {
     if (this.$scopedSlots['rowButton'] != null) {
       this.hasRowCustomButton = true
     } else {
@@ -356,7 +251,7 @@ export default {
     console.log(`是否有自定义行按钮: ${this.hasRowCustomButton}`)
   },
   methods: {
-    queryFormFieldSpan (item) {
+    queryFormFieldSpan(item) {
       // console.log(item)
 
       if (item.span != null) {
@@ -377,11 +272,11 @@ export default {
       // }
     },
     // 切换更多搜索条件
-    handleToggleMoreSearch () {
+    handleToggleMoreSearch() {
       this.queryParams.showMoreSearch = !this.queryParams.showMoreSearch
     },
     // 列上排序切换
-    handleSortChange (column) {
+    handleSortChange(column) {
       // {column: {…}, prop: "orgCode", order: "ascending"}
       if (column == null || column.prop == null) {
         console.warn('排序字段名prop为空，无法排序')
@@ -394,7 +289,7 @@ export default {
       this.handleQueryForm('query')
     },
     // 查询按钮
-    handleQueryForm (from) {
+    handleQueryForm(from) {
       // 如果是点查询按钮，把树的查询属性去掉
       if (from == 'query') {
         if (this.hasTreeFieldInQueryForm) {
@@ -413,7 +308,10 @@ export default {
         }
       }
       // 默认的排序
-      if (this.isBlank(this.queryParams['order']) && this.isNotBlank(this.option.buttons.query.order)) {
+      if (
+        this.isBlank(this.queryParams['order']) &&
+        this.isNotBlank(this.option.buttons.query.order)
+      ) {
         this.queryParams['sort'] = this.option.buttons.query.sort
         this.queryParams['order'] = this.option.buttons.query.order
       }
@@ -421,7 +319,7 @@ export default {
       this.handleQueryPageList()
     },
     // 列表查询
-    async handleQueryPageList () {
+    async handleQueryPageList() {
       var params = this.queryParams
       // 将特殊参数值urlcode处理 var params = this.urlEncodeObject(this.queryParams, 'order,sort')
       const { data, code } = await this.option.buttons.query.api(params)
@@ -430,7 +328,7 @@ export default {
       this.total = data.total
     },
     // 重置
-    handleResetForm () {
+    handleResetForm() {
       this.queryParams = {
         pageNumber: 1,
         pageSize: 10,
@@ -440,20 +338,27 @@ export default {
       // this.total = 0
     },
     // 树形查询条件点击回调
-    handleTreeNodeCheck () {
+    handleTreeNodeCheck() {
       this.handleQueryForm('tree')
       // 为新建页面的对应属性值，绑定上对应的默认值
       var treeFieldName = this.queryFormTreeField['field']
       for (var i = 0; i < this.option.columns.length; i++) {
         var item = this.option.columns[i]
-        if (item['editField'] == treeFieldName || item['field'] == treeFieldName) {
-          this.$set(this.option.columns[i], 'defaultValue', this.queryParams[treeFieldName])
+        if (
+          item['editField'] == treeFieldName ||
+          item['field'] == treeFieldName
+        ) {
+          this.$set(
+            this.option.columns[i],
+            'defaultValue',
+            this.queryParams[treeFieldName]
+          )
           break
         }
       }
     },
     // 编辑和查看操作
-    handleOpenEditView (modelType, row) {
+    handleOpenEditView(modelType, row) {
       if (modelType == 'view' || modelType == 'edit') {
         this.editDialogRowData = row
       }
@@ -469,11 +374,15 @@ export default {
       this.$emit('handleCustomValue', obj)
     },
     // 弹框被关闭时的回调事件
-    editDialogClosedEvent (value) {
+    editDialogClosedEvent(value) {
       // 把列表页中弹框打开标记改成已关闭
       this.editDialogOpen = false
       // 关闭弹出框时，如果有树，刷新下
-      if (this.hasTreeFieldInQueryForm && this.$refs.queryFormTree != null && !value) {
+      if (
+        this.hasTreeFieldInQueryForm &&
+        this.$refs.queryFormTree != null &&
+        !value
+      ) {
         this.$refs.queryFormTree.queryData()
       }
       this.handleQueryPageList()
@@ -481,7 +390,7 @@ export default {
       this.$refs.edit.$refs.mainForm.$refs.editForm.resetFields()
     },
     // 批量删除
-    handleDeleteBatch (row) {
+    handleDeleteBatch(row) {
       var ids = []
       if (row != null) {
         ids.push(row[this.primaryKeyFieldName]) // 删除指定的行
@@ -493,39 +402,43 @@ export default {
         type: 'warning',
         confirmButtonClass: 'delete_sure',
         cancelButtonClass: 'el-button--danger is-plain',
-      }).then(() => {
-        this.option.buttons.delete.api(ids).then((res) => {
-          // {code: "200", message: "操作成功", data: true}
-          this.checkRecords = []
-          // 关闭弹出框时，如果有树，刷新下
-          if (this.hasTreeFieldInQueryForm && this.$refs.queryFormTree != null) {
-            this.$refs.queryFormTree.queryData()
-          }
-          this.handleQueryPageList()
-        })
       })
+        .then(() => {
+          this.option.buttons.delete.api(ids).then((res) => {
+            // {code: "200", message: "操作成功", data: true}
+            this.checkRecords = []
+            // 关闭弹出框时，如果有树，刷新下
+            if (
+              this.hasTreeFieldInQueryForm &&
+              this.$refs.queryFormTree != null
+            ) {
+              this.$refs.queryFormTree.queryData()
+            }
+            this.handleQueryPageList()
+          })
+        })
         .catch((e) => {
           e
         })
     },
 
     // 选择项改变时
-    handleSelectionChange (val) {
+    handleSelectionChange(val) {
       this.checkRecords = val
     },
     // 页码改变
-    handleCurrentChange (pageNumber) {
+    handleCurrentChange(pageNumber) {
       this.queryParams.pageNumber = pageNumber
       this.handleQueryPageList()
     },
     // 每页size改变时
-    handleSizeChange (val) {
+    handleSizeChange(val) {
       this.queryParams.pageNumber = 1
       this.queryParams.pageSize = val
       this.handleQueryPageList()
     },
     // table列文件缩略图
-    thumbnailUrl (row, field) {
+    thumbnailUrl(row, field) {
       // return 'http://10.108.3.123:9090/tms/file/download/79ee7e8b-2a9a-4142-b06d-706ac8089205'
       // if (row.filePath) {
       //   if (row.filePath.endsWith('xlsx') || row.filePath.endsWith('xls')) {
@@ -539,43 +452,52 @@ export default {
       // }
     },
     // 带单位的列，需要转换
-    fieldLabel (columnConfig) {
+    fieldLabel(columnConfig) {
       if (columnConfig == null) {
         return ''
       }
-      if (columnConfig.inputType == 'anji-input' && columnConfig.anjiInput != null) {
+      if (
+        columnConfig.inputType == 'anji-input' &&
+        columnConfig.anjiInput != null
+      ) {
         return `${columnConfig.label}(${columnConfig.anjiInput.unit})`
       } else {
         return columnConfig.label
       }
     },
     // 带单位的输入框
-    fieldValueByAnjiInput (value, columnConfig) {
+    fieldValueByAnjiInput(value, columnConfig) {
       if (columnConfig == null) {
         return value
       }
-      if (columnConfig.inputType == 'anji-input' && columnConfig.anjiInput != null) {
+      if (
+        columnConfig.inputType == 'anji-input' &&
+        columnConfig.anjiInput != null
+      ) {
         return value / columnConfig.anjiInput.conversion
       } else {
         return value
       }
     },
     // 带表格列格式化的值
-    fieldValueByRowRenderer (row, columnConfig) {
-      if (columnConfig == null || typeof columnConfig.fieldTableRowRenderer != 'function') {
+    fieldValueByRowRenderer(row, columnConfig) {
+      if (
+        columnConfig == null ||
+        typeof columnConfig.fieldTableRowRenderer != 'function'
+      ) {
         return row[columnConfig.field]
       } else {
         return columnConfig.fieldTableRowRenderer(row)
       }
     },
     // 暴露给外部crud页面，回传saveForm的值
-    getMainEntity () {
+    getMainEntity() {
       return this.$refs.edit.getSaveForm()
     },
-    setMainEntity (object) {
+    setMainEntity(object) {
       this.$refs.edit.setSaveForm(object)
     },
-    async switchChange (val, api) {
+    async switchChange(val, api) {
       request({
         url: api.url,
         method: 'put',
@@ -585,7 +507,7 @@ export default {
         this.handleQueryPageList()
       })
     },
-    queryFormChange (fileName, fieldVal) {
+    queryFormChange(fileName, fieldVal) {
       if (typeof this.option.queryFormChange == 'function') {
         this.option.queryFormChange(this.queryParams, fileName, fieldVal)
       }
