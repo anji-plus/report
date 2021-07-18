@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1364704",
+      "name": "API网关",
+      "font_class": "APIwangguan",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "14341931",
+      "name": "database",
+      "font_class": "database",
+      "unicode": "e7b6",
+      "unicode_decimal": 59318
+    },
+    {
       "icon_id": "15338097",
       "name": "百分比",
       "font_class": "baifenbi",
