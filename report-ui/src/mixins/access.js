@@ -1,5 +1,4 @@
-import { setItem, getItem } from '@/utils/storage';
-
+import { getToken, getAccessUser } from '@/utils/auth'
 export default {
   data () {
     return {
@@ -7,12 +6,16 @@ export default {
   },
   computed: {
     operator: function () {
-      var operator = getItem('loginName')
-      return operator
+      return this.getUser.loginName
+    },
+    operatorText: function () {
+      return `${this.getUser.realName}[${this.getUser.loginName}]`
+    },
+    operatorToken: function (){
+      return getToken()
     },
     getUser: function () {
-      // var user = getItem('user');
-      var user = JSON.parse(localStorage.getItem('user'))
+      var user = getAccessUser()
       if (user != null) {
         return user;
       } else {
@@ -20,7 +23,7 @@ export default {
       }
     },
     opAuthorities () {
-      return this.getUser == null ? [] : this.getUser.authorityWithOrgIds
+      return this.getUser == null ? [] : this.getUser.authorities
     }
   },
   created () {

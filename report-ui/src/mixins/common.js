@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import { getStorageItem } from '@/utils/storage'
 export default {
   data () {
     return {
@@ -308,7 +309,7 @@ export default {
 
     // 根据数据字典，查询指定字典dict指定值code的，返回整个dictItem{id, text, extend}
     getDictItemByCode (dict, code) {
-      var dicts = JSON.parse(localStorage.getItem('gaeaDict'))
+      var dicts = getStorageItem('gaeaDict')
       if (!dicts.hasOwnProperty(dict)) {
         return null
       }
