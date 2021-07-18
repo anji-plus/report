@@ -17,8 +17,11 @@ mvn clean >/dev/null 2>&1
 mvn package -Dmaven.test.skip=true >/dev/null 2>&1
 
 echo "zip finish in build dir"
-mkdir $BuildDir/build
+if [ ! -d "$BuildDir/build" ]; then
+    mkdir $BuildDir/build
+fi
 mv $BuildDir/report-core/target/report-core-1.0.0-SNAPSHOT-assembly.zip $BuildDir/build/
+
 
 cd $BuildDir/
 rm -rf $BuildDir/report-core/src/main/resources/static
