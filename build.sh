@@ -13,4 +13,11 @@ mv $BuildDir/report-ui/dist $BuildDir/report-core/src/main/resources/static
 
 echo "build springboot"
 cd $BuildDir/report-core
-mvn clean & package -Dmaven.test.skip=true >/dev/null 2>&1
+mvn clean >/dev/null 2>&1
+mvn package -Dmaven.test.skip=true >/dev/null 2>&1
+
+echo "zip finish in build dir"
+mkdir $BuildDir/build
+mv $BuildDir/report-core/target/report-core-1.0.0-SNAPSHOT-assembly.zip $BuildDir/build/
+cd $BuildDir/
+git reset --hard >/dev/null 2>&1
