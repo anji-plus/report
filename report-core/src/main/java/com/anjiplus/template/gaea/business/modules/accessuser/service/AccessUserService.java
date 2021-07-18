@@ -40,5 +40,5 @@ public interface AccessUserService extends GaeaBaseService<AccessUserParam, Acce
      * @param gaeaUserDto
      * @return
      */
-    Map login(GaeaUserDto gaeaUserDto);
+    GaeaUserDto login(GaeaUserDto gaeaUserDto);
 }

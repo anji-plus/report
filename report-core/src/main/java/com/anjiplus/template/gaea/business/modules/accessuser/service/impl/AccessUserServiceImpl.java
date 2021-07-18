@@ -1,6 +1,7 @@
 
 package com.anjiplus.template.gaea.business.modules.accessuser.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.anji.plus.gaea.bean.TreeNode;
 import com.anji.plus.gaea.cache.CacheHelper;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
@@ -9,6 +10,7 @@ import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.utils.GaeaUtils;
 import com.anji.plus.gaea.utils.JwtBean;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
+import com.anjiplus.template.gaea.business.constant.BusinessConstant;
 import com.anjiplus.template.gaea.business.modules.accessrole.dao.AccessRoleMapper;
 import com.anjiplus.template.gaea.business.modules.accessrole.dao.entity.AccessRole;
 import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.AccessUserDto;
@@ -127,32 +129,48 @@ public class AccessUserServiceImpl implements AccessUserService {
     }
 
     @Override
-    public Map login(GaeaUserDto gaeaUserDto) {
+    public GaeaUserDto login(GaeaUserDto gaeaUserDto) {
 
         String loginName = gaeaUserDto.getLoginName();
         String password = gaeaUserDto.getPassword();
-        //1.判断用户是否存在
+
+        // 1.判断用户是否存在
         LambdaQueryWrapper<AccessUser> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(AccessUser::getLoginName, loginName);
         AccessUser accessUser = accessUserMapper.selectOne(wrapper);
-        if (null == accessUser || !accessUser.getPassword().equals(MD5Util.encrypt(password))) {
+        if (null == accessUser) {
             throw BusinessExceptionBuilder.build(ResponseCode.LOGIN_ERROR);
         }
-
-        Map<String, String> map = Maps.newHashMap();
-
-        //将登录信息缓存,默认一小时
-        if (cacheHelper.exist(loginName)) {
-            map.put("token", cacheHelper.stringGet(loginName));
-            map.put("loginName", loginName);
-        } else {
-            String uuid = GaeaUtils.UUID();
-            String token = jwtBean.createToken(loginName, uuid);
-            cacheHelper.stringSetExpire(loginName, token, 3600);
-            map.put("token", token);
-            map.put("loginName", loginName);
+        // 2.密码错误
+        if (!accessUser.getPassword().equals(MD5Util.encrypt(password))) {
+            throw BusinessExceptionBuilder.build(ResponseCode.USER_PASSWORD_ERROR);
         }
 
-        return map;
+        // 3.如果该用户登录未过期，这里允许一个用户在多个终端登录
+        String tokenKey = String.format(BusinessConstant.GAEA_SECURITY_LOGIN_TOKEN, loginName);
+        String userKey = String.format(BusinessConstant.GAEA_SECURITY_LOGIN_USER, loginName);
+        String token = "";
+        GaeaUserDto gaeaUser = new GaeaUserDto();
+        if (cacheHelper.exist(tokenKey) && cacheHelper.exist(userKey)) {
+            token = cacheHelper.stringGet(tokenKey);
+            gaeaUser = JSONObject.parseObject(cacheHelper.stringGet(userKey), GaeaUserDto.class);
+            return gaeaUser;
+        }
+
+        // 4.生成用户token
+        String uuid = GaeaUtils.UUID();
+        token = jwtBean.createToken(loginName, uuid);
+        cacheHelper.stringSetExpire(tokenKey, token, 3600);
+
+        // 5.缓存用户权限主信息
+        List<String> authorities = accessUserMapper.queryAuthoritiesByLoginName(loginName);
+        gaeaUser.setLoginName(loginName);
+        gaeaUser.setRealName(accessUser.getRealName());
+        gaeaUser.setToken(token);
+        gaeaUser.setAuthorities(authorities);
+        String gaeaUserStr = JSONObject.toJSONString(gaeaUser);
+        cacheHelper.stringSetExpire(userKey, gaeaUserStr, 3600);
+
+        return gaeaUser;
     }
 }
