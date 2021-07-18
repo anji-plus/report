@@ -6,7 +6,7 @@
  !-->
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="params" :rules="rules" label-width="120px">
+    <el-form ref="form" :model="params" :rules="rules" label-width="120px" v-permission="'datasourceManage:query'">
       <!-- 搜索 -->
       <el-row :gutter="10">
         <el-col :xs="24" :sm="20" :md="12" :lg="6" :xl="4">
@@ -30,7 +30,7 @@
         </el-col>
       </el-row>
     </el-form>
-    <el-button type="primary" icon="el-icon-plus" size="mini" @click="showAddLogModel()">新增</el-button>
+    <el-button type="primary" icon="el-icon-plus" size="mini" @click="showAddLogModel()" v-permission="'datasourceManage:insert'">新增</el-button>
 
     <!--表格渲染-->
     <el-table v-loading="listLoading" border :data="list" class="mt10" element-loading-text="Loading" style="width: 100%">
@@ -44,10 +44,10 @@
       <el-table-column prop="updateTime" label="修改时间" min-width="150px" />
       <el-table-column label="操作" align="center" min-width="120px">
         <template slot-scope="scope">
-          <el-button type="text" @click="showAddLogModel(scope.row)">编辑</el-button>
+          <el-button type="text" @click="showAddLogModel(scope.row)" v-permission="'datasourceManage:update'">编辑</el-button>
           <!-- <el-popconfirm :title="'确定删除' + scope.row.sourceNameCode + '吗？'"
                          @onConfirm="delData(scope.row)"> -->
-          <el-button slot="reference" @click="delData(scope.row)" type="text">删除</el-button>
+          <el-button slot="reference" @click="delData(scope.row)" type="text" v-permission="'datasourceManage:delete'">删除</el-button>
           <!-- </el-popconfirm> -->
         </template>
       </el-table-column>
