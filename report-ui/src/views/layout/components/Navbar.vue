@@ -10,7 +10,7 @@
                    trigger="click">
         <div class="avatar-wrapper">
           <i class="icon iconfont iconyonghu user" />
-          <span class="user-name">{{ operator }}</span>
+          <span class="user-name">{{ operatorText }}</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown"
@@ -29,7 +29,7 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
-import { getItem, delItem, getStorageItem } from '@/utils/storage'
+import { getStorageItem } from '@/utils/storage'
 import { aesEncrypt } from '@/utils/aes'
 import { reqUpdatePassword } from '@/api/login'
 
@@ -97,7 +97,6 @@ export default {
         cancelButtonText: '取消',
         type: 'warning',
       }).then(() => {
-        delItem('token')
         sessionStorage.clear()
         localStorage.clear()
         this.$router.push('/login')
@@ -126,7 +125,6 @@ export default {
               this.$message.success('修改密码成功,请重新登录')
               sessionStorage.clear()
               localStorage.clear()
-              delItem('token')
               this.$router.push('/login')
             }
           })
@@ -136,7 +134,7 @@ export default {
       })
     },
     helpCenter () {
-      let helpCategory = JSON.parse(localStorage.getItem('helpCategory'))
+      let helpCategory = getStorageItem('helpCategory')
       this.$router.push({
         path: '/helpCenList/list',
         query: {
