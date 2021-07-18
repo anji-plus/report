@@ -39,7 +39,7 @@ export default {
   methods: {
     goBigScreen () {
       let routeUrl = this.$router.resolve({
-        path: "/bigScreen"
+        path: "/report/bigScreen"
       });
       window.open(routeUrl.href, '_blank');
     }
