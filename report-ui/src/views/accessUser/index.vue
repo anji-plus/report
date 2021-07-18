@@ -1,31 +1,32 @@
 <template>
-  <anji-crud ref="listPage"
-             :option="crudOption">
+  <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
     </template>
 
-    <template slot="rowButton"
-              slot-scope="props">
-      <el-button type="text"
-                 @click="handleOpenDialogSetRoleForUser(props)">授予角色</el-button>
+    <template slot="rowButton" slot-scope="props">
+      <el-button type="text" @click="handleOpenDialogSetRoleForUser(props)">授予角色</el-button>
     </template>
     <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
     <template v-slot:pageSection>
-      <UserRole :login-name="loginName"
-                :visib="dialogVisibleSetRoleForUser"
-                @handleClose="dialogVisibleSetRoleForUser = false" />
+      <UserRole :login-name="loginName" :visib="dialogVisibleSetRoleForUser" @handleClose="dialogVisibleSetRoleForUser = false" />
     </template>
   </anji-crud>
 </template>
 <script>
-import { accessUserList, accessUserAdd, accessUserDeleteBatch, accessUserUpdate, accessUserDetail } from '@/api/accessUser'
+import {
+  accessUserList,
+  accessUserAdd,
+  accessUserDeleteBatch,
+  accessUserUpdate,
+  accessUserDetail,
+} from '@/api/accessUser'
 import UserRole from '@/views/accessUser/components/UserRole'
 export default {
   name: 'AccessUser',
   components: {
     UserRole: UserRole,
   },
-  data () {
+  data() {
     return {
       // 选中一个用户时，点授予角色时，弹出对话框
       dialogVisibleSetRoleForUser: false,
@@ -45,45 +46,45 @@ export default {
               dictCode: 'ENABLE_FLAG',
             },
             label: '启用状态',
-            field: 'enableFlag'
+            field: 'enableFlag',
           },
           {
             inputType: 'input',
             label: '登录名',
-            field: 'loginName'
+            field: 'loginName',
           },
           {
             inputType: 'input',
             label: '真实姓名',
-            field: 'realName'
+            field: 'realName',
           },
           {
             inputType: 'input',
             label: '手机号',
-            field: 'phone'
+            field: 'phone',
           },
         ],
         // 操作按钮
         buttons: {
           query: {
             api: accessUserList,
-            permission: 'AccessUser:PAGE'
+            permission: 'userManage:query',
           },
           queryByPrimarykey: {
             api: accessUserDetail,
-            permission: 'AccessUser:detail'
+            permission: 'userManage:query',
           },
           add: {
             api: accessUserAdd,
-            permission: 'AccessUser:insert'
+            permission: 'userManage:insert',
           },
           delete: {
             api: accessUserDeleteBatch,
-            permission: 'AccessUser:delete'
+            permission: 'userManage:delete',
           },
           edit: {
             api: accessUserUpdate,
-            permission: 'AccessUser:update'
+            permission: 'userManage:update',
           },
         },
         // 表格列
@@ -104,7 +105,7 @@ export default {
             inputType: 'input',
             rules: [
               { required: true, message: '登录名必填', trigger: 'blur' },
-              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' }
+              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
@@ -120,7 +121,7 @@ export default {
             inputType: 'input',
             rules: [
               { required: true, message: '真实姓名必填', trigger: 'blur' },
-              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' }
+              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
@@ -133,7 +134,7 @@ export default {
             inputType: 'input',
             rules: [
               { required: true, message: '密码必填', trigger: 'blur' },
-              { min: 1, max: 128, message: '不超过128个字符', trigger: 'blur' }
+              { min: 1, max: 128, message: '不超过128个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
@@ -144,7 +145,7 @@ export default {
             editField: 'phone',
             inputType: 'input',
             rules: [
-              { min: 1, max: 16, message: '不超过16个字符', trigger: 'blur' }
+              { min: 1, max: 16, message: '不超过16个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
@@ -155,7 +156,7 @@ export default {
             editField: 'email',
             inputType: 'input',
             rules: [
-              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' }
+              { min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
@@ -166,12 +167,12 @@ export default {
             editField: 'remark',
             inputType: 'input',
             rules: [
-              { min: 1, max: 512, message: '不超过512个字符', trigger: 'blur' }
+              { min: 1, max: 512, message: '不超过512个字符', trigger: 'blur' },
             ],
             disabled: false,
           },
           {
-            label: '启用状态',//0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG
+            label: '启用状态', //0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG
             placeholder: '',
             field: 'enableFlag',
             fieldTableRowRenderer: (row) => {
@@ -184,7 +185,7 @@ export default {
             },
             colorStyle: {
               0: 'table-danger', //key为editField渲染的值（字典的提交值）'红色': 'danger','蓝色': 'primary','绿色': 'success','黄色': 'warning','灰色': 'info','白色'：''
-              1: 'table-success'
+              1: 'table-success',
             },
             rules: [
               { required: true, message: '启用状态必填', trigger: 'blur' },
@@ -197,8 +198,7 @@ export default {
             field: 'lastLoginTime',
             editField: 'lastLoginTime',
             inputType: 'input',
-            rules: [
-            ],
+            rules: [],
             disabled: true,
           },
           {
@@ -208,7 +208,7 @@ export default {
             editField: 'lastLoginIp',
             inputType: 'input',
             rules: [
-              { min: 1, max: 16, message: '不超过16个字符', trigger: 'blur' }
+              { min: 1, max: 16, message: '不超过16个字符', trigger: 'blur' },
             ],
             disabled: true,
           },
@@ -257,13 +257,13 @@ export default {
     }
   },
 
-  created () { },
+  created() {},
   methods: {
-    handleOpenDialogSetRoleForUser (props) {
+    handleOpenDialogSetRoleForUser(props) {
       this.loginName = props.msg.loginName
       this.dialogVisibleSetRoleForUser = true
     },
-  }
+  },
 }
 </script>
 
