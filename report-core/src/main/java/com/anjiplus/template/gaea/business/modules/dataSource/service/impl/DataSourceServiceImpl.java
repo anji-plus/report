@@ -305,7 +305,7 @@ public class DataSourceServiceImpl implements DataSourceService {
             String catalog = unPooledConnection.getCatalog();
             log.info("数据库测试连接成功：{}", catalog);
             unPooledConnection.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             log.error("error",e);
             throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
         }
