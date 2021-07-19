@@ -474,9 +474,7 @@ export default {
     getEchartData(val) {
       const data = this.queryEchartsData(val);
       data.then(res => {
-        this.options.title.text = '{nums|' + res[0].value + '}{percent|%}'
-        //this.$forceUpdate();
-        console.log(res[0].value)
+        this.options.title.text = '{nums|' + res[0].value + '}{percent|%}';
       });
     }
   }
