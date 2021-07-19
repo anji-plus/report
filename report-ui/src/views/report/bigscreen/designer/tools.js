@@ -144,7 +144,6 @@ const widgetTools = [
           value: 'center'
         },
       ],
-
       // 数据
       data: [
         {
@@ -194,7 +193,7 @@ const widgetTools = [
           relactiveDomValue: 'dynamicData',
           chartType: 'widget-text',
           value: '',
-        },
+        }
       ],
 
       // 坐标
@@ -304,37 +303,66 @@ const widgetTools = [
           ],
           value: 'normal'
         },
-        {
-          type: 'el-select',
-          label: '对齐方式',
-          name: 'textAlign',
-          required: false,
-          placeholder: '',
-          selectOptions: [
-            {code: 'center', name: '居中'},
-            {code: 'left', name: '左对齐'},
-            {code: 'right', name: '右对齐'},
-          ],
-          value: 'center'
-        },
-        {
-          type: 'el-switch',
-          label: '开启滚动',
-          name: 'marqueeSet',
-          required: false,
-          placeholder: '',
-          value: true,
-        },
-        {
-          type: 'el-input-text',
+/*        {
+          type: 'el-input-number',
           label: '滚动速度',
           name: 'marqueeQuit',
           required: false,
           placeholder: '',
-        },
+          value: '1',
+        }*/
       ],
       // 数据
-      data: [],
+      data: [
+        {
+          type: 'el-radio-group',
+          label: '数据类型',
+          name: 'dataType',
+          require: false,
+          placeholder: '',
+          selectValue: true,
+          selectOptions: [
+            {
+              code: 'staticData',
+              name: '静态数据',
+            },
+            {
+              code: 'dynamicData',
+              name: '动态数据',
+            },
+          ],
+          value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
+        },
+        {
+          type: 'el-button',
+          label: '静态数据',
+          name: 'staticData',
+          required: false,
+          placeholder: 'px',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'staticData',
+          value: '文本框',
+        },
+        {
+          type: 'dycustComponents',
+          label: '',
+          name: 'dynamicData',
+          required: false,
+          placeholder: 'px',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          chartType: 'widget-text',
+          value: '',
+        }
+      ],
       // 坐标
       position: [
         {

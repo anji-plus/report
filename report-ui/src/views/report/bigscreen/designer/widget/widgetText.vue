@@ -89,7 +89,7 @@ export default {
         this.styleColor.text = res[0].value
         this.$forceUpdate();
       });
-    },
+    }
   }
 };
 </script>
