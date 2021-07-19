@@ -2,6 +2,7 @@ package com.anjiplus.template.gaea.business.modules.dataSource.pool.util;
 
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.Map;
 /**
  * Created by raodeming on 2021/4/19.
  */
+@Slf4j
 public final class DriverClassUtil {
 
     /**
@@ -62,7 +64,8 @@ public final class DriverClassUtil {
         try {
             Class.forName(driverClass);
         } catch (ClassNotFoundException e) {
-            throw BusinessExceptionBuilder.build(ResponseCode.CLASS_NOT_FOUND, e.getMessage());
+            log.error("error", e);
+            throw BusinessExceptionBuilder.build(ResponseCode.CLASS_NOT_FOUND);
         }
     }
 
