@@ -12,6 +12,11 @@
 	<includeBaseDirectory>true</includeBaseDirectory>
 	<fileSets>
 		<fileSet>
+			<directory>lib/mssqlserver</directory>
+			<outputDirectory>lib</outputDirectory>
+			<fileMode>0755</fileMode>
+		</fileSet>
+		<fileSet>
 			<directory>lib/kudu</directory>
 			<outputDirectory>lib</outputDirectory>
 			<fileMode>0755</fileMode>
