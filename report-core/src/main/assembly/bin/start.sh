@@ -3,7 +3,7 @@ cd `dirname $0`
 BIN_DIR=`pwd` #安装目录
 cd ..
 DEPLOY_DIR=`pwd`
-LIB_DIR=$DEPLOY_DIR/lib/ #jar目录
+LIB_DIR=$DEPLOY_DIR/lib #jar目录
 CONF_DIR=$DEPLOY_DIR/conf #conf目录
 LOGS_DIR=$DEPLOY_DIR/logs #log目录
 
@@ -23,5 +23,4 @@ if [ -n "$PIDS" ]; then
 fi
 
 
-nohup java -Xbootclasspath/a:$LIB_DIR $JAVA_OPTS -jar -Dspring.config.location=$CONF_DIR/bootstrap-dev.yml $LIB_DIR/report-core-1.0.0-SNAPSHOT.jar >/dev/null 2>&1 &
-#nohup java $JAVA_OPTS -jar -Dspring.config.location=$CONF_DIR/bootstrap-dev.yml $LIB_DIR/report-core-1.0.0-SNAPSHOT.jar -classpath $LIB_JARS >/dev/null 2>&1 &
+nohup java -Xbootclasspath/a:$LIB_JARS $JAVA_OPTS -jar -Dspring.config.location=$CONF_DIR/bootstrap-dev.yml $LIB_DIR/report-core-1.0.0-SNAPSHOT.jar >/dev/null 2>&1 &
