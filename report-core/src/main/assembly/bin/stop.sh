@@ -5,7 +5,6 @@ if [ -z "$pid" ] ; then
         exit -1;
 fi
 
-
 kill -9 ${pid}
 
 echo "Send shutdown request to report-core(${pid}) OK"
