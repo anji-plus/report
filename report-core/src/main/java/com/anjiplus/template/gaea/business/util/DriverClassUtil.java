@@ -1,4 +1,4 @@
-package com.anjiplus.template.gaea.business.modules.dataSource.pool.util;
+package com.anjiplus.template.gaea.business.util;
 
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anjiplus.template.gaea.business.code.ResponseCode;

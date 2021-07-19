@@ -1,18 +1,15 @@
-package com.anjiplus.template.gaea.business.modules.dataSource.pool.util;
+package com.anjiplus.template.gaea.business.util;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.anjiplus.template.gaea.business.modules.dataSource.controller.dto.DataSourceDto;
-import com.anjiplus.template.gaea.business.modules.dataSource.pool.datasource.PooledDataSource;
-import com.anjiplus.template.gaea.business.modules.dataSource.pool.datasource.UnPooledDataSource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by raodeming on 2021/3/18.
@@ -20,7 +17,9 @@ import java.util.concurrent.locks.ReentrantLock;
 @Slf4j
 public class JdbcUtil {
 
-    //所有数据源的连接池存在map里
+    /**
+     * 所有数据源的连接池存在map里
+     */
     static Map<Long, DruidDataSource> map = new ConcurrentHashMap<>();
 
     public static DruidDataSource getJdbcConnectionPool(DataSourceDto dataSource) {
@@ -48,13 +47,14 @@ public class JdbcUtil {
                     log.info("创建连接池成功：{}", dataSource.getJdbcUrl());
                 }
                 return map.get(dataSource.getId());
-            }  finally {
+            } finally {
             }
         }
     }
 
     /**
      * 删除数据库连接池
+     *
      * @param id
      */
     public static void removeJdbcConnectionPool(Long id) {
@@ -65,13 +65,14 @@ public class JdbcUtil {
                 map.remove(id);
             }
         } catch (Exception e) {
-            log.error("error",e);
+            log.error("error", e);
         } finally {
         }
     }
 
     /**
      * 获取连接
+     *
      * @param dataSource
      * @return
      * @throws SQLException
@@ -83,20 +84,20 @@ public class JdbcUtil {
 
     /**
      * 测试数据库连接  获取一个连接
+     *
      * @param dataSource
      * @return
-     * @throws ClassNotFoundException  driverName不正确
+     * @throws ClassNotFoundException driverName不正确
      * @throws SQLException
      */
     public static Connection getUnPooledConnection(DataSourceDto dataSource) throws SQLException {
-        UnPooledDataSource source = new UnPooledDataSource();
-        source.setJdbcUrl(dataSource.getJdbcUrl());
-        source.setDriverClass(dataSource.getDriverName());
-        source.setUser(dataSource.getUsername());
-        source.setPassword(dataSource.getPassword());
-        return source.getConnection();
+        DriverClassUtil.loadDriverClass(dataSource.getDriverName(), dataSource.getJdbcUrl());
+        if (StringUtils.isBlank(dataSource.getUsername()) && StringUtils.isBlank(dataSource.getPassword())) {
+            return DriverManager.getConnection(dataSource.getJdbcUrl());
+        }
+        return DriverManager.getConnection(dataSource.getJdbcUrl(),
+                dataSource.getUsername(), dataSource.getPassword());
     }
-
 
 
 }

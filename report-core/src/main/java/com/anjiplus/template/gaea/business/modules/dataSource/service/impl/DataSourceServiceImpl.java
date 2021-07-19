@@ -16,9 +16,9 @@ import com.anjiplus.template.gaea.business.modules.dataSource.controller.dto.Dat
 import com.anjiplus.template.gaea.business.modules.dataSource.controller.param.ConnectionParam;
 import com.anjiplus.template.gaea.business.modules.dataSource.dao.DataSourceMapper;
 import com.anjiplus.template.gaea.business.modules.dataSource.dao.entity.DataSource;
-import com.anjiplus.template.gaea.business.modules.dataSource.pool.constant.JdbcConstants;
-import com.anjiplus.template.gaea.business.modules.dataSource.pool.util.JdbcUtil;
+import com.anjiplus.template.gaea.business.util.JdbcConstants;
 import com.anjiplus.template.gaea.business.modules.dataSource.service.DataSourceService;
+import com.anjiplus.template.gaea.business.util.JdbcUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;

@@ -1,9 +1,22 @@
-package com.anjiplus.template.gaea.business.modules.dataSource.pool.constant;
+package com.anjiplus.template.gaea.business.util;
 
 /**
  * Created by raodeming on 2021/3/19.
  */
 public class JdbcConstants {
+   /**
+    * 已支持的数据源
+    */
+   public final static String KUDU_IMAPLA = "kudu_impala";
+   public final static String HTTP = "http";
+   public final static String MYSQL = "mysql";
+   public final static String ORACLE = "oracle";
+   public final static String ELASTIC_SEARCH_SQL = "elasticsearch_sql";
+
+
+
+
+
    public final static String JTDS = "jtds";
    public final static String MOCK = "mock";
    public final static String HSQL = "hsql";
@@ -16,12 +29,10 @@ public class JdbcConstants {
    public final static String SQL_SERVER_DRIVER = "com.microsoft.jdbc.sqlserver.SQLServerDriver";
    public final static String SQL_SERVER_DRIVER_SQLJDBC4 = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
    public final static String SQL_SERVER_DRIVER_JTDS = "net.sourceforge.jtds.jdbc.Driver";
-   public final static String ORACLE = "oracle";
    public final static String ORACLE_DRIVER = "oracle.jdbc.OracleDriver";
    public final static String ORACLE_DRIVER2 = "oracle.jdbc.driver.OracleDriver";
    public final static String ALI_ORACLE = "AliOracle";
    public final static String ALI_ORACLE_DRIVER = "com.alibaba.jdbc.AlibabaDriver";
-   public final static String MYSQL = "mysql";
    public final static String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
    public final static String MYSQL_DRIVER_6 = "com.mysql.cj.jdbc.Driver";
    public final static String MYSQL_DRIVER_REPLICATE = "com.mysql.jdbc.";
@@ -62,10 +73,8 @@ public class JdbcConstants {
    public final static String ALIYUN_DRDS = "aliyun_drds";
    public final static String PRESTO = "presto";
    public final static String ELASTIC_SEARCH = "elasticsearch";
-   public final static String ELASTIC_SEARCH_SQL = "elasticsearch_sql";
    public final static String ELASTIC_SEARCH_DRIVER = "com.alibaba.xdriver.elastic.jdbc.ElasticDriver";
    public final static String CLICKHOUSE = "clickhouse";
    public final static String CLICKHOUSE_DRIVER = "ru.yandex.clickhouse.ClickHouseDriver";
-   public final static String KUDU_IMAPLA = "kudu_impala";
-   public final static String HTTP = "http";
+
 }
