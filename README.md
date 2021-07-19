@@ -69,6 +69,24 @@
 - [vue-superslide](https://www.npmjs.com/package/vue-super-slider/): Vue-SuperSlide(Github) 是 SuperSlide 的 Vue 封装版本
 - [vuedraggable](https://github.com/SortableJS/Vue.Draggable/): 是一款基于Sortable.js实现的vue拖拽插件。
 
+## 编译打包
+在Linux上先准备好maven、node.js、jdk
+- [Apache Maven] 3.5 +<br>
+- [Node.js] 6.10 +<br>
+- [Jdk] 1.8+
+```
+git clone https://gitee.com/anji-plus/report.git
+cd report
+sh build.sh
+编译完成放在build文件夹 report-core-xxxx.zip
+
+unzip report-core-xxxx.zip
+cd report-core-xxxx
+sh bin/start.sh
+
+启动后访问
+http://serverip:9095
+```
 ## 近期计划
 -   完善地图插件
 -   完善表格插件
