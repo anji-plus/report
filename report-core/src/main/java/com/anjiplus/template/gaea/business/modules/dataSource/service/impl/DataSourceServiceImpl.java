@@ -10,6 +10,7 @@ import com.anji.plus.gaea.exception.BusinessException;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anji.plus.gaea.utils.GaeaAssert;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
+import com.anjiplus.template.gaea.business.constant.BusinessConstant;
 import com.anjiplus.template.gaea.business.modules.dataSet.controller.dto.DataSetDto;
 import com.anjiplus.template.gaea.business.modules.dataSetParam.service.DataSetParamService;
 import com.anjiplus.template.gaea.business.modules.dataSource.controller.dto.DataSourceDto;
@@ -267,9 +268,9 @@ public class DataSourceServiceImpl implements DataSourceService {
         HttpHeaders headers = new HttpHeaders();
         headers.setAll(JSONObject.parseObject(dto.getHeader(), Map.class));
         HttpEntity<String> entity = new HttpEntity<>(dto.getDynSentence(), headers);
-        ResponseEntity<JSONObject> exchange;
+        ResponseEntity<Object> exchange;
         try {
-            exchange = restTemplate.exchange(dto.getApiUrl(), HttpMethod.valueOf(dto.getMethod()), entity, JSONObject.class);
+            exchange = restTemplate.exchange(dto.getApiUrl(), HttpMethod.valueOf(dto.getMethod()), entity, Object.class);
         } catch (Exception e) {
             log.error("error",e);
             throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
@@ -277,9 +278,18 @@ public class DataSourceServiceImpl implements DataSourceService {
         if (exchange.getStatusCode().isError()) {
             throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, exchange.getBody());
         }
-        JSONObject body = exchange.getBody();
+        Object body = exchange.getBody();
+        String jsonStr = JSONObject.toJSONString(body);
         List<JSONObject> result = new ArrayList<>();
-        result.add(body);
+        if (jsonStr.trim().startsWith(BusinessConstant.LEFT_BIG_BOAST) && jsonStr.trim().endsWith(BusinessConstant.RIGTH_BIG_BOAST)) {
+            //JSONObject
+            result.add(JSONObject.parseObject(jsonStr));
+        } else if (jsonStr.trim().startsWith(BusinessConstant.LEFT_MIDDLE_BOAST) && jsonStr.trim().endsWith(BusinessConstant.RIGHT_MIDDLE_BOAST)) {
+            //List
+            result = JSONArray.parseArray(jsonStr, JSONObject.class);
+        } else {
+            result.add(new JSONObject());
+        }
         return result;
     }
 

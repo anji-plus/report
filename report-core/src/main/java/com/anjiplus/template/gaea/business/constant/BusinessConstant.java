@@ -7,6 +7,11 @@ package com.anjiplus.template.gaea.business.constant;
  */
 public interface BusinessConstant {
 
+    String LEFT_BIG_BOAST = "{";
+    String RIGTH_BIG_BOAST = "}";
+    String LEFT_MIDDLE_BOAST = "[";
+    String RIGHT_MIDDLE_BOAST = "]";
+
     /**
      * 字典项重复
      */
