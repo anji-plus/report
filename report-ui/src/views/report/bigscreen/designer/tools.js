@@ -5714,7 +5714,7 @@ const widgetTools = [
           name: 'background',
           required: false,
           placeholder: '',
-          value: ''
+          value: '#0F1C3C'
         },
         [
           {
@@ -5819,159 +5819,6 @@ const widgetTools = [
               },
             ],
           },
-/*          {
-            name: '数值设定',
-            list: [
-              {
-                type: 'el-switch',
-                label: '显示',
-                name: 'isShow',
-                required: false,
-                placeholder: '',
-                value: true,
-              },
-              {
-                type: 'el-switch',
-                label: '数值',
-                name: 'numberValue',
-                require: false,
-                placeholder: '',
-                value: true,
-              },
-              {
-                type: 'el-switch',
-                label: '百分比',
-                name: 'percentage',
-                require: false,
-                placeholder: '',
-                value: false,
-              },
-              {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'fontSize',
-                required: false,
-                placeholder: '',
-                value: 14,
-              },
-              {
-                type: 'vue-color',
-                label: '字体颜色',
-                name: 'subTextColor',
-                required: false,
-                placeholder: '',
-                value: ''
-              },
-              {
-                type: 'el-select',
-                label: '字体粗细',
-                name: 'fontWeight',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  {code: 'normal', name: '正常'},
-                  {code: 'bold', name: '粗体'},
-                  {code: 'bolder', name: '特粗体'},
-                  {code: 'lighter', name: '细体'}
-                ],
-                value: 'normal'
-              },
-            ],
-          },
-          {
-            name: '提示语设置',
-            list: [
-              {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'fontSize',
-                required: false,
-                placeholder: '',
-                value: 12
-              },
-              {
-                type: 'vue-color',
-                label: '网格线颜色',
-                name: 'lineColor',
-                required: false,
-                placeholder: '',
-                value: ''
-              },
-            ],
-          },
-          {
-            name: '图例操作',
-            list: [
-              {
-                type: 'el-switch',
-                label: '图例',
-                name: 'isShowLegend',
-                required: false,
-                placeholder: '',
-                value: true,
-              },
-              {
-                type: 'vue-color',
-                label: '字体颜色',
-                name: 'lengedColor',
-                required: false,
-                placeholder: '',
-                value: '#fff',
-              },
-              {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'lengedFontSize',
-                required: false,
-                placeholder: '',
-                value: 16,
-              },
-              {
-                type: 'el-input-number',
-                label: '图例宽度',
-                name: 'lengedWidth',
-                required: false,
-                placeholder: '',
-                value: 15,
-              },
-              {
-                type: 'el-select',
-                label: '横向位置',
-                name: 'lateralPosition',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  {code: 'left', name: '左对齐'},
-                  {code: 'right', name: '右对齐'},
-                ],
-                value: ''
-              },
-              {
-                type: 'el-select',
-                label: '纵向位置',
-                name: 'longitudinalPosition',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  {code: 'top', name: '顶部'},
-                  {code: 'bottom', name: '底部'},
-                ],
-                value: ''
-              },
-              {
-                type: 'el-select',
-                label: '布局前置',
-                name: 'layoutFront',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  {code: 'vertical', name: '竖排'},
-                  {code: 'horizontal', name: '横排'},
-                ],
-                value: ''
-              },
-            ],
-          },*/
           {
             name: '自定义配色',
             list: [
@@ -5986,7 +5833,56 @@ const widgetTools = [
           },
         ],
       ],
-      data: [],
+      data: [
+        {
+          type: 'el-radio-group',
+          label: '数据类型',
+          name: 'dataType',
+          require: false,
+          placeholder: '',
+          selectValue: true,
+          selectOptions: [
+            {
+              code: 'staticData',
+              name: '静态数据',
+            },
+            {
+              code: 'dynamicData',
+              name: '动态数据',
+            },
+          ],
+          value: 'staticData',
+        },
+        {
+          type: 'el-input-number',
+          label: '刷新时间(毫秒)',
+          name: 'refreshTime',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'dynamicData',
+          value: 5000
+        },
+        {
+          type: 'el-button',
+          label: '静态数据',
+          name: 'staticData',
+          required: false,
+          placeholder: 'px',
+          relactiveDom: 'dataType',
+          relactiveDomValue: 'staticData',
+          value: '[{"value": 1048,"name": "搜索引擎"},{"value": 735, "name": "直接访问"},{"value": 580, "name": "邮件营销"},{"value": 484,"name":"联盟广告"},{"value":300,"name":"视频广告"}]',
+        },
+        {
+          type: 'dycustComponents',
+          label: '',
+          name: 'dynamicData',
+          required: false,
+          placeholder: 'px',
+          relactiveDom: 'dataType',
+          chartType: 'widget-piechart',
+          relactiveDomValue: 'dynamicData',
+          value: '',
+        },
+      ],
       position: [
         {
           type: 'el-input-number',

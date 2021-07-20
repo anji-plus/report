@@ -329,7 +329,7 @@ export default {
                     offset: 1,
                     color: 'rgba(0,108,255,0.7)'
                   }],
-                  global: false // 缺省为 false
+                  global: false
                 },
               }
             },
@@ -354,14 +354,16 @@ export default {
             symbolSize: function (val) {
               if (val[2] == 0) {
                 return 0;
-              }
-              ;
+              };
               return ((maxSize4Pin - minSize4Pin) / (max - min)) * val[2] + (maxSize4Pin - ((maxSize4Pin - minSize4Pin) / (max - min)) * max) * 1.2;
             },
             data: convertData(data),
             zlevel: 1,
           }]
       },
+      optionsStyle: {}, // 样式
+      optionsData: {}, // 数据
+      optionsCollapse: {}, // 图标属性
       optionsSetup: {}
     }
   },
@@ -373,22 +375,25 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsCollapse.background
       };
     }
   },
   watch: {
     value: {
       handler(val) {
-        this.optionsStyle = val.position;
+/*        this.optionsStyle = val.position;
+        this.optionsData = val.data;
+        this.optionsSetup = val.setup;*/
+        this.optionsCollapse = val.setup;
+        this.editorOptions();
       },
       deep: true
     }
   },
-  created() {
-    this.optionsStyle = this.value.position;
-  },
   mounted() {
+    this.optionsStyle = this.value.position;
+    this.optionsCollapse =  this.value.setup;
   },
   methods: {
     // 修改图标options属性
@@ -414,16 +419,6 @@ export default {
         fontSize: optionsCollapse.subTextFontSize
       };
       this.options.title = title;
-    },
-    setdata(outname, outvalue) {
-      const outdata = {}
-      for (var i = 0; i < outname.length; i++) {
-        outdata.push({
-          name: outname[i],
-          value: outvalue[i]
-        })
-      }
-      return outdata
     },
     //数据解析
     setOptionsData() {
