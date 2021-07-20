@@ -1,9 +1,10 @@
 @echo off & setlocal enabledelayedexpansion
 
-set LIB_JARS=""
 cd ..\lib
-for %%i in (*) do set LIB_JARS=!LIB_JARS!;..\lib\%%i
+for %%i in (*) do set LIB_JARS=!LIB_JARS!..\lib\%%i;
 cd ..\bin
+
+echo %LIB_JARS%
 
 set JAVA_OPTS=" -server -Xmx2g -Xms2g -Xmn256m -XX:PermSize=128m -Xss256k "
 
