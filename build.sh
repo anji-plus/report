@@ -30,4 +30,3 @@ mv $BuildDir/report-core/target/report-core-1.0.0-SNAPSHOT-assembly.zip $BuildDi
 
 cd $BuildDir/
 rm -rf $BuildDir/report-core/src/main/resources/static
-git reset --hard >/dev/null 2>&1

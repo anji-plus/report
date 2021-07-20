@@ -41,6 +41,7 @@ import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRoseArea";
 import widgetTable from "./widgetTable.vue";
 import widgetMap from "./widgetMap.vue";
 import widgetPiePercentageChart from "./pie/widgetPiePercentageChart";
+import widgetAirBubbleMap from "./map/widgetAirBubbleMap";
 export default {
   name: "Widget",
   components: {
@@ -63,7 +64,8 @@ export default {
     WidgetPieNightingaleRoseArea,
     widgetTable,
     widgetMap,
-    widgetPiePercentageChart
+    widgetPiePercentageChart,
+    widgetAirBubbleMap
   },
   model: {
     prop: "value",
