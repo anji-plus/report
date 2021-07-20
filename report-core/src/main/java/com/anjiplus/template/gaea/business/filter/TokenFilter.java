@@ -50,14 +50,14 @@ public class TokenFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String uri = request.getRequestURI();
 
-        if(uri.equals("/")){
+        if (uri.equals("/")) {
             response.sendRedirect("/index.html");
             return;
         }
 
         // 不需要token验证和权限验证的url，直接放行
         boolean skipAuthenticate = SKIP_AUTHENTICATE_PATTERN.matcher(uri).matches();
-        if(skipAuthenticate){
+        if (skipAuthenticate) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -92,7 +92,6 @@ public class TokenFilter implements Filter {
                 && !uri.endsWith("/dataSet/testTransform")
                 && !uri.endsWith("/reportDashboard/getData")
                 && !uri.startsWith("/dict")
-                && !uri.startsWith("/dict")
         ) {
             //不允许删除
             String method = request.getMethod();
@@ -115,23 +114,25 @@ public class TokenFilter implements Filter {
         Filter.super.destroy();
     }
 
-    /** 根据名单，生成正则
+    /**
+     * 根据名单，生成正则
+     *
      * @param skipUrlList
      * @return
      */
-    private Pattern fitByList(List<String> skipUrlList){
-        if(skipUrlList == null || skipUrlList.size() == 0){
+    private Pattern fitByList(List<String> skipUrlList) {
+        if (skipUrlList == null || skipUrlList.size() == 0) {
             return Pattern.compile(".*().*");
         }
         StringBuffer patternString = new StringBuffer();
         patternString.append(".*(");
 
-        skipUrlList.stream().forEach(url ->{
+        skipUrlList.stream().forEach(url -> {
             patternString.append(url.trim());
             patternString.append("|");
         });
-        if(skipUrlList.size()>0){
-            patternString.deleteCharAt(patternString.length()-1);
+        if (skipUrlList.size() > 0) {
+            patternString.deleteCharAt(patternString.length() - 1);
         }
         patternString.append(").*");
 
