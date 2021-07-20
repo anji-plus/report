@@ -72,7 +72,7 @@
 ## 编译打包
 在Linux上先准备好maven、node.js、jdk
 - [Apache Maven] 3.5 +<br>
-- [Node.js] 6.10 +<br>
+- [Node.js] v14.16.0+<br>
 - [Jdk] 1.8+
 ```
 git clone https://gitee.com/anji-plus/report.git
