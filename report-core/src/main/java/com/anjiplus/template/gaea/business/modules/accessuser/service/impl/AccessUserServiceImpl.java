@@ -148,21 +148,20 @@ public class AccessUserServiceImpl implements AccessUserService {
 
         // 3.如果该用户登录未过期，这里允许一个用户在多个终端登录
         String tokenKey = String.format(BusinessConstant.GAEA_SECURITY_LOGIN_TOKEN, loginName);
-        String userKey = String.format(BusinessConstant.GAEA_SECURITY_LOGIN_USER, loginName);
         String token = "";
         GaeaUserDto gaeaUser = new GaeaUserDto();
-        if (cacheHelper.exist(tokenKey) && cacheHelper.exist(userKey)) {
+        if (cacheHelper.exist(tokenKey)) {
             token = cacheHelper.stringGet(tokenKey);
-            gaeaUser = JSONObject.parseObject(cacheHelper.stringGet(userKey), GaeaUserDto.class);
-            return gaeaUser;
+        } else {
+            // 生成用户token
+            String uuid = GaeaUtils.UUID();
+            token = jwtBean.createToken(loginName, uuid);
+            cacheHelper.stringSetExpire(tokenKey, token, 3600);
         }
 
-        // 4.生成用户token
-        String uuid = GaeaUtils.UUID();
-        token = jwtBean.createToken(loginName, uuid);
-        cacheHelper.stringSetExpire(tokenKey, token, 3600);
+        // 4.读取用户最新人权限主信息
+        String userKey = String.format(BusinessConstant.GAEA_SECURITY_LOGIN_USER, loginName);
 
-        // 5.缓存用户权限主信息
         List<String> authorities = accessUserMapper.queryAuthoritiesByLoginName(loginName);
         gaeaUser.setLoginName(loginName);
         gaeaUser.setRealName(accessUser.getRealName());
