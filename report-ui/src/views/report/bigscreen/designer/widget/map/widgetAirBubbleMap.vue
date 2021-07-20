@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart :options="options" autoresize/>
   </div>
 </template>
 <script>
@@ -47,7 +47,7 @@ var data = [
   {
     name: "南海诸岛",
     value: 1
-},
+  },
   {
     name: "北京",
     value: 524
@@ -185,7 +185,7 @@ var data = [
     value: 9
   },
 ];
-var convertData = function(data) {
+var convertData = function (data) {
   var res = [];
   for (var i = 0; i < data.length; i++) {
     var geoCoord = geoCoordMap[data[i].name];
@@ -209,17 +209,17 @@ export default {
     value: Object,
     ispreview: Boolean
   },
-  data (){
+  data() {
     return {
-      options : {
+      options: {
         //backgroundColor: '#0F1C3C',
         tooltip: {
           show: true,
-          formatter: function(params) {
+          formatter: function (params) {
             if (params.value.length > 1) {
-              return '&nbsp;&nbsp;' + params.name + '&nbsp;&nbsp;&nbsp;' + params.value[2] + '人&nbsp;&nbsp;';
+              return '&nbsp;&nbsp;' + params.name + '&nbsp;&nbsp;&nbsp;' + params.value[2] + '&nbsp;&nbsp;';
             } else {
-              return '&nbsp;&nbsp;' + params.name + '&nbsp;&nbsp;&nbsp;' + params.value + '人&nbsp;&nbsp;';
+              return '&nbsp;&nbsp;' + params.name + '&nbsp;&nbsp;&nbsp;' + params.value + '&nbsp;&nbsp;';
             }
           },
         },
@@ -249,109 +249,118 @@ export default {
             }
           }
         },
-        series: [{
-          type: 'map',
-          map: 'china',
-          aspectScale: 0.75,
-          //zoom:1.1,
-          label: {
-            normal: {
-              show: false,
+        series: [
+          {
+            type: 'map',
+            map: 'china',
+            aspectScale: 0.75,
+            label: {
+              normal: {
+                //formatter: '{b}',
+                position: 'right',
+                show: true,
+                color: '#53D9FF',
+                fontSize: 15
+              },
+              emphasis: {
+                show: true,
+              },
             },
-            emphasis: {
-              show: false,
-            }
-          },
-          itemStyle: {
-            normal: {
-              areaColor: {
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [{
-                  offset: 0,
-                  color: '#073684' // 0% 处的颜色
-                }, {
-                  offset: 1,
-                  color: '#061E3D' // 100% 处的颜色
-                }],
+            itemStyle: {
+              normal: {
+                //地图块颜色
+                areaColor: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [{
+                    offset: 0,
+                    color: '#073684' // 0% 处的颜色
+                  }, {
+                    offset: 1,
+                    color: '#061E3D' // 100% 处的颜色
+                  }],
+                },
+                borderColor: '#215495',
+                borderWidth: 1,
               },
-              borderColor: '#215495',
-              borderWidth: 1,
-            },
-            emphasis: {
-              areaColor: {
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [{
-                  offset: 0,
-                  color: '#073684' // 0% 处的颜色
-                }, {
-                  offset: 1,
-                  color: '#061E3D' // 100% 处的颜色
-                }],
-              },
-            }
-          },
-          data: data,
-        },
-          {type: 'effectScatter',
-          coordinateSystem: 'geo',
-          rippleEffect: {
-            brushType: 'stroke'
-          },
-          showEffectOn: 'render',
-          itemStyle: {
-            normal: {
-              color: {
-                type: 'radial',
-                x: 0.5,
-                y: 0.5,
-                r: 0.5,
-                colorStops: [{
-                  offset: 0,
-                  color: 'rgba(5,80,151,0.2)'
-                }, {
-                  offset: 0.8,
-                  color: 'rgba(5,80,151,0.8)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(0,108,255,0.7)'
-                }],
-                global: false // 缺省为 false
-              },
-            }
-          },
-          label: {
-            normal: {
-              show: true,
-              color: '#fff',
-              fontWeight: 'bold',
-              position: 'inside',
-              formatter: function(para) {
-                return '{cnNum|' + para.data.value[2] + '}'
-              },
-              rich: {
-                cnNum: {
-                  fontSize: 13,
-                  color: '#D4EEFF',
-                }
+              //鼠标放置颜色加深
+              emphasis: {
+                areaColor: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [{
+                    offset: 0,
+                    color: '#073684' // 0% 处的颜色
+                  }, {
+                    offset: 1,
+                    color: '#2B91B7' // 100% 处的颜色
+                  }],
+                },
               }
             },
+            data: data,
           },
-          symbol: 'circle',
-          symbolSize: function(val) {
-            if (val[2] == 0) {
-              return 0;
-            };
-            return ((maxSize4Pin - minSize4Pin) / (max - min)) * val[2] + (maxSize4Pin - ((maxSize4Pin - minSize4Pin) / (max - min)) * max) * 1.2;
-          },
-          data: convertData(data),
-          zlevel: 1,
-        }]
+          {
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            rippleEffect: {
+              brushType: 'stroke'
+            },
+            showEffectOn: 'render',
+            itemStyle: {
+              normal: {
+                //气泡颜色
+                color: {
+                  type: 'radial',
+                  x: 0.5,
+                  y: 0.5,
+                  r: 0.5,
+                  colorStops: [{
+                    offset: 0,
+                    color: 'rgba(5,80,151,0.2)'
+                  }, {
+                    offset: 0.8,
+                    color: 'rgba(5,80,151,0.8)'
+                  }, {
+                    offset: 1,
+                    color: 'rgba(0,108,255,0.7)'
+                  }],
+                  global: false // 缺省为 false
+                },
+              }
+            },
+            label: {
+              normal: {
+                show: true,
+                color: '#fff',
+                fontWeight: 'bold',
+                position: 'inside',
+                formatter: function (para) {
+                  return '{cnNum|' + para.data.value[2] + '}'
+                },
+                rich: {
+                  cnNum: {
+                    fontSize: 13,
+                    color: '#D4EEFF',
+                  }
+                }
+              },
+            },
+            symbol: 'circle',
+            symbolSize: function (val) {
+              if (val[2] == 0) {
+                return 0;
+              }
+              ;
+              return ((maxSize4Pin - minSize4Pin) / (max - min)) * val[2] + (maxSize4Pin - ((maxSize4Pin - minSize4Pin) / (max - min)) * max) * 1.2;
+            },
+            data: convertData(data),
+            zlevel: 1,
+          }]
       },
       optionsSetup: {}
     }
@@ -406,8 +415,8 @@ export default {
       };
       this.options.title = title;
     },
-    setdata(outname,outvalue){
-      const outdata={}
+    setdata(outname, outvalue) {
+      const outdata = {}
       for (var i = 0; i < outname.length; i++) {
         outdata.push({
           name: outname[i],
@@ -463,6 +472,7 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 .echarts {
   width: 100%;
   height: 100%;
