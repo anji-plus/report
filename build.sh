@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#判断node.js mvn是否存在
+command -v npm >/dev/null 2>&1 || { echo >&2 "I require node.js v14.16.0+ but it's not installed.  Aborting."; sleep 5; exit 1; }
+command -v mvn >/dev/null 2>&1 || { echo >&2 "I require maven 3.5 + but it's not installed.  Aborting."; sleep 5; exit 1; }
+
 cd `dirname $0`
 BuildDir=`pwd` #工程根目录
 
