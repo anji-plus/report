@@ -375,17 +375,17 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsCollapse.background
+        background: this.optionsSetup.background
       };
     }
   },
   watch: {
     value: {
       handler(val) {
-/*        this.optionsStyle = val.position;
+        this.optionsStyle = val.position;
         this.optionsData = val.data;
-        this.optionsSetup = val.setup;*/
         this.optionsCollapse = val.setup;
+        this.optionsSetup = val.setup;
         this.editorOptions();
       },
       deep: true
@@ -393,7 +393,10 @@ export default {
   },
   mounted() {
     this.optionsStyle = this.value.position;
-    this.optionsCollapse =  this.value.setup;
+    this.optionsData = this.value.data;
+    this.optionsCollapse = this.value.setup;
+    this.optionsSetup = this.value.setup;
+    this.editorOptions();
   },
   methods: {
     // 修改图标options属性
