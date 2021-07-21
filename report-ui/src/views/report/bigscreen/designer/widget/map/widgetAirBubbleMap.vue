@@ -406,6 +406,7 @@ export default {
       this.setOptionDataValue();
       this.setOptionsData();
       this.setOptionAirSize();
+      this.setOptionMapBlocak();
     },
     // 标题设置
     setOptionsTitle() {
@@ -439,7 +440,7 @@ export default {
       };
       label['normal'] = normal;
     },
-    setOptionDataValue(){
+    setOptionDataValue() {
       const optionsSetup = this.optionsSetup;
       const label = this.options.series[1]['label'];
       const normal = {
@@ -454,13 +455,34 @@ export default {
           cnNum: {
             fontSize: optionsSetup.fontDataSize,
             color: optionsSetup.fontDataColor,
-            fontWeight:optionsSetup.fontDataWeight,
+            fontWeight: optionsSetup.fontDataWeight,
           }
         }
       };
       label['normal'] = normal;
     },
-    setOptionAirSize(){
+    setOptionMapBlocak() {
+      const optionsSetup = this.optionsSetup;
+      const itemStyle = this.options.series[0]['itemStyle'];
+      //鼠标放置颜色加深
+      const emphasis = {
+        areaColor: {
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [{
+            offset: 0,
+            color: '#073684' // 0% 处的颜色
+          }, {
+            offset: 1,
+            color: optionsSetup.fontHighlightColor // 100% 处的颜色
+          }],
+        },
+      };
+      itemStyle['emphasis'] = emphasis;
+    },
+    setOptionAirSize() {
       minSize4Pin = this.optionsSetup.fontAirSize
     },
     //数据解析
@@ -474,7 +496,10 @@ export default {
         );
     },
     staticDataFn(val) {
-
+      const serise1 = this.options.series[1];
+      serise1['data'] = convertData(val)
+      const serise = this.options.series[0];
+      serise['data'] = val
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;

@@ -5908,13 +5908,13 @@ const widgetTools = [
           {
             name: '地图块颜色',
             list: [
-              {
+/*              {
                 type: 'vue-color',
                 label: '0%处颜色',
                 name: 'font0PreColor',
                 required: false,
                 placeholder: '',
-                value: ''
+                value: '#073684'
               },
               {
                 type: 'vue-color',
@@ -5922,15 +5922,15 @@ const widgetTools = [
                 name: 'font100PreColor',
                 required: false,
                 placeholder: '',
-                value: ''
-              },
+                value: '#061E3D'
+              },*/
               {
                 type: 'vue-color',
-                label: '高亮颜色',
+                label: '高亮渐变色',
                 name: 'fontHighlightColor',
                 required: false,
                 placeholder: '',
-                value: ''
+                value: '#2B91B7'
               },
             ],
           },
@@ -5984,43 +5984,42 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: '[' +
-            '{"value": 1,"name": "南海诸岛"},' +
-            '{"value": 524,"name": "北京"},' +
-            '{"value": 14,"name": "天津"},' +
-            '{"value": 150,"name": "上海"},' +
-            '{"value": 75,"name": "重庆"},' +
-            '{"value": 13,"name": "河北"},' +
-            '{"value": 83,"name": "河南"},' +
-            '{"value": 11,"name": "云南"},' +
-            '{"value": 19,"name": "辽宁"},' +
-            '{"value": 15,"name": "黑龙江"},' +
-            '{"value": 69,"name": "湖南"},' +
-            '{"value": 260,"name": "安徽"},' +
-            '{"value": 39,"name": "山东"},' +
-            '{"value": 4, "name": "新疆"},' +
-            '{"value": 31, "name": "江苏"},' +
-            '{"value": 104, "name": "浙江"},' +
-            '{"value": 36, "name": "江西"},' +
-            '{"value": 1052, "name": "湖北"},' +
-            '{"value": 33, "name": "广西"},' +
-            '{"value": 347, "name": "甘肃"},' +
-            '{"value": 8, "name": "山西"},' +
-            '{"value": 157,"name":"内蒙古"},' +
-            '{"value":22,"name":"陕西"}' +
-            '{"value":4,"name":"吉林"}' +
-            '{"value":36,"name":"福建"}' +
-            '{"value":39,"name":"贵州"}' +
-            '{"value":996,"name":"广东"}' +
-            '{"value":27,"name":"青海"}' +
-            '{"value":31,"name":"西藏"}' +
-            '{"value":46,"name":"四川"}' +
-            '{"value":16,"name":"宁夏"}' +
-            '{"value":22,"name":"海南"}' +
-            '{"value":6,"name":"台湾"}' +
-            '{"value":2,"name":"香港"}' +
-            '{"value":9,"name":"澳门"}' +
-            ']',
+          value: [
+            {"name":"南海诸岛","value":1},
+            {"name":"北京","value":524},
+            {"name":"天津","value":14},
+            {"name":"上海","value":150},
+            {"name":"重庆","value":75},
+            {"name":"河北","value":13},
+            {"name":"河南","value":83},
+            {"name":"云南","value":11},
+            {"name":"辽宁","value":19},
+            {"name":"黑龙江","value":15},
+            {"name":"湖南","value":69},
+            {"name":"安徽","value":260},
+            {"name":"山东","value":39},
+            {"name":"新疆","value":4},
+            {"name":"江苏","value":31},
+            {"name":"浙江","value":104},
+            {"name":"江西","value":36},
+            {"name":"湖北","value":1052},
+            {"name":"广西","value":33},
+            {"name":"甘肃","value":347},
+            {"name":"山西","value":8},
+            {"name":"内蒙古","value":157},
+            {"name":"陕西","value":22},
+            {"name":"吉林","value":4},
+            {"name":"福建","value":36},
+            {"name":"贵州","value":39},
+            {"name":"广东","value":996},
+            {"name":"青海","value":27},
+            {"name":"西藏","value":31},
+            {"name":"四川","value":46},
+            {"name":"宁夏","value":16},
+            {"name":"海南","value":22},
+            {"name":"台湾","value":6},
+            {"name":"香港","value":2},
+            {"name":"澳门","value":9}],
         },
         {
           type: 'dycustComponents',
