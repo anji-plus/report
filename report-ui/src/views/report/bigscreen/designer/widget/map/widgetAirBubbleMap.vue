@@ -255,12 +255,11 @@ export default {
             map: 'china',
             aspectScale: 0.75,
             label: {
-              normal: {
-                //formatter: '{b}',
+              normal: {//调整数值
                 position: 'right',
                 show: true,
                 color: '#53D9FF',
-                fontSize: 15
+                fontSize: 20
               },
               emphasis: {
                 show: true,
@@ -354,7 +353,8 @@ export default {
             symbolSize: function (val) {
               if (val[2] == 0) {
                 return 0;
-              };
+              }
+              ;
               return ((maxSize4Pin - minSize4Pin) / (max - min)) * val[2] + (maxSize4Pin - ((maxSize4Pin - minSize4Pin) / (max - min)) * max) * 1.2;
             },
             data: convertData(data),
@@ -402,6 +402,10 @@ export default {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
+      this.setOptionTextValue();
+      this.setOptionDataValue();
+      this.setOptionsData();
+      this.setOptionAirSize();
     },
     // 标题设置
     setOptionsTitle() {
@@ -423,20 +427,54 @@ export default {
       };
       this.options.title = title;
     },
+    setOptionTextValue() {
+      const optionsSetup = this.optionsSetup;
+      const label = this.options.series[0]['label'];
+      const normal = {
+        position: 'right',
+        show: true,
+        color: optionsSetup.fontTextColor,
+        fontSize: optionsSetup.fontTextSize,
+        fontWeight: optionsSetup.fontTextWeight,
+      };
+      label['normal'] = normal;
+    },
+    setOptionDataValue(){
+      const optionsSetup = this.optionsSetup;
+      const label = this.options.series[1]['label'];
+      const normal = {
+        show: true,
+        color: '#fff',
+        fontWeight: 'bold',
+        position: 'inside',
+        formatter: function (para) {
+          return '{cnNum|' + para.data.value[2] + '}'
+        },
+        rich: {
+          cnNum: {
+            fontSize: optionsSetup.fontDataSize,
+            color: optionsSetup.fontDataColor,
+            fontWeight:optionsSetup.fontDataWeight,
+          }
+        }
+      };
+      label['normal'] = normal;
+    },
+    setOptionAirSize(){
+      minSize4Pin = this.optionsSetup.fontAirSize
+    },
     //数据解析
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
+        : this.dynamicDataFn(
+        optionsData.dynamicData,
+        optionsData.refreshTime
+        );
     },
     staticDataFn(val) {
-      const staticData = JSON.parse(val);
-      for (const key in this.options.series) {
-        if (this.options.series[key].type == "china") {
-          this.options.series[key].data = staticData;
-        }
-      }
+
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;

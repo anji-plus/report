@@ -5819,6 +5819,121 @@ const widgetTools = [
               },
             ],
           },
+          {
+            name: '字体设置',
+            list: [
+              {
+                type: 'el-input-number',
+                label: '文字大小',
+                name: 'fontTextSize',
+                required: false,
+                placeholder: '',
+                value: 15,
+              },
+              {
+                type: 'vue-color',
+                label: '文字颜色',
+                name: 'fontTextColor',
+                required: false,
+                placeholder: '',
+                value: '#D4EEFF'
+              },
+              {
+                type: 'el-select',
+                label: '文字粗细',
+                name: 'fontTextWeight',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
+                ],
+                value: 'normal'
+              },
+              {
+                type: 'el-input-number',
+                label: '数值大小',
+                name: 'fontDataSize',
+                required: false,
+                placeholder: '',
+                value: 15,
+              },
+              {
+                type: 'vue-color',
+                label: '数值颜色',
+                name: 'fontDataColor',
+                required: false,
+                placeholder: '',
+                value: '#D4EEFF'
+              },
+              {
+                type: 'el-select',
+                label: '数值粗细',
+                name: 'fontDataWeight',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
+                ],
+                value: 'normal'
+              },
+            ],
+          },
+          {
+            name: '气泡设置',
+            list: [
+              {
+                type: 'el-input-number',
+                label: '气泡大小',
+                name: 'fontAirSize',
+                required: false,
+                placeholder: '',
+                value: 20,
+              },
+              /*{
+                type: 'vue-color',
+                label: '气泡颜色',
+                name: 'fontPieColor',
+                required: false,
+                placeholder: '',
+                value: ''
+              },*/
+            ],
+          },
+          {
+            name: '地图块颜色',
+            list: [
+              {
+                type: 'vue-color',
+                label: '0%处颜色',
+                name: 'font0PreColor',
+                required: false,
+                placeholder: '',
+                value: ''
+              },
+              {
+                type: 'vue-color',
+                label: '100%颜色',
+                name: 'font100PreColor',
+                required: false,
+                placeholder: '',
+                value: ''
+              },
+              {
+                type: 'vue-color',
+                label: '高亮颜色',
+                name: 'fontHighlightColor',
+                required: false,
+                placeholder: '',
+                value: ''
+              },
+            ],
+          },
           /*{
             name: '自定义配色',
             list: [
