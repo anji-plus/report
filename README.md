@@ -20,18 +20,18 @@
 ## 数据流程图
 ![An image](https://images.gitee.com/uploads/images/2021/0630/160451_31bb9052_1728982.png)
 
-## 打包目录
+## 打包目录build
 ```
 ├── bin                                           启动命令脚本
-│   ├── logs                                      启动日志目录
-│   ├── cache                                     本地缓存目录
-│   ├── startup.cmd
-│   ├── shutdown.cmd
-│   ├── startup.sh
-│   └── shutdown.sh
-├── config                                        配置文件目录
-├── lib                                           自定义扩展包
-├── target                                        report-core核心包
+│   ├── restart.sh
+│   ├── start.bat
+│   ├── start.sh
+│   └── stop.sh
+├── conf                                       配置文件目录
+│   └── bootstrap-dev.yml
+├── logs                                          启动日志目录
+├── cache                                         本地缓存目录
+├── lib                                           自定义扩展包&report-core核心包
 ```
 
 ## 系统目录
@@ -82,6 +82,7 @@ sh build.sh
 
 unzip report-core-xxxx.zip
 cd report-core-xxxx
+vim conf/bootstrap-dev.yml 数据库连接
 sh bin/start.sh
 
 启动后访问

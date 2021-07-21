@@ -1,25 +1,33 @@
 ## 快速部署
+下载地址：[https://gitee.com/anji-plus/report/releases](https://gitee.com/anji-plus/report/releases)
 ```js
  第一步，下载zip包，解压<br>
- 第二步，config->application.properties，修改mysql连接<br>
- 第三步，启动bin目录下startup.cmd(Windows)或者startup.sh(Linux)<br>
+ 第二步，conf->bootstrap-dev.yml，修改mysql连接<br>
+ 第三步，启动bin目录下start.sh<br>
  第四步，访问 http://localhost:9095/index.html
 ```
 
-## 源码打包
-```js
- 第一步，cd report-ui
-    npm install
-    npm run build
- 第二步，cd report-core/src/main/resources/static
-    将第一步打包文件dist文件夹下所有文件copy到当前目录
- 第三步，cd cd report-core
-    不可使用install，install会报错的
-    mvn clean package -Dmaven.test.skip=true
- 第四步，启动 java -jar report-core-1.0.0-SNAPSHOT.jar
+## 编译打包
+在Linux上先准备好maven、node.js、jdk
+- [Apache Maven] 3.5 +<br>
+- [Node.js] v14.16.0+<br>
+- [Jdk] 1.8+
+```
+git clone https://gitee.com/anji-plus/report.git
+cd report
+sh build.sh
+编译完成放在build文件夹 report-core-xxxx.zip
+
+unzip report-core-xxxx.zip
+cd report-core-xxxx
+vim conf/bootstrap-dev.yml 数据库连接、上传文件的路径以及地址修改
+sh bin/start.sh
+
+启动后访问
+http://serverip:9095
+```
 
 也可以前后端分开单独部署，前端部署nginx，后端jar
-```
 
 ## 系统特性
 1. 最新最稳定的技术栈；
