@@ -1,5 +1,5 @@
 /*
 字典更新
 */
-INSERT INTO `aj_report`.`gaea_dict_item`(`dict_code`, `item_name`, `item_value`, `item_extend`, `enabled`, `locale`, `remark`, `sort`, `create_by`, `create_time`, `update_by`, `update_time`, `version`) VALUES ('CHART_PROPERTIES', '地图地名', 'name', NULL, 1, 'zh', NULL, 10, 'admin', now(), 'admin', now(), 1);
-INSERT INTO `aj_report`.`gaea_dict_item`(`dict_code`, `item_name`, `item_value`, `item_extend`, `enabled`, `locale`, `remark`, `sort`, `create_by`, `create_time`, `update_by`, `update_time`, `version`) VALUES ('CHART_PROPERTIES', '地图数值', 'value', NULL, 1, 'zh', NULL, 10, 'admin', now(), 'admin', now(), 1);
+UPDATE `aj_report`.`gaea_dict_item` SET `dict_code` = 'CHART_PROPERTIES', `item_name` = '饼图/仪表盘/气泡地图name', `item_value` = 'name', `item_extend` = NULL, `enabled` = 1, `locale` = 'zh', `remark` = NULL, `sort` = 8, `create_by` = 'admin', `create_time` = '2021-04-29 10:48:43', `update_by` = 'admin', `update_time` = '2021-04-29 10:48:50', `version` = 1 WHERE `id` = 263;
+UPDATE `aj_report`.`gaea_dict_item` SET `dict_code` = 'CHART_PROPERTIES', `item_name` = '饼图/仪表盘/气泡地图value', `item_value` = 'value', `item_extend` = NULL, `enabled` = 1, `locale` = 'zh', `remark` = NULL, `sort` = 9, `create_by` = 'admin', `create_time` = '2021-04-29 10:48:43', `update_by` = 'admin', `update_time` = '2021-04-29 10:48:50', `version` = 1 WHERE `id` = 264;

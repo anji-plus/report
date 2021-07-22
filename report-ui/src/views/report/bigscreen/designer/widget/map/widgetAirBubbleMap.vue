@@ -403,7 +403,7 @@ export default {
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionTextValue();
-      this.setOptionDataValue();
+      //this.setOptionDataValue();
       this.setOptionsData();
       this.setOptionAirSize();
       this.setOptionMapBlocak();
@@ -440,27 +440,6 @@ export default {
       };
       label['normal'] = normal;
     },
-    setOptionDataValue() {
-      const optionsSetup = this.optionsSetup;
-      const label = this.options.series[1]['label'];
-      const normal = {
-        show: true,
-        color: '#fff',
-        fontWeight: 'bold',
-        position: 'inside',
-        formatter: function (para) {
-          return '{cnNum|' + para.data.value[2] + '}'
-        },
-        rich: {
-          cnNum: {
-            fontSize: optionsSetup.fontDataSize,
-            color: optionsSetup.fontDataColor,
-            fontWeight: optionsSetup.fontDataWeight,
-          }
-        }
-      };
-      label['normal'] = normal;
-    },
     setOptionMapBlocak() {
       const optionsSetup = this.optionsSetup;
       const itemStyle = this.options.series[0]['itemStyle'];
@@ -483,7 +462,8 @@ export default {
       itemStyle['emphasis'] = emphasis;
     },
     setOptionAirSize() {
-      minSize4Pin = this.optionsSetup.fontAirSize
+      maxSize4Pin = this.optionsSetup.fontmaxSize4Pin
+      minSize4Pin = this.optionsSetup.fontminSize4Pin
     },
     //数据解析
     setOptionsData() {
@@ -496,10 +476,28 @@ export default {
         );
     },
     staticDataFn(val) {
-      const serise1 = this.options.series[1];
-      serise1['data'] = convertData(val)
-      const serise = this.options.series[0];
-      serise['data'] = val
+      this.options.series[0]['data'] = val;
+      const optionsSetup = this.optionsSetup;
+      const label = this.options.series[1]['label'];
+      const normal = {
+        show: true,
+        color: '#fff',
+        fontWeight: 'bold',
+        position: 'inside',
+        formatter: function (para) {
+          return '{cnNum|' + para.data.value[2] + '}'
+        },
+        rich: {
+          cnNum: {
+            fontSize: optionsSetup.fontDataSize,
+            color: optionsSetup.fontDataColor,
+            fontWeight: optionsSetup.fontDataWeight,
+          }
+        }
+      };
+      const data = convertData(val);
+      this.options.series[1]['data']=data
+      label['normal'] = normal
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -519,11 +517,28 @@ export default {
       });
     },
     renderingFn(val) {
-      for (const key in this.options.series) {
-        if (this.options.series[key].type == "china") {
-          this.options.series[key].data = val;
+      this.options.series[0]['data'] = val;
+      const optionsSetup = this.optionsSetup;
+      const label = this.options.series[1]['label'];
+      const normal = {
+        show: true,
+        color: '#fff',
+        fontWeight: 'bold',
+        position: 'inside',
+        formatter: function (para) {
+          return '{cnNum|' + para.data.value[2] + '}'
+        },
+        rich: {
+          cnNum: {
+            fontSize: optionsSetup.fontDataSize,
+            color: optionsSetup.fontDataColor,
+            fontWeight: optionsSetup.fontDataWeight,
+          }
         }
-      }
+      };
+      const data = convertData(val);
+      this.options.series[1]['data']=data
+      label['normal'] = normal
     }
   }
 };

@@ -5889,11 +5889,19 @@ const widgetTools = [
             list: [
               {
                 type: 'el-input-number',
-                label: '气泡大小',
-                name: 'fontAirSize',
+                label: '最小半径',
+                name: 'fontminSize4Pin',
                 required: false,
                 placeholder: '',
                 value: 20,
+              },
+              {
+                type: 'el-input-number',
+                label: '最大半径',
+                name: 'fontmaxSize4Pin',
+                required: false,
+                placeholder: '',
+                value: 100,
               },
               /*{
                 type: 'vue-color',

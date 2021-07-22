@@ -156,7 +156,6 @@ export default {
       }
       ananysicData["xAxis"] = xAxisList;
       ananysicData["series"] = series;
-      // console.log(ananysicData, '结果数据')
       return ananysicData;
     },
     // 饼图或者空心饼图或者漏斗图
@@ -174,7 +173,6 @@ export default {
         }
         ananysicData.push(obj);
       }
-      // console.log(ananysicData, '结果数据')
       return ananysicData;
     },
     gaugeFn(chartProperties, data) {
@@ -194,7 +192,6 @@ export default {
         }
         ananysicData.push(obj);
       }
-      // console.log(ananysicData, '结果数据')
       return ananysicData[0];
     },
     widgettext(chartProperties, data) {
@@ -204,7 +201,6 @@ export default {
         for (const key in chartProperties) {
           const value = chartProperties[key];
           if (value === "name") {
-            //obj["name"] = data[i][key];
           } else {
             obj["value"] = data[i][key];
           }
