@@ -96,6 +96,8 @@ public class DataSourceServiceImpl implements DataSourceService {
             case JdbcConstants.MYSQL:
             case JdbcConstants.KUDU_IMAPLA:
             case JdbcConstants.ORACLE:
+            case JdbcConstants.SQL_SERVER:
+            case JdbcConstants.JDBC:
                 testRelationalDb(dto);
                 break;
             case JdbcConstants.HTTP:
@@ -118,6 +120,8 @@ public class DataSourceServiceImpl implements DataSourceService {
             case JdbcConstants.MYSQL:
             case JdbcConstants.KUDU_IMAPLA:
             case JdbcConstants.ORACLE:
+            case JdbcConstants.SQL_SERVER:
+            case JdbcConstants.JDBC:
                 return executeRelationalDb(dto);
             case JdbcConstants.HTTP:
                 return executeHttp(dto);
