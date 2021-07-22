@@ -5,6 +5,9 @@
 </template>
 
 <script>
+/*import echarts from "echarts";
+var myChart = echarts.init(this.$refs.myChart)*/
+var per = 60 ;
 export default {
   name: "widgetPiePercentageChart",//百分比图参考：https://www.makeapie.com/editor.html?c=xFkzKG-bpl
   components: {},
@@ -18,7 +21,7 @@ export default {
       options: {
         //backgroundColor: '#061740',
         title: {
-          text: '{nums|' + 60 + '}{percent|%}',
+          text: '{nums|' + per + '}{percent|%}',
           x: 'center',
           y: 'center',
           textStyle: {
@@ -223,7 +226,7 @@ export default {
             },
             data: [
               {
-                value: 60,
+                value: per,
                 name: '',
                 itemStyle: {
                   normal: {
@@ -244,7 +247,7 @@ export default {
                 },
               },
               {
-                value: 40,
+                value: 100 - per,
                 name: '',
                 label: {
                   normal: {
@@ -292,7 +295,10 @@ export default {
             detail: {
               show: false,
             },
-            data: [],
+            data: [{
+              value: 0,
+              name: ""
+            }],
           },
         ],
       },
@@ -336,7 +342,7 @@ export default {
   mounted() {
 /*        setInterval(() => {
           this.angle = this.angle + 3
-          myChart.setOption(option,true)
+          myChart.setOption(options,true)
         }, 1000);*/
   },
   methods: {
@@ -458,6 +464,8 @@ export default {
     staticDataFn(val) {
       const title = this.options.title;
       title.text = '{nums|' + val + '}{percent|%}';
+      this.options.series[6]['data'][0]['value'] = val ;
+      this.options.series[6]['data'][1]['value'] = 100 - val ;
       //this.setOptionPerData(val)
     },
     dynamicDataFn(val, refreshTime) {
@@ -475,6 +483,8 @@ export default {
       const data = this.queryEchartsData(val);
       data.then(res => {
         this.options.title.text = '{nums|' + res[0].value + '}{percent|%}';
+        this.options.series[6]['data'][0]['value'] = res[0].value;
+        this.options.series[6]['data'][1]['value'] = 100 - res[0].value;
       });
     }
   }
