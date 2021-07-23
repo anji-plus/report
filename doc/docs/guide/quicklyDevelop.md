@@ -1,40 +1,7 @@
-## 快速部署
-下载地址：[https://gitee.com/anji-plus/report/releases](https://gitee.com/anji-plus/report/releases)
-```js
- 第一步，下载zip包，解压<br>
- 第二步，conf->bootstrap-dev.yml，修改mysql连接<br>
- 第三步，启动bin目录下start.sh<br>
- 第四步，访问 http://localhost:9095/index.html
-```
-
-## 编译打包
-在Linux上先准备好maven、node.js、jdk
-- [Apache Maven] 3.5 +<br>
-- [Node.js] v14.16.0+<br>
-- [Jdk] 1.8+
-```
-git clone https://gitee.com/anji-plus/report.git
-cd report
-sh build.sh
-编译完成放在build文件夹 report-core-xxxx.zip
-
-unzip report-core-xxxx.zip
-cd report-core-xxxx
-vim conf/bootstrap-dev.yml 数据库连接、上传文件的路径以及地址修改
-sh bin/start.sh
-
-启动后访问
-http://serverip:9095
-```
-
-也可以前后端分开单独部署，前端部署nginx，后端jar
-
-## 系统特性
-1. 最新最稳定的技术栈；
-2. 支持多数据源配置
-3. 丰富的大屏组件。拖拽配置实现动态大屏
-
 ## 核心技术
+### 底层依赖
+- [Mysql] 5.7
+- [Jdk] 1.8
 ### 后端
 - [Spring Boot](https://spring.io/projects/spring-boot/): Spring Boot是一款开箱即用框架，让我们的Spring应用变的更轻量化、更快的入门。 在主程序执行main函数就可以运行。你也可以打包你的应用为jar并通过使用java -jar来运行你的Web应用；
 - [Mybatis-plus](https://mp.baomidou.com/): MyBatis-plus（简称 MP）是一个 MyBatis (opens new window) 的增强工具。
@@ -47,5 +14,18 @@ http://serverip:9095
 - [vue-router](https://router.vuejs.org/)： Vue提供的前端路由工具，利用其我们实现页面的路由控制，局部刷新及按需加载，构建单页应用，实现前后端分离。
 - [vuex](https://vuex.vuejs.org/)：Vue提供的状态管理工具，用于统一管理我们项目中各种数据的交互和重用，存储我们需要用到数据对象。
 - [element-ui](https://element.eleme.cn/#/zh-CN)：基于MVVM框架Vue开源出来的一套前端ui组件。
-- [avue](https://www.avuejs.com/): 用该组件包裹后可以变成拖拽组件,采用相对于父类绝对定位;用键盘的上下左右也可以控制移动
+- [avue](https://www.avuejs.com/): 用该组件包裹后可以变成拖拽组件,采用相对于父类绝对定位;用键盘的上下左右也可以控制移
 
+## 开发环境
+这里提供我们的开发环境版本进行参考
+- [CentOs] 7.5
+- [Mysql] 5.7
+- [Jdk] 1.8
+- [Spring Boot] 2.3.5
+- [Mybatis-plus] 3.3.2
+- [flyway] 5.2.1
+- [Apache Maven] 3.5
+- [Node.js] 14.16.0
+- [Windows 10]
+
+已知 **Mysql8.0** 和 **Jdk11** 会出现兼容性问题，后续有解决方法将会在下方 **其他** 大类进行补充  

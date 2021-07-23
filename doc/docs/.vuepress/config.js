@@ -14,15 +14,27 @@ module.exports = {
             {text: '指南', link: '/guide/'},
             {text: 'GitHub', link: 'https://github.com/anji-plus/report'},
             {text: 'Gitee', link: 'https://gitee.com/anji-plus/report'},
+            {text: '谁在使用', link: '/guide/briefUsing'},
         ],
         sidebar: {
             '/guide/': [
                 {
-                    title: '文档',
+                    title: '介绍',
                     collapsable: false,
                     children: [
-                        {title: '介绍', path: '/guide/'},
-                        {title: '快速入门', path: '/guide/quickly'},
+                        {title: '简介', path: '/guide/'},
+                        {title: '谁在使用', path: '/guide/briefUsing'},
+                        {title: '技术支持', path: '/guide/briefSupport'},
+                    ]
+                },
+                {
+                    title: '快速入门',
+                    collapsable: false,
+                    children: [
+                        {title: '开发环境', path: '/guide/quicklyDevelop'},
+                        {title: '发行版部署', path: '/guide/quicklyDistribution'},
+                        {title: '源码部署', path: '/guide/quicklySource'},
+                        {title: '前后端分离', path: '/guide/quicklySeparate'},
                     ]
                 },
                 {
