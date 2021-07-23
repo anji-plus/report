@@ -2,7 +2,7 @@
 ### 底层依赖
 - [Mysql] 5.7
 - [Jdk] 1.8
-- CPU核心数不低于2核
+
 ### 后端
 - [Spring Boot](https://spring.io/projects/spring-boot/): Spring Boot是一款开箱即用框架，让我们的Spring应用变的更轻量化、更快的入门。 在主程序执行main函数就可以运行。你也可以打包你的应用为jar并通过使用java -jar来运行你的Web应用；
 - [Mybatis-plus](https://mp.baomidou.com/): MyBatis-plus（简称 MP）是一个 MyBatis (opens new window) 的增强工具。
