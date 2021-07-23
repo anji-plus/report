@@ -1,4 +1,4 @@
-import request from './axios'
+import request from '@/utils/request'
 
 export function login (data) {
   return request({
@@ -16,8 +16,10 @@ export function logout () {
 }
 
 // 登录之后   根据旧修改密码
-export const reqUpdatePassword = data => request({
-  url: '/auth-service/user/updatePassword',
-  method: 'post',
-  data: data
-})
+export function reqUpdatePassword (data) {
+  return request({
+    url: '/accessUser/updatePassword',
+    method: 'post',
+    data
+  })
+}

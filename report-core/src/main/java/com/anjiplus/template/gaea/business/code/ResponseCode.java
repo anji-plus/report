@@ -20,6 +20,23 @@ public interface ResponseCode {
     String LOGIN_ERROR = "login.error";
 
     /**
+     * 新密码不能和原密码一致
+     */
+    String USER_PASSWORD_CONFIG_PASSWORD_CANOT_EQUAL = "user.password.config.password.canot.equal";
+
+    /**
+     * 密码和确认密码不一致
+     */
+    String USER_INCONSISTENT_PASSWORD_ERROR = "user.inconsistent.password.error";
+
+    /**
+     * 旧密码不正确
+     */
+    String USER_OLD_PASSWORD_ERROR = "user.old.password.error";
+
+
+
+    /**
      * 用户token过期
      */
     String USER_TOKEN_EXPIRED = "User.token.expired";
@@ -84,7 +101,6 @@ public interface ResponseCode {
     String COMPONENT_NOT_LOAD = "Component.load.check.error";
 
     String AUTH_PASSWORD_NOTSAME = "1001";
-    String USER_PASSWORD_CONFIG_PASSWORD_CANOT_EQUAL = "1002";
     String OLD_PASSWORD_ERROR = "1003";
     String USER_ONTEXIST_ORGINFO = "1004";
     String USER_ONTEXIST_ROLEINFO = "1005";

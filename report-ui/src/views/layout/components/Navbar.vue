@@ -17,11 +17,41 @@
                           class="user-dropdown">
           <el-dropdown-item divided>
             <span style="display:block;"
+                  @click="updatePassword">修改密码</span>
+          </el-dropdown-item>
+          <el-dropdown-item divided>
+            <span style="display:block;"
                   @click="logout">注销登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </el-menu>
+    <!-- 修改密码弹框 -->
+    <el-dialog
+      title="修改密码"
+      :visible.sync="wordVisible"
+      width="40%"
+      :close-on-click-modal='false'
+      top="20vh"
+      class="password-box"
+    >
+      <el-form ref="form" :model="form" label-width="100px" :rules="rules" :close-on-click-modal="false">
+        <el-form-item label="原密码" prop="oldPassword">
+          <el-input v-model.trim="form.oldPassword" type="password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="新密码" prop="password">
+          <el-input v-model.trim="form.password" type="password" autocomplete="off"></el-input>
+          <!-- <span class="password-tips"><i class="el-icon-warning-outline"> 密码至少8位,切包含大写、小写字母、数字、特殊字符中的3种</i></span> -->
+        </el-form-item>
+        <el-form-item label="确认新密码" prop="confirmPassword">
+          <el-input v-model.trim="form.confirmPassword" type="password" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+      <el-button @click="wordVisible = false">取 消</el-button>
+      <el-button type="primary" @click="confrimUpdate">确 定</el-button>
+    </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -30,8 +60,8 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import { getStorageItem } from '@/utils/storage'
-import { aesEncrypt } from '@/utils/aes'
 import { reqUpdatePassword } from '@/api/login'
+import { transPsw } from '@/utils/encrypted'
 
 export default {
   data () {
@@ -41,17 +71,19 @@ export default {
         callback(new Error('请再次输入密码'))
       } else if (value !== this.form.password) {
         callback(new Error('两次输入密码不一致!'))
+      } else if (value.length < 6 || value.length > 20) {
+        callback(new Error('密码长度需要再6-20之间!'));
       } else {
-        callback()
+        callback();
       }
     }
-    // const validatePass = (rule, value, callback) => {
-    // 	if (!/^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\W_]+$)(?![a-z0-9]+$)(?![a-z\W_]+$)(?![0-9\W_]+$)[a-zA-Z0-9\W_]{6,}$/.test(value)) {
-    // 		callback(new Error('请按要求输入密码'))
-    // 	} else {
-    // 		callback()
-    // 	}
-    // };
+    const validatePass = (rule, value, callback) => {
+    	if (!/^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\W_]+$)(?![a-z0-9]+$)(?![a-z\W_]+$)(?![0-9\W_]+$)[a-zA-Z0-9\W_]{6,}$/.test(value)) {
+    		callback(new Error('请按要求输入密码'))
+    	} else {
+    		callback()
+    	}
+    };
     const validateOldPass = (rule, value, callback) => {
       if (value.length < 6 || value.length > 30) {
         callback(new Error('请输入原密码'))
@@ -111,23 +143,22 @@ export default {
     },
     // 发送请求 确认修改
     confrimUpdate () {
-      this.$refs.form.validate((valid) => {
+      this.$refs.form.validate(async (valid) => {
         if (valid) {
-          const { oldPassword, password, confirmPassword } = this.form
+          const {oldPassword, password, confirmPassword} = this.form
           let data = {
-            oldPassword: aesEncrypt(oldPassword),
-            password: aesEncrypt(password),
-            confirmPassword: aesEncrypt(confirmPassword),
+            oldPassword: transPsw(oldPassword),
+            password: transPsw(password),
+            confirmPassword: transPsw(confirmPassword),
           }
-          reqUpdatePassword(data).then((res) => {
-            if (res.repCode == '0000') {
+
+          const { code } = await reqUpdatePassword(data);
+          if (code != '200') return
               this.wordVisible = false
               this.$message.success('修改密码成功,请重新登录')
               sessionStorage.clear()
               localStorage.clear()
               this.$router.push('/login')
-            }
-          })
         } else {
           return false
         }

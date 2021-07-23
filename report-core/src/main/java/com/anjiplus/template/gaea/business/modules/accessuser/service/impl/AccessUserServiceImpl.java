@@ -4,9 +4,11 @@ package com.anjiplus.template.gaea.business.modules.accessuser.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.anji.plus.gaea.bean.TreeNode;
 import com.anji.plus.gaea.cache.CacheHelper;
+import com.anji.plus.gaea.constant.BaseOperationEnum;
+import com.anji.plus.gaea.exception.BusinessException;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
-import com.anji.plus.gaea.utils.GaeaBeanUtils;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
+import com.anji.plus.gaea.holder.UserContentHolder;
 import com.anji.plus.gaea.utils.GaeaUtils;
 import com.anji.plus.gaea.utils.JwtBean;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
@@ -15,6 +17,7 @@ import com.anjiplus.template.gaea.business.modules.accessrole.dao.AccessRoleMapp
 import com.anjiplus.template.gaea.business.modules.accessrole.dao.entity.AccessRole;
 import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.AccessUserDto;
 import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.GaeaUserDto;
+import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.UpdatePasswordDto;
 import com.anjiplus.template.gaea.business.modules.accessuser.dao.AccessUserRoleMapper;
 import com.anjiplus.template.gaea.business.modules.accessuser.dao.entity.AccessUser;
 import com.anjiplus.template.gaea.business.modules.accessuser.dao.entity.AccessUserRole;
@@ -23,9 +26,9 @@ import com.anjiplus.template.gaea.business.modules.accessuser.dao.AccessUserMapp
 import com.anjiplus.template.gaea.business.util.MD5Util;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -50,6 +53,9 @@ public class AccessUserServiceImpl implements AccessUserService {
 
     @Autowired
     private AccessUserRoleMapper accessUserRoleMapper;
+
+    @Value("${customer.user.default.password:'123456'}")
+    private String defaultPassword;
 
     @Override
     public GaeaBaseMapper<AccessUser> getMapper() {
@@ -171,5 +177,61 @@ public class AccessUserServiceImpl implements AccessUserService {
         cacheHelper.stringSetExpire(userKey, gaeaUserStr, 3600);
 
         return gaeaUser;
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param dto
+     * @return
+     */
+    @Override
+    public Boolean updatePassword(UpdatePasswordDto dto) {
+        if (!dto.getConfirmPassword().equals(dto.getPassword())) {
+            //密码和确认密码不一致
+            throw BusinessExceptionBuilder.build(ResponseCode.USER_INCONSISTENT_PASSWORD_ERROR);
+        }
+        //新密码不能与老密码一样
+        if(StringUtils.equals(dto.getOldPassword(), dto.getPassword())){
+            throw BusinessExceptionBuilder.build(ResponseCode.USER_PASSWORD_CONFIG_PASSWORD_CANOT_EQUAL);
+        }
+
+        String username = UserContentHolder.getUsername();
+
+
+        LambdaQueryWrapper<AccessUser> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(AccessUser::getLoginName, username);
+        AccessUser accessUser = selectOne(wrapper);
+        String password = accessUser.getPassword();
+        if (!MD5Util.encrypt(dto.getOldPassword()).equals(password)) {
+            throw BusinessExceptionBuilder.build(ResponseCode.USER_OLD_PASSWORD_ERROR);
+        }
+        accessUser.setPassword(MD5Util.encrypt(dto.getPassword()));
+
+        accessUserMapper.updateById(accessUser);
+        return true;
+    }
+
+    /**
+     * 操作前处理
+     *
+     * @param entity        前端传递的对象
+     * @param operationEnum 操作类型
+     * @throws BusinessException 阻止程序继续执行或回滚事务
+     */
+    @Override
+    public void processBeforeOperation(AccessUser entity, BaseOperationEnum operationEnum) throws BusinessException {
+        //过滤密码
+        switch (operationEnum) {
+            case INSERT:
+                //gaea是为了和前端加密保持一致
+                entity.setPassword(MD5Util.encrypt(MD5Util.encrypt(defaultPassword.concat("gaea"))));
+                break;
+            case UPDATE:
+                //更新用户不允许修改密码
+                entity.setPassword(null);
+                break;
+        }
+
     }
 }

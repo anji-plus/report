@@ -7,6 +7,7 @@ import com.anji.plus.gaea.curd.controller.GaeaBaseController;
 import com.anji.plus.gaea.curd.service.GaeaBaseService;
 import com.anji.plus.gaea.holder.UserContentHolder;
 import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.GaeaUserDto;
+import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.UpdatePasswordDto;
 import com.anjiplus.template.gaea.business.modules.accessuser.dao.entity.AccessUser;
 import com.anjiplus.template.gaea.business.modules.accessuser.service.AccessUserService;
 import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.AccessUserDto;
@@ -97,6 +98,16 @@ public class AccessUserController extends GaeaBaseController<AccessUserParam, Ac
     @PostMapping({"/login"})
     public ResponseBean login(@RequestBody @Validated GaeaUserDto dto) {
         return responseSuccessWithData(accessUserService.login(dto));
+    }
+
+    /**
+     * 修改自己的密码
+     * @param dto
+     * @return
+     */
+    @PostMapping("/updatePassword")
+    public ResponseBean updatePassword(@RequestBody UpdatePasswordDto dto) {
+        return responseSuccessWithData(accessUserService.updatePassword(dto));
     }
 
 }

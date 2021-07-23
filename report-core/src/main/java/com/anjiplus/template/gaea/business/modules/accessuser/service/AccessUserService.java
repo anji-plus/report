@@ -3,6 +3,7 @@ package com.anjiplus.template.gaea.business.modules.accessuser.service;
 
 import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.AccessUserDto;
 import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.GaeaUserDto;
+import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.UpdatePasswordDto;
 import com.anjiplus.template.gaea.business.modules.accessuser.dao.entity.AccessUser;
 import com.anjiplus.template.gaea.business.modules.accessuser.controller.param.AccessUserParam;
 import com.anji.plus.gaea.curd.service.GaeaBaseService;
@@ -41,4 +42,11 @@ public interface AccessUserService extends GaeaBaseService<AccessUserParam, Acce
      * @return
      */
     GaeaUserDto login(GaeaUserDto gaeaUserDto);
+
+    /**
+     * 修改密码
+     * @param dto
+     * @return
+     */
+    Boolean updatePassword(UpdatePasswordDto dto);
 }

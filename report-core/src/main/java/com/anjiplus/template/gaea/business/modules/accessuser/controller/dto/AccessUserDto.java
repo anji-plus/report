@@ -27,11 +27,6 @@ public class AccessUserDto extends GaeaBaseDTO implements Serializable {
     @NotEmpty(message = "6002")
     private String loginName;
 
-    /** 密码 */
-    @ApiModelProperty(value = "密码")
-    @NotEmpty(message = "6002")
-    private String password;
-
     /** 真实用户 */
     @ApiModelProperty(value = "真实用户")
     @NotEmpty(message = "6002")

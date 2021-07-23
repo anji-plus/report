@@ -126,20 +126,20 @@ export default {
             ],
             disabled: false,
           },
-          {
-            label: '密码',
-            placeholder: '',
-            field: 'password',
-            tableHide: true, // 表格中不显示
-            editHide: true,
-            editField: 'password',
-            inputType: 'input',
-            rules: [
-              // { required: true, message: '密码必填', trigger: 'blur' },
-              { min: 1, max: 128, message: '不超过128个字符', trigger: 'blur' },
-            ],
-            disabled: false,
-          },
+          // {
+          //   label: '密码',
+          //   placeholder: '',
+          //   field: 'password',
+          //   tableHide: true, // 表格中不显示
+          //   editHide: true,
+          //   editField: 'password',
+          //   inputType: 'input',
+          //   rules: [
+          //     // { required: true, message: '密码必填', trigger: 'blur' },
+          //     { min: 1, max: 128, message: '不超过128个字符', trigger: 'blur' },
+          //   ],
+          //   disabled: false,
+          // },
           {
             label: '手机号码',
             placeholder: '',

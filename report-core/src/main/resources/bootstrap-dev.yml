@@ -77,3 +77,7 @@ file:
 customer:
   # 跳过token验证和权限验证的url清单
   skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html
+  user:
+    ##新增用户默认密码
+    default:
+      password: 123456
