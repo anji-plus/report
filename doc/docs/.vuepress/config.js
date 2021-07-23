@@ -38,6 +38,13 @@ module.exports = {
                     ]
                 },
                 {
+                    title: '用户权限',
+                    collapsable: false,
+                    children: [
+                        {title: '权限管理', path: '/guide/authmanager'},
+                    ]
+                },
+                {
                     title: '操作手册',
                     collapsable: false,
                     children: [
