@@ -18,8 +18,7 @@ IF "%JAVA_HOME%" == "" (
 :START
 	rem 获取应用的根目录
 	cd ../
-	rem set BIN_DIR=%cd%
-	set BIN_DIR=D://aj-report-2.0.2.RELEASE
+	set BIN_DIR=%cd%
 
 	set CONF_YML=%BIN_DIR%/conf/bootstrap.yml
 
