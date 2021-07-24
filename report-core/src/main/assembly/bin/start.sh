@@ -23,6 +23,6 @@ if [ -n "$PIDS" ]; then
 fi
 
 
-nohup java $JAVA_OPTS -jar -Dspring.config.location=$CONF_DIR/bootstrap.yml $LIB_DIR/aj-report-*.jar -Xbootclasspath/a:$LIB_JARS >/dev/null 2>&1 &
+nohup java $JAVA_OPTS -Xbootclasspath/a:$LIB_JARS -jar -Dspring.config.location=$CONF_DIR/bootstrap.yml $LIB_DIR/aj-report-*.jar >/dev/null 2>&1 &
 
 echo "The AJ-Report started!"
