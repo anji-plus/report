@@ -15,7 +15,7 @@ echo "$DEPLOY_DIR"
 echo "$LIB_JARS"
 
 
-PIDS=`ps -f | grep java | grep "report-core" |awk '{print $2}'`
+PIDS=`ps -f | grep java | grep "aj-report" |awk '{print $2}'`
 if [ -n "$PIDS" ]; then
     echo "ERROR: The AJ-Report already started!"
     echo "PID: $PIDS"
@@ -23,6 +23,6 @@ if [ -n "$PIDS" ]; then
 fi
 
 
-nohup java $JAVA_OPTS -jar -Dspring.config.location=$CONF_DIR/bootstrap-dev.yml $LIB_DIR/report-core-1.0.0-SNAPSHOT.jar -Xbootclasspath/a:$LIB_JARS >/dev/null 2>&1 &
+nohup java $JAVA_OPTS -jar -Dspring.config.location=$CONF_DIR/bootstrap.yml $LIB_DIR/aj-report-*.jar -Xbootclasspath/a:$LIB_JARS >/dev/null 2>&1 &
 
 echo "The AJ-Report started!"
