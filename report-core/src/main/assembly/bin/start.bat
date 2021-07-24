@@ -3,10 +3,8 @@
 rem 判断cmd中是否有JAVA_HOME
 rem set JAVA_HOME=D:\App\Java\jdk1.8.0_172
 IF "%JAVA_HOME%" == "" (
-echo end
 	goto END
 ) ELSE (
-echo start
     goto START
 )
 
@@ -37,7 +35,6 @@ echo start
 			set LIB_JARS=!LIB_JARS!%BIN_DIR%\lib\%%i;
 		)
 	)
-	echo %LIB_JARS%
 
 	rem 启动内存设置，请根据自己需要调整
 	cd %BIN_DIR%\bin
