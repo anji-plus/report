@@ -1,21 +1,10 @@
+# 该文件配置会继承bootstrap.xml，只需要配置数据库等差异配置
 spring:
-  application:
-    name: gaea-business
-  cloud:
-    nacos:
-      server-addr: 10.108.142.118:8848
-      username: gaea
-      password: p@ss1234
-      config:
-        namespace: fe5a998f-1149-4f55-aa83-e7552279058c
-        file-extension: yaml
-      discovery:
-        namespace: fe5a998f-1149-4f55-aa83-e7552279058c
-generator:
-  enabled: false
-  workspace: /workspace/gaea
-  templatePath: template
-  
+  datasource:
+    url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: appuser@anji
+
 customer:
-  # 跳过token验证和权限验证的url清单
-  skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html
+  file:
+    dist-path: /app/disk/upload/
