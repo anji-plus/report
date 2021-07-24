@@ -9,11 +9,11 @@
         <version>2.0.2.RELEASE</version>
     </parent>
 
-    <groupId>com.anjiplus.template.gaea</groupId>
-    <artifactId>template-gaea</artifactId>
-    <description>anjiplus-template-gaea</description>
+    <groupId>com.anjiplus.report</groupId>
+    <artifactId>aj-report</artifactId>
+    <description>aj-report</description>
     <version>1.0.0-SNAPSHOT</version>
-    <name>template-gaea</name>
+    <name>aj-report</name>
     <packaging>pom</packaging>
 
     <modules>

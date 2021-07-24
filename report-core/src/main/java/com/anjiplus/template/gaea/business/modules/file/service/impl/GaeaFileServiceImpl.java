@@ -116,7 +116,7 @@ public class GaeaFileServiceImpl implements GaeaFileService {
     public ResponseEntity<byte[]> download(HttpServletRequest request, HttpServletResponse response, String fileId) {
         try {
             String userAgent = request.getHeader("User-Agent");
-            boolean isIEBrowser = userAgent.indexOf("MSIE") > 0;
+            boolean isIeBrowser = userAgent.indexOf("MSIE") > 0;
             //根据fileId，从gaea_file中读出filePath
             LambdaQueryWrapper<GaeaFile> queryWrapper = Wrappers.lambdaQuery();
             queryWrapper.eq(GaeaFile::getFileId, fileId);
@@ -136,15 +136,15 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             File file = new File(filePath);
             ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
             builder.contentLength(file.length());
-            if (StringPatternUtil.StringMatchIgnoreCase(fileSuffix, "(.png|.jpg|.jpeg|.bmp|.gif|.icon)")) {
+            if (StringPatternUtil.stringMatchIgnoreCase(fileSuffix, "(.png|.jpg|.jpeg|.bmp|.gif|.icon)")) {
                 builder.cacheControl(CacheControl.noCache()).contentType(MediaType.IMAGE_PNG);
-            } else if (StringPatternUtil.StringMatchIgnoreCase(fileSuffix, "(.flv|.swf|.mkv|.avi|.rm|.rmvb|.mpeg|.mpg|.ogg|.ogv|.mov|.wmv|.mp4|.webm|.wav|.mid|.mp3|.aac)")) {
+            } else if (StringPatternUtil.stringMatchIgnoreCase(fileSuffix, "(.flv|.swf|.mkv|.avi|.rm|.rmvb|.mpeg|.mpg|.ogg|.ogv|.mov|.wmv|.mp4|.webm|.wav|.mid|.mp3|.aac)")) {
                 builder.header("Content-Type", "video/mp4; charset=UTF-8");
             } else {
                 //application/octet-stream 二进制数据流（最常见的文件下载）
                 builder.contentType(MediaType.APPLICATION_OCTET_STREAM);
                 filename = URLEncoder.encode(filename, "UTF-8");
-                if (isIEBrowser) {
+                if (isIeBrowser) {
                     builder.header("Content-Disposition", "attachment; filename=" + filename);
                 } else {
                     builder.header("Content-Disposition", "attacher; filename*=UTF-8''" + filename);

@@ -45,10 +45,10 @@ public class JsTransformServiceImpl implements TransformStrategy {
      */
     @Override
     public List<JSONObject> transform(DataSetTransformDto def, List<JSONObject> data) {
-        return getValueFromJS(def,data);
+        return getValueFromJs(def,data);
     }
 
-    private List<JSONObject> getValueFromJS(DataSetTransformDto def, List<JSONObject> data) {
+    private List<JSONObject> getValueFromJs(DataSetTransformDto def, List<JSONObject> data) {
         String js = def.getTransformScript();
         js = js + "\nvar result = dataTransform(eval(" + data.toString() + "));";
         try {

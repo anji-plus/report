@@ -3,6 +3,7 @@ package com.anjiplus.template.gaea.business.modules.dict.controller.dto;
 import com.anji.plus.gaea.curd.dto.GaeaBaseDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -52,5 +53,14 @@ public class GaeaDictDTO extends GaeaBaseDTO implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "GaeaDictDTO{" +
+                "dictName='" + dictName + '\'' +
+                ", dictCode='" + dictCode + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

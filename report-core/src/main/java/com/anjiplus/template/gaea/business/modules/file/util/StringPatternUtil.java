@@ -18,7 +18,7 @@ public class StringPatternUtil {
      * @param pattern
      * @return
      */
-    public static boolean StringMatch(String sourceStr,String pattern){
+    public static boolean stringMatch(String sourceStr, String pattern){
         boolean result=false;
         try{
             if(StringUtils.isBlank(sourceStr)|| StringUtils.isBlank(pattern)){
@@ -38,7 +38,7 @@ public class StringPatternUtil {
         return result;
     }
 
-    public static boolean StringMatchIgnoreCase(String sourceStr,String pattern){
+    public static boolean stringMatchIgnoreCase(String sourceStr, String pattern){
         boolean result=false;
         try{
             if(StringUtils.isBlank(sourceStr)|| StringUtils.isBlank(pattern)){
@@ -46,7 +46,7 @@ public class StringPatternUtil {
             }
             sourceStr=sourceStr.toLowerCase();
             pattern=pattern.toLowerCase();
-            result=StringMatch(sourceStr,pattern);
+            result= stringMatch(sourceStr,pattern);
         }catch(Exception e){
             result=false;
         }
@@ -63,7 +63,7 @@ public class StringPatternUtil {
      * @param pattern
      * @return
      */
-    public static String StringFind(String sourceStr,String pattern){
+    public static String stringFind(String sourceStr, String pattern){
         String result="";
         try{
             if(StringUtils.isBlank(sourceStr)|| StringUtils.isBlank(pattern)){

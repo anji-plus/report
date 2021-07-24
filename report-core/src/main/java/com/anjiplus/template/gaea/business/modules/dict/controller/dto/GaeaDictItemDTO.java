@@ -116,4 +116,18 @@ public class GaeaDictItemDTO extends GaeaBaseDTO implements Serializable {
     public void setLocaleView(String localeView) {
         this.localeView = localeView;
     }
+
+    @Override
+    public String toString() {
+        return "GaeaDictItemDTO{" +
+                "dictCode='" + dictCode + '\'' +
+                ", itemName='" + itemName + '\'' +
+                ", itemValue='" + itemValue + '\'' +
+                ", itemExtend='" + itemExtend + '\'' +
+                ", locale='" + locale + '\'' +
+                ", localeView='" + localeView + '\'' +
+                ", remark='" + remark + '\'' +
+                ", sort=" + sort +
+                '}';
+    }
 }

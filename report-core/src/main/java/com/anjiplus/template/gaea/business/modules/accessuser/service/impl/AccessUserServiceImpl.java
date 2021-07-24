@@ -108,10 +108,10 @@ public class AccessUserServiceImpl implements AccessUserService {
         String loginName = accessUserDto.getLoginName();
         List<String> roleCodeList = accessUserDto.getRoleCodeList();
         if(StringUtils.isBlank(loginName)){
-            throw BusinessExceptionBuilder.build(ResponseCode.Not_Empty, loginName);
+            throw BusinessExceptionBuilder.build(ResponseCode.NOT_EMPTY, loginName);
         }
         if(roleCodeList == null || roleCodeList.isEmpty()){
-            throw BusinessExceptionBuilder.build(ResponseCode.Not_Empty, roleCodeList);
+            throw BusinessExceptionBuilder.build(ResponseCode.NOT_EMPTY, roleCodeList);
         }
 
         // 先清除该用户已保存的角色
@@ -230,6 +230,9 @@ public class AccessUserServiceImpl implements AccessUserService {
             case UPDATE:
                 //更新用户不允许修改密码
                 entity.setPassword(null);
+                break;
+            default:
+
                 break;
         }
 

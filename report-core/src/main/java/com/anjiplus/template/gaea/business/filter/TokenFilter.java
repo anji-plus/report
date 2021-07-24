@@ -10,9 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,25 +22,31 @@ import java.util.regex.Pattern;
 
 /**
  * 简单的鉴权
- * Created by raodeming on 2021/6/24.
+ * @author raodeming
+ * @date 2021/6/24.
  */
 @Component
 @Order(Integer.MIN_VALUE + 99)
 public class TokenFilter implements Filter {
+    private static final Pattern PATTERN = Pattern.compile(".*().*");
+    private static final String USER_GUEST = "guest";
+    private static final String SLASH = "/";
+
     @Autowired
     private CacheHelper cacheHelper;
     @Autowired
     private JwtBean jwtBean;
 
-    // 跳过token验证和权限验证的url清单
+    /** 跳过token验证和权限验证的url清单*/
     @Value("#{'${customer.skip-authenticate-urls}'.split(',')}")
     private List<String> skipAuthenticateUrls;
-    private Pattern SKIP_AUTHENTICATE_PATTERN;
+    private Pattern skipAuthenticatePattern;
+
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // 生成匹配正则，跳过token验证和权限验证的url
-        SKIP_AUTHENTICATE_PATTERN = fitByList(skipAuthenticateUrls);
+        skipAuthenticatePattern = fitByList(skipAuthenticateUrls);
         Filter.super.init(filterConfig);
     }
 
@@ -50,13 +56,13 @@ public class TokenFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String uri = request.getRequestURI();
 
-        if (uri.equals("/")) {
+        if (SLASH.equals(uri)) {
             response.sendRedirect("/index.html");
             return;
         }
 
         // 不需要token验证和权限验证的url，直接放行
-        boolean skipAuthenticate = SKIP_AUTHENTICATE_PATTERN.matcher(uri).matches();
+        boolean skipAuthenticate = skipAuthenticatePattern.matcher(uri).matches();
         if (skipAuthenticate) {
             filterChain.doFilter(request, response);
             return;
@@ -88,18 +94,19 @@ public class TokenFilter implements Filter {
         cacheHelper.stringSetExpire(userKey, gaeaUserJsonStr, 3600);
 
         //在线体验版本
-        if (loginName.equals("guest")
+        if (USER_GUEST.equals(loginName)
                 && !uri.endsWith("/dataSet/testTransform")
                 && !uri.endsWith("/reportDashboard/getData")
                 && !uri.startsWith("/dict")
         ) {
             //不允许删除
             String method = request.getMethod();
-            if ("post".equalsIgnoreCase(method)
-                    || "put".equalsIgnoreCase(method)
-                    || "delete".equalsIgnoreCase(method)
+            if (HttpMethod.POST.name().equalsIgnoreCase(method)
+                    || HttpMethod.PUT.name().equalsIgnoreCase(method)
+                    || HttpMethod.DELETE.name().equalsIgnoreCase(method)
             ) {
-                ResponseBean responseBean = ResponseBean.builder().code("50001").message("在线体验版本，不允许此操作。请自行下载本地运行").build();
+                ResponseBean responseBean = ResponseBean.builder().code("50001")
+                        .message("在线体验版本，不允许此操作。请自行下载本地运行").build();
                 response.getWriter().print(JSONObject.toJSONString(responseBean));
                 return;
             }
@@ -122,7 +129,7 @@ public class TokenFilter implements Filter {
      */
     private Pattern fitByList(List<String> skipUrlList) {
         if (skipUrlList == null || skipUrlList.size() == 0) {
-            return Pattern.compile(".*().*");
+            return PATTERN;
         }
         StringBuffer patternString = new StringBuffer();
         patternString.append(".*(");

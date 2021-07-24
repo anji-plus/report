@@ -5,7 +5,6 @@ import com.anji.plus.gaea.bean.TreeNode;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
-import com.anjiplus.template.gaea.business.modules.accessauthority.dao.entity.AccessAuthority;
 import com.anjiplus.template.gaea.business.modules.accessauthority.service.AccessAuthorityService;
 import com.anjiplus.template.gaea.business.modules.accessrole.controller.dto.AccessRoleDto;
 import com.anjiplus.template.gaea.business.modules.accessrole.dao.AccessRoleAuthorityMapper;
@@ -16,11 +15,9 @@ import com.anjiplus.template.gaea.business.modules.accessrole.dao.AccessRoleMapp
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,10 +65,10 @@ public class AccessRoleServiceImpl implements AccessRoleService {
         String roleCode = accessRoleDto.getRoleCode();
         List<String> authorityList = accessRoleDto.getAuthorityList();
         if(StringUtils.isBlank(roleCode)){
-            throw BusinessExceptionBuilder.build(ResponseCode.Not_Empty, roleCode);
+            throw BusinessExceptionBuilder.build(ResponseCode.NOT_EMPTY, roleCode);
         }
         if(authorityList == null || authorityList.isEmpty()){
-            throw BusinessExceptionBuilder.build(ResponseCode.Not_Empty, authorityList);
+            throw BusinessExceptionBuilder.build(ResponseCode.NOT_EMPTY, authorityList);
         }
 
         // 先清除该角色已保存的权限
