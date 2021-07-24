@@ -25,7 +25,7 @@ echo "zip finish in build dir"
 if [ ! -d "$BuildDir/build" ]; then
     mkdir $BuildDir/build
 fi
-mv $BuildDir/report-core/target/report-core-1.0.0-SNAPSHOT-assembly.zip $BuildDir/build/
+mv $BuildDir/report-core/target/aj-report-*.zip $BuildDir/build/
 
 
 cd $BuildDir/
