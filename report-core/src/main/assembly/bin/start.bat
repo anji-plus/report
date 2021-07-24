@@ -17,28 +17,29 @@ IF "%JAVA_HOME%" == "" (
 
 :START
 	rem 获取应用的根目录
-	cd ..\
-	set BIN_DIR=%cd%
-	set CONF_YML=%BIN_DIR%\conf\bootstrap.yml
+	cd ../
+	rem set BIN_DIR=%cd%
+	set BIN_DIR=D://aj-report-2.0.2.RELEASE
 
-	cd %BIN_DIR%\lib
+	set CONF_YML=%BIN_DIR%/conf/bootstrap.yml
+
+	cd %BIN_DIR%/lib
 
 	rem 查找aj-report*.jar启动文件，版本号每次会变
 	for /f "delims=" %%i in ('dir /a-d /b /on aj-report*.jar') do (
-	   set BOOT_JAR=%BIN_DIR%\lib\%%i
+	   set BOOT_JAR=%%i
 	)
-	echo %BOOT_JAR%
 
 	rem 查找附加的驱动，加到java启动的classpath中
 	for %%i in (*) do (
 		if "%%i" neq "%BOOT_JAR%" (
-			set LIB_JARS=!LIB_JARS!%BIN_DIR%\lib\%%i;
+			set LIB_JARS=!LIB_JARS!%BIN_DIR%/lib/%%i;
 		)
 	)
 
 	rem 启动内存设置，请根据自己需要调整
-	cd %BIN_DIR%\bin
+	cd %BIN_DIR%/bin
 	set JAVA_OPTS= -server -Xms1g -Xmx2g -Xmn256m -XX:PermSize=128m -Xss256k
 
 	rem 正式启动
-	%JAVA_HOME%\bin\java %JAVA_OPTS% -jar -Dspring.config.location=%CONF_YML% %BOOT_JAR% -Xbootclasspath/a:%LIB_JARS%
+	%JAVA_HOME%\bin\java %JAVA_OPTS% -jar -Dspring.config.location=%CONF_YML% %BIN_DIR%/lib/%BOOT_JAR% -Xbootclasspath/a:%LIB_JARS%
