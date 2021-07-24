@@ -29,7 +29,7 @@ IF "%JAVA_HOME%" == "" (
 	rem 查找附加的驱动，加到java启动的classpath中
 	for %%i in ("%BIN_DIR%\lib\*") do (
 		if "%%i" neq "%BOOT_JAR%" (
-			set LIB_JARS=!LIB_JARS!%BIN_DIR%\lib\%%i;
+			set LIB_JARS=!LIB_JARS!%%i;
 		)
 	)
 
@@ -39,4 +39,3 @@ IF "%JAVA_HOME%" == "" (
 
 	rem 正式启动
 	%JAVA_HOME%\bin\java %JAVA_OPTS% -Xbootclasspath/a:%LIB_JARS% -jar -Dspring.config.location=%CONF_YML% %BIN_DIR%\lib\%BOOT_JAR%
-	
