@@ -8,6 +8,6 @@ echo %LIB_JARS%
 
 set JAVA_OPTS=" -server -Xmx2g -Xms2g -Xmn256m -XX:PermSize=128m -Xss256k "
 
-java -jar -Dspring.config.location=..\conf\bootstrap-dev.yml ..\lib\report-core-1.0.0-SNAPSHOT.jar -Xbootclasspath/a:%LIB_JARS% %JAVA_OPTS%
+java $JAVA_OPTS -jar -Dspring.config.location=..\conf\bootstrap.yml ..\lib\aj-report-*.jar -Xbootclasspath/a:%LIB_JARS%
 
 pause
