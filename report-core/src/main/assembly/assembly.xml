@@ -35,7 +35,7 @@
 			<directory>src/main/resources</directory>
 			<outputDirectory>conf</outputDirectory>
 			<includes>
-				<include>bootstrap-dev.yml</include>
+				<include>bootstrap.yml</include>
 			</includes>
 		</fileSet>
 		<fileSet>
