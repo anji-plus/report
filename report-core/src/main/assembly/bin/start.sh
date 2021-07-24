@@ -5,7 +5,7 @@ command -v java >/dev/null 2>&1 || { echo >&2 "require java but it's not install
 
 cd `dirname $0`
 BIN_DIR=`pwd` #安装目录
-cd ..
+cd ../
 DEPLOY_DIR=`pwd`
 LIB_DIR=$DEPLOY_DIR/lib #jar目录
 CONF_DIR=$DEPLOY_DIR/conf #conf目录
