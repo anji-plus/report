@@ -7,7 +7,7 @@ LIB_DIR=$DEPLOY_DIR/lib #jar目录
 CONF_DIR=$DEPLOY_DIR/conf #conf目录
 LOGS_DIR=$DEPLOY_DIR/logs #log目录
 
-LIB_JARS=`ls $LIB_DIR|grep .jar|awk '{print "'$LIB_DIR'/"$0}'|tr "\n" ":"`
+LIB_JARS=`ls $LIB_DIR|grep -v aj-report*.jar|awk '{print "'$LIB_DIR'/"$0}'|tr "\n" ":"`
 
 JAVA_OPTS=" -server -Xmx2g -Xms2g -Xmn256m -XX:PermSize=128m -Xss256k "
 

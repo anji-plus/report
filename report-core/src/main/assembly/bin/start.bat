@@ -39,4 +39,3 @@ IF "%JAVA_HOME%" == "" (
 
 	rem 正式启动
 	%JAVA_HOME%\bin\java %JAVA_OPTS% -Xbootclasspath/a:%LIB_JARS% -jar -Dspring.config.location=%CONF_YML% %BIN_DIR%\lib\%BOOT_JAR%
-	
