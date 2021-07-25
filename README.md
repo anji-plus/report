@@ -83,7 +83,9 @@ sh build.sh
 unzip report-core-xxxx.zip
 cd report-core-xxxx
 vim conf/bootstrap-dev.yml 数据库连接
-sh bin/start.sh
+sh bin/start.sh Linux启动
+bin/start.bat Windows修改第4行的JAVA_HOME后，双击启动
+
 
 启动后访问
 http://serverip:9095
