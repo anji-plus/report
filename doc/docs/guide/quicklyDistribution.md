@@ -16,7 +16,9 @@ report-core-XXX --> conf --> bootstrap-dev.yml <br>
 
 将图中关于mysql的连接配置信息换成你使用的IP <br>
 **注**：aj_report库是存放底层基础信息的库，flyway启动时会自动建立，如果你在这里修改了库，将会出错<br>
-![bootstrap.png](../picture/quickly/img_2.png)
+
+![bootstrap.png](../picture/quickly/img_2.png) <br>
+**注**：请确认你的Mysql是否支持远程连接，登陆用户是否有DDL权限
 
 ## 修改路径
 使用上传功能，必须修改此内容
