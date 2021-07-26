@@ -1,5 +1,5 @@
 ## 介绍
-- 支持多数据源，目前内置mysql、elasticsearch sql、kudu impala、 http、oracle 、mssqlserver、jdbc <br>
+- 支持多数据源，内置mysql、elasticsearch、kudu等多种驱动 <br>
 - 可动态扩展
 ![source.png](../picture/datasource/img_1.png)
 

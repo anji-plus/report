@@ -8,6 +8,9 @@ unzip report-core-xxxx.zip
 cd report-core-xxxx
 vim conf/bootstrap-dev.yml 数据库连接、上传文件的路径以及地址修改
 sh bin/start.sh
+
+访问
+http://serverip:9095
 ```
 
 ## 编译环境
@@ -22,9 +25,8 @@ git clone https://gitee.com/anji-plus/report.git <br>
 
 ## build
 进入report目录，启动build.sh
-![img_4.png](../picture/quickly/img_4.png)
+![img_4.png](../picture/quickly/img_4.png) <br>
 编译完成后是放在当前目录下的build文件夹中：report-core-xxxx.zip <br>
-**注**：脚本目前没有校验是否有Jdk、Git、Node.js
 
 ## 解压，修改mysql连接
 ![img_1.png](../picture/quickly/img_1.png)
@@ -36,8 +38,9 @@ git clone https://gitee.com/anji-plus/report.git <br>
 ## 启动
 report-core-XXX --> bin --> start.sh <br>
 sh bin/start.sh <br>
-**注**：脚本目前没有校验是否有Jdk、Mysql
 
 ## 访问
 http://serverip:9095 <br>
 默认密码：admin 123456
+
+
