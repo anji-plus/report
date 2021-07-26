@@ -31,6 +31,8 @@ windows启动：report-core-XXX --> bin --> start.bat <br>
 http://localhost:9095 <br>
 默认密码：admin 123456
 
-
+## 重置mysql连接
+登陆进来后请重置mysql连接 <br>
+![img_6.png](../picture/quickly/img_6.png)
 
 
