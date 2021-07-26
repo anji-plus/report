@@ -132,7 +132,6 @@ export default {
         : this.handlerDymaicData(tableData.dynamicData, tableData.refreshTime);
     },
     handlerStaticData(data) {
-      console.log(data);
       this.list = data;
     },
     handlerDymaicData(data, refreshTime) {

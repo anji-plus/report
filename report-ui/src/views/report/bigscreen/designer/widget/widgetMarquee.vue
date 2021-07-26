@@ -1,64 +1,65 @@
 <template>
   <div class="text" :style="styleColor">
-    <marquee behavior="" :direction="styleColor.direction">{{ styleColor.text }}</marquee>
+    <marquee behavior="" :direction="styleColor.direction">{{
+      styleColor.text
+    }}</marquee>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'WidgetMarquee',
+  name: "WidgetMarquee",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean,
+    ispreview: Boolean
   },
   data() {
     return {
-      options: {},
-    }
+      options: {}
+    };
   },
   computed: {
     transStyle() {
-      return this.objToOne(this.options)
+      return this.objToOne(this.options);
     },
     styleColor() {
       return {
-        position: this.ispreview ? 'absolute' : 'static',
+        position: this.ispreview ? "absolute" : "static",
         color: this.transStyle.color,
-        'font-weight': this.transStyle.fontWeight,
+        "font-weight": this.transStyle.fontWeight,
         text: this.transStyle.text,
-        'font-size': this.transStyle.fontSize + 'px',
-        'letter-spacing': this.transStyle.letterSpacing + 'em',
+        "font-size": this.transStyle.fontSize + "px",
+        "letter-spacing": this.transStyle.letterSpacing + "em",
         background: this.transStyle.background,
-        'text-align': this.transStyle.textAlign,
-        width: this.transStyle.width + 'px',
-        height: this.transStyle.height + 'px',
-        left: this.transStyle.left + 'px',
-        top: this.transStyle.top + 'px',
-        right: this.transStyle.right + 'px',
-
+        "text-align": this.transStyle.textAlign,
+        width: this.transStyle.width + "px",
+        height: this.transStyle.height + "px",
+        left: this.transStyle.left + "px",
+        top: this.transStyle.top + "px",
+        right: this.transStyle.right + "px",
         marqueeSet: this.transStyle.marqueeSet,
-        styleColor: this.transStyle.marqueeQuit,
-      }
+        styleColor: this.transStyle.marqueeQuit
+      };
     },
     isBehavior() {
-      return this.styleColor.marqueeSet ? 'start()' : 'stop()'
-    },
+      return this.styleColor.marqueeSet ? "start()" : "stop()";
+    }
   },
   watch: {
     value: {
       handler(val) {
-        this.options = val
-        this.optionsData = val.data
-        this.setOptionsData()
+        this.options = val;
+        this.optionsData = val.data;
+        this.setOptionsData();
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   mounted() {
-    this.options = this.value
-    this.optionsData = this.value.data
-    this.setOptionsData()
+    this.options = this.value;
+    this.optionsData = this.value.data;
+    this.setOptionsData();
   },
   methods: {
     // 数据解析
@@ -66,13 +67,9 @@ export default {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(
-        optionsData.dynamicData,
-        optionsData.refreshTime
-        );
+        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
-    staticDataFn(val) {
-    },
+    staticDataFn(val) {},
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
       if (this.ispreview) {
@@ -87,12 +84,12 @@ export default {
     getEchartData(val) {
       const data = this.queryEchartsData(val);
       data.then(res => {
-        this.styleColor.text = res[0].value
+        this.styleColor.text = res[0].value;
         this.$forceUpdate();
       });
     }
-  },
-}
+  }
+};
 </script>
 
 <style scoped lang="scss">

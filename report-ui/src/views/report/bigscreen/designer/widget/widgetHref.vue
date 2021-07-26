@@ -5,65 +5,74 @@
  * @Last Modified time: 2021-3-13 11:04:24
  !-->
 <template>
-  <a :href="styleColor.linkAdress" :style="styleColor" :target="styleColor.jumpMode">{{ styleColor.text }}</a>
+  <a
+    :href="styleColor.linkAdress"
+    :style="styleColor"
+    :target="styleColor.jumpMode"
+    >{{ styleColor.text }}</a
+  >
 </template>
 
 <script>
 export default {
-  name: 'WidgetHref',
+  name: "WidgetHref",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean,
+    ispreview: Boolean
   },
   data() {
     return {
-      options: {},
-    }
+      options: {}
+    };
   },
   computed: {
     transStyle() {
-      return this.objToOne(this.options)
+      return this.objToOne(this.options);
     },
     styleColor() {
       return {
-        position: this.ispreview ? 'absolute' : 'static',
-        color: this.transStyle.color || '#fff',
-        'font-weight': this.transStyle.fontWeight || '600',
-        text: this.transStyle.text || '超链接',
-        'font-size': this.transStyle.fontSize + 'px' || '12px',
-        'letter-spacing': this.transStyle.letterSpacing + 'em',
+        position: this.ispreview ? "absolute" : "static",
+        color: this.transStyle.color || "#fff",
+        "font-weight": this.transStyle.fontWeight || "600",
+        text: this.transStyle.text || "超链接",
+        "font-size": this.transStyle.fontSize + "px" || "12px",
+        "letter-spacing": this.transStyle.letterSpacing + "em",
         background: this.transStyle.background,
-        'text-align': this.transStyle.textAlign,
-        display: this.transStyle.hideLayer == undefined ? 'block' : this.transStyle.hideLayer ? 'none' : 'block',
-        width: this.transStyle.width + 'px',
-        height: this.transStyle.height + 'px',
-        left: this.transStyle.left + 'px',
-        top: this.transStyle.top + 'px',
-        right: this.transStyle.right + 'px',
-
+        "text-align": this.transStyle.textAlign,
+        display:
+          this.transStyle.hideLayer == undefined
+            ? "block"
+            : this.transStyle.hideLayer
+            ? "none"
+            : "block",
+        width: this.transStyle.width + "px",
+        height: this.transStyle.height + "px",
+        left: this.transStyle.left + "px",
+        top: this.transStyle.top + "px",
+        right: this.transStyle.right + "px",
         linkAdress: this.transStyle.linkAdress,
-        jumpMode: this.transStyle.jumpMode == 'other' ? '_blank' : '_self',
-      }
-    },
+        jumpMode: this.transStyle.jumpMode == "other" ? "_blank" : "_self"
+      };
+    }
   },
   watch: {
     value: {
       handler(val) {
-        this.options = val
+        this.options = val;
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   mounted() {
-    this.options = this.value
+    this.options = this.value;
   },
-  methods: {},
-}
+  methods: {}
+};
 </script>
 
 <style scoped lang="scss">
-a{
+a {
   width: 100%;
   height: 100%;
   overflow: hidden;

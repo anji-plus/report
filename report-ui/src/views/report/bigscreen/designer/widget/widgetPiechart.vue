@@ -109,7 +109,6 @@ export default {
         fontWeight: optionsCollapse.subTextFontWeight,
         fontSize: optionsCollapse.subTextFontSize
       };
-
       this.options.title = title;
     },
     // 数值设定

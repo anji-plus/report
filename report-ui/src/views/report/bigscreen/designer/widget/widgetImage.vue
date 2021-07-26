@@ -9,12 +9,6 @@
   </div>
 </template>
 <script>
-// http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095508.jpg
-// http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095500.jpg
-// http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095502.jpg
-// http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095503.jpg
-// http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095504.jpg
-// http://pic.ik123.com/uploads/allimg/190813/12-1ZQ3095506.jpg
 export default {
   name: "WidgetImage",
   components: {},

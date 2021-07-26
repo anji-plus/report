@@ -48,16 +48,16 @@ export default {
     value: {
       handler(val) {
         this.options = val;
-        this.optionsData = val.data
-        this.setOptionsData()
+        this.optionsData = val.data;
+        this.setOptionsData();
       },
       deep: true
     }
   },
   mounted() {
     this.options = this.value;
-    this.optionsData = this.value.data
-    this.setOptionsData()
+    this.optionsData = this.value.data;
+    this.setOptionsData();
   },
   methods: {
     // 数据解析
@@ -65,12 +65,7 @@ export default {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(
-        optionsData.dynamicData,
-        optionsData.refreshTime
-        );
-    },
-    staticDataFn(val) {
+        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -86,7 +81,7 @@ export default {
     getEchartData(val) {
       const data = this.queryEchartsData(val);
       data.then(res => {
-        this.styleColor.text = res[0].value
+        this.styleColor.text = res[0].value;
         this.$forceUpdate();
       });
     }
