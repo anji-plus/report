@@ -19,8 +19,7 @@
 
 
 ## 扩展
-- 以kudu impala 为例，在lib文件夹下加入kudu impala相关的JDBC连接相关的包，如图
-- 在数据库中新增数据源类型，参考数据源类型(上方)
+- 以kudu impala 为例，在lib文件夹下加入kudu impala相关的JDBC连接相关的包，如图在数据库中新增数据源类型，参考数据源类型(上方)
 
 ![An image](../picture/datasource/kudu-impala-lib.png)
 
