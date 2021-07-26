@@ -95,6 +95,8 @@ http://serverip:9095
 -   完善表格插件
 -   丰富自定义框图、挂件
 -   丰富更多图表组件
+-   基础图表增加
+-   现有图表功能修复/增加
 
 ## 技术支持
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
