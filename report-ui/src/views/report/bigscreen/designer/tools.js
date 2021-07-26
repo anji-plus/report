@@ -578,6 +578,9 @@ const widgetTools = [
             {code: 'MM-dd', name: '日期无年'},
             {code: 'hh:mm', name: '时分'},
             {code: 'hh:mm:ss', name: '时分秒'},
+            {code: 'year-week', name: '日期+星期'},
+            {code: 'year-h-m-week', name: '日期+时分+星期'},
+            {code: 'year-h-m-s-week', name: '日期+时分秒+星期'},
             {code: 'week', name: '星期'}
           ],
           value: 'yyyy-MM-dd hh:mm:ss'

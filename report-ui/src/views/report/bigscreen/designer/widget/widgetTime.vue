@@ -106,7 +106,39 @@ export default {
           dayCycle = "星期" + dayCycleArray[i];
         }
       }
-      return dayCycle;
+      if (fmt == "year-week") {
+        return year + "-" + month + "-" + day + dayCycle;
+      } else if (fmt == "year-h-m-week") {
+        return (
+          year +
+          "-" +
+          month +
+          "-" +
+          day +
+          " " +
+          hours +
+          ":" +
+          minutes +
+          dayCycle
+        );
+      } else if (fmt == "year-h-m-s-week") {
+        return (
+          year +
+          "-" +
+          month +
+          "-" +
+          day +
+          " " +
+          hours +
+          ":" +
+          minutes +
+          ":" +
+          seconds +
+          dayCycle
+        );
+      } else if (fmt == "week") {
+        return dayCycle;
+      }
     },
     displayTime() {
       this.timestr =
