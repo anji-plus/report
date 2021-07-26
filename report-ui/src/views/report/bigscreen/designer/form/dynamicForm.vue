@@ -23,7 +23,7 @@
               v-if="item.type == 'el-input-number'"
               size="mini"
               style="width:100%"
-              v-model="formData[item.name]"
+              v-model.trim="formData[item.name]"
               controls-position="right"
               :placeholder="item.placeholder"
               @change="changed($event, item.name)"
@@ -118,12 +118,6 @@
               width="50%"
               :before-close="handleClose"
             >
-              <!--              <codemirror-->
-              <!--                v-model.trim="formData[item.name]"-->
-              <!--                class="code-mirror"-->
-              <!--                :options="optionsJavascript"-->
-              <!--                style="height: 190px"-->
-              <!--              />-->
               <vue-json-editor
                 v-model="formData[item.name]"
                 :show-btns="false"
@@ -314,7 +308,6 @@ export default {
       optionsJavascript: {
         mode: "text/javascript",
         tabSize: 2, // 缩进格式
-        // theme: 'cobalt', // monokai主题，对应主题库 JS 需要提前引入
         lineNumbers: true, // 显示行号
         line: true,
         styleActiveLine: true, // 高亮选中行
@@ -357,8 +350,6 @@ export default {
         }
       }
     },
-    onJsonChange(value) {},
-    onJsonSave(value) {},
     saveData() {
       this.$emit("onChanged", this.formData);
       this.dialogVisibleStaticData = false;

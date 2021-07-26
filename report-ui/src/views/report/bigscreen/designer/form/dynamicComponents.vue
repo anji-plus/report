@@ -22,7 +22,7 @@
         :key="index"
         :label="item.paramName"
       >
-        <el-input v-model="item.sampleItem" size="mini" />
+        <el-input v-model.trim="item.sampleItem" size="mini" />
       </el-form-item>
       <el-form-item v-for="item in setParamList" :key="item" :label="item">
         <Dictionary

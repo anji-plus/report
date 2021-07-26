@@ -11,7 +11,6 @@
     <el-table :data="formData" style="width: 100%">
       <el-table-column prop="name" label="名称" width="80" />
       <el-table-column prop="key" label="key值" width="80" />
-      <!-- <el-table-column prop="width" label="宽度" width="80" /> -->
       <el-table-column label="操作" width="100">
         <template slot-scope="scope">
           <el-button
@@ -39,7 +38,7 @@
       <el-form :model="rowFormData" label-width="50px">
         <el-form-item label="名称:">
           <el-input
-            v-model="rowFormData['name']"
+            v-model.trim="rowFormData['name']"
             placeholder="请输入名称"
             size="mini"
           >
@@ -47,20 +46,12 @@
         </el-form-item>
         <el-form-item label="key值:">
           <el-input
-            v-model="rowFormData['key']"
+            v-model.trim="rowFormData['key']"
             placeholder="请输入key值"
             size="mini"
           >
           </el-input>
         </el-form-item>
-        <!-- <el-form-item label="宽度:">
-          <el-input
-            v-model="rowFormData['width']"
-            placeholder="请输入宽度"
-            size="mini"
-          >
-          </el-input>
-        </el-form-item> -->
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="dialogVisible = false">取 消</el-button>
@@ -90,40 +81,7 @@ export default {
       },
       flag: true, // true 新增， false 编辑
       indexEditor: -1, // 编辑第几个数据
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          zip: 200333
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1517 弄",
-          zip: 200333
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1519 弄",
-          zip: 200333
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1516 弄",
-          zip: 200333
-        }
-      ]
+      tableData: []
     };
   },
   methods: {
