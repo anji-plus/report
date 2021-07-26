@@ -22,38 +22,41 @@
 -->
 <template>
   <div>
-    <el-select v-model="selectValue"
-               :clearable="clearable"
-               :collapse-tags="collapseTags"
-               filterable
-               class="filter-item"
-               :placeholder="placeholder"
-               :disabled="disabled"
-               :multiple="multiple == null ? false : true"
-               :remote="remoteFilter"
-               :remote-method="remoteQuery"
-               @change="change">
-      <el-option v-for="(item, index) in options"
-                 :key="index"
-                 :label="getItemLabel(item, label)"
-                 :value="item[option]"
-                 :disabled="isDisabledOption(item)">
+    <el-select
+      v-model="selectValue"
+      :clearable="clearable"
+      :collapse-tags="collapseTags"
+      filterable
+      class="filter-item"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :multiple="multiple == null ? false : true"
+      :remote="remoteFilter"
+      :remote-method="remoteQuery"
+      @change="change"
+    >
+      <el-option
+        v-for="(item, index) in options"
+        :key="index"
+        :label="getItemLabel(item, label)"
+        :value="item[option]"
+        :disabled="isDisabledOption(item)"
+      >
         <template v-if="mergeLabel">
           <span style="float: left">{{ getItemLabel(item, label) }}</span>
-          <span style="float: right; color: #8492a6; font-size: 13px">{{ item[option] }}</span>
+          <span style="float: right; color: #8492a6; font-size: 13px">{{
+            item[option]
+          }}</span>
         </template>
       </el-option>
-      <el-option v-if="totalPage > 1"
-                 label="搜索更多"
-                 value=""
-                 disabled />
+      <el-option v-if="totalPage > 1" label="搜索更多" value="" disabled />
     </el-select>
   </div>
 </template>
 
 <script>
-import request from '@/utils/request'
-import { getStorageItem } from '@/utils/storage';
+import request from "@/utils/request";
+import { getStorageItem } from "@/utils/storage";
 export default {
   props: {
     dictCode: null, // 当传入dictCode时，可以不用传递url
@@ -62,240 +65,254 @@ export default {
     queryParam: {
       type: Object,
       default: () => {
-        return {}
-      },
+        return {};
+      }
     },
     value: null,
     placeholder: null,
     label: {
       type: String,
-      default: 'text',
+      default: "text"
     },
     option: {
       type: String,
-      default: 'id',
+      default: "id"
     },
     multiple: null,
     localOptions: null,
     disabled: null,
     clearable: {
       type: Boolean,
-      default: true,
+      default: true
     },
     collapseTags: {
       type: Boolean,
-      default: false,
+      default: false
     },
     mergeLabel: {
       type: Boolean,
-      default: false,
+      default: false
     },
     // 禁用的下拉选项
     disabledOptions: {
       type: String,
       default: () => {
-        return ''
-      },
+        return "";
+      }
     },
     // 使用远程搜索
     remoteFilter: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
-  data () {
+  data() {
     return {
       options: null,
       selectValue: null,
       // 如果是分页的，
-      totalPage: 0,
-    }
+      totalPage: 0
+    };
   },
   computed: {
     // 根据dictCode和url拼出最终的请求url
-    requestUrl () {
-      if (this.url != null && this.url.trim() != '') {
-        if (this.url.indexOf('?') > 0) {
+    requestUrl() {
+      if (this.url != null && this.url.trim() != "") {
+        if (this.url.indexOf("?") > 0) {
           if (this.option == null) {
-            console.log('url-' + this.url.substring(this.url.indexOf('?')))
+            console.log("url-" + this.url.substring(this.url.indexOf("?")));
           }
           if (this.label == null) {
           }
         }
-        return this.url
+        return this.url;
       }
-      if (this.dictCode != null && this.dictCode.trim() != '') {
-        return `/meta/gaeaDict/select/${this.dictCode}`
+      if (this.dictCode != null && this.dictCode.trim() != "") {
+        return `/meta/gaeaDict/select/${this.dictCode}`;
       }
-      return null
-    },
+      return null;
+    }
   },
   watch: {
-    value: function (val, oldVal) {
+    value: function(val, oldVal) {
       if (this.multiple != null) {
         if (!this.value) {
-          this.selectValue = []
+          this.selectValue = [];
         } else {
-          this.selectValue = this.value
+          this.selectValue = this.value;
         }
       } else {
         if (this.value != null && this.value != undefined) {
-          this.selectValue = this.value
+          this.selectValue = this.value;
         } else {
-          this.selectValue = ''
+          this.selectValue = "";
         }
       }
     },
-    url () {
+    url() {
       setTimeout(() => {
-        this.queryData()
-      }, 500)
-    },
+        this.queryData();
+      }, 500);
+    }
   },
-  created () {
+  created() {
     if (this.multiple != null) {
-      this.selectValue = this.value
+      this.selectValue = this.value;
     } else {
       if (this.value != null) {
-        this.selectValue = this.value
+        this.selectValue = this.value;
       }
     }
   },
-  mounted () {
+  mounted() {
     if (this.requestUrl == null) {
-      this.options = this.localOptions
-      return
+      this.options = this.localOptions;
+      return;
     }
-    this.queryData()
+    this.queryData();
   },
   methods: {
     // 判断选择是否已经禁用
-    isDisabledOption (option) {
-      if (option == null || this.disabledOptions == null || this.disabledOptions.length == 0) {
-        return false
+    isDisabledOption(option) {
+      if (
+        option == null ||
+        this.disabledOptions == null ||
+        this.disabledOptions.length == 0
+      ) {
+        return false;
       }
-      var currentOptionVal = option[this.option]
-      return this.disabledOptions.indexOf(currentOptionVal) >= 0
+      var currentOptionVal = option[this.option];
+      return this.disabledOptions.indexOf(currentOptionVal) >= 0;
     },
-    change (value) {
-      if (value === '') {
-        value = null
+    change(value) {
+      if (value === "") {
+        value = null;
       }
-      this.$emit('input', value)
+      this.$emit("input", value);
 
       // 根据当前值，找出对应的选项
-      var optionItem = this.options.find((item) => item[this.option] == value)
-      this.$emit('change', value, optionItem)
+      var optionItem = this.options.find(item => item[this.option] == value);
+      this.$emit("change", value, optionItem);
     },
     // 根据用户配置的label，生成对应的标签
-    getItemLabel (item, label) {
-      if (label.indexOf('${') < 0 && label.indexOf('}' < 0)) {
-        return item[label]
+    getItemLabel(item, label) {
+      if (label.indexOf("${") < 0 && label.indexOf("}" < 0)) {
+        return item[label];
       }
-      var reg = /\$\{[a-zA-Z0-9]*\}/g
-      var list = label.match(reg)
+      var reg = /\$\{[a-zA-Z0-9]*\}/g;
+      var list = label.match(reg);
       // ["${id}", "${text}"]
-      var result = label
+      var result = label;
       for (var i = 0; i < list.length; i++) {
-        var sub = list[i]
-        var key = sub.replace('${', '').replace('}', '')
-        result = result.replace(sub, item[key])
+        var sub = list[i];
+        var key = sub.replace("${", "").replace("}", "");
+        result = result.replace(sub, item[key]);
       }
-      return result
+      return result;
     },
     // 从本地localStorage取 gaeaDict
-    getOptionsFromLocalStorage () {
-      var dicts = getStorageItem('gaeaDict')
-      var options = []
+    getOptionsFromLocalStorage() {
+      var dicts = getStorageItem("gaeaDict");
+      var options = [];
       if (!dicts.hasOwnProperty(this.dictCode)) {
-        return []
+        return [];
       }
-      var dictItems = dicts[this.dictCode]
+      var dictItems = dicts[this.dictCode];
       for (var i = 0; i < dictItems.length; i++) {
-        var dictItem = dictItems[i]
-        options.push({ id: dictItem.id, text: dictItem.text })
+        var dictItem = dictItems[i];
+        options.push({ id: dictItem.id, text: dictItem.text });
       }
-      return options
+      return options;
     },
-    queryData () {
+    queryData() {
       // 所有从本地localStorage取，因为在App.vue中已经请求远程保存到本地了
-      var options = this.getOptionsFromLocalStorage()
+      var options = this.getOptionsFromLocalStorage();
       if (this.isNotBlank(options)) {
-        this.options = options
-        return
+        this.options = options;
+        return;
       }
       // 本地localStorage取不到，再从远程接口取
       if (this.requestUrl == null) {
-        return
+        return;
       }
-      if (this.method != null && this.method.toLocaleLowerCase().trim() == 'post') {
-        this.queryDataByPost()
+      if (
+        this.method != null &&
+        this.method.toLocaleLowerCase().trim() == "post"
+      ) {
+        this.queryDataByPost();
       } else {
-        this.queryDataByGet()
+        this.queryDataByGet();
       }
     },
-    queryDataByGet (keyword) {
-      var param = this.deepClone(this.queryParam)
+    queryDataByGet(keyword) {
+      var param = this.deepClone(this.queryParam);
       if (this.isNotBlank(keyword)) {
-        param['keyword'] = keyword
+        param["keyword"] = keyword;
       }
-      param['multiple'] = this.multiple == null ? null : 1
+      param["multiple"] = this.multiple == null ? null : 1;
       request({
         url: this.requestUrl,
         headers: { noPrompt: true },
-        params: param,
-      }).then((response) => {
-        this.setOptions(response.data)
-      })
+        params: param
+      }).then(response => {
+        this.setOptions(response.data);
+      });
     },
-    queryDataByPost (keyword) {
-      var param = this.deepClone(this.queryParam)
+    queryDataByPost(keyword) {
+      var param = this.deepClone(this.queryParam);
       if (this.isNotBlank(keyword)) {
-        param['keyword'] = keyword
+        param["keyword"] = keyword;
       }
       request({
         url: this.requestUrl,
-        method: 'post',
+        method: "post",
         headers: { noPrompt: true },
-        data: param,
-      }).then((response) => {
-        this.setOptions(response.data)
-      })
+        data: param
+      }).then(response => {
+        this.setOptions(response.data);
+      });
     },
-    setOptions (resData) {
+    setOptions(resData) {
       if (resData == null || resData.length == 0) {
-        this.options = []
-        this.totalPage = 0
-        return
+        this.options = [];
+        this.totalPage = 0;
+        return;
       }
       if (this.isArray(resData)) {
-        this.options = resData
-        this.totalPage = 1
-        return
+        this.options = resData;
+        this.totalPage = 1;
+        return;
       }
-      if (resData.records == null || resData.total == null || resData.pages == null) {
-        this.options = []
-        return
+      if (
+        resData.records == null ||
+        resData.total == null ||
+        resData.pages == null
+      ) {
+        this.options = [];
+        return;
       }
-      this.totalPage = resData.pages
+      this.totalPage = resData.pages;
       // resData.records
       // resData.total
       // resData.size
       // resData.current
-      this.options = resData.records
+      this.options = resData.records;
     },
-    remoteQuery (keyword) {
+    remoteQuery(keyword) {
       if (this.isBlank(keyword)) {
-        return
+        return;
       }
       setTimeout(() => {
-        if (this.method != null && this.method.toLocaleLowerCase().trim() == 'post') {
-          this.queryDataByPost(keyword)
+        if (
+          this.method != null &&
+          this.method.toLocaleLowerCase().trim() == "post"
+        ) {
+          this.queryDataByPost(keyword);
         } else {
-          this.queryDataByGet(keyword)
+          this.queryDataByGet(keyword);
         }
-      }, 200)
-    },
-  },
-}
+      }, 200);
+    }
+  }
+};
 </script>
