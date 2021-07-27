@@ -25,8 +25,13 @@ report-core-XXX --> conf --> bootstrap-dev.yml <br>
 ![file.png](../picture/quickly/img_5.png)
 
 ## 启动
-linux启动：report-core-XXX --> bin --> start.sh <br>
-windows启动：report-core-XXX --> bin --> start.bat <br>
+linux启动：<br>
+report-core-XXX --> bin -->sh start.sh <br>
+
+windows启动：<br>
+修改第4行的JAVA_HOME，改成你自己的JAVA_HOME，双击启动<br>
+report-core-XXX --> bin --> start.bat <br>
+![java.png](../picture/quickly/img_7.png)
 
 
 ## 访问
