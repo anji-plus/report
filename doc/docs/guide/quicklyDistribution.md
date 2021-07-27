@@ -32,7 +32,7 @@ windows启动：<br>
 report-core-XXX --> bin --> start.bat <br>
 修改第4行的JAVA_HOME，改成你自己的JAVA_HOME，并去掉**rem**注释，双击启动<br>
 ![java.png](../picture/quickly/img_7.png)
-**注**：如果你JAVA_HOME目录存在空格，请将bat最后JAVA_HOME填上""号
+**注**：如果你JAVA_HOME目录存在空格，将bat文件最下面的JAVA_HOME添加""号
 ![img.png](../picture/quickly/img_8.png)
 
 

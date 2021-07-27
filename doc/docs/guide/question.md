@@ -17,7 +17,7 @@
   修改pom.xml依赖，添加Mysql8.0驱动包，将DB目录里面SQL文件utf8_general_ci字符集改成mysql8.0支持的字符集
   
 
-- Jdk11兼容性问题
+- Jdk11无法启动
 
 
 
