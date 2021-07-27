@@ -29,8 +29,8 @@ linux启动：<br>
 report-core-XXX --> bin -->sh start.sh <br>
 
 windows启动：<br>
-修改第4行的JAVA_HOME，改成你自己的JAVA_HOME，双击启动<br>
 report-core-XXX --> bin --> start.bat <br>
+修改第4行的JAVA_HOME，改成你自己的JAVA_HOME，并去掉**rem**注释，双击启动<br>
 ![java.png](../picture/quickly/img_7.png)
 
 
