@@ -5,7 +5,7 @@
 ## 大屏简介
 ![img_2.png](../picture/dashboard/img_2.png)
 
-## 工具简介
+## 工具栏
 ### 文本框
 ![img_3.png](../picture/dashboard/img_3.png)
 ![img_4.png](../picture/dashboard/img_4.png)
