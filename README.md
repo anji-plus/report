@@ -91,7 +91,8 @@ bin/start.bat Windows修改第4行的JAVA_HOME后，双击启动
 http://serverip:9095
 ```
 ## 谁在使用
-![aj-logo.png](https://report.anji-plus.com/file/download/d287d4d3-d30b-4850-9bac-a6c991409251)
+<img src="https://report.anji-plus.com/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/>
+
 ## 近期计划
 -   完善地图插件
 -   完善表格插件
