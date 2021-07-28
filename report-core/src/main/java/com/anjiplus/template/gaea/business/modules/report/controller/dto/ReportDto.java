@@ -44,4 +44,10 @@ public class ReportDto extends GaeaBaseDTO implements Serializable {
     /** 报表缩略图 */
     private String reportImage;
 
+    /** 0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG */
+    private Integer enableFlag;
+
+    /** 0--未删除 1--已删除 DIC_NAME=DELETE_FLAG */
+    private Integer deleteFlag;
+
 }
