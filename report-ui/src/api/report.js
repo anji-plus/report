@@ -5,50 +5,7 @@
  * @Last Modified time: 2021-03-04 10:46:26
  */
 import request from '@/utils/request'
-// datasource
-export function pageList (params) {
-  return request({
-    url: '/dataSource/pageList',
-    method: 'get',
-    params,
-  })
-}
-export function dataSource (data) {
-  return request({
-    url: '/dataSource/' + data.id,
-    method: 'get',
-    data,
-  })
-}
-// delete datasource
-export function deleteDataSource (data) {
-  return request({
-    url: '/dataSource/' + data.id,
-    method: 'delete',
-    data,
-  })
-}
-export function testConnection (data) {
-  return request({
-    url: '/dataSource/testConnection',
-    method: 'post',
-    data,
-  })
-}
-export function addDataSource (data) {
-  return request({
-    url: '/dataSource',
-    method: 'post',
-    data,
-  })
-}
-export function editDataSource (data) {
-  return request({
-    url: '/dataSource',
-    method: 'put',
-    data,
-  })
-}
+
 // resultset
 export function dataSetPreview (data) {
   return request({
