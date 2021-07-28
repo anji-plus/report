@@ -198,78 +198,6 @@ export default {
         }
       })
     },
-
-
-
-
-
-
-    // 查询
-    search() {
-      this.params.pageNumber = 1
-      this.queryByPage()
-    },
-    // 重置
-    reset(formName) {
-      // this.$refs[formName].resetFields()
-      this.params.sourceName = ''
-      this.params.sourceCode = ''
-      this.params.pageNumber = 1
-      this.params.sourceType = ''
-      this.queryByPage()
-    },
-    async queryByPage() {
-      const res = await pageList(this.params)
-      if (res.code != '200') return
-      this.listLoading = true
-      this.list = res.data.records
-      this.list.forEach((value) => {
-        value['sourceNameCode'] =
-          value.sourceName + '[' + value.sourceCode + ']'
-      })
-      this.totalCount = res.data.total
-      this.totalPage = res.data.pages
-      this.listLoading = false
-    },
-    handleSizeChange(val) {
-      this.params.pageSize = val
-      this.queryByPage()
-    },
-    handleCurrentChange(val) {
-      this.params.pageNumber = val
-      this.queryByPage()
-    },
-    // 打开模态框
-    showAddLogModel(val) {
-      this.basicDialog = true
-      if (val == undefined) {
-        this.updataDisabled = false
-        this.getSystem()
-        this.dialogForm = {
-          sourceName: '',
-          sourceCode: '',
-          sourceType: '',
-          sourceDesc: '',
-          sourceConfig: '',
-        }
-      } else {
-        this.updataDisabled = true
-        this.dialogForm = val
-        const newSourceType = this.dialogForm
-        let newDataLink = []
-        this.dictionaryOptions.map((item) => {
-          if (item.id == newSourceType.sourceType) {
-            newDataLink = JSON.parse(item.extend)
-            var sourceConfigJson = JSON.parse(newSourceType.sourceConfig)
-            for (var i = 0; i < newDataLink.length; i++) {
-              newDataLink[i].value = sourceConfigJson[newDataLink[i].label]
-            }
-          }
-        })
-        this.dataLink = newDataLink
-      }
-    },
-
     selectChange(val) {
       this.dataLink = []
       const extendJSON = this.dictionaryOptions.find(function (obj) {
@@ -295,30 +223,6 @@ export default {
           this.testReplyCode = null
         }
       })
-    },
-    async delData(val) {
-      this.$confirm('确定删除?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-      })
-        .then(async () => {
-          this.$emit('deletelayer')
-          this.visible = false
-          const { code, data } = await deleteDataSource(val)
-          if (code != '200') return
-          this.queryByPage()
-          this.$message({
-            type: 'success',
-            message: '删除成功!',
-          })
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除',
-          })
-        })
     },
 
   },
