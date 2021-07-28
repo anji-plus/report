@@ -256,17 +256,17 @@
                         </el-button>
                       </template>
                     </el-table-column>
-                    <!-- <el-table-column :label="$t('btn.operationCol')"
+                     <el-table-column label="操作"
                                      width="200">
                       <template slot-scope="scope">
                         <el-button type="text"
                                    size="small"
-                                   @click.native.prevent="cutOutRow(scope.$index, tableData)">{{ $t('btn.delete') }}</el-button>
+                                   @click.native.prevent="cutOutRow(scope.$index, tableData)">删除</el-button>
                         <el-button type="text"
                                    size="small"
                                    @click="addRow(scope.row)">追加</el-button>
                       </template>
-                    </el-table-column> -->
+                    </el-table-column>
                   </el-table>
                   <el-checkbox
                     v-model="isShowPagination"
