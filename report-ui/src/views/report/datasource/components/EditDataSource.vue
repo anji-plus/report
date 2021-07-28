@@ -41,14 +41,7 @@
   </el-dialog>
 </template>
 <script>
-import {
-  pageList,
-
-  addDataSource,
-  editDataSource,
-  deleteDataSource,
-} from '@/api/report'
-import { testConnection, reportDataSourceDetail, reportDataSourceAdd, reportDataSourceDeleteBatch, reportDataSourceUpdate,  } from '@/api/reportDataSource'
+import { testConnection, reportDataSourceDetail, reportDataSourceAdd, reportDataSourceUpdate } from '@/api/reportDataSource'
 import { getDictList } from '@/api/dict-data' // 获取数据字典
 import Dictionary from '@/components/Dictionary/index'
 export default {
