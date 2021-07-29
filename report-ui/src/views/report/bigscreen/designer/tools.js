@@ -3702,6 +3702,18 @@ const widgetTools = [
           placeholder: '',
           value: ''
         },
+        {
+          type: 'el-select',
+          label: '饼图样式',
+          name: 'piechartStyle',
+          required: false,
+          placeholder: '',
+          selectOptions: [
+            {code: '50%', name: '实心饼图'},
+            {code: ["40%", "70%"], name: '空心饼图'},
+          ],
+          value: '50%'
+        },
         [
           {
             name: '标题设置',

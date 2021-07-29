@@ -90,6 +90,11 @@ export default {
       this.setOptionsLegend();
       this.setOptionsColor();
       this.setOptionsData();
+      this.setOptionsPiechartStyle();
+    },
+    // 饼图样式
+    setOptionsPiechartStyle(){
+      this.options.series[0]['radius'] = this.optionsSetup.piechartStyle
     },
     // 标题设置
     setOptionsTitle() {
