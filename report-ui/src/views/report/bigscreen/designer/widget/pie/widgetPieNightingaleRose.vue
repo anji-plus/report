@@ -86,6 +86,11 @@ export default {
       this.setOptionsLegend();
       this.setOptionsColor();
       this.setOptionsData();
+      this.setOptionsRosetype();
+    },
+    // 饼图模式 面积模式"area" 半径模式"radius"
+    setOptionsRosetype () {
+      this.options.series[0]['roseType'] = this.optionsSetup.nightingleRosetype
     },
     // 标题修改
     setOptionsTitle () {

@@ -37,7 +37,7 @@ import WidgetPiechart from "./widgetPiechart.vue";
 import WidgetHollowPiechart from "./widgetHollowPiechart.vue";
 import WidgetFunnel from "./widgetFunnel.vue";
 import WidgetGauge from "./widgetGauge.vue";
-import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRoseArea";
+import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRose";
 import widgetTable from "./widgetTable.vue";
 import widgetMap from "./widgetMap.vue";
 import widgetPiePercentageChart from "./pie/widgetPiePercentageChart";

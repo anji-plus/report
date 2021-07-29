@@ -5046,6 +5046,18 @@ const widgetTools = [
           placeholder: '',
           value: ''
         },
+        {
+          type: 'el-select',
+          label: '饼图模式',
+          name: 'nightingleRosetype',
+          required: false,
+          placeholder: '',
+          selectOptions: [
+            {code: 'area', name: '面积模式'},
+            {code: 'radius', name: '半径模式'},
+          ],
+          value: 'area'
+        },
         [
           {
             name: '标题设置',
@@ -6024,18 +6036,6 @@ const widgetTools = [
               },
             ],
           },
-          /*{
-            name: '自定义配色',
-            list: [
-              {
-                type: 'customColor',
-                label: '',
-                name: 'customColor',
-                required: false,
-                value: [{color: '#FF801C'}, {color: '#F5FF46'}, {color: '#00FE65'}, {color: '#00FEFF'}, {color: '#ffa800'}]
-              },
-            ],
-          },*/
         ],
       ],
       data: [
