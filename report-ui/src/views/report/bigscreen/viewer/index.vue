@@ -15,7 +15,7 @@
       />
     </div>
     <!-- 如果是二次开发商业使用必须带上这个技术支持 -->
-    <div class="bottom-text">技术支持： 安吉加加</div>
+    <div class="bottom-text">技术支持： 安吉加加信息技术有限公司</div>
   </div>
 </template>
 
