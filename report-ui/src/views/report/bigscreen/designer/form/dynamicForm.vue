@@ -124,8 +124,6 @@
                 :mode="'code'"
                 lang="zh"
                 class="my-editor"
-                @json-change="onJsonChange"
-                @json-save="onJsonSave"
               />
               <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisibleStaticData = false"
