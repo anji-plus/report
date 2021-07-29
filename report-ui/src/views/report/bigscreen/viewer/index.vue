@@ -14,6 +14,8 @@
         :type="widget.type"
       />
     </div>
+    <!-- 如果是二次开发商业使用必须带上这个技术支持 -->
+    <div class="bottom-text">技术支持： 安吉加加</div>
   </div>
 </template>
 
@@ -65,5 +67,13 @@ export default {
 .layout {
   width: 100%;
   height: 100%;
+  text-align: center;
+}
+.bottom-text {
+  width: 100%;
+  color: #999;
+  position: fixed;
+  bottom: 20px;
+  z-index: 9999;
 }
 </style>
