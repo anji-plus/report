@@ -27,6 +27,3 @@ if [ ! -d "$BuildDir/build" ]; then
 fi
 mv $BuildDir/report-core/target/aj-report-*.zip $BuildDir/build/
 
-
-cd $BuildDir/
-rm -rf $BuildDir/report-core/src/main/resources/static
