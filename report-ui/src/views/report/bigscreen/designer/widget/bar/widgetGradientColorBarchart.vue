@@ -95,12 +95,7 @@ export default {
             barWidth: "20px",
             itemStyle: {
               normal: {
-                color: new echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  0,
-                  1,
-                  [
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                     {
                       offset: 0,
                       color: "rgba(0,244,255,1)" // 0% 处的颜色
@@ -112,38 +107,22 @@ export default {
                   ],
                   false
                 ),
-                barBorderRadius: [30, 30, 30, 30],
                 shadowColor: "rgba(0,160,221,1)",
+                //模糊细数
                 shadowBlur: 4
               }
             },
             label: {
               normal: {
                 show: true,
-                lineHeight: 30,
-                width: 80,
-                height: 30,
-                backgroundColor: "rgba(0,160,221,0.1)",
-                borderRadius: 200,
-                position: ["-8", "-60"],
+                position: ['-10', '-30'],
                 distance: 1,
-                formatter: ["    {d|●}", " {a|{c}}     \n", "    {b|}"].join(
-                  ","
-                ),
+                formatter: '{a|{c}}',
                 rich: {
-                  d: {
-                    color: "#3CDDCF"
-                  },
                   a: {
+                    fontSize: 15,
                     color: "#fff",
                     align: "center"
-                  },
-                  b: {
-                    width: 1,
-                    height: 30,
-                    borderWidth: 1,
-                    borderColor: "#234e6c",
-                    align: "left"
                   }
                 }
               }
@@ -171,7 +150,6 @@ export default {
   watch: {
     value: {
       handler(val) {
-        console.log(val);
         this.optionsStyle = val.position;
         this.optionsData = val.data;
         this.optionsCollapse = val.setup;
@@ -194,10 +172,8 @@ export default {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
-      // this.setOptionsTop()
-      // this.setOptionsTooltip()
+      this.setOptionsTop();
       this.setOptionsMargin();
-      // this.setOptionsLegend()
       this.setOptionsColor();
       this.setOptionsData();
     },
@@ -229,15 +205,11 @@ export default {
         type: "category",
         show: optionsCollapse.hideX, // 坐标轴是否显示
         name: optionsCollapse.xName, // 坐标轴名称
-        nameTextStyle: {
-          color: optionsCollapse.xNameColor,
-          fontSize: optionsCollapse.xNameFontSize
-        },
         nameRotate: optionsCollapse.textAngle, // 文字角度
         inverse: optionsCollapse.reversalX, // 轴反转
         axisLabel: {
           show: true,
-          interval: optionsCollapse.textInterval, // 文字角度
+          interval: optionsCollapse.textInterval, // 文字间隔
           rotate: optionsCollapse.textAngle, // 文字角度
           textStyle: {
             color: optionsCollapse.Xcolor, // x轴 坐标文字颜色
@@ -266,15 +238,13 @@ export default {
         type: "value",
         show: optionsCollapse.isShowY, // 坐标轴是否显示
         name: optionsCollapse.textNameY, // 坐标轴名称
-        nameTextStyle: {
-          color: optionsCollapse.NameColorY,
-          fontSize: optionsCollapse.NameFontSizeY
-        },
         inverse: optionsCollapse.reversalY, // 轴反转
         axisLabel: {
           show: true,
+          interval: optionsCollapse.ytextInterval, // 文字间隔
+          rotate: optionsCollapse.ytextAngle, // 文字角度
           textStyle: {
-            color: optionsCollapse.colorY, // x轴 坐标文字颜色
+            color: optionsCollapse.colorY, // y轴 坐标文字颜色
             fontSize: optionsCollapse.fontSizeY
           }
         },
@@ -291,14 +261,12 @@ export default {
           }
         }
       };
-
       this.options.yAxis = yAxis;
     },
     // 数值设定 or 柱体设置
     setOptionsTop() {
       const optionsCollapse = this.optionsSetup;
       const series = this.options.series;
-
       for (const key in series) {
         if (series[key].type == "bar") {
           series[key].label = {
@@ -310,7 +278,7 @@ export default {
             fontWeight: optionsCollapse.fontWeight
           };
           series[key].barWidth = optionsCollapse.maxWidth;
-          series[key].barMinHeight = optionsCollapse.minHeight;
+          //series[key].barMinHeight = optionsCollapse.minHeight;
         }
       }
       this.options.series = series;
@@ -358,15 +326,27 @@ export default {
       legend.itemWidth = optionsCollapse.lengedWidth;
     },
     // 渐变色
-    setOptionsColor() {
+    setOptionsColor(){
       const optionsCollapse = this.optionsSetup;
-      const barStart = {};
-      barStart["offset"] = 0;
-      barStart["color"] = optionsCollapse.barStart;
-      const barEnd = {};
-      barStart["offset"] = 1;
-      barStart["color"] = optionsCollapse.barEnd;
-      // this.options.series[0].itemStyle.normal.color = new echarts.graphic.LinearGradient(0, 0, 0, 1,[ barStart, barEnd], false)
+      const itemStyle = this.options.series[0]['itemStyle']
+      const normal = {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: optionsCollapse.bar0color // 0% 处的颜色
+            },
+            {
+              offset: 1,
+              color: optionsCollapse.bar100color // 100% 处的颜色
+            }
+          ],
+          false
+        ),
+        barBorderRadius: optionsCollapse.radius, //圆角
+        shadowColor: optionsCollapse.shadowColor, // 阴影颜色
+        shadowBlur: optionsCollapse.shadowBlur //模糊系数
+      }
+      itemStyle['normal'] = normal
     },
     // 数据解析
     setOptionsData() {

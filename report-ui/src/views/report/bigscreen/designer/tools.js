@@ -1887,7 +1887,15 @@ const widgetTools = [
           name: 'layerName',
           required: false,
           placeholder: '',
-          value: '柱状图',
+          value: '柱形图-渐变色',
+        },
+        {
+          type: 'el-switch',
+          label: '竖展示',
+          name: 'verticalShow',
+          required: false,
+          placeholder: '',
+          value: false,
         },
         {
           type: 'vue-color',
@@ -1898,6 +1906,35 @@ const widgetTools = [
           value: ''
         },
         [
+          {
+            name: '柱体设置',
+            list: [
+              {
+                type: 'el-slider',
+                label: '最大宽度',
+                name: 'maxWidth',
+                required: false,
+                placeholder: '',
+                value: 10,
+              },
+              {
+                type: 'el-slider',
+                label: '圆角',
+                name: 'radius',
+                require: false,
+                placeholder: '',
+                value: 5,
+              },
+/*              {
+                type: 'el-slider',
+                label: '最小高度',
+                name: 'minHeight',
+                require: false,
+                placeholder: '',
+                value: 0,
+              },*/
+            ],
+          },
           {
             name: '标题设置',
             list: [
@@ -2020,20 +2057,20 @@ const widgetTools = [
                 value: true,
               },
               {
-                type: 'vue-color',
-                label: '坐标名颜色',
-                name: 'xNameColor',
+                type: 'el-input-number',
+                label: '字号',
+                name: 'fontSizeX',
                 required: false,
                 placeholder: '',
-                value: '#fff'
+                value: 12,
               },
               {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'xNameFontSize',
+                type: 'vue-color',
+                label: '颜色',
+                name: 'Xcolor',
                 required: false,
                 placeholder: '',
-                value: 12
+                value: '#fff',
               },
               {
                 type: 'el-slider',
@@ -2057,23 +2094,7 @@ const widgetTools = [
                 name: 'reversalX',
                 required: false,
                 placeholder: '',
-                value: ''
-              },
-              {
-                type: 'vue-color',
-                label: '颜色',
-                name: 'Xcolor',
-                required: false,
-                placeholder: '',
-                value: '#fff',
-              },
-              {
-                type: 'el-input-number',
-                label: '字号',
-                name: 'fontSizeX',
-                required: false,
-                placeholder: '',
-                value: 12,
+                value: false
               },
               {
                 type: 'vue-color',
@@ -2098,7 +2119,6 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#fff',
-
               }
             ],
           },
@@ -2123,30 +2143,6 @@ const widgetTools = [
               },
               {
                 type: 'vue-color',
-                label: '坐标名颜色',
-                name: 'NameColorY',
-                required: false,
-                placeholder: '',
-                value: '#fff',
-              },
-              {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'NameFontSizeY',
-                required: false,
-                placeholder: '',
-                value: 12,
-              },
-              {
-                type: 'el-switch',
-                label: '轴反转',
-                name: 'reversalY',
-                required: false,
-                placeholder: '',
-                value: false
-              },
-              {
-                type: 'vue-color',
                 label: '颜色',
                 name: 'colorY',
                 required: false,
@@ -2160,6 +2156,30 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: 12,
+              },
+              {
+                type: 'el-slider',
+                label: '文字角度',
+                name: 'ytextAngle',
+                required: false,
+                placeholder: '',
+                value: 0
+              },
+              {
+                type: 'el-input-number',
+                label: '文字间隔',
+                name: 'ytextInterval',
+                required: false,
+                placeholder: '',
+                value: ''
+              },
+              {
+                type: 'el-switch',
+                label: '轴反转',
+                name: 'reversalY',
+                required: false,
+                placeholder: '',
+                value: false
               },
               {
                 type: 'vue-color',
@@ -2185,6 +2205,49 @@ const widgetTools = [
                 value: '#fff',
 
               }
+            ],
+          },
+          {
+            name: '数值设定',
+            list: [
+              {
+                type: 'el-switch',
+                label: '显示',
+                name: 'isShow',
+                required: false,
+                placeholder: '',
+                value: false
+              },
+              {
+                type: 'el-input-number',
+                label: '字体大小',
+                name: 'fontSize',
+                required: false,
+                placeholder: '',
+                value: 14
+              },
+              {
+                type: 'vue-color',
+                label: '字体颜色',
+                name: 'subTextColor',
+                required: false,
+                placeholder: '',
+                value: '#fff'
+              },
+              {
+                type: 'el-select',
+                label: '字体粗细',
+                name: 'fontWeight',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
+                ],
+                value: 'normal'
+              },
             ],
           },
           {
@@ -2227,20 +2290,35 @@ const widgetTools = [
               {
                 type: 'vue-color',
                 label: '0%处',
-                name: 'barStart',
+                name: 'bar0color',
                 required: false,
                 placeholder: '',
-                value: '#00F4FFFF'
+                value: '#00F4FF'
               },
               {
                 type: 'vue-color',
                 label: '100%处',
-                name: 'barEnd',
+                name: 'bar100color',
                 required: false,
                 placeholder: '',
-                value: '#004DA7FF'
+                value: '#004DA7'
               },
-
+              {
+                type: 'vue-color',
+                label: '阴影颜色',
+                name: 'shadowColor',
+                required: false,
+                placeholder: '',
+                value: '#00A0DD'
+              },
+              {
+                type: 'el-input-number',
+                label: '模糊系数',
+                name: 'shadowBlur',
+                required: false,
+                placeholder: '',
+                value: 4,
+              },
             ],
           },
         ],
