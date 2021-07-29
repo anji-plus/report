@@ -920,8 +920,8 @@ export default {
     }
     .bottom-text {
       width: 100%;
-      color: #999;
-      font-size: 12px;
+      color: #a0a0a0;
+      font-size: 16px;
       position: absolute;
       bottom: 20px;
     }

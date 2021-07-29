@@ -71,9 +71,9 @@ export default {
 }
 .bottom-text {
   width: 100%;
-  color: #999;
+  color: #a0a0a0;
   position: fixed;
-  bottom: 20px;
+  bottom: 16px;
   z-index: 9999;
 }
 </style>
