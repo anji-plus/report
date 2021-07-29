@@ -170,6 +170,8 @@
           </div>
         </vue-ruler-tool>
       </div>
+      <!-- 如果是二次开发商业使用必须带上这个技术支持 -->
+      <div class="bottom-text">技术支持： 安吉加加</div>
     </div>
 
     <div class="layout-right" :style="{ width: widthLeftForOptions + 'px' }">
@@ -843,6 +845,7 @@ export default {
     border: 1px solid rgb(36, 42, 48);
     align-items: center;
     vertical-align: middle;
+    text-align: center;
     .top-button {
       display: flex;
       flex-direction: row;
@@ -914,6 +917,13 @@ export default {
           linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) 1px, transparent 0);
         // z-index: 2;
       }
+    }
+    .bottom-text {
+      width: 100%;
+      color: #999;
+      font-size: 12px;
+      position: absolute;
+      bottom: 20px;
     }
   }
 
