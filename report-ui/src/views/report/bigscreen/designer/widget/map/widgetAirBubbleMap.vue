@@ -443,6 +443,24 @@ export default {
     setOptionMapBlocak() {
       const optionsSetup = this.optionsSetup;
       const itemStyle = this.options.series[0]['itemStyle'];
+      const normal = {
+          //地图块颜色
+          areaColor: {
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+              offset: 0,
+              color: optionsSetup.font0PreColor // 0% 处的颜色
+            }, {
+              offset: 1,
+              color: optionsSetup.font100PreColor // 100% 处的颜色
+            }],
+          },
+          borderColor: '#215495',
+          borderWidth: 1,
+        };
       //鼠标放置颜色加深
       const emphasis = {
         areaColor: {
@@ -459,6 +477,7 @@ export default {
           }],
         },
       };
+      itemStyle['normal'] = normal;
       itemStyle['emphasis'] = emphasis;
     },
     setOptionAirSize() {

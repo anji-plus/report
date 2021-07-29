@@ -5998,7 +5998,7 @@ const widgetTools = [
           {
             name: '地图块颜色',
             list: [
-/*              {
+              {
                 type: 'vue-color',
                 label: '0%处颜色',
                 name: 'font0PreColor',
@@ -6013,7 +6013,7 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#061E3D'
-              },*/
+              },
               {
                 type: 'vue-color',
                 label: '高亮渐变色',
