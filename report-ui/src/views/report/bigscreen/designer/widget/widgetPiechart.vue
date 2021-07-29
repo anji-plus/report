@@ -94,7 +94,11 @@ export default {
     },
     // 饼图样式
     setOptionsPiechartStyle(){
-      this.options.series[0]['radius'] = this.optionsSetup.piechartStyle
+      if (this.optionsSetup.piechartStyle == "shixin") {
+        this.options.series[0]['radius'] = "50%"
+      }else if (this.optionsSetup.piechartStyle == "kongxin"){
+        this.options.series[0]['radius'] = ["40%", "70%"]
+      }else {}
     },
     // 标题设置
     setOptionsTitle() {
