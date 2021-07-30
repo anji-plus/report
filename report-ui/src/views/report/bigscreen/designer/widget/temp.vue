@@ -24,7 +24,6 @@ import widgetLinechart from "./widgetLinechart.vue";
 import widgetBarlinechart from "./widgetBarlinechart";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
 import WidgetPiechart from "./widgetPiechart.vue";
-import WidgetHollowPiechart from "./widgetHollowPiechart.vue";
 import WidgetFunnel from "./widgetFunnel.vue";
 import WidgetGauge from "./widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRose";
@@ -48,7 +47,6 @@ export default {
     widgetLinechart,
     widgetBarlinechart,
     WidgetPiechart,
-    WidgetHollowPiechart,
     WidgetFunnel,
     WidgetGauge,
     WidgetPieNightingaleRoseArea,

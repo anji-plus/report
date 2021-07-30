@@ -105,7 +105,7 @@ export default {
     // 解析不同图标的数据
     analysisChartsData(params, data) {
       // widget-barchart 柱线图、widget-linechart 折线图、 widget-barlinechart 柱线图
-      // widget-piechart 饼图、widget-hollow-piechart 空心饼图、widget-funnel 漏斗图
+      // widget-piechart 饼图、widget-funnel 漏斗图
       // widget-gauge 仪表盘
       // widget-text 文本框
       // widge-table 表格(数据不要转)
@@ -118,7 +118,6 @@ export default {
         return this.barOrLineChartFn(params.chartProperties, data);
       } else if (
         chartType == "widget-piechart" ||
-        chartType == "widget-hollow-piechart" ||
         chartType == "widget-funnel"
       ) {
         return this.piechartFn(params.chartProperties, data);
@@ -158,7 +157,7 @@ export default {
       ananysicData["series"] = series;
       return ananysicData;
     },
-    // 饼图或者空心饼图或者漏斗图
+    // 饼图、漏斗图
     piechartFn(chartProperties, data) {
       const ananysicData = [];
       for (let i = 0; i < data.length; i++) {
