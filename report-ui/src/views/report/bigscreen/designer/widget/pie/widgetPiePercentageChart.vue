@@ -254,6 +254,7 @@ export default {
                     show: false,
                   },
                 },
+                //剩余圆环颜色
                 itemStyle: {
                   normal: {
                     color: '#173164',
@@ -359,9 +360,10 @@ export default {
       this.setOptionsTitle();
       //this.setOptionsTooltip();
       //this.setOptionsLegend();
-      //this.setOptionsColor();
+      this.setOptionsColor();
       this.setOptionsData();
       this.setOptionLine();
+      this.setOptionSurplusColor();
     },
     setOptionsTitle() {
       const optionsCollapse = this.optionsSetup;
@@ -397,48 +399,33 @@ export default {
       }
     },
     //圆环0-100%颜色
-    /*setOptionPerData(val) {
+    setOptionsColor() {
       const optionsSetup = this.optionsSetup;
-      const data = this.options.series[6]['data'];
-      data.forEach((ev, index) => {
-        if (index == 0) {
-          ev.value = val
-          const itemStyle = {
-            normal: {
-              color: {
-                colorStops: [
-                  {
-                    offset: 0,
-                    color: optionsSetup.colorStart, // 0% 处的颜色
-                  },
-                  {
-                    offset: 1,
-                    color: optionsSetup.colorEnd, // 100% 处的颜色
-                  },
-                ]
-              }
-            }
-          };
-          data['itemStyle'] = itemStyle
-        } else if (index == 1) {
-          ev.value = (100 - val)
-          const label = {
-            normal: {
-              show: false,
+      const itemStyle = this.options.series[6]['data'][0]['itemStyle']
+      const normal = {
+        color: {
+          // 完成的圆环的颜色
+          colorStops: [
+            {
+              offset: 0,
+              color: optionsSetup.color0Start, // 0% 处的颜色
             },
-          };
-          const itemStyle = {
-            /!*normal: {
-              color: '#173164',
-            },*!/
-          };
-          data['label'] = label;
-          data['itemStyle'] = itemStyle;
-        } else {
-        }
-        ;
-      })
-    },*/
+            {
+              offset: 1,
+              color: optionsSetup.color100End, // 100% 处的颜色
+            },
+          ],
+        },
+      };
+      itemStyle['normal'] = normal
+    },
+    setOptionSurplusColor(){
+      const itemStyle = this.options.series[6]['data'][1]['itemStyle']
+      const normal = {
+          color: this.optionsSetup.colorsurplus,
+        };
+      itemStyle['normal'] = normal
+    },
     setOptionLine() {
       const optionsSetup = this.optionsSetup;
       const line = this.options.series[7]['splitLine'];
@@ -466,7 +453,6 @@ export default {
       title.text = '{nums|' + val + '}{percent|%}';
       this.options.series[6]['data'][0]['value'] = val ;
       this.options.series[6]['data'][1]['value'] = 100 - val ;
-      //this.setOptionPerData(val)
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;

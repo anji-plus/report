@@ -5071,70 +5071,6 @@ const widgetTools = [
           value: ''
         },
         [
-          /*{
-            name: '标题设置',
-            list: [
-              {
-                type: 'el-switch',
-                label: '标题',
-                name: 'isNoTitle',
-                required: false,
-                placeholder: '',
-                value: true,
-              },
-              {
-                type: 'el-input-text',
-                label: '标题',
-                name: 'titleText',
-                required: false,
-                placeholder: '',
-                value: '',
-              },
-              {
-                type: 'vue-color',
-                label: '字体颜色',
-                name: 'textColor',
-                required: false,
-                placeholder: '',
-                value: '#FFD700'
-              },
-              {
-                type: 'el-select',
-                label: '字体粗细',
-                name: 'textFontWeight',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  { code: 'normal', name: '正常' },
-                  { code: 'bold', name: '粗体' },
-                  { code: 'bolder', name: '特粗体' },
-                  { code: 'lighter', name: '细体' }
-                ],
-                value: 'normal'
-              },
-              {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'textFontSize',
-                required: false,
-                placeholder: '',
-                value: 20
-              },
-              {
-                type: 'el-select',
-                label: '字体位置',
-                name: 'textAlign',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  { code: 'center', name: '居中' },
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
-                ],
-                value: 'center'
-              }
-            ],
-          },*/
           {
             name: '数值设置',
             list: [
@@ -5203,22 +5139,6 @@ const widgetTools = [
           {
             name: '圆环设置',
             list: [
-/*              {
-                type: 'vue-color',
-                label: '0%处',
-                name: 'colorStart',
-                required: false,
-                placeholder: '',
-                value: '#4FADFD'
-              },
-              {
-                type: 'vue-color',
-                label: '100%处',
-                name: 'colorEnd',
-                required: false,
-                placeholder: '',
-                value: '#28E8FA'
-              },*/
               {
                 type: 'el-input-number',
                 label: '刻度数量',
@@ -5253,79 +5173,35 @@ const widgetTools = [
               },
             ]
           },
-          /*{
-            name: '图例操作',
+          {
+            name: '渐变色',
             list: [
               {
-                type: 'el-switch',
-                label: '图例',
-                name: 'isShowLegend',
+                type: 'vue-color',
+                label: '0%处颜色',
+                name: 'color0Start',
                 required: false,
                 placeholder: '',
-                value: true,
+                value: '#4FADFD'
               },
               {
                 type: 'vue-color',
-                label: '字体颜色',
-                name: 'lengedColor',
+                label: '100%颜色',
+                name: 'color100End',
                 required: false,
                 placeholder: '',
-                value: '#fff',
+                value: '#28E8FA'
               },
               {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'lengedFontSize',
+                type: 'vue-color',
+                label: '余处颜色',
+                name: 'colorsurplus',
                 required: false,
                 placeholder: '',
-                value: 16,
+                value: '#173164'
               },
-              {
-                type: 'el-input-number',
-                label: '图例宽度',
-                name: 'lengedWidth',
-                required: false,
-                placeholder: '',
-                value: 15,
-              },
-              {
-                type: 'el-select',
-                label: '横向位置',
-                name: 'lateralPosition',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  { code: 'left', name: '左对齐' },
-                  { code: 'right', name: '右对齐' },
-                ],
-                value: ''
-              },
-              {
-                type: 'el-select',
-                label: '纵向位置',
-                name: 'longitudinalPosition',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  { code: 'top', name: '顶部' },
-                  { code: 'bottom', name: '底部' },
-                ],
-                value: ''
-              },
-              {
-                type: 'el-select',
-                label: '布局前置',
-                name: 'layoutFront',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  { code: 'vertical', name: '竖排' },
-                  { code: 'horizontal', name: '横排' },
-                ],
-                value: ''
-              },
-            ],
-          },*/
+            ]
+          }
         ],
       ],
       // 数据
