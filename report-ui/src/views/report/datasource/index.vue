@@ -11,7 +11,7 @@
     <!--这里可以将自定义的弹出框代码，放入到page中
     -->
     <template v-slot:pageSection>
-      <EditDataSource :dataSource="dataSource" :visib="dialogVisibleSetDataSource" @handleClose="dialogVisibleSetDataSource = false" @refreshList="refreshList" />
+      <EditDataSource ref="EditDataSource" :dataSource="dataSource" :visib="dialogVisibleSetDataSource" @handleClose="dialogVisibleSetDataSource = false" @refreshList="refreshList" />
     </template>
   </anji-crud>
 </template>
@@ -190,6 +190,7 @@ export default {
       }else {
         this.dataSource = {}
       }
+      this.$refs.EditDataSource.getSystem()
     },
     refreshList(){
       this.$refs.listPage.handleQueryForm('query')

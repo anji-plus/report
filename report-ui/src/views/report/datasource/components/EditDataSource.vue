@@ -107,19 +107,9 @@ export default {
       testReplyCode: null,
     }
   },
-  watch: {
-    visib(val) {
-      if (val) {
-        this.setDataSource()
-        // 弹窗弹出时需要执行的逻辑
-      }
-    },
-  },
   // 在生命周期 beforeCreate里面改变this指向
   beforeCreate: function () {},
   mounted() {},
-  created() {
-  },
   methods: {
     async setDataSource() {
       this.dialogForm = {
@@ -129,8 +119,6 @@ export default {
         sourceDesc: '',
         sourceConfig: '',
       }
-      const { code } = await this.getSystem();
-      if (code != '200') return
       //根据dataSourceId判断新增还是编辑
       if (this.dataSource.id) {
         const {code, data} = await reportDataSourceDetail(this.dataSource)
@@ -157,6 +145,7 @@ export default {
       this.dictionaryOptions = data
       this.dialogForm.sourceType = this.dictionaryOptions[0].text
       this.dataLink = JSON.parse(this.dictionaryOptions[0].extend)
+      this.setDataSource()
     },
     // 关闭模态框
     closeDialog() {
