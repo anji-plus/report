@@ -14,7 +14,7 @@ public class JdbcConstants {
    public final static String ELASTIC_SEARCH_SQL = "elasticsearch_sql";
    public final static String SQL_SERVER = "mssqlserver";
    public final static String JDBC = "jdbc";
-
+   public final static String POSTGRESQL = "postgresql";
 
 
    public final static String JTDS = "jtds";
@@ -22,7 +22,6 @@ public class JdbcConstants {
    public final static String HSQL = "hsql";
    public final static String DB2 = "db2";
    public final static String DB2_DRIVER = "COM.ibm.db2.jdbc.app.DB2Driver";
-   public final static String POSTGRESQL = "postgresql";
    public final static String POSTGRESQL_DRIVER = "org.postgresql.Driver";
    public final static String SYBASE = "sybase";
    public final static String SQL_SERVER_DRIVER = "com.microsoft.jdbc.sqlserver.SQLServerDriver";
