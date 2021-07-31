@@ -69,7 +69,10 @@ export default {
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
-    staticDataFn(val) {},
+    staticDataFn(val) {
+      this.styleColor.text = val;
+      this.$forceUpdate();
+    },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
       if (this.ispreview) {
