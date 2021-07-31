@@ -129,7 +129,8 @@ export default {
         sourceDesc: '',
         sourceConfig: '',
       }
-      this.getSystem()
+      const { code } = await this.getSystem();
+      if (code != '200') return
       //根据dataSourceId判断新增还是编辑
       if (this.dataSource.id) {
         const {code, data} = await reportDataSourceDetail(this.dataSource)

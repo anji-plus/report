@@ -13,6 +13,7 @@ npm install >/dev/null 2>&1
 npm run build:prod >/dev/null 2>&1
 
 echo "publish web to springboot src/main/resources/static"
+rm -rf $BuildDir/report-core/src/main/resources/static
 mkdir -p $BuildDir/report-core/src/main/resources/static
 mv $BuildDir/report-ui/dist/* $BuildDir/report-core/src/main/resources/static/
 
