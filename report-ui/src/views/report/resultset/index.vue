@@ -657,13 +657,13 @@ export default {
     },
     async queryByPage() {
       let params = {
-        page: this.params.pageNumber,
-        size: this.params.pageSize,
         sort: "update_time",
         order: "DESC",
         pageNumber: this.params.pageNumber,
-        pageSize: this.params.pageSize
-      };
+        pageSize: this.params.pageSize,
+        setCode:this.query.setCode,
+        setName: this.query.setName
+      }
       const res = await dataSetPageList(params);
       if (res.code != "200") return;
       this.listLoading = true;

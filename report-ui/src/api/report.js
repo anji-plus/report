@@ -122,10 +122,10 @@ export function editReportExcel (data) {
   })
 }
 // /dataSet/pageList
-export function dataSetPageList (data) {
+export function dataSetPageList (params) {
   return request({
-    url: '/dataSet/pageList?page=' + data.page + '&size=' + data.size + '&sort=' + data.sort + '&order=' + data.order + '&pageNumber=' + data.pageNumber + '&pageSize=' + data.pageSize,
+    url: '/dataSet/pageList',
     method: 'GET',
-    data,
+    params,
   })
 }
