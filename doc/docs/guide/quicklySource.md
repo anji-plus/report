@@ -22,6 +22,8 @@ http://serverip:9095
   
 ## 克隆源码
 git clone https://gitee.com/anji-plus/report.git <br>
+![img9.png](../picture/quickly/img_9.png)
+**注**：不要下载发行版里面的 Source Code.zip
 
 ## build
 进入report目录，启动build.sh
