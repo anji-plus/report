@@ -65,13 +65,9 @@ export default {
     // 数据解析
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
-      optionsData.dataType == "staticData"
-        ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
-    },
-    staticDataFn(val) {
-      this.styleColor.text = val;
-      this.$forceUpdate();
+      if (optionsData.dataType == "dynamicData") {
+        this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
+      } else {};
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
