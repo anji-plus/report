@@ -38,3 +38,31 @@
     zoom: 1;
   }
 }
+
+.el-form-item .el-form-item__label {
+  line-height: 28px;
+}
+.el-form-item__content {
+  line-height: 28px;
+}
+.el-input__icon {
+  line-height: 28px;
+}
+
+.el-input--suffix .el-input__inner {
+  height: 28px;
+  line-height: 28px;
+}
+.el-input .el-input__inner {
+  height: 28px;
+  line-height: 28px;
+}
+.el-button {
+  padding: 7px 15px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.el-table td {
+  padding: 6px 0;
+}

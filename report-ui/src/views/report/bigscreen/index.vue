@@ -31,14 +31,7 @@
             />
           </el-form-item>
         </el-col>
-        <el-col
-          :xs="24"
-          :sm="20"
-          :md="4"
-          :lg="4"
-          :xl="4"
-          style="margin-top: 5px"
-        >
+        <el-col :xs="24" :sm="20" :md="4" :lg="4" :xl="4">
           <el-button type="primary" size="mini" @click="search('form')"
             >查询</el-button
           >

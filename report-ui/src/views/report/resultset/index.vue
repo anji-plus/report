@@ -256,15 +256,22 @@
                         </el-button>
                       </template>
                     </el-table-column>
-                     <el-table-column label="操作"
-                                     width="200">
+                    <el-table-column label="操作" width="200">
                       <template slot-scope="scope">
-                        <el-button type="text"
-                                   size="small"
-                                   @click.native.prevent="cutOutRow(scope.$index, tableData)">删除</el-button>
-                        <el-button type="text"
-                                   size="small"
-                                   @click="addRow(scope.row)">追加</el-button>
+                        <el-button
+                          type="text"
+                          size="small"
+                          @click.native.prevent="
+                            cutOutRow(scope.$index, tableData)
+                          "
+                          >删除</el-button
+                        >
+                        <el-button
+                          type="text"
+                          size="small"
+                          @click="addRow(scope.row)"
+                          >追加</el-button
+                        >
                       </template>
                     </el-table-column>
                   </el-table>
@@ -661,9 +668,9 @@ export default {
         order: "DESC",
         pageNumber: this.params.pageNumber,
         pageSize: this.params.pageSize,
-        setCode:this.query.setCode,
+        setCode: this.query.setCode,
         setName: this.query.setName
-      }
+      };
       const res = await dataSetPageList(params);
       if (res.code != "200") return;
       this.listLoading = true;
@@ -1175,8 +1182,5 @@ export default {
   height: 220px;
   overflow-y: auto;
   padding: 10px;
-}
-.query {
-  margin-top: 5px;
 }
 </style>
