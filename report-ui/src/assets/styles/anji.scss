@@ -1,0 +1,40 @@
+.anji-card {
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  font-feature-settings: "tnum";
+  position: relative;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s;
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 35px;
+    padding: 0 24px;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    font-size: 16px;
+    background: transparent;
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 2px 2px 0 0;
+    zoom: 1;
+
+    .main-card-header-button {
+      position: absolute;
+      right: 20px;
+    }
+  }
+
+  .card-body {
+    padding: 24px;
+    zoom: 1;
+  }
+}
