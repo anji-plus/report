@@ -2,17 +2,17 @@ package com.anjiplus.template.gaea.business.modules.dataSetTransform.service.imp
 
 import com.alibaba.fastjson.JSONObject;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.anjiplus.template.gaea.business.modules.dataSetTransform.controller.dto.DataSetTransformDto;
 import com.anjiplus.template.gaea.business.modules.dataSetTransform.service.TransformStrategy;
-import com.anjiplus.template.gaea.business.code.ResponseCode;
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by raodeming on 2021/3/23.
@@ -50,13 +50,18 @@ public class JsTransformServiceImpl implements TransformStrategy {
 
     private List<JSONObject> getValueFromJs(DataSetTransformDto def, List<JSONObject> data) {
         String js = def.getTransformScript();
-        js = js + "\nvar result = dataTransform(eval(" + data.toString() + "));";
         try {
             engine.eval(js);
-            ScriptObjectMirror result = (ScriptObjectMirror) engine.get("result");
-            return result.values().stream().map(o -> JSONObject.parseObject(JSONObject.toJSONString(o))).collect(Collectors.toList());
+            if(engine instanceof Invocable){
+                Invocable invocable = (Invocable) engine;
+                Object exec = invocable.invokeFunction("dataTransform", data);
+                ObjectMapper objectMapper = new ObjectMapper();
+                return objectMapper.convertValue(exec, List.class);
+            }
+
         } catch (Exception ex) {
             throw BusinessExceptionBuilder.build(ResponseCode.EXECUTE_JS_ERROR, ex.getMessage());
         }
+        return null;
     }
 }

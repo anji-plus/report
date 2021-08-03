@@ -9,11 +9,13 @@ import com.anjiplus.template.gaea.business.modules.dataSetParam.dao.entity.DataS
 import com.anjiplus.template.gaea.business.modules.dataSetParam.service.DataSetParamService;
 import com.anjiplus.template.gaea.business.modules.dataSetParam.util.ParamsResolverHelper;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.util.HashMap;
@@ -93,13 +95,16 @@ public class DataSetParamServiceImpl implements DataSetParamService {
     @Override
     public boolean verification(DataSetParamDto dataSetParamDto) {
 
-        String sampleItem = dataSetParamDto.getSampleItem();
         String validationRules = dataSetParamDto.getValidationRules();
         if (StringUtils.isNotBlank(validationRules)) {
-            validationRules = validationRules + "\nvar result = verification('" + sampleItem + "');";
             try {
                 engine.eval(validationRules);
-                return Boolean.parseBoolean(engine.get("result").toString());
+                if(engine instanceof Invocable){
+                    Invocable invocable = (Invocable) engine;
+                    Object exec = invocable.invokeFunction("verification", dataSetParamDto);
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    return objectMapper.convertValue(exec, Boolean.class);
+                }
 
             } catch (Exception ex) {
                 throw BusinessExceptionBuilder.build(ResponseCode.EXECUTE_JS_ERROR, ex.getMessage());
