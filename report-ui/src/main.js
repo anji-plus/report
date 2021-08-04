@@ -26,6 +26,8 @@ Vue.component('v-chart', ECharts)
 // anji component
 import anjiCrud from '@/components/AnjiPlus/anji-crud/anji-crud'
 import anjiSelect from '@/components/AnjiPlus/anji-select'
+import anjiUpload from '@/components/AnjiPlus/anji-upload'
+Vue.component('anji-upload', anjiUpload)
 Vue.component('anji-crud', anjiCrud)
 Vue.component('anji-select', anjiSelect)
 
