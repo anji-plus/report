@@ -51,6 +51,14 @@ export const constantRouterMap = [
       //{ path: 'excelreport', name: 'excelreport', component: () => import('@/views/report/excelreport/index'), meta: { title: '表格报表', icon: 'iconliebiao', keepAlive: true, requireAuth: true, permission: 'excelManage'} },
     ]
   },
+  {
+    path: '/system', name: 'system', component: Layout, meta: { title: '系统设置', icon: 'icon-xitong', requireAuth: true, permission: 'fileManage|dictManage|dictItemManage' },
+    children: [
+      { path: 'file', name: 'file', component: () => import('@/views/file-management/index'), meta: { title: '文件管理', icon: 'icondatabase', keepAlive: true, requireAuth: true, permission: 'fileManage'} },
+      { path: 'dict', name: 'dict', component: () => import('@/views/dict/index'), meta: { title: '数据字典', icon: 'iconAPIwangguan', keepAlive: true, requireAuth: true, permission: 'dictManage'} },
+      { path: 'dictItem', name: 'dictItem', component: () => import('@/views/dict/dict-item'), meta: { title: '字典项', icon: 'iconnavicon-ywcs', keepAlive: true, requireAuth: true, permission: 'dictItemManage'} },
+    ]
+  },
   { path: '/bigscreen/viewer', component: () => import('@/views/report/bigscreen/viewer'), hidden: true, meta: { requireAuth: true }},
   { path: '/bigscreen/designer', component: () => import('@/views/report/bigscreen/designer'), hidden: true, meta: { requireAuth: true }},
   { path: '/404', component: () => import('@/views/404'), hidden: true },
