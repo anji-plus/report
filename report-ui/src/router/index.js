@@ -52,11 +52,11 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/system', name: 'system', component: Layout, meta: { title: '系统设置', icon: 'icon-xitong', requireAuth: true, permission: 'fileManage|dictManage|dictItemManage' },
+    path: '/system', name: 'system', component: Layout, meta: { title: '系统设置', icon: 'iconshezhi', requireAuth: true, permission: 'fileManage|dictManage|dictItemManage' },
     children: [
-      { path: 'file', name: 'file', component: () => import('@/views/file-management/index'), meta: { title: '文件管理', icon: 'icondatabase', keepAlive: true, requireAuth: true, permission: 'fileManage'} },
-      { path: 'dict', name: 'dict', component: () => import('@/views/dict/index'), meta: { title: '数据字典', icon: 'iconAPIwangguan', keepAlive: true, requireAuth: true, permission: 'dictManage'} },
-      { path: 'dictItem', name: 'dictItem', component: () => import('@/views/dict/dict-item'), meta: { title: '字典项', icon: 'iconnavicon-ywcs', keepAlive: true, requireAuth: true, permission: 'dictItemManage'} },
+      { path: 'file', name: 'file', component: () => import('@/views/file-management/index'), meta: { title: '文件管理', icon: 'iconfill_folder', keepAlive: true, requireAuth: true, permission: 'fileManage'} },
+      { path: 'dict', name: 'dict', component: () => import('@/views/dict/index'), meta: { title: '数据字典', icon: 'iconzidian', keepAlive: true, requireAuth: true, permission: 'dictManage'} },
+      { path: 'dictItem', name: 'dictItem', component: () => import('@/views/dict/dict-item'), meta: { title: '字典项', icon: 'iconzidianxiang', keepAlive: true, requireAuth: true, permission: 'dictItemManage'} },
     ]
   },
   { path: '/bigscreen/viewer', component: () => import('@/views/report/bigscreen/viewer'), hidden: true, meta: { requireAuth: true }},
