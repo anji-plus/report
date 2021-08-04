@@ -14,6 +14,7 @@ import java.io.Serializable;
  * @since 2021-02-23 10:01:02
  */
 @ApiModel(value = "")
+@Data
 public class GaeaDictDTO extends GaeaBaseDTO implements Serializable {
     /**
      * 字典名称
@@ -31,36 +32,5 @@ public class GaeaDictDTO extends GaeaBaseDTO implements Serializable {
     @ApiModelProperty(value = "字典描述")
     private String remark;
 
-    public String getDictName() {
-        return dictName;
-    }
 
-    public void setDictName(String dictName) {
-        this.dictName = dictName;
-    }
-
-    public String getDictCode() {
-        return dictCode;
-    }
-
-    public void setDictCode(String dictCode) {
-        this.dictCode = dictCode;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    @Override
-    public String toString() {
-        return "GaeaDictDTO{" +
-                "dictName='" + dictName + '\'' +
-                ", dictCode='" + dictCode + '\'' +
-                ", remark='" + remark + '\'' +
-                '}';
-    }
 }
