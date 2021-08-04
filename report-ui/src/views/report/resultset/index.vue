@@ -18,7 +18,7 @@
     <template v-slot:pageSection>
       <EditDataSet ref="EditDataSet" :dataSet="dataSet" :visib="dialogVisibleSetDataSet"
                    @handleClose="dialogVisibleSetDataSet = false" @refreshList="refreshList"/>
-      <DataView ref="dataViewPreview" :visib="dialogCaseResult"
+      <DataView ref="DataView" :visib="dialogCaseResult"
                    @handleClose="dialogCaseResult = false"/>
     </template>
   </anji-crud>
@@ -227,7 +227,7 @@ export default {
     dataView(prop){
 
       this.dialogCaseResult = true;
-      this.$refs.EditDataSet.dataViewPreview(prop.msg.setName, JSON.parse(prop.msg.caseResult));
+      this.$refs.DataView.dataViewPreview(prop.msg.setName, JSON.parse(prop.msg.caseResult));
     }
   }
 }
