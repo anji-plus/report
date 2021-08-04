@@ -1,7 +1,12 @@
 <template>
   <div>
-    <el-dialog :title="dialogFormVisibleTitle" :visible.sync="visib" :close-on-click-modal="false"
-               :before-close="closeDialog" width="65%">
+    <el-dialog
+      :title="dialogFormVisibleTitle"
+      :visible.sync="visib"
+      :close-on-click-modal="false"
+      :before-close="closeDialog"
+      width="65%"
+    >
       <el-form
         ref="form"
         :model="formData"
@@ -38,12 +43,12 @@
           </el-col>
           <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
             <el-form-item label="数据集名称" prop="setName">
-              <el-input v-model.trim="formData.setName" size="mini"/>
+              <el-input v-model.trim="formData.setName" size="mini" />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="20" :md="22" :lg="22" :xl="22">
             <el-form-item label="数据集描述">
-              <el-input v-model.trim="formData.setDesc" size="mini"/>
+              <el-input v-model.trim="formData.setDesc" size="mini" />
             </el-form-item>
           </el-col>
 
@@ -80,17 +85,16 @@
                     type="text"
                     size="small"
                     @click="addRow()"
-                  >添加
-                  </el-button
-                  >
+                    >添加
+                  </el-button>
                   <el-table :data="tableData" border style="width: 100%">
                     <el-table-column
                       align="center"
                       label="序号"
                       type="index"
-                      min-width="40"
+                      width="80"
                     />
-                    <el-table-column label="参数名">
+                    <el-table-column label="参数名" align="center">
                       <template slot-scope="scope">
                         <el-input
                           v-model.trim="tableData[scope.$index].paramName"
@@ -101,35 +105,34 @@
                         />
                       </template>
                     </el-table-column>
-                    <el-table-column label="描述">
+                    <el-table-column label="描述" align="center">
                       <template slot-scope="scope">
                         <el-input
                           v-model.trim="tableData[scope.$index].paramDesc"
                         />
                       </template>
                     </el-table-column>
-                    <el-table-column label="数据类型">
+                    <el-table-column label="数据类型" align="center">
                       <template slot-scope="scope">
                         <el-input
                           v-model.trim="tableData[scope.$index].paramType"
                         />
                       </template>
                     </el-table-column>
-                    <el-table-column label="示例值">
+                    <el-table-column label="示例值" align="center">
                       <template slot-scope="scope">
                         <el-input
                           v-model.trim="tableData[scope.$index].sampleItem"
                         />
                       </template>
                     </el-table-column>
-                    <el-table-column label="校验" width="220">
+                    <el-table-column label="校验" width="220" align="center">
                       <template slot-scope="scope">
                         <el-checkbox
                           v-model="tableData[scope.$index].mandatory"
                           @change="Mandatory(scope.$index)"
-                        >必选
-                        </el-checkbox
-                        >
+                          >必选
+                        </el-checkbox>
                         <el-button
                           type="primary"
                           icon="el-icon-plus"
@@ -139,7 +142,7 @@
                         </el-button>
                       </template>
                     </el-table-column>
-                    <el-table-column label="操作" width="200">
+                    <el-table-column label="操作" width="200" align="center">
                       <template slot-scope="scope">
                         <el-button
                           type="text"
@@ -147,25 +150,22 @@
                           @click.native.prevent="
                             cutOutRow(scope.$index, tableData)
                           "
-                        >删除
-                        </el-button
-                        >
+                          >删除
+                        </el-button>
                         <el-button
                           type="text"
                           size="small"
                           @click="addRow(scope.row)"
-                        >追加
-                        </el-button
-                        >
+                          >追加
+                        </el-button>
                       </template>
                     </el-table-column>
                   </el-table>
                   <el-checkbox
                     v-model="isShowPagination"
                     @change="changePagination"
-                  >加入分页参数
-                  </el-checkbox
-                  >
+                    >加入分页参数
+                  </el-checkbox>
                 </el-tab-pane>
                 <el-tab-pane label="数据转换" name="second">
                   <template>
@@ -293,18 +293,17 @@
                               </el-table>
                             </div>
                             <el-button type="success" @click="addAllDict()"
-                            >新增
-                            </el-button
-                            >
+                              >新增
+                            </el-button>
                           </div>
                           <span slot="footer" class="dialog-footer">
                             <el-button @click="dialogSwitchVisible = false"
-                            >取消</el-button
+                              >取消</el-button
                             >
                             <el-button
                               type="primary"
                               @click="filterScriptConfirm"
-                            >保存</el-button
+                              >保存</el-button
                             >
                           </span>
                         </el-dialog>
@@ -314,7 +313,7 @@
                           disabled="true"
                           @click="addFilter"
                         >
-                          <i class="el-icon-plus"/><span>新增</span>
+                          <i class="el-icon-plus" /><span>新增</span>
                         </div>
                       </div>
                     </div>
@@ -360,7 +359,7 @@
         <el-button type="warning" @click="testResultset">测试</el-button>
 
         <el-button type="primary" @click="dialogValidationRules"
-        >保存</el-button
+          >保存</el-button
         >
         <el-button @click="dialogPermissionVisible = false">关闭</el-button>
       </span>
@@ -374,10 +373,10 @@ import {
   testTransformSet,
   dataSetPreview,
   addDataSet,
-  editDataSet,
+  editDataSet
 } from "@/api/report";
 import Dictionary from "@/components/Dictionary/index";
-import {codemirror} from "vue-codemirror"; // 引入codeMirror全局实例
+import { codemirror } from "vue-codemirror"; // 引入codeMirror全局实例
 import "codemirror/mode/sql/sql.js";
 import "codemirror/mode/javascript/javascript.js";
 import "codemirror/lib/codemirror.css"; // 核心样式
@@ -385,21 +384,21 @@ import "codemirror/theme/cobalt.css"; // 引入主题后还需要在 options 中
 import vueJsonEditor from "vue-json-editor";
 
 export default {
-  name: 'Support',
-  components: {Dictionary, codemirror, vueJsonEditor},
+  name: "Support",
+  components: { Dictionary, codemirror, vueJsonEditor },
   props: {
     visib: {
       required: true,
       type: Boolean,
-      default: false,
+      default: false
     },
     dataSet: {
       required: false,
       type: Object,
       default: () => {
-        return ''
-      },
-    },
+        return "";
+      }
+    }
   },
   data() {
     return {
@@ -467,13 +466,13 @@ export default {
       },
       formRules: {
         setName: [
-          {required: true, message: "数据集名称必填", trigger: "blur"}
+          { required: true, message: "数据集名称必填", trigger: "blur" }
         ],
         setCode: [
-          {required: true, message: "数据集编码必填", trigger: "blur"}
+          { required: true, message: "数据集编码必填", trigger: "blur" }
         ],
         sourceCode: [
-          {required: true, message: "数据源必选", trigger: "change"}
+          { required: true, message: "数据源必选", trigger: "change" }
         ]
       },
       sourceList: [],
@@ -510,38 +509,36 @@ export default {
       list: null,
       basicDialog: false,
       dialogForm: {
-        sourceName: '',
-        sourceCode: '',
-        sourceType: '',
-        sourceDesc: '',
-        sourceConfig: '',
+        sourceName: "",
+        sourceCode: "",
+        sourceType: "",
+        sourceDesc: "",
+        sourceConfig: ""
       },
       dataLink: [],
       rules: {
         sourceType: [
-          {required: true, message: '数据集名称必选', trigger: 'change'},
+          { required: true, message: "数据集名称必选", trigger: "change" }
         ],
         sourceCode: [
-          {required: true, message: '数据集编码必填', trigger: 'blur'},
+          { required: true, message: "数据集编码必填", trigger: "blur" }
         ],
         sourceName: [
-          {required: true, message: '数据源名称必选', trigger: 'blur'},
-        ],
+          { required: true, message: "数据源名称必选", trigger: "blur" }
+        ]
       },
-      value: '',
-      testReplyCode: null,
-    }
+      value: "",
+      testReplyCode: null
+    };
   },
   // 在生命周期 beforeCreate里面改变this指向
-  beforeCreate: function () {
-  },
-  mounted() {
-  },
+  beforeCreate: function() {},
+  mounted() {},
   methods: {
     // 编辑数据集,获取单条数据详情
     async addOrEditDataSet(row) {
       //获取数据源下拉
-      const {code, data} = await queryAllDataSourceSet();
+      const { code, data } = await queryAllDataSourceSet();
       if (code != "200") return;
       this.sourceList = data;
 
@@ -593,9 +590,9 @@ export default {
               for (const i in extendObj) {
                 const children = [];
                 for (const y in extendObj[i]) {
-                  children.push({name: y, value: extendObj[i][y]});
+                  children.push({ name: y, value: extendObj[i][y] });
                 }
-                extendArry.push({name: i, children: children});
+                extendArry.push({ name: i, children: children });
               }
               this.tableData2 = extendArry;
             }
@@ -618,14 +615,11 @@ export default {
     },
     // 关闭模态框
     closeDialog() {
-      this.$emit('handleClose')
+      this.$emit("handleClose");
     },
 
-
-    onJsonChange(value) {
-    },
-    onJsonSave(value) {
-    },
+    onJsonChange(value) {},
+    onJsonSave(value) {},
     handleClose(done) {
       this.dialogFormVisible = false;
     },
@@ -634,7 +628,6 @@ export default {
       this.caseResultTitle = item.setName;
       this.caseResultContent = JSON.parse(item.caseResult);
     },
-
 
     // 测试预览
     async handleClickTabs(tab, event) {
@@ -645,7 +638,7 @@ export default {
           dataSetParamDtoList: this.tableData,
           dataSetTransformDtoList: this.itemFilterList
         };
-        const {code, data} = await testTransformSet(params);
+        const { code, data } = await testTransformSet(params);
         if (code != "200") return;
         this.cols = data.data;
         this.testMassageCode = code;
@@ -697,7 +690,7 @@ export default {
       this.dialogSwitchVisible = true;
       if (item.transformType == "js") {
         this.itemFilterScriptId = item.itemFilterSort;
-        const fnCont = `function dataTransform(data){\n\t//自定义脚本内容\n\treturn data;\n}`
+        const fnCont = `function dataTransform(data){\n\t//自定义脚本内容\n\treturn data;\n}`;
         this.transformScript = item.transformScript
           ? item.transformScript
           : fnCont;
@@ -767,7 +760,7 @@ export default {
       this.title = "自定义高级规则";
       if (this.isRowData.sampleItem != "") {
         this.isRowData = row;
-        const fnCont = `function verification(data){\n\t//自定义脚本内容\n\treturn true;\n}`
+        const fnCont = `function verification(data){\n\t//自定义脚本内容\n\treturn true;\n}`;
         this.validationRules = row.validationRules
           ? row.validationRules
           : fnCont;
@@ -782,11 +775,11 @@ export default {
     addAllDict() {
       this.tableData2.push({
         name: "",
-        children: [{name: "", value: ""}]
+        children: [{ name: "", value: "" }]
       });
     },
     addDict(index, item) {
-      item.push({name: "", value: ""});
+      item.push({ name: "", value: "" });
     },
     delAllDict(index, rows) {
       rows.splice(index, 1);
@@ -800,21 +793,19 @@ export default {
     },
     // -------------------------------------------------------------------------------
     // 数据源下拉切换
-    changeSource() {
-    },
+    changeSource() {},
     // 自定义高级规则
     async testResultset() {
       this.isRowData.validationRules = this.validationRules;
-      const {code, message, data} = await verificationSet(this.isRowData);
+      const { code, message, data } = await verificationSet(this.isRowData);
       if (code == "200") {
         if (data) {
-          this.$message.success('校验通过');
-        }else {
-          this.$message.warning('当前示例值校验不通过');
+          this.$message.success("校验通过");
+        } else {
+          this.$message.warning("当前示例值校验不通过");
         }
-
       } else {
-        this.$message.error(message)
+        this.$message.error(message);
       }
     },
     // 删除
@@ -841,13 +832,13 @@ export default {
             this.formData.dataSetTransformDtoList = this.itemFilterList;
             this.formData.caseResult = JSON.stringify(this.cols);
             if (this.dialogFormVisibleTitle === "新增数据集") {
-              const {code} = await addDataSet(this.formData);
+              const { code } = await addDataSet(this.formData);
               if (code != "200") return;
-              this.closeDialog()
+              this.closeDialog();
             } else {
-              const {code} = await editDataSet(this.formData);
+              const { code } = await editDataSet(this.formData);
               if (code != "200") return;
-              this.closeDialog()
+              this.closeDialog();
             }
           } else {
             this.$message.error("请先测试预览，操作成功后便可保存！");
@@ -867,14 +858,14 @@ export default {
       for (const key in objfirst) {
         const newObj = {};
         objfirst[key].map(ev => {
-          Object.assign(newObj, {[ev.name]: ev.value});
+          Object.assign(newObj, { [ev.name]: ev.value });
         });
         objSecond[key] = newObj;
       }
       return objSecond;
     }
-  },
-}
+  }
+};
 </script>
 <style lang="scss" scoped>
 .code-mirror-form {
