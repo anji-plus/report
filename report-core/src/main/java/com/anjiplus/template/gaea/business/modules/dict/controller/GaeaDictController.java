@@ -1,5 +1,6 @@
 package com.anjiplus.template.gaea.business.modules.dict.controller;
 
+import com.anji.plus.gaea.annotation.Permission;
 import com.anji.plus.gaea.bean.KeyValue;
 import com.anji.plus.gaea.bean.ResponseBean;
 import com.anji.plus.gaea.curd.controller.GaeaBaseController;
@@ -54,6 +55,7 @@ public class GaeaDictController extends GaeaBaseController<GaeaDictParam, GaeaDi
      * @return
      */
     @PostMapping("/freshDict")
+    @Permission(code = "fresh",name = "刷新")
     public ResponseBean refreshDict(@RequestBody List<String> dictCodes) {
         //刷新
         gaeaDictService.refreshCache(dictCodes);
@@ -65,6 +67,7 @@ public class GaeaDictController extends GaeaBaseController<GaeaDictParam, GaeaDi
      * @return
      */
     @GetMapping("/select/{dictCode}")
+    @Permission(code = "query",name = "下拉")
     public ResponseBean select(@PathVariable("dictCode") String dictName){
         Locale locale = LocaleContextHolder.getLocale();
         //语言

@@ -1,5 +1,6 @@
 package com.anjiplus.template.gaea.business.modules.file.controller;
 
+import com.anji.plus.gaea.annotation.Permission;
 import com.anji.plus.gaea.bean.ResponseBean;
 import com.anji.plus.gaea.curd.service.GaeaBaseService;
 import com.anjiplus.template.gaea.business.base.BaseController;
@@ -30,6 +31,7 @@ public class GaeaFileController extends BaseController<GaeaFileParam, GaeaFile, 
     private GaeaFileService gaeaFileService;
 
     @PostMapping("/upload")
+    @Permission(code = "upload", name = "文件上传")
     public ResponseBean upload(@RequestParam("file") MultipartFile file) {
         return ResponseBean.builder().message("success").data((gaeaFileService.upload(file))).build();
     }
