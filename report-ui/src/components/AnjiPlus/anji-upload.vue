@@ -13,10 +13,7 @@
       :before-upload="handleBeforeUpload"
       :class="fileList && fileList.length >= limit ? 'hide_box' : ''"
     >
-      <i slot="default" class="el-icon-plus" />
-      <div slot="file" slot-scope="{ file }" class="imgBox">
-        <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
-      </div>
+      <i class="el-icon-plus" />
     </el-upload>
     <el-dialog :visible.sync="dialogVisibleImageUpload" :modal="false">
       <img width="100%" :src="imageUploadUrl" alt="" />
@@ -86,13 +83,7 @@ export default {
   },
   methods: {
     handleRemove(file) {
-      const fileList = [];
-      this.fileList.forEach(el => {
-        if (el.fileId != file.fileId) {
-          fileList.push(el);
-        }
-      });
-      this.fileList = fileList;
+      this.fileList = [];
       this.change();
     },
     handlePictureCardPreview(file) {
@@ -101,20 +92,18 @@ export default {
     },
     // 上传成功的回调
     handleSuccess(response, file, fileList) {
-      console.log(fileList);
       if (response.code != 200) {
         this.$message.error("上传失败");
         return;
       }
       this.fileList.push({
-        url: file.response.data.urlPath,
-        fileId: file.response.data.fileId
+        url: file.response.data.urlPath
       });
       this.change();
     },
     // 回传出去
     change() {
-      const fileList = this.fileList[0]["fileId"];
+      const fileList = (this.fileList.length > 0 && this.fileList[0].url) || "";
       this.$emit("input", fileList);
       this.$emit("change", fileList);
     },
@@ -136,7 +125,7 @@ export default {
       if (!val) {
         this.fileList = [];
       } else {
-        const list = [{ url: this.viewUrl + val, fileId: val }];
+        const list = [{ url: val }];
         this.fileList = list;
       }
     }
@@ -153,7 +142,7 @@ export default {
   width: 60px;
   height: 60px;
 }
-.hide_box .el-upload--picture-card {
+.hide_box /deep/ .el-upload--picture-card {
   display: none;
 }
 .el-upload-list__item {
