@@ -6,7 +6,20 @@
  !-->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
-    <template v-slot:buttonLeftOnTable> </template>
+    <template slot="rowButton" slot-scope="props">
+      <el-button
+        type="text"
+        @click="preview(props.msg)"
+        v-permission="'bigScreenManage:view'"
+        >预览</el-button
+      >
+      <el-button
+        type="text"
+        @click="design(props.msg)"
+        v-permission="'bigScreenManage:design'"
+        >设计</el-button
+      >
+    </template>
 
     <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
     <!--这里可以将自定义的弹出框代码，放入到page中
@@ -215,6 +228,26 @@ export default {
   methods: {
     handleOpenDialog1() {
       alert("自定义按钮1点击事件");
+    },
+    // 预览
+    preview(val) {
+      var routeUrl = this.$router.resolve({
+        path: "/bigscreen/viewer",
+        query: { reportCode: val.reportCode }
+      });
+      window.open(routeUrl.href, "_blank");
+    },
+    // 设计
+    design(val) {
+      var routeUrl = this.$router.resolve({
+        path: "/bigscreen/designer",
+        query: {
+          reportCode: val.reportCode,
+          reportId: val.id,
+          accessKey: val.accessKey
+        }
+      });
+      window.open(routeUrl.href, "_blank");
     }
   }
 };
