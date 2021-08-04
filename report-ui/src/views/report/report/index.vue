@@ -20,13 +20,6 @@
         >设计</el-button
       >
     </template>
-
-    <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
-    <!--这里可以将自定义的弹出框代码，放入到page中
-    <template v-slot:pageSection>
-      <div>插入底部html片段</div>
-    </template>
-    -->
   </anji-crud>
 </template>
 <script>
@@ -209,17 +202,7 @@ export default {
         // fieldName 触发修改的input name
         // fieldVal input最新值
         // fieldExtend 对于select型的扩展值
-        formChange: (formData, fieldName, fieldVal, fieldExtend) => {
-          // if (fieldName == "reportImage") {
-          //   const fileIdList = [];
-          //   fieldVal.forEach(el => {
-          //     if (el.fileId) {
-          //       fileIdList.push(el.fileId);
-          //     }
-          //   });
-          //   formData["reportImage"] = fileIdList.join(",");
-          // }
-        }
+        formChange: (formData, fieldName, fieldVal, fieldExtend) => {}
       }
     };
   },
