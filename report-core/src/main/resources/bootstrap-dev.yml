@@ -5,6 +5,6 @@ spring:
     username: root
     password: appuser@anji
 
-#customer:
-#  file:
-#    dist-path: D:\Workspace\AJ-Report\report-core\upload
+customer:
+  file:
+    dist-path: /app/disk/upload/
