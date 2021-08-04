@@ -62,6 +62,18 @@
   font-size: 12px;
   border-radius: 3px;
 }
+.el-dropdown-menu__item {
+  min-width: 80px;
+  max-width: 110px;
+  float: right;
+  .el-button--text {
+    margin-left: 0;
+  }
+}
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  background: none !important;
+}
 
 .el-table td {
   padding: 6px 0;
