@@ -17,9 +17,9 @@ import com.anjiplus.template.gaea.business.modules.dataSource.controller.dto.Dat
 import com.anjiplus.template.gaea.business.modules.dataSource.controller.param.ConnectionParam;
 import com.anjiplus.template.gaea.business.modules.dataSource.dao.DataSourceMapper;
 import com.anjiplus.template.gaea.business.modules.dataSource.dao.entity.DataSource;
-import com.anjiplus.template.gaea.business.util.JdbcConstants;
 import com.anjiplus.template.gaea.business.modules.dataSource.service.DataSourceService;
-import com.anjiplus.template.gaea.business.util.JdbcUtil;
+import com.anjiplus.template.gaea.business.modules.dataSource.service.JdbcService;
+import com.anjiplus.template.gaea.business.util.JdbcConstants;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +58,9 @@ public class DataSourceServiceImpl implements DataSourceService {
 
     @Autowired
     private DataSetParamService dataSetParamService;
+
+    @Autowired
+    private JdbcService jdbcService;
 
     @Override
     public GaeaBaseMapper<DataSource> getMapper() {
@@ -222,7 +225,7 @@ public class DataSourceServiceImpl implements DataSourceService {
         analysisRelationalDbConfig(dto);
         Connection pooledConnection = null;
         try {
-            pooledConnection = JdbcUtil.getPooledConnection(dto);
+            pooledConnection = jdbcService.getPooledConnection(dto);
 
             PreparedStatement statement = pooledConnection.prepareStatement(dto.getDynSentence());
             ResultSet rs = statement.executeQuery();
@@ -307,13 +310,18 @@ public class DataSourceServiceImpl implements DataSourceService {
     public void testRelationalDb(DataSourceDto dto) {
         analysisRelationalDbConfig(dto);
         try {
-            Connection unPooledConnection = JdbcUtil.getUnPooledConnection(dto);
+            Connection unPooledConnection = jdbcService.getUnPooledConnection(dto);
             String catalog = unPooledConnection.getCatalog();
             log.info("数据库测试连接成功：{}", catalog);
             unPooledConnection.close();
         } catch (SQLException e) {
             log.error("error",e);
-            throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
+            if (e.getCause() instanceof ClassNotFoundException) {
+                throw BusinessExceptionBuilder.build(ResponseCode.CLASS_NOT_FOUND, e.getCause().getMessage());
+            } else {
+                throw BusinessExceptionBuilder.build(ResponseCode.DATA_SOURCE_CONNECTION_FAILED, e.getMessage());
+            }
+
         }
     }
 
@@ -418,6 +426,6 @@ public class DataSourceServiceImpl implements DataSourceService {
      */
     @Override
     public void processAfterOperation(DataSource entity, BaseOperationEnum operationEnum) throws BusinessException {
-        JdbcUtil.removeJdbcConnectionPool(entity.getId());
+        jdbcService.removeJdbcConnectionPool(entity.getId());
     }
 }
