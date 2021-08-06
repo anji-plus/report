@@ -102,24 +102,22 @@ export default {
     },
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
-      console.log(optionsData);
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      const unit = JSON.parse(val).unit;
+      const staticData = typeof val == "string" ? JSON.parse(val) : val;
       const series = this.options.series;
       for (const key in series) {
-        series[key].detail.formatter = `{value}${unit}`;
+        series[key].detail.formatter = `{value}${staticData.unit}`;
         series[key].data[0] = {
-          value: JSON.parse(val).value,
-          name: JSON.parse(val).name
+          value: staticData.value,
+          name: staticData.name
         };
       }
     },
     dynamicDataFn(val, refreshTime) {
-      console.log(val);
       if (!val) return;
       if (this.ispreview) {
         this.getEchartData(val);

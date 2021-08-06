@@ -1822,7 +1822,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: '{"categories": ["苹果","三星","小米","oppo","vivo"],"series": [{"name": "手机品牌","data": [1000,2229,3879,2379,4079]}]}',
+          value: {"categories": ["苹果","三星","小米","oppo","vivo"],"series": [{"name": "手机品牌","data": [1000,2229,3879,2379,4079]}]},
         },
         {
           type: 'dycustComponents',
@@ -2360,7 +2360,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: '{"categories": ["苹果","三星","小米","oppo","vivo"],"series": [{"name": "手机品牌","data": [1000,2229,3879,2379,4079]}]}',
+          value: {"categories": ["苹果","三星","小米","oppo","vivo"],"series": [{"name": "手机品牌","data": [1000,2229,3879,2379,4079]}]},
         },
         {
           type: 'dycustComponents',
@@ -3003,7 +3003,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: '{"categories": ["苹果","三星","小米","oppo","vivo"],"series": [{"name": "手机品牌","data": [1009,3409,2309,5409,3409]}]}',
+          value: {"categories": ["苹果","三星","小米","oppo","vivo"],"series": [{"name": "手机品牌","data": [1009,3409,2309,5409,3409]}]},
         },
         {
           type: 'dycustComponents',
@@ -3628,7 +3628,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: '{"xAxis": ["1月", "2月", "3月", "4月", "5月","6月", "7月", "8月","9月","10月","11月","12月"],"series": [{"type": "bar","name": "货运量","data": [2.6,5.9,9,26.4,28.7,70.7,175.6,182.2,48.7,18.8,6,2.3]},{"type": "line","name": "货运总量","yAxisIndex": 1,"data": [2,2.2,3.3,4.5,6.3,10.2,20.3,23.4,23,16.5,12,6.2]}]}',
+          value: {"xAxis": ["1月", "2月", "3月", "4月", "5月","6月", "7月", "8月","9月","10月","11月","12月"],"series": [{"type": "bar","name": "货运量","data": [2.6,5.9,9,26.4,28.7,70.7,175.6,182.2,48.7,18.8,6,2.3]},{"type": "line","name": "货运总量","yAxisIndex": 1,"data": [2,2.2,3.3,4.5,6.3,10.2,20.3,23.4,23,16.5,12,6.2]}]},
         },
         {
           type: 'dycustComponents',
@@ -4021,7 +4021,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: '[{"value": 1048,"name": "搜索引擎"},{"value": 735, "name": "直接访问"},{"value": 580, "name": "邮件营销"},{"value": 484,"name":"联盟广告"},{"value":300,"name":"视频广告"}]',
+          value: [{"value": 1048,"name": "搜索引擎"},{"value": 735, "name": "直接访问"},{"value": 580, "name": "邮件营销"},{"value": 484,"name":"联盟广告"},{"value":300,"name":"视频广告"}]
         },
         {
           type: 'dycustComponents',
@@ -4395,7 +4395,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: '[{"value": 60,"name": "访问"},{"value": 40, "name": "咨询"},{"value": 20, "name": "订单"},{"value": 80,"name":"点击"},{"value":100,"name":"展现"}]',
+          value: [{"value": 60,"name": "访问"},{"value": 40, "name": "咨询"},{"value": 20, "name": "订单"},{"value": 80,"name":"点击"},{"value":100,"name":"展现"}],
         },
         {
           type: 'dycustComponents',
@@ -4548,7 +4548,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: '{"value": 50, "name": "名称", "unit": "%"}',
+          value: {value: 50, name: "名称", unit: "%"},
         },
         {
           type: 'dycustComponents',
@@ -4995,7 +4995,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: '[{"value": 1048,"name": "搜索引擎"},{"value": 735, "name": "直接访问"},{"value": 580, "name": "邮件营销"},{"value": 484,"name":"联盟广告"},{"value":300,"name":"视频广告"}]',
+          value: [{"value": 1048,"name": "搜索引擎"},{"value": 735, "name": "直接访问"},{"value": 580, "name": "邮件营销"},{"value": 484,"name":"联盟广告"},{"value":300,"name":"视频广告"}],
         },
         {
           type: 'dycustComponents',

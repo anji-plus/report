@@ -331,6 +331,12 @@ export default {
   },
   mounted() {},
   methods: {
+    onJsonChange(val) {
+      console.log(val);
+    },
+    onJsonSave(val) {
+      console.log(val);
+    },
     // 无论哪个输入框改变 都需要触发事件 将值回传
     changed(val, key) {
       if (val.extend) {

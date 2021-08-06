@@ -95,7 +95,12 @@ export default {
             barWidth: "20px",
             itemStyle: {
               normal: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                color: new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
                     {
                       offset: 0,
                       color: "rgba(0,244,255,1)" // 0% 处的颜色
@@ -115,9 +120,9 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: ['-10', '-30'],
+                position: ["-10", "-30"],
                 distance: 1,
-                formatter: '{a|{c}}',
+                formatter: "{a|{c}}",
                 rich: {
                   a: {
                     fontSize: 15,
@@ -326,11 +331,16 @@ export default {
       legend.itemWidth = optionsCollapse.lengedWidth;
     },
     // 渐变色
-    setOptionsColor(){
+    setOptionsColor() {
       const optionsCollapse = this.optionsSetup;
-      const itemStyle = this.options.series[0]['itemStyle']
+      const itemStyle = this.options.series[0]["itemStyle"];
       const normal = {
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        color: new echarts.graphic.LinearGradient(
+          0,
+          0,
+          0,
+          1,
+          [
             {
               offset: 0,
               color: optionsCollapse.bar0color // 0% 处的颜色
@@ -345,8 +355,8 @@ export default {
         barBorderRadius: optionsCollapse.radius, //圆角
         shadowColor: optionsCollapse.shadowColor, // 阴影颜色
         shadowBlur: optionsCollapse.shadowBlur //模糊系数
-      }
-      itemStyle['normal'] = normal
+      };
+      itemStyle["normal"] = normal;
     },
     // 数据解析
     setOptionsData() {
@@ -362,7 +372,7 @@ export default {
     },
     // 静态数据
     staticDataFn(val, optionsSetup) {
-      const staticData = JSON.parse(val);
+      const staticData = typeof val == "string" ? JSON.parse(val) : val;
       // x轴
       if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];

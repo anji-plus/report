@@ -383,7 +383,7 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      const staticData = JSON.parse(val);
+      const staticData = typeof val == "string" ? JSON.parse(val) : val;
       // x轴
       this.options.xAxis.data = staticData.xAxis;
       // series

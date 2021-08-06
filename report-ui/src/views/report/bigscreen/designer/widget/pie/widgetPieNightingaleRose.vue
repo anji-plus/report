@@ -1,7 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options"
-             autoresize />
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 
@@ -13,7 +12,7 @@ export default {
     value: Object,
     ispreview: Boolean
   },
-  data () {
+  data() {
     return {
       options: {
         legend: {
@@ -46,7 +45,7 @@ export default {
     };
   },
   computed: {
-    styleObj () {
+    styleObj() {
       return {
         position: this.ispreview ? "absolute" : "static",
         width: this.optionsStyle.width + "px",
@@ -59,7 +58,7 @@ export default {
   },
   watch: {
     value: {
-      handler (val) {
+      handler(val) {
         console.log(val);
         this.optionsStyle = val.position;
         this.optionsData = val.data;
@@ -70,7 +69,7 @@ export default {
       deep: true
     }
   },
-  mounted () {
+  mounted() {
     this.optionsStyle = this.value.position;
     this.optionsData = this.value.data;
     this.optionsCollapse = this.value.setup;
@@ -79,7 +78,7 @@ export default {
   },
   methods: {
     // 修改图标options属性
-    editorOptions () {
+    editorOptions() {
       this.setOptionsTitle();
       this.setOptionsValue();
       this.setOptionsTooltip();
@@ -89,11 +88,11 @@ export default {
       this.setOptionsRosetype();
     },
     // 饼图模式 面积模式"area" 半径模式"radius"
-    setOptionsRosetype () {
-      this.options.series[0]['roseType'] = this.optionsSetup.nightingleRosetype
+    setOptionsRosetype() {
+      this.options.series[0]["roseType"] = this.optionsSetup.nightingleRosetype;
     },
     // 标题修改
-    setOptionsTitle () {
+    setOptionsTitle() {
       const optionsCollapse = this.optionsSetup;
       const title = {};
       title.text = optionsCollapse.titleText;
@@ -141,7 +140,7 @@ export default {
       }
     },
     // tooltip 设置
-    setOptionsTooltip () {
+    setOptionsTooltip() {
       const optionsCollapse = this.optionsSetup;
       const tooltip = {
         trigger: "item",
@@ -154,7 +153,7 @@ export default {
       this.options.tooltip = tooltip;
     },
     // 边距设置
-    setOptionsMargin () {
+    setOptionsMargin() {
       const optionsCollapse = this.optionsSetup;
       const grid = {
         left: optionsCollapse.marginLeft,
@@ -166,7 +165,7 @@ export default {
       this.options.grid = grid;
     },
     // 图例操作 legend
-    setOptionsLegend () {
+    setOptionsLegend() {
       const optionsCollapse = this.optionsSetup;
       const legend = this.options.legend;
       legend.show = optionsCollapse.isShowLegend;
@@ -202,7 +201,7 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      const staticData = JSON.parse(val);
+      const staticData = typeof val == "string" ? JSON.parse(val) : val;
       for (const key in this.options.series) {
         if (this.options.series[key].type == "pie") {
           this.options.series[key].data = staticData;

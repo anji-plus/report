@@ -204,7 +204,7 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      const staticData = JSON.parse(val);
+      const staticData = typeof val == "string" ? JSON.parse(val) : val;
       for (const key in this.options.series) {
         if (this.options.series[key].type == "funnel") {
           this.options.series[key].data = staticData;

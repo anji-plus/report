@@ -93,12 +93,13 @@ export default {
       this.setOptionsPiechartStyle();
     },
     // 饼图样式
-    setOptionsPiechartStyle(){
+    setOptionsPiechartStyle() {
       if (this.optionsSetup.piechartStyle == "shixin") {
-        this.options.series[0]['radius'] = "50%"
-      }else if (this.optionsSetup.piechartStyle == "kongxin"){
-        this.options.series[0]['radius'] = ["40%", "70%"]
-      }else {}
+        this.options.series[0]["radius"] = "50%";
+      } else if (this.optionsSetup.piechartStyle == "kongxin") {
+        this.options.series[0]["radius"] = ["40%", "70%"];
+      } else {
+      }
     },
     // 标题设置
     setOptionsTitle() {
@@ -197,7 +198,7 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      const staticData = JSON.parse(val);
+      const staticData = typeof val == "string" ? JSON.parse(val) : val;
       for (const key in this.options.series) {
         if (this.options.series[key].type == "pie") {
           this.options.series[key].data = staticData;

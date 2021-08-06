@@ -296,7 +296,7 @@ export default {
     },
     // 静态数据
     staticDataFn(val, optionsSetup) {
-      const staticData = JSON.parse(val);
+      const staticData = typeof val == "string" ? JSON.parse(val) : val;
       // x轴
       if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];
