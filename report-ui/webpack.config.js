@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
   resolve: {
@@ -8,5 +9,8 @@ module.exports = {
       '@': path.resolve('src'),
       'vue$': 'vue/dist/vue.esm.js'
     }
-  }
+  },
+  plugins: [
+    new MonacoWebpackPlugin()
+  ]
 }

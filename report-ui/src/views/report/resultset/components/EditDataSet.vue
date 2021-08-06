@@ -62,11 +62,11 @@
           >
             <el-form-item label="查询SQL或请求体">
               <div class="codemirror">
-                <codemirror
+                <!-- <monaco-editor
                   v-model.trim="formData.dynSentence"
-                  :options="optionsSql"
-                  style="height: 190px"
-                />
+                  language="sql"
+                  style="height: 500px"
+                /> -->
               </div>
             </el-form-item>
           </el-col>
@@ -92,7 +92,7 @@
                       align="center"
                       label="序号"
                       type="index"
-                      width="80"
+                      min-width="80"
                     />
                     <el-table-column label="参数名" align="center">
                       <template slot-scope="scope">
@@ -349,10 +349,10 @@
     >
       <div class="codemirror">
         <!-- //自定义高级规则？ -->
-        <codemirror
+        <monaco-editor
           v-model.trim="validationRules"
-          :options="optionsJavascript"
-          style="height: 210px;overflow: hidden;"
+          language="javascript"
+          style="height: 500px"
         />
       </div>
       <span slot="footer" class="dialog-footer">
@@ -382,10 +382,10 @@ import "codemirror/mode/javascript/javascript.js";
 import "codemirror/lib/codemirror.css"; // 核心样式
 import "codemirror/theme/cobalt.css"; // 引入主题后还需要在 options 中指定主题才会生效
 import vueJsonEditor from "vue-json-editor";
-
+import MonacoEditor from "./MonacoEditor.vue";
 export default {
   name: "Support",
-  components: { Dictionary, codemirror, vueJsonEditor },
+  components: { Dictionary, codemirror, vueJsonEditor, MonacoEditor },
   props: {
     visib: {
       required: true,
