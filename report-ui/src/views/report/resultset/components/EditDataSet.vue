@@ -62,11 +62,11 @@
           >
             <el-form-item label="查询SQL或请求体">
               <div class="codemirror">
-                <!-- <monaco-editor
+                <monaco-editor
                   v-model.trim="formData.dynSentence"
                   language="sql"
                   style="height: 500px"
-                /> -->
+                />
               </div>
             </el-form-item>
           </el-col>
@@ -215,10 +215,10 @@
                           <div v-if="isItemFilterType.transformType == 'js'">
                             <div class="codemirror">
                               <!-- //自定义高级规则？ -->
-                              <codemirror
+                              <monaco-editor
                                 v-model.trim="transformScript"
-                                :options="optionsJavascript"
-                                style="height: 210px;overflow: hidden;"
+                                language="javascript"
+                                style="height: 500px"
                               />
                             </div>
                           </div>
