@@ -19,9 +19,9 @@ import com.anjiplus.template.gaea.business.modules.dashboardwidget.controller.dt
 import com.anjiplus.template.gaea.business.modules.dashboard.dao.entity.ReportDashboard;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.dao.entity.ReportDashboardWidget;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.service.ReportDashboardWidgetService;
-import com.anjiplus.template.gaea.business.modules.dataSet.controller.dto.DataSetDto;
-import com.anjiplus.template.gaea.business.modules.dataSet.controller.dto.OriginalDataDto;
-import com.anjiplus.template.gaea.business.modules.dataSet.service.DataSetService;
+import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.DataSetDto;
+import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.OriginalDataDto;
+import com.anjiplus.template.gaea.business.modules.dataset.service.DataSetService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
