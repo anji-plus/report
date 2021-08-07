@@ -125,7 +125,9 @@ export default {
         return this.gaugeFn(params.chartProperties, data);
       } else if (chartType == "widget-text") {
         return this.widgettext(params.chartProperties, data)
-      } else {
+      } else if (chartType == "widget-barstack") {
+        return this.barStackFn(params.chartProperties, data)
+      }else{
         return data
       }
     },
@@ -156,6 +158,10 @@ export default {
       ananysicData["xAxis"] = xAxisList;
       ananysicData["series"] = series;
       return ananysicData;
+    },
+    //柱状堆叠图
+    barStackFn(chartProperties, data){
+
     },
     // 饼图、漏斗图
     piechartFn(chartProperties, data) {
