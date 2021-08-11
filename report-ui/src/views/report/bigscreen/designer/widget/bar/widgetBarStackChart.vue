@@ -94,16 +94,16 @@ export default {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
-      //this.setOptionsX();
-      //this.setOptionsY();
+      this.setOptionsX();
+      this.setOptionsY();
       this.setOptionsTop();
       this.setOptionsTooltip();
       this.setOptionsMargin();
-      //this.setOptionsLegend();
+      this.setOptionsLegend();
       //this.setOptionsColor();
       this.setOptionsData();
     },
-    // 标题修改
+    // 标题修改  对应数据内容例如ABC等的调整
     setOptionsTitle() {
       const optionsCollapse = this.optionsSetup;
       const title = {};
@@ -195,7 +195,7 @@ export default {
       };
       this.options.yAxis = yAxis;
     },
-    // 数值设定 or 柱体设置
+    // 数值设定 or 柱体设置  数值设定字体大小，默认值没回显
     setOptionsTop() {
       const optionsCollapse = this.optionsSetup;
       const series = this.options.series;
@@ -303,7 +303,8 @@ export default {
       return newArr;
     },
     //静态数据
-    staticDataFn(val, optionsSetup) {
+    staticDataFn(val) {
+      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       let xAxisList = []
       let yAxisList = []

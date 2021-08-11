@@ -6155,8 +6155,9 @@ const widgetTools = [
                 selectOptions: [
                   {code: 'left', name: '左对齐'},
                   {code: 'right', name: '右对齐'},
+                  //{code: 'mid', name: '居中'},
                 ],
-                value: ''
+                value: 'left'
               },
               {
                 type: 'el-select',
@@ -6168,7 +6169,7 @@ const widgetTools = [
                   {code: 'top', name: '顶部'},
                   {code: 'bottom', name: '底部'},
                 ],
-                value: ''
+                value: 'top'
               },
               {
                 type: 'el-select',
@@ -6180,11 +6181,11 @@ const widgetTools = [
                   {code: 'vertical', name: '竖排'},
                   {code: 'horizontal', name: '横排'},
                 ],
-                value: ''
+                value: 'horizontal'
               },
             ],
           },
-          {
+          /*{
             name: '自定义配色',
             list: [
               {
@@ -6195,7 +6196,7 @@ const widgetTools = [
                 value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
               },
             ],
-          },
+          },*/
         ],
       ],
       // 数据
