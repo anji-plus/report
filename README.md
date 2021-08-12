@@ -113,7 +113,7 @@ http://serverip:9095
 
 ## 谁在使用
 
-希望你们的logo出现在此，[请点此Issue进行登记](https://gitee.com/anji-plus/report/issues/I3ZXT4) <br>
+希望你们的logo出现在此，[请点此Issue进行登记](https://gitee.com/anji-plus/report/issues/I3ZXT4) ，我们将优先支持 <br>
 
 <a href='http://www.anji-plus.com/'> <img src="https://report.anji-plus.com/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/> </a>
 <a href='https://www.yunstech.cn/'><img src="https://www.yunstech.cn/images/logo.png" width = "130" height = "50" /> </a>
@@ -127,6 +127,14 @@ http://serverip:9095
 - 丰富更多图表组件
 - 基础图表增加
 - 现有图表功能修复/增加
+
+## 版本问题
+已知以下版本存在兼容性问题
+- Node.js V16
+- Jdk 11
+- Mysql 8.0
+- Windows 11
+
 
 ## 技术支持
 
