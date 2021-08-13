@@ -109,6 +109,7 @@ export default {
       // widget-gauge 仪表盘
       // widget-text 文本框
       // widge-table 表格(数据不要转)
+      // widget-stackchart 堆叠图
       const chartType = params.chartType
       if (
         chartType == "widget-barchart" ||
@@ -125,8 +126,8 @@ export default {
         return this.gaugeFn(params.chartProperties, data);
       } else if (chartType == "widget-text") {
         return this.widgettext(params.chartProperties, data)
-      } else if (chartType == "widget-barstack") {
-        return this.barStackFn(params.chartProperties, data)
+      } else if (chartType == "widget-stackchart") {
+        return this.stackChartFn(params.chartProperties, data)
       }else{
         return data
       }
@@ -159,8 +160,8 @@ export default {
       ananysicData["series"] = series;
       return ananysicData;
     },
-    //柱状堆叠图
-    barStackFn(chartProperties, data){
+    //堆叠图
+    stackChartFn(chartProperties, data){
 
     },
     // 饼图、漏斗图

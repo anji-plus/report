@@ -6254,7 +6254,7 @@ const widgetTools = [
           placeholder: 'px',
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
-          chartType: 'widget-barstack',
+          chartType: 'widget-stackchart',
           value: '',
         },
       ],
