@@ -289,9 +289,9 @@ export default {
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(
-          optionsData.dynamicData,
-          optionsData.refreshTime,
-          optionsSetup
+        optionsData.dynamicData,
+        optionsData.refreshTime,
+        optionsSetup
         );
     },
     //去重
@@ -305,7 +305,7 @@ export default {
     //静态数据
     staticDataFn(val) {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
+      const series = [];
       let xAxisList = []
       let yAxisList = []
       for (const i in val) {
@@ -315,7 +315,7 @@ export default {
       xAxisList = this.setUnique(xAxisList) // x轴 0725 0726 0727
       yAxisList = this.setUnique(yAxisList) // y轴 A B C
       for (const i in yAxisList) {
-        const data = new Array(xAxisList.length).fill(0)
+        const data = new Array(yAxisList.length).fill(0)
         for (const j in xAxisList) {
           for (const k in val) {
             if (val[k].name == yAxisList[i]) { // a = a
@@ -328,9 +328,14 @@ export default {
         series.push({
           name: yAxisList[i],
           type: "bar",
-          data: data
+          data: data ,
+          barGap: "0%",
+          itemStyle: {
+            borderRadius: null
+          }
         })
       }
+      this.options.series = series
       if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];
         this.options.yAxis.data = xAxisList;
@@ -342,48 +347,47 @@ export default {
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
       }
-    }
-
+    },
     // 动态数据
-    /*        dynamicDataFn(val, refreshTime, optionsSetup) {
-              if (!val) return;
-              if (this.ispreview) {
-                this.getEchartData(val, optionsSetup);
-                this.flagInter = setInterval(() => {
-                  this.getEchartData(val, optionsSetup);
-                }, refreshTime);
-              } else {
-                this.getEchartData(val, optionsSetup);
-              }
-            },
-            getEchartData(val, optionsSetup) {
-              const data = this.queryEchartsData(val);
-              data.then(res => {
-                this.renderingFn(optionsSetup, res);
-              });
-            },
-            renderingFn(optionsSetup, val) {
-              // x轴
-              if (optionsSetup.verticalShow) {
-                this.options.xAxis.data = [];
-                this.options.yAxis.data = val.xAxis;
-                this.options.xAxis.type = "value";
-                this.options.yAxis.type = "category";
-              } else {
-                this.options.xAxis.data = val.xAxis;
-                this.options.yAxis.data = [];
-                this.options.xAxis.type = "category";
-                this.options.yAxis.type = "value";
-              }
+    dynamicDataFn(val, refreshTime, optionsSetup) {
+      if (!val) return;
+      if (this.ispreview) {
+        this.getEchartData(val, optionsSetup);
+        this.flagInter = setInterval(() => {
+          this.getEchartData(val, optionsSetup);
+        }, refreshTime);
+      } else {
+        this.getEchartData(val, optionsSetup);
+      }
+    },
+    getEchartData(val, optionsSetup) {
+      const data = this.queryEchartsData(val);
+      data.then(res => {
+        this.renderingFn(optionsSetup, res);
+      });
+    },
+    renderingFn(optionsSetup, val) {
+      // x轴
+      if (optionsSetup.verticalShow) {
+        this.options.xAxis.data = [];
+        this.options.yAxis.data = val.xAxis;
+        this.options.xAxis.type = "value";
+        this.options.yAxis.type = "category";
+      } else {
+        this.options.xAxis.data = val.xAxis;
+        this.options.yAxis.data = [];
+        this.options.xAxis.type = "category";
+        this.options.yAxis.type = "value";
+      }
 
-              // series
-              const series = this.options.series;
-              for (const i in series) {
-                if (series[i].type == "bar") {
-                  series[i].data = val.series[i].data;
-                }
-              }
-            }*/
+      const series = this.options.series;
+      for (const i in series) {
+        if (series[i].type == "bar") {
+          series[i].name = val.series[i].name;
+          series[i].data = val.series[i].data;
+        }
+      }
+    }
   }
 };
 </script>
