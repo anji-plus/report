@@ -6185,7 +6185,7 @@ const widgetTools = [
               },
             ],
           },
-          /*{
+          {
             name: '自定义配色',
             list: [
               {
@@ -6196,7 +6196,7 @@ const widgetTools = [
                 value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
               },
             ],
-          },*/
+          },
         ],
       ],
       // 数据
