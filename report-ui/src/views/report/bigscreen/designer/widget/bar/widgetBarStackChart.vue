@@ -211,6 +211,7 @@ export default {
             fontWeight: optionsCollapse.fontWeight
           };
           series[key].barWidth = optionsCollapse.maxWidth;
+          console.log(series[key].barWidth)
           series[key].barMinHeight = optionsCollapse.minHeight;
         }
       }
@@ -330,9 +331,9 @@ export default {
           type: "bar",
           data: data ,
           barGap: "0%",
-          itemStyle: {
+          /*itemStyle: {
             borderRadius: null
-          }
+          }*/
         })
       }
       this.options.series = series
