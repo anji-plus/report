@@ -5798,7 +5798,7 @@ const widgetTools = [
                 value: 'rgba(30, 144, 255, 1)'
               },
               {
-                type: 'el-input-text',
+                type: 'el-select',
                 label: '字体粗细',
                 name: 'subTextFontWeight',
                 required: false,
