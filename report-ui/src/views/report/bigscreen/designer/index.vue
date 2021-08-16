@@ -87,7 +87,7 @@
             <i class="iconfont iconyulan" @click="viewScreen"></i>
           </el-tooltip>
         </span>
-        <span class="btn border-left">
+        <!-- <span class="btn border-left">
           <ul class="nav">
             <li>
               <i class="el-icon-brush"></i><i class="el-icon-arrow-down"></i>
@@ -116,7 +116,7 @@
               </ul>
             </li>
           </ul>
-        </span>
+        </span> -->
       </div>
       <div
         class="workbench-container"
