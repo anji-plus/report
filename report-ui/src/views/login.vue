@@ -127,8 +127,8 @@ export default {
       activeTop: "-50%", // 色条滑块控制
       rememberPsw: false, // 记住密码选择框
       loginForm: {
-        loginName: "admin",
-        password: "123456",
+        loginName: "",
+        password: "",
         verifyCode: ""
       }, // 登录表单
       loginRules: {
