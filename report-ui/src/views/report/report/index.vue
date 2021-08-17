@@ -59,7 +59,9 @@ export default {
         buttons: {
           query: {
             api: reportList,
-            permission: "reportManage:query"
+            permission: "reportManage:query",
+            sort: 'update_time',
+            order: 'DESC'
           },
           queryByPrimarykey: {
             api: reportDetail,
