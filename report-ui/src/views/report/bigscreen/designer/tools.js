@@ -5707,19 +5707,11 @@ const widgetTools = [
                 name: 'maxWidth',
                 required: false,
                 placeholder: '',
-                value: 10,
-              },
-              {
-                type: 'el-slider',
-                label: '圆角',
-                name: 'radius',
-                require: false,
-                placeholder: '',
-                value: 5,
+                value: 20,
               },
             ],
           },
-          {
+/*          {
             name: '标题设置',
             list: [
               {
@@ -6050,15 +6042,16 @@ const widgetTools = [
               },
             ],
           },
-          {
+          /!*{
             name: '提示语设置',
             list: [
               {
                 type: 'el-input-number',
                 label: '字体大小',
-                name: 'fontSize',
+                name: 'tipsFontSize',
                 required: false,
                 placeholder: '',
+                value: 16
               },
               {
                 type: 'vue-color',
@@ -6068,7 +6061,7 @@ const widgetTools = [
                 placeholder: '',
               },
             ],
-          },
+          },*!/
           {
             name: '坐标轴边距设置',
             list: [
@@ -6145,11 +6138,11 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 selectOptions: [
+                  {code: 'center', name: '居中'},
                   {code: 'left', name: '左对齐'},
                   {code: 'right', name: '右对齐'},
-                  //{code: 'mid', name: '居中'},
                 ],
-                value: 'left'
+                value: 'center'
               },
               {
                 type: 'el-select',
@@ -6176,7 +6169,7 @@ const widgetTools = [
                 value: 'horizontal'
               },
             ],
-          },
+          },*/
           /*{
             name: '自定义配色',
             list: [

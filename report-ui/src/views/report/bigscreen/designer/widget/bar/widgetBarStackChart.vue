@@ -93,13 +93,14 @@ export default {
   methods: {
     // 修改图标options属性
     editorOptions() {
-      this.setOptionsTitle();
-      this.setOptionsX();
-      this.setOptionsY();
-      this.setOptionsTop();
-      this.setOptionsTooltip();
-      this.setOptionsMargin();
-      this.setOptionsLegend();
+      //this.setOptionBar();
+      //this.setOptionsTitle();
+      //this.setOptionsX();
+      //this.setOptionsY();
+      //this.setOptionsTop();
+      //this.setOptionsTooltip();
+      //this.setOptionsMargin();
+      //this.setOptionsLegend();
       //this.setOptionsColor();
       this.setOptionsData();
     },
@@ -195,11 +196,25 @@ export default {
       };
       this.options.yAxis = yAxis;
     },
-    // 数值设定 or 柱体设置  数值设定字体大小，默认值没回显
+    //柱体设置
+    setOptionBar() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      const itemStyle = {
+        borderRadius: optionsSetup.radius
+      }
+      const barWidth = optionsSetup.maxWidth;
+      for (const key in series) {
+        if (series[key].type == "bar") {
+          this.options.series[key].itemStyle = itemStyle
+        }
+      }
+      ;
+    },
+    // 数值设定 or 柱体设置
     setOptionsTop() {
       const optionsCollapse = this.optionsSetup;
       const series = this.options.series;
-
       for (const key in series) {
         if (series[key].type == "bar") {
           series[key].label = {
@@ -211,25 +226,23 @@ export default {
             fontWeight: optionsCollapse.fontWeight
           };
           series[key].barWidth = optionsCollapse.maxWidth;
-          console.log(series[key].barWidth)
-          series[key].barMinHeight = optionsCollapse.minHeight;
         }
       }
       this.options.series = series;
     },
     // tooltip 设置
-    setOptionsTooltip() {
-      const optionsCollapse = this.optionsSetup;
-      const tooltip = {
-        trigger: "item",
-        show: true,
-        textStyle: {
-          color: optionsCollapse.lineColor,
-          fontSize: optionsCollapse.fontSize
-        }
-      };
-      this.options.tooltip = tooltip;
-    },
+    /*    setOptionsTooltip() {
+          const optionsCollapse = this.optionsSetup;
+          const tooltip = {
+            trigger: "item",
+            show: true,
+            textStyle: {
+              color: optionsCollapse.lineColor,
+              fontSize: optionsCollapse.tipsFontSize
+            }
+          };
+          this.options.tooltip = tooltip;
+        },*/
     // 边距设置
     setOptionsMargin() {
       const optionsCollapse = this.optionsSetup;
@@ -329,11 +342,12 @@ export default {
         series.push({
           name: yAxisList[i],
           type: "bar",
-          data: data ,
+          data: data,
           barGap: "0%",
-          /*itemStyle: {
+          barWidth : optionsSetup.maxWidth,
+          itemStyle: {
             borderRadius: null
-          }*/
+          }
         })
       }
       this.options.series = series
