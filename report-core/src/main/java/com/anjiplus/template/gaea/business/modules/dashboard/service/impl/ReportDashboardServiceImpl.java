@@ -13,7 +13,7 @@ import com.anjiplus.template.gaea.business.modules.dashboard.controller.dto.Repo
 import com.anjiplus.template.gaea.business.modules.dashboard.dao.ReportDashboardMapper;
 import com.anjiplus.template.gaea.business.modules.dashboard.service.ChartStrategy;
 import com.anjiplus.template.gaea.business.modules.dashboard.service.ReportDashboardService;
-import com.anjiplus.template.gaea.business.modules.dashboard.util.DateUtil;
+import com.anjiplus.template.gaea.business.util.DateUtil;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.controller.dto.ReportDashboardWidgetDto;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.controller.dto.ReportDashboardWidgetValueDto;
 import com.anjiplus.template.gaea.business.modules.dashboard.dao.entity.ReportDashboard;
