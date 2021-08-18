@@ -3,6 +3,7 @@ package com.anjiplus.template.gaea.business.modules.reportshare.controller;
 
 import com.anji.plus.gaea.annotation.AccessKey;
 import com.anji.plus.gaea.annotation.Permission;
+import com.anji.plus.gaea.annotation.log.GaeaAuditLog;
 import com.anji.plus.gaea.bean.ResponseBean;
 import com.anji.plus.gaea.curd.controller.GaeaBaseController;
 import com.anji.plus.gaea.curd.service.GaeaBaseService;
@@ -14,16 +15,14 @@ import com.anjiplus.template.gaea.business.modules.reportshare.dao.entity.Report
 import com.anjiplus.template.gaea.business.modules.reportshare.service.ReportShareService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
-* @desc 报表分享 controller
-* @author Raod
-* @date 2021-08-18 13:37:26.663
-**/
+ * @author Raod
+ * @desc 报表分享 controller
+ * @date 2021-08-18 13:37:26.663
+ **/
 @RestController
 @Api(tags = "报表分享管理")
 @RequestMapping("/reportShare")
@@ -61,6 +60,25 @@ public class ReportShareController extends GaeaBaseController<ReportShareParam, 
         ResponseBean responseBean = this.responseSuccessWithData(this.resultDtoHandle(dto));
         this.logger.info("{}根据ID查询结束，结果：{}", this.getClass().getSimpleName(), GaeaUtils.toJSONString(responseBean));
         return responseBean;
+    }
+
+    @GetMapping({"/detailByCode"})
+    @Permission(code = "detail", name = "明细")
+    public ResponseBean detailByCode(@RequestParam("shareCode") String shareCode) {
+        return ResponseBean.builder().data(reportShareService.detailByCode(shareCode)).build();
+    }
+
+    @PostMapping
+    @Permission(
+            code = "insert",
+            name = "新增"
+    )
+    @GaeaAuditLog(
+            pageTitle = "新增"
+    )
+    @Override
+    public ResponseBean insert(@Validated @RequestBody ReportShareDto dto) {
+        return ResponseBean.builder().data(reportShareService.insertShare(dto)).build();
     }
 
 }
