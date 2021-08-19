@@ -48,7 +48,7 @@ export default {
             type: "bar",
             barGap: "0%",
             itemStyle: {
-              borderRadius: null
+              barBorderRadius: null
             }
           }
         ]
@@ -100,7 +100,7 @@ export default {
       this.setOptionsTooltip();
       this.setOptionsMargin();
       this.setOptionsLegend();
-      //this.setOptionsColor();
+      this.setOptionsColor();
       this.setOptionsData();
     },
     // 标题修改
@@ -255,7 +255,7 @@ export default {
       };
       legend.itemWidth = optionsCollapse.lengedWidth;
     },
-    // 图例颜色修改
+    // 自定义颜色
     setOptionsColor() {
       const optionsCollapse = this.optionsSetup;
       const customColor = optionsCollapse.customColor;
@@ -269,8 +269,8 @@ export default {
           color: params => {
             return arrColor[params.dataIndex];
           },
-          barBorderRadius: optionsCollapse.radius
-        }
+          barBorderRadius : optionsCollapse.radius
+        },
       };
       for (const key in this.options.series) {
         if (this.options.series[key].type == "bar") {
@@ -311,6 +311,13 @@ export default {
     //静态数据
     staticDataFn(val) {
       const optionsSetup = this.optionsSetup;
+      //颜色
+      const customColor = optionsSetup.customColor;
+      const arrColor = [];
+      for (let i = 0; i < customColor.length; i++) {
+        arrColor.push(customColor[i].color);
+      }
+      //数据
       const series = [];
       let xAxisList = []
       let yAxisList = []
@@ -346,8 +353,12 @@ export default {
             color: optionsSetup.subTextColor,
             fontWeight: optionsSetup.fontWeight
           },
+          //颜色，圆角属性
           itemStyle: {
-            borderRadius: null
+            normal : {
+              color: arrColor[i],
+              barBorderRadius : optionsSetup.radius,
+            }
           }
         })
       }
