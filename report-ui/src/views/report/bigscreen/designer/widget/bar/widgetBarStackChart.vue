@@ -98,12 +98,12 @@ export default {
       this.setOptionsY();
       this.setOptionsTop();
       this.setOptionsTooltip();
-      this.setOptionsMargin();
-      this.setOptionsLegend();
+      //this.setOptionsMargin();
+      //this.setOptionsLegend();
       //this.setOptionsColor();
       this.setOptionsData();
     },
-    // 标题修改  对应数据内容例如ABC等的调整
+    // 标题修改
     setOptionsTitle() {
       const optionsCollapse = this.optionsSetup;
       const title = {};
@@ -135,7 +135,7 @@ export default {
           color: optionsCollapse.xNameColor,
           fontSize: optionsCollapse.xNameFontSize
         },
-        nameRotate: optionsCollapse.textAngle, // 文字角度
+        nameRotate: optionsCollapse.textAngleX, // 文字角度
         inverse: optionsCollapse.reversalX, // 轴反转
         axisLabel: {
           show: true,
@@ -175,6 +175,7 @@ export default {
         inverse: optionsCollapse.reversalY, // y轴反转
         axisLabel: {
           show: true,
+          rotate: optionsCollapse.textAngleY,// 文字角度
           textStyle: {
             color: optionsCollapse.colorY, // y轴 坐标文字颜色
             fontSize: optionsCollapse.fontSizeY
@@ -195,11 +196,10 @@ export default {
       };
       this.options.yAxis = yAxis;
     },
-    // 数值设定 or 柱体设置  数值设定字体大小，默认值没回显
+    // 数值设定 or 柱体设置
     setOptionsTop() {
       const optionsCollapse = this.optionsSetup;
       const series = this.options.series;
-
       for (const key in series) {
         if (series[key].type == "bar") {
           series[key].label = {
@@ -211,25 +211,23 @@ export default {
             fontWeight: optionsCollapse.fontWeight
           };
           series[key].barWidth = optionsCollapse.maxWidth;
-          console.log(series[key].barWidth)
-          series[key].barMinHeight = optionsCollapse.minHeight;
         }
       }
       this.options.series = series;
     },
-    // tooltip 设置
-    setOptionsTooltip() {
-      const optionsCollapse = this.optionsSetup;
-      const tooltip = {
-        trigger: "item",
-        show: true,
-        textStyle: {
-          color: optionsCollapse.lineColor,
-          fontSize: optionsCollapse.fontSize
-        }
-      };
-      this.options.tooltip = tooltip;
-    },
+    // tooltip 提示语设置，鼠标放置显示
+        setOptionsTooltip() {
+          const optionsCollapse = this.optionsSetup;
+          const tooltip = {
+            trigger: "item",
+            show: true,
+            textStyle: {
+              color: optionsCollapse.lineColor,
+              fontSize: optionsCollapse.tipsFontSize
+            }
+          };
+          this.options.tooltip = tooltip;
+        },
     // 边距设置
     setOptionsMargin() {
       const optionsCollapse = this.optionsSetup;
@@ -329,11 +327,20 @@ export default {
         series.push({
           name: yAxisList[i],
           type: "bar",
-          data: data ,
+          data: data,
           barGap: "0%",
-          /*itemStyle: {
+          barWidth : optionsSetup.maxWidth,
+          label : {
+            show: optionsSetup.isShow,
+            position: "top",
+            distance: 10,
+            fontSize: optionsSetup.fontSize,
+            color: optionsSetup.subTextColor,
+            fontWeight: optionsSetup.fontWeight
+          },
+          itemStyle: {
             borderRadius: null
-          }*/
+          }
         })
       }
       this.options.series = series
