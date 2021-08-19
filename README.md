@@ -137,6 +137,7 @@ http://serverip:9095
 - Mysql 8.0
 - Windows 11
 
+AJ-Report 使用Druid，版本为1.2.6，如果你觉得你配置都是正常但是数据源测试不过，请尝试降低Druid版本
 
 ## 技术支持
 
