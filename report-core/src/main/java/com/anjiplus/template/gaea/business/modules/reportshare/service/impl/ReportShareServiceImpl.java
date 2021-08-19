@@ -13,13 +13,12 @@ import com.anjiplus.template.gaea.business.modules.reportshare.dao.entity.Report
 import com.anjiplus.template.gaea.business.modules.reportshare.service.ReportShareService;
 import com.anjiplus.template.gaea.business.util.DateUtil;
 import com.anjiplus.template.gaea.business.util.JwtUtil;
+import com.anjiplus.template.gaea.business.util.UuidUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 /**
 * @desc ReportShare 报表分享服务实现
@@ -94,7 +93,7 @@ public class ReportShareServiceImpl implements ReportShareService {
         //截取#之前的内容
         //http://localhost:9528/#/bigscreen/viewer?reportCode=bigScreen2
         //http://127.0.0.1:9095/reportDashboard/getData
-        String shareCode = UUID.randomUUID().toString();
+        String shareCode = UuidUtil.generateShortUuid();
         entity.setShareCode(shareCode);
         if (entity.getShareUrl().contains(SHARE_URL)) {
             String prefix = entity.getShareUrl().substring(0, entity.getShareUrl().indexOf("#"));
