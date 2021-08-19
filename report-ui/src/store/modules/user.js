@@ -1,5 +1,5 @@
 import { login, logout } from '@/api/login'
-import { setToken, delToken, setAccessUser, delAccessUser } from '@/utils/auth'
+import {setToken, delToken, setAccessUser, delAccessUser, delShareToken} from '@/utils/auth'
 
 const user = {
   state: {
@@ -51,6 +51,7 @@ const user = {
           commit('SET_TOKEN', '')
           commit('SET_ACCESSUSER', {})
           delToken()
+          delShareToken()
           delAccessUser()
           resolve()
         }).catch(error => {
@@ -65,6 +66,7 @@ const user = {
         commit('SET_TOKEN', '')
         commit('SET_ACCESSUSER', {})
         delToken()
+        delShareToken()
         delAccessUser()
         resolve()
       })

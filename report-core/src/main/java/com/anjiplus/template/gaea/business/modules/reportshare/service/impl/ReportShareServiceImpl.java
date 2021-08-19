@@ -4,6 +4,8 @@ package com.anjiplus.template.gaea.business.modules.reportshare.service.impl;
 import com.anji.plus.gaea.constant.BaseOperationEnum;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessException;
+import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.anjiplus.template.gaea.business.enums.EnableFlagEnum;
 import com.anjiplus.template.gaea.business.modules.reportshare.controller.dto.ReportShareDto;
 import com.anjiplus.template.gaea.business.modules.reportshare.dao.ReportShareMapper;
@@ -63,8 +65,12 @@ public class ReportShareServiceImpl implements ReportShareService {
     public ReportShare detailByCode(String shareCode) {
         LambdaQueryWrapper<ReportShare> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(ReportShare::getShareCode, shareCode);
-        wrapper.eq(ReportShare::getEnableFlag, EnableFlagEnum.ENABLE.getCodeDesc());
-        return selectOne(wrapper);
+        wrapper.eq(ReportShare::getEnableFlag, EnableFlagEnum.ENABLE.getCodeValue());
+        ReportShare reportShare = selectOne(wrapper);
+        if (null == reportShare) {
+            throw BusinessExceptionBuilder.build(ResponseCode.REPORT_SHARE_LINK_INVALID);
+        }
+        return reportShare;
     }
 
     @Override

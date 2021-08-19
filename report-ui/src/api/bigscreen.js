@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import { getShareToken, getToken } from "@/utils/auth";
 
 // 保存大屏设计
 export function insertDashboard(data) {
@@ -13,6 +14,7 @@ export function insertDashboard(data) {
 export function detailDashboard(data) {
   return request({
     url: 'reportDashboard/' + data,
+    headers: { 'Share-Token': getShareToken(), 'Authorization': getToken() },
     method: 'get',
   })
 }
@@ -22,6 +24,7 @@ export function queryAllDataSet(data) {
   return request({
     url: 'dataSet/queryAllDataSet',
     method: 'get',
+
   })
 }
 
@@ -38,6 +41,7 @@ export function getData(data) {
   return request({
     url: 'reportDashboard/getData',
     method: 'post',
+    headers: { 'Share-Token': getShareToken(), 'Authorization': getToken() },
     data,
   })
 }

@@ -39,4 +39,12 @@ export function reportShareDetail(data) {
   })
 }
 
+export function reportShareDetailByCode(data) {
+  return request({
+    url: 'reportShare/detailByCode',
+    method: 'get',
+    params: { shareCode: data }
+  })
+}
+
 export default { reportShareList, reportShareAdd, reportShareDeleteBatch, reportShareUpdate, reportShareDetail }

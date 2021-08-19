@@ -1,16 +1,26 @@
 import { getStorageItem, setStorageItem, delStorageItem } from '@/utils/storage'
 
 const TokenKey = 'token'
+const ShareTokenKey = 'shareToken'
 const AccessUserKey = 'gaeaUser'
 
 export function getToken() {
   return getStorageItem(TokenKey)
 }
+export function getShareToken() {
+  return getStorageItem(ShareTokenKey) == null ? '' : getStorageItem(ShareTokenKey);
+}
 export function setToken(token) {
   return setStorageItem(TokenKey, token)
 }
+export function setShareToken(shareToken) {
+  return setStorageItem(ShareTokenKey, shareToken)
+}
 export function delToken() {
   return delStorageItem(TokenKey)
+}
+export function delShareToken() {
+  return delStorageItem(ShareTokenKey)
 }
 
 export function getAccessUser() {

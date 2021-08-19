@@ -27,6 +27,7 @@ import Layout from '../views/layout/Layout'
 **/
 export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login'), hidden: true },
+  { path: '/aj/**', component: () => import('@/views/report/aj'), hidden: true },
   {
     path: '/index', component: Layout, name: 'index', meta: { title: '首页', icon: 'iconhome2' },
     children: [
