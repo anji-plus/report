@@ -301,6 +301,15 @@ export default {
       });
       return newArr;
     },
+    //获取堆叠样式
+    getStackStyle(){
+      const optionsSetup = this.optionsSetup;
+      let style = ""
+      if (optionsSetup.stackStyle == "upDown") {
+        style =  "total"
+      }
+      return style
+    },
     //静态数据
     staticDataFn(val) {
       const optionsSetup = this.optionsSetup;
@@ -329,6 +338,7 @@ export default {
           type: "bar",
           data: data,
           barGap: "0%",
+          stack: this.getStackStyle(),
           barWidth : optionsSetup.maxWidth,
           label : {
             show: optionsSetup.isShow,

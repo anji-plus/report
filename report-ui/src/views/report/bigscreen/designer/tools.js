@@ -5717,6 +5717,18 @@ const widgetTools = [
           placeholder: '',
           value: ''
         },
+        {
+          type: 'el-select',
+          label: '堆叠样式',
+          name: 'stackStyle',
+          required: false,
+          placeholder: '',
+          selectOptions: [
+            {code: 'leftRight', name: '左右堆叠'},
+            {code: 'upDown', name: '上下堆叠'},
+          ],
+          value: 'leftRight'
+        },
         [
           {
             name: '柱体设置',
@@ -6090,7 +6102,7 @@ const widgetTools = [
               },
             ],
           },
-          /*{
+          {
             name: '坐标轴边距设置',
             list: [
               {
@@ -6123,7 +6135,7 @@ const widgetTools = [
                 value: 10,
               },
             ],
-          },*/
+          },
           /*{
             name: '图例操作',
             list: [
