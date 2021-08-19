@@ -31,6 +31,10 @@ public class ReportShareDto extends GaeaBaseDTO implements Serializable {
     @ApiModelProperty(value = "分享有效期")
     private Date shareValidTime;
 
+    /** 分享token */
+    @ApiModelProperty(value = "分享token")
+    private String shareToken;
+
     /** 分享url */
     @ApiModelProperty(value = "分享url")
     @NotEmpty(message = "6002")

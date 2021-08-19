@@ -6,6 +6,7 @@ import com.anji.plus.gaea.bean.ResponseBean;
 import com.anji.plus.gaea.cache.CacheHelper;
 import com.anji.plus.gaea.utils.JwtBean;
 import com.anjiplus.template.gaea.business.constant.BusinessConstant;
+import com.anjiplus.template.gaea.business.util.JwtUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,6 +68,24 @@ public class TokenFilter implements Filter {
             filterChain.doFilter(request, response);
             return;
         }
+
+        //针对大屏分享，优先处理
+        String shareToken = request.getHeader("Share-Token");
+        if (StringUtils.isNotBlank(shareToken)) {
+            //两个接口需要处理
+            //  /reportDashboard/getData
+            //  /reportDashboard/{reportCode}
+            String reportCode = JwtUtil.getReportCode(shareToken);
+            if (!uri.endsWith("/getData") && !uri.contains(reportCode)) {
+                ResponseBean responseBean = ResponseBean.builder().code("50014")
+                        .message("分享链接已过期").build();
+                response.getWriter().print(JSONObject.toJSONString(responseBean));
+                return;
+            }
+            filterChain.doFilter(request, response);
+            return;
+        }
+
 
         //获取token
         String token = request.getHeader("Authorization");

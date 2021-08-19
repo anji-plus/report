@@ -10,6 +10,7 @@ import com.anjiplus.template.gaea.business.modules.reportshare.dao.ReportShareMa
 import com.anjiplus.template.gaea.business.modules.reportshare.dao.entity.ReportShare;
 import com.anjiplus.template.gaea.business.modules.reportshare.service.ReportShareService;
 import com.anjiplus.template.gaea.business.util.DateUtil;
+import com.anjiplus.template.gaea.business.util.JwtUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.BeanUtils;
@@ -80,6 +81,7 @@ public class ReportShareServiceImpl implements ReportShareService {
                     entity.setShareUrl(entity.getShareUrl() + SHARE_FLAG + shareCode);
                 }
                 entity.setShareValidTime(DateUtil.getFutureDateTmdHms(entity.getShareValidType()));
+                entity.setShareToken(JwtUtil.createToken(entity.getReportCode(), shareCode, entity.getShareValidTime()));
                 break;
             case UPDATE:
                 break;
