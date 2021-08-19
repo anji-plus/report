@@ -5741,6 +5741,14 @@ const widgetTools = [
                 placeholder: '',
                 value: 20,
               },
+              {
+                type: 'el-slider',
+                label: '圆角',
+                name: 'radius',
+                require: false,
+                placeholder: '',
+                value: 5,
+              },
             ],
           },
           {
@@ -6210,7 +6218,7 @@ const widgetTools = [
               },
             ],
           },
-          /*{
+          {
             name: '自定义配色',
             list: [
               {
@@ -6221,7 +6229,7 @@ const widgetTools = [
                 value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
               },
             ],
-          },*/
+          },
         ],
       ],
       // 数据
