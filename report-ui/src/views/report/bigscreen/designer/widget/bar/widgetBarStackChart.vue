@@ -97,7 +97,7 @@ export default {
       this.setOptionsX();
       this.setOptionsY();
       this.setOptionsTop();
-      //this.setOptionsTooltip();
+      this.setOptionsTooltip();
       //this.setOptionsMargin();
       //this.setOptionsLegend();
       //this.setOptionsColor();
@@ -215,8 +215,8 @@ export default {
       }
       this.options.series = series;
     },
-    // tooltip 设置
-    /*    setOptionsTooltip() {
+    // tooltip 提示语设置，鼠标放置显示
+        setOptionsTooltip() {
           const optionsCollapse = this.optionsSetup;
           const tooltip = {
             trigger: "item",
@@ -227,7 +227,7 @@ export default {
             }
           };
           this.options.tooltip = tooltip;
-        },*/
+        },
     // 边距设置
     setOptionsMargin() {
       const optionsCollapse = this.optionsSetup;

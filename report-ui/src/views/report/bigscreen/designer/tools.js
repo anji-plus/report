@@ -2251,6 +2251,26 @@ const widgetTools = [
             ],
           },
           {
+            name: '提示语设置',
+            list: [
+              {
+                type: 'el-input-number',
+                label: '字体大小',
+                name: 'tipsFontSize',
+                required: false,
+                placeholder: '',
+                value: 16
+              },
+              {
+                type: 'vue-color',
+                label: '字体颜色',
+                name: 'lineColor',
+                required: false,
+                placeholder: '',
+              },
+            ],
+          },
+          {
             name: '坐标轴边距设置',
             list: [
               {
@@ -6050,7 +6070,7 @@ const widgetTools = [
               },
             ],
           },
-          /*{
+          {
             name: '提示语设置',
             list: [
               {
@@ -6069,7 +6089,7 @@ const widgetTools = [
                 placeholder: '',
               },
             ],
-          },*/
+          },
           /*{
             name: '坐标轴边距设置',
             list: [
