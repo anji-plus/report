@@ -21,7 +21,7 @@ public interface ReportShareService extends GaeaBaseService<ReportShareParam, Re
      */
     ReportShare getDetail(Long id);
 
-    ReportShare insertShare(ReportShareDto dto);
+    ReportShareDto insertShare(ReportShareDto dto);
 
     ReportShare detailByCode(String shareCode);
 }

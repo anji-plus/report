@@ -49,11 +49,14 @@ public class ReportShareServiceImpl implements ReportShareService {
     }
 
     @Override
-    public ReportShare insertShare(ReportShareDto dto) {
+    public ReportShareDto insertShare(ReportShareDto dto) {
+        ReportShareDto reportShareDto = new ReportShareDto();
         ReportShare entity = new ReportShare();
         BeanUtils.copyProperties(dto, entity);
         insert(entity);
-        return entity;
+        //将分享链接返回
+        reportShareDto.setShareUrl(entity.getShareUrl());
+        return reportShareDto;
     }
 
     @Override
@@ -68,26 +71,32 @@ public class ReportShareServiceImpl implements ReportShareService {
     public void processBeforeOperation(ReportShare entity, BaseOperationEnum operationEnum) throws BusinessException {
         switch (operationEnum) {
             case INSERT:
-                //前端地址  window.location.href https://report.anji-plus.com/index.html#/report/bigscreen
-                //截取#之前的内容
-                //http://localhost:9528/#/bigscreen/viewer?reportCode=bigScreen2
-                //http://127.0.0.1:9095/reportDashboard/getData
-                String shareCode = UUID.randomUUID().toString();
-                entity.setShareCode(shareCode);
-                if (entity.getShareUrl().contains(SHARE_URL)) {
-                    String prefix = entity.getShareUrl().substring(0, entity.getShareUrl().indexOf("#"));
-                    entity.setShareUrl(prefix + SHARE_FLAG + shareCode);
-                } else {
-                    entity.setShareUrl(entity.getShareUrl() + SHARE_FLAG + shareCode);
-                }
-                entity.setShareValidTime(DateUtil.getFutureDateTmdHms(entity.getShareValidType()));
-                entity.setShareToken(JwtUtil.createToken(entity.getReportCode(), shareCode, entity.getShareValidTime()));
-                break;
-            case UPDATE:
+                init(entity);
                 break;
             default:
 
                 break;
         }
+    }
+
+    /**
+     * 新增初始化
+     * @param entity
+     */
+    private void init(ReportShare entity) {
+        //前端地址  window.location.href https://report.anji-plus.com/index.html#/report/bigscreen
+        //截取#之前的内容
+        //http://localhost:9528/#/bigscreen/viewer?reportCode=bigScreen2
+        //http://127.0.0.1:9095/reportDashboard/getData
+        String shareCode = UUID.randomUUID().toString();
+        entity.setShareCode(shareCode);
+        if (entity.getShareUrl().contains(SHARE_URL)) {
+            String prefix = entity.getShareUrl().substring(0, entity.getShareUrl().indexOf("#"));
+            entity.setShareUrl(prefix + SHARE_FLAG + shareCode);
+        } else {
+            entity.setShareUrl(entity.getShareUrl() + SHARE_FLAG + shareCode);
+        }
+        entity.setShareValidTime(DateUtil.getFutureDateTmdHms(entity.getShareValidType()));
+        entity.setShareToken(JwtUtil.createToken(entity.getReportCode(), shareCode, entity.getShareValidTime()));
     }
 }
