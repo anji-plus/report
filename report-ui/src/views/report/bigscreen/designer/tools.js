@@ -6136,12 +6136,12 @@ const widgetTools = [
               },
             ],
           },
-          /*{
+          {
             name: '图例操作',
             list: [
               {
                 type: 'el-switch',
-                label: '图例',
+                label: '显示',
                 name: 'isShowLegend',
                 required: false,
                 placeholder: '',
@@ -6209,7 +6209,7 @@ const widgetTools = [
                 value: 'horizontal'
               },
             ],
-          },*/
+          },
           /*{
             name: '自定义配色',
             list: [

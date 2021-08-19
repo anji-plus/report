@@ -98,8 +98,8 @@ export default {
       this.setOptionsY();
       this.setOptionsTop();
       this.setOptionsTooltip();
-      //this.setOptionsMargin();
-      //this.setOptionsLegend();
+      this.setOptionsMargin();
+      this.setOptionsLegend();
       //this.setOptionsColor();
       this.setOptionsData();
     },
@@ -121,7 +121,6 @@ export default {
         fontWeight: optionsCollapse.subTextFontWeight,
         fontSize: optionsCollapse.subTextFontSize
       };
-
       this.options.title = title;
     },
     // X轴设置
@@ -216,18 +215,18 @@ export default {
       this.options.series = series;
     },
     // tooltip 提示语设置，鼠标放置显示
-        setOptionsTooltip() {
-          const optionsCollapse = this.optionsSetup;
-          const tooltip = {
-            trigger: "item",
-            show: true,
-            textStyle: {
-              color: optionsCollapse.lineColor,
-              fontSize: optionsCollapse.tipsFontSize
-            }
-          };
-          this.options.tooltip = tooltip;
-        },
+    setOptionsTooltip() {
+      const optionsCollapse = this.optionsSetup;
+      const tooltip = {
+        trigger: "item",
+        show: true,
+        textStyle: {
+          color: optionsCollapse.lineColor,
+          fontSize: optionsCollapse.tipsFontSize
+        }
+      };
+      this.options.tooltip = tooltip;
+    },
     // 边距设置
     setOptionsMargin() {
       const optionsCollapse = this.optionsSetup;
@@ -245,15 +244,14 @@ export default {
       const optionsCollapse = this.optionsSetup;
       const legend = this.options.legend;
       legend.show = optionsCollapse.isShowLegend;
-      legend.left = optionsCollapse.lateralPosition == "left" ? 0 : "auto";
-      legend.right = optionsCollapse.lateralPosition == "right" ? 0 : "auto";
+      legend.left = optionsCollapse.lateralPosition;
       legend.top = optionsCollapse.longitudinalPosition == "top" ? 0 : "auto";
       legend.bottom =
         optionsCollapse.longitudinalPosition == "bottom" ? 0 : "auto";
       legend.orient = optionsCollapse.layoutFront;
       legend.textStyle = {
         color: optionsCollapse.lengedColor,
-        fontSize: optionsCollapse.fontSize
+        fontSize: optionsCollapse.lengedFontSize
       };
       legend.itemWidth = optionsCollapse.lengedWidth;
     },
@@ -302,11 +300,11 @@ export default {
       return newArr;
     },
     //获取堆叠样式
-    getStackStyle(){
+    getStackStyle() {
       const optionsSetup = this.optionsSetup;
       let style = ""
       if (optionsSetup.stackStyle == "upDown") {
-        style =  "total"
+        style = "total"
       }
       return style
     },
@@ -339,8 +337,8 @@ export default {
           data: data,
           barGap: "0%",
           stack: this.getStackStyle(),
-          barWidth : optionsSetup.maxWidth,
-          label : {
+          barWidth: optionsSetup.maxWidth,
+          label: {
             show: optionsSetup.isShow,
             position: "top",
             distance: 10,
