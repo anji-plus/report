@@ -93,18 +93,17 @@ export default {
   methods: {
     // 修改图标options属性
     editorOptions() {
-      //this.setOptionBar();
-      //this.setOptionsTitle();
-      //this.setOptionsX();
-      //this.setOptionsY();
-      //this.setOptionsTop();
+      this.setOptionsTitle();
+      this.setOptionsX();
+      this.setOptionsY();
+      this.setOptionsTop();
       //this.setOptionsTooltip();
       //this.setOptionsMargin();
       //this.setOptionsLegend();
       //this.setOptionsColor();
       this.setOptionsData();
     },
-    // 标题修改  对应数据内容例如ABC等的调整
+    // 标题修改
     setOptionsTitle() {
       const optionsCollapse = this.optionsSetup;
       const title = {};
@@ -136,7 +135,7 @@ export default {
           color: optionsCollapse.xNameColor,
           fontSize: optionsCollapse.xNameFontSize
         },
-        nameRotate: optionsCollapse.textAngle, // 文字角度
+        nameRotate: optionsCollapse.textAngleX, // 文字角度
         inverse: optionsCollapse.reversalX, // 轴反转
         axisLabel: {
           show: true,
@@ -176,6 +175,7 @@ export default {
         inverse: optionsCollapse.reversalY, // y轴反转
         axisLabel: {
           show: true,
+          rotate: optionsCollapse.textAngleY,// 文字角度
           textStyle: {
             color: optionsCollapse.colorY, // y轴 坐标文字颜色
             fontSize: optionsCollapse.fontSizeY
@@ -195,21 +195,6 @@ export default {
         }
       };
       this.options.yAxis = yAxis;
-    },
-    //柱体设置
-    setOptionBar() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      const itemStyle = {
-        borderRadius: optionsSetup.radius
-      }
-      const barWidth = optionsSetup.maxWidth;
-      for (const key in series) {
-        if (series[key].type == "bar") {
-          this.options.series[key].itemStyle = itemStyle
-        }
-      }
-      ;
     },
     // 数值设定 or 柱体设置
     setOptionsTop() {
@@ -345,6 +330,14 @@ export default {
           data: data,
           barGap: "0%",
           barWidth : optionsSetup.maxWidth,
+          label : {
+            show: optionsSetup.isShow,
+            position: "top",
+            distance: 10,
+            fontSize: optionsSetup.fontSize,
+            color: optionsSetup.subTextColor,
+            fontWeight: optionsSetup.fontWeight
+          },
           itemStyle: {
             borderRadius: null
           }
