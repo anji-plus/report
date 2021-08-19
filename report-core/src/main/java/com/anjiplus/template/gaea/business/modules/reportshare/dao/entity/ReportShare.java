@@ -24,6 +24,9 @@ public class ReportShare extends GaeaBaseEntity {
     /** 分享有效期 */
     private Date shareValidTime;
 
+    /** 分享token */
+    private String shareToken;
+
     /** 分享url */
     private String shareUrl;
 
