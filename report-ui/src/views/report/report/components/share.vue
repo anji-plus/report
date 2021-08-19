@@ -1,18 +1,31 @@
 <template>
   <el-dialog class="tree_dialog" :title="titleBuild()" width="60%" :close-on-click-modal="false" center :visible.sync="visib" :before-close="closeDialog">
-    <el-form ref="userForm" :model="dialogForm" :rules="rules" size="small" label-width="100px">
+    <div v-if="shareLinkFlag1">
+      <el-form ref="userForm" :model="dialogForm" :rules="rules" size="small" label-width="100px">
+        <el-row :gutter="10">
+          <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
+            <el-form-item label="有效期" prop="shareValidType">
+              <el-select v-model.trim="dialogForm.shareValidType" placeholder="请选择" clearable @change="selectChange">
+                <el-option v-for="item in shareValidTypeOptions" :key="item.id" :label="item.text" :value="item.id" />
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <el-button type="primary" plain @click="createShare">创建链接</el-button>
+    </div>
+    <div v-else>
       <el-row :gutter="10">
-        <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
-          <el-form-item label="有效期" prop="shareValidType">
-            <el-select v-model.trim="dialogForm.shareValidType" placeholder="请选择" clearable @change="selectChange">
-              <el-option v-for="item in shareValidTypeOptions" :key="item.id" :label="item.text" :value="item.id" />
-            </el-select>
-          </el-form-item>
-        </el-col>
+      <el-col :xs="24" :sm="20" :md="20" :lg="20" :xl="16">
+        <el-input v-model="reportShareUrl" :disabled="true"/>
+      </el-col>
       </el-row>
-    </el-form>
-    <el-button type="primary" plain @click="createShare">创建链接</el-button>
-    {{reportShareUrl}}
+      <el-row :gutter="10">
+        <el-button type="primary" plain @click="copyShare">复制链接</el-button>
+      </el-row>
+
+    </div>
+
     <div slot="footer" style="text-align: center">
 
 <!--      <el-button type="primary" plain @click="saveReportShare">保存</el-button>-->
@@ -59,6 +72,7 @@ export default {
         shareUrl: '',
         shareCode: '',
       },
+      shareLinkFlag1: true,
       rules: {
         shareValidType: [
           {required: true, message: '有效期必选', trigger: 'change'},
@@ -84,6 +98,7 @@ export default {
     },
     // 获取数据字典
     async getSystem() {
+      this.shareLinkFlag1 = true
       const { code, data } = await getDictList('SHARE_VAILD')
       if (code != '200') return
       this.shareValidTypeOptions = data
@@ -96,11 +111,28 @@ export default {
       const {code, data} = await reportShareAdd(this.dialogForm)
       if (code != '200') return
       console.log(data)
+      this.shareLinkFlag1 = false
       this.$message({
         message: '创建链接成功！',
         type: 'success',
       })
       this.reportShareUrl = data.shareUrl
+    },
+
+    copyShare(){
+      this.copyToClip(this.reportShareUrl)
+      this.$message({
+        message: '复制链接成功！',
+        type: 'success',
+      })
+    },
+    copyToClip(content, message) {
+      var aux = document.createElement("input");
+      aux.setAttribute("value", content);
+      document.body.appendChild(aux);
+      aux.select();
+      document.execCommand("copy");
+      document.body.removeChild(aux);
     },
 
     async saveReportShare() {
