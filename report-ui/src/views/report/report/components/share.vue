@@ -1,5 +1,5 @@
 <template>
-  <el-dialog class="tree_dialog" :title="title" width="60%" :close-on-click-modal="false" center :visible.sync="visib" :before-close="closeDialog">
+  <el-dialog class="tree_dialog" :title="titleBuild()" width="60%" :close-on-click-modal="false" center :visible.sync="visib" :before-close="closeDialog">
     <el-form ref="userForm" :model="dialogForm" :rules="rules" size="small" label-width="100px">
       <el-row :gutter="10">
         <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      title: '报表分享-' + this.reportName + '【' +this.reportCode + '】',
+      title: '报表分享',
       reportShareUrl:'',
       shareValidTypeOptions: [], // 有效期类型
       dialogForm: {
@@ -76,6 +76,9 @@ export default {
   },
   created() {},
   methods: {
+    titleBuild(){
+      return '【' +this.reportName + '】' + '报表分享-' + this.reportCode
+    },
     selectChange(val) {
       this.dialogForm.shareValidType = val
     },

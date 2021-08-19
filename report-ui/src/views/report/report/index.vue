@@ -19,6 +19,21 @@
         v-permission="'bigScreenManage:design'"
         >设计</el-button
       >
+      <el-button
+        type="text"
+        @click="shareReport(props.msg)"
+        v-permission="'bigScreenManage:share'"
+      >分享</el-button
+      >
+    </template>
+
+    <template v-slot:pageSection>
+      <Share
+        :visib="visibleForShareDialog"
+        :reportCode="reportCodeForShareDialog"
+        :reportName="reportNameForShareDialog"
+        @handleClose="visibleForShareDialog = false"
+      />
     </template>
   </anji-crud>
 </template>
@@ -30,13 +45,19 @@ import {
   reportUpdate,
   reportDetail
 } from "@/api/reportmanage";
+import Share from "@/views/report/report/components/share";
 export default {
   name: "Report",
   components: {
-    anjiCrud: require("@/components/AnjiPlus/anji-crud/anji-crud").default
+    anjiCrud: require("@/components/AnjiPlus/anji-crud/anji-crud").default,
+    Share
   },
   data() {
     return {
+      // 分享
+      visibleForShareDialog: false,
+      reportCodeForShareDialog: "",
+      reportNameForShareDialog: "",
       crudOption: {
         // 使用菜单做为页面标题
         title: "报表管理",
@@ -233,6 +254,12 @@ export default {
         }
       });
       window.open(routeUrl.href, "_blank");
+    },
+    //分享
+    shareReport(val){
+      this.reportCodeForShareDialog = val.reportCode;
+      this.reportNameForShareDialog = val.reportName;
+      this.visibleForShareDialog = true;
     }
   }
 };
