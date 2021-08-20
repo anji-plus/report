@@ -42,6 +42,7 @@ import widgetMap from "./widgetMap.vue";
 import widgetPiePercentageChart from "./pie/widgetPiePercentageChart";
 import widgetAirBubbleMap from "./map/widgetAirBubbleMap";
 import widgetBarStackChart from "./bar/widgetBarStackChart";
+import widgetLineStackChart from "./line/widgetLineStackChart";
 
 export default {
   name: "Widget",
@@ -66,7 +67,8 @@ export default {
     widgetMap,
     widgetPiePercentageChart,
     widgetAirBubbleMap,
-    widgetBarStackChart
+    widgetBarStackChart,
+    widgetLineStackChart
   },
   model: {
     prop: "value",

@@ -103,56 +103,56 @@ export default {
     },
     // 标题修改
     setOptionsTitle() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const title = {};
-      title.text = optionsCollapse.titleText;
-      title.show = optionsCollapse.isNoTitle;
-      title.left = optionsCollapse.textAlign;
+      title.text = optionsSetup.titleText;
+      title.show = optionsSetup.isNoTitle;
+      title.left = optionsSetup.textAlign;
       title.textStyle = {
-        color: optionsCollapse.textColor,
-        fontSize: optionsCollapse.textFontSize,
-        fontWeight: optionsCollapse.textFontWeight
+        color: optionsSetup.textColor,
+        fontSize: optionsSetup.textFontSize,
+        fontWeight: optionsSetup.textFontWeight
       };
-      title.subtext = optionsCollapse.subText;
+      title.subtext = optionsSetup.subText;
       title.subtextStyle = {
-        color: optionsCollapse.subTextColor,
-        fontWeight: optionsCollapse.subTextFontWeight,
-        fontSize: optionsCollapse.subTextFontSize
+        color: optionsSetup.subTextColor,
+        fontWeight: optionsSetup.subTextFontWeight,
+        fontSize: optionsSetup.subTextFontSize
       };
       this.options.title = title;
     },
     // X轴设置
     setOptionsX() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const xAxis = {
         type: "category",
-        show: optionsCollapse.hideX, // 坐标轴是否显示
-        name: optionsCollapse.xName, // 坐标轴名称
+        show: optionsSetup.hideX, // 坐标轴是否显示
+        name: optionsSetup.xName, // 坐标轴名称
         nameTextStyle: {
-          color: optionsCollapse.xNameColor,
-          fontSize: optionsCollapse.xNameFontSize
+          color: optionsSetup.xNameColor,
+          fontSize: optionsSetup.xNameFontSize
         },
-        nameRotate: optionsCollapse.textAngleX, // 文字角度
-        inverse: optionsCollapse.reversalX, // 轴反转
+        nameRotate: optionsSetup.textAngleX, // 文字角度
+        inverse: optionsSetup.reversalX, // 轴反转
         axisLabel: {
           show: true,
-          interval: optionsCollapse.textInterval, // 文字角度
-          rotate: optionsCollapse.textAngle, // 文字角度
+          interval: optionsSetup.textInterval, // 文字角度
+          rotate: optionsSetup.textAngle, // 文字角度
           textStyle: {
-            color: optionsCollapse.Xcolor, // x轴 坐标文字颜色
-            fontSize: optionsCollapse.fontSizeX
+            color: optionsSetup.Xcolor, // x轴 坐标文字颜色
+            fontSize: optionsSetup.fontSizeX
           }
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsCollapse.lineColorX
+            color: optionsSetup.lineColorX
           }
         },
         splitLine: {
-          show: optionsCollapse.isShowSplitLineX,
+          show: optionsSetup.isShowSplitLineX,
           lineStyle: {
-            color: optionsCollapse.splitLineColorX
+            color: optionsSetup.splitLineColorX
           }
         }
       };
@@ -160,34 +160,34 @@ export default {
     },
     // Y轴设置
     setOptionsY() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const yAxis = {
         type: "value",
-        show: optionsCollapse.isShowY, // 坐标轴是否显示
-        name: optionsCollapse.textNameY, // 坐标轴名称
+        show: optionsSetup.isShowY, // 坐标轴是否显示
+        name: optionsSetup.textNameY, // 坐标轴名称
         nameTextStyle: {
-          color: optionsCollapse.NameColorY,
-          fontSize: optionsCollapse.NameFontSizeY
+          color: optionsSetup.NameColorY,
+          fontSize: optionsSetup.NameFontSizeY
         },
-        inverse: optionsCollapse.reversalY, // y轴反转
+        inverse: optionsSetup.reversalY, // y轴反转
         axisLabel: {
           show: true,
-          rotate: optionsCollapse.textAngleY,// 文字角度
+          rotate: optionsSetup.textAngleY,// 文字角度
           textStyle: {
-            color: optionsCollapse.colorY, // y轴 坐标文字颜色
-            fontSize: optionsCollapse.fontSizeY
+            color: optionsSetup.colorY, // y轴 坐标文字颜色
+            fontSize: optionsSetup.fontSizeY
           }
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsCollapse.lineColorY
+            color: optionsSetup.lineColorY
           }
         },
         splitLine: {
-          show: optionsCollapse.isShowSplitLineY,
+          show: optionsSetup.isShowSplitLineY,
           lineStyle: {
-            color: optionsCollapse.splitLineColorY
+            color: optionsSetup.splitLineColorY
           }
         }
       };
@@ -195,44 +195,44 @@ export default {
     },
     // tooltip 提示语设置，鼠标放置显示
     setOptionsTooltip() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
         show: true,
         textStyle: {
-          color: optionsCollapse.lineColor,
-          fontSize: optionsCollapse.tipsFontSize
+          color: optionsSetup.lineColor,
+          fontSize: optionsSetup.tipsFontSize
         }
       };
       this.options.tooltip = tooltip;
     },
     // 边距设置
     setOptionsMargin() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const grid = {
-        left: optionsCollapse.marginLeft,
-        right: optionsCollapse.marginRight,
-        bottom: optionsCollapse.marginBottom,
-        top: optionsCollapse.marginTop,
+        left: optionsSetup.marginLeft,
+        right: optionsSetup.marginRight,
+        bottom: optionsSetup.marginBottom,
+        top: optionsSetup.marginTop,
         containLabel: true
       };
       this.options.grid = grid;
     },
     // 图例操作 legend
     setOptionsLegend() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const legend = this.options.legend;
-      legend.show = optionsCollapse.isShowLegend;
-      legend.left = optionsCollapse.lateralPosition;
-      legend.top = optionsCollapse.longitudinalPosition == "top" ? 0 : "auto";
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
       legend.bottom =
-        optionsCollapse.longitudinalPosition == "bottom" ? 0 : "auto";
-      legend.orient = optionsCollapse.layoutFront;
+        optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
+      legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
-        color: optionsCollapse.lengedColor,
-        fontSize: optionsCollapse.lengedFontSize
+        color: optionsSetup.lengedColor,
+        fontSize: optionsSetup.lengedFontSize
       };
-      legend.itemWidth = optionsCollapse.lengedWidth;
+      legend.itemWidth = optionsSetup.lengedWidth;
     },
     // 数据解析
     setOptionsData() {
@@ -310,9 +310,9 @@ export default {
           },
           //颜色，圆角属性
           itemStyle: {
-            normal : {
+            normal: {
               color: arrColor[i],
-              barBorderRadius : optionsSetup.radius,
+              barBorderRadius: optionsSetup.radius,
             }
           }
         })
@@ -387,9 +387,9 @@ export default {
             },
             //颜色，圆角属性
             itemStyle: {
-              normal : {
+              normal: {
                 color: arrColor[i],
-                barBorderRadius : optionsSetup.radius,
+                barBorderRadius: optionsSetup.radius,
               }
             }
           })
