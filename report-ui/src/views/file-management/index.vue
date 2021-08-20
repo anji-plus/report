@@ -7,6 +7,7 @@
     </template>
 
     <template slot="rowButton" slot-scope="props">
+      <el-button type="text" @click="copyUrlPath(props)">复制url</el-button>
       <el-button type="text" @click="customButtom(props)">下载</el-button>
     </template>
   </anji-crud>
@@ -184,6 +185,22 @@ export default {
     customButtom(val) {
       this.downloadFile(val.msg)
     },
+    copyUrlPath(val){
+      this.copyToClip(val.msg.urlPath)
+      this.$message({
+        message: '已将url路径复制至剪切板！',
+        type: 'success',
+      })
+    },
+    copyToClip(content, message) {
+      var aux = document.createElement("input");
+      aux.setAttribute("value", content);
+      document.body.appendChild(aux);
+      aux.select();
+      document.execCommand("copy");
+      document.body.removeChild(aux);
+    },
+
   },
 }
 </script>
