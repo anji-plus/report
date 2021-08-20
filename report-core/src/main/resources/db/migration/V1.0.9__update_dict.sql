@@ -1,0 +1,3 @@
+UPDATE `aj_report`.`gaea_dict_item` SET `dict_code` = 'CHART_PROPERTIES', `item_name` = 'x轴字段', `item_value` = 'xAxis', `item_extend` = NULL, `enabled` = 1, `locale` = 'zh', `remark` = NULL, `sort` = 1, `create_by` = 'admin', `create_time` = now(), `update_by` = 'admin', `update_time` = now(), `version` = 1 WHERE `id` = 260;
+
+INSERT INTO `aj_report`.`gaea_dict_item`(`id`, `dict_code`, `item_name`, `item_value`, `item_extend`, `enabled`, `locale`, `remark`, `sort`, `create_by`, `create_time`, `update_by`, `update_time`, `version`) VALUES (288, 'CHART_PROPERTIES', 'y轴字段', 'yAxis', NULL, 1, 'zh', NULL, 11, 'admin', '2021-07-05 15:33:59', 'admin', '2021-07-05 15:33:59', 1);

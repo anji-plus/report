@@ -109,6 +109,7 @@ export default {
       // widget-gauge 仪表盘
       // widget-text 文本框
       // widge-table 表格(数据不要转)
+      // widget-stackchart 堆叠图
       const chartType = params.chartType
       if (
         chartType == "widget-barchart" ||
@@ -125,6 +126,8 @@ export default {
         return this.gaugeFn(params.chartProperties, data);
       } else if (chartType == "widget-text") {
         return this.widgettext(params.chartProperties, data)
+      } else if (chartType == "widget-stackchart") {
+        return this.stackChartFn(params.chartProperties, data)
       } else {
         return data
       }
@@ -151,6 +154,39 @@ export default {
         obj["data"] = seriesData;
         if (!obj["type"].startsWith("xAxis")) {
           series.push(obj);
+        }
+      }
+      ananysicData["xAxis"] = xAxisList;
+      ananysicData["series"] = series;
+      return ananysicData;
+    },
+    //堆叠图
+    stackChartFn(chartProperties, data) {
+      const ananysicData = {};
+      const series = [];
+      //全部字段字典值
+      const types = Object.values(chartProperties)
+      //x轴字段、y轴字段名
+      const xAxisField = Object.keys(chartProperties)[types.indexOf('xAxis')]
+      const yAxisField = Object.keys(chartProperties)[types.indexOf('yAxis')]
+      //x轴数值去重，y轴去重
+      const xAxisList = this.setUnique(data.map(item => item[xAxisField]))
+      const yAxisList = this.setUnique(data.map(item => item[yAxisField]))
+      const dataGroup = this.setGroupBy(data, yAxisField)
+
+      for (const key in chartProperties) {
+        if (chartProperties[key] !== 'yAxis' && !chartProperties[key].startsWith('xAxis')) {
+          Object.keys(dataGroup).forEach(item => {
+            const data = new Array(yAxisList.length).fill(0)
+            dataGroup[item].forEach(res => {
+              data[xAxisList.indexOf(res[xAxisField])]= res[key]
+            })
+            series.push({
+              name: yAxisList[item],
+              type: chartProperties[key],
+              data,
+            })
+          })
         }
       }
       ananysicData["xAxis"] = xAxisList;
@@ -207,6 +243,24 @@ export default {
         ananysicData.push(obj);
       }
       return ananysicData;
+    },
+    setUnique(arr) {
+      let newArr = [];
+      arr.forEach(item => {
+        return newArr.includes(item) ? '' : newArr.push(item);
+      });
+      return newArr;
+    },
+    setGroupBy(array, name) {
+      const groups = {}
+      array.forEach(function (o) {
+        const group = JSON.stringify(o[name])
+        groups[group] = groups[group] || []
+        groups[group].push(o)
+      })
+      return Object.keys(groups).map(function (group) {
+        return groups[group]
+      })
     },
   },
   watch: {

@@ -177,7 +177,8 @@ export default {
             rules: [
               { required: true, message: "状态不能为空", trigger: "blur" }
             ],
-            disabled: false
+            disabled: false,
+            defaultValue: 1
           },
           {
             label: "排序", // 排序

@@ -99,6 +99,7 @@
     <Share
       :visib="visibleForShareDialog"
       :reportCode="reportCodeForShareDialog"
+      :reportName="reportNameForShareDialog"
       @handleClose="visibleForShareDialog = false"
     />
   </div>
@@ -127,7 +128,8 @@ export default {
       },
       // 分享
       visibleForShareDialog: false,
-      reportCodeForShareDialog: ""
+      reportCodeForShareDialog: "",
+      reportNameForShareDialog: ""
     };
   },
   mounted() {},
@@ -172,6 +174,7 @@ export default {
     // 分享
     share(val) {
       this.reportCodeForShareDialog = val.reportCode;
+      this.reportNameForShareDialog = val.reportName;
       this.visibleForShareDialog = true;
     },
     openDesign(val) {

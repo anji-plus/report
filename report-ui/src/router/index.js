@@ -27,6 +27,7 @@ import Layout from '../views/layout/Layout'
 **/
 export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login'), hidden: true },
+  { path: '/aj/**', component: () => import('@/views/report/aj'), hidden: true },
   {
     path: '/index', component: Layout, name: 'index', meta: { title: '首页', icon: 'iconhome2' },
     children: [
@@ -56,7 +57,7 @@ export const constantRouterMap = [
     children: [
       { path: 'file', name: 'file', component: () => import('@/views/file-management/index'), meta: { title: '文件管理', icon: 'iconfill_folder', keepAlive: true, requireAuth: true, permission: 'fileManage'} },
       { path: 'dict', name: 'dict', component: () => import('@/views/dict/index'), meta: { title: '数据字典', icon: 'iconzidian', keepAlive: true, requireAuth: true, permission: 'dictManage'} },
-      { path: 'dictItem', name: 'dictItem', component: () => import('@/views/dict/dict-item'), meta: { title: '字典项', icon: 'iconzidianxiang', keepAlive: true, requireAuth: true, permission: 'dictItemManage'} },
+      { path: 'dictItem', name: 'dictItem', component: () => import('@/views/dict/dict-item'), hidden: true, meta: { title: '字典项', icon: 'iconzidianxiang', keepAlive: true, requireAuth: true, permission: 'dictItemManage'} },
     ]
   },
   { path: '/bigscreen/viewer', component: () => import('@/views/report/bigscreen/viewer'), hidden: true, meta: { requireAuth: true }},

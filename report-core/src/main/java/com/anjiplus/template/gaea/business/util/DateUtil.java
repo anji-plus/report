@@ -1,7 +1,8 @@
-package com.anjiplus.template.gaea.business.modules.dashboard.util;
+package com.anjiplus.template.gaea.business.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -43,5 +44,26 @@ public class DateUtil {
             System.out.println("日期转换错误: " + e.getMessage());
             return null;
         }
+    }
+
+    /**
+     * 获取未来第几天的日期
+     *
+     * @param day
+     * @return
+     */
+    public static Date getFutureDateTmdHms(int day) {
+        if (day <= 0) {
+            //默认2099年
+            return parse("2099-01-01", defaultDatePattern);
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + day);
+        return calendar.getTime();
+    }
+
+    public static void main(String[] args) {
+        Date futureDateTmdHms = getFutureDateTmdHms(7);
+        System.out.println(futureDateTmdHms);
     }
 }

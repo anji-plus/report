@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "18888301",
+      "name": "堆叠图",
+      "font_class": "bianzu23",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "23457042",
+      "name": "堆叠图",
+      "font_class": "duidietu",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
       "icon_id": "5472881",
       "name": "文件",
       "font_class": "fill_folder",

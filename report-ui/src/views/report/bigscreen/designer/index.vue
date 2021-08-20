@@ -87,7 +87,7 @@
             <i class="iconfont iconyulan" @click="viewScreen"></i>
           </el-tooltip>
         </span>
-        <span class="btn border-left">
+        <!-- <span class="btn border-left">
           <ul class="nav">
             <li>
               <i class="el-icon-brush"></i><i class="el-icon-arrow-down"></i>
@@ -116,7 +116,7 @@
               </ul>
             </li>
           </ul>
-        </span>
+        </span> -->
       </div>
       <div
         class="workbench-container"
@@ -170,8 +170,6 @@
           </div>
         </vue-ruler-tool>
       </div>
-      <!-- 如果是二次开发商业使用必须带上这个技术支持 -->
-      <div class="bottom-text">技术支持： 安吉加加信息技术有限公司</div>
     </div>
 
     <div class="layout-right" :style="{ width: widthLeftForOptions + 'px' }">

@@ -283,12 +283,11 @@ export default {
             fontWeight: optionsCollapse.fontWeight
           };
           series[key].barWidth = optionsCollapse.maxWidth;
-          //series[key].barMinHeight = optionsCollapse.minHeight;
         }
       }
       this.options.series = series;
     },
-    // tooltip 设置
+    // tooltip 提示语设置
     setOptionsTooltip() {
       const optionsCollapse = this.optionsSetup;
       const tooltip = {

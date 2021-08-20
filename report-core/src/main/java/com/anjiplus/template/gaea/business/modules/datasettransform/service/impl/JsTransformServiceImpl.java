@@ -54,9 +54,7 @@ public class JsTransformServiceImpl implements TransformStrategy {
             engine.eval(js);
             if(engine instanceof Invocable){
                 Invocable invocable = (Invocable) engine;
-                Object exec = invocable.invokeFunction("dataTransform", data);
-                ObjectMapper objectMapper = new ObjectMapper();
-                return objectMapper.convertValue(exec, List.class);
+                return (List<JSONObject>) invocable.invokeFunction("dataTransform", data);
             }
 
         } catch (Exception ex) {

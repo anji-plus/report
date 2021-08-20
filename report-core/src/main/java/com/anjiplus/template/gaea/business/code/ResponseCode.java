@@ -132,4 +132,6 @@ public interface ResponseCode {
     String SOURCE_CODE_ISEXIST = "4009";
     String CLASS_NOT_FOUND = "4010";
 
+    String REPORT_SHARE_LINK_INVALID = "report.share.link.invalid";
+
 }

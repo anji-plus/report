@@ -5,7 +5,7 @@
         <el-select
           size="mini"
           v-model="dataSetValue"
-          clearable
+          filterable
           placeholder="请选择"
           @change="selectDataSet"
         >
@@ -27,7 +27,7 @@
       <el-form-item v-for="item in setParamList" :key="item" :label="item">
         <Dictionary
           v-model="params"
-          :dict-key="'CHART_PROPERTIES'"
+          :dict-key="getDictKey()"
           @input="selectParams($event, item)"
         />
       </el-form-item>
@@ -57,6 +57,7 @@ export default {
   },
   props: {
     chartType: String,
+    dictKey: String,
     props: ["formData"]
   },
   data() {
@@ -66,7 +67,7 @@ export default {
       userNameList: [], // 用户
       setParamList: [], // 对应的不同的图形数据参数
       params: {},
-      chartProperties: {}
+      chartProperties: {},
     };
   },
   computed: {
@@ -113,6 +114,9 @@ export default {
     },
     selectParams(val, key) {
       this.chartProperties[key] = val;
+    },
+    getDictKey(){
+      return this.dictKey == null ? 'CHART_PROPERTIES' : this.dictKey
     }
   }
 };
