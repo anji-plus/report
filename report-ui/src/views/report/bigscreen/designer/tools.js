@@ -6301,6 +6301,7 @@ const widgetTools = [
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
           chartType: 'widget-stackchart',
+          dictKey: 'STACK_PROPERTIES',
           value: '',
         },
       ],
