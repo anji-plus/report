@@ -5,7 +5,7 @@
         <el-select
           size="mini"
           v-model="dataSetValue"
-          clearable
+          filterable
           placeholder="请选择"
           @change="selectDataSet"
         >
