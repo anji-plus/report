@@ -1,7 +1,7 @@
 <template>
   <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
-      <el-upload class="el-upload" :action="uploadUrl" :headers="headers" :on-success="handleUpload" :on-error="handleUpload" :show-file-list="false" :limit="1">
+      <el-upload class="el-upload" ref="upload" :action="uploadUrl" :headers="headers" :on-success="handleUpload" :on-error="handleError" :show-file-list="false" :limit="1">
         <el-button type="primary" icon="el-icon" v-permission="'fileManage:upload'">文件上传</el-button>
       </el-upload>
     </template>
@@ -165,12 +165,19 @@ export default {
   created() {},
   methods: {
     // 上传成功的回调
-    handleUpload(response) {
+    handleUpload(response, file, fileList) {
       console.log(this)
       // 触发查询按钮
       this.$refs.listPage.handleQueryForm()
+      //清除el-upload组件中的文件
+      this.$refs.upload.clearFiles()
     },
-    handleError() {},
+    handleError() {
+      this.$message({
+        message: '上传失败！',
+        type: 'error',
+      })
+    },
     async downloadFile(row) {
       window.open(row.urlPath)
     },
