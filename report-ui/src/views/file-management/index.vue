@@ -1,8 +1,22 @@
 <template>
   <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
-      <el-upload class="el-upload" :action="uploadUrl" :headers="headers" :on-success="handleUpload" :on-error="handleUpload" :show-file-list="false" :limit="1">
-        <el-button type="primary" icon="el-icon" v-permission="'fileManage:upload'">文件上传</el-button>
+      <el-upload
+        ref="upload"
+        class="el-upload"
+        :action="uploadUrl"
+        :headers="headers"
+        :on-success="handleUpload"
+        :on-error="handleUpload"
+        :show-file-list="false"
+        :limit="1"
+      >
+        <el-button
+          type="primary"
+          icon="el-icon"
+          v-permission="'fileManage:upload'"
+          >文件上传</el-button
+        >
       </el-upload>
     </template>
 
@@ -12,173 +26,203 @@
   </anji-crud>
 </template>
 <script>
-import { fileList, fileAdd, fileDel, fileUpdate, fileDetail } from '@/api/file'
-import { getToken } from '@/utils/auth'
+import { fileList, fileAdd, fileDel, fileUpdate, fileDetail } from "@/api/file";
+import { getToken } from "@/utils/auth";
 export default {
-  name: 'File',
+  name: "File",
   components: {
-    anjiCrud: require('@/components/AnjiPlus/anji-crud/anji-crud').default,
+    anjiCrud: require("@/components/AnjiPlus/anji-crud/anji-crud").default
   },
   data() {
     return {
       selectedList: [],
-      uploadUrl: process.env.BASE_API + '/file/upload',
+      uploadUrl: process.env.BASE_API + "/file/upload",
       crudOption: {
         // 使用菜单做为页面标题
-        title: '文件管理',
+        title: "文件管理",
         // 详情页中输入框左边文字宽度
-        labelWidth: '120px',
+        labelWidth: "120px",
         // 查询表单条件
         queryFormFields: [
           {
-            inputType: 'input',
-            label: '文件路径',
-            field: 'filePath',
-          },
+            inputType: "input",
+            label: "文件路径",
+            field: "filePath"
+          }
         ],
         // 操作按钮
         buttons: {
           query: {
             api: fileList,
-            permission: 'fileManage:query',
-            sort: 'create_time',
-            order: 'DESC',
+            permission: "fileManage:query",
+            sort: "create_time",
+            order: "DESC"
           },
           queryByPrimarykey: {
             api: fileDetail,
-            permission: 'fileManage:query',
+            permission: "fileManage:query"
           },
           add: {
             api: fileAdd,
-            permission: 'fileManage:upload',
-            isShow: false,
+            permission: "fileManage:upload",
+            isShow: false
           },
           delete: {
             api: fileDel,
-            permission: 'fileManage:delete',
+            permission: "fileManage:delete"
           },
           edit: {
             api: fileUpdate,
-            permission: 'fileManage:update',
-            isShow: false,
+            permission: "fileManage:update",
+            isShow: false
           },
           // 自定义按钮
           customButton: {
-            operationWidth: 100, // row自定义按钮表格宽度
-          },
+            operationWidth: 100 // row自定义按钮表格宽度
+          }
         },
         // 表格列
         columns: [
           {
-            label: '',
-            field: 'id',
+            label: "",
+            field: "id",
             primaryKey: true, // 根据主键查询详情或者根据主键删除时, 主键的
             tableHide: true, // 表格中不显示
-            editHide: true, // 编辑弹框中不显示
+            editHide: true // 编辑弹框中不显示
           },
           {
             // 以下为表格的配置
-            label: '图片缩略图', // 列名称，必填
-            field: 'urlPath', // 字段名，必填
-            columnType: 'imgPreview', // 图片     不设置默认text
+            label: "图片缩略图", // 列名称，必填
+            field: "urlPath", // 字段名，必填
+            columnType: "imgPreview", // 图片     不设置默认text
             editHide: true, // 编辑弹框中不显示
             // 以下为编辑查看弹框的配置
             // inputType: 'input', // 编辑查看表单组件类型  input anji-select
 
-            placeholder: '',
-            disabled: false,
+            placeholder: "",
+            disabled: false
           },
           {
-            label: '文件标识', // 文件标识
-            placeholder: '',
-            field: 'fileId',
-            editField: 'fileId',
+            label: "文件标识", // 文件标识
+            placeholder: "",
+            field: "fileId",
+            editField: "fileId",
             tableHide: true, // 表格中不显示
-            inputType: 'input',
-            rules: [{ min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' }],
-            disabled: false,
+            inputType: "input",
+            rules: [
+              { min: 1, max: 64, message: "不超过64个字符", trigger: "blur" }
+            ],
+            disabled: false
           },
           {
-            label: '文件类型', // 文件路径
-            placeholder: '',
-            field: 'fileType',
-            editField: 'fileType',
-            inputType: 'input',
-            rules: [{ min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur' }],
-            disabled: false,
+            label: "文件类型", // 文件路径
+            placeholder: "",
+            field: "fileType",
+            editField: "fileType",
+            inputType: "input",
+            rules: [
+              {
+                min: 1,
+                max: 1024,
+                message: "不超过1024个字符",
+                trigger: "blur"
+              }
+            ],
+            disabled: false
           },
           {
-            label: '文件路径', // 文件路径
-            placeholder: '',
-            field: 'filePath',
-            editField: 'filePath',
-            inputType: 'input',
-            rules: [{ min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur' }],
-            disabled: false,
+            label: "文件路径", // 文件路径
+            placeholder: "",
+            field: "filePath",
+            editField: "filePath",
+            inputType: "input",
+            rules: [
+              {
+                min: 1,
+                max: 1024,
+                message: "不超过1024个字符",
+                trigger: "blur"
+              }
+            ],
+            disabled: false
           },
           {
-            label: 'url路径', // url路径
-            placeholder: '',
-            field: 'urlPath',
-            editField: 'urlPath',
-            inputType: 'input',
-            rules: [{ min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur' }],
-            disabled: false,
+            label: "url路径", // url路径
+            placeholder: "",
+            field: "urlPath",
+            editField: "urlPath",
+            inputType: "input",
+            rules: [
+              {
+                min: 1,
+                max: 1024,
+                message: "不超过1024个字符",
+                trigger: "blur"
+              }
+            ],
+            disabled: false
           },
           {
-            label: '内容说明', // 内容说明
-            placeholder: '',
-            field: 'fileInstruction',
-            editField: 'fileInstruction',
-            inputType: 'input',
-            rules: [{ min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur' }],
-            disabled: false,
+            label: "内容说明", // 内容说明
+            placeholder: "",
+            field: "fileInstruction",
+            editField: "fileInstruction",
+            inputType: "input",
+            rules: [
+              {
+                min: 1,
+                max: 1024,
+                message: "不超过1024个字符",
+                trigger: "blur"
+              }
+            ],
+            disabled: false
           },
           {
-            label: '创建人',
-            field: 'createByView',
-            columnType: 'expand', // 表格中放在可展开行中
+            label: "创建人",
+            field: "createByView",
+            columnType: "expand", // 表格中放在可展开行中
 
-            inputType: 'input', // 编辑和查看详情中显示的input
-            disabled: true, // 编辑和查看详情中不可编辑
+            inputType: "input", // 编辑和查看详情中显示的input
+            disabled: true // 编辑和查看详情中不可编辑
           },
           {
-            label: '创建时间',
-            field: 'createTime',
-            columnType: 'expand',
+            label: "创建时间",
+            field: "createTime",
+            columnType: "expand",
 
-            inputType: 'input',
-            disabled: true,
-          },
-        ],
-      },
-    }
+            inputType: "input",
+            disabled: true
+          }
+        ]
+      }
+    };
   },
   computed: {
     headers() {
       return {
-        Authorization: getToken(), // 直接从本地获取token就行
-      }
-    },
+        Authorization: getToken() // 直接从本地获取token就行
+      };
+    }
   },
 
   created() {},
   methods: {
     // 上传成功的回调
     handleUpload(response) {
-      console.log(this)
+      this.$refs.upload.clearFiles();
       // 触发查询按钮
-      this.$refs.listPage.handleQueryForm()
+      this.$refs.listPage.handleQueryForm();
     },
     handleError() {},
     async downloadFile(row) {
-      window.open(row.urlPath)
+      window.open(row.urlPath);
     },
     customButtom(val) {
-      this.downloadFile(val.msg)
-    },
-  },
-}
+      this.downloadFile(val.msg);
+    }
+  }
+};
 </script>
 <style scoped lang="scss">
 .el-upload {
