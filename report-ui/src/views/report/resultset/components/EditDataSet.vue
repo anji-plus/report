@@ -161,11 +161,11 @@
                       </template>
                     </el-table-column>
                   </el-table>
-                  <el-checkbox
-                    v-model="isShowPagination"
-                    @change="changePagination"
-                    >加入分页参数
-                  </el-checkbox>
+<!--                  <el-checkbox-->
+<!--                    v-model="isShowPagination"-->
+<!--                    @change="changePagination"-->
+<!--                    >加入分页参数-->
+<!--                  </el-checkbox>-->
                 </el-tab-pane>
                 <el-tab-pane label="数据转换" name="second">
                   <template>
