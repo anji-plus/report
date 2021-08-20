@@ -45,7 +45,9 @@
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 折线堆叠图 
-开发中 <br>
+动态的数据集对应字典值需要选择一个“X轴”、“Y轴”、“折线”，也就是说需要3个字段，不明白可以看看静态数据 <br>
+![img.17](../picture/dashboard/img_17.png)
+**如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 折线图
 折线图数据集对应字典值需要选择一个“X轴”、“折线”，只需要2个字段 <br>
