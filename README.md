@@ -110,6 +110,8 @@ bin/start.bat Windows修改第4行的JAVA_HOME后，双击启动
 启动后访问
 http://serverip:9095
 ```
+源码编译部署和发行版部署可参考在线文档 <br>
+https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html
 
 ## 谁在使用
 

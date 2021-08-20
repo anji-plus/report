@@ -96,11 +96,9 @@ export default {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
-      this.setOptionsTop();
       this.setOptionsTooltip();
       this.setOptionsMargin();
       this.setOptionsLegend();
-      this.setOptionsColor();
       this.setOptionsData();
     },
     // 标题修改
@@ -195,25 +193,6 @@ export default {
       };
       this.options.yAxis = yAxis;
     },
-    // 数值设定 or 柱体设置
-    setOptionsTop() {
-      const optionsCollapse = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "bar") {
-          series[key].label = {
-            show: optionsCollapse.isShow,
-            position: "top",
-            distance: 10,
-            fontSize: optionsCollapse.fontSize,
-            color: optionsCollapse.subTextColor,
-            fontWeight: optionsCollapse.fontWeight
-          };
-          series[key].barWidth = optionsCollapse.maxWidth;
-        }
-      }
-      this.options.series = series;
-    },
     // tooltip 提示语设置，鼠标放置显示
     setOptionsTooltip() {
       const optionsCollapse = this.optionsSetup;
@@ -254,30 +233,6 @@ export default {
         fontSize: optionsCollapse.lengedFontSize
       };
       legend.itemWidth = optionsCollapse.lengedWidth;
-    },
-    // 自定义颜色
-    setOptionsColor() {
-      const optionsCollapse = this.optionsSetup;
-      const customColor = optionsCollapse.customColor;
-      if (!customColor) return;
-      const arrColor = [];
-      for (let i = 0; i < customColor.length; i++) {
-        arrColor.push(customColor[i].color);
-      }
-      const itemStyle = {
-        normal: {
-          color: params => {
-            return arrColor[params.dataIndex];
-          },
-          barBorderRadius : optionsCollapse.radius
-        },
-      };
-      for (const key in this.options.series) {
-        if (this.options.series[key].type == "bar") {
-          this.options.series[key].itemStyle = itemStyle;
-        }
-      }
-      this.options = Object.assign({}, this.options);
     },
     // 数据解析
     setOptionsData() {
@@ -394,6 +349,12 @@ export default {
       });
     },
     renderingFn(optionsSetup, val) {
+      //颜色
+      const customColor = optionsSetup.customColor;
+      const arrColor = [];
+      for (let i = 0; i < customColor.length; i++) {
+        arrColor.push(customColor[i].color);
+      }
       // x轴
       if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];
@@ -406,14 +367,35 @@ export default {
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
       }
-
-      const series = this.options.series;
-      for (const i in series) {
-        if (series[i].type == "bar") {
-          series[i].name = val.series[i].name;
-          series[i].data = val.series[i].data;
+      const series = [];
+      for (const i in val.series) {
+        if (val.series[i].type == "bar") {
+          series.push({
+            name: val.series[i].name,
+            type: "bar",
+            data: val.series[i].data,
+            barGap: "0%",
+            stack: this.getStackStyle(),
+            barWidth: optionsSetup.maxWidth,
+            label: {
+              show: optionsSetup.isShow,
+              position: "top",
+              distance: 10,
+              fontSize: optionsSetup.fontSize,
+              color: optionsSetup.subTextColor,
+              fontWeight: optionsSetup.fontWeight
+            },
+            //颜色，圆角属性
+            itemStyle: {
+              normal : {
+                color: arrColor[i],
+                barBorderRadius : optionsSetup.radius,
+              }
+            }
+          })
         }
       }
+      this.options.series = series
     }
   }
 };
