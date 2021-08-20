@@ -5689,7 +5689,7 @@ const widgetTools = [
     code: 'widgetBarStackChart',
     type: 'chart',
     label: '柱状堆叠图',
-    icon: 'iconzhuzhuangtu',
+    icon: 'iconbianzu23',
     options: {
       // 配置
       setup: [
