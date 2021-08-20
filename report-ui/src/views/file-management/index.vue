@@ -1,7 +1,8 @@
 <template>
   <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
-      <el-upload class="el-upload" ref="upload" :action="uploadUrl" :headers="headers" :on-success="handleUpload" :on-error="handleError" :show-file-list="false" :limit="1">
+      <el-upload class="el-upload" ref="upload" :action="uploadUrl" :headers="headers" :on-success="handleUpload"
+                 :on-error="handleError" :show-file-list="false" :limit="1">
         <el-button type="primary" icon="el-icon" v-permission="'fileManage:upload'">文件上传</el-button>
       </el-upload>
     </template>
@@ -13,8 +14,9 @@
   </anji-crud>
 </template>
 <script>
-import { fileList, fileAdd, fileDel, fileUpdate, fileDetail } from '@/api/file'
-import { getToken } from '@/utils/auth'
+import {fileList, fileAdd, fileDel, fileUpdate, fileDetail} from '@/api/file'
+import {getToken} from '@/utils/auth'
+
 export default {
   name: 'File',
   components: {
@@ -96,7 +98,7 @@ export default {
             editField: 'fileId',
             tableHide: true, // 表格中不显示
             inputType: 'input',
-            rules: [{ min: 1, max: 64, message: '不超过64个字符', trigger: 'blur' }],
+            rules: [{min: 1, max: 64, message: '不超过64个字符', trigger: 'blur'}],
             disabled: false,
           },
           {
@@ -105,7 +107,7 @@ export default {
             field: 'fileType',
             editField: 'fileType',
             inputType: 'input',
-            rules: [{ min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur' }],
+            rules: [{min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur'}],
             disabled: false,
           },
           {
@@ -114,7 +116,7 @@ export default {
             field: 'filePath',
             editField: 'filePath',
             inputType: 'input',
-            rules: [{ min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur' }],
+            rules: [{min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur'}],
             disabled: false,
           },
           {
@@ -123,7 +125,7 @@ export default {
             field: 'urlPath',
             editField: 'urlPath',
             inputType: 'input',
-            rules: [{ min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur' }],
+            rules: [{min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur'}],
             disabled: false,
           },
           {
@@ -132,7 +134,7 @@ export default {
             field: 'fileInstruction',
             editField: 'fileInstruction',
             inputType: 'input',
-            rules: [{ min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur' }],
+            rules: [{min: 1, max: 1024, message: '不超过1024个字符', trigger: 'blur'}],
             disabled: false,
           },
           {
@@ -163,7 +165,8 @@ export default {
     },
   },
 
-  created() {},
+  created() {
+  },
   methods: {
     // 上传成功的回调
     handleUpload(response, file, fileList) {
@@ -185,7 +188,7 @@ export default {
     customButtom(val) {
       this.downloadFile(val.msg)
     },
-    copyUrlPath(val){
+    copyUrlPath(val) {
       this.copyToClip(val.msg.urlPath)
       this.$message({
         message: '已将url路径复制至剪切板！',
