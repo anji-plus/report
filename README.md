@@ -113,6 +113,12 @@ http://serverip:9095
 源码编译部署和发行版部署可参考在线文档 <br>
 https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html
 
+## SQL初始化
+sql文件的目录在：report-core --> src --> main --> resources -- > db.migration <br>
+
+系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件。 <br>
+执行完将会创建 aj_report（存放系统基础数据） 和 aj_report_init（存放示例数据） 俩个库。 <br>
+
 ## 谁在使用
 
 希望你们的logo出现在此，[请点此Issue进行登记](https://gitee.com/anji-plus/report/issues/I3ZXT4) ，我们将优先进行技术支持 <br>
