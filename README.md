@@ -141,6 +141,16 @@ https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html
 
 AJ-Report 使用Druid，版本为1.2.6，如果你觉得你配置都是正常但是数据源测试不过，请尝试降低Druid版本
 
+## 商业授权
+AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.0.html) <br>
+个人和企业，在直接使用、二次开发后商业使用，需要遵守：
+- 包含AJ-Report LICENSE文件（授权使用者免费使用AJ-Report专利和知识产权）
+- 如果修改了代码，需要在被修改的文件中说明
+- 在修改和有源代码衍生的代码中，需要带有原来代码中的协议，商标
+- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report LICENSE构成更改。
+
+如果您需要商业化增值服务，请加下面的微信沟通。
+
 ## 技术支持
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
