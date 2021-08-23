@@ -13,6 +13,9 @@ import com.anjiplus.template.gaea.business.modules.dashboard.controller.dto.Repo
 import com.anjiplus.template.gaea.business.modules.dashboard.dao.ReportDashboardMapper;
 import com.anjiplus.template.gaea.business.modules.dashboard.service.ChartStrategy;
 import com.anjiplus.template.gaea.business.modules.dashboard.service.ReportDashboardService;
+import com.anjiplus.template.gaea.business.modules.file.entity.GaeaFile;
+import com.anjiplus.template.gaea.business.modules.file.service.GaeaFileService;
+import com.anjiplus.template.gaea.business.modules.file.util.FileUtils;
 import com.anjiplus.template.gaea.business.util.DateUtil;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.controller.dto.ReportDashboardWidgetDto;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.controller.dto.ReportDashboardWidgetValueDto;
@@ -22,17 +25,29 @@ import com.anjiplus.template.gaea.business.modules.dashboardwidget.service.Repor
 import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.DataSetDto;
 import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.OriginalDataDto;
 import com.anjiplus.template.gaea.business.modules.dataset.service.DataSetService;
+import com.anjiplus.template.gaea.business.util.FileUtil;
+import com.anjiplus.template.gaea.business.util.UuidUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -42,6 +57,7 @@ import java.util.*;
  * @date 2021-04-12 14:52:21.761
  **/
 @Service
+@Slf4j
 //@RequiredArgsConstructor
 public class ReportDashboardServiceImpl implements ReportDashboardService, InitializingBean, ApplicationContextAware {
 
@@ -53,6 +69,18 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
 
     @Autowired
     private DataSetService dataSetService;
+
+    @Autowired
+    private GaeaFileService gaeaFileService;
+
+    @Value("${customer.file.downloadPath:''}")
+    private String fileDownloadPath;
+
+    @Value("${customer.file.dist-path:''}")
+    private String dictPath;
+
+    private final static String ZIP_PATH = "/zip/";
+    private final static String JSON_PATH = "dashboard.json";
 
     private Map<String, ChartStrategy> queryServiceImplMap = new HashMap<>();
     private ApplicationContext applicationContext;
@@ -163,6 +191,97 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
         List<JSONObject> resultData = buildTimeLine(data, dto);
         return resultData;
 //        return getTarget(chartType).transform(dto, result.getData());
+    }
+
+    /**
+     * 导出大屏，zip文件
+     *
+     * @param request
+     * @param response
+     * @param reportCode
+     * @return
+     */
+    @Override
+    public ResponseEntity<byte[]> exportDashboard(HttpServletRequest request, HttpServletResponse response, String reportCode) {
+        String userAgent = request.getHeader("User-Agent");
+        boolean isIeBrowser = userAgent.indexOf("MSIE") > 0;
+
+        ReportDashboardObjectDto detail = getDetail(reportCode);
+        List<ReportDashboardWidgetDto> widgets = detail.getDashboard().getWidgets();
+        detail.setWidgets(widgets);
+        detail.getDashboard().setWidgets(null);
+
+
+        //1.组装临时目录,/app/disk/upload/zip/临时文件夹
+        String path = dictPath + ZIP_PATH + UuidUtil.generateShortUuid();
+
+        //将涉及到的图片保存下来（1.背景图，2.组件为图片的）
+        String backgroundImage = detail.getDashboard().getBackgroundImage();
+        zipLoadImage(backgroundImage, path);
+        detail.getWidgets().stream()
+                .filter(reportDashboardWidgetDto -> "widget-image".equals(reportDashboardWidgetDto.getType()))
+                .forEach(reportDashboardWidgetDto -> {
+                    String imageAddress = reportDashboardWidgetDto.getValue().getSetup().getString("imageAdress");
+                    zipLoadImage(imageAddress, path);
+                });
+
+
+
+        //2.将大屏设计到的json文件保存
+        String jsonPath = path + "/" + JSON_PATH;
+        FileUtil.WriteStringToFile(jsonPath, JSONObject.toJSONString(detail));
+
+
+        //将path文件夹打包zip
+        String zipPath = path + ".zip";
+        FileUtil.compress(path, zipPath);
+
+
+        File file = new File(zipPath);
+        ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
+        builder.contentLength(file.length());
+        //application/octet-stream 二进制数据流（最常见的文件下载）
+        builder.contentType(MediaType.APPLICATION_OCTET_STREAM);
+        if (isIeBrowser) {
+            builder.header("Content-Disposition", "attachment; filename=" + reportCode + ".zip");
+        } else {
+            builder.header("Content-Disposition", "attacher; filename*=UTF-8''" + reportCode + ".zip");
+        }
+
+        //删除zip文件
+        file.delete();
+        //删除path临时文件夹
+        FileUtil.delete(path);
+        log.info("删除临时文件：{}，{}", zipPath, path);
+
+        return builder.body(FileUtils.readFileToByteArray(file));
+    }
+
+    /**
+     * 将大屏涉及到的图片存入指定文件夹
+     * @param imageAddress
+     * @param path
+     */
+    private void zipLoadImage(String imageAddress, String path) {
+        //http://10.108.26.197:9095/file/download/1d9bcd35-82a1-4f08-9465-b66b930b6a8d
+        if (imageAddress.trim().startsWith(fileDownloadPath)) {
+            //以fileDownloadPath为前缀的代表为上传的图片
+            String fileName = imageAddress.substring(fileDownloadPath.length() + 1);
+            //根据fileId，从gaea_file中读出filePath
+            LambdaQueryWrapper<GaeaFile> queryWrapper = Wrappers.lambdaQuery();
+            queryWrapper.eq(GaeaFile::getFileId, fileName);
+            GaeaFile gaeaFile = gaeaFileService.selectOne(queryWrapper);
+            if (null != gaeaFile) {
+                String fileType = gaeaFile.getFileType();
+                path = path + "/image/" + fileName + "." + fileType;
+                //path = /app/disk/upload/zip/UUID/image
+
+                //原始文件的路径
+                String filePath = gaeaFile.getFilePath();
+                FileUtil.copyFileUsingFileChannels(filePath, path);
+            }
+        }
+
     }
 
     public ChartStrategy getTarget(String type) {

@@ -3,7 +3,6 @@ package com.anjiplus.template.gaea.business.util;
 import com.anji.plus.gaea.code.ResponseCode;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import lombok.extern.slf4j.Slf4j;
-import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.net.URL;

@@ -8,3 +8,4 @@ spring:
 customer:
   file:
     dist-path: D:\Workspace\AJ-Report\report-core\upload
+    downloadPath: http://127.0.0.1:9095/file/download

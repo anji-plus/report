@@ -6,6 +6,10 @@ import com.anjiplus.template.gaea.business.modules.dashboard.controller.dto.Char
 import com.anjiplus.template.gaea.business.modules.dashboard.controller.dto.ReportDashboardObjectDto;
 import com.anjiplus.template.gaea.business.modules.dashboard.controller.param.ReportDashboardParam;
 import com.anjiplus.template.gaea.business.modules.dashboard.dao.entity.ReportDashboard;
+import org.springframework.http.ResponseEntity;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
 * @desc ReportDashboard 大屏设计服务接口
@@ -35,4 +39,14 @@ public interface ReportDashboardService extends GaeaBaseService<ReportDashboardP
      * @return
      */
     Object getChartData(ChartDto dto);
+
+
+    /**
+     * 导出大屏，zip文件
+     * @param request
+     * @param response
+     * @param reportCode
+     * @return
+     */
+    ResponseEntity<byte[]> exportDashboard(HttpServletRequest request, HttpServletResponse response, String reportCode);
 }
