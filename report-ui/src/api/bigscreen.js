@@ -45,3 +45,21 @@ export function getData(data) {
     data,
   })
 }
+
+// 导出大屏
+export function exportDashboard(data) {
+  return request({
+    url: 'reportDashboard/export/' + data,
+    method: 'get',
+  })
+}
+
+
+// 导入大屏
+export function importDashboard(data) {
+  return request({
+    url: 'reportDashboard/import',
+    method: 'post',
+    data,
+  })
+}
