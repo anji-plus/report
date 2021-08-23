@@ -87,7 +87,7 @@
 ![img16](../picture/dashboard/img_16.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
-### 热力图
+### 散点图
 **开发中** <br>
 
 ### 对比图

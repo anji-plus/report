@@ -55,6 +55,7 @@
 			<outputDirectory>/</outputDirectory>
 			<includes>
 				<include>LICENSE</include>
+                <include>NOTICE</include>
 			</includes>
 		</fileSet>
 	</fileSets>
