@@ -8,3 +8,5 @@ fi
 kill -9 ${pid}
 
 echo "Send shutdown request to aj-reporte(${pid}) OK"
+
+
