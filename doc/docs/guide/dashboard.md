@@ -20,10 +20,10 @@
 
 ### 当前时间
 已支持多种时间格式，其他格式请提Issue <br>
-![img_1.png](../picture/dashboard/img_1.png)
+![img_1.png](../picture/dashboard/img_1.png) <br>
 
 ### 图片
-![img_7.png](../picture/dashboard/img_7.png)
+![img_7.png](../picture/dashboard/img_7.png) <br>
 
 ### 视屏
 **暂不支持循环播放**<br>
@@ -41,22 +41,22 @@
 
 ### 柱状堆叠图
 动态的数据集对应字典值需要选择一个“X轴”、“Y轴”、“柱状”，也就是说需要3个字段，不明白可以看看静态数据 <br>
-![img.17](../picture/dashboard/img_17.png)
+![img.17](../picture/dashboard/img_17.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 折线堆叠图 
 动态的数据集对应字典值需要选择一个“X轴”、“Y轴”、“折线”，也就是说需要3个字段，不明白可以看看静态数据 <br>
-![img.17](../picture/dashboard/img_17.png)
+![img.17](../picture/dashboard/img_17.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 折线图
 折线图数据集对应字典值需要选择一个“X轴”、“折线”，只需要2个字段 <br>
-![img_8.png](../picture/dashboard/img_8.png)
+![img_8.png](../picture/dashboard/img_8.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 柱线图
 柱线图数据集对应字典值需要选择一个“X轴”、“柱状”、“折线”，需要3个字段 <br>
-![img9](../picture/dashboard/img_9.png)
+![img9](../picture/dashboard/img_9.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 饼图
@@ -77,7 +77,7 @@
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 中国地图
-**注**：气泡地图已支持动态数据，中国地图（迁徙图）暂不支持动态数据
+**注**：气泡地图已支持动态数据，中国地图（迁徙图）暂不支持动态数据 <br>
 气泡地图动态数据集，和饼图一样，对应字典值需要选择一个“Name”、“Value”，且name的字段值要和echarts图表里面的值能对应上，可参考静态数据 <br>
 ![img15](../picture/dashboard/img_15.png) <br>
 
