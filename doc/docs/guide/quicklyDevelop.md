@@ -30,3 +30,10 @@
 - [Windows 10]
 
 已知 **Mysql8.0** 和 **Jdk11** 会出现兼容性问题，后续有解决方法将会在下方 **其他** 大类进行补充  
+
+## SQL初始化
+sql文件的地址是：report-core --> src --> main --> resources -- > db.migration <br>
+![sql](../picture/quickly/img_13.png)
+
+系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件。 <br>
+执行完将会创建 aj_report（存放系统基础数据） 和 aj_report_init（存放示例数据） 俩个库。 <br>
