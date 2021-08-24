@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 
 /**
  * (GaeaFile)Service
@@ -17,15 +18,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface GaeaFileService extends GaeaBaseService<GaeaFileParam, GaeaFile> {
 
-
     /**
      * 文件上传
      *
      * @param file
      * @return 文件访问路径
      */
-    GaeaFile upload(MultipartFile file);
-
+    GaeaFile upload(MultipartFile multipartFile, File file, String customFileName);
     /**
      * 根据fileId显示图片或者下载文件
      *

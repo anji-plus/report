@@ -52,7 +52,7 @@ export function exportDashboard(data) {
   return new Promise((resolve) =>{
     axios({
       method:'get',
-      url: process.env.BASE_API + '/reportDashboard/export/' + data,
+      url: process.env.BASE_API + '/reportDashboard/export',
       headers: { 'Authorization': getToken() },
       params:data,
       responseType:'blob'

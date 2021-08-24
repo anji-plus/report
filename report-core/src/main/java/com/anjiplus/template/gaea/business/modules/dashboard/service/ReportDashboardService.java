@@ -7,6 +7,7 @@ import com.anjiplus.template.gaea.business.modules.dashboard.controller.dto.Repo
 import com.anjiplus.template.gaea.business.modules.dashboard.controller.param.ReportDashboardParam;
 import com.anjiplus.template.gaea.business.modules.dashboard.dao.entity.ReportDashboard;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,5 +49,13 @@ public interface ReportDashboardService extends GaeaBaseService<ReportDashboardP
      * @param reportCode
      * @return
      */
-    ResponseEntity<byte[]> exportDashboard(HttpServletRequest request, HttpServletResponse response, String reportCode);
+    ResponseEntity<byte[]> exportDashboard(HttpServletRequest request, HttpServletResponse response, String reportCode, Integer showDataSet);
+
+    /**
+     * 导入大屏zip
+     * @param file
+     * @param reportCode
+     * @return
+     */
+    void importDashboard(MultipartFile file, String reportCode);
 }

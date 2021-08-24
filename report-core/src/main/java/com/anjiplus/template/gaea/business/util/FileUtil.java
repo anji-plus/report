@@ -3,6 +3,7 @@ package com.anjiplus.template.gaea.business.util;
 import com.anji.plus.gaea.code.ResponseCode;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.net.URL;
@@ -90,6 +91,11 @@ public class FileUtil {
 
     public static void WriteStringToFile(String filePath, String content) {
         try {
+            //不存在创建文件
+            File file = new File(filePath);
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
             FileWriter fw = new FileWriter(filePath);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(content);
@@ -241,23 +247,45 @@ public class FileUtil {
         }
     }
 
+    public static void decompress(String zipFile, String dstPath) {
+        try {
+            decompress(new ZipFile(zipFile), dstPath);
+        } catch (IOException e) {
+            log.error("", e);
+            throw BusinessExceptionBuilder.build(ResponseCode.FAIL_CODE, e.getMessage());
+        }
+    }
+
+    public static void decompress(MultipartFile zipFile, String dstPath) {
+        try {
+            File file = new File(dstPath + File.separator + zipFile.getOriginalFilename());
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+            zipFile.transferTo(file);
+            decompress(new ZipFile(file), dstPath);
+            //解压完删除
+            file.delete();
+        } catch (IOException e) {
+            log.error("", e);
+            throw BusinessExceptionBuilder.build(ResponseCode.FAIL_CODE, e.getMessage());
+        }
+    }
 
     /**
      * 解压zip
      *
-     * @param zipFile
+     * @param zip
      * @param dstPath
      * @throws IOException
      */
-    public static void decompress(String zipFile, String dstPath) {
-        log.info("解压zip：{}，临时目录：{}", zipFile, dstPath);
+    public static void decompress(ZipFile zip, String dstPath) {
+        log.info("解压zip：{}，临时目录：{}", zip.getName(), dstPath);
         File pathFile = new File(dstPath);
         if (!pathFile.exists()) {
             pathFile.mkdirs();
         }
-        ZipFile zip = null;
         try {
-            zip = new ZipFile(zipFile);
 
             for (Enumeration entries = zip.entries(); entries.hasMoreElements(); ) {
                 ZipEntry entry = (ZipEntry) entries.nextElement();
@@ -315,7 +343,29 @@ public class FileUtil {
     }
 
     /**
+     * 获取流文件
+     * @param ins
+     * @param file
+     */
+    private static void inputStreamToFile(InputStream ins, File file) {
+        try {
+            OutputStream os = new FileOutputStream(file);
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            ins.close();
+        } catch (Exception e) {
+            log.error("获取流文件失败", e);
+            throw BusinessExceptionBuilder.build(ResponseCode.FAIL_CODE, e.getMessage());
+        }
+    }
+
+    /**
      * 删除文件夹
+     *
      * @param path
      */
     public static void delete(String path) {
@@ -355,7 +405,6 @@ public class FileUtil {
 //        FileUtil.decompress(rawZipFilePath, targetFolderPath);
 
 //        FileUtil.downloadPicture("http://10.108.26.197:9095/file/download/fd20d563-00aa-45e2-b5db-aff951f814ec", "D:\\abc.png");
-
 
 
 //        delete("D:\\aa");

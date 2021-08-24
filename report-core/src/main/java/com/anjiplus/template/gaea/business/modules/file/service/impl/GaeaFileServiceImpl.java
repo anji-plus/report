@@ -10,6 +10,7 @@ import com.anjiplus.template.gaea.business.modules.file.entity.GaeaFile;
 import com.anjiplus.template.gaea.business.modules.file.service.GaeaFileService;
 import com.anjiplus.template.gaea.business.modules.file.util.FileUtils;
 import com.anjiplus.template.gaea.business.modules.file.util.StringPatternUtil;
+import com.anjiplus.template.gaea.business.util.FileUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
@@ -64,11 +65,18 @@ public class GaeaFileServiceImpl implements GaeaFileService {
         return gaeaFileMapper;
     }
 
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public GaeaFile upload(MultipartFile file) {
+    public GaeaFile upload(MultipartFile multipartFile, File file, String customFileName) {
         try {
-            String fileName = file.getOriginalFilename();
+            String fileName = "";
+            if (null != multipartFile) {
+                fileName = multipartFile.getOriginalFilename();
+            }else {
+                fileName = file.getName();
+            }
+
             if (StringUtils.isBlank(fileName)) {
                 throw BusinessExceptionBuilder.build(ResponseCode.FILE_EMPTY_FILENAME);
             }
@@ -82,7 +90,12 @@ public class GaeaFileServiceImpl implements GaeaFileService {
                 throw BusinessExceptionBuilder.build(ResponseCode.FILE_SUFFIX_UNSUPPORTED);
             }
             // 生成文件唯一性标识
-            String fileId = UUID.randomUUID().toString();
+            String fileId;
+            if (StringUtils.isBlank(customFileName)) {
+                fileId = UUID.randomUUID().toString();
+            } else {
+                fileId = customFileName;
+            }
             String newFileName = fileId + suffixName;
             // 本地文件保存路径
             String filePath = dictPath + newFileName;
@@ -102,7 +115,11 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             if (!parentFile.exists()) {
                 parentFile.mkdirs();
             }
-            file.transferTo(dest);
+            if (null != multipartFile) {
+                multipartFile.transferTo(dest);
+            }else {
+                FileUtil.copyFileUsingFileChannels(file, dest);
+            }
             // 将完整的http访问路径返回
             return gaeaFile;
         } catch (Exception e) {

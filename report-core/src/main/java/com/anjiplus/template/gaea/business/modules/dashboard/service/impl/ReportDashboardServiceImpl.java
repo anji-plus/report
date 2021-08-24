@@ -43,6 +43,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -133,7 +134,7 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
      * @param dto
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void insertDashboard(ReportDashboardObjectDto dto) {
         String reportCode = dto.getReportCode();
         GaeaAssert.notEmpty(reportCode, ResponseCode.PARAM_IS_NULL, "reportCode");
@@ -149,6 +150,7 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
         } else {
             //更新
             dashboard.setId(reportDashboard.getId());
+            dashboard.setVersion(null);
             this.update(dashboard);
         }
 
@@ -202,7 +204,7 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
      * @return
      */
     @Override
-    public ResponseEntity<byte[]> exportDashboard(HttpServletRequest request, HttpServletResponse response, String reportCode) {
+    public ResponseEntity<byte[]> exportDashboard(HttpServletRequest request, HttpServletResponse response, String reportCode, Integer showDataSet) {
         String userAgent = request.getHeader("User-Agent");
         boolean isIeBrowser = userAgent.indexOf("MSIE") > 0;
 
@@ -225,6 +227,16 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
                     zipLoadImage(imageAddress, path);
                 });
 
+        //showDataSet == 0 代表不包含数据集
+        if (0 == showDataSet) {
+            detail.getWidgets().forEach(reportDashboardWidgetDto -> {
+                ReportDashboardWidgetValueDto value = reportDashboardWidgetDto.getValue();
+                JSONObject data = value.getData();
+                if (null != data && data.containsKey("dataType")) {
+                    reportDashboardWidgetDto.getValue().getData().put("dataType", "staticData");
+                }
+            });
+        }
 
 
         //2.将大屏设计到的json文件保存
@@ -248,13 +260,101 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
             builder.header("Content-Disposition", "attacher; filename*=UTF-8''" + reportCode + ".zip");
         }
 
+        ResponseEntity<byte[]> body = builder.body(FileUtils.readFileToByteArray(file));
+
         //删除zip文件
         file.delete();
         //删除path临时文件夹
         FileUtil.delete(path);
         log.info("删除临时文件：{}，{}", zipPath, path);
 
-        return builder.body(FileUtils.readFileToByteArray(file));
+        return body;
+    }
+
+    /**
+     * 导入大屏zip
+     *
+     * @param file
+     * @param reportCode
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void importDashboard(MultipartFile file, String reportCode) {
+        log.info("导入开始,{}", reportCode);
+        //1.组装临时目录,/app/disk/upload/zip/临时文件夹
+        String path = dictPath + ZIP_PATH + UuidUtil.generateShortUuid();
+        //2.解压
+        FileUtil.decompress(file, path);
+        // path/uuid/
+        File parentPath = new File(path);
+        //获取打包的第一层目录
+        File firstFile = parentPath.listFiles()[0];
+
+        File[] files = firstFile.listFiles();
+
+        //定义map
+        Map<String, String> fileMap = new HashMap<>();
+        String content = "";
+
+        for (int i = 0; i < files.length; i++) {
+            File childFile = files[i];
+            if (JSON_PATH.equals(childFile.getName())) {
+                //json文件
+                content = FileUtil.readFile(childFile);
+            } else if ("image".equals(childFile.getName())) {
+                File[] imageFiles = childFile.listFiles();
+                //所有需要上传的图片
+                for (File imageFile : imageFiles) {
+                    //查看是否存在此image
+                    String name = imageFile.getName();
+                    String fileName = imageFile.getName().split("\\.")[0];
+                    //根据fileId，从gaea_file中读出filePath
+                    LambdaQueryWrapper<GaeaFile> queryWrapper = Wrappers.lambdaQuery();
+                    queryWrapper.eq(GaeaFile::getFileId, fileName);
+                    GaeaFile gaeaFile = gaeaFileService.selectOne(queryWrapper);
+                    if (null == gaeaFile) {
+                        GaeaFile upload = gaeaFileService.upload(null, imageFile, fileName);
+                        fileMap.put(fileName, upload.getUrlPath());
+                    }
+                }
+            }
+
+        }
+
+
+
+        //解析cotent
+        ReportDashboardObjectDto detail = JSONObject.parseObject(content, ReportDashboardObjectDto.class);
+        //将涉及到的图片路径替换（1.背景图，2.组件为图片的）
+        String backgroundImage = detail.getDashboard().getBackgroundImage();
+        detail.getDashboard().setBackgroundImage(replaceUrl(backgroundImage, fileMap));
+        detail.getWidgets().stream()
+                .filter(reportDashboardWidgetDto -> "widget-image".equals(reportDashboardWidgetDto.getType()))
+                .forEach(reportDashboardWidgetDto -> {
+                    String imageAddress = reportDashboardWidgetDto.getValue().getSetup().getString("imageAdress");
+                    String address = replaceUrl(imageAddress, fileMap);
+                    reportDashboardWidgetDto.getValue().getSetup().put("imageAdress", address);
+                    reportDashboardWidgetDto.getOptions().getJSONArray("setup").getJSONObject(4).put("value", address);
+                });
+        //将新的大屏编码赋值
+        detail.setReportCode(reportCode);
+
+        //解析结束，删除临时文件夹
+        FileUtil.delete(path);
+
+        log.info("解析成功，开始存入数据库...");
+        insertDashboard(detail);
+    }
+
+
+    private String replaceUrl(String imageAddress, Map<String, String> fileMap) {
+        String fileId = imageAddress.substring(imageAddress.trim().length() - 36);
+        String orDefault = fileMap.getOrDefault(fileId, null);
+        if (StringUtils.isBlank(orDefault)) {
+            return imageAddress;
+        }
+        return orDefault;
     }
 
     /**
