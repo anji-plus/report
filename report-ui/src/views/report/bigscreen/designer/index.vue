@@ -104,14 +104,14 @@
                        :on-error="handleError"
                        :show-file-list="false"
                        :limit="1">
-              <i class="iconfont iconxiazai"></i>
+              <i class="iconfont icondaoru"></i>
           </el-upload>
           </el-tooltip>
         </span>
         <span class="btn border-left">
           <ul class="nav">
             <li>
-              <i class="iconfont iconfenxiang_2"></i><i class="el-icon-arrow-down"></i>
+              <i class="iconfont icondaochu"></i><i class="el-icon-arrow-down"></i>
               <ul>
                 <li>
                   <el-tooltip
