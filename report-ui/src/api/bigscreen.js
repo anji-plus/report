@@ -1,5 +1,6 @@
 import request from '@/utils/request'
 import { getShareToken, getToken } from "@/utils/auth";
+import axios from 'axios';
 
 // 保存大屏设计
 export function insertDashboard(data) {
@@ -48,12 +49,21 @@ export function getData(data) {
 
 // 导出大屏
 export function exportDashboard(data) {
-  return request({
-    url: 'reportDashboard/export/' + data,
-    method: 'get',
+  return new Promise((resolve) =>{
+    axios({
+      method:'get',
+      url: process.env.BASE_API + '/reportDashboard/export/' + data,
+      headers: { 'Authorization': getToken() },
+      params:data,
+      responseType:'blob'
+    }).then(res =>{
+      resolve(res.data);
+    }).catch(err =>{
+      resolve('error');
+    })
   })
-}
 
+}
 
 // 导入大屏
 export function importDashboard(data) {

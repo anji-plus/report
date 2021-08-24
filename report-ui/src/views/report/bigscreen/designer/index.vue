@@ -87,6 +87,26 @@
             <i class="iconfont iconyulan" @click="viewScreen"></i>
           </el-tooltip>
         </span>
+        <span class="btn">
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="导入"
+            placement="bottom"
+          >
+            <i class="iconfont iconyulan" @click="importDashboard"></i>
+          </el-tooltip>
+        </span>
+        <span class="btn">
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="导出"
+            placement="bottom"
+          >
+            <i class="iconfont iconyulan" @click="exportDashboard"></i>
+          </el-tooltip>
+        </span>
         <!-- <span class="btn border-left">
           <ul class="nav">
             <li>
@@ -226,7 +246,7 @@
 </template>
 
 <script>
-import { insertDashboard, detailDashboard } from "@/api/bigscreen";
+import { insertDashboard, detailDashboard, importDashboard, exportDashboard } from "@/api/bigscreen";
 import { widgetTools, getToolByCode } from "./tools";
 import widget from "./widget/widget.vue";
 import dynamicForm from "./form/dynamicForm.vue";
@@ -494,6 +514,28 @@ export default {
         query: { reportCode: this.$route.query.reportCode }
       });
       window.open(routeUrl.href, "_blank");
+    },
+    //  导出
+    async exportDashboard() {
+      const fileName = this.$route.query.reportCode + ".zip"
+      exportDashboard(this.$route.query.reportCode).then(res=>{
+        const blob = new Blob([res], {type: "application/octet-stream"});
+        if (window.navigator.msSaveOrOpenBlob) {//msSaveOrOpenBlob方法返回bool值
+          navigator.msSaveBlob(blob, fileName);//本地保存
+        } else {
+          const link = document.createElement('a');//a标签下载
+          link.href = window.URL.createObjectURL(blob);
+          link.download = fileName;
+          link.click();
+          window.URL.revokeObjectURL(link.href);
+        }
+      })
+
+    },
+
+    // 导入
+    importDashboard() {
+      alert("导入，开发中")
     },
     // 在缩放模式下的大小
     getPXUnderScale(px) {
