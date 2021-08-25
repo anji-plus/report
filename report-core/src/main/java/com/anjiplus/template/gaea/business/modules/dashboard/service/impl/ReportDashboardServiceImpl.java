@@ -307,21 +307,20 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
                 //所有需要上传的图片
                 for (File imageFile : imageFiles) {
                     //查看是否存在此image
-                    String name = imageFile.getName();
                     String fileName = imageFile.getName().split("\\.")[0];
                     //根据fileId，从gaea_file中读出filePath
                     LambdaQueryWrapper<GaeaFile> queryWrapper = Wrappers.lambdaQuery();
                     queryWrapper.eq(GaeaFile::getFileId, fileName);
                     GaeaFile gaeaFile = gaeaFileService.selectOne(queryWrapper);
                     if (null == gaeaFile) {
-                        GaeaFile upload = gaeaFileService.upload(null, imageFile, fileName);
+                        GaeaFile upload = gaeaFileService.upload(imageFile, fileName);
+                        log.info("存入图片: {}", upload.getFilePath());
                         fileMap.put(fileName, upload.getUrlPath());
                     }
                 }
             }
 
         }
-
 
 
         //解析cotent

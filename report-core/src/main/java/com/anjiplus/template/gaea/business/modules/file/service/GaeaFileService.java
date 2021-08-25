@@ -21,10 +21,30 @@ public interface GaeaFileService extends GaeaBaseService<GaeaFileParam, GaeaFile
     /**
      * 文件上传
      *
-     * @param file
-     * @return 文件访问路径
+     * @param multipartFile  文件
+     * @param file 文件
+     * @param customFileName 自定义文件名，默认给null
+     * @return
      */
     GaeaFile upload(MultipartFile multipartFile, File file, String customFileName);
+
+    /**
+     * 文件上传
+     *
+     * @param multipartFile  文件
+     * @return
+     */
+    GaeaFile upload(MultipartFile multipartFile);
+
+
+    /**
+     * 文件上传
+     *
+     * @param file 二选一
+     * @param customFileName 自定义文件名
+     * @return
+     */
+    GaeaFile upload(File file, String customFileName);
     /**
      * 根据fileId显示图片或者下载文件
      *

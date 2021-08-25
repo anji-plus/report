@@ -129,6 +129,29 @@ public class GaeaFileServiceImpl implements GaeaFileService {
         }
     }
 
+    /**
+     * 文件上传
+     *
+     * @param multipartFile 文件
+     * @return
+     */
+    @Override
+    public GaeaFile upload(MultipartFile multipartFile) {
+        return upload(multipartFile, null, null);
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param file           文件
+     * @param customFileName 自定义文件名
+     * @return
+     */
+    @Override
+    public GaeaFile upload(File file, String customFileName) {
+        return upload(null, file, customFileName);
+    }
+
     @Override
     public ResponseEntity<byte[]> download(HttpServletRequest request, HttpServletResponse response, String fileId) {
         try {
