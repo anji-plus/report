@@ -7010,7 +7010,7 @@ const widgetTools = [
     code: 'widgetBarCompareChart',
     type: 'chart',
     label: '柱状对比图',
-    icon: 'iconbianzu23',
+    icon: 'iconduibitupu',
     options: {
       // 配置
       setup: [
@@ -7022,14 +7022,14 @@ const widgetTools = [
           placeholder: '',
           value: '柱状对比图',
         },
-        {
+        /*{
           type: 'el-switch',
           label: '竖展示',
           name: 'verticalShow',
           required: false,
           placeholder: '',
           value: false,
-        },
+        },*/
         {
           type: 'vue-color',
           label: '背景颜色',
@@ -7048,7 +7048,7 @@ const widgetTools = [
                 name: 'maxWidth',
                 required: false,
                 placeholder: '',
-                value: 20,
+                value: 15,
               },
               {
                 type: 'el-slider',
@@ -7122,47 +7122,9 @@ const widgetTools = [
                 ],
                 value: 'center'
               },
-              {
-                type: 'el-input-text',
-                label: '副标题',
-                name: 'subText',
-                required: false,
-                placeholder: '',
-                value: ''
-              },
-              {
-                type: 'vue-color',
-                label: '字体颜色',
-                name: 'subTextColor',
-                required: false,
-                placeholder: '',
-                value: 'rgba(30, 144, 255, 1)'
-              },
-              {
-                type: 'el-select',
-                label: '字体粗细',
-                name: 'subTextFontWeight',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  {code: 'normal', name: '正常'},
-                  {code: 'bold', name: '粗体'},
-                  {code: 'bolder', name: '特粗体'},
-                  {code: 'lighter', name: '细体'}
-                ],
-                value: 'normal'
-              },
-              {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'subTextFontSize',
-                required: false,
-                placeholder: '',
-                value: 20
-              },
             ],
           },
-          {
+          /*{
             name: 'X轴设置',
             list: [
               {
@@ -7263,8 +7225,8 @@ const widgetTools = [
 
               }
             ],
-          },
-          {
+          },*/
+          /*{
             name: 'Y轴设置',
             list: [
               {
@@ -7355,7 +7317,7 @@ const widgetTools = [
 
               }
             ],
-          },
+          },*/
           {
             name: '数值设定',
             list: [
@@ -7365,7 +7327,7 @@ const widgetTools = [
                 name: 'isShow',
                 required: false,
                 placeholder: '',
-                value: false
+                value: true
               },
               {
                 type: 'el-input-number',
@@ -7399,7 +7361,7 @@ const widgetTools = [
               },
             ],
           },
-          {
+          /*{
             name: '提示语设置',
             list: [
               {
@@ -7526,7 +7488,7 @@ const widgetTools = [
                 value: 'horizontal'
               },
             ],
-          },
+          },*/
           {
             name: '自定义配色',
             list: [
@@ -7535,7 +7497,7 @@ const widgetTools = [
                 label: '',
                 name: 'customColor',
                 required: false,
-                value: [{color: '#ff7f50'}, {color: '#87cefa'}],
+                value: [{color: '#36c5e7'}, {color: '#e68b55'}],
               },
             ],
           },
