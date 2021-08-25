@@ -28,7 +28,7 @@ export default {
             show: false,
             left: '4%',
             top: 60,
-            bottom: 60,
+            bottom: 10,
             containLabel: true,
             width: '40%'
           },
@@ -43,7 +43,7 @@ export default {
             show: false,
             right: '4%',
             top: 60,
-            bottom: 60,
+            bottom: 10,
             containLabel: true,
             width: '40%'
           },
@@ -275,6 +275,7 @@ export default {
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionsTop();
+      this.setOptionsLegend();
       this.setOptionsColor();
       this.setOptionsData();
     },
@@ -292,7 +293,7 @@ export default {
       };
       this.options.title = title;
     },
-    // 数值设定 or 柱体设置
+    // 数值设定、柱体设置
     setOptionsTop() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
@@ -333,7 +334,23 @@ export default {
       }
       this.options.series = series;
     },
-    // 颜色修改，圆角修改
+    // 图例操作
+    setOptionsLegend() {
+      const optionsSetup = this.optionsSetup;
+      const legend = this.options.legend;
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
+      legend.bottom =
+        optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
+      legend.orient = optionsSetup.layoutFront;
+      legend.textStyle = {
+        color: optionsSetup.lengedColor,
+        fontSize: optionsSetup.lengedFontSize
+      };
+      legend.itemWidth = optionsSetup.lengedWidth;
+    },
+    // 颜色修改、圆角修改
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
       const customColor = optionsSetup.customColor;

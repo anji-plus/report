@@ -7022,14 +7022,6 @@ const widgetTools = [
           placeholder: '',
           value: '柱状对比图',
         },
-        /*{
-          type: 'el-switch',
-          label: '竖展示',
-          name: 'verticalShow',
-          required: false,
-          placeholder: '',
-          value: false,
-        },*/
         {
           type: 'vue-color',
           label: '背景颜色',
@@ -7361,7 +7353,7 @@ const widgetTools = [
               },
             ],
           },
-          /*{
+          {
             name: '提示语设置',
             list: [
               {
@@ -7381,7 +7373,7 @@ const widgetTools = [
               },
             ],
           },
-          {
+          /*{
             name: '坐标轴边距设置',
             list: [
               {
@@ -7414,7 +7406,7 @@ const widgetTools = [
                 value: 10,
               },
             ],
-          },
+          },*/
           {
             name: '图例操作',
             list: [
@@ -7488,7 +7480,7 @@ const widgetTools = [
                 value: 'horizontal'
               },
             ],
-          },*/
+          },
           {
             name: '自定义配色',
             list: [
