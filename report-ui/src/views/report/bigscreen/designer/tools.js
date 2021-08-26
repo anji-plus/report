@@ -7373,31 +7373,26 @@ const widgetTools = [
               },
             ],
           },
-          /*{
+          {
             name: '坐标轴边距设置',
             list: [
               {
                 type: 'el-slider',
-                label: '左边距(像素)',
-                name: 'marginLeft',
+                label: '左右边距(像素)',
+                name: 'marginLeftRight',
                 required: false,
                 placeholder: '',
                 value: 10,
-              }, {
+              },
+              {
                 type: 'el-slider',
                 label: '顶边距(像素)',
                 name: 'marginTop',
                 required: false,
                 placeholder: '',
-                value: 50,
-              }, {
-                type: 'el-slider',
-                label: '右边距(像素)',
-                name: 'marginRight',
-                required: false,
-                placeholder: '',
                 value: 40,
-              }, {
+              },
+              {
                 type: 'el-slider',
                 label: '底边距(像素)',
                 name: 'marginBottom',
@@ -7406,7 +7401,7 @@ const widgetTools = [
                 value: 10,
               },
             ],
-          },*/
+          },
           {
             name: '图例操作',
             list: [

@@ -23,8 +23,9 @@ export default {
             color: '#ffffff',
           },
         },
+        //边距
         grid: [
-          {
+          {//左
             show: false,
             left: '4%',
             top: 60,
@@ -36,10 +37,10 @@ export default {
             show: false,
             left: '50.5%',
             top: 60,
-            bottom: 80,
+            bottom: 25,
             width: '0%'
           },
-          {
+          {//右
             show: false,
             right: '4%',
             top: 60,
@@ -197,9 +198,9 @@ export default {
                 color: '#36c5e7',
                 barBorderRadius: [8, 0, 0, 8],
               },
-              /*emphasis: {
+              emphasis: {
                 show: false,
-              },*/
+              },
             },
             data: [],
           },
@@ -275,6 +276,8 @@ export default {
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionsTop();
+      this.setOptionsTooltip();
+      this.setOptionsMargin();
       this.setOptionsLegend();
       this.setOptionsColor();
       this.setOptionsData();
@@ -333,6 +336,49 @@ export default {
         }
       }
       this.options.series = series;
+    },
+    // tooltip 提示语设置
+    setOptionsTooltip() {
+      const optionsSetup = this.optionsSetup;
+      const tooltip = {
+        trigger: "item",
+        show: true,
+        textStyle: {
+          color: optionsSetup.lineColor,
+          fontSize: optionsSetup.fontSize
+        }
+      };
+      this.options.tooltip = tooltip;
+    },
+    // 边距设置
+    setOptionsMargin() {
+      const optionsSetup = this.optionsSetup;
+      const grid = [
+        {//左
+          show: false,
+          left: optionsSetup.marginLeftRight,
+          top: optionsSetup.marginTop,
+          bottom: optionsSetup.marginBottom,
+          containLabel: true,
+          width: '40%'
+        },
+        {//中间字体位置
+          show: false,
+          left: "51%",
+          top: optionsSetup.marginTop,
+          bottom: optionsSetup.marginBottom + 15,
+          width: '0%'
+        },
+        {//右
+          show: false,
+          right: optionsSetup.marginLeftRight,
+          top: optionsSetup.marginTop,
+          bottom: optionsSetup.marginBottom,
+          containLabel: true,
+          width: '40%'
+        },
+      ]
+      this.options.grid = grid;
     },
     // 图例操作
     setOptionsLegend() {
