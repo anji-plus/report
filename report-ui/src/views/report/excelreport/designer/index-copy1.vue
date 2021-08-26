@@ -68,13 +68,11 @@
           </el-button>
         </el-tooltip>
       </div>
-      <!-- <div id="x-spreadsheet-demo"
-           class="excel-designer" /> -->
-      <div id="luckysheet"
-           style="margin:0px;padding:0px;position:absolute;width:100%;left: 0px;top: 30px;bottom:0px;" />
+      <div id="x-spreadsheet-demo"
+           class="excel-designer" />
       <div id="qrCode"
-           ref="qrCodeDiv" />
-      <img id="barCode">
+           ref="qrCodeDiv"></div>
+      <img id="barCode" />
     </div>
 
     <div class="layout-right">
@@ -93,8 +91,8 @@
             </el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane v-if="dialogVisible"
-                     label="二维码配置"
+        <el-tab-pane label="二维码配置"
+                     v-if="dialogVisible"
                      name="second">
           <el-form ref="qrCodeForm"
                    :model="qrCodeForm"
@@ -118,8 +116,8 @@
             </el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane v-if="dialogBarCode"
-                     label="条形码配置"
+        <el-tab-pane label="条形码配置"
+                     v-if="dialogBarCode"
                      name="second">
           <el-form ref="barCodeForm"
                    :model="barCodeForm"
@@ -189,24 +187,25 @@
                          placeholder="请选择打印尺寸"
                          @change="onPaperChange">
                 <el-option v-for="(item, index) in paperList"
-                           :key="index"
                            :index="index"
                            :value="item.paper"
-                           :label="getPaperText(item)" />
+                           :label="getPaperText(item)"
+                           :key="index">
+                </el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="14">
             <el-form-item label="对应像素">
               <el-input v-model="formPrintSetting.pixel1"
-                        disabled />
+                        disabled></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="10">
             <el-form-item label=" "
                           label-width="12px">
               <el-input v-model="formPrintSetting.pixel2"
-                        disabled />
+                        disabled></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -226,11 +225,10 @@
 import draggable from 'vuedraggable'
 import { queryAllDataSet, detail, detailByReportCode } from '@/api/GaeaReport'
 import { addReportExcel, editReportExcel } from '@/api/report'
-// import "@/components/x-spreadsheet/dist/xspreadsheet.js"
-import ColorPicker from '../../bigscreen/designer/form/colorPicker.vue'
-import QRCode from 'qrcodejs2'
-import JsBarcode from 'jsbarcode'
-import LuckyExcel from 'luckyexcel'
+import "@/components/x-spreadsheet/dist/xspreadsheet.js"
+import ColorPicker from "../../bigscreen/designer/form/colorPicker.vue"
+import QRCode from 'qrcodejs2';
+import JsBarcode from 'jsbarcode';
 export default {
   name: 'Excels',
   components: {
@@ -244,7 +242,7 @@ export default {
       reportId: null,
       accessKey: null,
       reportCode: '',
-      options: [],
+      options: {},
       sheet: {},
       dataSetData: [],
       reportExcelDto: {
@@ -260,19 +258,19 @@ export default {
         value: '',
       },
       qrCodeForm: {
-        type: 'QRCode',
+        type: "QRCode",
         content: 'https://www.baidu.com',
         width: 125,
         height: 125,
-        colorDark: '#333333', // 二维码颜色
-        colorLight: '#ffffff', // 二维码背景色
-        correctLevel: QRCode.CorrectLevel.L, // 容错率，L/M/H
+        colorDark: "#333333", //二维码颜色
+        colorLight: "#ffffff", //二维码背景色
+        correctLevel: QRCode.CorrectLevel.L,//容错率，L/M/H
         ri: 0,
         ci: 0,
         currentSrc: '',
       },
       barCodeForm: {
-        type: 'BarCode',
+        type: "BarCode",
         format: 'CODE39',
         displayValue: true,
         content: '99999999999',
@@ -304,20 +302,20 @@ export default {
       dialogVisible: false,
       dialogBarCode: false,
       paperList: [],
-      // 纸张标识
+      //纸张标识
       paper: '',
       // 纸张宽高
       width: '',
       height: '',
-      // 清晰度
+      //清晰度
       definition: '',
-      // 是否套打
+      //是否套打
       isBackend: '',
       dpi: '',
       pxWidth: '',
       pxHeight: '',
       show: false,
-      config: '',
+      config: "",
       settings: {},
       qrCodeList: [],
       moveDataelse: {
@@ -328,16 +326,62 @@ export default {
     }
   },
   mounted () {
-    this.options = [
-      { text: 'Money Manager.xlsx', value: 'https://minio.cnbabylon.com/public/luckysheet/money-manager-2.xlsx' },
-      { text: 'Activity costs tracker.xlsx', value: 'https://minio.cnbabylon.com/public/luckysheet/Activity%20costs%20tracker.xlsx' },
-      { text: 'House cleaning checklist.xlsx', value: 'https://minio.cnbabylon.com/public/luckysheet/House%20cleaning%20checklist.xlsx' },
-      { text: 'Student assignment planner.xlsx', value: 'https://minio.cnbabylon.com/public/luckysheet/Student%20assignment%20planner.xlsx' },
-      { text: 'Credit card tracker.xlsx', value: 'https://minio.cnbabylon.com/public/luckysheet/Credit%20card%20tracker.xlsx' },
-      { text: 'Blue timesheet.xlsx', value: 'https://minio.cnbabylon.com/public/luckysheet/Blue%20timesheet.xlsx' },
-      { text: 'Student calendar (Mon).xlsx', value: 'https://minio.cnbabylon.com/public/luckysheet/Student%20calendar%20%28Mon%29.xlsx' },
-      { text: 'Blue mileage and expense report.xlsx', value: 'https://minio.cnbabylon.com/public/luckysheet/Blue%20mileage%20and%20expense%20report.xlsx' },
-    ]
+    this.options = {
+      mode: 'edit', // edit | read
+      // "uploadUrl": "/design/report/upload", //统一上传地址
+      // "viewLocalImage": "/design/report/img",//预览本地图片方法,//预览本地图片方法
+      showToolbar: true,
+      showGrid: true,
+      showContextmenu: true,
+      view: {
+        height: () => document.documentElement.clientHeight,
+        width: () => document.getElementsByClassName('layout-middle')[0].clientWidth,
+      },
+      row: {
+        len: 100,
+        height: 25,
+      },
+      col: {
+        len: 52,
+        width: 100,
+        indexWidth: 60,
+        minWidth: 60,
+      },
+      style: {
+        bgcolor: '#ffffff',
+        align: 'left',
+        valign: 'middle',
+        textwrap: false,
+        strike: false,
+        underline: false,
+        color: '#0a0a0a',
+        font: {
+          name: 'Helvetica',
+          size: 10,
+          bold: false,
+          italic: false,
+        },
+      },
+      // 大屏画布中的组件
+      widgets: [{
+        // type和value最终存到数据库中去，保存到gaea_report_dashboard_widget中
+        type: 'widget-text',
+        value: {
+          setup: {},
+          data: {},
+          position: {
+            width: 100,
+            height: 100,
+            left: 0,
+            top: 0,
+            zIndex: 0,
+          },
+        },
+        // options属性是从工具栏中拿到的tools中拿到
+        options: [],
+      },
+      ], // 工作区中拖放的组件
+    }
     this.load()
   },
   created () {
@@ -354,7 +398,7 @@ export default {
     },
     handleChange (val) {
     },
-    // 右侧信息配置tabs
+    //右侧信息配置tabs
     handleClick (tab, event) {
     },
     async design () {
@@ -363,7 +407,7 @@ export default {
       if (data != null) {
         this.reportId = data.id
       }
-      // this.sheet.loadData(data == null ? [{}] : JSON.parse(data.jsonStr)['sheet'])
+      this.sheet.loadData(data == null ? [{}] : JSON.parse(data.jsonStr)['sheet'])
       if (data != null) {
         if (data.setCodes != null && data.setCodes !== '') {
           var dataSetList = data.setCodes.split('|')
@@ -411,6 +455,7 @@ export default {
         this.reportExcelDto.id = this.reportId
         const res = editReportExcel(this.reportExcelDto)
       }
+
     },
 
     async detailByReportCode (reportCode) {
@@ -467,7 +512,7 @@ export default {
       // 计算行列
       const { ri, ci } = this.sheet.datas[0].getCellRectByXY(x - leftLayout, y - excelToolbarHeight)
       this.sheet.cellText(ri, ci, '#{' + this.setCode + '.' + fieldLabel + '}', 0)
-      // 设定值 
+      // 设定值
       this.sheet.reRender()
     },
     del (val) {
@@ -481,75 +526,62 @@ export default {
     changed (val, key) {
     },
     load () {
-      // eslint-disable-next-line no-undef
-      luckysheet.create({
-        container: 'luckysheet', // 设定DOM容器的id
-        title: 'Luckysheet Demo', // 设定表格名称
-        lang: 'zh', // 设定表格语言
-        plugins: ['chart'],
-        data: [{
-          'name': 'Cell', // 工作表名称
-          'color': '', // 工作表颜色
-          'index': 0, // 工作表索引
-          'status': 1, // 激活状态
-          'order': 0, // 工作表的下标
-          'hide': 0, // 是否隐藏
-          'row': 36, // 行数
-          'column': 18, // 列数
-          'defaultRowHeight': 19, // 自定义行高
-          'defaultColWidth': 73, // 自定义列宽
-          'celldata': [], // 初始化使用的单元格数据
-          'config': {
-            'merge': {}, // 合并单元格
-            'rowlen': {}, // 表格行高
-            'columnlen': {}, // 表格列宽
-            'rowhidden': {}, // 隐藏行
-            'colhidden': {}, // 隐藏列
-            'borderInfo': {}, // 边框
-            'authority': {}, // 工作表保护
-
-          },
-          'scrollLeft': 0, // 左右滚动条位置
-          'scrollTop': 315, // 上下滚动条位置
-          'luckysheet_select_save': [], // 选中的区域
-          'calcChain': [], // 公式链
-          'isPivotTable': false, // 是否数据透视表
-          'pivotTable': {}, // 数据透视表设置
-          'filter_select': {}, // 筛选范围
-          'filter': null, // 筛选配置
-          'luckysheet_alternateformat_save': [], // 交替颜色
-          'luckysheet_alternateformat_save_modelCustom': [], // 自定义交替颜色	
-          'luckysheet_conditionformat_save': {}, // 条件格式
-          'frozen': {}, // 冻结行列配置
-          'chart': [], // 图表配置
-          'zoomRatio': 1, // 缩放比例
-          'image': [], // 图片
-          'showGridLines': 1, // 是否显示网格线
-          'dataVerification': {} // 数据验证配置
-        },
-        {
-          'name': 'Sheet2',
-          'color': '',
-          'index': 1,
-          'status': 0,
-          'order': 1,
-          'celldata': [],
-          'config': {}
-        },
-        {
-          'name': 'Sheet3',
-          'color': '',
-          'index': 2,
-          'status': 0,
-          'order': 2,
-          'celldata': [],
-          'config': {},
-        }
-        ]
-      })
+      this.activeName = 'first';
+      const rows = {};
+      this.sheet = x_spreadsheet('#x-spreadsheet-demo', this.options)
+        .loadData([{}]).change((cdata) => {
+        });
+      this.sheet.on('cell-selected', (cell, ri, ci) => {
+        // console.log('cell:', cell, ', ri:', ri, ', ci:', ci);
+      }).on('cell-edited', (text, ri, ci) => {
+        // console.log('text:', text, ', ri: ', ri, ', ci:', ci);
+      });
+      this.sheet.on('generateQrcode', (cell, ri, ci) => {
+        let that = this;
+        that.dialogVisible = true;
+        that.dialogBarCode = false
+        let selector = cell.print.data.selector
+        // 生成二维码.
+        that.sheet.reRender()
+        this.$nextTick(() => {
+          setTimeout(function () {
+            new QRCode(that.$refs.qrCodeDiv, that.qrCodeForm);
+          }, 200)
+        })
+        this.$nextTick(() => {
+          setTimeout(function () {
+            that.qrCodeForm.currentSrc = document.getElementById("qrCode").getElementsByTagName("img")[0].src;
+            that.sheet.cellText(selector.ri, selector.ci, that.qrCodeForm).reRender()
+          }, 500)
+        })
+      });
+      this.sheet.on('generateBarcode', (cell) => {
+        let that = this;
+        let selector = cell.print.data.selector
+        // 生成条形码.
+        that.dialogBarCode = true;
+        that.dialogVisible = false;
+        that.sheet.reRender()
+        this.$nextTick(() => {
+          JsBarcode('#barCode', that.barCodeForm.content, that.barCodeForm)
+        })
+        this.$nextTick(() => {
+          setTimeout(function () {
+            that.barCodeForm.currentSrc = document.getElementById("barCode").src;
+            that.sheet.cellText(selector.ri, selector.ci, that.barCodeForm).reRender()
+          }, 500)
+        })
+      });
+      this.sheet.on('printSettings', () => {
+        this.printVisible = true;
+        // 打印设置.
+      });
+      this.sheet.on('insertImg', () => {
+        // 插入图片
+      });
     },
     testClick () {
-      console.log('sdsdsddsd')
+      console.log("sdsdsddsd")
     },
     // 获取回传的参数
     getEmitParam () {
@@ -562,7 +594,7 @@ export default {
     },
     // 纸张大小改变事件
     onPaperChange (value) {
-      const arr = this.paperList.filter(item => {
+      let arr = this.paperList.filter(item => {
         return item.paper === value
       })
       this.resetForm(arr[0])
@@ -588,129 +620,57 @@ export default {
     initPaperList () {
       let printPaper = []
       if (this.config) {
-        const config2 = JSON.parse(this.config)
+        let config2 = JSON.parse(this.config)
         if (config2 && config2['printPaper']) {
           printPaper = config2['printPaper']
         }
       }
-      const arr = []
-      for (const item of this.pixelList) {
+      let arr = []
+      for (let item of this.pixelList) {
         arr.push(item)
       }
-      for (const item of printPaper) {
+      for (let item of printPaper) {
         arr.push({
           paper: item.title, width: item['size'][0], height: item['size'][1]
         })
       }
-      this.paperList = [...arr]
+      this.paperList = [...arr];
     },
 
-    // 获取窗口dpi
+    //获取窗口dpi
     getWindowDpi () {
-      // 25.41 1英寸=25.41mm 96是window默认dpi,mac:72
+      //25.41 1英寸=25.41mm 96是window默认dpi,mac:72
       this.printVisible = false
-      // eslint-disable-next-line no-array-constructor
-      const arrDPI = new Array()
+      let arrDPI = new Array();
       if (window.screen.deviceXDPI != undefined) {
-        arrDPI[0] = window.screen.deviceXDPI
-        arrDPI[1] = window.screen.deviceYDPI
-      } else {
-        const tmpNode = document.createElement('div')
-        tmpNode.style.cssText = 'width:1in;height:1in;position:absolute;left:0px;top:0px;z-index:99;visibility:hidden'
-        document.body.appendChild(tmpNode)
-        arrDPI[0] = parseInt(tmpNode.offsetWidth)
-        arrDPI[1] = parseInt(tmpNode.offsetHeight)
-        tmpNode.parentNode.removeChild(tmpNode)
+        arrDPI[0] = window.screen.deviceXDPI;
+        arrDPI[1] = window.screen.deviceYDPI;
+      }
+      else {
+        let tmpNode = document.createElement("div");
+        tmpNode.style.cssText = "width:1in;height:1in;position:absolute;left:0px;top:0px;z-index:99;visibility:hidden";
+        document.body.appendChild(tmpNode);
+        arrDPI[0] = parseInt(tmpNode.offsetWidth);
+        arrDPI[1] = parseInt(tmpNode.offsetHeight);
+        tmpNode.parentNode.removeChild(tmpNode);
       }
       this.dpi = [...arrDPI]
     },
-    // 获取像素宽
+    //获取像素宽
     getPxWidth (width) {
       let margin = 10
       if (this.isBackend == true) {
         margin = 0
       }
-      return Math.ceil((width - margin * 2) / 25.41 * this.dpi[0])
+      return Math.ceil((width - margin * 2) / 25.41 * this.dpi[0]);
     },
-    // 获取像素高
+    //获取像素高
     getPxHeight (height) {
       let margin = 10
       if (this.isBackend == true) {
         margin = 0
       }
-      return Math.ceil((height - margin * 2) / 25.41 * this.dpi[1])
-    },
-
-    uploadExcel (evt) {
-      const files = evt.target.files
-      if (files == null || files.length == 0) {
-        alert('No files wait for import')
-        return
-      }
-
-      const name = files[0].name
-      const suffixArr = name.split('.'); const suffix = suffixArr[suffixArr.length - 1]
-      if (suffix != 'xlsx') {
-        alert('Currently only supports the import of xlsx files')
-        return
-      }
-      LuckyExcel.transformExcelToLucky(files[0], function (exportJson, luckysheetfile) {
-        if (exportJson.sheets == null || exportJson.sheets.length == 0) {
-          alert('Failed to read the content of the excel file, currently does not support xls files!')
-          return
-        }
-        window.luckysheet.destroy()
-
-        window.luckysheet.create({
-          container: 'luckysheet', // luckysheet is the container id
-          showinfobar: false,
-          data: exportJson.sheets,
-          title: exportJson.info.name,
-          userInfo: exportJson.info.name.creator
-        })
-      })
-    },
-    selectExcel (evt) {
-      const value = this.selected
-      const name = evt.target.options[evt.target.selectedIndex].innerText
-
-      if (value == '') {
-        return
-      }
-
-      LuckyExcel.transformExcelToLuckyByUrl(value, name, (exportJson, luckysheetfile) => {
-        if (exportJson.sheets == null || exportJson.sheets.length == 0) {
-          alert('Failed to read the content of the excel file, currently does not support xls files!')
-          return
-        }
-
-        window.luckysheet.destroy()
-
-        window.luckysheet.create({
-          container: 'luckysheet', // luckysheet is the container id
-          showinfobar: false,
-          data: exportJson.sheets,
-          title: exportJson.info.name,
-          userInfo: exportJson.info.name.creator
-        })
-      })
-    },
-    downloadExcel () {
-      const value = this.selected
-
-      if (value.length == 0) {
-        alert('Please select a demo file')
-        return
-      }
-
-      var elemIF = document.getElementById('Lucky-download-frame')
-      if (elemIF == null) {
-        elemIF = document.createElement('iframe')
-        elemIF.style.display = 'none'
-        elemIF.id = 'Lucky-download-frame'
-        document.body.appendChild(elemIF)
-      }
-      elemIF.src = value
+      return Math.ceil((height - margin * 2) / 25.41 * this.dpi[1]);
     }
   },
 }
