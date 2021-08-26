@@ -7116,8 +7116,77 @@ const widgetTools = [
               },
             ],
           },
-          /*{
-            name: 'X轴设置',
+          {
+            name: '左X轴设置',
+            list: [
+              {
+                type: 'el-switch',
+                label: '显示',
+                name: 'hideXLeft',
+                required: false,
+                placeholder: '',
+                value: true,
+              },
+              {
+                type: 'el-input-number',
+                label: '数值间隔',
+                name: 'splitNumberLeft',
+                required: false,
+                placeholder: '',
+                value: ''
+              },
+              {
+                type: 'vue-color',
+                label: '数值颜色',
+                name: 'XcolorLeft',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              },
+              {
+                type: 'el-input-number',
+                label: '数值字号',
+                name: 'fontSizeXLeft',
+                required: false,
+                placeholder: '',
+                value: 14,
+              },
+              {
+                type: 'vue-color',
+                label: '轴颜色',
+                name: 'lineColorXLeft',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              },
+              {
+                type: 'el-switch',
+                label: 'X轴线',
+                name: 'downSplitLineXLeft',
+                require: false,
+                placeholder: '',
+                value: false,
+              },
+              {
+                type: 'el-switch',
+                label: '竖分割线',
+                name: 'SplitLineXLeft',
+                require: false,
+                placeholder: '',
+                value: false,
+              },
+              {
+                type: 'el-switch',
+                label: '边框线',
+                name: 'upSplitLineXLeft',
+                require: false,
+                placeholder: '',
+                value: false,
+              },
+            ],
+          },
+          {
+            name: '右X轴设置',
             list: [
               {
                 type: 'el-switch',
@@ -7217,8 +7286,8 @@ const widgetTools = [
 
               }
             ],
-          },*/
-          /*{
+          },
+          {
             name: 'Y轴设置',
             list: [
               {
@@ -7309,7 +7378,7 @@ const widgetTools = [
 
               }
             ],
-          },*/
+          },
           {
             name: '数值设定',
             list: [

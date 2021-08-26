@@ -26,7 +26,7 @@ export default {
         //边距
         grid: [
           {//左
-            show: false,
+            show: false,//边框线
             left: '4%',
             top: 60,
             bottom: 10,
@@ -66,7 +66,7 @@ export default {
             splitNumber: 2,
             type: 'value',
             inverse: true,
-            axisLine: {
+            axisLine: {//底分割线
               show: false,
             },
             axisTick: {
@@ -80,7 +80,7 @@ export default {
                 fontSize: 12
               }
             },
-            splitLine: { // 分割线
+            splitLine: { // 竖分割线
               show: true,
               lineStyle: {
                 color: '#57617f',
@@ -275,9 +275,10 @@ export default {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
+      this.setOptionsXLeft();
       this.setOptionsTop();
       this.setOptionsTooltip();
-      this.setOptionsMargin();
+      this.setOptionsGrid();
       this.setOptionsLegend();
       this.setOptionsColor();
       this.setOptionsData();
@@ -295,6 +296,38 @@ export default {
         fontWeight: optionsCollapse.textFontWeight
       };
       this.options.title = title;
+    },
+    // 左X轴设置
+    setOptionsXLeft() {
+      const optionsSetup = this.optionsSetup;
+      const xAxisLeft = {
+        splitNumber: optionsSetup.splitNumberLeft,
+        type: 'value',
+        inverse: true,
+        axisLine: {//X轴线
+          show: false,
+        },
+        axisTick: {
+          show: false,
+        },
+        position: 'bottom',
+        axisLabel: { // x轴
+          show: optionsSetup.hideXLeft,
+          textStyle: {
+            color : optionsSetup.lineColorXLeft,
+            fontSize: optionsSetup.fontSizeXLeft
+          }
+        },
+        splitLine: { // 分割线
+          show: false,
+          lineStyle: {
+            color: '#57617f',
+            width: 1,
+            type: 'solid'
+          }
+        }
+      }
+      this.options.xAxis[0] = xAxisLeft;
     },
     // 数值设定、柱体设置
     setOptionsTop() {
@@ -351,7 +384,7 @@ export default {
       this.options.tooltip = tooltip;
     },
     // 边距设置
-    setOptionsMargin() {
+    setOptionsGrid() {
       const optionsSetup = this.optionsSetup;
       const grid = [
         {//左
