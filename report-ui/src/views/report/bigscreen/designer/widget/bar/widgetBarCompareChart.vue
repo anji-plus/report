@@ -17,7 +17,7 @@ export default {
     return {
       options: {
         title: {
-          text: '柱状对比图',
+          //text: '柱状对比图',
           x: 'center',
           textStyle: {
             color: '#ffffff',
@@ -28,7 +28,7 @@ export default {
             show: false,
             left: '4%',
             top: 60,
-            bottom: 60,
+            bottom: 10,
             containLabel: true,
             width: '40%'
           },
@@ -43,7 +43,7 @@ export default {
             show: false,
             right: '4%',
             top: 60,
-            bottom: 60,
+            bottom: 10,
             containLabel: true,
             width: '40%'
           },
@@ -61,8 +61,8 @@ export default {
           //itemWidth: 0
         },
         xAxis: [
-          {
-            splitNumber: 2,//左间隔
+          {// 左
+            splitNumber: 2,
             type: 'value',
             inverse: true,
             axisLine: {
@@ -72,14 +72,14 @@ export default {
               show: false,
             },
             position: 'bottom',
-            axisLabel: {
+            axisLabel: { // x轴
               show: true,
               textStyle: {
                 color: '#ffffff',
                 fontSize: 12
               }
             },
-            splitLine: {
+            splitLine: { // 分割线
               show: true,
               lineStyle: {
                 color: '#57617f',
@@ -92,7 +92,7 @@ export default {
             gridIndex: 1,
             show: false,
           },
-          {
+          {// 右
             gridIndex: 2,
             type: 'value',
             axisLine: {
@@ -177,7 +177,7 @@ export default {
             name: '',
             type: 'bar',
             barGap: 20,
-            barWidth: '80%',
+            barWidth: 15,
             label: {
               normal: {
                 show: true,
@@ -207,7 +207,7 @@ export default {
             name: '',
             type: 'bar',
             barGap: 20,
-            barWidth: '80%',
+            barWidth: 15,
             xAxisIndex: 2,
             yAxisIndex: 2,
             label: {
@@ -256,7 +256,7 @@ export default {
       handler(val) {
         this.optionsStyle = val.position;
         this.optionsData = val.data;
-        this.optionsCollapse = val.setup;
+        this.optionsSetup = val.setup;
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
@@ -273,7 +273,108 @@ export default {
   methods: {
     // 修改图标options属性
     editorOptions() {
+      this.setOptionsTitle();
+      this.setOptionsTop();
+      this.setOptionsLegend();
+      this.setOptionsColor();
       this.setOptionsData();
+    },
+    // 标题修改
+    setOptionsTitle() {
+      const optionsCollapse = this.optionsSetup;
+      const title = {};
+      title.text = optionsCollapse.titleText;
+      title.show = optionsCollapse.isNoTitle;
+      title.left = optionsCollapse.textAlign;
+      title.textStyle = {
+        color: optionsCollapse.textColor,
+        fontSize: optionsCollapse.textFontSize,
+        fontWeight: optionsCollapse.textFontWeight
+      };
+      this.options.title = title;
+    },
+    // 数值设定、柱体设置
+    setOptionsTop() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      for (const key in series) {
+        if (series[key].type == "bar") {
+          series[0].label = {
+            normal: {
+              show: optionsSetup.isShow,
+              //color: 'red',
+              position: 'insideLeft',
+              textStyle: {
+                fontSize: optionsSetup.fontSize,
+                color: optionsSetup.subTextColor,
+                fontWeight: optionsSetup.fontWeight
+              }
+            },
+            emphasis: {
+              show: false,
+            },
+          },
+            series[1].label = {
+              normal: {
+                show: optionsSetup.isShow,
+                color: 'red',
+                position: 'insideRight',
+                textStyle: {
+                  fontSize: optionsSetup.fontSize,
+                  color: optionsSetup.subTextColor,
+                  fontWeight: optionsSetup.fontWeight
+                }
+              },
+              emphasis: {
+                show: false,
+              },
+            },
+            series[key].barWidth = optionsSetup.maxWidth;
+        }
+      }
+      this.options.series = series;
+    },
+    // 图例操作
+    setOptionsLegend() {
+      const optionsSetup = this.optionsSetup;
+      const legend = this.options.legend;
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
+      legend.bottom =
+        optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
+      legend.orient = optionsSetup.layoutFront;
+      legend.textStyle = {
+        color: optionsSetup.lengedColor,
+        fontSize: optionsSetup.lengedFontSize
+      };
+      legend.itemWidth = optionsSetup.lengedWidth;
+    },
+    // 颜色修改、圆角修改
+    setOptionsColor() {
+      const optionsSetup = this.optionsSetup;
+      const customColor = optionsSetup.customColor;
+      if (!customColor) return;
+      const itemStyleLeft = {
+        normal: {
+          color: customColor[0].color,
+          barBorderRadius: [optionsSetup.radius, 0, 0, optionsSetup.radius]
+        },
+        emphasis: {
+          show: false,
+        },
+      }
+      const itemStyleRight = {
+        normal: {
+          color: customColor[1].color,
+          barBorderRadius: [0, optionsSetup.radius, optionsSetup.radius, 0]
+        },
+        emphasis: {
+          show: false,
+        },
+      }
+      this.options.series[0].itemStyle = itemStyleLeft;
+      this.options.series[1].itemStyle = itemStyleRight;
     },
     // 数据解析
     setOptionsData() {
@@ -335,7 +436,6 @@ export default {
       this.options.series[1]['name'] = arrayList[1].name
       this.options.series[1]['data'] = arrayList[1].data
       this.options.yAxis[1]['data'] = xAxisList
-
       /*if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];
         this.options.yAxis.data = xAxisList;
