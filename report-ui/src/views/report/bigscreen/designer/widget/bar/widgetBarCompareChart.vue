@@ -276,6 +276,7 @@ export default {
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionsXLeft();
+      this.setOptionsXRight();
       this.setOptionsTop();
       this.setOptionsTooltip();
       this.setOptionsGrid();
@@ -305,7 +306,10 @@ export default {
         type: 'value',
         inverse: true,
         axisLine: {//X轴线
-          show: false,
+          show: optionsSetup.xLineLeft,
+          lineStyle: {
+            color: optionsSetup.lineColorXLeft,
+          },
         },
         axisTick: {
           show: false,
@@ -314,20 +318,55 @@ export default {
         axisLabel: { // x轴
           show: optionsSetup.hideXLeft,
           textStyle: {
-            color : optionsSetup.lineColorXLeft,
+            color : optionsSetup.XcolorLeft,
             fontSize: optionsSetup.fontSizeXLeft
           }
         },
         splitLine: { // 分割线
-          show: false,
+          show: optionsSetup.SplitLineLeft,
           lineStyle: {
-            color: '#57617f',
-            width: 1,
+            color: optionsSetup.SplitLineColorLeft,
+            width: optionsSetup.SplitLinefontSizeLeft,
             type: 'solid'
           }
         }
       }
       this.options.xAxis[0] = xAxisLeft;
+    },
+    // 右X轴设置
+    setOptionsXRight() {
+      const optionsSetup = this.optionsSetup;
+      const xAxisRight = {
+        gridIndex: 2,
+        splitNumber: optionsSetup.splitNumberRight,
+        type: 'value',
+        axisLine: {//X轴线
+          show: optionsSetup.xLineRight,
+          lineStyle: {
+            color: optionsSetup.lineColorXRight,
+          },
+        },
+        axisTick: {
+          show: false,
+        },
+        position: 'bottom',
+        axisLabel: { // x轴
+          show: optionsSetup.hideXRight,
+          textStyle: {
+            color : optionsSetup.XcolorRight,
+            fontSize: optionsSetup.fontSizeXRight
+          }
+        },
+        splitLine: { // 分割线
+          show: optionsSetup.SplitLineRight,
+          lineStyle: {
+            color: optionsSetup.SplitLineColorRight,
+            width: optionsSetup.SplitLinefontSizeRight,
+            type: 'solid'
+          }
+        }
+      }
+      this.options.xAxis[2] = xAxisRight;
     },
     // 数值设定、柱体设置
     setOptionsTop() {
@@ -388,7 +427,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const grid = [
         {//左
-          show: false,
+          show: optionsSetup.frameLineLeft,
           left: optionsSetup.marginLeftRight,
           top: optionsSetup.marginTop,
           bottom: optionsSetup.marginBottom,
@@ -403,7 +442,7 @@ export default {
           width: '0%'
         },
         {//右
-          show: false,
+          show: optionsSetup.frameLineRight,
           right: optionsSetup.marginLeftRight,
           top: optionsSetup.marginTop,
           bottom: optionsSetup.marginBottom,
