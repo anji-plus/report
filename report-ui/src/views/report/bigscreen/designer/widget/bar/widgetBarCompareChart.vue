@@ -312,7 +312,7 @@ export default {
           },
         },
         axisTick: {
-          show: false,
+          show: optionsSetup.tickLineLeft,
         },
         position: 'bottom',
         axisLabel: { // x轴
@@ -347,7 +347,7 @@ export default {
           },
         },
         axisTick: {
-          show: false,
+          show: optionsSetup.tickLineRight,
         },
         position: 'bottom',
         axisLabel: { // x轴

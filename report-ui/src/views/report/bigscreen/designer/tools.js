@@ -7153,6 +7153,14 @@ const widgetTools = [
               },
               {
                 type: 'el-switch',
+                label: '刻度线',
+                name: 'tickLineLeft',
+                require: false,
+                placeholder: '',
+                value: false,
+              },
+              {
+                type: 'el-switch',
                 label: 'X轴线',
                 name: 'xLineLeft',
                 require: false,
@@ -7235,6 +7243,14 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: 14,
+              },
+              {
+                type: 'el-switch',
+                label: '刻度线',
+                name: 'tickLineLeft',
+                require: false,
+                placeholder: '',
+                value: false,
               },
               {
                 type: 'el-switch',
@@ -7362,7 +7378,7 @@ const widgetTools = [
                 value: '#fff',
               }, {
                 type: 'el-switch',
-                label: '分割线显示',
+                label: 'y轴线显示',
                 name: 'isShowSplitLineY',
                 require: false,
                 placeholder: '',
@@ -7384,7 +7400,7 @@ const widgetTools = [
               {
                 type: 'el-switch',
                 label: '显示',
-                name: 'isShow',
+                name: 'isShowY',
                 required: false,
                 placeholder: '',
                 value: true
@@ -7392,7 +7408,7 @@ const widgetTools = [
               {
                 type: 'el-input-number',
                 label: '字体大小',
-                name: 'fontSize',
+                name: 'fontSizeY',
                 required: false,
                 placeholder: '',
                 value: 14
@@ -7400,7 +7416,7 @@ const widgetTools = [
               {
                 type: 'vue-color',
                 label: '字体颜色',
-                name: 'subTextColor',
+                name: 'subTextColorY',
                 required: false,
                 placeholder: '',
                 value: '#fff'
@@ -7408,7 +7424,7 @@ const widgetTools = [
               {
                 type: 'el-select',
                 label: '字体粗细',
-                name: 'fontWeight',
+                name: 'fontWeightY',
                 required: false,
                 placeholder: '',
                 selectOptions: [
