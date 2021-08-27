@@ -88,7 +88,9 @@
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 散点图
-**开发中** <br>
+**规划中** <br>
 
 ### 对比图
-**开发中** <br>
+柱状对比图数据集需要3个字段，其中一个作为对比的字段只能为2种值，只有2种值作为对比的字段要选择“y轴字段”字典。因为底层的解析用的是堆叠图的解析，这里的y轴字段并不是指的图表上面的y轴，还请注意，有强迫症可以自行修改源码的解析，剩下的2个字段对应字典看图<br>
+![img18](../picture/dashboard/img_18.png)
+**如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
