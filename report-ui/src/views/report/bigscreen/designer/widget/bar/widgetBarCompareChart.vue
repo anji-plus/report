@@ -51,9 +51,6 @@ export default {
         ],
         //图例
         legend: {
-          data: ['success', 'fail'],
-          bottom: 10,
-          center: true,
           textStyle: {
             color: '#fff',
             textAlign: 'center'
@@ -277,6 +274,7 @@ export default {
       this.setOptionsTitle();
       this.setOptionsXLeft();
       this.setOptionsXRight();
+      this.setOptionsY();
       this.setOptionsTop();
       this.setOptionsTooltip();
       this.setOptionsGrid();
@@ -318,7 +316,7 @@ export default {
         axisLabel: { // x轴
           show: optionsSetup.hideXLeft,
           textStyle: {
-            color : optionsSetup.XcolorLeft,
+            color: optionsSetup.XcolorLeft,
             fontSize: optionsSetup.fontSizeXLeft
           }
         },
@@ -353,7 +351,7 @@ export default {
         axisLabel: { // x轴
           show: optionsSetup.hideXRight,
           textStyle: {
-            color : optionsSetup.XcolorRight,
+            color: optionsSetup.XcolorRight,
             fontSize: optionsSetup.fontSizeXRight
           }
         },
@@ -368,6 +366,30 @@ export default {
       }
       this.options.xAxis[2] = xAxisRight;
     },
+    // Y轴设置
+    setOptionsY() {
+      const optionsSetup = this.optionsSetup;
+      const axisLine = {
+        show: optionsSetup.lineY,
+        lineStyle: {
+          color: optionsSetup.lineColorY
+        }
+      };
+      const axisTick = {
+        show: optionsSetup.tickLineY
+      };
+      const axisLabel = {
+        show: optionsSetup.hideY,
+        textStyle: {
+          align: optionsSetup.textAlign,
+          color: optionsSetup.colorY,
+          fontSize: optionsSetup.fontSizeY,
+        }
+      };
+      this.options.yAxis[1]['axisLine'] = axisLine;
+      this.options.yAxis[1]['axisTick'] = axisTick;
+      this.options.yAxis[1]['axisLabel'] = axisLabel;
+    },
     // 数值设定、柱体设置
     setOptionsTop() {
       const optionsSetup = this.optionsSetup;
@@ -377,7 +399,6 @@ export default {
           series[0].label = {
             normal: {
               show: optionsSetup.isShow,
-              //color: 'red',
               position: 'insideLeft',
               textStyle: {
                 fontSize: optionsSetup.fontSize,
@@ -423,6 +444,16 @@ export default {
       this.options.tooltip = tooltip;
     },
     // 边距设置
+    getOptionsBottom(){
+      const optionsSetup = this.optionsSetup;
+      let bottom = optionsSetup.marginBottom;
+      if (optionsSetup.hideXLeft) {
+        bottom = optionsSetup.marginBottom + 15
+      }else if (optionsSetup.hideXRight){
+        bottom = optionsSetup.marginBottom + 15
+      }
+      return bottom
+    },
     setOptionsGrid() {
       const optionsSetup = this.optionsSetup;
       const grid = [
@@ -438,7 +469,7 @@ export default {
           show: false,
           left: "51%",
           top: optionsSetup.marginTop,
-          bottom: optionsSetup.marginBottom + 15,
+          bottom: this.getOptionsBottom(),
           width: '0%'
         },
         {//右
@@ -516,13 +547,6 @@ export default {
     },
     //静态数据
     staticDataFn(val) {
-      const optionsSetup = this.optionsSetup;
-      //颜色
-      const customColor = optionsSetup.customColor;
-      const arrColor = [];
-      for (let i = 0; i < customColor.length; i++) {
-        arrColor.push(customColor[i].color);
-      }
       //数据
       let xAxisList = [];
       let yAxisList = [];
@@ -554,17 +578,6 @@ export default {
       this.options.series[1]['name'] = arrayList[1].name
       this.options.series[1]['data'] = arrayList[1].data
       this.options.yAxis[1]['data'] = xAxisList
-      /*if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = xAxisList;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = xAxisList;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-      }*/
     },
     // 动态数据
     dynamicDataFn(val, refreshTime, optionsSetup) {
@@ -585,52 +598,13 @@ export default {
       });
     },
     renderingFn(optionsSetup, val) {
-      //颜色
-      const customColor = optionsSetup.customColor;
-      const arrColor = [];
-      for (let i = 0; i < customColor.length; i++) {
-        arrColor.push(customColor[i].color);
+      this.options.yAxis[1]['data'] = val.xAxis
+      if (val.series[0].type == "bar"){
+        this.options.series[0]['name'] = val.series[0].name
+        this.options.series[0]['data'] = val.series[0].data
+        this.options.series[1]['name'] = val.series[1].name
+        this.options.series[1]['data'] = val.series[1].data
       }
-      // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = val.xAxis;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = val.xAxis;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-      }
-      const series = [];
-      for (const i in val.series) {
-        if (val.series[i].type == "bar") {
-          series.push({
-            name: val.series[i].name,
-            type: "bar",
-            data: val.series[i].data,
-            barGap: "0%",
-            barWidth: optionsSetup.maxWidth,
-            label: {
-              show: optionsSetup.isShow,
-              position: "top",
-              distance: 10,
-              fontSize: optionsSetup.fontSize,
-              color: optionsSetup.subTextColor,
-              fontWeight: optionsSetup.fontWeight
-            },
-            //颜色，圆角属性
-            itemStyle: {
-              normal: {
-                color: arrColor[i],
-                barBorderRadius: optionsSetup.radius,
-              }
-            }
-          })
-        }
-      }
-      this.options.series = series
     }
   }
 };

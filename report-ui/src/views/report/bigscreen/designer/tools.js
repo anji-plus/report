@@ -7247,7 +7247,7 @@ const widgetTools = [
               {
                 type: 'el-switch',
                 label: '刻度线',
-                name: 'tickLineLeft',
+                name: 'tickLineRight',
                 require: false,
                 placeholder: '',
                 value: false,
@@ -7308,54 +7308,14 @@ const widgetTools = [
               {
                 type: 'el-switch',
                 label: '显示',
-                name: 'isShowY',
-                require: false,
+                name: 'hideY',
+                required: false,
                 placeholder: '',
                 value: true,
               },
               {
-                type: 'el-input-text',
-                label: 'Y轴别名',
-                name: 'textNameY',
-                require: false,
-                placeholder: '',
-                value: ''
-              },
-              {
                 type: 'vue-color',
-                label: '别名颜色',
-                name: 'NameColorY',
-                required: false,
-                placeholder: '',
-                value: '#fff',
-              },
-              {
-                type: 'el-input-number',
-                label: '别名字号',
-                name: 'NameFontSizeY',
-                required: false,
-                placeholder: '',
-                value: 14,
-              },
-              {
-                type: 'el-switch',
-                label: '轴反转',
-                name: 'reversalY',
-                required: false,
-                placeholder: '',
-                value: false
-              },
-              {
-                type: 'el-slider',
-                label: '文字角度',
-                name: 'textAngleY',
-                required: false,
-                placeholder: '',
-                value: 0
-              },
-              {
-                type: 'vue-color',
-                label: '文字颜色',
+                label: '数值颜色',
                 name: 'colorY',
                 required: false,
                 placeholder: '',
@@ -7363,11 +7323,40 @@ const widgetTools = [
               },
               {
                 type: 'el-input-number',
-                label: '文字字号',
+                label: '数值字号',
                 name: 'fontSizeY',
                 required: false,
                 placeholder: '',
                 value: 14,
+              },
+              {
+                type: 'el-select',
+                label: '数值对齐',
+                name: 'textAlign',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  {code: 'center', name: '居中'},
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
+                ],
+                value: 'center'
+              },
+              {
+                type: 'el-switch',
+                label: '刻度线',
+                name: 'tickLineY',
+                require: false,
+                placeholder: '',
+                value: false,
+              },
+              {
+                type: 'el-switch',
+                label: 'Y轴线',
+                name: 'lineY',
+                require: false,
+                placeholder: '',
+                value: false,
               },
               {
                 type: 'vue-color',
@@ -7376,22 +7365,7 @@ const widgetTools = [
                 required: false,
                 placeholder: '',
                 value: '#fff',
-              }, {
-                type: 'el-switch',
-                label: 'y轴线显示',
-                name: 'isShowSplitLineY',
-                require: false,
-                placeholder: '',
-                value: false,
-              }, {
-                type: 'vue-color',
-                label: '分割线颜色',
-                name: 'splitLineColorY',
-                required: false,
-                placeholder: '',
-                value: '#fff',
-
-              }
+              },
             ],
           },
           {
@@ -7400,7 +7374,7 @@ const widgetTools = [
               {
                 type: 'el-switch',
                 label: '显示',
-                name: 'isShowY',
+                name: 'isShow',
                 required: false,
                 placeholder: '',
                 value: true
@@ -7408,7 +7382,7 @@ const widgetTools = [
               {
                 type: 'el-input-number',
                 label: '字体大小',
-                name: 'fontSizeY',
+                name: 'fontSize',
                 required: false,
                 placeholder: '',
                 value: 14
@@ -7416,7 +7390,7 @@ const widgetTools = [
               {
                 type: 'vue-color',
                 label: '字体颜色',
-                name: 'subTextColorY',
+                name: 'subTextColor',
                 required: false,
                 placeholder: '',
                 value: '#fff'
@@ -7424,7 +7398,7 @@ const widgetTools = [
               {
                 type: 'el-select',
                 label: '字体粗细',
-                name: 'fontWeightY',
+                name: 'fontWeight',
                 required: false,
                 placeholder: '',
                 selectOptions: [
