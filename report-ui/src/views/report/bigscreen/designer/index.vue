@@ -59,7 +59,7 @@
       :style="{ width: widthLeftForToolsHideButton + 'px' }"
       @click="toolIsShow = !toolIsShow"
     >
-      <i class="el-icon-arrow-right" />
+      <i class="el-icon-arrow-right"/>
     </div>
 
     <div
@@ -87,36 +87,87 @@
             <i class="iconfont iconyulan" @click="viewScreen"></i>
           </el-tooltip>
         </span>
-        <!-- <span class="btn border-left">
+        <span class="btn">
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="导入"
+            placement="bottom"
+          >
+
+            <el-upload class="el-upload"
+                       ref="upload"
+                       :action="uploadUrl"
+                       :headers="headers"
+                       accept=".zip"
+                       :on-success="handleUpload"
+                       :on-error="handleError"
+                       :show-file-list="false"
+                       :limit="1">
+              <i class="iconfont icondaoru"></i>
+          </el-upload>
+          </el-tooltip>
+        </span>
+        <span class="btn border-left">
           <ul class="nav">
             <li>
-              <i class="el-icon-brush"></i><i class="el-icon-arrow-down"></i>
+              <i class="iconfont icondaochu"></i><i class="el-icon-arrow-down"></i>
               <ul>
                 <li>
-                  <div>
-                    <i class="el-icon-full-screen mr10"></i>边框
-                    <i class="el-icon-arrow-right ml20"></i>
-                  </div>
-                  <ul class="three-level">
-                    <li><a href="#">边框1</a></li>
-                    <li><a href="#">边框2</a></li>
-                    <li><a href="#">边框3</a></li>
-                  </ul>
+                  <el-tooltip
+                    class="item"
+                    effect="dark"
+                    content="适合当前系统"
+                    placement="right"
+                  >
+                       <div @click="exportDashboard(1)">导出(包含数据集)</div>
+                  </el-tooltip>
+
                 </li>
                 <li>
-                  <div>
-                    <i class="el-icon-magic-stick mr10"></i>装饰<i
-                      class="el-icon-arrow-right ml20"
-                    ></i>
-                  </div>
-                  <ul class="three-level">
-                    <li><a href="#">装饰1</a></li>
-                  </ul>
+                  <el-tooltip
+                    class="item"
+                    effect="dark"
+                    content="适合跨系统"
+                    placement="right"
+                  >
+                       <div @click="exportDashboard(0)">导出(不包含数据集)</div>
+                  </el-tooltip>
                 </li>
               </ul>
             </li>
           </ul>
-        </span> -->
+        </span>
+        <!--         <span class="btn border-left">
+                  <ul class="nav">
+                    <li>
+                      <i class="el-icon-brush"></i><i class="el-icon-arrow-down"></i>
+                      <ul>
+                        <li>
+                          <div>
+                            <i class="el-icon-full-screen mr10"></i>边框
+                            <i class="el-icon-arrow-right ml20"></i>
+                          </div>
+                          <ul class="three-level">
+                            <li><a href="#">边框1</a></li>
+                            <li><a href="#">边框2</a></li>
+                            <li><a href="#">边框3</a></li>
+                          </ul>
+                        </li>
+                        <li>
+                          <div>
+                            <i class="el-icon-magic-stick mr10"></i>装饰<i
+                              class="el-icon-arrow-right ml20"
+                            ></i>
+                          </div>
+                          <ul class="three-level">
+                            <li><a href="#">装饰1</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </span>-->
       </div>
       <div
         class="workbench-container"
@@ -226,13 +277,15 @@
 </template>
 
 <script>
-import { insertDashboard, detailDashboard } from "@/api/bigscreen";
-import { widgetTools, getToolByCode } from "./tools";
+import {insertDashboard, detailDashboard, importDashboard, exportDashboard} from "@/api/bigscreen";
+import {widgetTools, getToolByCode} from "./tools";
 import widget from "./widget/widget.vue";
 import dynamicForm from "./form/dynamicForm.vue";
 import draggable from "vuedraggable";
 import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
 import contentMenu from "./form/contentMenu";
+import {getToken} from "@/utils/auth";
+
 export default {
   name: "Login",
   components: {
@@ -244,6 +297,7 @@ export default {
   },
   data() {
     return {
+      uploadUrl: process.env.BASE_API + '/reportDashboard/import/' + this.$route.query.reportCode,
       grade: false,
       layerWidget: [],
       widgetTools: widgetTools, // 左侧工具栏的组件图标，将js变量加入到当前作用域
@@ -310,6 +364,11 @@ export default {
     };
   },
   computed: {
+    headers() {
+      return {
+        Authorization: getToken(), // 直接从本地获取token就行
+      }
+    },
     // 左侧折叠切换时，动态计算中间区的宽度
     middleWidth() {
       var widthLeftAndRight = 0;
@@ -382,7 +441,7 @@ export default {
     },
     async initEchartData() {
       const reportCode = this.$route.query.reportCode;
-      const { code, data } = await detailDashboard(reportCode);
+      const {code, data} = await detailDashboard(reportCode);
       if (code != 200) return;
       const processData = this.handleInitEchartsData(data);
       const screenData = this.handleBigScreen(data.dashboard);
@@ -482,7 +541,7 @@ export default {
         },
         widgets: this.widgets
       };
-      const { code, data } = await insertDashboard(screenData);
+      const {code, data} = await insertDashboard(screenData);
       if (code == "200") {
         this.$message.success("保存成功！");
       }
@@ -491,10 +550,50 @@ export default {
     viewScreen() {
       var routeUrl = this.$router.resolve({
         path: "/bigscreen/viewer",
-        query: { reportCode: this.$route.query.reportCode }
+        query: {reportCode: this.$route.query.reportCode}
       });
       window.open(routeUrl.href, "_blank");
     },
+    //  导出
+    async exportDashboard(val) {
+      const fileName = this.$route.query.reportCode + ".zip"
+
+      const param = {
+        reportCode:this.$route.query.reportCode,
+        showDataSet:val
+      }
+      exportDashboard(param).then(res => {
+        const blob = new Blob([res], {type: "application/octet-stream"});
+        if (window.navigator.msSaveOrOpenBlob) {//msSaveOrOpenBlob方法返回bool值
+          navigator.msSaveBlob(blob, fileName);//本地保存
+        } else {
+          const link = document.createElement('a');//a标签下载
+          link.href = window.URL.createObjectURL(blob);
+          link.download = fileName;
+          link.click();
+          window.URL.revokeObjectURL(link.href);
+        }
+      })
+
+    },
+    // 上传成功的回调
+    handleUpload(response, file, fileList) {
+      //清除el-upload组件中的文件
+      this.$refs.upload.clearFiles();
+      //刷新大屏页面
+      this.initEchartData();
+      this.$message({
+        message: '导入成功！',
+        type: 'success',
+      })
+    },
+    handleError() {
+      this.$message({
+        message: '上传失败！',
+        type: 'error',
+      })
+    },
+
     // 在缩放模式下的大小
     getPXUnderScale(px) {
       return this.bigscreenScaleInWorkbench * px;
@@ -750,22 +849,28 @@ export default {
 .mr10 {
   margin-right: 10px;
 }
+
 .ml20 {
   margin-left: 20px;
 }
+
 .border-right {
   border-right: 1px solid #273b4d;
 }
+
 .border-left {
   border-left: 1px solid #273b4d;
 }
+
 .el-icon-arrow-down {
   font-size: 10px;
 }
+
 .is-active {
   background: #31455d !important;
   color: #bfcbd9 !important;
 }
+
 .layout {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -775,6 +880,7 @@ export default {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   overflow: hidden;
+
   .layout-left {
     display: inline-block;
     height: 100%;
@@ -807,6 +913,7 @@ export default {
         border: 1px solid #3a4659;
         background: #282a30;
       }
+
       .tools-item-text {
       }
     }
@@ -823,6 +930,7 @@ export default {
     background-color: #242a30;
     cursor: pointer;
     padding-top: 26%;
+
     i {
       font-size: 18px;
       width: 18px;
@@ -844,18 +952,21 @@ export default {
     align-items: center;
     vertical-align: middle;
     text-align: center;
+
     .top-button {
       display: flex;
       flex-direction: row;
       height: 40px;
       line-height: 40px;
       margin-left: 9px;
+
       .btn {
         color: #788994;
         width: 55px;
         text-align: center;
         display: block;
         cursor: pointer;
+
         .el-icon-arrow-down {
           transform: rotate(0deg);
           -ms-transform: rotate(0deg); /* IE 9 */
@@ -864,8 +975,10 @@ export default {
           -o-transform: rotate(0deg); /* Opera */
           transition: all 0.4s ease-in-out;
         }
+
         &:hover {
           background: rgb(25, 29, 34);
+
           .el-icon-arrow-down {
             transform: rotate(180deg);
             -ms-transform: rotate(180deg); /* IE 9 */
@@ -877,6 +990,7 @@ export default {
         }
       }
     }
+
     .workbench-container {
       position: relative;
       -webkit-transform-origin: 0 0;
@@ -885,10 +999,12 @@ export default {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+
       .vueRuler {
         width: 100%;
         padding: 18px 0px 0px 18px;
       }
+
       .workbench {
         background-color: #1e1e1e;
         position: relative;
@@ -901,6 +1017,7 @@ export default {
         margin: 0;
         padding: 0;
       }
+
       .bg-grid {
         position: absolute;
         top: 0;
@@ -911,11 +1028,12 @@ export default {
         background-image: linear-gradient(
             hsla(0, 0%, 100%, 0.1) 1px,
             transparent 0
-          ),
-          linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) 1px, transparent 0);
+        ),
+        linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) 1px, transparent 0);
         // z-index: 2;
       }
     }
+
     .bottom-text {
       width: 100%;
       color: #a0a0a0;
@@ -930,36 +1048,43 @@ export default {
     height: 100%;
   }
 
-  /deep/.el-tabs--border-card {
+  /deep/ .el-tabs--border-card {
     border: 0;
+
     .el-tabs__header {
       .el-tabs__nav {
         .el-tabs__item {
           background-color: #242f3b;
           border: 0px;
         }
+
         .el-tabs__item.is-active {
           background-color: #31455d;
         }
       }
     }
+
     .el-tabs__content {
       background-color: #242a30;
       height: calc(100vh - 39px);
       overflow-x: hidden;
       overflow-y: auto;
+
       .el-tab-pane {
         color: #bfcbd9;
       }
+
       &::-webkit-scrollbar {
         width: 5px;
         height: 14px;
       }
+
       &::-webkit-scrollbar-track,
       &::-webkit-scrollbar-thumb {
         border-radius: 1px;
         border: 0 solid transparent;
       }
+
       &::-webkit-scrollbar-track-piece {
         /*修改滚动条的背景和圆角*/
         background: #29405c;
@@ -969,14 +1094,17 @@ export default {
       &::-webkit-scrollbar-track {
         box-shadow: 1px 1px 5px rgba(116, 148, 170, 0.5) inset;
       }
+
       &::-webkit-scrollbar-thumb {
         min-height: 20px;
         background-clip: content-box;
         box-shadow: 0 0 0 5px rgba(116, 148, 170, 0.5) inset;
       }
+
       &::-webkit-scrollbar-corner {
         background: transparent;
       }
+
       /*修改垂直滚动条的样式*/
       &::-webkit-scrollbar-thumb:vertical {
         background-color: #00113a;
@@ -991,34 +1119,41 @@ export default {
     }
   }
 }
+
 ul,
 li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
+
 .nav {
   width: 40px;
   padding: 0;
   list-style: none;
   /* overflow: hidden; */
 }
+
 .nav {
   zoom: 1;
 }
+
 .nav:before,
 .nav:after {
   content: "";
   display: table;
 }
+
 .nav:after {
   clear: both;
 }
+
 .nav li {
   width: 55px;
   text-align: center;
   position: relative;
 }
+
 .nav li a {
   float: left;
   padding: 12px 30px;
@@ -1026,9 +1161,11 @@ li {
   font: bold 12px;
   text-decoration: none;
 }
+
 .nav li:hover {
   color: #788994;
 }
+
 .nav li ul {
   visibility: hidden;
   position: absolute;
@@ -1043,14 +1180,17 @@ li {
   width: 120px;
   transition: all 0.2s ease-in-out;
 }
+
 .nav li:hover > ul {
   opacity: 1;
   visibility: visible;
   margin: 0;
+
   li:hover {
     background-color: rgb(25, 29, 34);
   }
 }
+
 .nav ul li {
   float: left;
   display: block;
@@ -1058,6 +1198,7 @@ li {
   width: 100%;
   font-size: 12px;
 }
+
 .nav ul a {
   padding: 10px;
   width: 100%;
@@ -1068,12 +1209,15 @@ li {
   background-color: rgb(25, 29, 34);
   transition: all 0.2s ease-in-out;
 }
+
 .nav ul a:hover {
   border: 1px solid #3c5e88;
 }
+
 .nav ul li:first-child > a:hover:before {
   border-bottom-color: #04acec;
 }
+
 .nav ul ul {
   top: 0;
   left: 120px;
@@ -1083,6 +1227,7 @@ li {
   padding: 10px;
   _margin: 0;
 }
+
 .nav ul ul li {
   width: 120px;
   height: 120px;
@@ -1090,10 +1235,12 @@ li {
   display: block;
   float: left;
 }
-/deep/.vue-ruler-h {
+
+/deep/ .vue-ruler-h {
   opacity: 0.3;
 }
-/deep/.vue-ruler-v {
+
+/deep/ .vue-ruler-v {
   opacity: 0.3;
 }
 </style>

@@ -33,6 +33,7 @@ import widgetPiePercentageChart from "./pie/widgetPiePercentageChart";
 import widgetAirBubbleMap from "./map/widgetAirBubbleMap";
 import widgetBarStackChart from "./bar/widgetBarStackChart";
 import widgetLineStackChart from "./line/widgetLineStackChart";
+import widgetBarCompareChart from "./bar/widgetBarCompareChart";
 
 export default {
   name: "WidgetTemp",
@@ -58,7 +59,8 @@ export default {
     widgetPiePercentageChart,
     widgetAirBubbleMap,
     widgetBarStackChart,
-    widgetLineStackChart
+    widgetLineStackChart,
+    widgetBarCompareChart
   },
   model: {
     prop: "value",

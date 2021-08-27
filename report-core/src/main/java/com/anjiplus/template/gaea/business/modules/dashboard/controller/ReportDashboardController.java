@@ -9,7 +9,12 @@ import com.anjiplus.template.gaea.business.modules.dashboard.controller.dto.Char
 import com.anjiplus.template.gaea.business.modules.dashboard.controller.dto.ReportDashboardObjectDto;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
 * @desc 大屏设计 controller
@@ -60,6 +65,32 @@ public class ReportDashboardController {
     @Permission(code = "view", name = "查看大屏")
     public ResponseBean getData(@RequestBody ChartDto dto) {
         return ResponseBean.builder().data(reportDashboardService.getChartData(dto)).build();
+    }
+
+
+    /**
+     * 导出大屏
+     * @param reportCode
+     * @return
+     */
+    @GetMapping("/export")
+    @Permission(code = "view", name = "导出大屏")
+    public ResponseEntity<byte[]> exportDashboard(HttpServletRequest request, HttpServletResponse response,
+                                                  @RequestParam("reportCode") String reportCode, @RequestParam(value = "showDataSet",required = false, defaultValue = "1") Integer showDataSet) {
+        return reportDashboardService.exportDashboard(request, response, reportCode, showDataSet);
+    }
+
+    /**
+     * 导入大屏
+     * @param file  导入的zip文件
+     * @param reportCode
+     * @return
+     */
+    @PostMapping("/import/{reportCode}")
+    @Permission(code = "design", name = "导入大屏")
+    public ResponseBean importDashboard(@RequestParam("file") MultipartFile file, @PathVariable("reportCode") String reportCode) {
+        reportDashboardService.importDashboard(file, reportCode);
+        return ResponseBean.builder().build();
     }
 
 }
