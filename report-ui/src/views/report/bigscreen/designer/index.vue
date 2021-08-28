@@ -59,7 +59,7 @@
       :style="{ width: widthLeftForToolsHideButton + 'px' }"
       @click="toolIsShow = !toolIsShow"
     >
-      <i class="el-icon-arrow-right"/>
+      <i class="el-icon-arrow-right" />
     </div>
 
     <div
@@ -94,24 +94,26 @@
             content="导入"
             placement="bottom"
           >
-
-            <el-upload class="el-upload"
-                       ref="upload"
-                       :action="uploadUrl"
-                       :headers="headers"
-                       accept=".zip"
-                       :on-success="handleUpload"
-                       :on-error="handleError"
-                       :show-file-list="false"
-                       :limit="1">
+            <el-upload
+              class="el-upload"
+              ref="upload"
+              :action="uploadUrl"
+              :headers="headers"
+              accept=".zip"
+              :on-success="handleUpload"
+              :on-error="handleError"
+              :show-file-list="false"
+              :limit="1"
+            >
               <i class="iconfont icondaoru"></i>
-          </el-upload>
+            </el-upload>
           </el-tooltip>
         </span>
         <span class="btn border-left">
           <ul class="nav">
             <li>
-              <i class="iconfont icondaochu"></i><i class="el-icon-arrow-down"></i>
+              <i class="iconfont icondaochu"></i
+              ><i class="el-icon-arrow-down"></i>
               <ul>
                 <li>
                   <el-tooltip
@@ -120,9 +122,8 @@
                     content="适合当前系统"
                     placement="right"
                   >
-                       <div @click="exportDashboard(1)">导出(包含数据集)</div>
+                    <div @click="exportDashboard(1)">导出(包含数据集)</div>
                   </el-tooltip>
-
                 </li>
                 <li>
                   <el-tooltip
@@ -131,7 +132,7 @@
                     content="适合跨系统"
                     placement="right"
                   >
-                       <div @click="exportDashboard(0)">导出(不包含数据集)</div>
+                    <div @click="exportDashboard(0)">导出(不包含数据集)</div>
                   </el-tooltip>
                 </li>
               </ul>
@@ -277,14 +278,19 @@
 </template>
 
 <script>
-import {insertDashboard, detailDashboard, importDashboard, exportDashboard} from "@/api/bigscreen";
-import {widgetTools, getToolByCode} from "./tools";
+import {
+  insertDashboard,
+  detailDashboard,
+  importDashboard,
+  exportDashboard
+} from "@/api/bigscreen";
+import { widgetTools, getToolByCode } from "./tools/index";
 import widget from "./widget/widget.vue";
 import dynamicForm from "./form/dynamicForm.vue";
 import draggable from "vuedraggable";
 import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
 import contentMenu from "./form/contentMenu";
-import {getToken} from "@/utils/auth";
+import { getToken } from "@/utils/auth";
 
 export default {
   name: "Login",
@@ -297,7 +303,10 @@ export default {
   },
   data() {
     return {
-      uploadUrl: process.env.BASE_API + '/reportDashboard/import/' + this.$route.query.reportCode,
+      uploadUrl:
+        process.env.BASE_API +
+        "/reportDashboard/import/" +
+        this.$route.query.reportCode,
       grade: false,
       layerWidget: [],
       widgetTools: widgetTools, // 左侧工具栏的组件图标，将js变量加入到当前作用域
@@ -366,8 +375,8 @@ export default {
   computed: {
     headers() {
       return {
-        Authorization: getToken(), // 直接从本地获取token就行
-      }
+        Authorization: getToken() // 直接从本地获取token就行
+      };
     },
     // 左侧折叠切换时，动态计算中间区的宽度
     middleWidth() {
@@ -441,7 +450,7 @@ export default {
     },
     async initEchartData() {
       const reportCode = this.$route.query.reportCode;
-      const {code, data} = await detailDashboard(reportCode);
+      const { code, data } = await detailDashboard(reportCode);
       if (code != 200) return;
       const processData = this.handleInitEchartsData(data);
       const screenData = this.handleBigScreen(data.dashboard);
@@ -541,7 +550,7 @@ export default {
         },
         widgets: this.widgets
       };
-      const {code, data} = await insertDashboard(screenData);
+      const { code, data } = await insertDashboard(screenData);
       if (code == "200") {
         this.$message.success("保存成功！");
       }
@@ -550,31 +559,31 @@ export default {
     viewScreen() {
       var routeUrl = this.$router.resolve({
         path: "/bigscreen/viewer",
-        query: {reportCode: this.$route.query.reportCode}
+        query: { reportCode: this.$route.query.reportCode }
       });
       window.open(routeUrl.href, "_blank");
     },
     //  导出
     async exportDashboard(val) {
-      const fileName = this.$route.query.reportCode + ".zip"
+      const fileName = this.$route.query.reportCode + ".zip";
 
       const param = {
-        reportCode:this.$route.query.reportCode,
-        showDataSet:val
-      }
+        reportCode: this.$route.query.reportCode,
+        showDataSet: val
+      };
       exportDashboard(param).then(res => {
-        const blob = new Blob([res], {type: "application/octet-stream"});
-        if (window.navigator.msSaveOrOpenBlob) {//msSaveOrOpenBlob方法返回bool值
-          navigator.msSaveBlob(blob, fileName);//本地保存
+        const blob = new Blob([res], { type: "application/octet-stream" });
+        if (window.navigator.msSaveOrOpenBlob) {
+          //msSaveOrOpenBlob方法返回bool值
+          navigator.msSaveBlob(blob, fileName); //本地保存
         } else {
-          const link = document.createElement('a');//a标签下载
+          const link = document.createElement("a"); //a标签下载
           link.href = window.URL.createObjectURL(blob);
           link.download = fileName;
           link.click();
           window.URL.revokeObjectURL(link.href);
         }
-      })
-
+      });
     },
     // 上传成功的回调
     handleUpload(response, file, fileList) {
@@ -583,15 +592,15 @@ export default {
       //刷新大屏页面
       this.initEchartData();
       this.$message({
-        message: '导入成功！',
-        type: 'success',
-      })
+        message: "导入成功！",
+        type: "success"
+      });
     },
     handleError() {
       this.$message({
-        message: '上传失败！',
-        type: 'error',
-      })
+        message: "上传失败！",
+        type: "error"
+      });
     },
 
     // 在缩放模式下的大小
@@ -1028,8 +1037,8 @@ export default {
         background-image: linear-gradient(
             hsla(0, 0%, 100%, 0.1) 1px,
             transparent 0
-        ),
-        linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) 1px, transparent 0);
+          ),
+          linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) 1px, transparent 0);
         // z-index: 2;
       }
     }
