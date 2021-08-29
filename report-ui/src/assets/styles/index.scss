@@ -13,6 +13,13 @@ body {
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
     Microsoft YaHei, Arial, sans-serif;
 }
+ul,
+li,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+}
 
 html {
   height: 100%;
