@@ -1,12 +1,12 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 主文件
  * @version: 
  * @Author: qianlishi
  * @Date: 2021-08-29 06:43:07
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:57:24
+ * @LastEditTime: 2021-08-29 08:00:59
  */
-import { widgetTool } from "./toolMain"
+import { widgetTool } from "./main"
 const screenConfig = {
   code: 'screen',
   type: 'screen',
