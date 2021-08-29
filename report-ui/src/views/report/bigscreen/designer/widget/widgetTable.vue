@@ -27,11 +27,10 @@
   </div>
 </template>
 <script>
+import vue from "vue";
 import VueSuperSlide from "vue-superslide";
+vue.use(VueSuperSlide);
 export default {
-  components: {
-    VueSuperSlide
-  },
   props: {
     value: Object,
     ispreview: Boolean
