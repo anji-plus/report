@@ -13,18 +13,20 @@
       <el-table-column prop="key" label="key值" width="80" />
       <el-table-column label="操作" width="100">
         <template slot-scope="scope">
-          <el-button
-            @click="handleEditorClick(scope.$index, scope.row)"
-            type="text"
-            size="small"
-            >编辑</el-button
-          >
-          <el-button
-            type="text"
-            size="small"
-            @click="handleDeleteClick(scope.$index, scope.row)"
-            >删除</el-button
-          >
+          <div class="button-group">
+            <el-button
+              @click="handleEditorClick(scope.$index, scope.row)"
+              type="text"
+              size="small"
+              >编辑</el-button
+            >
+            <el-button
+              type="text"
+              size="small"
+              @click="handleDeleteClick(scope.$index, scope.row)"
+              >删除</el-button
+            >
+          </div>
         </template>
       </el-table-column>
     </el-table>
@@ -160,5 +162,8 @@ export default {
 }
 /deep/.el-table::before {
   height: 0;
+}
+.button-group .el-button {
+  padding: 0;
 }
 </style>
