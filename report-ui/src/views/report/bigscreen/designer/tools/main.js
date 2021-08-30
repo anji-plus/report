@@ -1,6 +1,6 @@
 /*
  * @Descripttion: json 入口文件
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:46:46
  * @LastEditors: qianlishi
@@ -31,6 +31,7 @@ import { widgetAirbubbleMap } from "./componentsJSON/widget-airbubble-map"
 import { widgetBarStack } from "./componentsJSON/widget-bar-stack"
 import { widgetLineStack } from "./componentsJSON/widget-line-stack"
 import { widgetBarCompare } from "./componentsJSON/widget-bar-compare"
+import { widgetLineCompare } from "./componentsJSON/widget-line-compare"
 
 export const widgetTool = [
   // type=html类型的组件
@@ -57,5 +58,6 @@ export const widgetTool = [
   widgetAirbubbleMap,
   widgetBarStack,
   widgetLineStack,
-  widgetBarCompare
+  widgetBarCompare,
+  widgetLineCompare
 ]
