@@ -511,9 +511,12 @@ export default {
       this.pop = false
     },
     save () {
-      var sheetData = {}
-      sheetData['sheet'] = this.sheet.getData()
-      this.reportExcelDto.jsonStr = JSON.stringify(sheetData)
+
+      console.log(luckysheet.toJson())
+      console.log(luckysheet.getAllSheets())
+      console.log(luckysheet.getSheetData(0))
+
+      this.reportExcelDto.jsonStr = JSON.stringify(luckysheet.getAllSheets())
       var setCodeList = []
       var setParams = {}
       this.dataSet.forEach((code) => {
