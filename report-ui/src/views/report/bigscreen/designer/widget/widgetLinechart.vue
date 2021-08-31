@@ -180,7 +180,7 @@ export default {
         axisLabel: {
           show: true,
           textStyle: {
-            color: optionsCollapse.colorY, // x轴 坐标文字颜色
+            color: optionsCollapse.colorY, // y轴 坐标文字颜色
             fontSize: optionsCollapse.fontSizeY
           }
         },

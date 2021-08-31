@@ -61,6 +61,7 @@ export default {
         xAxis: [
           {// 左
             splitNumber: 2,
+            show: true,
             type: 'value',
             inverse: true,
             axisLine: {//底分割线
@@ -92,6 +93,7 @@ export default {
           },
           {// 右
             gridIndex: 2,
+            show: true,
             type: 'value',
             axisLine: {
               show: false,
@@ -302,6 +304,7 @@ export default {
       const xAxisLeft = {
         splitNumber: optionsSetup.splitNumberLeft,
         type: 'value',
+        show : optionsSetup.hideXLeft,
         inverse: true,
         axisLine: {//X轴线
           show: optionsSetup.xLineLeft,
@@ -314,7 +317,7 @@ export default {
         },
         position: 'bottom',
         axisLabel: { // x轴
-          show: optionsSetup.hideXLeft,
+          show: true,
           textStyle: {
             color: optionsSetup.XcolorLeft,
             fontSize: optionsSetup.fontSizeXLeft
@@ -337,6 +340,7 @@ export default {
       const xAxisRight = {
         gridIndex: 2,
         splitNumber: optionsSetup.splitNumberRight,
+        show : optionsSetup.hideXRight,
         type: 'value',
         axisLine: {//X轴线
           show: optionsSetup.xLineRight,
@@ -349,7 +353,7 @@ export default {
         },
         position: 'bottom',
         axisLabel: { // x轴
-          show: optionsSetup.hideXRight,
+          show: true,
           textStyle: {
             color: optionsSetup.XcolorRight,
             fontSize: optionsSetup.fontSizeXRight
@@ -444,16 +448,6 @@ export default {
       this.options.tooltip = tooltip;
     },
     // 边距设置
-    getOptionsBottom(){
-      const optionsSetup = this.optionsSetup;
-      let bottom = optionsSetup.marginBottom;
-      if (optionsSetup.hideXLeft) {
-        bottom = optionsSetup.marginBottom + 15
-      }else if (optionsSetup.hideXRight){
-        bottom = optionsSetup.marginBottom + 15
-      }
-      return bottom
-    },
     setOptionsGrid() {
       const optionsSetup = this.optionsSetup;
       const grid = [
@@ -469,7 +463,7 @@ export default {
           show: false,
           left: "51%",
           top: optionsSetup.marginTop,
-          bottom: this.getOptionsBottom(),
+          bottom: optionsSetup.marginBottom + 15,
           width: '0%'
         },
         {//右
