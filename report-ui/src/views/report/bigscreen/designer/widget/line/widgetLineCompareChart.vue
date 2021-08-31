@@ -29,13 +29,24 @@ export default {
         },
         tooltip: {
           show: true,
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
-            type: "line",
+            type: 'line',
             lineStyle: {
-              type: "dashed",
+              color: 'ffffff',
+              type: 'dashed',
             },
           },
+          /*axisPointer: {
+              type: 'cross',
+              lineStyle: {
+                  color: 'ffffff',
+                  type: 'dashed',
+              },
+              crossStyle: {
+                  color: 'ffffff',
+              }
+          },*/
         },
         //边距
         grid: [
@@ -65,6 +76,7 @@ export default {
         xAxis: [
           {//
             gridIndex: 0,
+            show: true,
             type: 'category',
             boundaryGap: true, // 居中
             axisLine: { //x轴线
@@ -79,6 +91,7 @@ export default {
             axisLabel: { // X轴数据
               show: true,
               textStyle: {
+                interval: 0,
                 color: '#ffffff',
                 fontSize: 14
               }
@@ -87,6 +100,7 @@ export default {
           },
           {//
             gridIndex: 1,
+            show: true,
             type: 'category',
             position: 'top',
             boundaryGap: true, // 居中
@@ -101,6 +115,7 @@ export default {
             },
             axisLabel: {
               show: false,
+              interval: 0,
             },
             data: [],
           },
@@ -129,6 +144,9 @@ export default {
                 color: '#ffffff',
               },
             },
+            axisPointer: {
+              snap: true
+            },
           },
           {
             gridIndex: 1,
@@ -152,6 +170,9 @@ export default {
               lineStyle: {
                 color: '#ffffff',
               },
+            },
+            axisPointer: {
+              snap: true
             },
           },
         ],
@@ -242,260 +263,274 @@ export default {
   methods: {
     // 修改图标options属性
     editorOptions() {
-      /*this.setOptionsTitle();
-      this.setOptionsXLeft();
-      this.setOptionsXRight();
-      this.setOptionsY();
-      this.setOptionsTop();
-      this.setOptionsTooltip();
-      this.setOptionsGrid();
-      this.setOptionsLegend();
-      this.setOptionsColor();*/
+      this.setOptionsTitle();
+      this.setOptionsX();
+      // this.setOptionsXRight();
+      // this.setOptionsY();
+      // this.setOptionsTop();
+      // this.setOptionsTooltip();
+      // this.setOptionsGrid();
+      // this.setOptionsLegend();
+      // this.setOptionsColor();
       this.setOptionsData();
     },
-    /*    // 标题修改
-        setOptionsTitle() {
-          const optionsCollapse = this.optionsSetup;
-          const title = {};
-          title.text = optionsCollapse.titleText;
-          title.show = optionsCollapse.isNoTitle;
-          title.left = optionsCollapse.textAlign;
-          title.textStyle = {
-            color: optionsCollapse.textColor,
-            fontSize: optionsCollapse.textFontSize,
-            fontWeight: optionsCollapse.textFontWeight
-          };
-          this.options.title = title;
-        },
-        // 左X轴设置
-        setOptionsXLeft() {
-          const optionsSetup = this.optionsSetup;
-          const xAxisLeft = {
-            splitNumber: optionsSetup.splitNumberLeft,
-            type: 'value',
-            inverse: true,
-            axisLine: {//X轴线
-              show: optionsSetup.xLineLeft,
-              lineStyle: {
-                color: optionsSetup.lineColorXLeft,
-              },
-            },
-            axisTick: {
-              show: optionsSetup.tickLineLeft,
-            },
-            position: 'bottom',
-            axisLabel: { // x轴
-              show: optionsSetup.hideXLeft,
-              textStyle: {
-                color: optionsSetup.XcolorLeft,
-                fontSize: optionsSetup.fontSizeXLeft
-              }
-            },
-            splitLine: { // 分割线
-              show: optionsSetup.SplitLineLeft,
-              lineStyle: {
-                color: optionsSetup.SplitLineColorLeft,
-                width: optionsSetup.SplitLinefontSizeLeft,
-                type: 'solid'
-              }
-            }
+    // 标题修改
+    setOptionsTitle() {
+      const optionsCollapse = this.optionsSetup;
+      const title = {};
+      title.text = optionsCollapse.titleText;
+      title.show = optionsCollapse.isNoTitle;
+      title.left = optionsCollapse.textAlign;
+      title.textStyle = {
+        color: optionsCollapse.textColor,
+        fontSize: optionsCollapse.textFontSize,
+        fontWeight: optionsCollapse.textFontWeight
+      };
+      this.options.title = title;
+    },
+    // X轴设置
+    setOptionsX() {
+      const optionsSetup = this.optionsSetup;
+      const xAxis0 = {
+        gridIndex: 0,
+        show: optionsSetup.isShowX,
+        type: 'category',
+        boundaryGap: optionsSetup.boundaryX, // 值居中
+        axisLine: { //x轴线
+          show: optionsSetup.lineX,
+          lineStyle: {
+            color: optionsSetup.lineColorX,
           }
-          this.options.xAxis[0] = xAxisLeft;
         },
-        // 右X轴设置
-        setOptionsXRight() {
-          const optionsSetup = this.optionsSetup;
-          const xAxisRight = {
-            gridIndex: 2,
-            splitNumber: optionsSetup.splitNumberRight,
-            type: 'value',
-            axisLine: {//X轴线
-              show: optionsSetup.xLineRight,
-              lineStyle: {
-                color: optionsSetup.lineColorXRight,
-              },
-            },
-            axisTick: {
-              show: optionsSetup.tickLineRight,
-            },
-            position: 'bottom',
-            axisLabel: { // x轴
-              show: optionsSetup.hideXRight,
-              textStyle: {
-                color: optionsSetup.XcolorRight,
-                fontSize: optionsSetup.fontSizeXRight
-              }
-            },
-            splitLine: { // 分割线
-              show: optionsSetup.SplitLineRight,
-              lineStyle: {
-                color: optionsSetup.SplitLineColorRight,
-                width: optionsSetup.SplitLinefontSizeRight,
-                type: 'solid'
-              }
-            }
+        axisTick: { // 刻度
+          show: optionsSetup.tickLineX,
+        },
+        axisLabel: { // X轴数据
+          show: true,
+          interval: optionsSetup.splitNumberX,
+          textStyle: {
+            color: optionsSetup.colorX,
+            fontSize: optionsSetup.fontSizeX
           }
-          this.options.xAxis[2] = xAxisRight;
         },
-        // Y轴设置
-        setOptionsY() {
-          const optionsSetup = this.optionsSetup;
-          const axisLine = {
-            show: optionsSetup.lineY,
-            lineStyle: {
-              color: optionsSetup.lineColorY
-            }
-          };
-          const axisTick = {
-            show: optionsSetup.tickLineY
-          };
-          const axisLabel = {
-            show: optionsSetup.hideY,
-            textStyle: {
-              align: optionsSetup.textAlign,
-              color: optionsSetup.colorY,
-              fontSize: optionsSetup.fontSizeY,
-            }
-          };
-          this.options.yAxis[1]['axisLine'] = axisLine;
-          this.options.yAxis[1]['axisTick'] = axisTick;
-          this.options.yAxis[1]['axisLabel'] = axisLabel;
-        },
-        // 数值设定、柱体设置
-        setOptionsTop() {
-          const optionsSetup = this.optionsSetup;
-          const series = this.options.series;
-          for (const key in series) {
-            if (series[key].type == "bar") {
-              series[0].label = {
-                normal: {
-                  show: optionsSetup.isShow,
-                  position: 'insideLeft',
-                  textStyle: {
-                    fontSize: optionsSetup.fontSize,
-                    color: optionsSetup.subTextColor,
-                    fontWeight: optionsSetup.fontWeight
-                  }
-                },
-                emphasis: {
-                  show: false,
-                },
-              },
-                series[1].label = {
-                  normal: {
-                    show: optionsSetup.isShow,
-                    color: 'red',
-                    position: 'insideRight',
-                    textStyle: {
-                      fontSize: optionsSetup.fontSize,
-                      color: optionsSetup.subTextColor,
-                      fontWeight: optionsSetup.fontWeight
-                    }
-                  },
-                  emphasis: {
-                    show: false,
-                  },
-                },
-                series[key].barWidth = optionsSetup.maxWidth;
-            }
+      }
+      const xAxis1 = {
+        gridIndex: 1,
+        show: optionsSetup.isShowX,
+        type: 'category',
+        position: 'top',
+        boundaryGap: optionsSetup.boundaryX, // 值居中
+        axisLine: { // x轴线
+          show: optionsSetup.lineX,
+          lineStyle: {
+            color: optionsSetup.lineColorX,
           }
-          this.options.series = series;
         },
-        // tooltip 提示语设置
-        setOptionsTooltip() {
-          const optionsSetup = this.optionsSetup;
-          const tooltip = {
-            trigger: "item",
-            show: true,
-            textStyle: {
-              color: optionsSetup.lineColor,
-              fontSize: optionsSetup.fontSize
-            }
-          };
-          this.options.tooltip = tooltip;
+        axisTick: { // 刻度
+          show: optionsSetup.tickLineX,
         },
-        // 边距设置
-        getOptionsBottom(){
-          const optionsSetup = this.optionsSetup;
-          let bottom = optionsSetup.marginBottom;
-          if (optionsSetup.hideXLeft) {
-            bottom = optionsSetup.marginBottom + 15
-          }else if (optionsSetup.hideXRight){
-            bottom = optionsSetup.marginBottom + 15
+        axisLabel: {
+          show: false,
+          interval: optionsSetup.splitNumberX,
+        },
+      }
+      this.options.xAxis[0] = xAxis0;
+      this.options.xAxis[1] = xAxis1;
+    },
+    // 右X轴设置
+    setOptionsXRight() {
+      const optionsSetup = this.optionsSetup;
+      const xAxisRight = {
+        gridIndex: 2,
+        splitNumber: optionsSetup.splitNumberRight,
+        type: 'value',
+        axisLine: {//X轴线
+          show: optionsSetup.xLineRight,
+          lineStyle: {
+            color: optionsSetup.lineColorXRight,
+          },
+        },
+        axisTick: {
+          show: optionsSetup.tickLineRight,
+        },
+        position: 'bottom',
+        axisLabel: { // x轴
+          show: optionsSetup.hideXRight,
+          textStyle: {
+            color: optionsSetup.XcolorRight,
+            fontSize: optionsSetup.fontSizeXRight
           }
-          return bottom
         },
-        setOptionsGrid() {
-          const optionsSetup = this.optionsSetup;
-          const grid = [
-            {//左
-              show: optionsSetup.frameLineLeft,
-              left: optionsSetup.marginLeftRight,
-              top: optionsSetup.marginTop,
-              bottom: optionsSetup.marginBottom,
-              containLabel: true,
-              width: '40%'
-            },
-            {//中间字体位置
-              show: false,
-              left: "51%",
-              top: optionsSetup.marginTop,
-              bottom: this.getOptionsBottom(),
-              width: '0%'
-            },
-            {//右
-              show: optionsSetup.frameLineRight,
-              right: optionsSetup.marginLeftRight,
-              top: optionsSetup.marginTop,
-              bottom: optionsSetup.marginBottom,
-              containLabel: true,
-              width: '40%'
-            },
-          ]
-          this.options.grid = grid;
-        },
-        // 图例操作
-        setOptionsLegend() {
-          const optionsSetup = this.optionsSetup;
-          const legend = this.options.legend;
-          legend.show = optionsSetup.isShowLegend;
-          legend.left = optionsSetup.lateralPosition;
-          legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
-          legend.bottom =
-            optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
-          legend.orient = optionsSetup.layoutFront;
-          legend.textStyle = {
-            color: optionsSetup.lengedColor,
-            fontSize: optionsSetup.lengedFontSize
-          };
-          legend.itemWidth = optionsSetup.lengedWidth;
-        },
-        // 颜色修改、圆角修改
-        setOptionsColor() {
-          const optionsSetup = this.optionsSetup;
-          const customColor = optionsSetup.customColor;
-          if (!customColor) return;
-          const itemStyleLeft = {
+        splitLine: { // 分割线
+          show: optionsSetup.SplitLineRight,
+          lineStyle: {
+            color: optionsSetup.SplitLineColorRight,
+            width: optionsSetup.SplitLinefontSizeRight,
+            type: 'solid'
+          }
+        }
+      }
+      this.options.xAxis[2] = xAxisRight;
+    },
+    // Y轴设置
+    setOptionsY() {
+      const optionsSetup = this.optionsSetup;
+      const axisLine = {
+        show: optionsSetup.lineY,
+        lineStyle: {
+          color: optionsSetup.lineColorY
+        }
+      };
+      const axisTick = {
+        show: optionsSetup.tickLineY
+      };
+      const axisLabel = {
+        show: optionsSetup.hideY,
+        textStyle: {
+          align: optionsSetup.textAlign,
+          color: optionsSetup.colorY,
+          fontSize: optionsSetup.fontSizeY,
+        }
+      };
+      this.options.yAxis[1]['axisLine'] = axisLine;
+      this.options.yAxis[1]['axisTick'] = axisTick;
+      this.options.yAxis[1]['axisLabel'] = axisLabel;
+    },
+    // 数值设定、柱体设置
+    setOptionsTop() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      for (const key in series) {
+        if (series[key].type == "bar") {
+          series[0].label = {
             normal: {
-              color: customColor[0].color,
-              barBorderRadius: [optionsSetup.radius, 0, 0, optionsSetup.radius]
+              show: optionsSetup.isShow,
+              position: 'insideLeft',
+              textStyle: {
+                fontSize: optionsSetup.fontSize,
+                color: optionsSetup.subTextColor,
+                fontWeight: optionsSetup.fontWeight
+              }
             },
             emphasis: {
               show: false,
             },
-          }
-          const itemStyleRight = {
-            normal: {
-              color: customColor[1].color,
-              barBorderRadius: [0, optionsSetup.radius, optionsSetup.radius, 0]
+          },
+            series[1].label = {
+              normal: {
+                show: optionsSetup.isShow,
+                color: 'red',
+                position: 'insideRight',
+                textStyle: {
+                  fontSize: optionsSetup.fontSize,
+                  color: optionsSetup.subTextColor,
+                  fontWeight: optionsSetup.fontWeight
+                }
+              },
+              emphasis: {
+                show: false,
+              },
             },
-            emphasis: {
-              show: false,
-            },
-          }
-          this.options.series[0].itemStyle = itemStyleLeft;
-          this.options.series[1].itemStyle = itemStyleRight;
-        },*/
+            series[key].barWidth = optionsSetup.maxWidth;
+        }
+      }
+      this.options.series = series;
+    },
+    // tooltip 提示语设置
+    setOptionsTooltip() {
+      const optionsSetup = this.optionsSetup;
+      const tooltip = {
+        trigger: "item",
+        show: true,
+        textStyle: {
+          color: optionsSetup.lineColor,
+          fontSize: optionsSetup.fontSize
+        }
+      };
+      this.options.tooltip = tooltip;
+    },
+    // 边距设置
+    getOptionsBottom() {
+      const optionsSetup = this.optionsSetup;
+      let bottom = optionsSetup.marginBottom;
+      if (optionsSetup.hideXLeft) {
+        bottom = optionsSetup.marginBottom + 15
+      } else if (optionsSetup.hideXRight) {
+        bottom = optionsSetup.marginBottom + 15
+      }
+      return bottom
+    },
+    setOptionsGrid() {
+      const optionsSetup = this.optionsSetup;
+      const grid = [
+        {//左
+          show: optionsSetup.frameLineLeft,
+          left: optionsSetup.marginLeftRight,
+          top: optionsSetup.marginTop,
+          bottom: optionsSetup.marginBottom,
+          containLabel: true,
+          width: '40%'
+        },
+        {//中间字体位置
+          show: false,
+          left: "51%",
+          top: optionsSetup.marginTop,
+          bottom: this.getOptionsBottom(),
+          width: '0%'
+        },
+        {//右
+          show: optionsSetup.frameLineRight,
+          right: optionsSetup.marginLeftRight,
+          top: optionsSetup.marginTop,
+          bottom: optionsSetup.marginBottom,
+          containLabel: true,
+          width: '40%'
+        },
+      ]
+      this.options.grid = grid;
+    },
+    // 图例操作
+    setOptionsLegend() {
+      const optionsSetup = this.optionsSetup;
+      const legend = this.options.legend;
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
+      legend.bottom =
+        optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
+      legend.orient = optionsSetup.layoutFront;
+      legend.textStyle = {
+        color: optionsSetup.lengedColor,
+        fontSize: optionsSetup.lengedFontSize
+      };
+      legend.itemWidth = optionsSetup.lengedWidth;
+    },
+    // 颜色修改、圆角修改
+    setOptionsColor() {
+      const optionsSetup = this.optionsSetup;
+      const customColor = optionsSetup.customColor;
+      if (!customColor) return;
+      const itemStyleLeft = {
+        normal: {
+          color: customColor[0].color,
+          barBorderRadius: [optionsSetup.radius, 0, 0, optionsSetup.radius]
+        },
+        emphasis: {
+          show: false,
+        },
+      }
+      const itemStyleRight = {
+        normal: {
+          color: customColor[1].color,
+          barBorderRadius: [0, optionsSetup.radius, optionsSetup.radius, 0]
+        },
+        emphasis: {
+          show: false,
+        },
+      }
+      this.options.series[0].itemStyle = itemStyleLeft;
+      this.options.series[1].itemStyle = itemStyleRight;
+    },
     // 数据解析
     setOptionsData() {
       const optionsSetup = this.optionsSetup;
@@ -544,7 +579,6 @@ export default {
           data: data
         })
       }
-      console.log(arrayList)
       this.options.series[0]['name'] = arrayList[0].name
       this.options.series[0]['data'] = arrayList[0].data
       this.options.series[1]['name'] = arrayList[1].name

@@ -31,27 +31,59 @@ export const widgetLineCompare = {
         value: ''
       },
       [
-        /*{
-          name: '柱体设置',
+        {
+          name: '折线设置',
           list: [
             {
-              type: 'el-slider',
-              label: '最大宽度',
-              name: 'maxWidth',
+              type: 'el-switch',
+              label: '标记点',
+              name: 'markPoint',
               required: false,
               placeholder: '',
-              value: 15,
+              value: true,
             },
             {
               type: 'el-slider',
-              label: '圆角',
-              name: 'radius',
-              require: false,
+              label: '点大小',
+              name: 'pointSize',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'el-switch',
+              label: '平滑曲线',
+              name: 'smoothCurve',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '面积堆积',
+              name: 'area',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-slider',
+              label: '面积厚度',
+              name: 'areaThickness',
+              required: false,
               placeholder: '',
               value: 5,
             },
+            {
+              type: 'el-slider',
+              label: '线条宽度',
+              name: 'lineWidth',
+              required: false,
+              placeholder: '',
+              value: 4,
+            },
           ],
-        },*/
+        },
         {
           name: '标题设置',
           list: [
@@ -117,12 +149,12 @@ export const widgetLineCompare = {
           ],
         },
         {
-          name: '左X轴设置',
+          name: 'X轴设置',
           list: [
             {
               type: 'el-switch',
               label: '显示',
-              name: 'hideXLeft',
+              name: 'isShowX',
               required: false,
               placeholder: '',
               value: true,
@@ -130,15 +162,23 @@ export const widgetLineCompare = {
             {
               type: 'el-input-number',
               label: '数值间隔',
-              name: 'splitNumberLeft',
+              name: 'splitNumberX',
               required: false,
               placeholder: '',
               value: ''
             },
             {
+              type: 'el-switch',
+              label: '数值居中',
+              name: 'boundaryX',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
               type: 'vue-color',
               label: '数值颜色',
-              name: 'XcolorLeft',
+              name: 'colorX',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -146,7 +186,7 @@ export const widgetLineCompare = {
             {
               type: 'el-input-number',
               label: '数值字号',
-              name: 'fontSizeXLeft',
+              name: 'fontSizeX',
               required: false,
               placeholder: '',
               value: 14,
@@ -154,68 +194,36 @@ export const widgetLineCompare = {
             {
               type: 'el-switch',
               label: '刻度线',
-              name: 'tickLineLeft',
+              name: 'tickLineX',
               require: false,
               placeholder: '',
-              value: false,
+              value: true,
             },
             {
               type: 'el-switch',
               label: 'X轴线',
-              name: 'xLineLeft',
+              name: 'lineX',
               require: false,
               placeholder: '',
-              value: false,
+              value: true,
             },
             {
               type: 'vue-color',
               label: '轴颜色',
-              name: 'lineColorXLeft',
+              name: 'lineColorX',
               required: false,
               placeholder: '',
               value: '#fff',
-            },
-            {
-              type: 'el-switch',
-              label: '竖分割线',
-              name: 'SplitLineLeft',
-              require: false,
-              placeholder: '',
-              value: false,
-            },
-            {
-              type: 'vue-color',
-              label: '分割线颜色',
-              name: 'SplitLineColorLeft',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '分割线宽度',
-              name: 'SplitLinefontSizeLeft',
-              required: false,
-              placeholder: '',
-              value: 1,
-            },
-            {
-              type: 'el-switch',
-              label: '边框线',
-              name: 'frameLineLeft',
-              require: false,
-              placeholder: '',
-              value: false,
             },
           ],
         },
         {
-          name: '右X轴设置',
+          name: '上y轴设置',
           list: [
             {
               type: 'el-switch',
               label: '显示',
-              name: 'hideXRight',
+              name: 'isShowYTop',
               required: false,
               placeholder: '',
               value: true,
@@ -223,7 +231,7 @@ export const widgetLineCompare = {
             {
               type: 'el-input-number',
               label: '数值间隔',
-              name: 'splitNumberRight',
+              name: 'splitNumberYTop',
               required: false,
               placeholder: '',
               value: ''
@@ -303,7 +311,7 @@ export const widgetLineCompare = {
           ],
         },
         {
-          name: 'Y轴设置',
+          name: '下Y轴设置',
           list: [
             {
               type: 'el-switch',
