@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 柱状图渐变色 json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:23:41
  * @LastEditors: qianlishi
@@ -299,9 +299,17 @@ export const widgetGradientBarchart =  {
                 value: 0
               },
               {
+                type: 'el-switch',
+                label: '缩放',
+                name: 'scale',
+                require: false,
+                placeholder: '',
+                value: false,
+              },
+              {
                 type: 'el-input-number',
-                label: '文字间隔',
-                name: 'ytextInterval',
+                label: '均分',
+                name: 'splitNumber',
                 required: false,
                 placeholder: '',
                 value: ''
