@@ -197,7 +197,7 @@ export const widgetLineCompare = {
               name: 'colorX',
               required: false,
               placeholder: '',
-              value: '#36c5e7',
+              value: '#fff',
             },
             {
               type: 'el-input-number',
@@ -237,7 +237,7 @@ export const widgetLineCompare = {
               name: 'lineColorX',
               required: false,
               placeholder: '',
-              value: '#36c5e7',
+              value: '#fff',
             },
           ],
         },
@@ -265,7 +265,7 @@ export const widgetLineCompare = {
               name: 'nameColorYTop',
               required: false,
               placeholder: '',
-              value: '#36c5e7',
+              value: '#fff',
             },
             {
               type: 'el-input-number',
@@ -297,7 +297,7 @@ export const widgetLineCompare = {
               name: 'colorYTop',
               required: false,
               placeholder: '',
-              value: '#36c5e7',
+              value: '#fff',
             },
             {
               type: 'el-input-number',
@@ -329,7 +329,7 @@ export const widgetLineCompare = {
               name: 'lineColorYTop',
               required: false,
               placeholder: '',
-              value: '#36c5e7',
+              value: '#fff',
             },
             {
               type: 'el-switch',
@@ -381,7 +381,7 @@ export const widgetLineCompare = {
               name: 'nameColorYBottom',
               required: false,
               placeholder: '',
-              value: '#e68b55',
+              value: '#fff',
             },
             {
               type: 'el-input-number',
@@ -413,7 +413,7 @@ export const widgetLineCompare = {
               name: 'colorYBottom',
               required: false,
               placeholder: '',
-              value: '#e68b55',
+              value: '#fff',
             },
             {
               type: 'el-input-number',
@@ -445,7 +445,7 @@ export const widgetLineCompare = {
               name: 'lineColorYBottom',
               required: false,
               placeholder: '',
-              value: '#e68b55',
+              value: '#fff',
             },
             {
               type: 'el-switch',
