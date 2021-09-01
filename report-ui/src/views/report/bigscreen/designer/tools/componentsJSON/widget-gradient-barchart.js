@@ -174,14 +174,6 @@ export const widgetGradientBarchart =  {
             name: 'X轴设置',
             list: [
               {
-                type: 'el-input-text',
-                label: '名称',
-                name: 'xName',
-                required: false,
-                placeholder: '',
-                value: ''
-              },
-              {
                 type: 'el-switch',
                 label: '显示',
                 name: 'hideX',
@@ -190,24 +182,48 @@ export const widgetGradientBarchart =  {
                 value: true,
               },
               {
-                type: 'el-input-number',
-                label: '字号',
-                name: 'fontSizeX',
+                type: 'el-input-text',
+                label: '坐标名',
+                name: 'xName',
                 required: false,
                 placeholder: '',
-                value: 12,
+                value: ''
               },
               {
                 type: 'vue-color',
-                label: '颜色',
+                label: '坐标名颜色',
+                name: 'nameColorX',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              },
+              {
+                type: 'el-input-number',
+                label: '坐标字号',
+                name: 'nameFontSizeX',
+                required: false,
+                placeholder: '',
+                value: 14,
+              },
+              {
+                type: 'vue-color',
+                label: '数值颜色',
                 name: 'Xcolor',
                 required: false,
                 placeholder: '',
                 value: '#fff',
               },
               {
+                type: 'el-input-number',
+                label: '数值字号',
+                name: 'fontSizeX',
+                required: false,
+                placeholder: '',
+                value: 14,
+              },
+              {
                 type: 'el-slider',
-                label: '文字角度',
+                label: '数值角度',
                 name: 'textAngle',
                 required: false,
                 placeholder: '',
@@ -215,7 +231,7 @@ export const widgetGradientBarchart =  {
               },
               {
                 type: 'el-input-number',
-                label: '文字间隔',
+                label: '数值间隔',
                 name: 'textInterval',
                 required: false,
                 placeholder: '',
@@ -259,14 +275,6 @@ export const widgetGradientBarchart =  {
             name: 'Y轴设置',
             list: [
               {
-                type: 'el-input-text',
-                label: '名称',
-                name: 'textNameY',
-                require: false,
-                placeholder: '',
-                value: ''
-              },
-              {
                 type: 'el-switch',
                 label: '显示',
                 name: 'isShowY',
@@ -275,8 +283,31 @@ export const widgetGradientBarchart =  {
                 value: true,
               },
               {
+                type: 'el-input-text',
+                label: '坐标名',
+                name: 'textNameY',
+                require: false,
+                placeholder: '',
+                value: ''
+              },{
                 type: 'vue-color',
-                label: '颜色',
+                label: '坐标名颜色',
+                name: 'nameColorY',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              },
+              {
+                type: 'el-input-number',
+                label: '坐标字号',
+                name: 'namefontSizeY',
+                required: false,
+                placeholder: '',
+                value: 14,
+              },
+              {
+                type: 'vue-color',
+                label: '数值颜色',
                 name: 'colorY',
                 required: false,
                 placeholder: '',
@@ -284,15 +315,15 @@ export const widgetGradientBarchart =  {
               },
               {
                 type: 'el-input-number',
-                label: '字号',
+                label: '数值字号',
                 name: 'fontSizeY',
                 required: false,
                 placeholder: '',
-                value: 12,
+                value: 14,
               },
               {
                 type: 'el-slider',
-                label: '文字角度',
+                label: '数值角度',
                 name: 'ytextAngle',
                 required: false,
                 placeholder: '',
@@ -344,7 +375,6 @@ export const widgetGradientBarchart =  {
                 required: false,
                 placeholder: '',
                 value: '#fff',
-
               }
             ],
           },
