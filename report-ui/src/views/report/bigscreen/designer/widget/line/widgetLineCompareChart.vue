@@ -639,8 +639,9 @@ export default {
       });
     },
     renderingFn(optionsSetup, val) {
-      this.options.yAxis[1]['data'] = val.xAxis
-      if (val.series[0].type == "bar") {
+      this.options.xAxis[0]['data'] = val.xAxis
+      this.options.xAxis[1]['data'] = val.xAxis
+      if (val.series[0].type == "line") {
         this.options.series[0]['name'] = val.series[0].name
         this.options.series[0]['data'] = val.series[0].data
         this.options.series[1]['name'] = val.series[1].name
