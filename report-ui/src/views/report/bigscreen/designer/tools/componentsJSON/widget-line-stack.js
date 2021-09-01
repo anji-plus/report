@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 折线堆叠图 json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:38:17
  * @LastEditors: qianlishi
@@ -56,7 +56,7 @@ export const widgetLineStack =   {
                 name: 'pointSize',
                 required: false,
                 placeholder: '',
-                value: 10,
+                value: 5,
               },
               {
                 type: 'el-switch',

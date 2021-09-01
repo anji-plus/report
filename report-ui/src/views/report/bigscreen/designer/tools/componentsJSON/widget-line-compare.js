@@ -48,7 +48,7 @@ export const widgetLineCompare = {
               name: 'pointSize',
               required: false,
               placeholder: '',
-              value: 10,
+              value: 5,
             },
             {
               type: 'el-switch',
@@ -80,7 +80,7 @@ export const widgetLineCompare = {
               name: 'lineWidth',
               required: false,
               placeholder: '',
-              value: 4,
+              value: 2,
             },
           ],
         },
@@ -281,7 +281,7 @@ export const widgetLineCompare = {
               name: 'scaleYTop',
               required: false,
               placeholder: '',
-              value: true,
+              value: false,
             },
             {
               type: 'el-input-number',
@@ -397,7 +397,7 @@ export const widgetLineCompare = {
               name: 'scaleYBottom',
               required: false,
               placeholder: '',
-              value: true,
+              value: false,
             },
             {
               type: 'el-input-number',
@@ -520,19 +520,31 @@ export const widgetLineCompare = {
           name: '提示语设置',
           list: [
             {
-              type: 'el-input-number',
-              label: '字体大小',
-              name: 'tipsFontSize',
+              type: 'el-switch',
+              label: '显示',
+              name: 'tipShow',
               required: false,
               placeholder: '',
-              value: 16
+              value: true,
+            },
+            {
+              type: 'el-select',
+              label: '类型',
+              name: 'tipType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'line', name: '线形'},
+                {code: 'cross', name: '十字形'},
+              ],
+              value: 'line'
             },
             {
               type: 'vue-color',
-              label: '字体颜色',
-              name: 'lineColor',
+              label: '颜色',
+              name: 'tipColor',
               required: false,
-              placeholder: '',
+              placeholder: '#e68b55',
             },
           ],
         },

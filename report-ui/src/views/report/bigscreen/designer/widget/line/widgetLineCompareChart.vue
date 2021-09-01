@@ -33,18 +33,18 @@ export default {
           axisPointer: {
             type: 'line',
             lineStyle: {
-              color: 'ffffff',
+              color: '#ffffff',
               type: 'dashed',
             },
           },
           /*axisPointer: {
               type: 'cross',
               lineStyle: {
-                  color: 'ffffff',
+                  color: '#ffffff',
                   type: 'dashed',
               },
               crossStyle: {
-                  color: 'ffffff',
+                  color: '#ffffff',
               }
           },*/
         },
@@ -182,6 +182,9 @@ export default {
             type: 'line',
             xAxisIndex: 0,
             yAxisIndex: 0,
+            showSymbol: true,// 标记点
+            symbol: 'circle',
+            symbolSize: 5,
             smooth: true, // 曲线，折线
             itemStyle: {
               color: '#36c5e7',
@@ -190,7 +193,7 @@ export default {
               color: '#36c5e7',
               width: 2,
             },
-            label: {
+            label: { // 数值
               position: 'top',
               distance: 10,
               show: true,
@@ -204,6 +207,9 @@ export default {
             type: 'line',
             xAxisIndex: 1,
             yAxisIndex: 1,
+            showSymbol: true,// 标记点
+            symbol: 'circle',
+            symbolSize: 5,
             smooth: true, // 曲线，折线
             itemStyle: {
               color: '#e68b55',
@@ -212,7 +218,7 @@ export default {
               color: '#e68b55',
               width: 2,
             },
-            label: {
+            label: {// 数值
               position: 'bottom',
               distance: 10,
               show: true,
@@ -267,11 +273,11 @@ export default {
       this.setOptionsX();
       this.setOptionsYTop();
       this.setOptionsYBottom();
-      // this.setOptionsTop();
-      // this.setOptionsTooltip();
+      this.setOptionsTop();
+      this.setOptionsTooltip();
       this.setOptionsGrid();
-      // this.setOptionsLegend();
-      // this.setOptionsColor();
+      this.setOptionsLegend();
+      this.setOptionsColor();
       this.setOptionsData();
     },
     // 标题修改
@@ -427,57 +433,77 @@ export default {
       }
       this.options.yAxis[1] = yAxis
     },
-    // 数值设定、柱体设置
+    // 数值设定 折线设置
     setOptionsTop() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
+      const series = this.options.series
+      // 折线
       for (const key in series) {
-        if (series[key].type == "bar") {
-          series[0].label = {
-            normal: {
-              show: optionsSetup.isShow,
-              position: 'insideLeft',
-              textStyle: {
-                fontSize: optionsSetup.fontSize,
-                color: optionsSetup.subTextColor,
-                fontWeight: optionsSetup.fontWeight
-              }
-            },
-            emphasis: {
-              show: false,
-            },
-          },
-            series[1].label = {
-              normal: {
-                show: optionsSetup.isShow,
-                color: 'red',
-                position: 'insideRight',
-                textStyle: {
-                  fontSize: optionsSetup.fontSize,
-                  color: optionsSetup.subTextColor,
-                  fontWeight: optionsSetup.fontWeight
-                }
-              },
-              emphasis: {
-                show: false,
-              },
-            },
-            series[key].barWidth = optionsSetup.maxWidth;
+        series[key].showSymbol = optionsSetup.markPoint
+        series[key].symbolSize = optionsSetup.pointSize
+        series[key].smooth = optionsSetup.smoothCurve
+        if (optionsSetup.area) {
+          series[key].areaStyle = {
+            opacity: optionsSetup.areaThickness / 100
+          }
+        } else {
+          series[key].areaStyle = {
+            opacity: 0
+          }
         }
       }
-      this.options.series = series;
+      // 数值
+      if (series[0].type == 'line') {
+        series[0].label = {
+          position: 'top',
+          distance: 10,
+          show: optionsSetup.isShow,
+          color: optionsSetup.subTextColor,
+          fontSize: optionsSetup.fontSize,
+          fontWeight: optionsSetup.fontWeight
+        }
+        series[1].label = {
+          position: 'bottom',
+          distance: 10,
+          show: optionsSetup.isShow,
+          color: optionsSetup.subTextColor,
+          fontSize: optionsSetup.fontSize,
+          fontWeight: optionsSetup.fontWeight
+        }
+      }
     },
     // tooltip 提示语设置
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
-      const tooltip = {
-        trigger: "item",
-        show: true,
-        textStyle: {
-          color: optionsSetup.lineColor,
-          fontSize: optionsSetup.fontSize
+      let tooltip = {}
+      if (optionsSetup.tipType == "line") {
+        tooltip = {
+          show: optionsSetup.tipShow,
+          trigger: 'axis',
+          axisPointer: {
+            type: optionsSetup.tipType,
+            lineStyle: {
+              color: optionsSetup.tipColor,
+              type: 'dashed',
+            },
+          },
         }
-      };
+      } else {
+        tooltip = {
+          show: optionsSetup.tipShow,
+          trigger: 'axis',
+          axisPointer: {
+            type: optionsSetup.tipType,
+            lineStyle: {
+              color: optionsSetup.tipColor,
+              type: 'dashed',
+            },
+            crossStyle: {
+              color: optionsSetup.tipColor,
+            }
+          },
+        }
+      }
       this.options.tooltip = tooltip;
     },
     // 边距设置
@@ -517,31 +543,27 @@ export default {
       };
       legend.itemWidth = optionsSetup.lengedWidth;
     },
-    // 颜色修改、圆角修改
+    // 颜色修改、宽度修改
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
       const customColor = optionsSetup.customColor;
+      const series = this.options.series
+      const arrColor = [];
+      for (let i = 0; i < customColor.length; i++) {
+        arrColor.push(customColor[i].color);
+      }
       if (!customColor) return;
-      const itemStyleLeft = {
-        normal: {
-          color: customColor[0].color,
-          barBorderRadius: [optionsSetup.radius, 0, 0, optionsSetup.radius]
-        },
-        emphasis: {
-          show: false,
-        },
+      for (const key in series) {
+        const itemStyle = {
+          color: arrColor[key],
+        }
+        const lineStyle = {
+          color: arrColor[key],
+          width: optionsSetup.lineWidth,
+        }
+        this.options.series[key].itemStyle = itemStyle
+        this.options.series[key].lineStyle = lineStyle
       }
-      const itemStyleRight = {
-        normal: {
-          color: customColor[1].color,
-          barBorderRadius: [0, optionsSetup.radius, optionsSetup.radius, 0]
-        },
-        emphasis: {
-          show: false,
-        },
-      }
-      this.options.series[0].itemStyle = itemStyleLeft;
-      this.options.series[1].itemStyle = itemStyleRight;
     },
     // 数据解析
     setOptionsData() {

@@ -277,7 +277,6 @@ export default {
         fontSize: optionsCollapse.fontSize
       };
       legend.itemWidth = optionsCollapse.lengedWidth;
-      console.log(legend);
     },
     // 图例颜色修改
     setOptionsColor() {
