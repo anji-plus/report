@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 柱状堆叠图
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:37:09
  * @LastEditors: qianlishi
@@ -350,7 +350,8 @@ export const widgetBarStack =  {
                 required: false,
                 placeholder: '',
                 value: '#fff',
-              }, {
+              },
+              {
                 type: 'el-switch',
                 label: '分割线显示',
                 name: 'isShowSplitLineY',
@@ -364,7 +365,6 @@ export const widgetBarStack =  {
                 required: false,
                 placeholder: '',
                 value: '#fff',
-
               }
             ],
           },

@@ -265,11 +265,11 @@ export default {
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionsX();
-      // this.setOptionsXRight();
-      // this.setOptionsY();
+      this.setOptionsYTop();
+      this.setOptionsYBottom();
       // this.setOptionsTop();
       // this.setOptionsTooltip();
-      // this.setOptionsGrid();
+      this.setOptionsGrid();
       // this.setOptionsLegend();
       // this.setOptionsColor();
       this.setOptionsData();
@@ -294,6 +294,11 @@ export default {
       const xAxis0 = {
         gridIndex: 0,
         show: optionsSetup.isShowX,
+        name: optionsSetup.xName, // 坐标轴名称
+        nameTextStyle: {
+          color: optionsSetup.nameColorX,
+          fontSize: optionsSetup.nameFontSizeX
+        },
         type: 'category',
         boundaryGap: optionsSetup.boundaryX, // 值居中
         axisLine: { //x轴线
@@ -337,64 +342,90 @@ export default {
       this.options.xAxis[0] = xAxis0;
       this.options.xAxis[1] = xAxis1;
     },
-    // 右X轴设置
-    setOptionsXRight() {
+    // 上y轴设置
+    setOptionsYTop() {
       const optionsSetup = this.optionsSetup;
-      const xAxisRight = {
-        gridIndex: 2,
-        splitNumber: optionsSetup.splitNumberRight,
-        type: 'value',
-        axisLine: {//X轴线
-          show: optionsSetup.xLineRight,
-          lineStyle: {
-            color: optionsSetup.lineColorXRight,
+      const yAxis = {
+        gridIndex: 0,
+        splitNumber: optionsSetup.splitNumberYTop,
+        show: optionsSetup.isShowYTop,
+        scale: optionsSetup.scaleYTop, // 缩放
+        name: optionsSetup.textNameYTop, // 坐标轴名称
+        nameTextStyle: {
+          color: optionsSetup.nameColorYTop,
+          fontSize: optionsSetup.namefontSizeYTop
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: optionsSetup.colorYTop,
+            fontSize: optionsSetup.fontSizeYTop,
           },
         },
-        axisTick: {
-          show: optionsSetup.tickLineRight,
+        axisTick: { // 刻度
+          show: optionsSetup.tickLineYTop,
         },
-        position: 'bottom',
-        axisLabel: { // x轴
-          show: optionsSetup.hideXRight,
-          textStyle: {
-            color: optionsSetup.XcolorRight,
-            fontSize: optionsSetup.fontSizeXRight
-          }
-        },
-        splitLine: { // 分割线
-          show: optionsSetup.SplitLineRight,
+        axisLine: { // 轴线
+          show: optionsSetup.lineYTop,
           lineStyle: {
-            color: optionsSetup.SplitLineColorRight,
-            width: optionsSetup.SplitLinefontSizeRight,
-            type: 'solid'
-          }
-        }
+            color: optionsSetup.lineColorYTop,
+          },
+        },
+        splitLine: {
+          show: optionsSetup.splitLineYTop,
+          lineStyle: {
+            width: optionsSetup.splitLinefontSizeYTop,
+            color: optionsSetup.splitLineColorYTop,
+          },
+        },
+        axisPointer: {
+          snap: true
+        },
       }
-      this.options.xAxis[2] = xAxisRight;
+      this.options.yAxis[0] = yAxis
     },
-    // Y轴设置
-    setOptionsY() {
+    // 下Y轴设置
+    setOptionsYBottom() {
       const optionsSetup = this.optionsSetup;
-      const axisLine = {
-        show: optionsSetup.lineY,
-        lineStyle: {
-          color: optionsSetup.lineColorY
-        }
-      };
-      const axisTick = {
-        show: optionsSetup.tickLineY
-      };
-      const axisLabel = {
-        show: optionsSetup.hideY,
-        textStyle: {
-          align: optionsSetup.textAlign,
-          color: optionsSetup.colorY,
-          fontSize: optionsSetup.fontSizeY,
-        }
-      };
-      this.options.yAxis[1]['axisLine'] = axisLine;
-      this.options.yAxis[1]['axisTick'] = axisTick;
-      this.options.yAxis[1]['axisLabel'] = axisLabel;
+      const yAxis = {
+        gridIndex: 1,
+        splitNumber: optionsSetup.splitNumberYBottom,
+        show: optionsSetup.isShowYBottom,
+        scale: optionsSetup.scaleYBottom, // 缩放
+        name: optionsSetup.textNameYBottom, // 坐标轴名称
+        nameTextStyle: {
+          color: optionsSetup.nameColorYBottom,
+          fontSize: optionsSetup.namefontSizeYBottom
+        },
+        inverse: true, // 翻转
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: optionsSetup.colorYBottom,
+            fontSize: optionsSetup.fontSizeYBottom,
+          },
+        },
+        axisTick: { // 刻度
+          show: optionsSetup.tickLineYBottom,
+        },
+        axisLine: { // 轴线
+          show: optionsSetup.lineYBottom,
+          lineStyle: {
+            color: optionsSetup.lineColorYBottom,
+          },
+        },
+        splitLine: {
+          show: optionsSetup.splitLineYBottom,
+          lineStyle: {
+            width: optionsSetup.splitLinefontSizeYBottom,
+            color: optionsSetup.splitLineColorYBottom,
+          },
+        },
+        axisPointer: {
+          snap: true
+        },
+      }
+      this.options.yAxis[1] = yAxis
     },
     // 数值设定、柱体设置
     setOptionsTop() {
@@ -450,41 +481,22 @@ export default {
       this.options.tooltip = tooltip;
     },
     // 边距设置
-    getOptionsBottom() {
-      const optionsSetup = this.optionsSetup;
-      let bottom = optionsSetup.marginBottom;
-      if (optionsSetup.hideXLeft) {
-        bottom = optionsSetup.marginBottom + 15
-      } else if (optionsSetup.hideXRight) {
-        bottom = optionsSetup.marginBottom + 15
-      }
-      return bottom
-    },
     setOptionsGrid() {
       const optionsSetup = this.optionsSetup;
       const grid = [
-        {//左
-          show: optionsSetup.frameLineLeft,
-          left: optionsSetup.marginLeftRight,
+        {// 上
+          left: optionsSetup.marginLeft,
+          right: optionsSetup.marginRight,
           top: optionsSetup.marginTop,
-          bottom: optionsSetup.marginBottom,
           containLabel: true,
-          width: '40%'
+          bottom: '50%',
         },
-        {//中间字体位置
-          show: false,
-          left: "51%",
-          top: optionsSetup.marginTop,
-          bottom: this.getOptionsBottom(),
-          width: '0%'
-        },
-        {//右
-          show: optionsSetup.frameLineRight,
-          right: optionsSetup.marginLeftRight,
-          top: optionsSetup.marginTop,
-          bottom: optionsSetup.marginBottom,
+        { // 下
+          left: optionsSetup.marginLeft,
+          right: optionsSetup.marginRight,
           containLabel: true,
-          width: '40%'
+          top: '51%',
+          bottom: optionsSetup.marginBottom,
         },
       ]
       this.options.grid = grid;
