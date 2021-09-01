@@ -368,7 +368,8 @@ export const widgetGradientBarchart =  {
                 require: false,
                 placeholder: '',
                 value: false,
-              }, {
+              },
+              {
                 type: 'vue-color',
                 label: '分割线颜色',
                 name: 'splitLineColorY',

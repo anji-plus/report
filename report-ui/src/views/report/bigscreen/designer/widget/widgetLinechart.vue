@@ -136,14 +136,14 @@ export default {
         show: optionsCollapse.hideX, // 坐标轴是否显示
         name: optionsCollapse.xName, // 坐标轴名称
         nameTextStyle: {
-          color: optionsCollapse.xNameColor,
-          fontSize: optionsCollapse.xNameFontSize
+          color: optionsCollapse.nameColorX,
+          fontSize: optionsCollapse.nameFontSizeX
         },
         nameRotate: optionsCollapse.textAngle, // 文字角度
         inverse: optionsCollapse.reversalX, // 轴反转
         axisLabel: {
           show: true,
-          interval: optionsCollapse.textInterval, // 文字角度
+          interval: optionsCollapse.textInterval, // 文字间隔
           rotate: optionsCollapse.textAngle, // 文字角度
           textStyle: {
             color: optionsCollapse.Xcolor, // x轴 坐标文字颜色
@@ -170,15 +170,18 @@ export default {
       const optionsCollapse = this.optionsSetup;
       const yAxis = {
         type: "value",
+        scale : optionsCollapse.scale,
+        splitNumber: optionsCollapse.splitNumber,// 均分
         show: optionsCollapse.isShowY, // 坐标轴是否显示
         name: optionsCollapse.textNameY, // 坐标轴名称
-        nameTextStyle: {
-          color: optionsCollapse.NameColorY,
-          fontSize: optionsCollapse.NameFontSizeY
+        nameTextStyle: { // 别名
+          color: optionsCollapse.nameColorY,
+          fontSize: optionsCollapse.namefontSizeY
         },
         inverse: optionsCollapse.reversalY, // 轴反转
         axisLabel: {
           show: true,
+          rotate: optionsCollapse.ytextAngle, // 文字角度
           textStyle: {
             color: optionsCollapse.colorY, // y轴 坐标文字颜色
             fontSize: optionsCollapse.fontSizeY
@@ -197,7 +200,6 @@ export default {
           }
         }
       };
-
       this.options.yAxis = yAxis;
     },
     // 折线设置
