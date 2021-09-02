@@ -1,10 +1,12 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart :options="options" autoresize/>
   </div>
 </template>
 
 <script>
+import echarts from "echarts";
+
 export default {
   name: "WidgetGauge",
   components: {},
@@ -17,35 +19,108 @@ export default {
       options: {
         series: [
           {
-            name: "Pressure",
-            type: "gauge",
-            detail: {
-              formatter: "{value}",
-              textStyle: {
-                fontSize: 12
-              }
-            },
+            type: 'gauge',
+            z: 100,
             axisLine: {
-              show: true,
               lineStyle: {
-                width: 10
-              }
+                width: 10,
+                color: [
+                  [
+                    0.3,
+                    new echarts.graphic.LinearGradient(0, 1, 1, 0, [
+                      {
+                        offset: 0,
+                        color: 'rgba(0, 237, 3,0.1)',
+                      },
+                      {
+                        offset: 0.5,
+                        color: 'rgba(0, 237, 3,0.6)',
+                      },
+                      {
+                        offset: 1,
+                        color: 'rgba(0, 237, 3,1)',
+                      },
+                    ]),
+                  ],
+                  [
+                    0.7,
+                    new echarts.graphic.LinearGradient(0, 1, 1, 0, [
+                      {
+                        offset: 0,
+                        color: 'rgba(255, 184, 0,0.1)',
+                      },
+                      {
+                        offset: 0.5,
+                        color: 'rgba(255, 184, 0,0.6)',
+                      },
+                      {
+                        offset: 1,
+                        color: 'rgba(255, 184, 0,1)',
+                      },
+                    ]),
+                  ],
+                  [
+                    1,
+                    new echarts.graphic.LinearGradient(0, 1, 1, 0, [
+                      {
+                        offset: 0,
+                        color: 'rgba(175, 36, 74,0.1)',
+                      },
+                      {
+                        offset: 0.5,
+                        color: 'rgba(255, 36, 74,0.6)',
+                      },
+                      {
+                        offset: 1,
+                        color: 'rgba(255, 36, 74,1)',
+                      },
+                    ]),
+                  ],
+                ],
+              },
+            },
+            pointer: {
+              itemStyle: {
+                color: 'auto',
+              },
+            },
+            axisTick: {
+              show: true,
+              distance: 0,
+              length: 10,
+              lineStyle: {
+                color: 'auto',
+                width: 2,
+              },
+            },
+            splitLine: {
+              show: true,
+              distance: 0,
+              length: 14,
+              lineStyle: {
+                color: 'auto',
+                width: 4,
+              },
             },
             axisLabel: {
               show: true,
-              fontSize: 12
+              color: 'white',
+              distance: 2,
+              fontSize: 10,
             },
-            axisTick: {
-              show: true
+            detail: {
+              valueAnimation: true,
+              formatter: '{value} %',
+              color: 'white',
+              fontSize: 18,
             },
             data: [
               {
-                value: 50,
-                name: ""
-              }
-            ]
-          }
-        ]
+                value: 70,
+              },
+            ],
+          },
+        ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
@@ -72,8 +147,7 @@ export default {
         this.optionsData = val.data; // 数据
         this.optionsCollapse = val.collapse; // 折叠数据
         this.optionsSetup = val.setup; // 样式
-        this.setOptions();
-        this.setOptionsData();
+        this.editorOptions();
       },
       deep: true
     }
@@ -83,10 +157,13 @@ export default {
     this.optionsData = this.value.data;
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
-    this.setOptions();
-    this.setOptionsData();
+    this.editorOptions();
   },
   methods: {
+    editorOptions() {
+      // this.setOptions()
+      // this.setOptionsData()
+    },
     setOptions() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
@@ -107,14 +184,11 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      const staticData = typeof val == "string" ? JSON.parse(val) : val;
+      //const staticData = typeof val == "string" ? JSON.parse(val) : val;
       const series = this.options.series;
       for (const key in series) {
-        series[key].detail.formatter = `{value}${staticData.unit}`;
-        series[key].data[0] = {
-          value: staticData.value,
-          name: staticData.name
-        };
+        //series[key].detail.formatter = `{value}${val.unit}`;
+        series[key].data = val
       }
     },
     dynamicDataFn(val, refreshTime) {
