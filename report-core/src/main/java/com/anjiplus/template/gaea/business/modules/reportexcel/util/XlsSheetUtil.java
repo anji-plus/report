@@ -5,8 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFColor;
 
 import java.util.*;
 
@@ -101,17 +99,6 @@ public class XlsSheetUtil {
                     //样式
                     CellStyle style = wb.createCellStyle();
                     cell.setCellStyle(style);
-
-                    //bs 边框样式 //bc 边框颜色
-                    setBorderStyle(style, v_json, "bs", "bc");
-                    //bs_t 上边框样式   bc_t  上边框颜色
-                    setBorderStyle(style, v_json, "bs_t", "bc_t");
-                    //bs_b 下边框样式   bc_b  下边框颜色
-                    setBorderStyle(style, v_json, "bs_b", "bc_b");
-                    //bs_l 左边框样式   bc_l  左边框颜色
-                    setBorderStyle(style, v_json, "bs_l", "bc_l");
-                    //bs_r 右边框样式   bc_r  右边框颜色
-                    setBorderStyle(style, v_json, "bs_r", "bc_r");
 
 
                     //合并单元格
