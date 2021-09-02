@@ -67,8 +67,6 @@
           </el-button>
         </el-tooltip>
       </div>
-      <!-- <div id="x-spreadsheet-demo"
-           class="excel-designer" /> -->
       <div id="luckysheet"
            style="margin:0px;padding:0px;position:absolute;width:100%;height:95vh;left: 0px;top: 30px;bottom:0px;" />
       <div id="qrCode"
@@ -493,7 +491,7 @@ export default {
       }
     },
     async preview () {
-      var routeUrl = this.$router.resolve({ path: '/report/excelreport/viewer', query: { reportCode: this.reportCode } })
+      var routeUrl = this.$router.resolve({ path: '/excelreport/viewer', query: { reportCode: this.reportCode } })
       window.open(routeUrl.href, '_blank')
     },
     async queryAllDataSet () {

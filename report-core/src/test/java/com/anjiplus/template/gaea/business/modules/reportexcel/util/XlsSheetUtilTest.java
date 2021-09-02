@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -34,6 +35,20 @@ public class XlsSheetUtilTest {
             e.printStackTrace();
         }
         System.out.println("start");
+    }
+
+
+    @Test
+    public void test2(){
+        List<String> list = new LinkedList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
+        list.add("e");
+        list.add(2, "f");
+        //CopyOnWriteArrayList
+        System.out.println(list);
     }
 
 }
