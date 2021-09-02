@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -48,11 +47,11 @@ public class ReportExcelServiceImpl implements ReportExcelService {
     @Override
     public ReportExcelDto detailByReportCode(String reportCode) {
         QueryWrapper<ReportExcel> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("report_code" , reportCode);
+        queryWrapper.eq("report_code", reportCode);
         ReportExcel reportExcel = reportExcelMapper.selectOne(queryWrapper);
-        if(reportExcel != null){
+        if (reportExcel != null) {
             ReportExcelDto dto = new ReportExcelDto();
-            BeanUtils.copyProperties(reportExcel , dto);
+            BeanUtils.copyProperties(reportExcel, dto);
             return dto;
         }
         return null;
@@ -84,13 +83,13 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         // 根据id查询 报表详情
         ReportExcel reportExcel = selectOne("report_code", reportExcelDto.getReportCode());
         QueryWrapper<Report> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("report_code" , reportExcelDto.getReportCode());
+        queryWrapper.eq("report_code", reportExcelDto.getReportCode());
         Report report = reportMapper.selectOne(queryWrapper);
         GaeaAssert.notNull(reportExcel, ResponseCode.RULE_CONTENT_NOT_EXIST, "reportExcel");
         String setParam = reportExcelDto.getSetParam();
 
-        GaeaBeanUtils.copyAndFormatter(reportExcel , reportExcelDto);
-        if(StringUtils.isNotBlank(setParam)){
+        GaeaBeanUtils.copyAndFormatter(reportExcel, reportExcelDto);
+        if (StringUtils.isNotBlank(setParam)) {
             reportExcelDto.setSetParam(setParam);
         }
         reportExcelDto.setReportName(report.getReportName());

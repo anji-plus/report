@@ -346,7 +346,7 @@ public class XlsSheetUtil {
 
                         if ("border-outside".equals(borderType)) {
                             //外圈边框
-                            if (row_ == rowList.getInteger(0) ) {
+                            if (row_ == rowList.getInteger(0)) {
                                 style.setBorderTop(BorderStyle.valueOf(style_)); //顶部边框
                                 style.setTopBorderColor(color);//顶部边框颜色
                             }
@@ -365,49 +365,34 @@ public class XlsSheetUtil {
 
                         }
 
-                        if ("border-inside".equals(borderType)) {
-                            //所有内边框
-                            if (row_ >= rowList.getInteger(0) && row_ < rowList.getInteger(rowList.size() - 1)) {
-                                style.setBorderRight(BorderStyle.valueOf(style_)); //右边框
-                                style.setRightBorderColor(color);//右边框颜色
-                                style.setBorderBottom(BorderStyle.valueOf(style_)); //底部边框
-                                style.setBottomBorderColor(color);//底部边框颜色 }
-                            }
-
-                            if (col_ >= columnList.getInteger(0) && col_ < columnList.getInteger(columnList.size() - 1)) {
-                                style.setBorderRight(BorderStyle.valueOf(style_)); //右边框
-                                style.setRightBorderColor(color);//右边框颜色
-                                style.setBorderBottom(BorderStyle.valueOf(style_)); //底部边框
-                                style.setBottomBorderColor(color);//底部边框颜色 }
-                            }
-
-                        }
-
-                        if ("border-horizontal".equals(borderType)) {
+                        if ("border-horizontal".equals(borderType) || "border-inside".equals(borderType)) {
                             //内部横线
-                            if (row_ >= rowList.getInteger(0) && row_ < rowList.getInteger(rowList.size() - 1)) {
-                                style.setBorderBottom(BorderStyle.valueOf(style_)); //底部边框
-                                style.setBottomBorderColor(color);//底部边框颜色 }
-                            }
-                            if (col_ >= columnList.getInteger(0) && col_ < columnList.getInteger(columnList.size() - 1)) {
+                            if (row_ >= rowList.getInteger(0)
+                                    && row_ < rowList.getInteger(rowList.size() - 1)
+                                    && col_ >= columnList.getInteger(0)
+                                    && col_ <= columnList.getInteger(columnList.size() - 1)) {
                                 style.setBorderBottom(BorderStyle.valueOf(style_)); //底部边框
                                 style.setBottomBorderColor(color);//底部边框颜色 }
                             }
                         }
 
-                        if ("border-vertical".equals(borderType)) {
+                        if ("border-vertical".equals(borderType) || "border-inside".equals(borderType)) {
                             //内部竖线
-                            if (row_ >= rowList.getInteger(0) && row_ < rowList.getInteger(rowList.size() - 1)) {
-                                style.setBorderRight(BorderStyle.valueOf(style_)); //右边框
-                                style.setRightBorderColor(color);//右边框颜色
-                            }
-                            if (col_ >= columnList.getInteger(0) && col_ < columnList.getInteger(columnList.size() - 1)) {
+                            if (row_ >= rowList.getInteger(0)
+                                    && row_ <= rowList.getInteger(rowList.size() - 1)
+                                    && col_ >= columnList.getInteger(0)
+                                    && col_ < columnList.getInteger(columnList.size() - 1)) {
                                 style.setBorderRight(BorderStyle.valueOf(style_)); //右边框
                                 style.setRightBorderColor(color);//右边框颜色
                             }
                         }
 
-
+                        if ("border-none".equals(borderType)) {
+                            style.setBorderLeft(BorderStyle.NONE); //左边框
+                            style.setBorderRight(BorderStyle.NONE); //左边框
+                            style.setBorderTop(BorderStyle.NONE); //左边框
+                            style.setBorderBottom(BorderStyle.NONE); //左边框
+                        }
 
                     }
                 }

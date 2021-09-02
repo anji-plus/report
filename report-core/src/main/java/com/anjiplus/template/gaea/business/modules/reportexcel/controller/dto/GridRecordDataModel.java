@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * 存储对象类
+ *
  * @author Administrator
  */
 @Data
