@@ -834,10 +834,12 @@ export default {
             if (this.dialogFormVisibleTitle === "新增数据集") {
               const { code } = await addDataSet(this.formData);
               if (code != "200") return;
+              this.$emit('refreshList')
               this.closeDialog();
             } else {
               const { code } = await editDataSet(this.formData);
               if (code != "200") return;
+              this.$emit('refreshList')
               this.closeDialog();
             }
           } else {
