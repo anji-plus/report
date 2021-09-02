@@ -81,14 +81,20 @@
 气泡地图动态数据集，和饼图一样，对应字典值需要选择一个“Name”、“Value”，且name的字段值要和echarts图表里面的值能对应上，可参考静态数据 <br>
 ![img15](../picture/dashboard/img_15.png) <br>
 
-
 ### 百分百图
 数据集只能有一个字段，且字典选择“文本数字” <br>
 ![img16](../picture/dashboard/img_16.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
-### 散点图
-**开发中** <br>
-
 ### 对比图
-**开发中** <br>
+柱状对比图： <br>
+数据集需要3个字段，其中一个作为对比的字段只能为2种值，只有2种值作为对比的字段要选择“y轴字段”字典。因为底层的解析用的是堆叠图的解析，这里的y轴字段并不是指的图表上面的y轴，还请注意，有强迫症可以自行修改源码的解析，剩下的2个字段对应字典看图<br>
+![img18](../picture/dashboard/img_18.png) <br>
+**如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
+
+折线对比图: <br>
+数据集需要3个字段，其中一个作为对比的字段只能为2种值，只有2种值作为对比的字段要选择“y轴字段”字典，剩下的字典对应看图<br>
+![img19](../picture/dashboard/img_19.png) <br>
+**注**：如果提示语设置选择“十字形”，请注意需要选择 “X轴颜色、上Y轴颜色、下Y轴颜色”，不然预览图表鼠标选择是全白色，还请注意。<br>
+![img20](../picture/dashboard/img_20.png)
+**如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**

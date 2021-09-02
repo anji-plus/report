@@ -1,6 +1,7 @@
 <template>
   <div :style="styleObj">
     <superslide v-if="hackReset" :options="options" class="txtScroll-top">
+      <!--表头-->
       <div class="title">
         <div
           v-for="(item, index) in header"
@@ -10,6 +11,7 @@
           {{ item.name }}
         </div>
       </div>
+      <!--数据-->
       <div class="bd">
         <ul class="infoList">
           <li v-for="(item, index) in list" :key="index">
@@ -27,6 +29,10 @@
   </div>
 </template>
 <script>
+import vue from "vue";
+import VueSuperSlide from "vue-superslide";
+
+vue.use(VueSuperSlide);
 export default {
   props: {
     value: Object,
@@ -40,7 +46,7 @@ export default {
         mainCell: ".bd ul",
         effect: "topLoop",
         autoPage: true,
-        effect: "top",
+        //effect: "top",
         autoPlay: true,
         vis: 5
       },
@@ -126,7 +132,6 @@ export default {
     },
     handlerData() {
       const tableData = this.optionsData;
-      console.log(tableData);
       tableData.dataType == "staticData"
         ? this.handlerStaticData(tableData.staticData)
         : this.handlerDymaicData(tableData.dynamicData, tableData.refreshTime);
@@ -179,31 +184,38 @@ export default {
   overflow: hidden;
   position: relative;
 }
+
 .title {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
+
 .title > div {
   height: 50px;
   line-height: 50px;
   width: 100%;
 }
+
 .txtScroll-top .bd {
   width: 100%;
 }
+
 .txtScroll-top .infoList li {
   height: 50px;
   line-height: 50px;
   display: flex;
   flex-direction: row;
 }
+
 .txtScroll-top .infoList li > div {
   width: 100%;
 }
+
 .txtScroll-top .infoList li:nth-child(n) {
   background: rgb(0, 59, 81);
 }
+
 .txtScroll-top .infoList li:nth-child(2n) {
   background: rgb(10, 39, 50);
 }

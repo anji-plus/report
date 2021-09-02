@@ -165,15 +165,18 @@ export default {
       const optionsCollapse = this.optionsSetup;
       const yAxis = {
         type: "value",
+        scale : optionsCollapse.scale,
+        splitNumber: optionsCollapse.splitNumber,// 均分
         show: optionsCollapse.isShowY, // 坐标轴是否显示
         name: optionsCollapse.textNameY, // 坐标轴名称
         nameTextStyle: {
-          color: optionsCollapse.NameColorY,
-          fontSize: optionsCollapse.NameFontSizeY
+          color: optionsCollapse.nameColorY,
+          fontSize: optionsCollapse.nameFontSizeY
         },
         inverse: optionsCollapse.reversalY, // 轴反转
         axisLabel: {
           show: true,
+          rotate: optionsCollapse.ytextAngle, // 文字角度
           textStyle: {
             color: optionsCollapse.colorY, // x轴 坐标文字颜色
             fontSize: optionsCollapse.fontSizeY

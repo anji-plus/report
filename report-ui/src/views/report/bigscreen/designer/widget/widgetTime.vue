@@ -103,7 +103,7 @@ export default {
       const dayCycleArray = ["日", "一", "二", "三", "四", "五", "六"];
       for (let i = 0; i < 7; i++) {
         if (dayCycle == i) {
-          dayCycle = "星期" + dayCycleArray[i];
+          dayCycle = " 星期" + dayCycleArray[i];
         }
       }
       if (fmt == "year-week") {
