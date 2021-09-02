@@ -16,6 +16,7 @@ public interface ReportExcelService extends GaeaBaseService<ReportExcelParam, Re
 
     /**
      * 根据报表编码查询详情
+     *
      * @param reportCode
      * @return
      */
@@ -23,6 +24,7 @@ public interface ReportExcelService extends GaeaBaseService<ReportExcelParam, Re
 
     /**
      * 报表预览
+     *
      * @param reportExcelDto
      * @return
      */
@@ -31,6 +33,7 @@ public interface ReportExcelService extends GaeaBaseService<ReportExcelParam, Re
 
     /**
      * 导出为excel
+     *
      * @param reportExcelDto
      * @return
      */
