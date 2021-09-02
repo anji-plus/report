@@ -73,7 +73,7 @@
 
 ### 仪表盘
 数据集只能有一个字段，且字典选择“文本数字” <br>
-![img14](../picture/dashboard/img_14.png) <br>
+![img21](../picture/dashboard/img_21.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 中国地图
