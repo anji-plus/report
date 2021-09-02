@@ -161,20 +161,93 @@ export default {
   },
   methods: {
     editorOptions() {
-      // this.setOptions()
-      // this.setOptionsData()
+      this.setOptions()
+      this.setOptionsData()
     },
     setOptions() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "gauge") {
-          series[key].axisLine.lineStyle.width = optionsSetup.tickMarkWeight;
-          series[key].axisLabel.show = optionsSetup.showScaleValue;
-          series[key].axisLabel.fontSize = optionsSetup.scaleFontSize;
-          series[key].axisTick.show = optionsSetup.showTickMarks;
-          series[key].detail.textStyle.fontSize = optionsSetup.targetFontSize;
+      if (series[0].type == 'gauge') {
+        const axisLine = {
+          show: optionsSetup.ringShow,
+          lineStyle: {
+            width: optionsSetup.pieWeight,
+            color: [
+              [
+                0.3,
+                new echarts.graphic.LinearGradient(0, 1, 1, 0, [
+                  {
+                    offset: 0,
+                    color: optionsSetup.color30p0,
+                  },
+                  {
+                    offset: 0.5,
+                    color: optionsSetup.color30p5,
+                  },
+                  {
+                    offset: 1,
+                    color: optionsSetup.color30p10,
+                  },
+                ]),
+              ],
+              [
+                0.7,
+                new echarts.graphic.LinearGradient(0, 1, 1, 0, [
+                  {
+                    offset: 0,
+                    color: optionsSetup.color70p0,
+                  },
+                  {
+                    offset: 0.5,
+                    color: optionsSetup.color70p5,
+                  },
+                  {
+                    offset: 1,
+                    color: optionsSetup.color70p10,
+                  },
+                ]),
+              ],
+              [
+                1,
+                new echarts.graphic.LinearGradient(0, 1, 1, 0, [
+                  {
+                    offset: 0,
+                    color: optionsSetup.color100p0,
+                  },
+                  {
+                    offset: 0.5,
+                    color: optionsSetup.color100p5,
+                  },
+                  {
+                    offset: 1,
+                    color: optionsSetup.color100p10,
+                  },
+                ]),
+              ],
+            ],
+          },
         }
+        const axisTick = {
+          show: optionsSetup.tickShow,
+          distance: optionsSetup.tickDistance,
+          length: optionsSetup.tickLength,
+          lineStyle: {
+            color: 'auto',
+            width: optionsSetup.tickWidth,
+          },
+        }
+        const splitLine = {
+          show: optionsSetup.splitShow,
+          distance: optionsSetup.splitDistance,
+          length: optionsSetup.splitLength,
+          lineStyle: {
+            color: 'auto',
+            width: optionsSetup.splitWidth,
+          },
+        }
+        series[0].axisLine = axisLine
+        series[0].axisTick = axisTick
+        series[0].splitLine = splitLine
       }
     },
     setOptionsData() {
@@ -184,12 +257,22 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      //const staticData = typeof val == "string" ? JSON.parse(val) : val;
+      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      for (const key in series) {
-        //series[key].detail.formatter = `{value}${val.unit}`;
-        series[key].data = val
+      const data = [
+        {
+          value: val
+        }
+      ]
+      const detail = {
+        valueAnimation: true,
+        formatter: '{value} %',
+        color: optionsSetup.labelColor,
+        fontSize: optionsSetup.labelFontSize,
+        fontWeight: optionsSetup.labelFontWeight,
       }
+      series[0].data = data
+      series[0].detail = detail
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -209,14 +292,22 @@ export default {
       });
     },
     renderingFn(val) {
+      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      for (const key in series) {
-        series[key].detail.formatter = `{value}${val.unit}`;
-        series[key].data[0] = {
-          value: val.value,
-          name: val.name || ""
-        };
+      const data = [
+        {
+          value: val[0].value
+        }
+      ]
+      const detail = {
+        valueAnimation: true,
+        formatter: '{value} %',
+        color: optionsSetup.labelColor,
+        fontSize: optionsSetup.labelFontSize,
+        fontWeight: optionsSetup.labelFontWeight,
       }
+      series[0].data = data
+      series[0].detail = detail
     }
   }
 };

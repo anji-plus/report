@@ -201,7 +201,7 @@ export const widgetGauge = {
               name: 'splitLength',
               require: false,
               placeholder: '',
-              value: 20,
+              value: 14,
             },
             {
               type: 'el-input-number',
@@ -267,7 +267,7 @@ export const widgetGauge = {
               name: 'labelFontSize',
               require: false,
               placeholder: '',
-              value: 10,
+              value: 14,
             },
             {
               type: 'el-select',
@@ -333,7 +333,7 @@ export const widgetGauge = {
         required: false,
         placeholder: 'px',
         relactiveDom: 'dataType',
-        chartType: 'widget-piechart',
+        chartType: 'widget-text',
         dictKey: 'TEXT_PROPERTIES',
         relactiveDomValue: 'dynamicData',
         value: '',
