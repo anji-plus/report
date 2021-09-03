@@ -12,7 +12,7 @@
           <a v-if="reportCode != null"
              download="xxx.xlsx">
             <el-button type="text"
-                       @click="download('')">
+                       @click="download('gaea_template_excel')">
               <i class="iconfont iconexcel"></i>导出excel
             </el-button>
           </a>
@@ -115,14 +115,20 @@ export default {
       // console.log(this.sheetData)
       this.createSheet();
     },
-    download (val) {
-      const result = {}
+    async download(val) {
+      if (val == 'gaea_template_pdf') {
+        this.$message('暂不支持pdf');
+        return
+      }
+      const result = {};
       result['reportCode'] = this.reportCode
       result['setParam'] = JSON.stringify(this.params.setParam)
       if (val != '') {
         result['exportType'] = val
       }
-      exportExcel(result)
+      const {code, message} = await exportExcel(result)
+      if (code != 200) return
+      this.$message.success(message);
     },
     // 表单封装json
     toObject (val) {
