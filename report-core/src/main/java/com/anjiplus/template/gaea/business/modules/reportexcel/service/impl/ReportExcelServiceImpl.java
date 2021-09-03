@@ -132,11 +132,13 @@ public class ReportExcelServiceImpl implements ReportExcelService {
     public Boolean exportExcel(ReportExcelDto reportExcelDto) {
         String reportCode = reportExcelDto.getReportCode();
         String exportType = reportExcelDto.getExportType();
-
-        if (exportType.equals(ExportTypeEnum.GAEA_TEMPLATE_EXCEL)) {
+        logger.error("导出...");
+        if (exportType.equals(ExportTypeEnum.GAEA_TEMPLATE_EXCEL.getCodeValue())) {
+            ReportExcelDto report = detailByReportCode(reportCode);
+            reportExcelDto.setJsonStr(report.getJsonStr());
             String jsonStr = analysisReportData(reportExcelDto);
             List<JSONObject> lists=(List<JSONObject> ) JSON.parse(jsonStr);
-            OutputStream out = null;
+            OutputStream out;
             try {
                 String fileId = UUID.randomUUID().toString();
                 String filePath = dictPath + File.separator + fileId + ".xlsx";
@@ -153,6 +155,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 XlsUtil.exportXlsFile(out, true, lists);
 
                 gaeaFileMapper.insert(gaeaFile);
+                logger.info("导出成功：{}", gaeaFile);
             } catch (IOException e) {
                 logger.error("导出失败", e);
             }

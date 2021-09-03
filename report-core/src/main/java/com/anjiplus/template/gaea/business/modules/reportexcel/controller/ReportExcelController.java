@@ -66,7 +66,7 @@ public class ReportExcelController extends GaeaBaseController<ReportExcelParam, 
 
         return ResponseBean.builder().code(ResponseCode.SUCCESS_CODE)
                 .data(reportExcelService.exportExcel(reportExcelDto))
-                .message("导出成功，请稍后在下载中心查看").build();
+                .message("导出成功，请稍后在文件管理中查看").build();
     }
 
 //    @PostMapping("/exportPdf")
