@@ -454,6 +454,11 @@ export default {
       // console.log(luckysheet.toJson())
       // console.log(luckysheet.getAllSheets())
       // console.log(luckysheet.getSheetData(0))
+      const jsonData = luckysheet.getAllSheets()
+      for (let i = 0; i < jsonData.length; i++) {
+        //清空data数据，以celldata数据为主
+        jsonData[i]['data'] = []
+      }
 
       this.reportExcelDto.jsonStr = JSON.stringify(luckysheet.getAllSheets())
       var setCodeList = []

@@ -87,8 +87,8 @@ export default {
     async searchPreview () {
       const arr = this.toObject(this.tableData2)
       this.params.setParam = JSON.stringify(arr)
-      const { code, data } = await preview(this.params)
-      if (code !== '200') return
+      //每次都重新加载需要改成刷新
+      this.preview()
     },
     async preview () {
       this.excelData = {}
@@ -111,8 +111,8 @@ export default {
 
       this.excelData = data.jsonStr
       this.sheetData = (data == null ? [{}] : JSON.parse(data.jsonStr))
-      console.log(this.excelData)
-      console.log(this.sheetData)
+      // console.log(this.excelData)
+      // console.log(this.sheetData)
       this.createSheet();
     },
     download (val) {
@@ -191,7 +191,7 @@ export default {
         ]
       };
       options.data = this.sheetData;
-
+      console.log(this.sheetData)
       $(function () {
         luckysheet.create(options);
       });

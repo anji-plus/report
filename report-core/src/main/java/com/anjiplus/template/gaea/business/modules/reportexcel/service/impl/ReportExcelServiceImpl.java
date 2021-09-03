@@ -28,9 +28,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * TODO
@@ -127,11 +125,12 @@ public class ReportExcelServiceImpl implements ReportExcelService {
     private String analysisReportData(ReportExcelDto reportExcelDto) {
 
         String jsonStr = reportExcelDto.getJsonStr();
+        String setParam = reportExcelDto.getSetParam();
         List<JSONObject> dbObjectList = (List<JSONObject>) JSON.parse(jsonStr);
 
         if (dbObjectList != null && dbObjectList.size() > 0) {
             for (int x = 0; x < dbObjectList.size(); x++) {
-                analysisSheetCellData(dbObjectList.get(x));
+                analysisSheetCellData(dbObjectList.get(x), setParam);
             }
         }
         //fastjson $ref 循环引用
@@ -143,7 +142,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      *
      * @param dbObject
      */
-    private void analysisSheet(JSONObject dbObject) {
+    private void analysisSheet(JSONObject dbObject, String setParma) {
         //data是一个二维数组
         if (dbObject.containsKey("data") && null != dbObject.get("data")) {
             List<JSONArray> data = (List<JSONArray>) dbObject.get("data");
@@ -158,7 +157,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                     JSONObject cell = jsonArray.getJSONObject(c);
                     if (null != cell && cell.containsKey("v") && StringUtils.isNotBlank(cell.getString("v"))) {
                         String v = cell.getString("v");
-                        DataSetDto dataSet = getDataSet(v);
+                        DataSetDto dataSet = getDataSet(v, setParma);
                         if (null != dataSet) {
                             OriginalDataDto originalDataDto = dataSetService.getData(dataSet);
                             if (null != originalDataDto.getData()) {
@@ -204,7 +203,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      *
      * @param dbObject
      */
-    private void analysisSheetCellData(JSONObject dbObject) {
+    private void analysisSheetCellData(JSONObject dbObject, String setParam) {
         //清空data值
         dbObject.remove("data");
         //celldata是一个一维数组
@@ -225,7 +224,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 JSONObject cell = cellObj.getJSONObject("v");
                 if (null != cell && cell.containsKey("v") && StringUtils.isNotBlank(cell.getString("v"))) {
                     String v = cell.getString("v");
-                    DataSetDto dataSet = getDataSet(v);
+                    DataSetDto dataSet = getDataSet(v, setParam);
                     if (null != dataSet) {
                         OriginalDataDto originalDataDto = dataSetService.getData(dataSet);
                         if (null != originalDataDto.getData()) {
@@ -267,10 +266,6 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 }
             }
 
-
-            System.out.println("aaaa");
-
-
         }
 
 
@@ -282,7 +277,8 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      * @param v
      * @return
      */
-    private DataSetDto getDataSet(String v) {
+    private DataSetDto getDataSet(String v, String setParam) {
+
         DataSetDto dto = new DataSetDto();
         if (v.contains("#{") && v.contains("}")) {
             int start = v.indexOf("#{") + 2;
@@ -293,11 +289,30 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                     String[] split = substring.split("\\.");
                     dto.setSetCode( split[0]);
                     dto.setFieldLabel(split[1]);
+                    getContextData(setParam, dto);
                     return dto;
                 }
             }
         }
         return null;
+    }
+
+    /**
+     * 动态参数替换
+     * @param setParam
+     * @param dto
+     */
+    private void getContextData(String setParam, DataSetDto dto) {
+        if (StringUtils.isNotBlank(setParam)) {
+            JSONObject setParamJson = JSONObject.parseObject(setParam);
+            Map<String, Object> map = new HashMap<>();
+            // 查询条件
+            if (setParamJson.containsKey(dto.getSetCode())) {
+                JSONObject paramCondition = setParamJson.getJSONObject(dto.getSetCode());
+                paramCondition.forEach(map::put);
+            }
+            dto.setContextData(map);
+        }
     }
 
 }
