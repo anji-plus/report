@@ -51,6 +51,7 @@ module.exports = {
                         {title: '数据源', path: '/guide/datasource'},
                         {title: '数据集', path: '/guide/dataset'},
                         {title: '大屏设计', path: '/guide/dashboard'},
+                        {title: '导入导出', path: '/guide/importexport'},
                     ]
                 },
                 {

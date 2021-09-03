@@ -171,14 +171,14 @@ export default {
         show: optionsCollapse.hideX, // 坐标轴是否显示
         name: optionsCollapse.xName, // 坐标轴名称
         nameTextStyle: {
-          color: optionsCollapse.xNameColor,
-          fontSize: optionsCollapse.xNameFontSize
+          color: optionsCollapse.nameColorX,
+          fontSize: optionsCollapse.nameFontSizeX
         },
         nameRotate: optionsCollapse.textAngle, // 文字角度
         inverse: optionsCollapse.reversalX, // 轴反转
         axisLabel: {
           show: true,
-          interval: optionsCollapse.textInterval, // 文字角度
+          interval: optionsCollapse.textInterval, // 文字间隔
           rotate: optionsCollapse.textAngle, // 文字角度
           textStyle: {
             color: optionsCollapse.Xcolor, // x轴 坐标文字颜色
@@ -206,46 +206,18 @@ export default {
       const yAxis = [
         {
           type: "value",
-          show: optionsCollapse.isShowY, // 坐标轴是否显示
-          name: optionsCollapse.textNameY, // 坐标轴名称
-          nameTextStyle: {
-            color: optionsCollapse.NameColorY,
-            fontSize: optionsCollapse.NameFontSizeY
+          splitNumber: optionsCollapse.splitNumberLeft,// 均分
+          show: optionsCollapse.isShowYLeft, // 坐标轴是否显示
+          name: optionsCollapse.textNameYLeft, // 坐标轴名称
+          nameTextStyle: { // 别名
+            color: optionsCollapse.nameColorYLeft,
+            fontSize: optionsCollapse.namefontSizeYLeft
           },
           inverse: optionsCollapse.reversalY, // 轴反转
           axisLabel: {
             show: true,
             textStyle: {
-              color: optionsCollapse.colorY, // x轴 坐标文字颜色
-              fontSize: optionsCollapse.fontSizeY
-            }
-          },
-          axisLine: {
-            show: true,
-            lineStyle: {
-              color: "#fff"
-            }
-          },
-          splitLine: {
-            show: optionsCollapse.isShowSplitLineY,
-            lineStyle: {
-              color: optionsCollapse.splitLineColorY
-            }
-          }
-        },
-        {
-          type: "value",
-          show: optionsCollapse.isShowY, // 坐标轴是否显示
-          name: optionsCollapse.textNameY, // 坐标轴名称
-          nameTextStyle: {
-            color: optionsCollapse.NameColorY,
-            fontSize: optionsCollapse.NameFontSizeY
-          },
-          inverse: optionsCollapse.reversalY, // 轴反转
-          axisLabel: {
-            show: true,
-            textStyle: {
-              color: optionsCollapse.colorY, // x轴 坐标文字颜色
+              color: optionsCollapse.colorY, // y轴 坐标文字颜色
               fontSize: optionsCollapse.fontSizeY
             }
           },
@@ -257,13 +229,36 @@ export default {
           },
           splitLine: {
             show: false,
-            lineStyle: {
-              color: optionsCollapse.splitLineColorY
+          }
+        },
+        {
+          type: "value",
+          splitNumber: optionsCollapse.splitNumberRight,// 均分
+          show: optionsCollapse.isShowYRight, // 坐标轴是否显示
+          name: optionsCollapse.textNameYRight, // 坐标轴名称
+          nameTextStyle: { // 别名
+            color: optionsCollapse.nameColorYRight,
+            fontSize: optionsCollapse.namefontSizeYRight
+          },
+          inverse: optionsCollapse.reversalY, // 轴反转
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: optionsCollapse.colorY, // y轴 坐标文字颜色
+              fontSize: optionsCollapse.fontSizeY
             }
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: optionsCollapse.lineColorY
+            }
+          },
+          splitLine: {
+            show: false,
           }
         }
       ];
-
       this.options.yAxis = yAxis;
     },
     // 折线设置

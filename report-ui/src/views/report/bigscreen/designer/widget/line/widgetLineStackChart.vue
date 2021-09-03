@@ -319,7 +319,6 @@ export default {
           symbol: 'circle',
           showSymbol: optionsSetup.markPoint,
           symbolSize: optionsSetup.pointSize,
-          symbolColor: arrColor[i],
           smooth: optionsSetup.smoothCurve,
           // 线条
           lineStyle: {

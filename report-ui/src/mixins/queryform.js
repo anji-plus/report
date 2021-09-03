@@ -122,9 +122,7 @@ export default {
         chartType == "widget-funnel"
       ) {
         return this.piechartFn(params.chartProperties, data);
-      } else if (chartType == "widget-gauge") {
-        return this.gaugeFn(params.chartProperties, data);
-      } else if (chartType == "widget-text") {
+      }  else if (chartType == "widget-text") {
         return this.widgettext(params.chartProperties, data)
       } else if (chartType == "widget-stackchart") {
         return this.stackChartFn(params.chartProperties, data)
@@ -210,7 +208,7 @@ export default {
       }
       return ananysicData;
     },
-    gaugeFn(chartProperties, data) {
+    /*gaugeFn(chartProperties, data) {
       const ananysicData = [];
       for (let i = 0; i < data.length; i++) {
         const obj = {};
@@ -228,7 +226,7 @@ export default {
         ananysicData.push(obj);
       }
       return ananysicData[0];
-    },
+    },*/
     widgettext(chartProperties, data) {
       const ananysicData = [];
       for (let i = 0; i < data.length; i++) {
