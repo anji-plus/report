@@ -434,12 +434,114 @@ export const widgetBarlinechart = {
             ],
           },
           {
+            name: '折线数值设定',
+            list: [
+              {
+                type: 'el-switch',
+                label: '显示',
+                name: 'isShowLine',
+                required: false,
+                placeholder: '',
+                value: false
+              },
+              {
+                type: 'el-input-number',
+                label: '距离',
+                name: 'distanceLine',
+                required: false,
+                placeholder: '',
+                value: 5
+              },
+              {
+                type: 'el-input-number',
+                label: '字体字号',
+                name: 'fontSizeLine',
+                required: false,
+                placeholder: '',
+                value: 14
+              },
+              {
+                type: 'vue-color',
+                label: '字体颜色',
+                name: 'subTextColorLine',
+                required: false,
+                placeholder: '',
+                value: '#fff'
+              },
+              {
+                type: 'el-select',
+                label: '字体粗细',
+                name: 'fontWeightLine',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
+                ],
+                value: 'normal'
+              },
+            ],
+          },
+          {
+            name: '柱体数值设定',
+            list: [
+              {
+                type: 'el-switch',
+                label: '显示',
+                name: 'isShowBar',
+                required: false,
+                placeholder: '',
+                value: false
+              },
+              {
+                type: 'el-input-number',
+                label: '距离',
+                name: 'distanceBar',
+                required: false,
+                placeholder: '',
+                value: 5
+              },
+              {
+                type: 'el-input-number',
+                label: '字体字号',
+                name: 'fontSizeBar',
+                required: false,
+                placeholder: '',
+                value: 14
+              },
+              {
+                type: 'vue-color',
+                label: '字体颜色',
+                name: 'subTextColorBar',
+                required: false,
+                placeholder: '',
+                value: '#fff'
+              },
+              {
+                type: 'el-select',
+                label: '字体粗细',
+                name: 'fontWeightBar',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  {code: 'normal', name: '正常'},
+                  {code: 'bold', name: '粗体'},
+                  {code: 'bolder', name: '特粗体'},
+                  {code: 'lighter', name: '细体'}
+                ],
+                value: 'normal'
+              },
+            ],
+          },
+          {
             name: '提示语设置',
             list: [
               {
                 type: 'el-input-number',
                 label: '字体大小',
-                name: 'fontSize',
+                name: 'tipFontSize',
                 required: false,
                 placeholder: '',
                 value: 12
@@ -450,7 +552,7 @@ export const widgetBarlinechart = {
                 name: 'lineColor',
                 required: false,
                 placeholder: '',
-                value: '#fff'
+                value: '#e68b55'
               },
             ],
           },

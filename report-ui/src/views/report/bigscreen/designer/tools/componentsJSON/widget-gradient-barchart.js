@@ -58,14 +58,6 @@ export const widgetGradientBarchart =  {
                 placeholder: '',
                 value: 5,
               },
-/*              {
-                type: 'el-slider',
-                label: '最小高度',
-                name: 'minHeight',
-                require: false,
-                placeholder: '',
-                value: 0,
-              },*/
             ],
           },
           {
@@ -388,7 +380,15 @@ export const widgetGradientBarchart =  {
                 name: 'isShow',
                 required: false,
                 placeholder: '',
-                value: false
+                value: true
+              },
+              {
+                type: 'el-input-number',
+                label: '距离',
+                name: 'distance',
+                required: false,
+                placeholder: '',
+                value: 5
               },
               {
                 type: 'el-input-number',
@@ -438,7 +438,7 @@ export const widgetGradientBarchart =  {
                 label: '字体颜色',
                 name: 'lineColor',
                 required: false,
-                placeholder: '',
+                placeholder: '#ff7f50',
               },
             ],
           },
@@ -485,7 +485,7 @@ export const widgetGradientBarchart =  {
                 name: 'bar0color',
                 required: false,
                 placeholder: '',
-                value: '#00F4FF'
+                value: 'rgba(0,244,255,1)'
               },
               {
                 type: 'vue-color',
@@ -493,7 +493,7 @@ export const widgetGradientBarchart =  {
                 name: 'bar100color',
                 required: false,
                 placeholder: '',
-                value: '#004DA7'
+                value: 'rgba(0,77,167,1)'
               },
               {
                 type: 'vue-color',
@@ -501,7 +501,7 @@ export const widgetGradientBarchart =  {
                 name: 'shadowColor',
                 required: false,
                 placeholder: '',
-                value: '#00A0DD'
+                value: 'rgba(0,160,221,1)'
               },
               {
                 type: 'el-input-number',

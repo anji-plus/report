@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart :options="options" autoresize/>
   </div>
 </template>
 
@@ -261,7 +261,7 @@ export default {
       ];
       this.options.yAxis = yAxis;
     },
-    // 折线设置
+    // 折线设置 数值设置
     setOptionsTop() {
       const optionsCollapse = this.optionsSetup;
       const series = this.options.series;
@@ -284,29 +284,30 @@ export default {
           };
           series[key].itemStyle.borderRadius = optionsCollapse.radius;
           series[key].label = {
-            show: optionsCollapse.isShow,
+            show: optionsCollapse.isShowLine,
             position: "top",
-            distance: 10,
-            fontSize: optionsCollapse.fontSize,
-            color: optionsCollapse.subTextColor,
-            fontWeight: optionsCollapse.fontWeight
+            distance: optionsCollapse.distanceLine,
+            fontSize: optionsCollapse.fontSizeLine,
+            color: optionsCollapse.subTextColorLine,
+            fontWeight: optionsCollapse.fontWeightLine
           };
         }
       }
       this.options.series = series;
     },
+    // 柱体设置 数值设置
     setOptionsBar() {
       const optionsCollapse = this.optionsSetup;
       const series = this.options.series;
       for (const key in series) {
         if (series[key].type == "bar") {
           series[key].label = {
-            show: optionsCollapse.isShow,
+            show: optionsCollapse.isShowBar,
             position: "top",
-            distance: 10,
-            fontSize: optionsCollapse.fontSize,
-            color: optionsCollapse.subTextColor,
-            fontWeight: optionsCollapse.fontWeight
+            distance: optionsCollapse.distanceBar,
+            fontSize: optionsCollapse.fontSizeBar,
+            color: optionsCollapse.subTextColorBar,
+            fontWeight: optionsCollapse.fontWeightBar
           };
           series[key].barWidth = optionsCollapse.maxWidth;
           series[key].barMinHeight = optionsCollapse.minHeight;
@@ -323,7 +324,7 @@ export default {
         show: true,
         textStyle: {
           color: optionsCollapse.lineColor,
-          fontSize: optionsCollapse.fontSize
+          fontSize: optionsCollapse.tipFontSize
         }
       };
       this.options.tooltip = tooltip;

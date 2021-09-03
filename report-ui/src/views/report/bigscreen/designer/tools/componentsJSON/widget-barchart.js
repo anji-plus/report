@@ -111,7 +111,7 @@ export const widgetBarchart = {
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'textFontSize',
                 required: false,
                 placeholder: '',
@@ -162,7 +162,7 @@ export const widgetBarchart = {
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'subTextFontSize',
                 required: false,
                 placeholder: '',
@@ -203,7 +203,7 @@ export const widgetBarchart = {
                 name: 'nameFontSizeX',
                 required: false,
                 placeholder: '',
-                value: 12
+                value: 14
               },
               {
                 type: 'vue-color',
@@ -219,7 +219,7 @@ export const widgetBarchart = {
                 name: 'fontSizeX',
                 required: false,
                 placeholder: '',
-                value: 12,
+                value: 14,
               },
               {
                 type: 'el-slider',
@@ -389,11 +389,19 @@ export const widgetBarchart = {
                 name: 'isShow',
                 required: false,
                 placeholder: '',
-                value: false
+                value: true
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '距离',
+                name: 'distance',
+                required: false,
+                placeholder: '',
+                value: 5
+              },
+              {
+                type: 'el-input-number',
+                label: '字体字号',
                 name: 'fontSize',
                 required: false,
                 placeholder: '',
@@ -428,17 +436,17 @@ export const widgetBarchart = {
             list: [
               {
                 type: 'el-input-number',
-                label: '字体大小',
-                name: 'fontSize',
+                label: '字体字号',
+                name: 'tipFontSize',
                 required: false,
-                placeholder: '',
+                placeholder: 16,
               },
               {
                 type: 'vue-color',
                 label: '字体颜色',
                 name: 'lineColor',
                 required: false,
-                placeholder: '',
+                placeholder: '#ff7f50',
               },
             ],
           },
@@ -497,7 +505,7 @@ export const widgetBarchart = {
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'lengedFontSize',
                 required: false,
                 placeholder: '',
