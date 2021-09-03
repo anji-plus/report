@@ -51,12 +51,7 @@
 </template>
 
 <script>
-// import Spreadsheet from 'x-data-spreadsheet'
-// import zhCN from 'x-data-spreadsheet/src/locale/zh-cn'
 import { preview, exportExcel } from '@/api/GaeaReport'
-import { addReport, editReport } from '@/api/report'
-import '@/components/x-spreadsheet/dist/xspreadsheet.js'
-// Spreadsheet.locale('zh-cn', zhCN)
 
 export default {
   name: 'Login',
@@ -197,7 +192,7 @@ export default {
         ]
       };
       options.data = this.sheetData;
-      console.log(this.sheetData)
+      // console.log(this.sheetData)
       $(function () {
         luckysheet.create(options);
       });

@@ -709,7 +709,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../../../components/x-spreadsheet/dist/xspreadsheet.css';
 .position {
   position: absolute;
   z-index: 100;
