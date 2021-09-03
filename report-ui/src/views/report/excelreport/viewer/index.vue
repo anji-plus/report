@@ -111,6 +111,8 @@ export default {
 
       this.excelData = data.jsonStr
       this.sheetData = (data == null ? [{}] : JSON.parse(data.jsonStr))
+      console.log(this.excelData)
+      console.log(this.sheetData)
       this.createSheet();
     },
     download (val) {

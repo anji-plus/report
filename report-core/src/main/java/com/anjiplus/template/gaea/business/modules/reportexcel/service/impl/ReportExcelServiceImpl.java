@@ -3,6 +3,7 @@ package com.anjiplus.template.gaea.business.modules.reportexcel.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.anji.plus.gaea.constant.BaseOperationEnum;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessException;
@@ -27,6 +28,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -128,15 +131,15 @@ public class ReportExcelServiceImpl implements ReportExcelService {
 
         if (dbObjectList != null && dbObjectList.size() > 0) {
             for (int x = 0; x < dbObjectList.size(); x++) {
-                analysisSheet(dbObjectList.get(x));
+                analysisSheetCellData(dbObjectList.get(x));
             }
         }
-
-        return JSONObject.toJSONString(dbObjectList);
+        //fastjson $ref 循环引用
+        return JSONObject.toJSONString(dbObjectList, SerializerFeature.DisableCircularReferenceDetect);
     }
 
     /**
-     * 解析单sheet
+     * 解析单sheet data
      *
      * @param dbObject
      */
@@ -184,6 +187,82 @@ public class ReportExcelServiceImpl implements ReportExcelService {
 
 
 
+                }
+            }
+
+
+            System.out.println("aaaa");
+
+
+        }
+
+
+    }
+
+    /**
+     * 解析单sheet celldata
+     *
+     * @param dbObject
+     */
+    private void analysisSheetCellData(JSONObject dbObject) {
+        //清空data值
+        dbObject.remove("data");
+        //celldata是一个一维数组
+        if (dbObject.containsKey("celldata") && null != dbObject.get("celldata")) {
+            List<JSONObject> celldata = new ArrayList<>();
+            celldata.addAll((List<JSONObject>) dbObject.get("celldata"));
+            // 遍历已存在的单元格，查看是否存在动态参数
+            for (int i = 0; i < celldata.size(); i++) {
+                //单元格对象
+                JSONObject cellObj = celldata.get(i);
+
+                //行号
+                Integer r = cellObj.getInteger("r");
+                //列号
+                Integer c = cellObj.getInteger("c");
+                JSONObject cell = cellObj.getJSONObject("v");
+                if (null != cell && cell.containsKey("v") && StringUtils.isNotBlank(cell.getString("v"))) {
+                    String v = cell.getString("v");
+                    DataSetDto dataSet = getDataSet(v);
+                    if (null != dataSet) {
+                        OriginalDataDto originalDataDto = dataSetService.getData(dataSet);
+                        if (null != originalDataDto.getData()) {
+                            List<JSONObject> data = originalDataDto.getData();
+
+                            for (int j = 0; j < data.size(); j++) {
+                                if (j == 0) {
+                                    //处理当前行
+                                    //第一行，作为渲染参照数据
+                                    JSONObject jsonObject = data.get(j);
+                                    String fieldLabel = jsonObject.getString(dataSet.getFieldLabel());
+
+                                    String replace = v.replace("#{".concat(dataSet.getSetCode()).concat(".").concat(dataSet.getFieldLabel()).concat("}"), fieldLabel);
+                                    dbObject.getJSONArray("celldata").getJSONObject(i).getJSONObject("v").put("v", replace);
+                                    dbObject.getJSONArray("celldata").getJSONObject(i).getJSONObject("v").put("m", replace);
+                                } else {
+                                    //新增的行数据
+                                    JSONObject addCell = data.get(j);
+                                    //字段
+                                    String fieldLabel = addCell.getString(dataSet.getFieldLabel());
+                                    String replace = v.replace("#{".concat(dataSet.getSetCode()).concat(".").concat(dataSet.getFieldLabel()).concat("}"), fieldLabel);
+
+                                    JSONObject addCellData = new JSONObject();
+                                    addCellData.putAll(cellObj);
+
+                                    addCellData.put("v", cellObj.getJSONObject("v"));
+                                    addCellData.put("r", r + j);
+                                    addCellData.put("c", c);
+                                    addCellData.getJSONObject("v").put("v", replace);
+                                    addCellData.getJSONObject("v").put("m", replace);
+                                    dbObject.getJSONArray("celldata").add(addCellData);
+
+                                }
+
+                            }
+
+                        }
+
+                    }
                 }
             }
 
