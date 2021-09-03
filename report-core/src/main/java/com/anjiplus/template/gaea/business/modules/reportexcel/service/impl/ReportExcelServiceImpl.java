@@ -215,6 +215,8 @@ public class ReportExcelServiceImpl implements ReportExcelService {
             for (int i = 0; i < celldata.size(); i++) {
                 //单元格对象
                 JSONObject cellObj = celldata.get(i);
+                //fastjson深拷贝问题
+                String cellStr = cellObj.toJSONString();
 
                 //行号
                 Integer r = cellObj.getInteger("r");
@@ -246,10 +248,9 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                                     String fieldLabel = addCell.getString(dataSet.getFieldLabel());
                                     String replace = v.replace("#{".concat(dataSet.getSetCode()).concat(".").concat(dataSet.getFieldLabel()).concat("}"), fieldLabel);
 
-                                    JSONObject addCellData = new JSONObject();
-                                    addCellData.putAll(cellObj);
+                                    //转字符串，解决深拷贝问题
+                                    JSONObject addCellData = JSONObject.parseObject(cellStr);
 
-                                    addCellData.put("v", cellObj.getJSONObject("v"));
                                     addCellData.put("r", r + j);
                                     addCellData.put("c", c);
                                     addCellData.getJSONObject("v").put("v", replace);
