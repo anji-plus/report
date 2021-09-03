@@ -167,11 +167,31 @@ export default {
       //x轴字段、y轴字段名
       const xAxisField = Object.keys(chartProperties)[types.indexOf('xAxis')]
       const yAxisField = Object.keys(chartProperties)[types.indexOf('yAxis')]
+      const dataField = Object.keys(chartProperties)[types.indexOf('bar')]
       //x轴数值去重，y轴去重
       const xAxisList = this.setUnique(data.map(item => item[xAxisField]))
+      console.log(xAxisList)
       const yAxisList = this.setUnique(data.map(item => item[yAxisField]))
-      const dataGroup = this.setGroupBy(data, yAxisField)
-
+      console.log(yAxisList)
+      for (const i in yAxisList) {
+        const dataArray = new Array(yAxisList.length).fill(0)
+        for (const j in xAxisList) {
+          for (const k in data) {
+            if (data[k][xAxisField] == yAxisList[i] ) {
+              if (data[k][xAxisField] == xAxisList[j]) {
+                dataArray[j] = data[k][dataField]
+              }
+            }
+          }
+        }
+        series.push({
+          name: yAxisList[i],
+          type: "bar",
+          data: dataArray,
+        })
+      }
+      console.log(series)
+/*      const dataGroup = this.setGroupBy(data, yAxisField)
       for (const key in chartProperties) {
         if (chartProperties[key] !== 'yAxis' && !chartProperties[key].startsWith('xAxis')) {
           Object.keys(dataGroup).forEach(item => {
@@ -182,11 +202,11 @@ export default {
             series.push({
               name: yAxisList[item],
               type: chartProperties[key],
-              data,
+              data: data,
             })
           })
         }
-      }
+      }*/
       ananysicData["xAxis"] = xAxisList;
       ananysicData["series"] = series;
       return ananysicData;
