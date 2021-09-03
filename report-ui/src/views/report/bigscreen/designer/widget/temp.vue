@@ -34,6 +34,7 @@ import widgetAirBubbleMap from "./map/widgetAirBubbleMap";
 import widgetBarStackChart from "./bar/widgetBarStackChart";
 import widgetLineStackChart from "./line/widgetLineStackChart";
 import widgetBarCompareChart from "./bar/widgetBarCompareChart";
+import widgetLineCompareChart from "./line/widgetLineCompareChart";
 
 export default {
   name: "WidgetTemp",
@@ -60,7 +61,8 @@ export default {
     widgetAirBubbleMap,
     widgetBarStackChart,
     widgetLineStackChart,
-    widgetBarCompareChart
+    widgetBarCompareChart,
+    widgetLineCompareChart
   },
   model: {
     prop: "value",

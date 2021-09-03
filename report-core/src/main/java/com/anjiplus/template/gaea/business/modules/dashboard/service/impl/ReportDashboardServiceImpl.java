@@ -348,6 +348,9 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
 
 
     private String replaceUrl(String imageAddress, Map<String, String> fileMap) {
+        if (StringUtils.isBlank(imageAddress)) {
+            return "";
+        }
         String fileId = imageAddress.substring(imageAddress.trim().length() - 36);
         String orDefault = fileMap.getOrDefault(fileId, null);
         if (StringUtils.isBlank(orDefault)) {

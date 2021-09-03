@@ -66,7 +66,7 @@ INSERT INTO `aj_report`.`gaea_report_data_set`(`set_code`, `set_name`, `set_desc
 
 use
 aj_report_init;
-CREATE TABLE `aj_report_barstack`
+CREATE TABLE if not exists `aj_report_barstack`
 (
     `id`   int(11) NOT NULL AUTO_INCREMENT,
     `time` date         DEFAULT NULL,

@@ -210,6 +210,10 @@ export default {
         type: "category",
         show: optionsCollapse.hideX, // 坐标轴是否显示
         name: optionsCollapse.xName, // 坐标轴名称
+        nameTextStyle: {
+          color: optionsCollapse.nameColorX,
+          fontSize: optionsCollapse.nameFontSizeX
+        },
         nameRotate: optionsCollapse.textAngle, // 文字角度
         inverse: optionsCollapse.reversalX, // 轴反转
         axisLabel: {
@@ -241,12 +245,17 @@ export default {
       const optionsCollapse = this.optionsSetup;
       const yAxis = {
         type: "value",
+        scale : optionsCollapse.scale,
+        splitNumber: optionsCollapse.splitNumber,// 均分
         show: optionsCollapse.isShowY, // 坐标轴是否显示
         name: optionsCollapse.textNameY, // 坐标轴名称
+        nameTextStyle: { // 别名
+          color: optionsCollapse.nameColorY,
+          fontSize: optionsCollapse.namefontSizeY
+        },
         inverse: optionsCollapse.reversalY, // 轴反转
         axisLabel: {
           show: true,
-          interval: optionsCollapse.ytextInterval, // 文字间隔
           rotate: optionsCollapse.ytextAngle, // 文字角度
           textStyle: {
             color: optionsCollapse.colorY, // y轴 坐标文字颜色
