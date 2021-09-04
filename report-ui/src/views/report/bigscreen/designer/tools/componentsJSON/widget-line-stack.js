@@ -614,10 +614,8 @@ export const widgetLineStack =   {
             {"axis":"2021-07-25","name":"A","data":"12"},
             {"axis":"2021-07-25","name":"B","data":"20"},
             {"axis":"2021-07-26","name":"B","data":"5"},
-            {"axis":"2021-07-26","name":"C","data":"20"},
             {"axis":"2021-07-27","name":"A","data":"15"},
             {"axis":"2021-07-27","name":"B","data":"30"},
-            {"axis":"2021-07-27","name":"C","data":"5"}
           ],
         },
         {

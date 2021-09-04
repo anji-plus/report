@@ -106,7 +106,6 @@ export default {
     analysisChartsData(params, data) {
       // widget-barchart 柱线图、widget-linechart 折线图、 widget-barlinechart 柱线图
       // widget-piechart 饼图、widget-funnel 漏斗图
-      // widget-gauge 仪表盘
       // widget-text 文本框
       // widge-table 表格(数据不要转)
       // widget-stackchart 堆叠图
@@ -170,28 +169,8 @@ export default {
       const dataField = Object.keys(chartProperties)[types.indexOf('bar')]
       //x轴数值去重，y轴去重
       const xAxisList = this.setUnique(data.map(item => item[xAxisField]))
-      console.log(xAxisList)
       const yAxisList = this.setUnique(data.map(item => item[yAxisField]))
-      console.log(yAxisList)
-      for (const i in yAxisList) {
-        const dataArray = new Array(yAxisList.length).fill(0)
-        for (const j in xAxisList) {
-          for (const k in data) {
-            if (data[k][xAxisField] == yAxisList[i] ) {
-              if (data[k][xAxisField] == xAxisList[j]) {
-                dataArray[j] = data[k][dataField]
-              }
-            }
-          }
-        }
-        series.push({
-          name: yAxisList[i],
-          type: "bar",
-          data: dataArray,
-        })
-      }
-      console.log(series)
-/*      const dataGroup = this.setGroupBy(data, yAxisField)
+      const dataGroup = this.setGroupBy(data, yAxisField)
       for (const key in chartProperties) {
         if (chartProperties[key] !== 'yAxis' && !chartProperties[key].startsWith('xAxis')) {
           Object.keys(dataGroup).forEach(item => {
@@ -206,7 +185,7 @@ export default {
             })
           })
         }
-      }*/
+      }
       ananysicData["xAxis"] = xAxisList;
       ananysicData["series"] = series;
       return ananysicData;
@@ -228,25 +207,6 @@ export default {
       }
       return ananysicData;
     },
-    /*gaugeFn(chartProperties, data) {
-      const ananysicData = [];
-      for (let i = 0; i < data.length; i++) {
-        const obj = {};
-        for (const key in chartProperties) {
-          const value = chartProperties[key];
-          if (value === "name") {
-            obj["name"] = data[i][key];
-          } else {
-            obj["value"] = data[i][key];
-          }
-        }
-        if (!obj["unit"]) {
-          obj["unit"] = "%";
-        }
-        ananysicData.push(obj);
-      }
-      return ananysicData[0];
-    },*/
     widgettext(chartProperties, data) {
       const ananysicData = [];
       for (let i = 0; i < data.length; i++) {
