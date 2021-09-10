@@ -74,7 +74,7 @@ public class ReportDashboardController {
      * @return
      */
     @GetMapping("/export")
-    @Permission(code = "view", name = "导出大屏")
+    @Permission(code = "export", name = "导出大屏")
     public ResponseEntity<byte[]> exportDashboard(HttpServletRequest request, HttpServletResponse response,
                                                   @RequestParam("reportCode") String reportCode, @RequestParam(value = "showDataSet",required = false, defaultValue = "1") Integer showDataSet) {
         return reportDashboardService.exportDashboard(request, response, reportCode, showDataSet);
@@ -87,7 +87,7 @@ public class ReportDashboardController {
      * @return
      */
     @PostMapping("/import/{reportCode}")
-    @Permission(code = "design", name = "导入大屏")
+    @Permission(code = "import", name = "导入大屏")
     public ResponseBean importDashboard(@RequestParam("file") MultipartFile file, @PathVariable("reportCode") String reportCode) {
         reportDashboardService.importDashboard(file, reportCode);
         return ResponseBean.builder().build();
