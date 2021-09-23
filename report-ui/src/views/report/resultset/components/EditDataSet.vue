@@ -208,6 +208,7 @@
                         <el-dialog
                           :title="dialogTitle"
                           :visible.sync="dialogSwitchVisible"
+                          :close-on-click-modal="false"
                           width="60%"
                           min-height="400px"
                           append-to-body
@@ -345,6 +346,7 @@
     <el-dialog
       :title="title"
       :visible.sync="dialogPermissionVisible"
+      :close-on-click-modal="false"
       width="60%"
     >
       <div class="codemirror">
