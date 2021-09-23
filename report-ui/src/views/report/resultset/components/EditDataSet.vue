@@ -383,6 +383,7 @@ import "codemirror/lib/codemirror.css"; // 核心样式
 import "codemirror/theme/cobalt.css"; // 引入主题后还需要在 options 中指定主题才会生效
 import vueJsonEditor from "vue-json-editor";
 import MonacoEditor from "./MonacoEditor.vue";
+import {validateEngOrNum} from "@/utils/validate";
 export default {
   name: "Support",
   components: { Dictionary, codemirror, vueJsonEditor, MonacoEditor },
@@ -469,7 +470,8 @@ export default {
           { required: true, message: "数据集名称必填", trigger: "blur" }
         ],
         setCode: [
-          { required: true, message: "数据集编码必填", trigger: "blur" }
+          { required: true, message: "数据集编码必填", trigger: "blur" },
+          { validator: validateEngOrNum, trigger: 'blur' },
         ],
         sourceCode: [
           { required: true, message: "数据源必选", trigger: "change" }
