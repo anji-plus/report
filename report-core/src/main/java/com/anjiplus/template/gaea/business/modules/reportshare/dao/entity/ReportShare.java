@@ -1,11 +1,11 @@
 
 package com.anjiplus.template.gaea.business.modules.reportshare.dao.entity;
 
-import lombok.Data;
-import io.swagger.annotations.ApiModelProperty;
 import com.anji.plus.gaea.curd.entity.GaeaBaseEntity;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import javax.validation.constraints.*;
+import lombok.Data;
+
 import java.util.Date;
 /**
 * @description 报表分享 entity
@@ -38,6 +38,13 @@ public class ReportShare extends GaeaBaseEntity {
 
     /** 0--未删除 1--已删除 DIC_NAME=DELETE_FLAG */
     private Integer deleteFlag;
+
+    /** 分享码 */
+    @TableField(exist = false)
+    private String sharePassword;
+
+    @TableField(exist = false)
+    private boolean sharePasswordFlag;
 
 
 }
