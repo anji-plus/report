@@ -120,7 +120,7 @@ export default {
       params: {
         reportCode: "",
         reportName: "",
-        // reportType: '',
+        reportType: 'report_screen',
         pageNumber: 1,
         pageSize: 8,
         order: "DESC",

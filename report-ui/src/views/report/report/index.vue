@@ -67,6 +67,14 @@ export default {
         // 查询表单条件
         queryFormFields: [
           {
+            inputType: 'anji-select', //form表单类型 input|input-number|anji-select(传递url或者dictCode)|anji-tree(左侧树)|date|datetime|datetimerange
+            anjiSelectOption: {
+              dictCode: "REPORT_TYPE"
+            },
+            label: '报表类型',
+            field: 'reportType'
+          },
+          {
             inputType: "input",
             label: "报表名称",
             field: "reportName"
@@ -75,14 +83,6 @@ export default {
             inputType: "input",
             label: "报表编码",
             field: "reportCode"
-          },
-          {
-            inputType: 'anji-select', //form表单类型 input|input-number|anji-select(传递url或者dictCode)|anji-tree(左侧树)|date|datetime|datetimerange
-            anjiSelectOption: {
-              dictCode: "REPORT_TYPE"
-            },
-            label: '报表类型',
-            field: 'reportType'
           },
         ],
         // 操作按钮
@@ -282,6 +282,11 @@ export default {
     },
     //分享
     shareReport(val){
+      if (val.reportType == 'report_excel') {
+        //excel暂不支持
+        this.$message.warning("暂不支持excel报表分享");
+        return;
+      }
       this.reportCodeForShareDialog = val.reportCode;
       this.reportNameForShareDialog = val.reportName;
       this.visibleForShareDialog = true;
