@@ -49,7 +49,7 @@ spring:
 
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql打印
     call-setters-on-nulls: true
   mapperLocations:
     - classpath*:/mapper/**/*.xml
