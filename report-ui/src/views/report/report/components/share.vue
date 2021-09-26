@@ -11,19 +11,40 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <el-row :gutter="10">
+          <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
+            <el-form-item label="分享码" prop="sharePasswordFlag">
+              <el-switch
+                v-model="dialogForm.sharePasswordFlag">
+              </el-switch>
+            </el-form-item>
+
+          </el-col>
+        </el-row>
       </el-form>
       <el-button type="primary" plain @click="createShare">创建链接</el-button>
     </div>
     <div v-else>
-      <el-row :gutter="10">
-      <el-col :xs="24" :sm="20" :md="20" :lg="20" :xl="16">
-        <el-input v-model="reportShareUrl" :disabled="true"/>
-      </el-col>
+      <el-form ref="userForm" :model="dialogForm" :rules="rules" size="small" label-width="100px">
+        <el-row :gutter="10">
+        <el-col :xs="24" :sm="20" :md="20" :lg="20" :xl="16">
+          <el-form-item label="链接" prop="reportShareUrl">
+            <el-input v-model="reportShareUrl" :disabled="true"/>
+          </el-form-item>
+        </el-col>
+        </el-row>
+        <el-row :gutter="10" v-if="dialogForm.sharePassword != ''">
+          <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
+            <el-form-item label="分享码" prop="sharePassword">
+              <el-input v-model="dialogForm.sharePassword" :disabled="true"/>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+        <el-button v-if="dialogForm.sharePassword == ''" type="primary" plain @click="copyShare">复制链接</el-button>
+        <el-button v-if="dialogForm.sharePassword != ''" type="primary" plain @click="copyShare">复制链接和分享码</el-button>
       </el-row>
-      <el-row :gutter="10">
-        <el-button type="primary" plain @click="copyShare">复制链接</el-button>
-      </el-row>
-
+      </el-form>
     </div>
 
     <div slot="footer" style="text-align: center">
@@ -71,6 +92,8 @@ export default {
         reportCode: '',
         shareUrl: '',
         shareCode: '',
+        sharePassword: '',
+        sharePasswordFlag: false,
       },
       shareLinkFlag1: true,
       rules: {
@@ -103,24 +126,33 @@ export default {
       if (code != '200') return
       this.shareValidTypeOptions = data
       this.dialogForm.shareValidType = this.shareValidTypeOptions[0].id
+      this.dialogForm.sharePasswordFlag = false
+      this.dialogForm.sharePassword = ''
     },
     async createShare() {
       this.dialogForm.reportCode = this.reportCode
       this.dialogForm.shareUrl = window.location.href
-      console.log(this.dialogForm)
+      // console.log(this.dialogForm)
       const {code, data} = await reportShareAdd(this.dialogForm)
       if (code != '200') return
-      console.log(data)
+      // console.log(data)
       this.shareLinkFlag1 = false
       this.$message({
         message: '创建链接成功！',
         type: 'success',
       })
       this.reportShareUrl = data.shareUrl
+      this.dialogForm.sharePassword = data.sharePassword
     },
 
     copyShare(){
-      this.copyToClip(this.reportShareUrl)
+      let content = ''
+      if (this.dialogForm.sharePassword == '') {
+        content = 'AJ-Report分享链接：' + this.reportShareUrl
+      }else {
+        content = 'AJ-Report分享链接：' + this.reportShareUrl + '  分享码：' + this.dialogForm.sharePassword;
+      }
+      this.copyToClip(content)
       this.$message({
         message: '复制链接成功！',
         type: 'success',

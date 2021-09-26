@@ -46,6 +46,7 @@ import {
   reportDetail
 } from "@/api/reportmanage";
 import Share from "@/views/report/report/components/share";
+import {validateEngOrNum} from "@/utils/validate";
 export default {
   name: "Report",
   components: {
@@ -131,7 +132,8 @@ export default {
             editField: "reportCode",
             inputType: "input",
             rules: [
-              { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" }
+              { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" },
+              { validator: validateEngOrNum, trigger: 'blur' },
             ],
             disabled: "disableOnEdit"
           },

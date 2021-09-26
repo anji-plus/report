@@ -1,8 +1,10 @@
 <template>
   <el-dialog
     :title="caseResultTitle"
+    :close-on-click-modal="false"
     :visible.sync="visib"
     width="70%"
+    :before-close="closeDialog"
   >
     <vue-json-editor
       v-model="caseResultContent"

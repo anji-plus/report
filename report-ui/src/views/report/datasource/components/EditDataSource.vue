@@ -44,6 +44,7 @@
 import { testConnection, reportDataSourceDetail, reportDataSourceAdd, reportDataSourceUpdate } from '@/api/reportDataSource'
 import { getDictList } from '@/api/dict-data' // 获取数据字典
 import Dictionary from '@/components/Dictionary/index'
+import {validateEngOrNum} from "@/utils/validate";
 export default {
   name: 'Support',
   components: { Dictionary },
@@ -97,6 +98,7 @@ export default {
         ],
         sourceCode: [
           { required: true, message: '数据集编码必填', trigger: 'blur' },
+          { validator: validateEngOrNum, trigger: 'blur' },
         ],
         sourceName: [
           { required: true, message: '数据源名称必选', trigger: 'blur' },
