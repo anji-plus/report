@@ -12,7 +12,7 @@ import java.util.Date;
 * @author Raod
 * @date 2021-08-18 13:37:26.663
 **/
-@TableName(value="gaea_report_share")
+@TableName(keepGlobalPrefix=true, value="gaea_report_share")
 @Data
 public class ReportShare extends GaeaBaseEntity {
     /** 分享编码，系统生成，默认UUID */
