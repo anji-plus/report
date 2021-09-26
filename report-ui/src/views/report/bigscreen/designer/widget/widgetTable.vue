@@ -154,6 +154,7 @@ export default {
       const data = this.queryEchartsData(val);
       data.then(res => {
         this.list = res;
+        this.hackResetFun();
       });
     },
     // vue hack 之强制刷新组件
