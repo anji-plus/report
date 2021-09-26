@@ -87,7 +87,7 @@
             <i class="iconfont iconyulan" @click="viewScreen"></i>
           </el-tooltip>
         </span>
-        <span class="btn">
+        <span class="btn" v-permission="'bigScreenManage:export'">
           <el-tooltip
             class="item"
             effect="dark"
@@ -109,7 +109,7 @@
             </el-upload>
           </el-tooltip>
         </span>
-        <span class="btn border-left">
+        <span class="btn border-left" v-permission="'bigScreenManage:import'">
           <ul class="nav">
             <li>
               <i class="iconfont icondaochu"></i

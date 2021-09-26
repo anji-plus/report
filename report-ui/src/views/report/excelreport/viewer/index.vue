@@ -12,7 +12,7 @@
           <a v-if="reportCode != null"
              download="xxx.xlsx">
             <el-button type="text"
-                       @click="download('')">
+                       @click="download('gaea_template_excel')">
               <i class="iconfont iconexcel"></i>导出excel
             </el-button>
           </a>
@@ -44,19 +44,14 @@
       </div>
     </div>
     <div class="layout-middle">
-      <div id="x-spreadsheet-demo"
-           class="excel-designer" />
+      <div id="luckysheet"
+           style="margin:0px;padding:0px;position:absolute;width:100%;height:95vh;left: 0px;top: 30px;bottom:0px;" />
     </div>
   </div>
 </template>
 
 <script>
-// import Spreadsheet from 'x-data-spreadsheet'
-// import zhCN from 'x-data-spreadsheet/src/locale/zh-cn'
 import { preview, exportExcel } from '@/api/GaeaReport'
-import { addReport, editReport } from '@/api/report'
-import '@/components/x-spreadsheet/dist/xspreadsheet.js'
-// Spreadsheet.locale('zh-cn', zhCN)
 
 export default {
   name: 'Login',
@@ -78,43 +73,6 @@ export default {
     }
   },
   mounted () {
-    this.options = {
-      mode: 'read', // edit | read
-      showToolbar: false,
-      showGrid: true,
-      showContextmenu: false,
-      view: {
-        height: () => document.documentElement.clientHeight,
-        width: () => document.getElementsByClassName('layout-middle')[0].clientWidth,
-      },
-      row: {
-        len: 100,
-        height: 25,
-      },
-      col: {
-        len: 52,
-        width: 100,
-        indexWidth: 60,
-        minWidth: 60,
-      },
-      style: {
-        bgcolor: '#ffffff',
-        align: 'left',
-        valign: 'middle',
-        textwrap: false,
-        strike: false,
-        underline: false,
-        color: '#0a0a0a',
-        font: {
-          name: 'Helvetica',
-          size: 10,
-          bold: false,
-          italic: false,
-        },
-      },
-    }
-    // this.sheet = new Spreadsheet('#x-spreadsheet-demo', this.options).loadData({})
-    this.load()
     this.preview()
   },
   created () {
@@ -124,10 +82,8 @@ export default {
     async searchPreview () {
       const arr = this.toObject(this.tableData2)
       this.params.setParam = JSON.stringify(arr)
-      const { code, data } = await preview(this.params)
-      if (code !== '200') return
-      this.excelData = JSON.parse(data.jsonStr)
-      this.sheet.loadData(this.excelData)
+      //每次都重新加载需要改成刷新
+      this.preview()
     },
     async preview () {
       this.excelData = {}
@@ -149,16 +105,25 @@ export default {
       this.tableData2 = extendArry
 
       this.excelData = data.jsonStr
-      this.sheet.loadData(JSON.parse(this.excelData))
+      this.sheetData = (data == null ? [{}] : JSON.parse(data.jsonStr))
+      // console.log(this.excelData)
+      // console.log(this.sheetData)
+      this.createSheet();
     },
-    download (val) {
-      const result = {}
+    async download(val) {
+      if (val == 'gaea_template_pdf') {
+        this.$message('暂不支持pdf');
+        return
+      }
+      const result = {};
       result['reportCode'] = this.reportCode
       result['setParam'] = JSON.stringify(this.params.setParam)
       if (val != '') {
         result['exportType'] = val
       }
-      exportExcel(result)
+      const {code, message} = await exportExcel(result)
+      if (code != 200) return
+      this.$message.success(message);
     },
     // 表单封装json
     toObject (val) {
@@ -176,55 +141,67 @@ export default {
       }
       return objSecond
     },
-    load () {
-      const rows10 = { len: 1000 }
-      for (let i = 0; i < 1000; i += 1) {
-        rows10[i] = {
-          cells: {},
-        }
-      }
-      const rows = {}
-      this.sheet = x_spreadsheet('#x-spreadsheet-demo', this.options)
-        .loadData([
+    //初始化表格
+    createSheet(){
+      const options = {
+        container: 'luckysheet', // 设定DOM容器的id
+        title: 'Luckysheet Demo', // 设定表格名称
+        lang: 'zh', // 设定表格语言
+        plugins:['chart'],
+        data:[
           {
-            freeze: 'B3',
-            styles: [],
-            merges: [],
-            cols: {
-              len: 20,
-              // 2: { width: 200 },
+            "name": "report", //工作表名称
+            "color": "", //工作表颜色
+            "index": 0, //工作表索引
+            "status": 1, //激活状态
+            "order": 0, //工作表的下标
+            "hide": 0,//是否隐藏
+            "row": 36, //行数
+            "column": 18, //列数
+            "defaultRowHeight": 19, //自定义行高
+            "defaultColWidth": 73, //自定义列宽
+            "celldata": [], //初始化使用的单元格数据
+            "config": {
+              "merge":{}, //合并单元格
+              "rowlen":{}, //表格行高
+              "columnlen":{}, //表格列宽
+              "rowhidden":{}, //隐藏行
+              "colhidden":{}, //隐藏列
+              "borderInfo":{}, //边框
+              "authority":{}, //工作表保护
+
             },
-            rows,
-          },
-          { name: 'sheet-test', rows: rows10 },
-        ])
-        .change((cdata) => {
-          const dataRect = this.sheet.data.getDataRect()
-        })
-      this.sheet
-        .on('cell-selected', (cell, ri, ci) => {
-          // console.log('cell:', cell, ', ri:', ri, ', ci:', ci);
-        })
-        .on('cell-edited', (text, ri, ci) => {
-          // console.log('text:', text, ', ri: ', ri, ', ci:', ci);
-        })
-      this.sheet.on('printSettings', () => {
-        // 打印设置.
-      })
-      this.sheet.on('generateQrcode', () => {
-        // 生成二维码.
-        console.log('insertImg', this.dialogVisible)
-      })
-      this.sheet.on('insertImg', () => {
-        // 插入图片
-      })
+            "scrollLeft": 0, //左右滚动条位置
+            "scrollTop": 315, //上下滚动条位置
+            "luckysheet_select_save": [], //选中的区域
+            "calcChain": [],//公式链
+            "isPivotTable":false,//是否数据透视表
+            "pivotTable":{},//数据透视表设置
+            "filter_select": {},//筛选范围
+            "filter": null,//筛选配置
+            "luckysheet_alternateformat_save": [], //交替颜色
+            "luckysheet_alternateformat_save_modelCustom": [], //自定义交替颜色
+            "luckysheet_conditionformat_save": {},//条件格式
+            "frozen": {}, //冻结行列配置
+            "chart": [], //图表配置
+            "zoomRatio":1, // 缩放比例
+            "image":[], //图片
+            "showGridLines": 1, //是否显示网格线
+            "dataVerification":{} //数据验证配置
+          }
+        ]
+      };
+      options.data = this.sheetData;
+      // console.log(this.sheetData)
+      $(function () {
+        luckysheet.create(options);
+      });
     },
   },
 }
 </script>
 
 <style scoped lang="scss">
-@import '../../../../components/x-spreadsheet/dist/xspreadsheet.css';
 .download {
   width: 100%;
   float: left;

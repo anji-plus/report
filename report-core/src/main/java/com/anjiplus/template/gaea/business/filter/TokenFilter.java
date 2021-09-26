@@ -57,6 +57,12 @@ public class TokenFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String uri = request.getRequestURI();
 
+        //OPTIONS直接放行
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         if (SLASH.equals(uri)) {
             response.sendRedirect("/index.html");
             return;

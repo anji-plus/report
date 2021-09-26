@@ -182,8 +182,6 @@ export default {
         path: "/bigscreen/designer",
         query: {
           reportCode: val.reportCode,
-          reportId: val.id,
-          accessKey: val.accessKey
         }
       });
       window.open(routeUrl.href, "_blank");

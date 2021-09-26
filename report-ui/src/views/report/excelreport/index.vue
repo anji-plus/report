@@ -1,8 +1,8 @@
 <!--
  * @Author: lide1202@hotmail.com
- * @Date: 2021-3-13 11:04:24 
+ * @Date: 2021-3-13 11:04:24
  * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24 
+ * @Last Modified time: 2021-3-13 11:04:24
  !-->
 <template>
   <div class="main-layout">
@@ -70,7 +70,7 @@ export default {
   mounted() {},
   methods: {
     openDesign(reportId) {
-      var routeUrl = this.$router.resolve({ path: '/report/excelreport/designer', query: { reportId: reportId }})
+      var routeUrl = this.$router.resolve({ path: '/excelreport/designer', query: { reportCode: reportId }})
       window.open(routeUrl.href, '_blank')
     },
   },

@@ -75,7 +75,15 @@ export default {
             inputType: "input",
             label: "报表编码",
             field: "reportCode"
-          }
+          },
+          {
+            inputType: 'anji-select', //form表单类型 input|input-number|anji-select(传递url或者dictCode)|anji-tree(左侧树)|date|datetime|datetimerange
+            anjiSelectOption: {
+              dictCode: "REPORT_TYPE"
+            },
+            label: '报表类型',
+            field: 'reportType'
+          },
         ],
         // 操作按钮
         buttons: {
@@ -121,6 +129,7 @@ export default {
             editField: "reportName",
             inputType: "input",
             rules: [
+              { required: true, message: '请输入报表名称', trigger: 'blur' },
               { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" }
             ],
             disabled: false
@@ -156,17 +165,18 @@ export default {
             placeholder: "",
             field: "reportType",
             editField: "reportType",
-            tableHide: true,
-            editHide: true,
             inputType: "anji-select",
+            fieldTableRowRenderer: row => {
+              return this.getDictLabelByCode("REPORT_TYPE", row["reportType"]);
+            },
             anjiSelectOption: {
               dictCode: "REPORT_TYPE"
             },
             rules: [
+              { required: true, message: '请输入报表类型', trigger: 'blur' },
               { min: 1, max: 20, message: "不超过20个字符", trigger: "blur" }
             ],
-            disabled: true,
-            defaultValue: "report_screen"
+            disabled: "disableOnEdit",
           },
           {
             label: "描述", //报表描述
@@ -239,23 +249,36 @@ export default {
     },
     // 预览
     preview(val) {
+      let routePath = "";
+      if (val.reportType === 'report_excel') {
+        routePath = "/excelreport/viewer";
+
+      } else {
+        routePath = "/bigscreen/viewer";
+      }
       var routeUrl = this.$router.resolve({
-        path: "/bigscreen/viewer",
+        path: routePath,
         query: { reportCode: val.reportCode }
       });
       window.open(routeUrl.href, "_blank");
     },
     // 设计
     design(val) {
+      let routePath = "";
+      if (val.reportType === 'report_excel') {
+        routePath = "/excelreport/designer";
+
+      } else {
+        routePath = "/bigscreen/designer";
+      }
       var routeUrl = this.$router.resolve({
-        path: "/bigscreen/designer",
+        path: routePath,
         query: {
           reportCode: val.reportCode,
-          reportId: val.id,
-          accessKey: val.accessKey
         }
       });
       window.open(routeUrl.href, "_blank");
+
     },
     //分享
     shareReport(val){
