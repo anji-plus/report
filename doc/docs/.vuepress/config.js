@@ -60,7 +60,15 @@ module.exports = {
                     children: [
                         {title: '常见问题', path: '/guide/question'}
                     ]
-                }],
+                },
+                {
+                    title: '社区提供',
+                    collapsable: false,
+                    children: [
+                        {title: '搭建AJ-Report开发环境', path: '/community/AC1688/'}
+                    ]
+                }
+                ],
         }
     },
     plugins: [

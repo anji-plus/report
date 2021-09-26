@@ -142,10 +142,11 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 已知以下版本存在兼容性问题
 - Node.js V16
 - Jdk 11
-- Mysql 8.0
+- Mysql 8.0（8.0.26版本没有问题，8.0.21版本存在问题）
 - Windows 11
 
-AJ-Report 使用Druid，版本为1.2.6，如果你觉得你配置都是正常但是数据源测试不过，请尝试降低Druid版本
+AJ-Report 使用Druid，版本为1.2.6，如果你觉得你配置都是正常但是数据源测试不过，请尝试修改pom文件降低Druid版本。
+例如：MSSQLSERVER 2014，请将Druid版本降低为1.2.1以下
 
 ## 商业授权
 AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.0.html) <br>
