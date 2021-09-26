@@ -15,7 +15,7 @@
         label-width="130px"
       >
         <el-row :gutter="10">
-          <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
+          <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
             <el-form-item label="数据源" prop="sourceCode">
               <el-select
                 v-model.trim="formData.sourceCode"
@@ -32,7 +32,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
+          <el-col :xs="24" :sm="20" :md="7" :lg="7" :xl="7">
             <el-form-item label="数据集编码" prop="setCode">
               <el-input
                 :disabled="updataDisabled"
@@ -41,7 +41,7 @@
               />
             </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
+          <el-col :xs="24" :sm="20" :md="7" :lg="7" :xl="7">
             <el-form-item label="数据集名称" prop="setName">
               <el-input v-model.trim="formData.setName" size="mini" />
             </el-form-item>

@@ -2,19 +2,19 @@
   <el-dialog title="项目基础配置" width="50%" :close-on-click-modal="false" center :visible.sync="visib" :before-close="closeDialog">
     <el-form ref="userForm" :model="dialogForm" :rules="rules" size="small" label-width="100px">
       <el-row :gutter="10">
-        <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
+        <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
           <el-form-item label="数据源类型" prop="sourceType">
             <el-select v-model.trim="dialogForm.sourceType" placeholder="请选择" clearable @change="selectChange">
               <el-option v-for="item in dictionaryOptions" :key="item.id" :label="item.text" :value="item.id" />
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :xs="24" :sm="20" :md="7" :lg="7" :xl="7">
+        <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
           <el-form-item label="数据源编码" prop="sourceCode">
             <el-input :disabled="updataDisabled" v-model.trim="dialogForm.sourceCode" />
           </el-form-item>
         </el-col>
-        <el-col :xs="24" :sm="20" :md="7" :lg="7" :xl="7">
+        <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
           <el-form-item label="数据源名称" prop="sourceName">
             <el-input v-model.trim="dialogForm.sourceName" />
           </el-form-item>
