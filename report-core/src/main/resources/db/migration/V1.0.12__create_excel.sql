@@ -21,7 +21,13 @@ CREATE TABLE `gaea_report_excel`
 ) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8;
 
 
-UPDATE `aj_report`.`access_authority` SET `parent_target` = 'report', `target` = 'bigScreenManage', `target_name` = '大屏报表', `action` = 'export', `action_name` = '导出大屏', `sort` = 234, `enable_flag` = 1, `delete_flag` = 0, `create_by` = 'admin', `create_time` = '2019-07-23 15:59:40', `update_by` = 'admin', `update_time` = '2019-07-23 15:59:40', `version` = 1 WHERE `id` = 234;
-
+INSERT INTO `aj_report`.`access_authority`(`id`, `parent_target`, `target`, `target_name`, `action`, `action_name`, `sort`, `enable_flag`, `delete_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `version`) VALUES (234, 'report', 'bigScreenManage', '大屏报表', 'export', '导出大屏', 234, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
 INSERT INTO `aj_report`.`access_authority`(`id`, `parent_target`, `target`, `target_name`, `action`, `action_name`, `sort`, `enable_flag`, `delete_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `version`) VALUES (235, 'report', 'bigScreenManage', '大屏报表', 'import', '导入大屏', 235, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
-INSERT INTO `aj_report`.`access_authority`(`id`, `parent_target`, `target`, `target_name`, `action`, `action_name`, `sort`, `enable_flag`, `delete_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `version`) VALUES (236, 'report', 'excelManage', '表格报表', 'query', '查询报表', 234, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+INSERT INTO `aj_report`.`access_authority`(`id`, `parent_target`, `target`, `target_name`, `action`, `action_name`, `sort`, `enable_flag`, `delete_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `version`) VALUES (236, 'report', 'excelManage', '表格报表', 'query', '查询报表', 236, 1, 0, 'admin', '2019-07-23 15:59:40', 'admin', '2019-07-23 15:59:40', 1);
+
+INSERT INTO `aj_report`.`access_role_authority`(`id`, `role_code`, `target`, `action`) VALUES (default , 'root', 'bigScreenManage', 'export');
+INSERT INTO `aj_report`.`access_role_authority`(`id`, `role_code`, `target`, `action`) VALUES (default , 'root', 'bigScreenManage', 'import');
+
+
+UPDATE `aj_report`.`gaea_report` SET `report_type` = 'report_screen' WHERE `report_code` in ('log_ajreport', 'car_ajreport', 'acc_ajreport');
+
