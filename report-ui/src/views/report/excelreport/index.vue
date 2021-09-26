@@ -6,6 +6,7 @@
  !-->
 <template>
   <div class="main-layout">
+    <h2>表格报表基于luckysheet，还在开发中...</h2>
     <el-form ref="form" :model="params" :rules="rules" label-width="120px">
       <!-- 搜索 -->
       <el-row :gutter="10">
