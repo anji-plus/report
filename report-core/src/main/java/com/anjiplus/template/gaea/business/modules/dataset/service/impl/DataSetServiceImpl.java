@@ -226,11 +226,13 @@ public class DataSetServiceImpl implements DataSetService {
         DataSource dataSource = dataSourceService.selectOne("source_code", dataSetDto.getSourceCode());
         //3.参数替换
         //3.1参数校验
+        log.debug("参数校验替换前：{}", dto.getContextData());
         boolean verification = dataSetParamService.verification(dataSetDto.getDataSetParamDtoList(), dto.getContextData());
         if (!verification) {
             throw BusinessExceptionBuilder.build(ResponseCode.RULE_FIELDS_CHECK_ERROR);
         }
         String dynSentence = dataSetParamService.transform(dto.getContextData(), dataSetDto.getDynSentence());
+        log.debug("参数校验替换后：{}", dto.getContextData());
         //4.获取数据
         DataSourceDto dataSourceDto = new DataSourceDto();
         BeanUtils.copyProperties(dataSource, dataSourceDto);
