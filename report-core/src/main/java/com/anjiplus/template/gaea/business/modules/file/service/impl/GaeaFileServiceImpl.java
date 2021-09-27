@@ -99,7 +99,7 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             String newFileName = fileId + suffixName;
             // 本地文件保存路径
             String filePath = dictPath + newFileName;
-            String urlPath = fileDownloadPath + java.io.File.separator + fileId;
+            String urlPath = fileDownloadPath + "/" + fileId;
 
             GaeaFile gaeaFile = new GaeaFile();
             gaeaFile.setFilePath(filePath);

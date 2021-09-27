@@ -15,7 +15,7 @@
         label-width="130px"
       >
         <el-row :gutter="10">
-          <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
+          <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
             <el-form-item label="数据源" prop="sourceCode">
               <el-select
                 v-model.trim="formData.sourceCode"
@@ -32,7 +32,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
+          <el-col :xs="24" :sm="20" :md="7" :lg="7" :xl="7">
             <el-form-item label="数据集编码" prop="setCode">
               <el-input
                 :disabled="updataDisabled"
@@ -41,7 +41,7 @@
               />
             </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
+          <el-col :xs="24" :sm="20" :md="7" :lg="7" :xl="7">
             <el-form-item label="数据集名称" prop="setName">
               <el-input v-model.trim="formData.setName" size="mini" />
             </el-form-item>
@@ -450,7 +450,7 @@ export default {
       itemFilterList: [
         {
           transformType: "js",
-          transformScript: `function dataTransform(data){\n\t//自定义脚本内容\n\treturn data;\n}`
+          transformScript: ``
         }
       ],
       transformScript: `function dataTransform(data){\n\t//自定义脚本内容\n\treturn data;\n}`,
@@ -491,7 +491,7 @@ export default {
           sampleItem: "",
           mandatory: true,
           requiredFlag: 1,
-          validationRules: `function verification(data){\n\t//自定义脚本内容\n\treturn true;\n}`
+          validationRules: `function verification(data){\n\t//自定义脚本内容\n\t//可返回true/false单纯校验键入的data正确性\n\t//可返回文本，实时替换,比如当前时间等\n\t//return "2099-01-01 00:00:00";\n\treturn true;\n}`
         }
       ],
       isRowData: {},
@@ -764,7 +764,7 @@ export default {
       this.title = "自定义高级规则";
       if (this.isRowData.sampleItem != "") {
         this.isRowData = row;
-        const fnCont = `function verification(data){\n\t//自定义脚本内容\n\treturn true;\n}`;
+        const fnCont = `function verification(data){\n\t//自定义脚本内容\n\t//可返回true/false单纯校验键入的data正确性\n\t//可返回文本，实时替换,比如当前时间等\n\t//return "2099-01-01 00:00:00";\n\treturn true;\n}`;
         this.validationRules = row.validationRules
           ? row.validationRules
           : fnCont;
@@ -801,10 +801,11 @@ export default {
     // 自定义高级规则
     async testResultset() {
       this.isRowData.validationRules = this.validationRules;
+      console.log(this.isRowData,"12345678")
       const { code, message, data } = await verificationSet(this.isRowData);
       if (code == "200") {
         if (data) {
-          this.$message.success("校验通过");
+          this.$message.success("返回结果："+ data);
         } else {
           this.$message.warning("当前示例值校验不通过");
         }
@@ -825,7 +826,7 @@ export default {
         sampleItem: "",
         mandatory: true,
         requiredFlag: 1,
-        validationRules: `function verification(data){\n\t//自定义脚本内容\n\treturn true;\n}`
+        validationRules: `function verification(data){\n\t//自定义脚本内容\n\t//可返回true/false单纯校验键入的data正确性\n\t//可返回文本，实时替换,比如当前时间等\n\t//return "2099-01-01 00:00:00";\n\treturn true;\n}`
       });
     },
     async submit(formName) {
@@ -838,10 +839,12 @@ export default {
             if (this.dialogFormVisibleTitle === "新增数据集") {
               const { code } = await addDataSet(this.formData);
               if (code != "200") return;
+              this.$emit('refreshList')
               this.closeDialog();
             } else {
               const { code } = await editDataSet(this.formData);
               if (code != "200") return;
+              this.$emit('refreshList')
               this.closeDialog();
             }
           } else {

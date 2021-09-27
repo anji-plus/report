@@ -120,7 +120,7 @@ export default {
       params: {
         reportCode: "",
         reportName: "",
-        // reportType: '',
+        reportType: 'report_screen',
         pageNumber: 1,
         pageSize: 8,
         order: "DESC",
@@ -182,8 +182,6 @@ export default {
         path: "/bigscreen/designer",
         query: {
           reportCode: val.reportCode,
-          reportId: val.id,
-          accessKey: val.accessKey
         }
       });
       window.open(routeUrl.href, "_blank");
