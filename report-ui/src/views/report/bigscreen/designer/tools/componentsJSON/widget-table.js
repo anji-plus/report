@@ -131,14 +131,14 @@ export const widgetTable = {
                 placeholder: '',
                 value: '#fff',
               },
-/*              {
+              {
                 type: 'vue-color',
-                label: '表格背景',
+                label: '表格背景色',
                 name: 'tableBgColor',
                 require: false,
                 placeholder: '',
                 value: '',
-              },*/
+              },
               {
                 type: 'vue-color',
                 label: '奇行颜色',

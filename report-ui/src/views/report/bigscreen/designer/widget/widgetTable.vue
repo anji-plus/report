@@ -67,7 +67,7 @@ export default {
         height: allStyle.height + "px",
         left: allStyle.left + "px",
         top: allStyle.top + "px",
-        //background: this.optionsSetUp.tableBgColor
+        background: this.optionsSetUp.tableBgColor
       };
     },
     headerTableStlye() {
@@ -92,7 +92,7 @@ export default {
         "border-width": bodyStyle.borderWidth + "px",
         "border-color": bodyStyle.borderColor,
         color: bodyStyle.bodyColor,
-        //"background-color": bodyStyle.tableBgColor
+        "background-color": bodyStyle.tableBgColor
       };
     }
   },
@@ -215,11 +215,11 @@ export default {
   width: 100%;
 }
 
-.txtScroll-top .infoList li:nth-child(n) {
+/*.txtScroll-top .infoList li:nth-child(n) {
   background: rgb(0, 59, 81);
 }
 
 .txtScroll-top .infoList li:nth-child(2n) {
   background: rgb(10, 39, 50);
-}
+}*/
 </style>
