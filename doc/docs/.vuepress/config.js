@@ -65,7 +65,7 @@ module.exports = {
                     title: '社区提供',
                     collapsable: false,
                     children: [
-                        {title: '搭建AJ-Report开发环境', path: '/community/AC1688/'}
+                        {title: '搭建AJ-Report开发环境', path: '/guide/community/AC1688/搭建aj-report开发环境'}
                     ]
                 }
                 ],
