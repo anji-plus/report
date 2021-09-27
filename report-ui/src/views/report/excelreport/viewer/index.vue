@@ -201,6 +201,7 @@ export default {
 }
 </script>
 
+<style src="../../../../../static/luckysheet/assets/iconfont/iconfont.css" />
 <style scoped lang="scss">
 .download {
   width: 100%;
