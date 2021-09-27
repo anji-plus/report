@@ -59,13 +59,15 @@ export default {
   },
   computed: {
     styleObj() {
+      console.log(this.optionsSetUp);
       const allStyle = this.optionsPosition;
       return {
         position: this.ispreview ? "absolute" : "static",
         width: allStyle.width + "px",
         height: allStyle.height + "px",
         left: allStyle.left + "px",
-        top: allStyle.top + "px"
+        top: allStyle.top + "px",
+        background: this.optionsSetUp.tableBgColor
       };
     },
     headerTableStlye() {
