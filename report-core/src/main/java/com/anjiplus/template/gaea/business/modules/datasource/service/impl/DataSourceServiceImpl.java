@@ -75,6 +75,7 @@ public class DataSourceServiceImpl implements DataSourceService {
         LambdaQueryWrapper<DataSource> wrapper = Wrappers.lambdaQuery();
         wrapper.select(DataSource::getSourceCode, DataSource::getSourceName)
                 .eq(DataSource::getEnableFlag, Enabled.YES.getValue());
+        wrapper.orderByDesc(DataSource::getUpdateTime);
         return dataSourceMapper.selectList(wrapper);
     }
 

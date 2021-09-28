@@ -302,6 +302,7 @@ public class DataSetServiceImpl implements DataSetService {
         LambdaQueryWrapper<DataSet> wrapper = Wrappers.lambdaQuery();
         wrapper.select(DataSet::getSetCode, DataSet::getSetName, DataSet::getSetDesc, DataSet::getId)
                 .eq(DataSet::getEnableFlag, Enabled.YES.getValue());
+        wrapper.orderByDesc(DataSet::getUpdateTime);
         return dataSetMapper.selectList(wrapper);
     }
 
