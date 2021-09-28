@@ -800,6 +800,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 20px;
 }
 .anji_curd_table {
   margin-top: 20px;
