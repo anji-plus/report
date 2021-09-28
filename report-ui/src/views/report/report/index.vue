@@ -136,11 +136,13 @@ export default {
           },
           {
             label: "报表编码", //报表编码
-            placeholder: "",
+            placeholder: '唯一标识',
             field: "reportCode",
             editField: "reportCode",
             inputType: "input",
+
             rules: [
+              { required: true, message: '请输入报表编码', trigger: 'blur' },
               { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" },
               { validator: validateEngOrNum, trigger: 'blur' },
             ],

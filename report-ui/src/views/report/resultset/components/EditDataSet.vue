@@ -37,6 +37,7 @@
               <el-input
                 :disabled="updataDisabled"
                 v-model.trim="formData.setCode"
+                placeholder="唯一标识"
                 size="mini"
               />
             </el-form-item>
