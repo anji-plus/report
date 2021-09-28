@@ -316,3 +316,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.filter-item {
+  width: 100%;
+}
+</style>
