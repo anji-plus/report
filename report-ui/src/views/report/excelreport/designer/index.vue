@@ -133,7 +133,7 @@
 import draggable from "vuedraggable";
 import { queryAllDataSet, detail, detailByReportCode } from "@/api/GaeaReport";
 import { addReportExcel, editReportExcel } from "@/api/report";
-import ColorPicker from "../../bigscreen/designer/form/colorPicker.vue";
+import ColorPicker from "../../bigscreen/designer/designerComponents/colorPicker.vue";
 // import QRCode from 'qrcodejs2'
 // import JsBarcode from 'jsbarcode'
 export default {
