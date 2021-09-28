@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:17:55
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:19:02
+ * @LastEditTime: 2021-09-28 14:14:39
  */
 export const widgetIframe =  {
     code: 'widget-iframe',
@@ -40,7 +40,7 @@ export const widgetIframe =  {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -48,7 +48,7 @@ export const widgetIframe =  {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

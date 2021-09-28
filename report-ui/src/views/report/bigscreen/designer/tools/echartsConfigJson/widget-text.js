@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 06:52:13
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:01:07
+ * @LastEditTime: 2021-09-28 14:20:12
  */
 export const widgetText =  {
     code: 'widget-text',
@@ -124,7 +124,7 @@ export const widgetText =  {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: '文本框',
@@ -134,7 +134,7 @@ export const widgetText =  {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
           chartType: 'widget-text',
@@ -150,7 +150,7 @@ export const widgetText =  {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -158,7 +158,7 @@ export const widgetText =  {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

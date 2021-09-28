@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:24:48
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:24:49
+ * @LastEditTime: 2021-09-28 14:17:10
  */
 export const widgetLinechart = {
     code: 'widget-linechart',
@@ -618,7 +618,7 @@ export const widgetLinechart = {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: {"categories": ["苹果","三星","小米","oppo","vivo"],"series": [{"name": "手机品牌","data": [1009,3409,2309,5409,3409]}]},
@@ -628,7 +628,7 @@ export const widgetLinechart = {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           chartType: 'widget-linechart',
           dictKey: 'LINE_PROPERTIES',
@@ -642,7 +642,7 @@ export const widgetLinechart = {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -650,7 +650,7 @@ export const widgetLinechart = {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

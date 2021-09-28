@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:39:35
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:39:35
+ * @LastEditTime: 2021-09-28 14:09:58
  */
 export const widgetBarCompare = {
     code: 'widgetBarCompareChart',
@@ -582,7 +582,7 @@ export const widgetBarCompare = {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: [
@@ -603,7 +603,7 @@ export const widgetBarCompare = {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
           chartType: 'widget-stackchart',
@@ -618,7 +618,7 @@ export const widgetBarCompare = {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -626,7 +626,7 @@ export const widgetBarCompare = {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

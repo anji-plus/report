@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:08:53
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:08:55
+ * @LastEditTime: 2021-09-28 14:19:30
  */
 export const widgetSliders =  {
     code: 'widget-slider',
@@ -59,14 +59,14 @@ export const widgetSliders =  {
           label: '左边距',
           name: 'left',
           required: true,
-          placeholder: 'px',
+          placeholder: '',
         },
         {
           type: 'el-input-number',
           label: '上边距',
           name: 'top',
           required: true,
-          placeholder: 'px',
+          placeholder: '',
         },
         {
           type: 'el-input-number',

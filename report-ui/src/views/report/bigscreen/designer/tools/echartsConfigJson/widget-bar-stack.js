@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:37:09
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:37:09
+ * @LastEditTime: 2021-09-28 14:11:09
  */
 export const widgetBarStack =  {
     code: 'widgetBarStackChart',
@@ -587,7 +587,7 @@ export const widgetBarStack =  {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: [
@@ -603,7 +603,7 @@ export const widgetBarStack =  {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
           chartType: 'widget-stackchart',
@@ -618,7 +618,7 @@ export const widgetBarStack =  {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -626,7 +626,7 @@ export const widgetBarStack =  {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

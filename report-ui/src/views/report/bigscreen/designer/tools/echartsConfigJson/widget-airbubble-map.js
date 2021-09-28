@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:35:32
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:36:47
+ * @LastEditTime: 2021-09-28 14:10:01
  */
 export const widgetAirbubbleMap =   {
     code: 'widgetAirBubbleMap',
@@ -291,7 +291,7 @@ export const widgetAirbubbleMap =   {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: [
@@ -336,7 +336,7 @@ export const widgetAirbubbleMap =   {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           chartType: 'widget-piechart',
           dictKey: 'MAP_PROPERTIES',
@@ -350,7 +350,7 @@ export const widgetAirbubbleMap =   {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -358,7 +358,7 @@ export const widgetAirbubbleMap =   {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

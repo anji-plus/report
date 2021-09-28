@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:29:23
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:29:23
+ * @LastEditTime: 2021-09-28 14:12:37
  */
 export const widgetFunnel = {
     code: 'widget-funnel',
@@ -326,7 +326,7 @@ export const widgetFunnel = {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: [{"value": 60,"name": "访问"},{"value": 40, "name": "咨询"},{"value": 20, "name": "订单"},{"value": 80,"name":"点击"},{"value":100,"name":"展现"}],
@@ -336,7 +336,7 @@ export const widgetFunnel = {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           chartType: 'widget-funnel',
           relactiveDomValue: 'dynamicData',
@@ -351,7 +351,7 @@ export const widgetFunnel = {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -359,7 +359,7 @@ export const widgetFunnel = {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

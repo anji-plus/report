@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:05:52
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:05:53
+ * @LastEditTime: 2021-09-28 14:20:30
  */
 export const widgetTime =  {
     code: 'widget-time',
@@ -111,7 +111,7 @@ export const widgetTime =  {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -119,7 +119,7 @@ export const widgetTime =  {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:00:00
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:04:32
+ * @LastEditTime: 2021-09-28 14:17:39
  */
 export const widgetMarquee = {
     code: 'widget-marquee',
@@ -119,7 +119,7 @@ export const widgetMarquee = {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: '文本框',
@@ -129,7 +129,7 @@ export const widgetMarquee = {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
           chartType: 'widget-text',
@@ -144,7 +144,7 @@ export const widgetMarquee = {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -152,7 +152,7 @@ export const widgetMarquee = {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

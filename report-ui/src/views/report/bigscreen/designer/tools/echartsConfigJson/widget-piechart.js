@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:28:20
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:28:20
+ * @LastEditTime: 2021-09-28 14:19:19
  */
 export const widgetPiechart =   {
     code: 'widget-piechart',
@@ -346,7 +346,7 @@ export const widgetPiechart =   {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: [{"value": 1048,"name": "搜索引擎"},{"value": 735, "name": "直接访问"},{"value": 580, "name": "邮件营销"},{"value": 484,"name":"联盟广告"},{"value":300,"name":"视频广告"}]
@@ -356,7 +356,7 @@ export const widgetPiechart =   {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           chartType: 'widget-piechart',
           relactiveDomValue: 'dynamicData',
@@ -371,7 +371,7 @@ export const widgetPiechart =   {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -379,7 +379,7 @@ export const widgetPiechart =   {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

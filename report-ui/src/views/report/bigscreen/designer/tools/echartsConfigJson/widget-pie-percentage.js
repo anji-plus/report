@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:34:01
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:34:02
+ * @LastEditTime: 2021-09-28 14:18:45
  */
 export const widgetPiePercentage = {
     code: 'widgetPiePercentageChart',
@@ -198,7 +198,7 @@ export const widgetPiePercentage = {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: 60,
@@ -208,7 +208,7 @@ export const widgetPiePercentage = {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           chartType: 'widget-piechart',
           dictKey: 'TEXT_PROPERTIES',
@@ -223,7 +223,7 @@ export const widgetPiePercentage = {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -231,7 +231,7 @@ export const widgetPiePercentage = {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

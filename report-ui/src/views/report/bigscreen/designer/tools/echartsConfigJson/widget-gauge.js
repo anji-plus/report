@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:30:25
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:30:25
+ * @LastEditTime: 2021-09-28 14:13:17
  */
 export const widgetGauge = {
   code: 'widget-gauge',
@@ -321,7 +321,7 @@ export const widgetGauge = {
         label: '静态数据',
         name: 'staticData',
         required: false,
-        placeholder: 'px',
+        placeholder: '',
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: 50,
@@ -331,7 +331,7 @@ export const widgetGauge = {
         label: '',
         name: 'dynamicData',
         required: false,
-        placeholder: 'px',
+        placeholder: '',
         relactiveDom: 'dataType',
         chartType: 'widget-text',
         dictKey: 'TEXT_PROPERTIES',
@@ -346,7 +346,7 @@ export const widgetGauge = {
         label: '左边距',
         name: 'left',
         required: false,
-        placeholder: 'px',
+        placeholder: '',
         value: 0,
       },
       {
@@ -354,7 +354,7 @@ export const widgetGauge = {
         label: '上边距',
         name: 'top',
         required: false,
-        placeholder: 'px',
+        placeholder: '',
         value: 0,
       },
       {

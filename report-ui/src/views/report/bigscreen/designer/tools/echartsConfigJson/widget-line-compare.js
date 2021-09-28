@@ -3,8 +3,8 @@
  * @version:
  * @Author: foming
  * @Date: 2021-08-29 07:39:35
- * @LastEditors: foming
- * @LastEditTime: 2021-08-30
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-09-28 14:15:42
  */
 export const widgetLineCompare = {
   code: 'widgetLineCompareChart',
@@ -707,7 +707,7 @@ export const widgetLineCompare = {
         label: '静态数据',
         name: 'staticData',
         required: false,
-        placeholder: 'px',
+        placeholder: '',
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
@@ -728,7 +728,7 @@ export const widgetLineCompare = {
         label: '',
         name: 'dynamicData',
         required: false,
-        placeholder: 'px',
+        placeholder: '',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
         chartType: 'widget-stackchart',
@@ -743,7 +743,7 @@ export const widgetLineCompare = {
         label: '左边距',
         name: 'left',
         required: false,
-        placeholder: 'px',
+        placeholder: '',
         value: 0,
       },
       {
@@ -751,7 +751,7 @@ export const widgetLineCompare = {
         label: '上边距',
         name: 'top',
         required: false,
-        placeholder: 'px',
+        placeholder: '',
         value: 0,
       },
       {

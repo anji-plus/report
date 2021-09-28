@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:07:23
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:07:24
+ * @LastEditTime: 2021-09-28 14:14:51
  */
 export const widgetImage = {
     code: 'widget-image',
@@ -71,7 +71,7 @@ export const widgetImage = {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -79,7 +79,7 @@ export const widgetImage = {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

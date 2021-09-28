@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:26:48
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:26:49
+ * @LastEditTime: 2021-09-28 14:11:57
  */
 export const widgetBarlinechart = {
     code: 'widget-barlinechart',
@@ -711,7 +711,7 @@ export const widgetBarlinechart = {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: {"xAxis": ["1月", "2月", "3月", "4月", "5月","6月", "7月", "8月","9月","10月","11月","12月"],"series": [{"type": "bar","name": "货运量","data": [2.6,5.9,9,26.4,28.7,70.7,175.6,182.2,48.7,18.8,6,2.3]},{"type": "line","name": "货运总量","yAxisIndex": 1,"data": [2,2.2,3.3,4.5,6.3,10.2,20.3,23.4,23,16.5,12,6.2]}]},
@@ -721,7 +721,7 @@ export const widgetBarlinechart = {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           chartType: 'widget-barlinechart',
           dictKey: 'BAR_LINE_PROPERTIES',
@@ -735,7 +735,7 @@ export const widgetBarlinechart = {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -743,7 +743,7 @@ export const widgetBarlinechart = {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:31:21
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:31:21
+ * @LastEditTime: 2021-09-28 14:17:20
  */
 export const widgetMap = {
     code: 'widget-map',
@@ -29,7 +29,7 @@ export const widgetMap = {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -37,7 +37,7 @@ export const widgetMap = {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

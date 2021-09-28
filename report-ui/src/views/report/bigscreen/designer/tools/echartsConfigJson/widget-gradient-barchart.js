@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:23:41
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:23:42
+ * @LastEditTime: 2021-09-28 14:14:08
  */
 export const widgetGradientBarchart =  {
     code: 'widget-gradient-color-barchart',
@@ -549,7 +549,7 @@ export const widgetGradientBarchart =  {
           label: '静态数据',
           name: 'staticData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
           value: {"categories": ["苹果","三星","小米","oppo","vivo"],"series": [{"name": "手机品牌","data": [1000,2229,3879,2379,4079]}]},
@@ -559,7 +559,7 @@ export const widgetGradientBarchart =  {
           label: '',
           name: 'dynamicData',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
           chartType: 'widget-barchart',
@@ -574,7 +574,7 @@ export const widgetGradientBarchart =  {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -582,7 +582,7 @@ export const widgetGradientBarchart =  {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

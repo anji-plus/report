@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:03:58
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:05:04
+ * @LastEditTime: 2021-09-28 14:14:21
  */
 export const widgetHref =  {
     code: 'widget-href',
@@ -125,7 +125,7 @@ export const widgetHref =  {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -133,7 +133,7 @@ export const widgetHref =  {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {

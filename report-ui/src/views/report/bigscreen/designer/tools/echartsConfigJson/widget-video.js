@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:10:22
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 07:10:23
+ * @LastEditTime: 2021-09-28 14:20:47
  */
 export const widgetVideo =  {
     code: 'widget-video',
@@ -40,7 +40,7 @@ export const widgetVideo =  {
           label: '左边距',
           name: 'left',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
@@ -48,7 +48,7 @@ export const widgetVideo =  {
           label: '上边距',
           name: 'top',
           required: false,
-          placeholder: 'px',
+          placeholder: '',
           value: 0,
         },
         {
