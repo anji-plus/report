@@ -144,7 +144,7 @@ export default {
   created() {},
   methods: {
     titleBuild() {
-      return "【" + this.reportName + "】" + "报表分享-" + this.reportCode;
+      return "【" + this.reportName + "】" + "报表分享";
     },
     selectChange(val) {
       this.dialogForm.shareValidType = val;
