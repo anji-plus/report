@@ -129,7 +129,7 @@ export default {
     },
     // 数据集回显
     async echoDataSet(val) {
-      console.log(val);
+      if (!val) return;
       const setCode = val.setCode;
 
       await this.loadDataSet();
@@ -142,10 +142,10 @@ export default {
       this.echoDynamicData(val);
     },
     echoDynamicData(val) {
-      const chartProperties = val.chartProperties;
+      const chartProperties = this.deepClone(val.chartProperties);
+      this.chartProperties = chartProperties;
       if (this.userNameList.length > 0) {
       }
-
       if (this.setParamList.length > 0) {
         for (let i = 0; i < this.setParamList.length; i++) {
           const item = this.setParamList[i];
@@ -154,9 +154,6 @@ export default {
           }
         }
       }
-      console.log(this.params);
-      // console.log(this.userNameList);
-      // console.log(this.setParamList);
     }
   }
 };

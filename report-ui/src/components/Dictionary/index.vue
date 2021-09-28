@@ -54,7 +54,9 @@ export default {
   created() {
     this.getSystem();
   },
-  mounted() {},
+  mounted() {
+    this.dictionary = this.value;
+  },
   methods: {
     // 获取数据字典
     async getSystem() {
