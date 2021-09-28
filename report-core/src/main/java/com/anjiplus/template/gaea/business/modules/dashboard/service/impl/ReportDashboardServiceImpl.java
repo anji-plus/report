@@ -446,14 +446,19 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
             return data;
         }
         //获取时间轴字段和解析时间颗粒度
-        chartProperties.forEach((key, value) -> {
+
+        for (Map.Entry<String, String> entry : chartProperties.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
             dto.setParticles(value);
             setTimeLineFormat(dto);
             if (StringUtils.isNotBlank(dto.getDataTimeFormat())) {
                 dto.setTimeLineFiled(key);
-                return;
+                break;
             }
-        });
+
+        }
+
 
         if (StringUtils.isBlank(dto.getDataTimeFormat())) {
             return data;
