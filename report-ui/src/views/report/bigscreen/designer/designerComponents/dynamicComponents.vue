@@ -26,7 +26,7 @@
       </el-form-item>
       <el-form-item v-for="item in setParamList" :key="item" :label="item">
         <Dictionary
-          v-model="params"
+          v-model="params[item]"
           :dict-key="getDictKey()"
           @input="selectParams($event, item)"
         />
@@ -58,7 +58,7 @@ export default {
   props: {
     chartType: String,
     dictKey: String,
-    props: ["formData"]
+    formData: Object
   },
   data() {
     return {
@@ -67,8 +67,16 @@ export default {
       userNameList: [], // 用户
       setParamList: [], // 对应的不同的图形数据参数
       params: {},
-      chartProperties: {},
+      chartProperties: {}
     };
+  },
+  watch: {
+    formData: {
+      handler(val) {
+        this.echoDataSet(val);
+      },
+      deep: true
+    }
   },
   computed: {
     setCode() {
@@ -83,6 +91,7 @@ export default {
   },
   mounted() {
     this.loadDataSet();
+    this.echoDataSet(this.formData);
   },
   methods: {
     async loadDataSet() {
@@ -115,8 +124,39 @@ export default {
     selectParams(val, key) {
       this.chartProperties[key] = val;
     },
-    getDictKey(){
-      return this.dictKey == null ? 'CHART_PROPERTIES' : this.dictKey
+    getDictKey() {
+      return this.dictKey == null ? "CHART_PROPERTIES" : this.dictKey;
+    },
+    // 数据集回显
+    async echoDataSet(val) {
+      console.log(val);
+      const setCode = val.setCode;
+
+      await this.loadDataSet();
+
+      this.dataSetValue = this.dataSet.filter(
+        el => setCode == el.setCode
+      )[0].id;
+
+      await this.selectDataSet();
+      this.echoDynamicData(val);
+    },
+    echoDynamicData(val) {
+      const chartProperties = val.chartProperties;
+      if (this.userNameList.length > 0) {
+      }
+
+      if (this.setParamList.length > 0) {
+        for (let i = 0; i < this.setParamList.length; i++) {
+          const item = this.setParamList[i];
+          if (chartProperties.hasOwnProperty(item)) {
+            this.params[item] = chartProperties[item];
+          }
+        }
+      }
+      console.log(this.params);
+      // console.log(this.userNameList);
+      // console.log(this.setParamList);
     }
   }
 };

@@ -25,7 +25,6 @@
               style="width:100%"
               v-model.trim="formData[item.name]"
               controls-position="right"
-              :placeholder="item.placeholder"
               @change="changed($event, item.name)"
             />
 
@@ -137,7 +136,7 @@
             v-if="item.type == 'dycustComponents' && inputShow[item.name]"
             v-model="formData[item.name]"
             :chart-type="item.chartType"
-            :dict-key='item.dictKey'
+            :dict-key="item.dictKey"
             @change="changed($event, item.name)"
           />
           <dynamic-add-table
