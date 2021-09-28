@@ -215,11 +215,11 @@ export default {
   width: 100%;
 }
 
-.txtScroll-top .infoList li:nth-child(n) {
+/*.txtScroll-top .infoList li:nth-child(n) {
   background: rgb(0, 59, 81);
 }
 
 .txtScroll-top .infoList li:nth-child(2n) {
   background: rgb(10, 39, 50);
-}
+}*/
 </style>

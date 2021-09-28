@@ -11,7 +11,7 @@
         </el-col>
         <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
           <el-form-item label="数据源编码" prop="sourceCode">
-            <el-input :disabled="updataDisabled" v-model.trim="dialogForm.sourceCode" />
+            <el-input :disabled="updataDisabled" v-model.trim="dialogForm.sourceCode" placeholder="唯一标识" />
           </el-form-item>
         </el-col>
         <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">

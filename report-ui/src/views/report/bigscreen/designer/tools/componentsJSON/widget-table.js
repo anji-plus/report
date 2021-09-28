@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 表格json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:16:10
  * @LastEditors: qianlishi
@@ -133,7 +133,7 @@ export const widgetTable = {
               },
               {
                 type: 'vue-color',
-                label: '表格背景',
+                label: '表格背景色',
                 name: 'tableBgColor',
                 require: false,
                 placeholder: '',
