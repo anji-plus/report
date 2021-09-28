@@ -93,7 +93,11 @@
               >查询</el-button
             >
             <el-button type="danger" @click="handleResetForm()">重置</el-button>
-            <a style="margin-left: 8px" @click="handleToggleMoreSearch">
+            <a
+              v-if="queryFormFieldExcludeTree.length > 3"
+              style="margin-left: 8px"
+              @click="handleToggleMoreSearch"
+            >
               {{ queryParams.showMoreSearch == true ? "收起" : "展开" }}
               <i
                 :class="
