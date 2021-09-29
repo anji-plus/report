@@ -50,7 +50,9 @@ module.exports = {
                     children: [
                         {title: '数据源', path: '/guide/datasource'},
                         {title: '数据集', path: '/guide/dataset'},
-                        {title: '大屏设计', path: '/guide/dashboard'},
+                        {title: '报表管理', path: '/guide/reportmanager'},
+                        {title: '大屏报表', path: '/guide/dashboard'},
+                        {title: '表格报表', path: '/guide/execl'},
                         {title: '导入导出', path: '/guide/importexport'},
                     ]
                 },
