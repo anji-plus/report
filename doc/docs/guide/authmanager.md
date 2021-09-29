@@ -19,4 +19,11 @@
 为角色分配权限，可看已有角色示例 <br>
 ![img](../picture/authmanager/img_6.png) <br>
 
+## 导入导出权限
+**注**：现在guest用户的权限是底层写死只有访问权限，无实质操作权限。<br>
+导入导出的权限是在 角色 --> 分配权限中控制。 <br>
+![img](../picture/authmanager/img_7.png) <br>
+用户绑定了角色，角色则绑定了权限，是这样一层关系。 <br>
+
+
 
