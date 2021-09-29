@@ -1,16 +1,21 @@
-## 介绍
-## 新增大屏
-![img.png](../picture/dashboard/img.png)
+## 设计大屏
+进入大屏设计方法1： <br>
+从报表管理模块选择需要设计的大屏，按图示进入大屏设计界面 <br>
+![img](../picture/dashboard/img22.png) <br>
+
+进入大屏设计方法2： <br>
+从大屏报表模块选择需要设计的大屏，按图示进入大屏设计界面 <br>
+![img](../picture/dashboard/img23.png) <br>
 
 ## 大屏简介
-![img_2.png](../picture/dashboard/img_2.png)
+![img_2.png](../picture/dashboard/img_2.png) <br>
 
 ## 工具栏
 ### 文本框
-![img_3.png](../picture/dashboard/img_3.png)
-![img_4.png](../picture/dashboard/img_4.png)
-![img_5.png](../picture/dashboard/img_5.png)
-![img_6.png](../picture/dashboard/img_6.png)
+![img_3.png](../picture/dashboard/img_3.png) <br>
+![img_4.png](../picture/dashboard/img_4.png) <br>
+![img_5.png](../picture/dashboard/img_5.png) <br>
+![img_6.png](../picture/dashboard/img_6.png) <br>
 
 ### 滚动文本
 已支持动态数据，请参考文本框的操作 <br>
