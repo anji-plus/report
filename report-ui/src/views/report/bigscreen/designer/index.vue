@@ -1157,13 +1157,13 @@ li {
   clear: both;
 }
 
-.nav li {
+.nav > li {
   width: 55px;
-  text-align: center;
+  text-align: left;
   position: relative;
 }
 
-.nav li a {
+.nav > li a {
   float: left;
   padding: 12px 30px;
   color: #999;
@@ -1171,16 +1171,15 @@ li {
   text-decoration: none;
 }
 
-.nav li:hover {
+.nav > li:hover {
   color: #788994;
 }
 
-.nav li ul {
+.nav > li ul {
   visibility: hidden;
   position: absolute;
   z-index: 1000;
   list-style: none;
-  top: 38px;
   left: 0;
   padding: 0;
   background-color: rgb(36, 42, 48);
@@ -1190,7 +1189,7 @@ li {
   transition: all 0.2s ease-in-out;
 }
 
-.nav li:hover > ul {
+.nav > li:hover > ul {
   opacity: 1;
   visibility: visible;
   margin: 0;
@@ -1243,6 +1242,10 @@ li {
   margin-right: 3px;
   display: block;
   float: left;
+}
+
+.nav .item {
+  padding: 5px;
 }
 
 /deep/ .vue-ruler-h {
