@@ -37,6 +37,7 @@ spring:
     breakAfterAcquireFailure: true # 数据库服务宕机自动重连机制
     timeBetweenConnectErrorMillis: 300000 # 连接出错后重试时间间隔
   flyway:
+    enabled: true    #是否开启flyway，默认true.
     baseline-on-migrate: true
     #数据库连接配置
     url: ${spring.datasource.url}
@@ -48,7 +49,7 @@ spring:
 
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql打印
     call-setters-on-nulls: true
   mapperLocations:
     - classpath*:/mapper/**/*.xml

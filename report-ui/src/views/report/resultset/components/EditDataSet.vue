@@ -15,7 +15,7 @@
         label-width="130px"
       >
         <el-row :gutter="10">
-          <el-col :xs="24" :sm="20" :md="6" :lg="6" :xl="6">
+          <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
             <el-form-item label="数据源" prop="sourceCode">
               <el-select
                 v-model.trim="formData.sourceCode"
@@ -32,16 +32,17 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
+          <el-col :xs="24" :sm="20" :md="7" :lg="7" :xl="7">
             <el-form-item label="数据集编码" prop="setCode">
               <el-input
                 :disabled="updataDisabled"
                 v-model.trim="formData.setCode"
+                placeholder="唯一标识"
                 size="mini"
               />
             </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
+          <el-col :xs="24" :sm="20" :md="7" :lg="7" :xl="7">
             <el-form-item label="数据集名称" prop="setName">
               <el-input v-model.trim="formData.setName" size="mini" />
             </el-form-item>
@@ -208,6 +209,7 @@
                         <el-dialog
                           :title="dialogTitle"
                           :visible.sync="dialogSwitchVisible"
+                          :close-on-click-modal="false"
                           width="60%"
                           min-height="400px"
                           append-to-body
@@ -345,6 +347,7 @@
     <el-dialog
       :title="title"
       :visible.sync="dialogPermissionVisible"
+      :close-on-click-modal="false"
       width="60%"
     >
       <div class="codemirror">
@@ -383,6 +386,7 @@ import "codemirror/lib/codemirror.css"; // 核心样式
 import "codemirror/theme/cobalt.css"; // 引入主题后还需要在 options 中指定主题才会生效
 import vueJsonEditor from "vue-json-editor";
 import MonacoEditor from "./MonacoEditor.vue";
+import {validateEngOrNum} from "@/utils/validate";
 export default {
   name: "Support",
   components: { Dictionary, codemirror, vueJsonEditor, MonacoEditor },
@@ -447,7 +451,7 @@ export default {
       itemFilterList: [
         {
           transformType: "js",
-          transformScript: `function dataTransform(data){\n\t//自定义脚本内容\n\treturn data;\n}`
+          transformScript: ``
         }
       ],
       transformScript: `function dataTransform(data){\n\t//自定义脚本内容\n\treturn data;\n}`,
@@ -469,7 +473,8 @@ export default {
           { required: true, message: "数据集名称必填", trigger: "blur" }
         ],
         setCode: [
-          { required: true, message: "数据集编码必填", trigger: "blur" }
+          { required: true, message: "数据集编码必填", trigger: "blur" },
+          { validator: validateEngOrNum, trigger: 'blur' },
         ],
         sourceCode: [
           { required: true, message: "数据源必选", trigger: "change" }
@@ -487,7 +492,7 @@ export default {
           sampleItem: "",
           mandatory: true,
           requiredFlag: 1,
-          validationRules: `function verification(data){\n\t//自定义脚本内容\n\treturn true;\n}`
+          validationRules: `function verification(data){\n\t//自定义脚本内容\n\t//可返回true/false单纯校验键入的data正确性\n\t//可返回文本，实时替换,比如当前时间等\n\t//return "2099-01-01 00:00:00";\n\treturn true;\n}`
         }
       ],
       isRowData: {},
@@ -760,7 +765,7 @@ export default {
       this.title = "自定义高级规则";
       if (this.isRowData.sampleItem != "") {
         this.isRowData = row;
-        const fnCont = `function verification(data){\n\t//自定义脚本内容\n\treturn true;\n}`;
+        const fnCont = `function verification(data){\n\t//自定义脚本内容\n\t//可返回true/false单纯校验键入的data正确性\n\t//可返回文本，实时替换,比如当前时间等\n\t//return "2099-01-01 00:00:00";\n\treturn true;\n}`;
         this.validationRules = row.validationRules
           ? row.validationRules
           : fnCont;
@@ -797,10 +802,11 @@ export default {
     // 自定义高级规则
     async testResultset() {
       this.isRowData.validationRules = this.validationRules;
+      console.log(this.isRowData,"12345678")
       const { code, message, data } = await verificationSet(this.isRowData);
       if (code == "200") {
         if (data) {
-          this.$message.success("校验通过");
+          this.$message.success("返回结果："+ data);
         } else {
           this.$message.warning("当前示例值校验不通过");
         }
@@ -821,7 +827,7 @@ export default {
         sampleItem: "",
         mandatory: true,
         requiredFlag: 1,
-        validationRules: `function verification(data){\n\t//自定义脚本内容\n\treturn true;\n}`
+        validationRules: `function verification(data){\n\t//自定义脚本内容\n\t//可返回true/false单纯校验键入的data正确性\n\t//可返回文本，实时替换,比如当前时间等\n\t//return "2099-01-01 00:00:00";\n\treturn true;\n}`
       });
     },
     async submit(formName) {
@@ -834,10 +840,12 @@ export default {
             if (this.dialogFormVisibleTitle === "新增数据集") {
               const { code } = await addDataSet(this.formData);
               if (code != "200") return;
+              this.$emit('refreshList')
               this.closeDialog();
             } else {
               const { code } = await editDataSet(this.formData);
               if (code != "200") return;
+              this.$emit('refreshList')
               this.closeDialog();
             }
           } else {

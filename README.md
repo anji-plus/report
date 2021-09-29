@@ -1,7 +1,7 @@
 ## 简介
 
 &emsp; &emsp; AJ-Report由 [安吉加加](http://www.anji-plus.com) 开源的一个BI平台，酷炫大屏展示，能随时随地掌控业务动态，让每个决策都有数据支撑。<br>
-&emsp; &emsp; 多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，支持17种大屏组件，不会开发，照着设计稿也可以制作大屏。<br>
+&emsp; &emsp; 多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，支持17+种大屏组件，不会开发，照着设计稿也可以制作大屏。<br>
 &emsp; &emsp; 三步轻松完成大屏设计：配置数据源---->写SQL配置数据集---->拖拽配置大屏---->保存发布。欢迎体验。
 
 ## 在线体验
@@ -85,6 +85,7 @@
 - [vue-echarts](https://www.npmjs.com/package/vue-echarts/): vue-echarts是封装后的vue插件,基于 ECharts v4.0.1+ 开发
 - [vue-superslide](https://www.npmjs.com/package/vue-super-slider/): Vue-SuperSlide(Github) 是 SuperSlide 的 Vue 封装版本
 - [vuedraggable](https://github.com/SortableJS/Vue.Draggable/): 是一款基于Sortable.js实现的vue拖拽插件。
+- [luckysheet](https://gitee.com/mengshukeji/Luckysheet): Luckysheet ，一款纯前端类似excel的在线表格，功能强大、配置简单、完全开源。
 
 ## 编译打包
 
@@ -142,11 +143,11 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 已知以下版本存在兼容性问题
 - Node.js V16
 - Jdk 11
-- Mysql 8.0（8.0.26版本没有问题，8.0.21版本存在问题）
+- Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
 - Windows 11
 
-AJ-Report 使用Druid，版本为1.2.6，如果你觉得你配置都是正常但是数据源测试不过，请尝试修改pom文件降低Druid版本。
-例如：MSSQLSERVER 2014，请将Druid版本降低为1.2.1以下
+AJ-Report 使用Druid，版本为1.2.6，如果你觉得你配置都是正常但是数据源测试不过，请尝试修改pom文件降低Druid版本。 <br>
+例如：MSSQLSERVER 2014，请将Druid版本降低为1.2.1以下。 <br>
 
 ## 商业授权
 AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.0.html) <br>

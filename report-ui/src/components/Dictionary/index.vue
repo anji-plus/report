@@ -28,7 +28,8 @@ export default {
   name: "GetDictionary",
   props: {
     dictKey: String, // 字典code
-    updataDict: String // 回显绑定的值
+    updataDict: String, // 回显绑定的值
+    value: String
   },
   data() {
     return {
@@ -43,18 +44,18 @@ export default {
         this.getSystem();
       }
     },
-    updataDict: {
-      immediate: true,
-      handler() {
-        this.dictionary = this.updataDict;
-      }
+    value: {
+      handler(val) {
+        this.dictionary = val;
+      },
+      deep: true
     }
   },
   created() {
     this.getSystem();
   },
   mounted() {
-    this.dictionary = this.updataDict;
+    this.dictionary = this.value;
   },
   methods: {
     // 获取数据字典

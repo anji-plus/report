@@ -3,6 +3,7 @@ package com.anjiplus.template.gaea.business.config;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.flyway.FlywayProperties;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import java.sql.Statement;
 @Slf4j
 @Component
 @AllArgsConstructor
+@ConditionalOnProperty(value = {"spring.flyway.enabled"})
 public class DatabaseInitializer {
 
     private final FlywayProperties flywayProperties;

@@ -5,9 +5,7 @@
 </template>
 
 <script>
-/*import echarts from "echarts";
-var myChart = echarts.init(this.$refs.myChart)*/
-var per = 60 ;
+var per = 60;
 export default {
   name: "widgetPiePercentageChart",//百分比图参考：https://www.makeapie.com/editor.html?c=xFkzKG-bpl
   components: {},
@@ -19,7 +17,6 @@ export default {
     return {
       angle: 0,
       options: {
-        //backgroundColor: '#061740',
         title: {
           text: '{nums|' + per + '}{percent|%}',
           x: 'center',
@@ -341,10 +338,10 @@ export default {
     this.editorOptions();
   },
   mounted() {
-/*        setInterval(() => {
-          this.angle = this.angle + 3
-          myChart.setOption(options,true)
-        }, 1000);*/
+    /*        setInterval(() => {
+              this.angle = this.angle + 3
+              myChart.setOption(options,true)
+            }, 1000);*/
   },
   methods: {
     //轴point设置
@@ -358,8 +355,6 @@ export default {
     },
     editorOptions() {
       this.setOptionsTitle();
-      //this.setOptionsTooltip();
-      //this.setOptionsLegend();
       this.setOptionsColor();
       this.setOptionsData();
       this.setOptionLine();
@@ -419,11 +414,11 @@ export default {
       };
       itemStyle['normal'] = normal
     },
-    setOptionSurplusColor(){
+    setOptionSurplusColor() {
       const itemStyle = this.options.series[6]['data'][1]['itemStyle']
       const normal = {
-          color: this.optionsSetup.colorsurplus,
-        };
+        color: this.optionsSetup.colorsurplus,
+      };
       itemStyle['normal'] = normal
     },
     setOptionLine() {
@@ -451,8 +446,8 @@ export default {
     staticDataFn(val) {
       const title = this.options.title;
       title.text = '{nums|' + val + '}{percent|%}';
-      this.options.series[6]['data'][0]['value'] = val ;
-      this.options.series[6]['data'][1]['value'] = 100 - val ;
+      this.options.series[6]['data'][0]['value'] = val;
+      this.options.series[6]['data'][1]['value'] = 100 - val;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;

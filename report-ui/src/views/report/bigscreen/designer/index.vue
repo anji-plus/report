@@ -87,7 +87,7 @@
             <i class="iconfont iconyulan" @click="viewScreen"></i>
           </el-tooltip>
         </span>
-        <span class="btn">
+        <span class="btn" v-permission="'bigScreenManage:export'">
           <el-tooltip
             class="item"
             effect="dark"
@@ -109,7 +109,7 @@
             </el-upload>
           </el-tooltip>
         </span>
-        <span class="btn border-left">
+        <span class="btn border-left" v-permission="'bigScreenManage:import'">
           <ul class="nav">
             <li>
               <i class="iconfont icondaochu"></i
@@ -286,10 +286,10 @@ import {
 } from "@/api/bigscreen";
 import { widgetTools, getToolByCode } from "./tools/index";
 import widget from "./widget/widget.vue";
-import dynamicForm from "./form/dynamicForm.vue";
+import dynamicForm from "./designerComponents/dynamicForm.vue";
 import draggable from "vuedraggable";
 import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
-import contentMenu from "./form/contentMenu";
+import contentMenu from "./designerComponents/contentMenu";
 import { getToken } from "@/utils/auth";
 
 export default {
@@ -572,6 +572,18 @@ export default {
         showDataSet: val
       };
       exportDashboard(param).then(res => {
+        const that = this;
+        const type = res.type;
+        if (type == "application/json") {
+          var reader = new FileReader();
+          reader.readAsText(res, "utf-8");
+          reader.onload = function() {
+            const data = JSON.parse(reader.result);
+            that.$message.error(data.message);
+          };
+          return;
+        }
+
         const blob = new Blob([res], { type: "application/octet-stream" });
         if (window.navigator.msSaveOrOpenBlob) {
           //msSaveOrOpenBlob方法返回bool值
@@ -591,12 +603,19 @@ export default {
       this.$refs.upload.clearFiles();
       //刷新大屏页面
       this.initEchartData();
-      this.$message({
-        message: "导入成功！",
-        type: "success"
-      });
+      if (response.code == "200") {
+        this.$message({
+          message: "导入成功！",
+          type: "success"
+        });
+      } else {
+        this.$message({
+          message: response.message,
+          type: "error"
+        });
+      }
     },
-    handleError() {
+    handleError(err) {
       this.$message({
         message: "上传失败！",
         type: "error"
@@ -1157,13 +1176,13 @@ li {
   clear: both;
 }
 
-.nav li {
+.nav > li {
   width: 55px;
-  text-align: center;
+  text-align: left;
   position: relative;
 }
 
-.nav li a {
+.nav > li a {
   float: left;
   padding: 12px 30px;
   color: #999;
@@ -1171,16 +1190,15 @@ li {
   text-decoration: none;
 }
 
-.nav li:hover {
+.nav > li:hover {
   color: #788994;
 }
 
-.nav li ul {
+.nav > li ul {
   visibility: hidden;
   position: absolute;
   z-index: 1000;
   list-style: none;
-  top: 38px;
   left: 0;
   padding: 0;
   background-color: rgb(36, 42, 48);
@@ -1190,7 +1208,7 @@ li {
   transition: all 0.2s ease-in-out;
 }
 
-.nav li:hover > ul {
+.nav > li:hover > ul {
   opacity: 1;
   visibility: visible;
   margin: 0;
@@ -1243,6 +1261,10 @@ li {
   margin-right: 3px;
   display: block;
   float: left;
+}
+
+.nav .item {
+  padding: 5px;
 }
 
 /deep/ .vue-ruler-h {
