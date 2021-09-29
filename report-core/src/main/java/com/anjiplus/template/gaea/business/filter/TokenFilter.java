@@ -124,6 +124,7 @@ public class TokenFilter implements Filter {
                 && !uri.endsWith("/dataSet/testTransform")
                 && !uri.endsWith("/reportDashboard/getData")
                 && !uri.startsWith("/dict")
+                && !uri.endsWith("/reportExcel/preview")
         ) {
             //不允许删除
             String method = request.getMethod();
