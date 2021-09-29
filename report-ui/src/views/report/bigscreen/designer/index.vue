@@ -591,12 +591,20 @@ export default {
       this.$refs.upload.clearFiles();
       //刷新大屏页面
       this.initEchartData();
-      this.$message({
-        message: "导入成功！",
-        type: "success"
-      });
+      if (response.code == '200') {
+        this.$message({
+          message: "导入成功！",
+          type: "success"
+        });
+      }else {
+        this.$message({
+          message: response.message,
+          type: "error"
+        });
+      }
+
     },
-    handleError() {
+    handleError(err) {
       this.$message({
         message: "上传失败！",
         type: "error"
