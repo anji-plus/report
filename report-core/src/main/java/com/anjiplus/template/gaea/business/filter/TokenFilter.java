@@ -8,6 +8,7 @@ import com.anji.plus.gaea.utils.JwtBean;
 import com.anjiplus.template.gaea.business.constant.BusinessConstant;
 import com.anjiplus.template.gaea.business.util.JwtUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -129,9 +130,11 @@ public class TokenFilter implements Filter {
             if (HttpMethod.POST.name().equalsIgnoreCase(method)
                     || HttpMethod.PUT.name().equalsIgnoreCase(method)
                     || HttpMethod.DELETE.name().equalsIgnoreCase(method)
+                    || uri.contains("/reportDashboard/export")
             ) {
                 ResponseBean responseBean = ResponseBean.builder().code("50001")
                         .message("在线体验版本，不允许此操作。请自行下载本地运行").build();
+                response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
                 response.getWriter().print(JSONObject.toJSONString(responseBean));
                 return;
             }
@@ -173,6 +176,7 @@ public class TokenFilter implements Filter {
 
     private void error(HttpServletResponse response) throws IOException {
         ResponseBean responseBean = ResponseBean.builder().code("50014").message("The Token has expired").build();
+        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         response.getWriter().print(JSONObject.toJSONString(responseBean));
     }
 }
