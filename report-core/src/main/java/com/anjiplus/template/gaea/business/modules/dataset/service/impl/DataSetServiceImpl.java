@@ -315,14 +315,16 @@ public class DataSetServiceImpl implements DataSetService {
         if (null == dataSetParamDtoList || dataSetParamDtoList.size() <= 0) {
             return;
         }
-        List<DataSetParam> dataSetParamList = new ArrayList<>();
+//        List<DataSetParam> dataSetParamList = new ArrayList<>();
         dataSetParamDtoList.forEach(dataSetParamDto -> {
             DataSetParam dataSetParam = new DataSetParam();
             BeanUtils.copyProperties(dataSetParamDto, dataSetParam);
             dataSetParam.setSetCode(setCode);
-            dataSetParamList.add(dataSetParam);
+            //不采用批量
+            dataSetParamService.insert(dataSetParam);
+//            dataSetParamList.add(dataSetParam);
         });
-        dataSetParamService.insertBatch(dataSetParamList);
+//        dataSetParamService.insertBatch(dataSetParamList);
 
     }
 
@@ -335,15 +337,17 @@ public class DataSetServiceImpl implements DataSetService {
         if (null == dataSetTransformDtoList || dataSetTransformDtoList.size() <= 0) {
             return;
         }
-        List<DataSetTransform> dataSetTransformList = new ArrayList<>();
+//        List<DataSetTransform> dataSetTransformList = new ArrayList<>();
         for (int i = 0; i < dataSetTransformDtoList.size(); i++) {
             DataSetTransform dataSetTransform = new DataSetTransform();
             BeanUtils.copyProperties(dataSetTransformDtoList.get(i), dataSetTransform);
             dataSetTransform.setOrderNum(i + 1);
             dataSetTransform.setSetCode(setCode);
-            dataSetTransformList.add(dataSetTransform);
+            //不采用批量
+            dataSetTransformService.insert(dataSetTransform);
+//            dataSetTransformList.add(dataSetTransform);
         }
-        dataSetTransformService.insertBatch(dataSetTransformList);
+//        dataSetTransformService.insertBatch(dataSetTransformList);
     }
 
 }

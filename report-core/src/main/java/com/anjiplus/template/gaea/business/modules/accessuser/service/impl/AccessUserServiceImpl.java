@@ -179,19 +179,22 @@ public class AccessUserServiceImpl implements AccessUserService {
         accessUserWrapper.eq(AccessUserRole::getLoginName, loginName);
         List<AccessUserRole> accessUserRoles = accessUserRoleMapper.selectList(accessUserWrapper);
         Set<String> roleCodeSet = accessUserRoles.stream().map(AccessUserRole::getRoleCode).collect(Collectors.toSet());
-
-        LambdaQueryWrapper<AccessRoleAuthority> accessRoleAuthorityWrapper = Wrappers.lambdaQuery();
-        accessRoleAuthorityWrapper.select(AccessRoleAuthority::getTarget, AccessRoleAuthority::getAction);
-        accessRoleAuthorityWrapper.in(AccessRoleAuthority::getRoleCode, roleCodeSet);
-        List<AccessRoleAuthority> accessRoleAuthorities = accessRoleAuthorityMapper.selectList(accessRoleAuthorityWrapper);
-        List<String> authorities = accessRoleAuthorities.stream()
-                .map(accessRoleAuthority -> accessRoleAuthority.getTarget().concat(":").concat(accessRoleAuthority.getAction())).distinct().collect(Collectors.toList());
-
+        if (roleCodeSet.size() < 1) {
+            gaeaUser.setAuthorities(new ArrayList<>());
+        }else {
+            LambdaQueryWrapper<AccessRoleAuthority> accessRoleAuthorityWrapper = Wrappers.lambdaQuery();
+            accessRoleAuthorityWrapper.select(AccessRoleAuthority::getTarget, AccessRoleAuthority::getAction);
+            accessRoleAuthorityWrapper.in(AccessRoleAuthority::getRoleCode, roleCodeSet);
+            List<AccessRoleAuthority> accessRoleAuthorities = accessRoleAuthorityMapper.selectList(accessRoleAuthorityWrapper);
+            List<String> authorities = accessRoleAuthorities.stream()
+                    .map(accessRoleAuthority -> accessRoleAuthority.getTarget().concat(":").concat(accessRoleAuthority.getAction())).distinct().collect(Collectors.toList());
+            gaeaUser.setAuthorities(authorities);
+        }
 
         gaeaUser.setLoginName(loginName);
         gaeaUser.setRealName(accessUser.getRealName());
         gaeaUser.setToken(token);
-        gaeaUser.setAuthorities(authorities);
+
         String gaeaUserStr = JSONObject.toJSONString(gaeaUser);
         cacheHelper.stringSetExpire(userKey, gaeaUserStr, 3600);
 
