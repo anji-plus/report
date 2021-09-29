@@ -159,7 +159,7 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
                 .lambda().eq(ReportDashboardWidget::getReportCode, reportCode));
         List<ReportDashboardWidgetDto> widgets = dto.getWidgets();
 
-        List<ReportDashboardWidget> reportDashboardWidgetList = new ArrayList<>();
+//        List<ReportDashboardWidget> reportDashboardWidgetList = new ArrayList<>();
         for (int i = 0; i < widgets.size(); i++) {
             ReportDashboardWidget reportDashboardWidget = new ReportDashboardWidget();
             ReportDashboardWidgetDto reportDashboardWidgetDto = widgets.get(i);
@@ -175,9 +175,13 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
             reportDashboardWidget.setEnableFlag(1);
             reportDashboardWidget.setDeleteFlag(0);
             reportDashboardWidget.setSort((long) (i + 1));
-            reportDashboardWidgetList.add(reportDashboardWidget);
+
+            //兼容底层，不采用批量插入
+            reportDashboardWidgetService.insert(reportDashboardWidget);
+
+//            reportDashboardWidgetList.add(reportDashboardWidget);
         }
-        reportDashboardWidgetService.insertBatch(reportDashboardWidgetList);
+//        reportDashboardWidgetService.insertBatch(reportDashboardWidgetList);
 
     }
 
