@@ -43,6 +43,14 @@ export const widgetTable = {
           value: '16'
         },
         {
+          type: 'el-input-number',
+          label: '显示行数',
+          name: 'vis',
+          required: false,
+          placeholder: '',
+          value: '5'
+        },
+        {
           type: 'el-switch',
           label: '开启滚动',
           name: 'isRoll',
@@ -68,7 +76,7 @@ export const widgetTable = {
         },
         {
           type: 'el-switch',
-          label: '线条',
+          label: '边框线',
           name: 'isLine',
           required: false,
           placeholder: '',
