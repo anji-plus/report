@@ -105,16 +105,23 @@ unzip report-core-xxxx.zip
 cd report-core-xxxx
 vim conf/bootstrap-dev.yml 数据库连接
 sh bin/start.sh Linux启动
-bin/start.bat Windows修改第4行的JAVA_HOME后，双击启动
-
+bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
 启动后访问
 http://serverip:9095
 ```
-源码编译部署和发行版部署可参考在线文档 <br>
-https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html
+
+源码编译部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklySource.html <br>
+发行版部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html <br>
+前后端分类部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklySeparate.html <br>
+
+## 操作手册
+
+新建数据源（重置mysql数据源） --> 新建数据集（编写sql） --> 新建大屏（设计大屏） <br>
+请参考在线文档：https://report.anji-plus.com/report-doc/guide/datasource.html <br>
 
 ## SQL初始化
+
 sql文件的目录在：report-core --> src --> main --> resources -- > db.migration <br>
 
 系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件。 <br>
@@ -129,7 +136,6 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 <a href='http://www.fgkb.net/'><img src="https://report.anji-plus.com/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
 <a href='https://www.gykjweb.com/'><img src="https://report.anji-plus.com/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a>
 
-
 ## 近期计划
 
 - 完善地图插件
@@ -140,22 +146,29 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 - 现有图表功能修复/增加
 
 ## 版本问题
+
 已知以下版本存在兼容性问题
+
 - Node.js V16
 - Jdk 11
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
 - Windows 11
 
 AJ-Report 使用Druid，版本为1.2.6，如果你觉得你配置都是正常但是数据源测试不过，请尝试修改pom文件降低Druid版本。 <br>
-例如：MSSQLSERVER 2014，请将Druid版本降低为1.2.1以下。 <br>
+例如：MSSQLSERVER 2014，请将Druid版本降低为1.2.1以下（需要修改源码）。 <br>
+
+常见问题：https://report.anji-plus.com/report-doc/guide/question.html <br>
 
 ## 商业授权
+
 AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.0.html) <br>
 个人和企业，在直接使用、二次开发后商业使用，需要遵守：
+
 - 包含AJ-Report LICENSE文件（授权使用者免费使用AJ-Report专利和知识产权）
 - 如果修改了代码，需要在被修改的文件中说明
 - 在修改和有源代码衍生的代码中，需要带有原来代码中的协议，商标
-- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report LICENSE构成更改。
+- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report
+  LICENSE构成更改。
 
 如果您需要商业化增值服务，请加下面的微信沟通。
 
@@ -163,7 +176,8 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 微信群：<br>
-<img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "200" height = "200" align=left/>|
+<img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "200" height = "200" align=left/>
+|
 
 #### 开源不易，劳烦各位star ☺
 

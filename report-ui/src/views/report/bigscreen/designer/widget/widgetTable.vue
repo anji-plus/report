@@ -118,6 +118,10 @@ export default {
       this.handlerRollFn();
       this.handlerHead();
       this.handlerData();
+      this.visConfig();
+    },
+    visConfig(){
+      this.options.vis = this.optionsSetUp.vis;
     },
     handlerRollFn() {
       const options = this.options;
