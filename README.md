@@ -115,6 +115,11 @@ http://serverip:9095
 发行版部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html <br>
 前后端分类部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklySeparate.html <br>
 
+## 操作手册
+
+新建数据源（重置mysql数据源） --> 新建数据集（编写sql） --> 新建大屏（设计大屏） <br>
+请参考在线文档：https://report.anji-plus.com/report-doc/guide/datasource.html <br>
+
 ## SQL初始化
 
 sql文件的目录在：report-core --> src --> main --> resources -- > db.migration <br>
