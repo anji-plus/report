@@ -113,7 +113,7 @@ http://serverip:9095
 
 源码编译部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklySource.html <br>
 发行版部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html <br>
-前后端分类部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklySeparate.html <br>
+前后端分离部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklySeparate.html <br>
 
 ## 操作手册
 
