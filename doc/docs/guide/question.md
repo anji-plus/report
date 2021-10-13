@@ -32,6 +32,9 @@
   https://my.oschina.net/u/4517014/blog/5270828 <br>
   **注**：http数据源未来会挪到数据集那边 <br>
 
+- 执行编译脚本（build.sh）报错提示“*** No such file or directory” <br>
+可能原因1：Node.js版本不是V14，导致前端编译失败 <br>
+可能原因2：Mvn版本过低，导致后端编译失败 <br>
 
 
 
