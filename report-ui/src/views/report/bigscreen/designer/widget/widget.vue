@@ -6,6 +6,7 @@
  !-->
 <template>
   <avue-draggable
+    :step="step"
     :width="widgetsWidth"
     :height="widgetsHeight"
     :left="widgetsLeft"
@@ -89,7 +90,8 @@ export default {
     value: {
       type: [Object],
       default: () => {}
-    }
+    }，
+    step: Number
   },
   data() {
     return {
