@@ -90,7 +90,7 @@ export default {
     value: {
       type: [Object],
       default: () => {}
-    }，
+    },
     step: Number
   },
   data() {
