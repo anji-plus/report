@@ -42,6 +42,8 @@ http://localhost:9095 <br>
 
 ## 重置mysql连接
 登陆进来后请重置mysql连接 <br>
-![img_6.png](../picture/quickly/img_6.png)
+数据源 --> mysql数据源 --> 编辑 --> 修改用户名密码 <br>
+![img](../picture/quickly/img_14.png) <br>
+![img_6.png](../picture/quickly/img_6.png) <br>
 
 
