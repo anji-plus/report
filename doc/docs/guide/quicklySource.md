@@ -49,6 +49,10 @@ git clone https://gitee.com/anji-plus/report.git <br>
 report-core-XXX --> bin --> start.sh <br>
 sh bin/start.sh <br>
 
+## 日志位置
+看到控制台提示“The AJ-Report started!”，说明report正在启动，可以看看日志确定程序启动到哪里了。<br>
+日志的位置是：report-xxx/logs/aj-report.log <br>
+
 ## 访问
 http://serverip:9095 <br>
 默认密码：admin 123456
