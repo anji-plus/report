@@ -212,6 +212,7 @@
               :key="index"
               v-model="widget.value"
               :index="index"
+              :step="step"
               :type="widget.type"
               :bigscreen="{ bigscreenWidth, bigscreenHeight }"
               @onActivated="setOptionsOnClickWidget"
@@ -373,6 +374,9 @@ export default {
     };
   },
   computed: {
+    step () {
+      return Number(100 / (this.bigscreenScaleInWorkbench * 100))
+    },
     headers() {
       return {
         Authorization: getToken() // 直接从本地获取token就行
