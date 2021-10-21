@@ -2,7 +2,7 @@
   ![img.png](../picture/qusetion/img.png) <br>
   请使用Maven Package进行打包 <br>
 
--- 版本问题：[开发环境参考](https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html)
+### 版本问题：[开发环境参考](https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html)
 
 - 底层数据库为Mysql8.0+时，flyway执行SQL报错<br>
 - Node.js是V16版本时 npm install失败 <br>
@@ -17,12 +17,11 @@
 
 - 部署完进入系统，点击预览大屏，大屏提示：**执行sql失败** <br>
   ![img](../picture/qusetion/img_3.png) <br>
-  请先重置数据源的mysql连接，修改mysql的账号密码。<br>
+  请先重置mysql数据源，修改mysql数据源的账号密码。<br>
 
 - flyway执行报错1.0.10sql失败 <br>
   错误提示：Caused by: org.flywaydb.core.api.FlywayException: Validate failed: Detected failed <br>
   migration to version 1.0.10 (create report share) <br>
-  **注：0.93发行版及之后使用Report的小伙伴不用担心会出现此问题** <br>
   请参考此Issue解决此问题：https://gitee.com/anji-plus/report/issues/I47JNE <br>
 
 - 禁用flyway及切换底层数据库方案 <br>
@@ -32,9 +31,24 @@
   https://my.oschina.net/u/4517014/blog/5270828 <br>
   **注**：http数据源未来会挪到数据集那边 <br>
 
-- 执行编译脚本（build.sh）报错提示“*** No such file or directory” <br>
-可能原因1：Node.js版本不是V14，导致前端编译失败 <br>
-可能原因2：Mvn版本过低，导致后端编译失败 <br>
+### 执行源码编译脚本（build.sh）报错
+
+- 提示：“*** report-ui/dist/* *** No such file or directory” <br>
+  前端编译失败。<br>
+  99%的原因是Node.js版本过高（高于14），导致前端编译失败，Nodejs在编译执行初始化时会去下载一些依赖，如果依赖下载不来，也会导致失败。<br>
+  剩下极少数情况可能是你编译的linux系统问题。<br>
+
+- 提示：“report-core/target/aj-report-*.zip *** No such file or directory” <br>
+  后端编译失败。<br>
+  可能原因有：Mvn版本过低/过高，导致后端编译失败 <br>
+
+- 使用eclipse进行源码编译时失败 <br>
+  失败的提示有很多，这里建议换成IDEA  <br>
+
+- 使用IDEA进行源码编译时提示：“*** openjdk-***” <br>
+  请使用jdk1.8
+
+
 
 
 
