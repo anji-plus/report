@@ -111,9 +111,12 @@ bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启�
 http://serverip:9095
 ```
 
-源码编译部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklySource.html <br>
-发行版部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html <br>
-前后端分离部署参考文档：https://report.anji-plus.com/report-doc/guide/quicklySeparate.html <br>
+**源码编译部署参考文档：** <br>
+https://report.anji-plus.com/report-doc/guide/quicklySource.html <br>
+**发行版部署参考文档：** <br>
+https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html <br>
+**前后端分离部署参考文档：** <br>
+https://report.anji-plus.com/report-doc/guide/quicklySeparate.html <br>
 
 ## 操作手册
 
@@ -136,23 +139,27 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 <a href='http://www.fgkb.net/'><img src="https://report.anji-plus.com/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
 <a href='https://www.gykjweb.com/'><img src="https://report.anji-plus.com/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a>
 
-## 近期计划
+## 未来计划
 
-- 完善地图插件
-- 完善表格插件
-- 丰富自定义框图、挂件
-- 丰富更多图表组件
-- 基础图表增加
-- 现有图表功能修复/增加
+- 增加装饰图、省市区地图等图
+- 表格数据解析方式优化
+- 增加基础边框样式
+- http数据源调整
+- 大屏工具栏使用二级菜单显示
+- Execl报表功能增加与bug修复
+
+## 已知问题
+
+- 大屏宽高动态适配问题
 
 ## 版本问题
 
 已知以下版本存在兼容性问题
 
 - Node.js V16
+- openJdk
 - Jdk 11
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
-- Windows 11
 
 AJ-Report 使用Druid，版本为1.2.6，如果你觉得你配置都是正常但是数据源测试不过，请尝试修改pom文件降低Druid版本。 <br>
 例如：MSSQLSERVER 2014，请将Druid版本降低为1.2.1以下（需要修改源码）。 <br>
