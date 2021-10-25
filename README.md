@@ -99,11 +99,11 @@
 git clone https://gitee.com/anji-plus/report.git
 cd report
 sh build.sh
-编译完成放在build文件夹 report-core-xxxx.zip
+编译完成放在build文件夹 aj-report-xxxx.zip
 
-unzip report-core-xxxx.zip
-cd report-core-xxxx
-vim conf/bootstrap-dev.yml 数据库连接
+unzip aj-report-xxxx.zip
+cd aj-report-xxxx
+vim conf/bootstrap-dev.yml 修改数据库连接等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
