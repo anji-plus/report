@@ -24,6 +24,11 @@
 **在线案例还在努力创造中，敬请期待！！！**
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
 
+## 宣传视频
+<video id="video" controls="" preload="none" poster="https://report.anji-plus.com/file/download/0c7d57c8-e55f-401c-ba21-1385b2164647"><br>
+<source id="mp4" src="https://report.anji-plus.com/report-doc/static/Rhea.mp4" type="video/mp4">
+</video>
+
 ## 数据流程图
 
 ![An image](https://images.gitee.com/uploads/images/2021/0630/160451_31bb9052_1728982.png)
