@@ -25,7 +25,8 @@
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
 
 ## 宣传视频
-[视频链接](https://report.anji-plus.com/report-doc/static/Rhea.mp4)
+<video id="video" controls="" preload="none" src="https://report.anji-plus.com/report-doc/static/Rhea.mp4">
+</video>
 
 ## 数据流程图
 
