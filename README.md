@@ -183,10 +183,9 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 ## 技术支持
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
-微信群：<br>
-技术支持2群：
+技术支持2群群：<br>
 <img src="https://images.gitee.com/uploads/images/2021/1101/130421_caa25124_7492051.jpeg" width = "200" height = "200" align=left/> <br>
-个人企业微信：
+个人企业微信：<br>
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "200" height = "200" align=left/>
 
 
