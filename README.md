@@ -21,11 +21,10 @@
 #### &emsp; 组件介绍
 
 &emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。 内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
-**在线案例还在努力创造中，敬请期待！！！**
+**在线案例还在努力创造中，敬请期待！！！**  
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
 
-## 宣传视频
-[视频链接](https://report.anji-plus.com/report-doc/static/Rhea.mp4)
+![更多案例](https://report.anji-plus.com/report-doc/static/Rhea.mp4) <br>
 
 ## 数据流程图
 
