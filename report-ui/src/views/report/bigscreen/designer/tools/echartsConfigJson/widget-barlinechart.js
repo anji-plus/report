@@ -590,7 +590,7 @@ export const widgetBarlinechart = {
               },
             ],
           },
-          {
+          /*{
             name: '图例操作',
             list: [
               {
@@ -663,7 +663,7 @@ export const widgetBarlinechart = {
                 value: 'horizontal'
               },
             ],
-          },
+          },*/
           {
             name: '自定义配色',
             list: [
