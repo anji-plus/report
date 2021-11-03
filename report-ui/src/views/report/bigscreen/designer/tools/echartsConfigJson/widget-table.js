@@ -51,6 +51,14 @@ export const widgetTable = {
           value: '5'
         },
         {
+          type: 'el-input-number',
+          label: '行高',
+          name: 'rowHeight',
+          required: false,
+          placeholder: '',
+          value: '50'
+        },
+        {
           type: 'el-switch',
           label: '开启滚动',
           name: 'isRoll',
@@ -172,10 +180,10 @@ export const widgetTable = {
           name: 'dynamicAddTable',
           required: false,
           placeholder: '',
-          value: [{name: '日期', key: 'date', width: 200}, {name: '姓名', key: 'name', width: 200}, {
-            name: '地址',
-            key: 'address',
-            width: '200'
+          value: [
+            {name: '日期', key: 'date', width: '50%'},
+            {name: '姓名', key: 'name', width: '50%'},
+            {name: '地址', key: 'address', width: '200%',
           }]
         }
       ],
