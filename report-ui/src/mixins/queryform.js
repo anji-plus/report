@@ -129,7 +129,7 @@ export default {
         return data
       }
     },
-    // 柱状图、折线图、折柱图
+    // 柱状图、折线图、柱线图
     barOrLineChartFn(chartProperties, data) {
       const ananysicData = {};
       const xAxisList = [];

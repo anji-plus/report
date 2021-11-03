@@ -1,5 +1,5 @@
 /*
- * @Descripttion: 主线图
+ * @Descripttion: 柱线图
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:26:48
@@ -595,7 +595,7 @@ export const widgetBarlinechart = {
             list: [
               {
                 type: 'el-switch',
-                label: '图例',
+                label: '显示',
                 name: 'isShowLegend',
                 required: false,
                 placeholder: '',
@@ -610,7 +610,7 @@ export const widgetBarlinechart = {
                 value: '#fff',
               },
               {
-                type: 'el-input-text',
+                type: 'el-input-number',
                 label: '字体大小',
                 name: 'lengedFontSize',
                 required: false,
@@ -632,10 +632,11 @@ export const widgetBarlinechart = {
                 required: false,
                 placeholder: '',
                 selectOptions: [
+                  {code: 'center', name: '居中'},
                   {code: 'left', name: '左对齐'},
                   {code: 'right', name: '右对齐'},
                 ],
-                value: ''
+                value: 'center'
               },
               {
                 type: 'el-select',
@@ -647,7 +648,7 @@ export const widgetBarlinechart = {
                   {code: 'top', name: '顶部'},
                   {code: 'bottom', name: '底部'},
                 ],
-                value: ''
+                value: 'top'
               },
               {
                 type: 'el-select',
@@ -659,7 +660,7 @@ export const widgetBarlinechart = {
                   {code: 'vertical', name: '竖排'},
                   {code: 'horizontal', name: '横排'},
                 ],
-                value: ''
+                value: 'horizontal'
               },
             ],
           },

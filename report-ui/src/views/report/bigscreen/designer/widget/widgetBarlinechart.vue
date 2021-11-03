@@ -31,7 +31,6 @@ export default {
           textStyle: {
             color: "#fff"
           },
-          data: ["货运量", "货运总量"]
         },
         xAxis: [
           {
@@ -139,7 +138,7 @@ export default {
       this.setOptionsTooltip();
       this.setOptionsData();
       this.setOptionsMargin();
-      this.setOptionsLegend();
+      //this.setOptionsLegend();
       this.setOptionsColor();
     },
     // 标题修改
@@ -341,23 +340,23 @@ export default {
       };
       this.options.grid = grid;
     },
-    // 图例操作 legend
+/*    // 图例操作 legend
     setOptionsLegend() {
       const optionsCollapse = this.optionsSetup;
       const legend = this.options.legend;
       legend.show = optionsCollapse.isShowLegend;
-      legend.left = optionsCollapse.lateralPosition == "left" ? 0 : "auto";
-      legend.right = optionsCollapse.lateralPosition == "right" ? 0 : "auto";
+      legend.left = optionsCollapse.lateralPosition;
       legend.top = optionsCollapse.longitudinalPosition == "top" ? 0 : "auto";
       legend.bottom =
         optionsCollapse.longitudinalPosition == "bottom" ? 0 : "auto";
       legend.orient = optionsCollapse.layoutFront;
       legend.textStyle = {
         color: optionsCollapse.lengedColor,
-        fontSize: optionsCollapse.fontSize
+        fontSize: optionsCollapse.lengedFontSize
       };
       legend.itemWidth = optionsCollapse.lengedWidth;
-    },
+      console.log(legend);
+    },*/
     // 图例颜色修改
     setOptionsColor() {
       const optionsCollapse = this.optionsSetup;
@@ -373,7 +372,6 @@ export default {
     // 数据处理
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
-      console.log(optionsData);
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
