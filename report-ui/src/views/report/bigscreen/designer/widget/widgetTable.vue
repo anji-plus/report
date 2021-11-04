@@ -128,8 +128,10 @@ export default {
       const options = this.options;
       const rollSet = this.optionsSetUp;
       options.autoPlay = rollSet.isRoll;
-      options.delayTime = rollSet.rollTime;
-      options.scroll = rollSet.rollNumber;
+      options.effect = rollSet.effect;
+      options.interTime = rollSet.interTime;
+      options.delayTime = rollSet.delayTime;
+      options.scroll = rollSet.scroll;
       this.options = options;
       this.hackResetFun();
     },

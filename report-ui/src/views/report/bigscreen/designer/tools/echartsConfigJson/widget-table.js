@@ -67,17 +67,37 @@ export const widgetTable = {
           value: true
         },
         {
-          type: 'el-input-number',
-          label: '滚动时间(毫秒)',
-          name: 'rollTime',
+          type: 'el-select',
+          label: '动画效果',
+          name: 'effect',
           required: false,
           placeholder: '',
-          value: 1000
+          selectOptions: [
+            {code: 'top', name: '上滚动'},
+            {code: 'topLoop', name: '上循环滚动'},
+          ],
+          value: 'topLoop'
+        },
+        {
+          type: 'el-input-number',
+          label: '滚动间隔(毫秒)',
+          name: 'interTime',
+          required: false,
+          placeholder: '',
+          value: 2500
+        },
+        {
+          type: 'el-input-number',
+          label: '动效时间(毫秒)',
+          name: 'delayTime',
+          required: false,
+          placeholder: '',
+          value: 500
         },
         {
           type: 'el-input-number',
           label: '滚动个数',
-          name: 'rollNumber',
+          name: 'scroll',
           required: false,
           placeholder: '',
           value: 1
@@ -213,7 +233,7 @@ export const widgetTable = {
           name: 'refreshTime',
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
-          value: 5000
+          value: 30000
         },
         {
           type: 'el-button',
