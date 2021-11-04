@@ -68,7 +68,7 @@ http://serverip:9095 <br>
 ## 重置mysql连接
 
 登陆进来后请修改mysql数据源 <br>
-数据源 --> mysql数据源 --> 编辑 --> 修改用户名密码 <br>
+数据源 --> mysql数据源 --> 编辑 --> 修改用户名密码（改成你自己系统mysql的用户名密码） <br>
 ![img](../picture/quickly/img_14.png) <br>
 ![img_6.png](../picture/quickly/img_6.png) <br>
 

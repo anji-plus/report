@@ -17,18 +17,18 @@
 
 - 部署完进入系统，点击预览大屏，大屏提示：“执行sql失败“ <br>
   ![img](../picture/qusetion/img_3.png) <br>
-  请先重置mysql数据源，修改mysql数据源的账号密码。<br>
+  请先重置mysql数据源，将mysql数据源的账号密码修改为你当前系统的账号密码。<br>
 
 - flyway执行报错1.0.10sql失败 <br>
   错误提示：Caused by: org.flywaydb.core.api.FlywayException: Validate failed: Detected failed <br>
   migration to version 1.0.10 (create report share) <br>
-  请参考此Issue解决此问题：https://gitee.com/anji-plus/report/issues/I47JNE <br>
+  请参考此 [Issue](https://gitee.com/anji-plus/report/issues/I47JNE) 解决此问题 <br>
 
 - 禁用flyway及切换底层数据库方案 <br>
-  https://my.oschina.net/u/4517014/blog/5269319 <br>
+  [链接](https://my.oschina.net/u/4517014/blog/5269319) <br>
 
 - 数据源数据集用法总结 <br>
-  https://my.oschina.net/u/4517014/blog/5270828 <br>
+  [链接](https://my.oschina.net/u/4517014/blog/5270828) <br>
   **注**：http数据源未来会挪到数据集那边 <br>
 
 ### 执行源码编译脚本（build.sh）报错

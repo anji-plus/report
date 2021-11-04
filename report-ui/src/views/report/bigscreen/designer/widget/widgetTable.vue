@@ -5,7 +5,7 @@
       <div class="title">
         <div
           v-for="(item, index) in header"
-          :style="headerTableStlye"
+          :style="[headerTableStlye,tableFiledWidth(index),tableRowHeight()]"
           :key="index"
         >
           {{ item.name }}
@@ -14,11 +14,11 @@
       <!--数据-->
       <div class="bd">
         <ul class="infoList">
-          <li v-for="(item, index) in list" :key="index">
+          <li v-for="(item, index) in list" :key="index" :style="tableRowHeight()" >
             <div
               v-for="(itemChild, idx) in header"
               :key="idx"
-              :style="[bodyTableStyle, bodyTable(index)]"
+              :style="[bodyTableStyle, bodyTable(index),tableFiledWidth(idx),tableRowHeight()]"
             >
               {{ item[itemChild.key] }}
             </div>
@@ -48,7 +48,8 @@ export default {
         autoPage: true,
         //effect: "top",
         autoPlay: true,
-        vis: 5
+        vis: 5,
+        rowHeight:'50px'
       },
       header: [],
       list: [],
@@ -172,15 +173,32 @@ export default {
     },
     // 计算 奇偶背景色
     bodyTable(index) {
+      var styleJson = {};
       if (index % 2) {
-        return {
-          "background-color": this.optionsSetUp.eventColor
-        };
+        styleJson["background-color"] = this.optionsSetUp.eventColor
       } else {
-        return {
-          "background-color": this.optionsSetUp.oldColor
-        };
+        styleJson["background-color"] = this.optionsSetUp.oldColor
       }
+      return styleJson;
+    },
+    tableRowHeight(){
+      var styleJson = {};
+      if(this.optionsSetUp.rowHeight){
+        styleJson['height'] = this.optionsSetUp.rowHeight+'px';
+        styleJson['line-height'] = this.optionsSetUp.rowHeight+'px';
+      }else{
+        styleJson['height'] =this.options.rowHeight
+        styleJson['line-height'] = this.optionsSetUp.rowHeight+'px';
+      }
+      return styleJson;
+    },
+    tableFiledWidth(index){
+      var styleJson = {};
+      debugger
+      if(this.optionsSetUp.dynamicAddTable[index].width ){
+        styleJson["width"] = this.optionsSetUp.dynamicAddTable[index].width
+      }
+      return styleJson
     }
   }
 };

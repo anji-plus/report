@@ -6,11 +6,12 @@
       icon="el-icon-plus"
       plain
       @click="handleAddClick"
-      >新增</el-button
+    >新增</el-button
     >
     <el-table :data="formData" style="width: 100%">
-      <el-table-column prop="name" label="名称" width="80" />
-      <el-table-column prop="key" label="key值" width="80" />
+      <el-table-column prop="name" label="名称" width="60" />
+      <el-table-column prop="key" label="key值" width="70" />
+      <el-table-column prop="width" label="宽度" width="50" />
       <el-table-column label="操作" width="100">
         <template slot-scope="scope">
           <div class="button-group">
@@ -18,13 +19,13 @@
               @click="handleEditorClick(scope.$index, scope.row)"
               type="text"
               size="small"
-              >编辑</el-button
+            >编辑</el-button
             >
             <el-button
               type="text"
               size="small"
               @click="handleDeleteClick(scope.$index, scope.row)"
-              >删除</el-button
+            >删除</el-button
             >
           </div>
         </template>
@@ -54,11 +55,19 @@
           >
           </el-input>
         </el-form-item>
+        <el-form-item label="宽度:">
+          <el-input
+            v-model.trim="rowFormData['width']"
+            placeholder="请输入宽度"
+            size="mini"
+          >
+          </el-input>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="dialogVisible = false">取 消</el-button>
         <el-button size="mini" type="primary" @click="handleSaveClick"
-          >确 定</el-button
+        >确 定</el-button
         >
       </span>
     </el-dialog>
