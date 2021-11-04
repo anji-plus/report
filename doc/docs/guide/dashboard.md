@@ -37,9 +37,9 @@
 当超链接和视频链接无效的时候，请尝试使用内联框架<br>
 
 ### 表格
-![img](../picture/dashboard/img.png) <br>
+![img](../picture/dashboard/img_22.png) <br>
 表格字段对应的数据只选择“文本数字”。<br>
-![img14](../picture/dashboard/img_14.png) <br>
+![img14](../picture/dashboard/img_23.png) <br>
 **注意：** 多个字段的时候，需要在“配置-新增”添加你选择数据集所对应的字段，类似于映射关系。 <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
