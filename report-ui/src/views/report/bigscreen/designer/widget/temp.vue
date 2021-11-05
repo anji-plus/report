@@ -23,7 +23,7 @@ import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetLinechart from "./line/widgetLinechart.vue";
 import widgetBarlinechart from "./bar/widgetBarlinechart";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
-import WidgetPiechart from "./widgetPiechart.vue";
+import WidgetPiechart from "./pie/widgetPiechart.vue";
 import WidgetFunnel from "./widgetFunnel.vue";
 import WidgetGauge from "./widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRose";
