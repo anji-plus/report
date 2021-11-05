@@ -17,7 +17,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <component :is="type" :value="value" />
+    <component :is="type" :value="value"/>
   </avue-draggable>
 </template>
 
@@ -33,7 +33,7 @@ import WidgetIframe from "./widgetIframe.vue";
 import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
 import widgetLinechart from "./line/widgetLinechart.vue";
-import widgetBarlinechart from "./widgetBarlinechart";
+import widgetBarlinechart from "./bar/widgetBarlinechart";
 import WidgetPiechart from "./widgetPiechart.vue";
 import WidgetFunnel from "./widgetFunnel.vue";
 import WidgetGauge from "./widgetGauge.vue";
@@ -89,7 +89,8 @@ export default {
     bigscreen: Object,
     value: {
       type: [Object],
-      default: () => {}
+      default: () => {
+      }
     },
     step: Number
   },
@@ -119,11 +120,13 @@ export default {
       return this.value.position.zIndex || 1;
     }
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
-    handleFocus({ index, left, top, width, height }) {},
-    handleBlur({ index, left, top, width, height }) {
-      this.$emit("onActivated", { index, left, top, width, height });
+    handleFocus({index, left, top, width, height}) {
+    },
+    handleBlur({index, left, top, width, height}) {
+      this.$emit("onActivated", {index, left, top, width, height});
       this.$refs.draggable.setActive(true);
     }
   }
@@ -134,11 +137,13 @@ export default {
 .vue-draggalbe {
   position: absolute;
 }
+
 .widget-active {
   cursor: move;
   border: 1px dashed #09f;
   background-color: rgba(115, 170, 229, 0.5);
 }
+
 .avue-draggable {
   padding: 0 !important;
 }

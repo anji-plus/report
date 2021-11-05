@@ -6,7 +6,7 @@
  !-->
 <template>
   <div>
-    <component :is="type" :value="value" :ispreview="true" />
+    <component :is="type" :value="value" :ispreview="true"/>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ import widgetVideo from "./widgetVideo.vue";
 import WidgetIframe from "./widgetIframe.vue";
 import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetLinechart from "./line/widgetLinechart.vue";
-import widgetBarlinechart from "./widgetBarlinechart";
+import widgetBarlinechart from "./bar/widgetBarlinechart";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
 import WidgetPiechart from "./widgetPiechart.vue";
 import WidgetFunnel from "./widgetFunnel.vue";
@@ -72,13 +72,15 @@ export default {
     type: String,
     value: {
       type: [Object],
-      default: () => {}
+      default: () => {
+      }
     }
   },
   data() {
     return {};
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {}
 };
 </script>
