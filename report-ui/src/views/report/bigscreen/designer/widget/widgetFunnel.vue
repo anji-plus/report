@@ -24,18 +24,64 @@ export default {
         },
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b} : {c}%"
+          formatter: "{a} <br/>{b} : {c}"
         },
         legend: {
+          x : 'center',
+          y : '92%',
           textStyle: {
             color: "#fff"
           }
         },
         series: [
           {
+            name: '',
+            type: 'funnel',
+            left: 'center',
+            width: '90%',
+            sort: 'ascending',
+            label: {
+              normal: {
+                formatter: '{b}',
+                backgroundColor:'#6D480E',
+                borderRadius :3,
+                padding :[5,5,1,5],
+                shadowBlur: 0,
+                shadowOffsetX: 2,
+                shadowOffsetY: 2,
+                shadowColor: '#9E853A'
+              },
+
+            },
+            labelLine: {
+              normal: {
+                show: true,
+                length: 15,
+                lineStyle: {
+                  type: 'solid',
+                  //color: "#6D480E"
+                },
+              }
+            },
+            itemStyle: {
+              normal: {
+                opacity: 0.5,
+                borderColor: '#000',
+                borderWidth: 2,
+                shadowBlur: 0,
+                shadowOffsetX: 0,
+                shadowOffsetY: 10,
+                shadowColor: 'rgba(0, 0, 0, .6)'
+              }
+            },
+            tooltip: {
+              show: false
+            },
+          },
+          {
             name: "",
             type: "funnel",
-            left: "10%",
+            left: "center",
             top: 60,
             bottom: 60,
             width: "80%",
@@ -46,8 +92,18 @@ export default {
             sort: "descending",
             gap: 2,
             label: {
-              show: true,
-              position: "inside"
+              normal: {
+                position: 'inside',
+                formatter: '{c}',
+                textStyle: {
+                  color: '#fff',
+                  fontSize:14,
+                }
+              },
+              emphasis: {
+                position: 'inside',
+                formatter: '{b}: {c}'
+              }
             },
             labelLine: {
               length: 10,
@@ -57,12 +113,14 @@ export default {
               }
             },
             itemStyle: {
-              borderColor: "#fff",
-              borderWidth: 1
-            },
-            emphasis: {
-              label: {
-                fontSize: 20
+              normal: {
+                opacity: 0.8,
+                borderColor: 'rgba(12, 13, 43, .9)',
+                borderWidth: 3,
+                shadowBlur: 5,
+                shadowOffsetX: 0,
+                shadowOffsetY: 5,
+                shadowColor: 'rgba(0, 0, 0, .6)'
               }
             },
             data: []
