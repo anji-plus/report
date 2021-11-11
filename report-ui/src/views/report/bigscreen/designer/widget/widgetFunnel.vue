@@ -119,17 +119,17 @@ export default {
     },
     // 文字设置
     setOptionsText() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
 
       for (const key in series) {
         if (series[key].type == "funnel") {
-          series[key].label.show = optionsCollapse.isShow;
-          series[key].label.fontSize = optionsCollapse.fontSize;
-          series[key].label.color = optionsCollapse.color;
-          series[key].label.fontWeight = optionsCollapse.fontWeight;
+          series[key].label.show = optionsSetup.isShow;
+          series[key].label.fontSize = optionsSetup.fontSize;
+          series[key].label.color = optionsSetup.color;
+          series[key].label.fontWeight = optionsSetup.fontWeight;
 
-          series[key].sort = optionsCollapse.reversal
+          series[key].sort = optionsSetup.reversal
             ? "ascending"
             : "descending";
         }
@@ -137,59 +137,59 @@ export default {
     },
     // 标题修改
     setOptionsTitle() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const title = {};
-      title.show = optionsCollapse.isNoTitle;
-      title.text = optionsCollapse.titleText;
-      title.left = optionsCollapse.textAlign;
+      title.show = optionsSetup.isNoTitle;
+      title.text = optionsSetup.titleText;
+      title.left = optionsSetup.textAlign;
       title.textStyle = {
-        color: optionsCollapse.textColor,
-        fontSize: optionsCollapse.textFontSize,
-        fontWeight: optionsCollapse.textFontWeight
+        color: optionsSetup.textColor,
+        fontSize: optionsSetup.textFontSize,
+        fontWeight: optionsSetup.textFontWeight
       };
-      title.subtext = optionsCollapse.subText;
+      title.subtext = optionsSetup.subText;
       title.subtextStyle = {
-        color: optionsCollapse.subTextColor,
-        fontWeight: optionsCollapse.subTextFontWeight,
-        fontSize: optionsCollapse.subTextFontSize
+        color: optionsSetup.subTextColor,
+        fontWeight: optionsSetup.subTextFontWeight,
+        fontSize: optionsSetup.subTextFontSize
       };
 
       this.options.title = title;
     },
     // 提示语设置 tooltip
     setOptionsTooltip() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
         show: true,
         textStyle: {
-          color: optionsCollapse.lineColor,
-          fontSize: optionsCollapse.fontSize
+          color: optionsSetup.lineColor,
+          fontSize: optionsSetup.fontSize
         }
       };
       this.options.tooltip = tooltip;
     },
     // 图例操作 legend
     setOptionsLegend() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const legend = this.options.legend;
-      legend.show = optionsCollapse.isShowLegend;
-      legend.left = optionsCollapse.lateralPosition;
-      legend.right = optionsCollapse.lateralPosition;
-      legend.top = optionsCollapse.longitudinalPosition;
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition;
+      legend.right = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition;
       legend.bottom =
-        optionsCollapse.longitudinalPosition;
-      legend.orient = optionsCollapse.layoutFront;
+        optionsSetup.longitudinalPosition;
+      legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
-        color: optionsCollapse.lengedColor,
-        fontSize: optionsCollapse.fontSize
+        color: optionsSetup.lengedColor,
+        fontSize: optionsSetup.fontSize
       };
-      legend.itemWidth = optionsCollapse.lengedWidth;
+      legend.itemWidth = optionsSetup.lengedWidth;
     },
     // 图例颜色修改
     setOptionsColor() {
-      const optionsCollapse = this.optionsSetup;
-      const customColor = optionsCollapse.customColor;
+      const optionsSetup = this.optionsSetup;
+      const customColor = optionsSetup.customColor;
       if (!customColor) return;
       const arrColor = [];
       for (let i = 0; i < customColor.length; i++) {
