@@ -150,6 +150,7 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 - http数据源调整
 - 大屏工具栏使用二级菜单显示
 - Execl报表功能增加与bug修复
+- 使用vue3 + ts
 
 ## 已知问题
 
