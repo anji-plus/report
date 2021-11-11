@@ -33,14 +33,116 @@ export const widgetFunnel = {
       {
         type: 'el-switch',
         label: '翻转',
-        name: 'cending',
+        name: 'ending',
         require: false,
         placeholder: '',
         value: false,
       },
       [
         {
-          name: '文字设置',
+          name: '标题设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '标题',
+              name: 'isNoTitle',
+              required: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'el-input-text',
+              label: '标题',
+              name: 'titleText',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'textColor',
+              required: false,
+              placeholder: '',
+              value: '#FFD700'
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'textFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'textFontSize',
+              required: false,
+              placeholder: '',
+              value: 20
+            },
+            {
+              type: 'el-select',
+              label: '字体位置',
+              name: 'textAlign',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-input-text',
+              label: '副标题',
+              name: 'subText',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'subTextColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(30, 144, 255, 1)'
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'subTextFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'subTextFontSize',
+              required: false,
+              placeholder: '',
+              value: 16
+            },
+          ],
+        },
+        {
+          name: '数值设置',
           list: [
             {
               type: 'el-switch',
@@ -52,7 +154,7 @@ export const widgetFunnel = {
             },
             {
               type: 'el-input-number',
-              label: '字体大小',
+              label: '字体字号',
               name: 'fontSize',
               require: false,
               placeholder: '',
@@ -83,129 +185,6 @@ export const widgetFunnel = {
           ],
         },
         {
-          name: '标题设置',
-          list: [
-            {
-              type: 'el-switch',
-              label: '标题',
-              name: 'isNoTitle',
-              required: false,
-              placeholder: '',
-              value: true
-            },
-            {
-              type: 'el-input-text',
-              label: '标题',
-              name: 'titleText',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'textColor',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'textFontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-input-number',
-              label: '字体大小',
-              name: 'textFontSize',
-              required: false,
-              placeholder: '',
-              value: 12
-            },
-            {
-              type: 'el-select',
-              label: '字体位置',
-              name: 'textAlign',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
-              ],
-              value: 'left'
-            },
-            {
-              type: 'el-input-text',
-              label: '副标题',
-              name: 'subText',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'subTextColor',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'subTextFontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-input-number',
-              label: '字体大小',
-              name: 'subTextFontSize',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-          ],
-        },
-        {
-          name: '提示语设置',
-          list: [
-            {
-              type: 'el-input-number',
-              label: '字体大小',
-              name: 'tipFontSize',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '网格线颜色',
-              name: 'lineColor',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-          ],
-        },
-        {
           name: '图例操作',
           list: [
             {
@@ -226,7 +205,7 @@ export const widgetFunnel = {
             },
             {
               type: 'el-input-number',
-              label: '字体大小',
+              label: '字体字号',
               name: 'lengedFontSize',
               required: false,
               placeholder: '',
@@ -276,6 +255,27 @@ export const widgetFunnel = {
                 {code: 'horizontal', name: '横排'},
               ],
               value: 'horizontal'
+            },
+          ],
+        },
+        {
+          name: '提示语设置',
+          list: [
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'tipFontSize',
+              required: false,
+              placeholder: '',
+              value: 14
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'lineColor',
+              required: false,
+              placeholder: '',
+              value: ''
             },
           ],
         },

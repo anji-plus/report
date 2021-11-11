@@ -111,7 +111,7 @@ export default {
   methods: {
     // 修改图标options属性
     editorOptions() {
-      this.setCending();
+      this.setEnding();
       this.setOptionsText();
       this.setOptionsTitle();
       this.setOptionsTooltip();
@@ -120,16 +120,16 @@ export default {
       this.setOptionsData();
     },
     // 翻转
-    setCending(){
+    setEnding() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      if (optionsSetup.cending) {
+      if (optionsSetup.ending) {
         series[0].sort = "ascending";
       } else {
         series[0].sort = "descending";
       }
     },
-    // 文字设置
+    // 数值设置
     setOptionsText() {
       const optionsSetup = this.optionsSetup;
       const normal = {
@@ -148,8 +148,8 @@ export default {
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
       const title = {};
-      title.show = optionsSetup.isNoTitle;
       title.text = optionsSetup.titleText;
+      title.show = optionsSetup.isNoTitle;
       title.left = optionsSetup.textAlign;
       title.textStyle = {
         color: optionsSetup.textColor,
