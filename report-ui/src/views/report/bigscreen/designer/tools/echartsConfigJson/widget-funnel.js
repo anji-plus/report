@@ -56,7 +56,7 @@ export const widgetFunnel = {
               name: 'fontSize',
               require: false,
               placeholder: '',
-              value: 12,
+              value: 14,
             },
             {
               type: 'vue-color',
@@ -79,14 +79,6 @@ export const widgetFunnel = {
                 {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
-            },
-            {
-              type: 'el-switch',
-              label: '反转',
-              name: 'reversal',
-              require: false,
-              placeholder: '',
-              value: 0
             },
           ],
         },
@@ -198,7 +190,7 @@ export const widgetFunnel = {
             {
               type: 'el-input-number',
               label: '字体大小',
-              name: 'fontSize',
+              name: 'tipFontSize',
               required: false,
               placeholder: '',
               value: ''

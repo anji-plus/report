@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart :options="options" autoresize/>
   </div>
 </template>
 
@@ -27,8 +27,8 @@ export default {
           formatter: "{a} <br/>{b} : {c}"
         },
         legend: {
-          x : 'center',
-          y : '92%',
+          x: 'center',
+          y: '92%',
           textStyle: {
             color: "#fff"
           }
@@ -43,11 +43,12 @@ export default {
             sort: "descending",
             label: {
               normal: {
+                show: true,
                 position: 'inside',
                 formatter: '{c}',
                 textStyle: {
                   color: '#fff',
-                  fontSize:14,
+                  fontSize: 14,
                 }
               },
               emphasis: {
@@ -110,6 +111,7 @@ export default {
   methods: {
     // 修改图标options属性
     editorOptions() {
+      this.setCending();
       this.setOptionsText();
       this.setOptionsTitle();
       this.setOptionsTooltip();
@@ -117,23 +119,30 @@ export default {
       this.setOptionsColor();
       this.setOptionsData();
     },
+    // 翻转
+    setCending(){
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      if (optionsSetup.cending) {
+        series[0].sort = "ascending";
+      } else {
+        series[0].sort = "descending";
+      }
+    },
     // 文字设置
     setOptionsText() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-
-      for (const key in series) {
-        if (series[key].type == "funnel") {
-          series[key].label.show = optionsSetup.isShow;
-          series[key].label.fontSize = optionsSetup.fontSize;
-          series[key].label.color = optionsSetup.color;
-          series[key].label.fontWeight = optionsSetup.fontWeight;
-
-          series[key].sort = optionsSetup.reversal
-            ? "ascending"
-            : "descending";
+      const normal = {
+        show: optionsSetup.isShow,
+        position: 'inside',
+        formatter: '{c}',
+        textStyle: {
+          color: optionsSetup.color,
+          fontSize: optionsSetup.fontSize,
+          fontWeight: optionsSetup.fontWeight,
         }
       }
+      this.options.series[0].label['normal'] = normal;
     },
     // 标题修改
     setOptionsTitle() {
@@ -164,7 +173,7 @@ export default {
         show: true,
         textStyle: {
           color: optionsSetup.lineColor,
-          fontSize: optionsSetup.fontSize
+          fontSize: optionsSetup.tipFontSize
         }
       };
       this.options.tooltip = tooltip;
@@ -182,7 +191,7 @@ export default {
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
         color: optionsSetup.lengedColor,
-        fontSize: optionsSetup.fontSize
+        fontSize: optionsSetup.lengedFontSize
       };
       legend.itemWidth = optionsSetup.lengedWidth;
     },
