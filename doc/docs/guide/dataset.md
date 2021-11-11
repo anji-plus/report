@@ -27,9 +27,11 @@
 ### 数据转换
 
 #### js脚本
+
 **注**：这里的JS是java的scriptengine执行的，很多es6的语法不支持 <br>
 ![img4](../picture/dateset/img_4.png) <br>
 入参是data，返回值也必须是data，中间是JS的处理过程，注意入参返回都是List<JSONObject>，记得保存。 <br>
 
 #### 字典项
+
 场景有限，待补充。
