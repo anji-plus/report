@@ -30,6 +30,14 @@ export const widgetFunnel = {
         placeholder: '',
         value: ''
       },
+      {
+        type: 'el-switch',
+        label: '翻转',
+        name: 'cending',
+        require: false,
+        placeholder: '',
+        value: false,
+      },
       [
         {
           name: '文字设置',
@@ -210,7 +218,7 @@ export const widgetFunnel = {
           list: [
             {
               type: 'el-switch',
-              label: '图例',
+              label: '显示',
               name: 'isShowLegend',
               required: false,
               placeholder: '',
@@ -238,7 +246,7 @@ export const widgetFunnel = {
               name: 'lengedWidth',
               required: false,
               placeholder: '',
-              value: 10,
+              value: 15,
             },
             {
               type: 'el-select',
@@ -247,10 +255,11 @@ export const widgetFunnel = {
               required: false,
               placeholder: '',
               selectOptions: [
+                {code: 'center', name: '居中'},
                 {code: 'left', name: '左对齐'},
                 {code: 'right', name: '右对齐'},
               ],
-              value: ''
+              value: 'center'
             },
             {
               type: 'el-select',
@@ -262,7 +271,7 @@ export const widgetFunnel = {
                 {code: 'top', name: '顶部'},
                 {code: 'bottom', name: '底部'},
               ],
-              value: ''
+              value: 'top'
             },
             {
               type: 'el-select',
@@ -274,7 +283,7 @@ export const widgetFunnel = {
                 {code: 'vertical', name: '竖排'},
                 {code: 'horizontal', name: '横排'},
               ],
-              value: ''
+              value: 'horizontal'
             },
           ],
         },
@@ -332,7 +341,7 @@ export const widgetFunnel = {
         value: [
           {"value": 2, "name": "访问"},
           {"value": 5, "name": "咨询"},
-          {"value": 12, "name": "订单"},
+          {"value": 20, "name": "订单"},
           {"value": 40, "name": "点击"},
           {"value": 125, "name": "展现"}
         ],
@@ -382,7 +391,7 @@ export const widgetFunnel = {
         name: 'height',
         required: false,
         placeholder: '该容器在1080px大屏中的高度',
-        value: 200,
+        value: 500,
       },
     ],
   }

@@ -35,62 +35,12 @@ export default {
         },
         series: [
           {
-            name: '',
-            type: 'funnel',
-            left: 'center',
-            width: '90%',
-            sort: 'ascending',
-            label: {
-              normal: {
-                formatter: '{b}',
-                backgroundColor:'#6D480E',
-                borderRadius :3,
-                padding :[5,5,1,5],
-                shadowBlur: 0,
-                shadowOffsetX: 2,
-                shadowOffsetY: 2,
-                shadowColor: '#9E853A'
-              },
-
-            },
-            labelLine: {
-              normal: {
-                show: true,
-                length: 15,
-                lineStyle: {
-                  type: 'solid',
-                  //color: "#6D480E"
-                },
-              }
-            },
-            itemStyle: {
-              normal: {
-                opacity: 0.5,
-                borderColor: '#000',
-                borderWidth: 2,
-                shadowBlur: 0,
-                shadowOffsetX: 0,
-                shadowOffsetY: 10,
-                shadowColor: 'rgba(0, 0, 0, .6)'
-              }
-            },
-            tooltip: {
-              show: false
-            },
-          },
-          {
             name: "",
             type: "funnel",
             left: "center",
-            top: 60,
-            bottom: 60,
             width: "80%",
-            min: 0,
-            max: 100,
-            minSize: "0%",
-            maxSize: "100%",
+            //maxSize: '80%',
             sort: "descending",
-            gap: 2,
             label: {
               normal: {
                 position: 'inside',
@@ -105,21 +55,14 @@ export default {
                 formatter: '{b}: {c}'
               }
             },
-            labelLine: {
-              length: 10,
-              lineStyle: {
-                width: 1,
-                type: "solid"
-              }
-            },
             itemStyle: {
               normal: {
                 opacity: 0.8,
                 borderColor: 'rgba(12, 13, 43, .9)',
-                borderWidth: 3,
-                shadowBlur: 5,
+                borderWidth: 1,
+                shadowBlur: 4,
                 shadowOffsetX: 0,
-                shadowOffsetY: 5,
+                shadowOffsetY: 0,
                 shadowColor: 'rgba(0, 0, 0, .6)'
               }
             },
@@ -231,11 +174,11 @@ export default {
       const optionsCollapse = this.optionsSetup;
       const legend = this.options.legend;
       legend.show = optionsCollapse.isShowLegend;
-      legend.left = optionsCollapse.lateralPosition == "left" ? 0 : "auto";
-      legend.right = optionsCollapse.lateralPosition == "right" ? 0 : "auto";
-      legend.top = optionsCollapse.longitudinalPosition == "top" ? 0 : "auto";
+      legend.left = optionsCollapse.lateralPosition;
+      legend.right = optionsCollapse.lateralPosition;
+      legend.top = optionsCollapse.longitudinalPosition;
       legend.bottom =
-        optionsCollapse.longitudinalPosition == "bottom" ? 0 : "auto";
+        optionsCollapse.longitudinalPosition;
       legend.orient = optionsCollapse.layoutFront;
       legend.textStyle = {
         color: optionsCollapse.lengedColor,
