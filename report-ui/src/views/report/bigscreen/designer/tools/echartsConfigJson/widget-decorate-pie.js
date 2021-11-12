@@ -32,6 +32,27 @@ export const widgetDecoratePie = {
       },
       [
         {
+          name: '最外环设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShow',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'vue-color',
+              label: '最外环颜色',
+              name: 'ring1Color',
+              required: false,
+              placeholder: '',
+              value: '#46d3f3'
+            },
+          ]
+        },
+        {
           name: '标题设置',
           list: [
             {
@@ -130,171 +151,6 @@ export const widgetDecoratePie = {
               required: false,
               placeholder: '',
               value: 12
-            },
-          ],
-        },
-        {
-          name: '数值设定',
-          list: [
-            {
-              type: 'el-switch',
-              label: '显示',
-              name: 'isShow',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-switch',
-              label: '数值',
-              name: 'numberValue',
-              require: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-switch',
-              label: '百分比',
-              name: 'percentage',
-              require: false,
-              placeholder: '',
-              value: false,
-            },
-            {
-              type: 'el-input-number',
-              label: '字体大小',
-              name: 'fontSize',
-              required: false,
-              placeholder: '',
-              value: 14,
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'subTextColor',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'fontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
-              ],
-              value: 'normal'
-            },
-          ],
-        },
-        {
-          name: '提示语设置',
-          list: [
-            {
-              type: 'el-input-number',
-              label: '字体大小',
-              name: 'fontSize',
-              required: false,
-              placeholder: '',
-              value: 12
-            },
-            {
-              type: 'vue-color',
-              label: '网格线颜色',
-              name: 'lineColor',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-          ],
-        },
-        {
-          name: '图例操作',
-          list: [
-            {
-              type: 'el-switch',
-              label: '图例',
-              name: 'isShowLegend',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'lengedColor',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-text',
-              label: '字体大小',
-              name: 'lengedFontSize',
-              required: false,
-              placeholder: '',
-              value: 16,
-            },
-            {
-              type: 'el-input-number',
-              label: '图例宽度',
-              name: 'lengedWidth',
-              required: false,
-              placeholder: '',
-              value: 15,
-            },
-            {
-              type: 'el-select',
-              label: '横向位置',
-              name: 'lateralPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
-              ],
-              value: ''
-            },
-            {
-              type: 'el-select',
-              label: '纵向位置',
-              name: 'longitudinalPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'top', name: '顶部'},
-                {code: 'bottom', name: '底部'},
-              ],
-              value: ''
-            },
-            {
-              type: 'el-select',
-              label: '布局前置',
-              name: 'layoutFront',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'vertical', name: '竖排'},
-                {code: 'horizontal', name: '横排'},
-              ],
-              value: ''
-            },
-          ],
-        },
-        {
-          name: '自定义配色',
-          list: [
-            {
-              type: 'customColor',
-              label: '',
-              name: 'customColor',
-              required: false,
-              value: [{color: '#0CD2E6'}, {color: '#00BFA5'}, {color: '#FFC722'}, {color: '#886EFF'}, {color: '#008DEC'}],
             },
           ],
         },

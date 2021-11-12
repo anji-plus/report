@@ -18,12 +18,14 @@ export default {
         title: {},
         series: [
           {
+            name: '外环1',
             type: 'pie',
             zlevel: 1,
             silent: true,
             radius: ['98%', '97%'],
             hoverAnimation: false,
-            color: "rgba(88,142,197,0.5)",
+            color: "#46d3f3",
+            //color: "rgba(88,142,197,0.5)",
             // animation:false,    //charts3 no
             label: {
               normal: {
