@@ -46,6 +46,7 @@ import widgetBarStackChart from "./bar/widgetBarStackChart";
 import widgetLineStackChart from "./line/widgetLineStackChart";
 import widgetBarCompareChart from "./bar/widgetBarCompareChart";
 import widgetLineCompareChart from "./line/widgetLineCompareChart";
+import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
 
 export default {
   name: "Widget",
@@ -73,7 +74,8 @@ export default {
     widgetBarStackChart,
     widgetLineStackChart,
     widgetBarCompareChart,
-    widgetLineCompareChart
+    widgetLineCompareChart,
+    widgetDecoratePieChart
   },
   model: {
     prop: "value",
