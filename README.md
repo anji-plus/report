@@ -1,7 +1,7 @@
 ## 简介
 
 &emsp; &emsp; AJ-Report是全开源的一个BI平台，酷炫大屏展示，能随时随地掌控业务动态，让每个决策都有数据支撑。<br>
-&emsp; &emsp; 多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，支持17+种大屏组件，不会开发，照着设计稿也可以制作大屏。<br>
+&emsp; &emsp; 多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，目前已支持20种大屏组件/图表，不会开发，照着设计稿也可以制作大屏。<br>
 &emsp; &emsp; 三步轻松完成大屏设计：配置数据源---->写SQL配置数据集---->拖拽配置大屏---->保存发布。欢迎体验。
 
 ## 在线体验
@@ -65,8 +65,8 @@
 
 ### 依赖
 
-- [Mysql] 5.7+
-- [Jdk] 1.8+
+- [Mysql] 5.7
+- [Jdk] 1.8
 
 ### 后端
 
@@ -93,9 +93,9 @@
 
 在Linux上先准备好maven、node.js、jdk
 
-- [Apache Maven] 3.5 +<br>
-- [Node.js] v14.16.0+<br>
-- [Jdk] 1.8+
+- [Apache Maven] 3.5 <br>
+- [Node.js] v14.16.0 <br>
+- [Jdk] 1.8
 
 ```
 git clone https://gitee.com/anji-plus/report.git
@@ -113,6 +113,8 @@ bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启�
 http://serverip:9095
 ```
 
+**开发环境参考文档：** <br>
+https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html <br>
 **源码编译部署参考文档：** <br>
 https://report.anji-plus.com/report-doc/guide/quicklySource.html <br>
 **发行版部署参考文档：** <br>
@@ -190,7 +192,6 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 <img src="https://images.gitee.com/uploads/images/2021/1101/130421_caa25124_7492051.jpeg" width = "200" height = "200" align=left/> <br>
 个人企业微信：<br>
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "200" height = "200" align=left/>
-
 
 #### 开源不易，劳烦各位star ☺
 
