@@ -303,16 +303,24 @@ export default {
       } else {
         series.data = ''
       }
+      let lastRing0Color = optionsSetup.lastRing0Color;
+      let lastRing100Color = optionsSetup.lastRing100Color;
+      if (lastRing0Color == "") {
+        lastRing0Color = 'rgba(0,0,0,0)'
+      }
+      if (lastRing100Color == "") {
+        lastRing100Color = 'rgba(0,0,0,0)'
+      }
       const normal = {
         color: {
           colorStops: [
             {
               offset: 0,
-              color: optionsSetup.lastRing0Color,
+              color: lastRing0Color,
             },
             {
               offset: 1,
-              color: optionsSetup.lastRing100Color,
+              color: lastRing100Color,
             },
           ],
         },
