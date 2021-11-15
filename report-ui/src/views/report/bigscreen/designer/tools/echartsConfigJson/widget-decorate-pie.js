@@ -37,18 +37,26 @@ export const widgetDecoratePie = {
             {
               type: 'el-switch',
               label: '显示',
-              name: 'isShow',
+              name: 'isLastRingShow',
               required: false,
               placeholder: '',
               value: true
             },
             {
               type: 'vue-color',
-              label: '最外环颜色',
-              name: 'ring1Color',
+              label: '0%颜色',
+              name: 'lastRing0Color',
               required: false,
               placeholder: '',
-              value: '#46d3f3'
+              value: '#4FADFD'
+            },
+            {
+              type: 'vue-color',
+              label: '100%颜色',
+              name: 'lastRing100Color',
+              required: false,
+              placeholder: '',
+              value: 'rgba(235, 10, 10, 1)'
             },
           ]
         },

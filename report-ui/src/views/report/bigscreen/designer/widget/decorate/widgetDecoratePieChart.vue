@@ -18,15 +18,10 @@ export default {
         title: {},
         series: [
           {
-            name: '外环1',
+            name: '最外环',
             type: 'pie',
-            zlevel: 1,
             silent: true,
             radius: ['98%', '97%'],
-            hoverAnimation: false,
-            color: "#46d3f3",
-            //color: "rgba(88,142,197,0.5)",
-            // animation:false,    //charts3 no
             label: {
               normal: {
                 show: false
@@ -37,7 +32,23 @@ export default {
                 show: false
               }
             },
-            data: [1]
+            itemStyle: {
+              normal: {
+                color: {
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: '#4FADFD', // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: 'rgba(235, 10, 10, 1)', // 100% 处的颜色
+                    },
+                  ],
+                },
+              },
+            },
+            data: [0]
           },
           {
             type: 'pie',
@@ -303,7 +314,7 @@ export default {
   methods: {
     pie2() {
       let dataArr = [];
-      for (var i = 0; i < 8; i++) {
+      for (let i = 0; i < 8; i++) {
         if (i % 2 === 0) {
           dataArr.push({
             name: (i + 1).toString(),
@@ -329,13 +340,12 @@ export default {
             }
           })
         }
-
       }
       return dataArr
     },
     pie3() {
       let dataArr = [];
-      for (var i = 0; i < 100; i++) {
+      for (let i = 0; i < 100; i++) {
         if (i % 2 === 0) {
           dataArr.push({
             name: (i + 1).toString(),
@@ -361,34 +371,59 @@ export default {
             }
           })
         }
-
       }
       return dataArr
     },
     editorOptions() {
+      this.setOptionsLastRing();
       //this.setOptionsTitle();
     },
-    // 标题修改
-    setOptionsTitle() {
-      const optionsCollapse = this.optionsSetup;
-      const title = {};
-      title.text = optionsCollapse.titleText;
-      title.show = optionsCollapse.isNoTitle;
-      title.left = optionsCollapse.textAlign;
-      title.textStyle = {
-        color: optionsCollapse.textColor,
-        fontSize: optionsCollapse.textFontSize,
-        fontWeight: optionsCollapse.textFontWeight
+    // 最外外环1
+    setOptionsLastRing() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series[0];
+      if (optionsSetup.isLastRingShow) {
+        series.data = [0]
+      }else {
+        series.data = ''
+      }
+      const normal = {
+        color: {
+          colorStops: [
+            {
+              offset: 0,
+              color: optionsSetup.lastRing0Color,
+            },
+            {
+              offset: 1,
+              color: optionsSetup.lastRing100Color,
+            },
+          ],
+        },
       };
-      title.subtext = optionsCollapse.subText;
-      title.subtextStyle = {
-        color: optionsCollapse.subTextColor,
-        fontWeight: optionsCollapse.subTextFontWeight,
-        fontSize: optionsCollapse.subTextFontSize
-      };
-      this.options.title = title;
-    },
-  }
+    series.itemStyle['normal'] = normal;
+  },
+  // 标题修改
+  setOptionsTitle() {
+    const optionsCollapse = this.optionsSetup;
+    const title = {};
+    title.text = optionsCollapse.titleText;
+    title.show = optionsCollapse.isNoTitle;
+    title.left = optionsCollapse.textAlign;
+    title.textStyle = {
+      color: optionsCollapse.textColor,
+      fontSize: optionsCollapse.textFontSize,
+      fontWeight: optionsCollapse.textFontWeight
+    };
+    title.subtext = optionsCollapse.subText;
+    title.subtextStyle = {
+      color: optionsCollapse.subTextColor,
+      fontWeight: optionsCollapse.subTextFontWeight,
+      fontSize: optionsCollapse.subTextFontSize
+    };
+    this.options.title = title;
+  },
+}
 }
 </script>
 
