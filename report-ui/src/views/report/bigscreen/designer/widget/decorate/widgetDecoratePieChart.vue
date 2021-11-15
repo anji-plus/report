@@ -34,30 +34,19 @@ export default {
             },
             itemStyle: {
               normal: {
-                color: {
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: '#4FADFD', // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: 'rgba(235, 10, 10, 1)', // 100% 处的颜色
-                    },
-                  ],
-                },
+                show: false,
               },
             },
             data: [0]
           },
           {
+            name: '外四环',
             type: 'pie',
             zlevel: 2,
             silent: true,
             radius: ['90%', '91%'],
             startAngle: 50,
             hoverAnimation: false,
-            // animation:false,    //charts3 no
             label: {
               normal: {
                 show: false
@@ -68,9 +57,10 @@ export default {
                 show: false
               }
             },
-            data: this.pie2()
+            data: [0]
           },
           {
+            name: '里四环',
             type: 'pie',
             zlevel: 3,
             silent: true,
@@ -85,9 +75,10 @@ export default {
                 show: false
               }
             },
-            data: this.pie2()
+            data: [0]
           },
           {
+            name: '虚线环',
             type: 'pie',
             zlevel: 4,
             silent: true,
@@ -102,9 +93,10 @@ export default {
                 show: false
               }
             },
-            data: this.pie3()
+            data: [0]
           },
           {
+            name: '三分环',
             type: 'pie',
             zlevel: 5,
             silent: true,
@@ -121,7 +113,7 @@ export default {
             data: [50, 20, 40]
           },
           {
-            name: "",
+            name: "刻度环",
             type: 'gauge',
             splitNumber: 30, //刻度数量
             min: 0,
@@ -167,7 +159,7 @@ export default {
             },
           },
           {
-            //name: '统计',
+            name: '刻度环',
             type: 'gauge',
             splitNumber: 30, //刻度数量
             min: 0,
@@ -222,21 +214,6 @@ export default {
               formatter: '{value}'
             },
             data: []
-          },
-          {
-            type: 'pie',
-            zlevel: 20,
-            silent: true,
-            radius: ['60%', '59%'],
-            hoverAnimation: false,
-            color: '#2dc0c9',
-            // animation:false,
-            //data: [1],
-            labelLine: {
-              normal: {
-                show: false
-              }
-            }
           },
           {
             name: '中间环形图',
@@ -312,71 +289,10 @@ export default {
     this.editorOptions();
   },
   methods: {
-    pie2() {
-      let dataArr = [];
-      for (let i = 0; i < 8; i++) {
-        if (i % 2 === 0) {
-          dataArr.push({
-            name: (i + 1).toString(),
-            value: 25,
-            itemStyle: {
-              normal: {
-                color: "rgba(88,142,197,0.5)",
-                borderWidth: 0,
-                borderColor: "rgba(0,0,0,0)"
-              }
-            }
-          })
-        } else {
-          dataArr.push({
-            name: (i + 1).toString(),
-            value: 20,
-            itemStyle: {
-              normal: {
-                color: "rgba(0,0,0,0)",
-                borderWidth: 0,
-                borderColor: "rgba(0,0,0,0)"
-              }
-            }
-          })
-        }
-      }
-      return dataArr
-    },
-    pie3() {
-      let dataArr = [];
-      for (let i = 0; i < 100; i++) {
-        if (i % 2 === 0) {
-          dataArr.push({
-            name: (i + 1).toString(),
-            value: 25,
-            itemStyle: {
-              normal: {
-                color: "rgb(126,190,255)",
-                borderWidth: 0,
-                borderColor: "rgba(0,0,0,0)"
-              }
-            }
-          })
-        } else {
-          dataArr.push({
-            name: (i + 1).toString(),
-            value: 20,
-            itemStyle: {
-              normal: {
-                color: "rgba(0,0,0,0)",
-                borderWidth: 0,
-                borderColor: "rgba(0,0,0,0)"
-              }
-            }
-          })
-        }
-      }
-      return dataArr
-    },
     editorOptions() {
       this.setOptionsLastRing();
-      //this.setOptionsTitle();
+      this.setOptionsEightRing();
+      this.setOptionsDottedRing();
     },
     // 最外外环1
     setOptionsLastRing() {
@@ -384,7 +300,7 @@ export default {
       const series = this.options.series[0];
       if (optionsSetup.isLastRingShow) {
         series.data = [0]
-      }else {
+      } else {
         series.data = ''
       }
       const normal = {
@@ -401,29 +317,108 @@ export default {
           ],
         },
       };
-    series.itemStyle['normal'] = normal;
-  },
-  // 标题修改
-  setOptionsTitle() {
-    const optionsCollapse = this.optionsSetup;
-    const title = {};
-    title.text = optionsCollapse.titleText;
-    title.show = optionsCollapse.isNoTitle;
-    title.left = optionsCollapse.textAlign;
-    title.textStyle = {
-      color: optionsCollapse.textColor,
-      fontSize: optionsCollapse.textFontSize,
-      fontWeight: optionsCollapse.textFontWeight
-    };
-    title.subtext = optionsCollapse.subText;
-    title.subtextStyle = {
-      color: optionsCollapse.subTextColor,
-      fontWeight: optionsCollapse.subTextFontWeight,
-      fontSize: optionsCollapse.subTextFontSize
-    };
-    this.options.title = title;
-  },
-}
+      series.itemStyle['normal'] = normal;
+    },
+    setRingPie2() {
+      const optionsSetup = this.optionsSetup;
+      let eightColor = optionsSetup.eightColor;
+      if (eightColor == "") {
+        eightColor = 'rgba(0,0,0,0)';
+      }
+      let dataArr = [];
+      for (let i = 0; i < 8; i++) {
+        if (i % 2 === 0) {
+          dataArr.push({
+            name: (i + 1).toString(),
+            value: 25,
+            itemStyle: {
+              normal: {
+                color: optionsSetup.eightColor,
+                borderWidth: 0,
+                borderColor: 'rgba(0,0,0,0)'
+              }
+            }
+          })
+        } else {
+          dataArr.push({
+            name: (i + 1).toString(),
+            value: 20,
+            itemStyle: {
+              normal: {
+                color: 'rgba(0,0,0,0)'
+              }
+            }
+          })
+        }
+      }
+      return dataArr
+    },
+    setOptionsEightRing() {
+      const series = this.options.series;
+      series[1].data = this.setRingPie2();
+      series[2].data = this.setRingPie2();
+    },
+    setRingPie3() {
+      const optionsSetup = this.optionsSetup;
+      let dottedColor = optionsSetup.dottedColor;
+      if (dottedColor == "") {
+        dottedColor = 'rgba(0,0,0,0)';
+      }
+      let dataArr = [];
+      for (let i = 0; i < (optionsSetup.dottedNum * 2); i++) {
+        if (i % 2 === 0) {
+          dataArr.push({
+            name: (i + 1).toString(),
+            value: 25,
+            itemStyle: {
+              normal: {
+                color: dottedColor,
+                borderWidth: 0,
+                borderColor: 'rgba(0,0,0,0)'
+              }
+            }
+          })
+        } else {
+          dataArr.push({
+            name: (i + 1).toString(),
+            value: 20,
+            itemStyle: {
+              normal: {
+                color: 'rgba(0,0,0,0)',
+                borderWidth: 0,
+                borderColor: "rgba(0,0,0,0)"
+              }
+            }
+          })
+        }
+      }
+      return dataArr
+    },
+    setOptionsDottedRing(){
+      const series = this.options.series;
+      series[3].data = this.setRingPie3()
+    },
+    // 标题修改
+    setOptionsTitle() {
+      const optionsCollapse = this.optionsSetup;
+      const title = {};
+      title.text = optionsCollapse.titleText;
+      title.show = optionsCollapse.isNoTitle;
+      title.left = optionsCollapse.textAlign;
+      title.textStyle = {
+        color: optionsCollapse.textColor,
+        fontSize: optionsCollapse.textFontSize,
+        fontWeight: optionsCollapse.textFontWeight
+      };
+      title.subtext = optionsCollapse.subText;
+      title.subtextStyle = {
+        color: optionsCollapse.subTextColor,
+        fontWeight: optionsCollapse.subTextFontWeight,
+        fontSize: optionsCollapse.subTextFontSize
+      };
+      this.options.title = title;
+    },
+  }
 }
 </script>
 

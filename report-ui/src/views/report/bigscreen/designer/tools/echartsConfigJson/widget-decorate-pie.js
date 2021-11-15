@@ -56,111 +56,43 @@ export const widgetDecoratePie = {
               name: 'lastRing100Color',
               required: false,
               placeholder: '',
-              value: 'rgba(235, 10, 10, 1)'
+              value: '#28E8FA'
             },
           ]
         },
         {
-          name: '标题设置',
+          name: '八分环设置',
           list: [
             {
-              type: 'el-switch',
-              label: '标题',
-              name: 'isNoTitle',
+              type: 'vue-color',
+              label: '颜色',
+              name: 'eightColor',
               required: false,
               placeholder: '',
-              value: true
+              value: '#4FADFD'
             },
+          ]
+        },
+        {
+          name: '虚线环设置',
+          list: [
             {
-              type: 'el-input-text',
-              label: '标题',
-              name: 'titleText',
+              type: 'el-input-number',
+              label: '虚线数量',
+              name: 'dottedNum',
               required: false,
               placeholder: '',
-              value: ''
+              value: 40
             },
             {
               type: 'vue-color',
-              label: '字体颜色',
-              name: 'textColor',
+              label: '颜色',
+              name: 'dottedColor',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: '#28E8FA'
             },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'textFontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-input-number',
-              label: '字体大小',
-              name: 'textFontSize',
-              required: false,
-              placeholder: '',
-              value: 20
-            },
-            {
-              type: 'el-select',
-              label: '字体位置',
-              name: 'textAlign',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
-              ],
-              value: 'left'
-            },
-            {
-              type: 'el-input-text',
-              label: '副标题',
-              name: 'subText',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'subTextColor',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'subTextFontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-input-number',
-              label: '字体大小',
-              name: 'subTextFontSize',
-              required: false,
-              placeholder: '',
-              value: 12
-            },
-          ],
+          ]
         },
       ],
     ],
