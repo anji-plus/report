@@ -94,6 +94,35 @@ export const widgetDecoratePie = {
             },
           ]
         },
+        {
+          name: '三分环设置',
+          list: [
+            {
+              type: 'vue-color',
+              label: '一段颜色',
+              name: 'three1Color',
+              required: false,
+              placeholder: '',
+              value: '#fc8d89'
+            },
+            {
+              type: 'vue-color',
+              label: '二段颜色',
+              name: 'three2Color',
+              required: false,
+              placeholder: '',
+              value: '#46d3f3'
+            },
+            {
+              type: 'vue-color',
+              label: '三段颜色',
+              name: 'three3Color',
+              required: false,
+              placeholder: '',
+              value: 'rgba(203,203,203,.2)'
+            },
+          ]
+        },
       ],
     ],
     // 坐标

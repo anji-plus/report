@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import echarts from "echarts";
+
 export default {
   name: "widgetRotatePieChart",
   components: {},
@@ -104,7 +106,6 @@ export default {
             color: ["#fc8d89", "#46d3f3", "rgba(203,203,203,.2)"],
             startAngle: 50,
             hoverAnimation: false,
-            // animation:false,    //charts3 no
             label: {
               normal: {
                 show: false
@@ -113,7 +114,7 @@ export default {
             data: [50, 20, 40]
           },
           {
-            name: "刻度环",
+            name: "长刻度环",
             type: 'gauge',
             splitNumber: 30, //刻度数量
             min: 0,
@@ -159,7 +160,7 @@ export default {
             },
           },
           {
-            name: '刻度环',
+            name: '短刻度环',
             type: 'gauge',
             splitNumber: 30, //刻度数量
             min: 0,
@@ -293,6 +294,7 @@ export default {
       this.setOptionsLastRing();
       this.setOptionsEightRing();
       this.setOptionsDottedRing();
+      this.setOptionsThreeRing();
     },
     // 最外外环1
     setOptionsLastRing() {
@@ -341,7 +343,7 @@ export default {
             value: 25,
             itemStyle: {
               normal: {
-                color: optionsSetup.eightColor,
+                color: eightColor,
                 borderWidth: 0,
                 borderColor: 'rgba(0,0,0,0)'
               }
@@ -361,6 +363,7 @@ export default {
       }
       return dataArr
     },
+    // 八分环
     setOptionsEightRing() {
       const series = this.options.series;
       series[1].data = this.setRingPie2();
@@ -402,30 +405,29 @@ export default {
       }
       return dataArr
     },
-    setOptionsDottedRing(){
+    // 虚线环
+    setOptionsDottedRing() {
       const series = this.options.series;
       series[3].data = this.setRingPie3()
     },
-    // 标题修改
-    setOptionsTitle() {
-      const optionsCollapse = this.optionsSetup;
-      const title = {};
-      title.text = optionsCollapse.titleText;
-      title.show = optionsCollapse.isNoTitle;
-      title.left = optionsCollapse.textAlign;
-      title.textStyle = {
-        color: optionsCollapse.textColor,
-        fontSize: optionsCollapse.textFontSize,
-        fontWeight: optionsCollapse.textFontWeight
-      };
-      title.subtext = optionsCollapse.subText;
-      title.subtextStyle = {
-        color: optionsCollapse.subTextColor,
-        fontWeight: optionsCollapse.subTextFontWeight,
-        fontSize: optionsCollapse.subTextFontSize
-      };
-      this.options.title = title;
-    },
+    // 三分环
+    setOptionsThreeRing() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      let three1Color = optionsSetup.three1Color;
+      let three2Color = optionsSetup.three2Color;
+      let three3Color = optionsSetup.three3Color;
+      if (three1Color == "") {
+        three1Color = 'rgba(0,0,0,0)'
+      }
+      if (three2Color == "") {
+        three2Color = 'rgba(0,0,0,0)'
+      }
+      if (three3Color == "") {
+        three3Color = 'rgba(0,0,0,0)'
+      }
+      series[4].color = [three1Color,three2Color,three3Color]
+    }
   }
 }
 </script>
