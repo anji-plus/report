@@ -19,11 +19,13 @@ import java.util.List;
 public class DataSetTestTransformParam implements Serializable{
 
     /** 数据源编码 */
-    @NotBlank(message = "sourceCode not empty")
     private String sourceCode;
 
     /** 动态查询sql或者接口中的请求体 */
     private String dynSentence;
+
+    /** 数据集类型 */
+    private String setType;
 
     /** 请求参数集合 */
     private List<DataSetParamDto> dataSetParamDtoList;
