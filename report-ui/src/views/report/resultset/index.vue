@@ -1,13 +1,19 @@
 <template>
   <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
-      <el-button
-        type="primary"
-        icon="el-icon-plus"
-        @click="operateDataset('add')"
-        v-permission="'resultsetManage:insert'"
-        >新增
-      </el-button>
+      <el-dropdown
+        placement="bottom"
+        @command="operateDataset"
+      >
+        <el-button type="primary" icon="el-icon-plus">
+          新增
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="sql">SQL</el-dropdown-item>
+          <el-dropdown-item command="http">HTTP</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </template>
 
     <template slot="edit" slot-scope="props">
@@ -15,7 +21,7 @@
         type="text"
         @click="operateDataset('edit', props)"
         v-permission="'resultsetManage:update'"
-        >编辑
+      >编辑
       </el-button>
     </template>
 
@@ -24,7 +30,7 @@
         type="text"
         @click="dataView(props)"
         v-permission="'resultsetManage:query'"
-        >数据预览
+      >数据预览
       </el-button>
     </template>
     <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
@@ -95,7 +101,15 @@ export default {
             },
             label: "数据源",
             field: "sourceCode"
-          }
+          },
+          {
+            inputType: "anji-select", //form表单类型 input|input-number|anji-select(传递url或者dictCode)|anji-tree(左侧树)|date|datetime|datetimerange
+            anjiSelectOption: {
+              dictCode: "SET_TYPE"
+            },
+            label: "数据集类型",
+            field: "setType"
+          },
         ],
         // 操作按钮
         buttons: {
@@ -143,7 +157,7 @@ export default {
             editField: "setCode",
             inputType: "input",
             rules: [
-              { min: 1, max: 50, message: "不超过50个字符", trigger: "blur" }
+              {min: 1, max: 50, message: "不超过50个字符", trigger: "blur"}
             ],
             disabled: false
           },
@@ -154,7 +168,7 @@ export default {
             editField: "setName",
             inputType: "input",
             rules: [
-              { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" }
+              {min: 1, max: 100, message: "不超过100个字符", trigger: "blur"}
             ],
             disabled: false
           },
@@ -165,7 +179,7 @@ export default {
             editField: "setDesc",
             inputType: "input",
             rules: [
-              { min: 1, max: 255, message: "不超过255个字符", trigger: "blur" }
+              {min: 1, max: 255, message: "不超过255个字符", trigger: "blur"}
             ],
             disabled: false
           },
@@ -176,7 +190,18 @@ export default {
             editField: "sourceCode",
             inputType: "input",
             rules: [
-              { min: 1, max: 50, message: "不超过50个字符", trigger: "blur" }
+              {min: 1, max: 50, message: "不超过50个字符", trigger: "blur"}
+            ],
+            disabled: false
+          },
+          {
+            label: "数据集类型", //数据源编码
+            placeholder: "",
+            field: "setType",
+            editField: "setType",
+            inputType: "input",
+            rules: [
+              {min: 1, max: 50, message: "不超过50个字符", trigger: "blur"}
             ],
             disabled: false
           },
@@ -245,16 +270,19 @@ export default {
     };
   },
 
-  created() {},
+  created() {
+  },
   methods: {
     operateDataset(type, prop) {
+      debugger
       this.dialogVisibleSetDataSet = true;
-      if (prop) {
+      if (prop && prop.msg) {
         this.dataSet = prop.msg;
+        type = prop.msg.setType;
       } else {
         this.dataSet = {};
       }
-      this.$refs.EditDataSet.addOrEditDataSet(this.dataSet);
+      this.$refs.EditDataSet.addOrEditDataSet(this.dataSet, type);
     },
     refreshList() {
       this.$refs.listPage.handleQueryForm("query");

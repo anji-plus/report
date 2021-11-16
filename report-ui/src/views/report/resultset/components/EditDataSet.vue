@@ -15,7 +15,7 @@
         label-width="130px"
       >
         <el-row :gutter="10">
-          <el-col :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
+          <el-col v-if="this.setType=='sql'" :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
             <el-form-item label="数据源" prop="sourceCode">
               <el-select
                 v-model.trim="formData.sourceCode"
@@ -53,6 +53,9 @@
             </el-form-item>
           </el-col>
 
+
+        </el-row>
+        <el-row v-if="this.setType=='sql'" :gutter="10">
           <el-col
             :xs="24"
             :sm="20"
@@ -61,7 +64,7 @@
             :xl="22"
             class="code-mirror-form"
           >
-            <el-form-item label="查询SQL或请求体">
+            <el-form-item  label="查询SQL">
               <div class="codemirror">
                 <monaco-editor
                   v-model.trim="formData.dynSentence"
@@ -71,6 +74,25 @@
               </div>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row v-if="this.setType=='http'">
+          <el-form-item  label="请求路径">
+            <el-input placeholder="请输入请求路径..." v-model="httpForm.apiUrl" class="input-with-select">
+              <el-select v-model="httpForm.method" slot="prepend" placeholder="请选择">
+                <el-option label="GET" value="GET"></el-option>
+                <el-option label="POST" value="POST"></el-option>
+                <el-option label="PUT" value="PUT"></el-option>
+                <el-option label="DELETE" value="DELETE"></el-option>
+              </el-select>
+            </el-input>
+          </el-form-item>
+          <el-form-item  label="请求头">
+            <el-input v-model.trim="httpForm.header" size="mini" placeholder="请输入请求头..."/>
+          </el-form-item>
+          <el-form-item  label="请求体">
+            <el-input v-model.trim="httpForm.body" size="mini" placeholder="请输入请求体..."/>
+          </el-form-item>
+
         </el-row>
         <el-row :gutter="10">
           <el-col :xs="24" :sm="20" :md="22" :lg="22" :xl="22">
@@ -508,7 +530,13 @@ export default {
         setName: "",
         setCode: ""
       },
-
+      setType: '',  //数据集类型，主要用于区分http   addSql  addHttp  edit
+      httpForm: {   //http数据源相关数据
+        apiUrl: '',
+        method: 'GET',
+        header: '{"Content-Type":"application/json;charset=UTF-8"}',
+        body: '',
+      },
       //待删除
       dictionaryOptions: [], // 数据源类型
       list: null,
@@ -541,7 +569,11 @@ export default {
   mounted() {},
   methods: {
     // 编辑数据集,获取单条数据详情
-    async addOrEditDataSet(row) {
+    async addOrEditDataSet(row, type) {
+      this.setType = type
+      if (type == 'http' && row.dynSentence) {
+        this.httpForm = JSON.parse(row.dynSentence)
+      }
       //获取数据源下拉
       const { code, data } = await queryAllDataSourceSet();
       if (code != "200") return;
@@ -636,12 +668,18 @@ export default {
 
     // 测试预览
     async handleClickTabs(tab, event) {
+      if (this.setType == 'http') {
+        //针对http数据源
+        console.log("http数据集" + this.httpForm);
+        this.formData.dynSentence = JSON.stringify(this.httpForm)
+      }
       if (tab.paneName == "third") {
         const params = {
           sourceCode: this.formData.sourceCode,
           dynSentence: this.formData.dynSentence,
           dataSetParamDtoList: this.tableData,
-          dataSetTransformDtoList: this.itemFilterList
+          dataSetTransformDtoList: this.itemFilterList,
+          setType: this.setType
         };
         const { code, data } = await testTransformSet(params);
         if (code != "200") return;
@@ -831,6 +869,12 @@ export default {
       });
     },
     async submit(formName) {
+      if (this.setType == 'http') {
+        //针对http数据源
+        console.log("http数据集" + this.httpForm);
+        this.formData.dynSentence = JSON.stringify(this.httpForm)
+      }
+      this.formData.setType = this.setType
       this.$refs[formName].validate(async (valid, obj) => {
         if (valid) {
           if (this.testMassageCode == 200) {
