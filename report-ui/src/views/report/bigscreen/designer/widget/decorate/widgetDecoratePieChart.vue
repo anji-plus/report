@@ -104,6 +104,7 @@ export default {
             radius: ['80%', '78%'],
             color: ["#fc8d89", "#46d3f3", "rgba(203,203,203,.2)"],
             startAngle: 50,
+            avoidLabelOverlap: true,
             hoverAnimation: false,
             label: {
               normal: {
@@ -159,7 +160,6 @@ export default {
             silent: true,
             radius: ['60%', '59%'],
             hoverAnimation: false,
-            data: [1],
             label: {
               normal: {
                 show: false
@@ -170,17 +170,11 @@ export default {
                 show: false
               }
             },
-            itemStyle: {
-              normal: {
-                color: '#28E8FA',
-                show: false,
-              },
-            },
           },
           {
             name: '中间环形图',
             type: 'pie',
-            radius: ['35%', '55%'],
+            radius: ['40%', '55%'],
             avoidLabelOverlap: false,
             hoverAnimation: false,
             itemStyle: {
@@ -258,6 +252,16 @@ export default {
       this.setOptionsThreeRing();
       this.setOptionsOutRing();
       this.setOptionsInRing();
+      this.setOptionsRingOnRing();
+      this.setOptionsPie();
+    },
+    // 颜色设置
+    setColor(color) {
+      const nullColor = 'rgba(0,0,0,0)'
+      if (color == "") {
+        color = nullColor
+      }
+      return color
     },
     // 最外外环1
     setOptionsLastRing() {
@@ -268,24 +272,16 @@ export default {
       } else {
         series.data = ''
       }
-      let lastRing0Color = optionsSetup.lastRing0Color;
-      let lastRing100Color = optionsSetup.lastRing100Color;
-      if (lastRing0Color == "") {
-        lastRing0Color = 'rgba(0,0,0,0)'
-      }
-      if (lastRing100Color == "") {
-        lastRing100Color = 'rgba(0,0,0,0)'
-      }
       const normal = {
         color: {
           colorStops: [
             {
               offset: 0,
-              color: lastRing0Color,
+              color: this.setColor(optionsSetup.lastRing0Color),
             },
             {
               offset: 1,
-              color: lastRing100Color,
+              color: this.setColor(optionsSetup.lastRing100Color),
             },
           ],
         },
@@ -294,10 +290,6 @@ export default {
     },
     setRingPie2() {
       const optionsSetup = this.optionsSetup;
-      let eightColor = optionsSetup.eightColor;
-      if (eightColor == "") {
-        eightColor = 'rgba(0,0,0,0)';
-      }
       let dataArr = [];
       for (let i = 0; i < 8; i++) {
         if (i % 2 === 0) {
@@ -306,7 +298,7 @@ export default {
             value: 25,
             itemStyle: {
               normal: {
-                color: eightColor,
+                color: this.setColor(optionsSetup.eightColor),
                 borderWidth: 0,
                 borderColor: 'rgba(0,0,0,0)'
               }
@@ -334,10 +326,6 @@ export default {
     },
     setRingPie3() {
       const optionsSetup = this.optionsSetup;
-      let dottedColor = optionsSetup.dottedColor;
-      if (dottedColor == "") {
-        dottedColor = 'rgba(0,0,0,0)';
-      }
       let dataArr = [];
       for (let i = 0; i < (optionsSetup.dottedNum * 2); i++) {
         if (i % 2 === 0) {
@@ -346,7 +334,7 @@ export default {
             value: 25,
             itemStyle: {
               normal: {
-                color: dottedColor,
+                color: this.setColor(optionsSetup.dottedColor),
                 borderWidth: 0,
                 borderColor: 'rgba(0,0,0,0)'
               }
@@ -359,8 +347,6 @@ export default {
             itemStyle: {
               normal: {
                 color: 'rgba(0,0,0,0)',
-                borderWidth: 0,
-                borderColor: "rgba(0,0,0,0)"
               }
             }
           })
@@ -376,62 +362,38 @@ export default {
     // 三分环
     setOptionsThreeRing() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      let three1Color = optionsSetup.three1Color;
-      let three2Color = optionsSetup.three2Color;
-      let three3Color = optionsSetup.three3Color;
-      if (three1Color == "") {
-        three1Color = 'rgba(0,0,0,0)'
-      }
-      if (three2Color == "") {
-        three2Color = 'rgba(0,0,0,0)'
-      }
-      if (three3Color == "") {
-        three3Color = 'rgba(0,0,0,0)'
-      }
-      series[4].color = [three1Color, three2Color, three3Color]
+      const series = this.options.series[4];
+      series.color = [this.setColor(optionsSetup.three1Color), this.setColor(optionsSetup.three2Color), this.setColor(optionsSetup.three3Color)]
     },
     // 外指标环
     setOptionsOutRing() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      let outRingColor = optionsSetup.outRingColor
-      if (outRingColor == "") {
-        outRingColor = 'rgba(0,0,0,0)';
-      }
       const axisLine = {
         show: optionsSetup.isOutRingShow,
         lineStyle: {
           width: optionsSetup.outRingWidth,
           shadowBlur: 0,
           color: [
-            [1, outRingColor]
+            [1, this.setColor(optionsSetup.outRingColor)]
           ]
         }
       };
-      let outTickColor = optionsSetup.outTickColor
-      if (outTickColor == "") {
-        outTickColor = 'rgba(0,0,0,0)';
-      }
       const axisTick = {
         show: optionsSetup.isOutTickShow,
         lineStyle: {
-          color: outTickColor,
+          color: this.setColor(optionsSetup.outTickColor),
           width: optionsSetup.outTickWidth
         },
         length: optionsSetup.outTickLength,
         splitNumber: optionsSetup.outTickWidth
       };
       series[5].splitNumber = optionsSetup.outSplitNum
-      let outSplitColor = optionsSetup.outSplitColor
-      if (outSplitColor == "") {
-        outSplitColor = 'rgba(0,0,0,0)'
-      }
       const splitLine = {
         show: optionsSetup.isOutSplitShow,
         length: optionsSetup.outSplitLength,
         lineStyle: {
-          color: outSplitColor,
+          color: this.setColor(optionsSetup.outSplitColor),
           width: optionsSetup.outSplitWidth,
         }
       };
@@ -443,43 +405,31 @@ export default {
     setOptionsInRing() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      let inRingColor = optionsSetup.inRingColor
-      if (inRingColor == "") {
-        inRingColor = 'rgba(0,0,0,0)'
-      }
       const axisLine = {
         show: optionsSetup.isInRingShow,
-          lineStyle: {
+        lineStyle: {
           width: optionsSetup.inRingWidth,
-            shadowBlur: 0,
-            color: [
-            [1, inRingColor],
+          shadowBlur: 0,
+          color: [
+            [1, this.setColor(optionsSetup.inRingColor)],
           ],
         },
       };
-      let inTickColor = optionsSetup.inTickColor
-      if (inTickColor == "") {
-        inTickColor = 'rgba(0,0,0,0)'
-      }
       const axisTick = {
         show: optionsSetup.isInTickShow,
-          lineStyle: {
-          color: inTickColor,
-            width: optionsSetup.inTickWidth,
+        lineStyle: {
+          color: this.setColor(optionsSetup.inTickColor),
+          width: optionsSetup.inTickWidth,
         },
         length: optionsSetup.inTickLength,
-          splitNumber: optionsSetup.inTickNum,
+        splitNumber: optionsSetup.inTickNum,
       };
       series[6].splitNumber = optionsSetup.inSplitNum
-      let inSplitColor = optionsSetup.inSplitColor
-      if (inSplitColor == "") {
-        inSplitColor = 'rgba(0,0,0,0)'
-      }
       const splitLine = {
         show: optionsSetup.isInSplitShow,
         length: optionsSetup.inSplitLength,
         lineStyle: {
-          color: inSplitColor,
+          color: this.setColor(optionsSetup.inSplitColor),
           width: optionsSetup.inSplitWidth
         }
       };
@@ -487,6 +437,46 @@ export default {
       series[6].axisTick = axisTick
       series[6].splitLine = splitLine
     },
+    // 环外环设置
+    setOptionsRingOnRing() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series[7];
+      if (optionsSetup.isRingOnRingShow) {
+        series.data = [0]
+      } else {
+        series.data = ''
+      }
+      const itemStyle = {
+        normal: {
+          color: this.setColor(optionsSetup.ringOnRingColor),
+        }
+      }
+      series.itemStyle = itemStyle
+    },
+    // 中饼图设置
+    setOptionsPie() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series[8];
+      let width = optionsSetup.pieWidth
+      const pieWidth = width + "%"
+      series.radius = [pieWidth, '55%']
+
+      let pieBlocks = optionsSetup.pieBlocks
+      if (pieBlocks == "six") {
+        series.data = [25, 25, 25, 25, 25, 25]
+      } else if (pieBlocks == "five") {
+        series.data = [30, 30, 30, 30, 30]
+      } else {
+        series.data = [40, 40, 40, 40]
+      }
+      const itemStyle = {
+        normal: {
+          color: this.setColor(optionsSetup.pieColor),
+          borderColor: this.setColor(optionsSetup.pieBorderColor),
+        }
+      }
+      series.itemStyle = itemStyle
+    }
   }
 }
 </script>

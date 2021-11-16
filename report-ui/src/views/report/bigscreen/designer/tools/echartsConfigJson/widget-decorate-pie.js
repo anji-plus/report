@@ -9,7 +9,7 @@
 export const widgetDecoratePie = {
   code: 'widgetDecoratePieChart',
   type: 'chart',
-  label: '静态装饰饼图',
+  label: '装饰饼图',
   icon: 'iconicon_tubiao_bingtu',
   options: {
     // 配置
@@ -20,7 +20,7 @@ export const widgetDecoratePie = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '装饰饼图',
+        value: '静态装饰饼图',
       },
       {
         type: 'vue-color',
@@ -140,7 +140,7 @@ export const widgetDecoratePie = {
               name: 'outRingColor',
               required: false,
               placeholder: '',
-              value: '#28E8FA'
+              value: '#0dc2fe'
             },
             {
               type: 'el-input-number',
@@ -188,7 +188,7 @@ export const widgetDecoratePie = {
               name: 'outSplitColor',
               required: false,
               placeholder: '',
-              value: '#28E8FA'
+              value: '#0dc2fe'
             },
             {
               type: 'el-switch',
@@ -228,7 +228,7 @@ export const widgetDecoratePie = {
               name: 'outTickColor',
               required: false,
               placeholder: '',
-              value: '#28E8FA'
+              value: '#0dc2fe'
             },
           ]
         },
@@ -249,7 +249,7 @@ export const widgetDecoratePie = {
               name: 'inRingColor',
               required: false,
               placeholder: '',
-              value: '#28E8FA'
+              value: '#0dc2fe'
             },
             {
               type: 'el-input-number',
@@ -297,7 +297,7 @@ export const widgetDecoratePie = {
               name: 'inSplitColor',
               required: false,
               placeholder: '',
-              value: '#28E8FA'
+              value: '#0dc2fe'
             },
             {
               type: 'el-switch',
@@ -337,7 +337,70 @@ export const widgetDecoratePie = {
               name: 'inTickColor',
               required: false,
               placeholder: '',
-              value: '#28E8FA'
+              value: '#0dc2fe'
+            },
+          ]
+        },
+        {
+          name: '环外环设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isRingOnRingShow',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'vue-color',
+              label: '颜色',
+              name: 'ringOnRingColor',
+              required: false,
+              placeholder: '',
+              value: '#4FADFD'
+            },
+          ]
+        },
+        {
+          name: '中饼图设置',
+          list: [
+            {
+              type: 'el-input-number',
+              label: '半径',
+              name: 'pieWidth',
+              required: false,
+              placeholder: '',
+              value: 40
+            },
+            {
+              type: 'vue-color',
+              label: '颜色',
+              name: 'pieColor',
+              required: false,
+              placeholder: '',
+              value: '#0dc2fe'
+            },
+            {
+              type: 'vue-color',
+              label: '边框颜色',
+              name: 'pieBorderColor',
+              required: false,
+              placeholder: '',
+              value: '#3D4268'
+            },
+            {
+              type: 'el-select',
+              label: '分块',
+              name: 'pieBlocks',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'four', name: '十字星'},
+                {code: 'five', name: '五角星'},
+                {code: 'six', name: '六芒星'},
+              ],
+              value: 'six'
             },
           ]
         },
