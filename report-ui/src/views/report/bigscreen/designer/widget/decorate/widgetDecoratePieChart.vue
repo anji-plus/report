@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import echarts from "echarts";
 
 export default {
   name: "widgetRotatePieChart",
@@ -114,45 +113,19 @@ export default {
             data: [50, 20, 40]
           },
           {
-            name: "长刻度环",
+            name: "外指标环",
             type: 'gauge',
-            splitNumber: 30, //刻度数量
+            splitNumber: 30,
             min: 0,
             max: 100,
             radius: '73%', //图表尺寸
             center: ['50%', '50%'],
             startAngle: 90,
             endAngle: -269.9999,
-            axisLine: {
-              show: false,
-              lineStyle: {
-                width: 0,
-                shadowBlur: 0,
-                color: [
-                  [1, '#0dc2fe']
-                ]
-              }
-            },
-            axisTick: {
-              show: false,
-              lineStyle: {
-                color: 'auto',
-                width: 2
-              },
-              length: 20,
-              splitNumber: 5
-            },
-            splitLine: {
-              show: true,
-              length: 32,
-              lineStyle: {
-                color: 'auto',
-              }
-            },
             axisLabel: {
               show: false
             },
-            pointer: { //仪表盘指针
+            pointer: {
               show: 0,
             },
             detail: {
@@ -160,61 +133,49 @@ export default {
             },
           },
           {
-            name: '短刻度环',
+            name: '里指标环',
             type: 'gauge',
-            splitNumber: 30, //刻度数量
+            splitNumber: 30,
             min: 0,
             max: 100,
-            radius: '68%', //图表尺寸
+            radius: '68%',
             center: ['50%', '50%'],
             startAngle: 90,
             endAngle: -269.9999,
-            axisLine: {
-              show: true,
-              lineStyle: {
-                width: 0,
-                shadowBlur: 0,
-                color: [
-                  [0, '#0dc2fe'],
-                  [1, '#0dc2fe']
-                ]
-              }
-            },
-            axisTick: {
-              show: true,
-              lineStyle: {
-                color: '#0dc2fe',
-                width: 2
-              },
-              length: 20,
-              splitNumber: 5
-            },
-            splitLine: {
-              show: true,
-              length: 20,
-              lineStyle: {
-                color: '#0dc2fe',
-              }
-            },
             axisLabel: {
               show: false
             },
-            pointer: { //仪表盘指针
+            pointer: {
               show: 0,
             },
             detail: {
               show: false,
-              borderColor: '#fff',
-              shadowColor: '#fff', //默认透明
-              shadowBlur: 2,
-              offsetCenter: [0, '0%'], // x, y，单位px
-              textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                color: '#fff',
-                fontSize: 50,
-              },
-              formatter: '{value}'
             },
-            data: []
+          },
+          {
+            name: '环外环',
+            type: 'pie',
+            zlevel: 20,
+            silent: true,
+            radius: ['60%', '59%'],
+            hoverAnimation: false,
+            data: [1],
+            label: {
+              normal: {
+                show: false
+              },
+            },
+            labelLine: {
+              normal: {
+                show: false
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: '#28E8FA',
+                show: false,
+              },
+            },
           },
           {
             name: '中间环形图',
@@ -295,6 +256,8 @@ export default {
       this.setOptionsEightRing();
       this.setOptionsDottedRing();
       this.setOptionsThreeRing();
+      this.setOptionsOutRing();
+      this.setOptionsInRing();
     },
     // 最外外环1
     setOptionsLastRing() {
@@ -426,8 +389,104 @@ export default {
       if (three3Color == "") {
         three3Color = 'rgba(0,0,0,0)'
       }
-      series[4].color = [three1Color,three2Color,three3Color]
-    }
+      series[4].color = [three1Color, three2Color, three3Color]
+    },
+    // 外指标环
+    setOptionsOutRing() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      let outRingColor = optionsSetup.outRingColor
+      if (outRingColor == "") {
+        outRingColor = 'rgba(0,0,0,0)';
+      }
+      const axisLine = {
+        show: optionsSetup.isOutRingShow,
+        lineStyle: {
+          width: optionsSetup.outRingWidth,
+          shadowBlur: 0,
+          color: [
+            [1, outRingColor]
+          ]
+        }
+      };
+      let outTickColor = optionsSetup.outTickColor
+      if (outTickColor == "") {
+        outTickColor = 'rgba(0,0,0,0)';
+      }
+      const axisTick = {
+        show: optionsSetup.isOutTickShow,
+        lineStyle: {
+          color: outTickColor,
+          width: optionsSetup.outTickWidth
+        },
+        length: optionsSetup.outTickLength,
+        splitNumber: optionsSetup.outTickWidth
+      };
+      series[5].splitNumber = optionsSetup.outSplitNum
+      let outSplitColor = optionsSetup.outSplitColor
+      if (outSplitColor == "") {
+        outSplitColor = 'rgba(0,0,0,0)'
+      }
+      const splitLine = {
+        show: optionsSetup.isOutSplitShow,
+        length: optionsSetup.outSplitLength,
+        lineStyle: {
+          color: outSplitColor,
+          width: optionsSetup.outSplitWidth,
+        }
+      };
+      series[5].axisLine = axisLine
+      series[5].axisTick = axisTick
+      series[5].splitLine = splitLine
+    },
+    // 里指标环
+    setOptionsInRing() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      let inRingColor = optionsSetup.inRingColor
+      if (inRingColor == "") {
+        inRingColor = 'rgba(0,0,0,0)'
+      }
+      const axisLine = {
+        show: optionsSetup.isInRingShow,
+          lineStyle: {
+          width: optionsSetup.inRingWidth,
+            shadowBlur: 0,
+            color: [
+            [1, inRingColor],
+          ],
+        },
+      };
+      let inTickColor = optionsSetup.inTickColor
+      if (inTickColor == "") {
+        inTickColor = 'rgba(0,0,0,0)'
+      }
+      const axisTick = {
+        show: optionsSetup.isInTickShow,
+          lineStyle: {
+          color: inTickColor,
+            width: optionsSetup.inTickWidth,
+        },
+        length: optionsSetup.inTickLength,
+          splitNumber: optionsSetup.inTickNum,
+      };
+      series[6].splitNumber = optionsSetup.inSplitNum
+      let inSplitColor = optionsSetup.inSplitColor
+      if (inSplitColor == "") {
+        inSplitColor = 'rgba(0,0,0,0)'
+      }
+      const splitLine = {
+        show: optionsSetup.isInSplitShow,
+        length: optionsSetup.inSplitLength,
+        lineStyle: {
+          color: inSplitColor,
+          width: optionsSetup.inSplitWidth
+        }
+      };
+      series[6].axisLine = axisLine
+      series[6].axisTick = axisTick
+      series[6].splitLine = splitLine
+    },
   }
 }
 </script>

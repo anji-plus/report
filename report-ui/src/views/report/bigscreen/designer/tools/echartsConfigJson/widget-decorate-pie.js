@@ -9,7 +9,7 @@
 export const widgetDecoratePie = {
   code: 'widgetDecoratePieChart',
   type: 'chart',
-  label: '装饰饼图',
+  label: '静态装饰饼图',
   icon: 'iconicon_tubiao_bingtu',
   options: {
     // 配置
@@ -120,6 +120,224 @@ export const widgetDecoratePie = {
               required: false,
               placeholder: '',
               value: 'rgba(203,203,203,.2)'
+            },
+          ]
+        },
+        {
+          name: '外指标环设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '环显示',
+              name: 'isOutRingShow',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'vue-color',
+              label: '环颜色',
+              name: 'outRingColor',
+              required: false,
+              placeholder: '',
+              value: '#28E8FA'
+            },
+            {
+              type: 'el-input-number',
+              label: '环宽度',
+              name: 'outRingWidth',
+              required: false,
+              placeholder: '',
+              value: 1
+            },
+            {
+              type: 'el-switch',
+              label: '指标线显示',
+              name: 'isOutSplitShow',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-input-number',
+              label: '指标线数量',
+              name: 'outSplitNum',
+              required: false,
+              placeholder: '',
+              value: 30
+            },
+            {
+              type: 'el-input-number',
+              label: '指标线长度',
+              name: 'outSplitLength',
+              required: false,
+              placeholder: '',
+              value: 32
+            },
+            {
+              type: 'el-input-number',
+              label: '指标线宽度',
+              name: 'outSplitWidth',
+              required: false,
+              placeholder: '',
+              value: 2
+            },
+            {
+              type: 'vue-color',
+              label: '指标线颜色',
+              name: 'outSplitColor',
+              required: false,
+              placeholder: '',
+              value: '#28E8FA'
+            },
+            {
+              type: 'el-switch',
+              label: '刻度线显示',
+              name: 'isOutTickShow',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-input-number',
+              label: '刻度线数量',
+              name: 'outTickNum',
+              required: false,
+              placeholder: '',
+              value: 5
+            },
+            {
+              type: 'el-input-number',
+              label: '刻度线长度',
+              name: 'outTickLength',
+              required: false,
+              placeholder: '',
+              value: 20
+            },
+            {
+              type: 'el-input-number',
+              label: '刻度线宽度',
+              name: 'outTickWidth',
+              required: false,
+              placeholder: '',
+              value: 2
+            },
+            {
+              type: 'vue-color',
+              label: '刻度线颜色',
+              name: 'outTickColor',
+              required: false,
+              placeholder: '',
+              value: '#28E8FA'
+            },
+          ]
+        },
+        {
+          name: '里指标环设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '环显示',
+              name: 'isInRingShow',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'vue-color',
+              label: '环颜色',
+              name: 'inRingColor',
+              required: false,
+              placeholder: '',
+              value: '#28E8FA'
+            },
+            {
+              type: 'el-input-number',
+              label: '环宽度',
+              name: 'inRingWidth',
+              required: false,
+              placeholder: '',
+              value: 1
+            },
+            {
+              type: 'el-switch',
+              label: '指标线显示',
+              name: 'isInSplitShow',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-input-number',
+              label: '指标线数量',
+              name: 'inSplitNum',
+              required: false,
+              placeholder: '',
+              value: 30
+            },
+            {
+              type: 'el-input-number',
+              label: '指标线长度',
+              name: 'inSplitLength',
+              required: false,
+              placeholder: '',
+              value: 20
+            },
+            {
+              type: 'el-input-number',
+              label: '指标线宽度',
+              name: 'inSplitWidth',
+              required: false,
+              placeholder: '',
+              value: 2
+            },
+            {
+              type: 'vue-color',
+              label: '指标线颜色',
+              name: 'inSplitColor',
+              required: false,
+              placeholder: '',
+              value: '#28E8FA'
+            },
+            {
+              type: 'el-switch',
+              label: '刻度线显示',
+              name: 'isInTickShow',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-input-number',
+              label: '刻度线数量',
+              name: 'inTickNum',
+              required: false,
+              placeholder: '',
+              value: 5
+            },
+            {
+              type: 'el-input-number',
+              label: '刻度线长度',
+              name: 'inTickLength',
+              required: false,
+              placeholder: '',
+              value: 20
+            },
+            {
+              type: 'el-input-number',
+              label: '刻度线宽度',
+              name: 'inTickWidth',
+              required: false,
+              placeholder: '',
+              value: 2
+            },
+            {
+              type: 'vue-color',
+              label: '刻度线颜色',
+              name: 'inTickColor',
+              required: false,
+              placeholder: '',
+              value: '#28E8FA'
             },
           ]
         },
