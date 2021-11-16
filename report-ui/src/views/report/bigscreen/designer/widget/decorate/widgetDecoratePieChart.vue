@@ -104,7 +104,7 @@ export default {
             radius: ['80%', '78%'],
             color: ["#fc8d89", "#46d3f3", "rgba(203,203,203,.2)"],
             startAngle: 50,
-            avoidLabelOverlap: true,
+            avoidLabelOverlap: false,
             hoverAnimation: false,
             label: {
               normal: {
