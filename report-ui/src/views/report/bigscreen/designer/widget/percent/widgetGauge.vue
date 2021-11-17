@@ -259,9 +259,10 @@ export default {
     staticDataFn(val) {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
+      const num = val[0]['num'];
       const data = [
         {
-          value: val
+          value: num
         }
       ]
       const detail = {

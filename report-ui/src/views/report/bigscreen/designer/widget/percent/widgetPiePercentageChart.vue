@@ -445,9 +445,10 @@ export default {
     },
     staticDataFn(val) {
       const title = this.options.title;
-      title.text = '{nums|' + val + '}{percent|%}';
-      this.options.series[6]['data'][0]['value'] = val;
-      this.options.series[6]['data'][1]['value'] = 100 - val;
+      const num = val[0]['num'];
+      title.text = '{nums|' + num + '}{percent|%}';
+      this.options.series[6]['data'][0]['value'] = num;
+      this.options.series[6]['data'][1]['value'] = 100 - num;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;

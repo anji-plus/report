@@ -201,7 +201,9 @@ export const widgetPiePercentage = {
           placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: 60,
+          value: [
+            {"num":60}
+          ],
         },
         {
           type: 'dycustComponents',
