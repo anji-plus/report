@@ -220,15 +220,16 @@ public class DataSetServiceImpl implements DataSetService {
      */
     @Override
     public OriginalDataDto getData(DataSetDto dto) {
-        String dynSentence = dto.getDynSentence();
 
         OriginalDataDto originalDataDto = new OriginalDataDto();
         String setCode = dto.getSetCode();
         //1.获取数据集、参数替换、数据转换
         DataSetDto dataSetDto = detailSet(setCode);
+        String dynSentence = dataSetDto.getDynSentence();
         //2.获取数据源
         DataSource dataSource;
-        if (dto.getSetType().equals(SetTypeEnum.HTTP.getCodeValue())) {
+        if (StringUtils.isNotBlank(dataSetDto.getSetType())
+                && dataSetDto.getSetType().equals(SetTypeEnum.HTTP.getCodeValue())) {
             //http不需要数据源，兼容已有的逻辑，将http所需要的数据塞进DataSource
             dataSource = new DataSource();
             dataSource.setSourceConfig(dynSentence);
