@@ -48,6 +48,13 @@
 - 使用IDEA进行源码编译时提示：“*** openjdk-***” <br>
   请使用jdk1.8
 
+### 启动服务报错
+
+- 提示“xxx The driver has not received any packets from the server” <br>
+  1、确保软件打包正常 <br>
+  2、mysql版本不兼容，详细看上面关于版本兼容性 <br>
+  3、bootstrap.yml中配置的mysql地址ip不对 <br>
+
 
 
 
