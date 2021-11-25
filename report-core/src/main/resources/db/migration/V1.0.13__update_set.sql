@@ -2,7 +2,7 @@ use
 aj_report;
 
 -- 增加字段
-ALTER TABLE `gaea_report_data_set` DROP COLUMN `set_type`;
+ALTER TABLE `gaea_report_data_set` add COLUMN `set_type` varchar(10);
 -- 将该字段值全更新为sql
 update gaea_report_data_set set set_type = 'sql';
 
