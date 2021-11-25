@@ -143,12 +143,12 @@ export default {
       const tableData = this.optionsData;
       tableData.dataType == "staticData"
         ? this.handlerStaticData(tableData.staticData)
-        : this.handlerDymaicData(tableData.dynamicData, tableData.refreshTime);
+        : this.handlerDynamicData(tableData.dynamicData, tableData.refreshTime);
     },
     handlerStaticData(data) {
       this.list = data;
     },
-    handlerDymaicData(data, refreshTime) {
+    handlerDynamicData(data, refreshTime) {
       if (!data) return;
       if (this.ispreview) {
         this.getEchartData(data);
