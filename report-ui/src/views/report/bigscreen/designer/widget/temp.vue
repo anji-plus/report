@@ -6,7 +6,7 @@
  !-->
 <template>
   <div>
-    <component :is="type" :value="value" :ispreview="true" />
+    <component :is="type" :value="value" :ispreview="true"/>
   </div>
 </template>
 
@@ -19,22 +19,23 @@ import widgetImage from "./widgetImage.vue";
 import widgetSlider from "./widgetSlider.vue";
 import widgetVideo from "./widgetVideo.vue";
 import WidgetIframe from "./widgetIframe.vue";
-import widgetBarchart from "./widgetBarchart.vue";
-import widgetLinechart from "./widgetLinechart.vue";
-import widgetBarlinechart from "./widgetBarlinechart";
+import widgetBarchart from "./bar/widgetBarchart.vue";
+import widgetLinechart from "./line/widgetLinechart.vue";
+import widgetBarlinechart from "./bar/widgetBarlinechart";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
-import WidgetPiechart from "./widgetPiechart.vue";
+import WidgetPiechart from "./pie/widgetPiechart.vue";
 import WidgetFunnel from "./widgetFunnel.vue";
-import WidgetGauge from "./widgetGauge.vue";
+import WidgetGauge from "./percent/widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRose";
 import widgetTable from "./widgetTable.vue";
 import widgetMap from "./widgetMap.vue";
-import widgetPiePercentageChart from "./pie/widgetPiePercentageChart";
+import widgetPiePercentageChart from "./percent/widgetPiePercentageChart";
 import widgetAirBubbleMap from "./map/widgetAirBubbleMap";
 import widgetBarStackChart from "./bar/widgetBarStackChart";
 import widgetLineStackChart from "./line/widgetLineStackChart";
 import widgetBarCompareChart from "./bar/widgetBarCompareChart";
 import widgetLineCompareChart from "./line/widgetLineCompareChart";
+import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
 
 export default {
   name: "WidgetTemp",
@@ -62,7 +63,8 @@ export default {
     widgetBarStackChart,
     widgetLineStackChart,
     widgetBarCompareChart,
-    widgetLineCompareChart
+    widgetLineCompareChart,
+    widgetDecoratePieChart
   },
   model: {
     prop: "value",
@@ -72,13 +74,15 @@ export default {
     type: String,
     value: {
       type: [Object],
-      default: () => {}
+      default: () => {
+      }
     }
   },
   data() {
     return {};
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {}
 };
 </script>

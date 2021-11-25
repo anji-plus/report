@@ -29,7 +29,6 @@
 
 - 数据源数据集用法总结 <br>
   [链接](https://my.oschina.net/u/4517014/blog/5270828) <br>
-  **注**：http数据源未来会挪到数据集那边 <br>
 
 ### 执行源码编译脚本（build.sh）报错
 
@@ -47,6 +46,14 @@
 
 - 使用IDEA进行源码编译时提示：“*** openjdk-***” <br>
   请使用jdk1.8
+
+### 启动服务报错
+
+- 提示“xxx The driver has not received any packets from the server” <br>
+  连不上mysql。<br>
+  1、确保软件打包正常 <br>
+  2、mysql版本不兼容，详细看上面关于版本兼容性 <br>
+  3、bootstrap.yml中配置的mysql地址ip不对 <br>
 
 
 

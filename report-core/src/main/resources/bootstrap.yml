@@ -66,7 +66,7 @@ logging:
 customer:
   # 开发测试用本地文件，如果是生产，请考虑使用对象存储
   file:
-    #上传对应本地全路径
+    #上传对应本地全路径，路径必须是真实存在的
     dist-path: /app/disk/upload/
     white-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi
     excelSuffix: .xlsx|.xls|.csv

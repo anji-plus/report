@@ -361,20 +361,20 @@ export default {
       this.setOptionSurplusColor();
     },
     setOptionsTitle() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const title = this.options.title;
       title.x = "center";
       title.y = "center";
       const rich = {
         nums: {
-          fontSize: optionsCollapse.textNumFontSize,
-          color: optionsCollapse.textNumColor,
-          fontWeight: optionsCollapse.textNumFontWeight
+          fontSize: optionsSetup.textNumFontSize,
+          color: optionsSetup.textNumColor,
+          fontWeight: optionsSetup.textNumFontWeight
         },
         percent: {
-          fontSize: optionsCollapse.textPerFontSize,
-          color: optionsCollapse.textPerColor,
-          fontWeight: optionsCollapse.textPerFontWeight
+          fontSize: optionsSetup.textPerFontSize,
+          color: optionsSetup.textPerColor,
+          fontWeight: optionsSetup.textPerFontWeight
         }
       };
       title.textStyle['rich'] = rich;
@@ -445,9 +445,10 @@ export default {
     },
     staticDataFn(val) {
       const title = this.options.title;
-      title.text = '{nums|' + val + '}{percent|%}';
-      this.options.series[6]['data'][0]['value'] = val;
-      this.options.series[6]['data'][1]['value'] = 100 - val;
+      const num = val[0]['num'];
+      title.text = '{nums|' + num + '}{percent|%}';
+      this.options.series[6]['data'][0]['value'] = num;
+      this.options.series[6]['data'][1]['value'] = 100 - num;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;

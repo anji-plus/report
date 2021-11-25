@@ -17,7 +17,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <component :is="type" :value="value" />
+    <component :is="type" :value="value"/>
   </avue-draggable>
 </template>
 
@@ -30,22 +30,23 @@ import widgetImage from "./widgetImage.vue";
 import widgetSlider from "./widgetSlider.vue";
 import widgetVideo from "./widgetVideo.vue";
 import WidgetIframe from "./widgetIframe.vue";
-import widgetBarchart from "./widgetBarchart.vue";
+import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
-import widgetLinechart from "./widgetLinechart.vue";
-import widgetBarlinechart from "./widgetBarlinechart";
-import WidgetPiechart from "./widgetPiechart.vue";
+import widgetLinechart from "./line/widgetLinechart.vue";
+import widgetBarlinechart from "./bar/widgetBarlinechart";
+import WidgetPiechart from "./pie/widgetPiechart.vue";
 import WidgetFunnel from "./widgetFunnel.vue";
-import WidgetGauge from "./widgetGauge.vue";
+import WidgetGauge from "./percent/widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRose";
 import widgetTable from "./widgetTable.vue";
 import widgetMap from "./widgetMap.vue";
-import widgetPiePercentageChart from "./pie/widgetPiePercentageChart";
+import widgetPiePercentageChart from "./percent/widgetPiePercentageChart";
 import widgetAirBubbleMap from "./map/widgetAirBubbleMap";
 import widgetBarStackChart from "./bar/widgetBarStackChart";
 import widgetLineStackChart from "./line/widgetLineStackChart";
 import widgetBarCompareChart from "./bar/widgetBarCompareChart";
 import widgetLineCompareChart from "./line/widgetLineCompareChart";
+import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
 
 export default {
   name: "Widget",
@@ -73,7 +74,8 @@ export default {
     widgetBarStackChart,
     widgetLineStackChart,
     widgetBarCompareChart,
-    widgetLineCompareChart
+    widgetLineCompareChart,
+    widgetDecoratePieChart
   },
   model: {
     prop: "value",
@@ -89,7 +91,8 @@ export default {
     bigscreen: Object,
     value: {
       type: [Object],
-      default: () => {}
+      default: () => {
+      }
     },
     step: Number
   },
@@ -119,11 +122,13 @@ export default {
       return this.value.position.zIndex || 1;
     }
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
-    handleFocus({ index, left, top, width, height }) {},
-    handleBlur({ index, left, top, width, height }) {
-      this.$emit("onActivated", { index, left, top, width, height });
+    handleFocus({index, left, top, width, height}) {
+    },
+    handleBlur({index, left, top, width, height}) {
+      this.$emit("onActivated", {index, left, top, width, height});
       this.$refs.draggable.setActive(true);
     }
   }
@@ -134,11 +139,13 @@ export default {
 .vue-draggalbe {
   position: absolute;
 }
+
 .widget-active {
   cursor: move;
   border: 1px dashed #09f;
   background-color: rgba(115, 170, 229, 0.5);
 }
+
 .avue-draggable {
   padding: 0 !important;
 }

@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart :options="options" autoresize/>
   </div>
 </template>
 
@@ -24,9 +24,11 @@ export default {
         },
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b} : {c}%"
+          formatter: "{a} <br/>{b} : {c}"
         },
         legend: {
+          x: 'center',
+          y: '92%',
           textStyle: {
             color: "#fff"
           }
@@ -35,34 +37,34 @@ export default {
           {
             name: "",
             type: "funnel",
-            left: "10%",
-            top: 60,
-            bottom: 60,
+            left: "center",
             width: "80%",
-            min: 0,
-            max: 100,
-            minSize: "0%",
-            maxSize: "100%",
+            //maxSize: '80%',
             sort: "descending",
-            gap: 2,
             label: {
-              show: true,
-              position: "inside"
-            },
-            labelLine: {
-              length: 10,
-              lineStyle: {
-                width: 1,
-                type: "solid"
+              normal: {
+                show: true,
+                position: 'inside',
+                formatter: '{c}',
+                textStyle: {
+                  color: '#fff',
+                  fontSize: 14,
+                }
+              },
+              emphasis: {
+                position: 'inside',
+                formatter: '{b}: {c}'
               }
             },
             itemStyle: {
-              borderColor: "#fff",
-              borderWidth: 1
-            },
-            emphasis: {
-              label: {
-                fontSize: 20
+              normal: {
+                opacity: 0.8,
+                borderColor: 'rgba(12, 13, 43, .9)',
+                borderWidth: 1,
+                shadowBlur: 4,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowColor: 'rgba(0, 0, 0, .6)'
               }
             },
             data: []
@@ -109,6 +111,7 @@ export default {
   methods: {
     // 修改图标options属性
     editorOptions() {
+      this.setEnding();
       this.setOptionsText();
       this.setOptionsTitle();
       this.setOptionsTooltip();
@@ -116,79 +119,86 @@ export default {
       this.setOptionsColor();
       this.setOptionsData();
     },
-    // 文字设置
-    setOptionsText() {
-      const optionsCollapse = this.optionsSetup;
+    // 翻转
+    setEnding() {
+      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-
-      for (const key in series) {
-        if (series[key].type == "funnel") {
-          series[key].label.show = optionsCollapse.isShow;
-          series[key].label.fontSize = optionsCollapse.fontSize;
-          series[key].label.color = optionsCollapse.color;
-          series[key].label.fontWeight = optionsCollapse.fontWeight;
-
-          series[key].sort = optionsCollapse.reversal
-            ? "ascending"
-            : "descending";
+      if (optionsSetup.ending) {
+        series[0].sort = "ascending";
+      } else {
+        series[0].sort = "descending";
+      }
+    },
+    // 数值设置
+    setOptionsText() {
+      const optionsSetup = this.optionsSetup;
+      const normal = {
+        show: optionsSetup.isShow,
+        position: 'inside',
+        formatter: '{c}',
+        textStyle: {
+          color: optionsSetup.color,
+          fontSize: optionsSetup.fontSize,
+          fontWeight: optionsSetup.fontWeight,
         }
       }
+      this.options.series[0].label['normal'] = normal;
     },
     // 标题修改
     setOptionsTitle() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const title = {};
-      title.show = optionsCollapse.isNoTitle;
-      title.text = optionsCollapse.titleText;
-      title.left = optionsCollapse.textAlign;
+      title.text = optionsSetup.titleText;
+      title.show = optionsSetup.isNoTitle;
+      title.left = optionsSetup.textAlign;
       title.textStyle = {
-        color: optionsCollapse.textColor,
-        fontSize: optionsCollapse.textFontSize,
-        fontWeight: optionsCollapse.textFontWeight
+        color: optionsSetup.textColor,
+        fontSize: optionsSetup.textFontSize,
+        fontWeight: optionsSetup.textFontWeight
       };
-      title.subtext = optionsCollapse.subText;
+      title.subtext = optionsSetup.subText;
       title.subtextStyle = {
-        color: optionsCollapse.subTextColor,
-        fontWeight: optionsCollapse.subTextFontWeight,
-        fontSize: optionsCollapse.subTextFontSize
+        color: optionsSetup.subTextColor,
+        fontWeight: optionsSetup.subTextFontWeight,
+        fontSize: optionsSetup.subTextFontSize
       };
 
       this.options.title = title;
     },
     // 提示语设置 tooltip
     setOptionsTooltip() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
         show: true,
         textStyle: {
-          color: optionsCollapse.lineColor,
-          fontSize: optionsCollapse.fontSize
+          color: optionsSetup.lineColor,
+          fontSize: optionsSetup.tipFontSize
         }
       };
       this.options.tooltip = tooltip;
     },
     // 图例操作 legend
     setOptionsLegend() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const legend = this.options.legend;
-      legend.show = optionsCollapse.isShowLegend;
-      legend.left = optionsCollapse.lateralPosition == "left" ? 0 : "auto";
-      legend.right = optionsCollapse.lateralPosition == "right" ? 0 : "auto";
-      legend.top = optionsCollapse.longitudinalPosition == "top" ? 0 : "auto";
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition;
+      legend.right = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition;
       legend.bottom =
-        optionsCollapse.longitudinalPosition == "bottom" ? 0 : "auto";
-      legend.orient = optionsCollapse.layoutFront;
+        optionsSetup.longitudinalPosition;
+      legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
-        color: optionsCollapse.lengedColor,
-        fontSize: optionsCollapse.fontSize
+        color: optionsSetup.lengedColor,
+        fontSize: optionsSetup.lengedFontSize
       };
-      legend.itemWidth = optionsCollapse.lengedWidth;
+      legend.itemWidth = optionsSetup.lengedWidth;
     },
     // 图例颜色修改
     setOptionsColor() {
-      const optionsCollapse = this.optionsSetup;
-      const customColor = optionsCollapse.customColor;
+      const optionsSetup = this.optionsSetup;
+      const customColor = optionsSetup.customColor;
       if (!customColor) return;
       const arrColor = [];
       for (let i = 0; i < customColor.length; i++) {

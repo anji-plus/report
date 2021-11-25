@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 百分比图 json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:34:01
  * @LastEditors: qianlishi
@@ -113,7 +113,7 @@ export const widgetPiePercentage = {
                 name: 'lineLength',
                 required: false,
                 placeholder: '',
-                value: 15
+                value: 19
               },
               {
                 type: 'el-input-number',
@@ -121,7 +121,7 @@ export const widgetPiePercentage = {
                 name: 'lineWidth',
                 required: false,
                 placeholder: '',
-                value: 5
+                value: 2
               },
               {
                 type: 'vue-color',
@@ -201,7 +201,9 @@ export const widgetPiePercentage = {
           placeholder: '',
           relactiveDom: 'dataType',
           relactiveDomValue: 'staticData',
-          value: 60,
+          value: [
+            {"num":60}
+          ],
         },
         {
           type: 'dycustComponents',
@@ -248,7 +250,7 @@ export const widgetPiePercentage = {
           name: 'height',
           required: false,
           placeholder: '该容器在1080px大屏中的高度',
-          value: 200,
+          value: 300,
         },
       ],
     }

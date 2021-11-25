@@ -34,7 +34,7 @@ const hints = [
     "PREPARE",
     "EXECUTE",
     "DESCRIBE",
-    "FORM",
+    "FROM",
     "ORDER BY"]
 function createCompleter(getExtraHints) {
     const createSuggestions = function (model, textUntilPosition) {

@@ -8,6 +8,7 @@ import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anji.plus.gaea.utils.GaeaBeanUtils;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
+import com.anjiplus.template.gaea.business.enums.SetTypeEnum;
 import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.OriginalDataDto;
 import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.DataSetDto;
 import com.anjiplus.template.gaea.business.modules.dataset.dao.DataSetMapper;
@@ -22,6 +23,7 @@ import com.anjiplus.template.gaea.business.modules.datasettransform.service.Data
 import com.anjiplus.template.gaea.business.modules.datasource.controller.dto.DataSourceDto;
 import com.anjiplus.template.gaea.business.modules.datasource.dao.entity.DataSource;
 import com.anjiplus.template.gaea.business.modules.datasource.service.DataSourceService;
+import com.anjiplus.template.gaea.business.util.JdbcConstants;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -218,12 +220,31 @@ public class DataSetServiceImpl implements DataSetService {
      */
     @Override
     public OriginalDataDto getData(DataSetDto dto) {
+
         OriginalDataDto originalDataDto = new OriginalDataDto();
         String setCode = dto.getSetCode();
         //1.获取数据集、参数替换、数据转换
         DataSetDto dataSetDto = detailSet(setCode);
+        String dynSentence = dataSetDto.getDynSentence();
         //2.获取数据源
-        DataSource dataSource = dataSourceService.selectOne("source_code", dataSetDto.getSourceCode());
+        DataSource dataSource;
+        if (StringUtils.isNotBlank(dataSetDto.getSetType())
+                && dataSetDto.getSetType().equals(SetTypeEnum.HTTP.getCodeValue())) {
+            //http不需要数据源，兼容已有的逻辑，将http所需要的数据塞进DataSource
+            dataSource = new DataSource();
+            dataSource.setSourceConfig(dynSentence);
+            dataSource.setSourceType(JdbcConstants.HTTP);
+            String body = JSONObject.parseObject(dynSentence).getString("body");
+            if (StringUtils.isNotBlank(body)) {
+                dynSentence = body;
+            }else {
+                dynSentence = "{}";
+            }
+
+        }else {
+            dataSource  = dataSourceService.selectOne("source_code", dataSetDto.getSourceCode());
+        }
+
         //3.参数替换
         //3.1参数校验
         log.debug("参数校验替换前：{}", dto.getContextData());
@@ -231,7 +252,7 @@ public class DataSetServiceImpl implements DataSetService {
         if (!verification) {
             throw BusinessExceptionBuilder.build(ResponseCode.RULE_FIELDS_CHECK_ERROR);
         }
-        String dynSentence = dataSetParamService.transform(dto.getContextData(), dataSetDto.getDynSentence());
+        dynSentence = dataSetParamService.transform(dto.getContextData(), dynSentence);
         log.debug("参数校验替换后：{}", dto.getContextData());
         //4.获取数据
         DataSourceDto dataSourceDto = new DataSourceDto();
@@ -258,10 +279,28 @@ public class DataSetServiceImpl implements DataSetService {
      */
     @Override
     public OriginalDataDto testTransform(DataSetDto dto) {
+        String dynSentence = dto.getDynSentence();
+
         OriginalDataDto originalDataDto = new OriginalDataDto();
         String sourceCode = dto.getSourceCode();
         //1.获取数据源
-        DataSource dataSource = dataSourceService.selectOne("source_code", sourceCode);
+        DataSource dataSource;
+        if (dto.getSetType().equals(SetTypeEnum.HTTP.getCodeValue())) {
+            //http不需要数据源，兼容已有的逻辑，将http所需要的数据塞进DataSource
+            dataSource = new DataSource();
+            dataSource.setSourceConfig(dynSentence);
+            dataSource.setSourceType(JdbcConstants.HTTP);
+            String body = JSONObject.parseObject(dynSentence).getString("body");
+            if (StringUtils.isNotBlank(body)) {
+                dynSentence = body;
+            }else {
+                dynSentence = "{}";
+            }
+
+        }else {
+          dataSource  = dataSourceService.selectOne("source_code", sourceCode);
+        }
+
         //3.参数替换
         //3.1参数校验
         boolean verification = dataSetParamService.verification(dto.getDataSetParamDtoList(), null);
@@ -269,7 +308,7 @@ public class DataSetServiceImpl implements DataSetService {
             throw BusinessExceptionBuilder.build(ResponseCode.RULE_FIELDS_CHECK_ERROR);
         }
 
-        String dynSentence = dataSetParamService.transform(dto.getDataSetParamDtoList(), dto.getDynSentence());
+        dynSentence = dataSetParamService.transform(dto.getDataSetParamDtoList(), dynSentence);
         //4.获取数据
         DataSourceDto dataSourceDto = new DataSourceDto();
         BeanUtils.copyProperties(dataSource, dataSourceDto);

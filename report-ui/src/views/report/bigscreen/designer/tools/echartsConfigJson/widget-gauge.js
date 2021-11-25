@@ -324,7 +324,9 @@ export const widgetGauge = {
         placeholder: '',
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
-        value: 50,
+        value: [
+          {"num":50}
+        ],
       },
       {
         type: 'dycustComponents',

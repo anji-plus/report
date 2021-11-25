@@ -299,32 +299,37 @@ export default {
       const optionsSetup = this.optionsSetup;
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
-        ? this.staticDataFn(optionsData.staticData, optionsSetup)
+        ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(
-        optionsData.dynamicData,
-        optionsData.refreshTime,
-        optionsSetup
+          optionsData.dynamicData,
+          optionsData.refreshTime,
+          optionsSetup
         );
     },
     // 静态数据
-    staticDataFn(val, optionsSetup) {
-      const staticData = typeof val == "string" ? JSON.parse(val) : val;
+    staticDataFn(val) {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      let axis = [];
+      let data = [];
+      for (const i in val) {
+        axis[i] = val[i].axis;
+        data[i] = val[i].data
+      }
       // x轴
       if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];
-        this.options.yAxis.data = staticData.categories;
+        this.options.yAxis.data = axis;
         this.options.xAxis.type = "value";
         this.options.yAxis.type = "category";
       } else {
-        this.options.xAxis.data = staticData.categories;
+        this.options.xAxis.data = axis;
         this.options.yAxis.data = [];
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
       }
-      // series
-      const series = this.options.series;
       if (series[0].type == "bar") {
-        series[0].data = staticData.series[0].data;
+        series[0].data = data;
       }
     },
     // 动态数据

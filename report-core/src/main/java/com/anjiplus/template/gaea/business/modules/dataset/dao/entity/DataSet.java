@@ -26,6 +26,9 @@ public class DataSet extends GaeaBaseEntity {
     @ApiModelProperty(value = "数据集描述")
     private String setDesc;
 
+    @ApiModelProperty(value = "数据集类型")
+    private String setType;
+
     @ApiModelProperty(value = "数据源编码")
     private String sourceCode;
 

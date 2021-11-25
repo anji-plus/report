@@ -59,7 +59,6 @@ export default {
   watch: {
     value: {
       handler(val) {
-        console.log(val);
         this.optionsStyle = val.position;
         this.optionsData = val.data;
         this.optionsCollapse = val.setup;

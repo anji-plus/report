@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart :options="options" autoresize/>
   </div>
 </template>
 
@@ -103,86 +103,86 @@ export default {
     },
     // 标题设置
     setOptionsTitle() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const title = {};
-      title.show = optionsCollapse.isNoTitle;
-      title.text = optionsCollapse.titleText;
-      title.left = optionsCollapse.textAlign;
+      title.show = optionsSetup.isNoTitle;
+      title.text = optionsSetup.titleText;
+      title.left = optionsSetup.textAlign;
       title.textStyle = {
-        color: optionsCollapse.textColor,
-        fontSize: optionsCollapse.textFontSize,
-        fontWeight: optionsCollapse.textFontWeight
+        color: optionsSetup.textColor,
+        fontSize: optionsSetup.textFontSize,
+        fontWeight: optionsSetup.textFontWeight
       };
-      title.subtext = optionsCollapse.subText;
+      title.subtext = optionsSetup.subText;
       title.subtextStyle = {
-        color: optionsCollapse.subTextColor,
-        fontWeight: optionsCollapse.subTextFontWeight,
-        fontSize: optionsCollapse.subTextFontSize
+        color: optionsSetup.subTextColor,
+        fontWeight: optionsSetup.subTextFontWeight,
+        fontSize: optionsSetup.subTextFontSize
       };
       this.options.title = title;
     },
     // 数值设定
     setOptionsValue() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      const numberValue = optionsCollapse.numberValue ? "{c}" : "";
-      const percentage = optionsCollapse.percentage ? "({d})%" : "";
+      const numberValue = optionsSetup.numberValue ? "{c}" : "";
+      const percentage = optionsSetup.percentage ? "({d})%" : "";
       const label = {
-        show: optionsCollapse.isShow,
+        show: optionsSetup.isShow,
         formatter: `{a|{b}：${numberValue} ${percentage}}`,
         rich: {
           a: {
             padding: [-30, 15, -20, 15],
-            color: optionsCollapse.subTextColor,
-            fontSize: optionsCollapse.fontSize,
-            fontWeight: optionsCollapse.fontWeight
+            color: optionsSetup.subTextColor,
+            fontSize: optionsSetup.fontSize,
+            fontWeight: optionsSetup.fontWeight
           }
         },
-        fontSize: optionsCollapse.fontSize,
+        fontSize: optionsSetup.fontSize,
 
-        fontWeight: optionsCollapse.optionsCollapse
+        fontWeight: optionsSetup.optionsSetup
       };
       for (const key in series) {
         if (series[key].type == "pie") {
           series[key].label = label;
-          series[key].labelLine = { show: optionsCollapse.isShow };
+          series[key].labelLine = {show: optionsSetup.isShow};
         }
       }
     },
     // 提示语设置 tooltip
     setOptionsTooltip() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
         show: true,
         textStyle: {
-          color: optionsCollapse.lineColor,
-          fontSize: optionsCollapse.fontSize
+          color: optionsSetup.lineColor,
+          fontSize: optionsSetup.fontSize
         }
       };
       this.options.tooltip = tooltip;
     },
     // 图例操作 legend
     setOptionsLegend() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const legend = this.options.legend;
-      legend.show = optionsCollapse.isShowLegend;
-      legend.left = optionsCollapse.lateralPosition == "left" ? 0 : "auto";
-      legend.right = optionsCollapse.lateralPosition == "right" ? 0 : "auto";
-      legend.top = optionsCollapse.longitudinalPosition == "top" ? 0 : "auto";
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition == "left" ? 0 : "auto";
+      legend.right = optionsSetup.lateralPosition == "right" ? 0 : "auto";
+      legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
       legend.bottom =
-        optionsCollapse.longitudinalPosition == "bottom" ? 0 : "auto";
-      legend.orient = optionsCollapse.layoutFront;
+        optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
+      legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
-        color: optionsCollapse.lengedColor,
-        fontSize: optionsCollapse.fontSize
+        color: optionsSetup.lengedColor,
+        fontSize: optionsSetup.fontSize
       };
-      legend.itemWidth = optionsCollapse.lengedWidth;
+      legend.itemWidth = optionsSetup.lengedWidth;
     },
     // 图例颜色修改
     setOptionsColor() {
-      const optionsCollapse = this.optionsSetup;
-      const customColor = optionsCollapse.customColor;
+      const optionsSetup = this.optionsSetup;
+      const customColor = optionsSetup.customColor;
       if (!customColor) return;
       const arrColor = [];
       for (let i = 0; i < customColor.length; i++) {

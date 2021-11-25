@@ -256,7 +256,7 @@ export default {
       handler(val) {
         this.optionsStyle = val.position;
         this.optionsData = val.data;
-        this.optionsSetup = val.setup;
+        this.optionsCollapse = val.setup;
         this.optionsSetup = val.setup;
         this.editorOptions();
       },

@@ -27,4 +27,8 @@ public class DataSetParam extends PageParam implements Serializable{
     /** 数据源编码 */
     @Query(QueryEnum.EQ)
     private String sourceCode;
+
+    /** 数据集类型 */
+    @Query(QueryEnum.EQ)
+    private String setType;
 }

@@ -17,10 +17,10 @@ http://serverip:9095
 
 请在Linux上先准备好maven、node.js、jdk
 
-- [Apache Maven] 3.5 + <br>
-- [Node.js] v14.16.0 + <br>
+- [Apache Maven] 3.5 <br>
+- [Node.js] v14.16.0 <br>
 - [Jdk] 1.8 <br>
-  **注**：已知**Jdk11**存在兼容性问题，请不要使用openJdk，环境问题请看**常见问题**大类 <br>
+  **注**：已知**Jdk11**存在兼容性问题，请不要使用openJdk，环境问题请看 **常见问题** 大类 <br>
 
 ## 克隆源码
 
