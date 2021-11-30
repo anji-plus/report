@@ -35,6 +35,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -313,7 +314,7 @@ public class DataSetServiceImpl implements DataSetService {
         DataSourceDto dataSourceDto = new DataSourceDto();
         BeanUtils.copyProperties(dataSource, dataSourceDto);
         dataSourceDto.setDynSentence(dynSentence);
-        dataSourceDto.setContextData(dto.getContextData());
+        dataSourceDto.setContextData(setContextData(dto.getDataSetParamDtoList()));
 
         //获取total,判断DataSetParamDtoList中是否传入分页参数
         Map<String, Object> collect = dto.getDataSetParamDtoList().stream().collect(Collectors.toMap(DataSetParamDto::getParamName, DataSetParamDto::getSampleItem));
@@ -387,6 +388,19 @@ public class DataSetServiceImpl implements DataSetService {
 //            dataSetTransformList.add(dataSetTransform);
         }
 //        dataSetTransformService.insertBatch(dataSetTransformList);
+    }
+
+    /**
+     * dataSetParamDtoList转map
+     * @param dataSetParamDtoList
+     * @return
+     */
+    public Map<String, Object> setContextData(List<DataSetParamDto> dataSetParamDtoList){
+        Map<String, Object> map = new HashMap<>();
+        if (null != dataSetParamDtoList && dataSetParamDtoList.size() > 0) {
+            dataSetParamDtoList.forEach(dataSetParamDto -> map.put(dataSetParamDto.getParamName(), dataSetParamDto.getSampleItem()));
+        }
+        return map;
     }
 
 }
