@@ -196,7 +196,6 @@ export default {
     },
     tableFiledWidth(index){
       var styleJson = {};
-      debugger
       if(this.optionsSetUp.dynamicAddTable[index].width ){
         styleJson["width"] = this.optionsSetUp.dynamicAddTable[index].width
       }

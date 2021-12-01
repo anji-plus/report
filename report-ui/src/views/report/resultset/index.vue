@@ -274,7 +274,6 @@ export default {
   },
   methods: {
     operateDataset(type, prop) {
-      debugger
       this.dialogVisibleSetDataSet = true;
       if (prop && prop.msg) {
         this.dataSet = prop.msg;
