@@ -21,10 +21,10 @@
 #### &emsp; 组件介绍
 
 &emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。 内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
-**在线案例还在努力创造中，敬请期待！！！**  
+**[更多案例](https://report.anji-plus.com/report-doc/guide/bigScreenCase.html)** <br>
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
 
-![更多案例](https://report.anji-plus.com/report-doc/static/Rhea.mp4) <br>
+![视频](https://report.anji-plus.com/report-doc/static/Rhea.mp4) <br>
 
 ## 数据流程图
 
@@ -144,7 +144,6 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 <a href='http://www.turingoal.com/'><img src="https://report.anji-plus.com/file/download/cda7bf68-376b-45dc-9a55-c52b21e4a8c8" width = "130" height = "50" /> </a>
 <a href='https://www.gykjweb.com/'><img src="https://report.anji-plus.com/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a> <br>
 <a href='http://www.plian.net/'><img src="https://report.anji-plus.com/file/download/7838f2c2-fdce-4ca7-8373-14d13dcda5cc" width = "130" height = "50" /> </a>
-
 
 ## 未来计划
 

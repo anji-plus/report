@@ -15,6 +15,7 @@ module.exports = {
             {text: 'GitHub', link: 'https://github.com/anji-plus/report'},
             {text: 'Gitee', link: 'https://gitee.com/anji-plus/report'},
             {text: '谁在使用', link: '/guide/briefUsing'},
+            {text: '更多案例', link: '/guide/bigScreenCase'},
         ],
         sidebar: {
             '/guide/': [
