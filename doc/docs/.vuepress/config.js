@@ -72,7 +72,7 @@ module.exports = {
                         {title: '搭建AJ-Report开发环境', path: '/guide/community/AC1688/搭建aj-report开发环境'}
                     ]
                 }
-                ],
+            ],
         }
     },
     plugins: [

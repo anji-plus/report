@@ -26,7 +26,7 @@
 
 ![视频](https://report.anji-plus.com/report-doc/static/Rhea.mp4) <br>
 
-**[更多案例](https://report.anji-plus.com/report-doc/guide/bigScreenCase.html)** <br>
+**[更多社区大屏案例](https://report.anji-plus.com/report-doc/guide/bigScreenCase.html)** <br>
 
 ## 数据流程图
 

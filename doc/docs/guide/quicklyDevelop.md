@@ -1,13 +1,19 @@
 ## 核心技术
+
 ### 底层依赖
+
 - [Mysql] 5.7
 - [Jdk] 1.8
 
 ### 后端
-- [Spring Boot](https://spring.io/projects/spring-boot/): Spring Boot是一款开箱即用框架，让我们的Spring应用变的更轻量化、更快的入门。 在主程序执行main函数就可以运行。你也可以打包你的应用为jar并通过使用java -jar来运行你的Web应用；
+
+- [Spring Boot](https://spring.io/projects/spring-boot/): Spring Boot是一款开箱即用框架，让我们的Spring应用变的更轻量化、更快的入门。
+  在主程序执行main函数就可以运行。你也可以打包你的应用为jar并通过使用java -jar来运行你的Web应用；
 - [Mybatis-plus](https://mp.baomidou.com/): MyBatis-plus（简称 MP）是一个 MyBatis (opens new window) 的增强工具。
 - [flyway](https://flywaydb.org/): 主要用于在你的应用版本不断升级的同时，升级你的数据库结构和里面的数据
+
 ### 前端
+
 - [npm](https://www.npmjs.com/)：node.js的包管理工具，用于统一管理我们前端项目中需要用到的包、插件、工具、命令等，便于开发和维护。
 - [webpack](https://webpack.docschina.org/)：用于现代 JavaScript 应用程序的_静态模块打包工具
 - [ES6](https://es6.ruanyifeng.com/)：Javascript的新版本，ECMAScript6的简称。利用ES6我们可以简化我们的JS代码，同时利用其提供的强大功能来快速实现JS逻辑。
@@ -18,7 +24,9 @@
 - [avue](https://www.avuejs.com/): 用该组件包裹后可以变成拖拽组件,采用相对于父类绝对定位;用键盘的上下左右也可以控制移
 
 ## 开发环境
+
 这里提供我们的开发环境版本进行参考
+
 - [CentOs] 7.5
 - [Mysql] 5.7
 - [Jdk] 1.8
@@ -29,9 +37,10 @@
 - [Node.js] 14.16.0
 - [Windows 10]
 
-已知 **Mysql8.0** 和 **Jdk11** 会出现兼容性问题，后续有解决方法将会在下方 **其他** 大类进行补充  
+已知 **Mysql8.0** 和 **Jdk11** (部分小版本)会出现兼容性问题，后续有解决方法将会在下方 **其他** 大类进行补充
 
 ## SQL初始化
+
 sql文件的地址是：report-core --> src --> main --> resources -- > db.migration <br>
 ![sql](../picture/quickly/img_13.png)
 

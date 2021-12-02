@@ -48,7 +48,7 @@ git clone https://gitee.com/anji-plus/report.git <br>
 ## 上传功能
 
 使用上传功能，必须修改此内容 <br>
-![file.png](../picture/quickly/img_5.png)
+![file.png](../picture/quickly/img_15.png)
 
 ## 启动
 
