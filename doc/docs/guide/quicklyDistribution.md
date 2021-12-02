@@ -7,7 +7,7 @@
 
 ## 下载发行版
 
-下载地址：[https://gitee.com/anji-plus/report/releases](https://gitee.com/anji-plus/report/releases) <br>
+[下载地址](https://gitee.com/anji-plus/report/releases) ：https://gitee.com/anji-plus/report/releases <br>
 ![img.png](../picture/quickly/img.png) <br>
 
 ## 修改mysql连接
@@ -25,7 +25,7 @@ report-core-XXX --> conf --> bootstrap-dev.yml <br>
 ## 上传功能
 
 使用上传功能，必须修改此内容 <br>
-![file.png](../picture/quickly/img_5.png) <br>
+![file.png](../picture/quickly/img_15.png) <br>
 
 ## 启动
 

@@ -6,25 +6,27 @@
 
 ## 在线体验
 
-#### &emsp; 在线体验: [https://report.anji-plus.com/index.html](https://report.anji-plus.com/index.html "链接")  &emsp;体验账号：guest 密码：guest
+#### &emsp; [在线体验](https://report.anji-plus.com/index.html "链接"): https://report.anji-plus.com/index.html  &emsp;体验账号：guest 密码：guest
 
-#### &emsp; 在线文档: [https://report.anji-plus.com/report-doc/](https://report.anji-plus.com/report-doc/ "doc")<br>
+#### &emsp; [在线文档](https://report.anji-plus.com/report-doc/ "doc"): https://report.anji-plus.com/report-doc/ <br>
 
-#### &emsp; 在线提问: [https://gitee.com/anji-plus/report/issues](https://gitee.com/anji-plus/report/issues "issue")<br>
+#### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
 ## 发行版本
 
-#### &emsp; 下载链接：[https://gitee.com/anji-plus/report/releases](https://gitee.com/anji-plus/report/releases "下载链接")<br>
+#### &emsp; [下载链接](https://gitee.com/anji-plus/report/releases "下载链接"): https://gitee.com/anji-plus/report/releases <br>
 
 ## 功能概述
 
 #### &emsp; 组件介绍
 
 &emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。 内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
-**[更多案例](https://report.anji-plus.com/report-doc/guide/bigScreenCase.html)** <br>
+
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
 
 ![视频](https://report.anji-plus.com/report-doc/static/Rhea.mp4) <br>
+
+**[更多社区大屏案例](https://report.anji-plus.com/report-doc/guide/bigScreenCase.html)** <br>
 
 ## 数据流程图
 
@@ -113,19 +115,19 @@ bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启�
 http://serverip:9095
 ```
 
-**开发环境参考文档：** <br>
-https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html <br>
-**源码编译部署参考文档：** <br>
-https://report.anji-plus.com/report-doc/guide/quicklySource.html <br>
-**发行版部署参考文档：** <br>
-https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html <br>
-**前后端分离部署参考文档：** <br>
-https://report.anji-plus.com/report-doc/guide/quicklySeparate.html <br>
+**[运行环境参考文档](https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html)** <br>
+
+**[源码编译部署参考文档](https://report.anji-plus.com/report-doc/guide/quicklySource.html)** <br>
+
+**[发行版部署参考文档](https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html)** <br>
+
+**[前后端分离部署参考文档](https://report.anji-plus.com/report-doc/guide/quicklySeparate.html)** <br>
 
 ## 操作手册
 
 新建数据源（重置mysql数据源） --> 新建数据集（编写sql） --> 新建大屏（设计大屏） <br>
-请参考在线文档：https://report.anji-plus.com/report-doc/guide/datasource.html <br>
+
+**[在线文档](https://report.anji-plus.com/report-doc/guide/datasource.html)**
 
 ## SQL初始化
 
@@ -166,7 +168,7 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 - Jdk 11
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
 
-常见问题：https://report.anji-plus.com/report-doc/guide/question.html <br>
+**[常见问题](https://report.anji-plus.com/report-doc/guide/question.html)**
 
 ## 商业授权
 

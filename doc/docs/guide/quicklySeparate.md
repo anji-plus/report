@@ -24,7 +24,7 @@ npm run build
 - [Node.js] v14.16.0 <br>
 - [Jdk] 1.8 <br>
   请在你的Windows上先准备好maven、node.js、jdk <br>
-  **注**：已知**Jdk11**存在兼容性问题，请不要使用openJdk，环境问题请看 **常见问题** 大类 <br>
+  **注**：已知 **Jdk11** (部分小版本)存在兼容性问题，请不要使用openJdk，环境问题请看 **常见问题** 大类 <br>
 
 ### 克隆源码
 
@@ -43,7 +43,7 @@ report-core --> src --> main --> resources --> bootstrap.yml <br>
 ### 上传功能
 
 使用上传功能，必须修改此内容 <br>
-![file.png](../picture/quickly/img_5.png) <br>
+![file.png](../picture/quickly/img_15.png) <br>
 
 ### maven打包
 
@@ -85,7 +85,7 @@ report-ui目录： <br>
 ### 修改config
 
 目录地址：report-ui --> config --> prod.env.js <br>
-修改你的BASE_API地址 <br>
+修改你的BASE_API地址，改成自己后端的api <br>
 
 ### build
 
