@@ -8,13 +8,13 @@
 ## 下载发行版
 
 [下载地址](https://gitee.com/anji-plus/report/releases) ：https://gitee.com/anji-plus/report/releases <br>
-![img.png](../picture/quickly/img.png) <br>
+![img.png](../picture/quickly/img_16.png) <br>
 
 ## 修改mysql连接
 
 解压下载好的Zip包，找到bootstrap-dev.yml <br>
 report-core-XXX --> conf --> bootstrap-dev.yml <br>
-![img_1.png](../picture/quickly/img_1.png) <br>
+![img_1.png](../picture/quickly/img_17.png) <br>
 
 将图中关于mysql的连接配置信息换成你使用的IP <br>
 **注**：aj_report库是存放底层基础信息的库，flyway启动时会自动建立，如果你在这里修改了库，将会出错 <br>

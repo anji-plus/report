@@ -37,7 +37,7 @@ git clone https://gitee.com/anji-plus/report.git <br>
 ## 修改mysql连接
 
 解压aj-report-xxxx.zip，找到bootstrap-dev.yml <br>
-![img_1.png](../picture/quickly/img_1.png) <br>
+![img_1.png](../picture/quickly/img_17.png) <br>
 
 将图中关于mysql的连接配置信息换成你使用的IP <br>
 **注**：aj_report库是存放底层基础信息的库，flyway启动时会自动建立，如果你在这里修改了库，将会出错 <br>
