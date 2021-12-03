@@ -52,8 +52,11 @@ git clone https://gitee.com/anji-plus/report.git <br>
 
 ## 启动
 
+linux启动： <br>
 aj-report-XXX --> bin --> start.sh <br>
 sh bin/start.sh <br>
+
+注意啊，如果你在linux打包，然后在win上执行，要转化start.bat文件的格式，反之也是一样。
 
 ## 日志位置
 

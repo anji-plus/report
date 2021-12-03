@@ -34,6 +34,10 @@ aj-report-XXX --> bin -->sh start.sh <br>
 
 windows启动：<br>
 aj-report-XXX --> bin --> start.bat <br>
+
+![img18](../picture/quickly/img_18.png) <br>
+
+如果start.bat启动有问题的话，可以尝试以下方法解决。<br>
 修改第4行的JAVA_HOME，改成你自己的JAVA_HOME，并去掉**rem**注释，双击启动<br>
 ![java.png](../picture/quickly/img_7.png) <br>
 **注**：如果你JAVA_HOME目录存在空格，将bat文件最下面的JAVA_HOME添加""号
