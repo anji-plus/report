@@ -12,7 +12,7 @@
 
 ## 修改mysql连接
 
-解压下载好的Zip包，找到bootstrap-dev.yml <br>
+解压下载好的Zip包，找到bootstrap.yml <br>
 report-core-XXX --> conf --> bootstrap-dev.yml <br>
 ![img_1.png](../picture/quickly/img_17.png) <br>
 

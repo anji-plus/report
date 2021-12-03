@@ -36,7 +36,7 @@ git clone https://gitee.com/anji-plus/report.git <br>
 
 ## 修改mysql连接
 
-解压aj-report-xxxx.zip，找到bootstrap-dev.yml <br>
+解压aj-report-xxxx.zip，找到bootstrap.yml <br>
 ![img_1.png](../picture/quickly/img_17.png) <br>
 
 将图中关于mysql的连接配置信息换成你使用的IP <br>
