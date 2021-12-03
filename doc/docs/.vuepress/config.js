@@ -26,6 +26,7 @@ module.exports = {
                         {title: '简介', path: '/guide/'},
                         {title: '谁在使用', path: '/guide/briefUsing'},
                         {title: '技术支持', path: '/guide/briefSupport'},
+                        {title: '更多案例', path: '/guide/bigScreenCase'},
                     ]
                 },
                 {
@@ -55,6 +56,7 @@ module.exports = {
                         {title: '大屏报表', path: '/guide/dashboard'},
                         {title: '表格报表', path: '/guide/execl'},
                         {title: '导入导出', path: '/guide/importexport'},
+                        {title: '图表组件', path: '/guide/charts'},
                     ]
                 },
                 {

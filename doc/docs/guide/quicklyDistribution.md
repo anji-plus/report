@@ -1,6 +1,6 @@
 ```
  第一步，下载zip包，解压<br>
- 第二步，conf->bootstrap-dev.yml，修改mysql连接<br>
+ 第二步，conf->bootstrap.yml，修改mysql连接<br>
  第三步，启动bin目录下start.sh<br>
  第四步，访问 http://localhost:9095
 ```
@@ -8,13 +8,12 @@
 ## 下载发行版
 
 [下载地址](https://gitee.com/anji-plus/report/releases) ：https://gitee.com/anji-plus/report/releases <br>
-![img.png](../picture/quickly/img.png) <br>
+![img.png](../picture/quickly/img_16.png) <br>
 
 ## 修改mysql连接
 
-解压下载好的Zip包，找到bootstrap-dev.yml <br>
-report-core-XXX --> conf --> bootstrap-dev.yml <br>
-![img_1.png](../picture/quickly/img_1.png) <br>
+解压下载好的Zip包，找到bootstrap.yml <br>
+![img_1.png](../picture/quickly/img_17.png) <br>
 
 将图中关于mysql的连接配置信息换成你使用的IP <br>
 **注**：aj_report库是存放底层基础信息的库，flyway启动时会自动建立，如果你在这里修改了库，将会出错 <br>
@@ -34,6 +33,10 @@ aj-report-XXX --> bin -->sh start.sh <br>
 
 windows启动：<br>
 aj-report-XXX --> bin --> start.bat <br>
+
+![img18](../picture/quickly/img_18.png) <br>
+
+如果start.bat启动有问题的话，可以尝试以下方法解决。<br>
 修改第4行的JAVA_HOME，改成你自己的JAVA_HOME，并去掉**rem**注释，双击启动<br>
 ![java.png](../picture/quickly/img_7.png) <br>
 **注**：如果你JAVA_HOME目录存在空格，将bat文件最下面的JAVA_HOME添加""号

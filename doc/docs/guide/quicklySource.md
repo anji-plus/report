@@ -6,7 +6,7 @@ sh build.sh
 
 unzip aj-report-xxxx.zip
 cd aj-report-xxxx
-vim conf/bootstrap-dev.yml 修改数据库连接、上传文件的路径以及地址
+vim conf/bootstrap.yml 修改数据库连接、上传文件的路径以及地址
 sh bin/start.sh
 
 访问
@@ -36,8 +36,8 @@ git clone https://gitee.com/anji-plus/report.git <br>
 
 ## 修改mysql连接
 
-解压aj-report-xxxx.zip，找到bootstrap-dev.yml <br>
-![img_1.png](../picture/quickly/img_1.png) <br>
+解压aj-report-xxxx.zip，找到bootstrap.yml <br>
+![img_1.png](../picture/quickly/img_17.png) <br>
 
 将图中关于mysql的连接配置信息换成你使用的IP <br>
 **注**：aj_report库是存放底层基础信息的库，flyway启动时会自动建立，如果你在这里修改了库，将会出错 <br>
@@ -52,8 +52,11 @@ git clone https://gitee.com/anji-plus/report.git <br>
 
 ## 启动
 
+linux启动： <br>
 aj-report-XXX --> bin --> start.sh <br>
 sh bin/start.sh <br>
+
+注意啊，如果你在linux打包，然后在win上执行，要转化start.bat文件的格式，反之也是一样。
 
 ## 日志位置
 
