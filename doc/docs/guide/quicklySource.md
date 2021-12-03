@@ -6,7 +6,7 @@ sh build.sh
 
 unzip aj-report-xxxx.zip
 cd aj-report-xxxx
-vim conf/bootstrap-dev.yml 修改数据库连接、上传文件的路径以及地址
+vim conf/bootstrap.yml 修改数据库连接、上传文件的路径以及地址
 sh bin/start.sh
 
 访问
