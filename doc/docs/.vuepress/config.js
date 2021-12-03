@@ -26,6 +26,7 @@ module.exports = {
                         {title: '简介', path: '/guide/'},
                         {title: '谁在使用', path: '/guide/briefUsing'},
                         {title: '技术支持', path: '/guide/briefSupport'},
+                        {title: '更多案例', path: '/guide/bigScreenCase'},
                     ]
                 },
                 {
