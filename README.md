@@ -41,7 +41,7 @@
 │   ├── start.sh
 │   └── stop.sh
 ├── conf                                       配置文件目录
-│   └── bootstrap-dev.yml
+│   └── bootstrap.yml
 ├── logs                                          启动日志目录
 ├── cache                                         本地缓存目录
 ├── lib                                           自定义扩展包&report-core核心包
@@ -107,7 +107,7 @@ sh build.sh
 
 unzip aj-report-xxxx.zip
 cd aj-report-xxxx
-vim conf/bootstrap-dev.yml 修改数据库连接等信息
+vim conf/bootstrap.yml 修改数据库连接等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
