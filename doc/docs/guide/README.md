@@ -39,7 +39,7 @@
 │   ├── start.sh
 │   └── stop.sh
 ├── conf                                       配置文件目录
-│   └── bootstrap-dev.yml
+│   └── bootstrap.yml
 ├── logs                                          启动日志目录
 ├── cache                                         本地缓存目录
 ├── lib                                           自定义扩展包&report-core核心包
