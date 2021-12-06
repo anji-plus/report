@@ -23,7 +23,7 @@
 
 ## 上传功能
 
-使用上传功能，必须修改此内容 <br>
+使用上传功能，必须修改此内容，注意路径格式，比如Win是 \ ,linux是 / <br>
 ![file.png](../picture/quickly/img_15.png) <br>
 
 ## 启动
