@@ -23,10 +23,26 @@
 
 ## 扩展
 
-- 以kudu impala 为例，在lib文件夹下加入kudu impala相关的JDBC连接相关的包，如图在数据库中新增数据源类型，参考数据源类型(上方)
+### JDBC驱动类数据源添加：
 
-![An image](../picture/datasource/kudu-impala-lib.png)
+- 第一种，在report-core/lib目录下添加 <br>
+  按照同样的层级将驱动包放置，使用build.sh脚本进行打包，前端页面选择jdbc数据源，填上对应的驱动类即可使用。<br>
+  **注意：** 此方式添加的jar包只能使用build.sh进行编译后才会生效。<br>
 
+<br>
+
+- 第二种，在pom.xml中添加 <br>
+  使用build.sh脚本编译或者maven package编译都可以，前端页面选择jdbc数据源，填上对应驱动。<br>
+
+<br>
+
+### 非JDBC类数据源驱动添加：
+
+例如原生ES、Redis之类。<br>
+
+1、在源码中编写解析代码 <br>
+2、使用页面生成数据字典 <br>
+3、添加对应驱动包<br>
 
   
   
