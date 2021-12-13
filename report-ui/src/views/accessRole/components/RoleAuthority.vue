@@ -15,6 +15,7 @@
       node-key="id"
       default-expand-all
       :default-checked-keys="checkedKeys"
+      class="el-tree"
     />
     <div slot="footer" style="text-align: center">
       <el-button type="primary" plain @click="saveTreeData">保存</el-button>
@@ -83,3 +84,9 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+/deep/.el-dialog__body {
+  height: 400px;
+  overflow-y: scroll;
+}
+</style>
