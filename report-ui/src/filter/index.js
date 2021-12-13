@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 10:15:29
+ * @LastEditTime: 2021-12-13 13:40:00
  */
 
 import { getStorageItem } from '@/utils/storage';
@@ -46,18 +46,18 @@ export function getDataByCode(keyCode) {
 
 //保留两位小数
 export function fixed(value){
-let intVal = null;
-if(typeof value == 'string' && /^[0-9.]+$/.test(value)){
-  intVal = parseInt(value);
-}
-if(typeof value == 'number'){
-  intVal = value;
-}
-if(intVal == null){
-  return value;
-}else{
-  return (Math.round(value*100)/100).toFixed(2);
-}
+  let intVal = null;
+  if(typeof value == 'string' && /^[0-9.]+$/.test(value)){
+    intVal = parseInt(value);
+  }
+  if(typeof value == 'number'){
+    intVal = value;
+  }
+  if(intVal == null){
+    return value;
+  }else{
+    return (Math.round(value*100)/100).toFixed(2);
+  }
 }
 
 // 时间戳转日期

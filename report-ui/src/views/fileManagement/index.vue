@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 13:14:13
+ * @LastEditTime: 2021-12-13 13:47:02
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
@@ -89,7 +89,7 @@ export default {
           },
           // 自定义按钮
           customButton: {
-            operationWidth: 150 // row自定义按钮表格宽度
+            operationWidth: 160 // row自定义按钮表格宽度
           }
         },
         // 表格列
