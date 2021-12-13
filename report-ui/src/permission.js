@@ -1,17 +1,15 @@
 import router from './router'
-import store from './store'
-import NProgress from 'nprogress' // Progress 进度条
-import 'nprogress/nprogress.css'// Progress 进度条样式
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { getToken, getAccessUser } from "@/utils/auth";
 export default router
-var whiteList = ['/login', '/aj/**', '/bigscreen/viewer']
+const whiteList = ['/login', '/aj/**', '/bigscreen/viewer']
 //  判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
 
   NProgress.start()
-  var token = getToken();
-  var gaeaUser = getAccessUser();
-  // 如果有token
+  let token = getToken();
+  let gaeaUser = getAccessUser();
   if (token) {
     if (to.path == '/login') {
       next('/index')
@@ -20,13 +18,11 @@ router.beforeEach((to, from, next) => {
       next()
     }
   }else {
-    console.log(to.path)
     if (whiteList.includes(to.path)) {
       next()
     }else {
-      // 如果没有token
-      if ((token == null || token == '' || token ==undefined || gaeaUser == {}) && (to.meta != null && to.meta.requireAuth == true)) {// 在免登录白名单，直接进入
-        next(`/login?redirect=${to.path}`); // 否则全部重定向到登录页
+      if ((token == null || token == '' || token ==undefined || gaeaUser == {}) && (to.meta != null && to.meta.requireAuth == true)) {
+        next(`/login?redirect=${to.path}`);
         NProgress.done();
       } else {
         next();
@@ -37,5 +33,5 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(() => {
-  NProgress.done() // 结束Progress
+  NProgress.done()
 })
