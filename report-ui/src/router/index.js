@@ -32,7 +32,7 @@ export const constantRouterMap = [
   },
   { 
     path: '/aj/**',
-    component: () => import('@/views/report/aj'), 
+    component: () => import('@/views/bigScreenReport/aj'), 
     hidden: true 
   },
   {
@@ -155,7 +155,7 @@ export const constantRouterMap = [
       { 
         path: 'bigscreen', 
         name: 'bigscreen', 
-        component: () => import('@/views/report/bigscreen/index'), 
+        component: () => import('@/views/bigScreenReport/bigscreen/index'), 
         meta: { 
           title: '大屏报表', 
           icon: 'iconchufaqipeizhi-hui', 
@@ -230,7 +230,7 @@ export const constantRouterMap = [
   },
   { 
     path: '/bigscreen/viewer', 
-    component: () => import('@/views/report/bigscreen/viewer'), 
+    component: () => import('@/views/bigScreenReport/bigscreen/viewer'), 
     hidden: true, 
     meta: { 
       requireAuth: true 
@@ -238,7 +238,7 @@ export const constantRouterMap = [
   },
   { 
     path: '/bigscreen/designer', 
-    component: () => import('@/views/report/bigscreen/designer'), 
+    component: () => import('@/views/bigScreenReport/bigscreen/designer'), 
     hidden: true, 
     meta: { 
       requireAuth: true 
