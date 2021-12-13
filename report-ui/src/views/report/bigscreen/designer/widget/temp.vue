@@ -36,6 +36,7 @@ import widgetLineStackChart from "./line/widgetLineStackChart";
 import widgetBarCompareChart from "./bar/widgetBarCompareChart";
 import widgetLineCompareChart from "./line/widgetLineCompareChart";
 import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
+import widgetMoreBarLineChart from "./bar/widgetMoreBarLineChart";
 
 export default {
   name: "WidgetTemp",
@@ -64,7 +65,8 @@ export default {
     widgetLineStackChart,
     widgetBarCompareChart,
     widgetLineCompareChart,
-    widgetDecoratePieChart
+    widgetDecoratePieChart,
+    widgetMoreBarLineChart
   },
   model: {
     prop: "value",

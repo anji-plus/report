@@ -5,8 +5,10 @@
 </template>
 
 <script>
+
 export default {
-  name: "WidgetBarlinechart",
+  //https://echarts.apache.org/examples/zh/editor.html?c=multiple-y-axis
+  name: "widgetMoreBarLineChart",
   components: {},
   props: {
     value: Object,
@@ -15,87 +17,104 @@ export default {
   data() {
     return {
       options: {
-        color: [],
-        grid: {},
-        title: {
-          text: "",
-          textStyle: {
-            color: "#fff"
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross'
           }
         },
-        tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c}%"
+        grid: {
+          right: '20%'
         },
         legend: {
-          textStyle: {
-            color: "#fff"
-          },
+          data: ['Evaporation', 'Precipitation', 'Temperature']
         },
         xAxis: [
           {
-            type: "category",
-            data: [],
-            axisLabel: {
-              show: false,
-              textStyle: {
-                color: "#fff"
-              }
-            }
+            type: 'category',
+            axisTick: {
+              alignWithLabel: true
+            },
+            // prettier-ignore
+            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
           }
         ],
         yAxis: [
           {
-            type: "value",
-            name: "",
+            type: 'value',
+            name: 'Evaporation',
             min: 0,
             max: 250,
-            interval: 50,
-            axisLabel: {
+            position: 'right',
+            axisLine: {
               show: true,
-              textStyle: {
-                color: "#fff"
+              lineStyle: {
+                color: '#5470C6'
               }
+            },
+            axisLabel: {
+              formatter: '{value} ml'
             }
           },
           {
-            type: "value",
-            name: "",
+            type: 'value',
+            name: 'Precipitation',
+            min: 0,
+            max: 250,
+            position: 'right',
+            offset: 80,
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: '#91CC75'
+              }
+            },
+            axisLabel: {
+              formatter: '{value} ml'
+            }
+          },
+          {
+            type: 'value',
+            name: '温度',
             min: 0,
             max: 25,
-            interval: 5,
-            axisLabel: {
+            position: 'left',
+            axisLine: {
               show: true,
-              textStyle: {
-                color: "#fff"
+              lineStyle: {
+                color: '#EE6666'
               }
+            },
+            axisLabel: {
+              formatter: '{value} °C'
             }
           }
         ],
         series: [
           {
-            name: "",
-            type: "bar",
-            yAxisIndex: 0,
-            data: [],
-            itemStyle: {
-              barBorderRadius: null
-            }
+            name: 'Evaporation',
+            type: 'bar',
+            data: [
+              2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3
+            ]
           },
           {
-            name: "",
-            type: "line",
+            name: 'Precipitation',
+            type: 'bar',
             yAxisIndex: 1,
-            data: [],
-            itemStyle: {}
+            data: [
+              2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3
+            ]
+          },
+          {
+            name: 'Temperature',
+            type: 'line',
+            yAxisIndex: 2,
+            data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
           }
         ]
-      },
-      optionsStyle: {}, // 样式
-      optionsData: {}, // 数据
-      optionsCollapse: {}, // 图标属性
-      optionsSetup: {}
-    };
+      }
+    }
   },
   computed: {
     styleObj() {
@@ -132,15 +151,15 @@ export default {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
-      this.setOptionsX();
+      /*this.setOptionsX();
       this.setOptionsY();
       this.setOptionsTop();
       this.setOptionsBar();
       this.setOptionsTooltip();
       this.setOptionsData();
       this.setOptionsMargin();
-      //this.setOptionsLegend();
-      this.setOptionsColor();
+      this.setOptionsLegend();
+      this.setOptionsColor();*/
     },
     // 标题修改
     setOptionsTitle() {
@@ -412,6 +431,7 @@ export default {
     }
   }
 };
+
 </script>
 
 <style scoped lang="scss">
