@@ -25,8 +25,6 @@
     <el-select
       v-model="selectValue"
       :clearable="clearable"
-      :allow-create="!!allowCreate"
-      :default-first-option="!!allowCreate"
       :collapse-tags="collapseTags"
       filterable
       class="filter-item"
@@ -41,39 +39,29 @@
         v-for="(item, index) in options"
         :key="index"
         :label="getItemLabel(item, label)"
-        :value="item[option] + ''"
+        :value="item[option]"
         :disabled="isDisabledOption(item)"
       >
         <template v-if="mergeLabel">
           <span style="float: left">{{ getItemLabel(item, label) }}</span>
-          <span
-            v-if="!dictCode && !localOptions"
-            style="float: right; color: #8492a6; font-size: 13px"
-            >{{ item[option] }}</span
-          >
+          <span style="float: right; color: #8492a6; font-size: 13px">{{
+            item[option]
+          }}</span>
         </template>
       </el-option>
-      <el-option v-if="totalPage >= 1" value="" disabled>{{
-        $lang("GLOBAL.placeholder_select_remote_search")
-      }}</el-option>
+      <el-option v-if="totalPage > 1" label="搜索更多" value="" disabled />
     </el-select>
   </div>
 </template>
 
 <script>
 import request from "@/utils/request";
+import { getStorageItem } from "@/utils/storage";
 export default {
   props: {
     dictCode: null, // 当传入dictCode时，可以不用传递url
     url: null,
-    allowCreate: {
-      type: Boolean,
-      default: false
-    },
-    method: {
-      type: String,
-      default: "get"
-    },
+    method: null,
     queryParam: {
       type: Object,
       default: () => {
@@ -103,7 +91,7 @@ export default {
     },
     mergeLabel: {
       type: Boolean,
-      default: true
+      default: false
     },
     // 禁用的下拉选项
     disabledOptions: {
@@ -129,13 +117,10 @@ export default {
   computed: {
     // 根据dictCode和url拼出最终的请求url
     requestUrl() {
-      if (this.localOptions) {
-        return null;
-      }
       if (this.url != null && this.url.trim() != "") {
         if (this.url.indexOf("?") > 0) {
           if (this.option == null) {
-            // console.log('url-' + this.url.substring(this.url.indexOf('?')))
+            console.log("url-" + this.url.substring(this.url.indexOf("?")));
           }
           if (this.label == null) {
           }
@@ -149,39 +134,20 @@ export default {
     }
   },
   watch: {
-    dictCode(val) {
-      if (val) {
-        this.queryData();
-      }
-    },
-    // 监听接口地址变化时，触发刷新请求
-    localOptions(val) {
-      this.options = val;
-    },
-    value: {
-      handler(val) {
-        if (
-          typeof val == "string" &&
-          this.url != null &&
-          this.url.trim() != ""
-        ) {
-          this.remoteQuery(val);
-        }
-        if (this.multiple != null) {
-          if (!this.value) {
-            this.selectValue = [];
-          } else {
-            this.selectValue = this.value;
-          }
+    value: function(val, oldVal) {
+      if (this.multiple != null) {
+        if (!this.value) {
+          this.selectValue = [];
         } else {
-          if (this.value != null && this.value != undefined) {
-            this.selectValue = this.value + "";
-          } else {
-            this.selectValue = "";
-          }
+          this.selectValue = this.value;
         }
-      },
-      immediate: true
+      } else {
+        if (this.value != null && this.value != undefined) {
+          this.selectValue = this.value;
+        } else {
+          this.selectValue = "";
+        }
+      }
     },
     url() {
       setTimeout(() => {
@@ -194,7 +160,7 @@ export default {
       this.selectValue = this.value;
     } else {
       if (this.value != null) {
-        this.selectValue = this.value + "";
+        this.selectValue = this.value;
       }
     }
   },
@@ -215,17 +181,17 @@ export default {
       ) {
         return false;
       }
-      let currentOptionVal = option[this.option];
+      var currentOptionVal = option[this.option];
       return this.disabledOptions.indexOf(currentOptionVal) >= 0;
     },
     change(value) {
       if (value === "") {
-        value = "";
+        value = null;
       }
       this.$emit("input", value);
 
       // 根据当前值，找出对应的选项
-      let optionItem = this.options.find(item => item[this.option] == value);
+      var optionItem = this.options.find(item => item[this.option] == value);
       this.$emit("change", value, optionItem);
     },
     // 根据用户配置的label，生成对应的标签
@@ -233,38 +199,34 @@ export default {
       if (label.indexOf("${") < 0 && label.indexOf("}" < 0)) {
         return item[label];
       }
-      let reg = /\$\{[a-zA-Z0-9]*\}/g;
-      let list = label.match(reg);
+      var reg = /\$\{[a-zA-Z0-9]*\}/g;
+      var list = label.match(reg);
       // ["${id}", "${text}"]
-      let result = label;
-      for (let i = 0; i < list.length; i++) {
-        let sub = list[i];
-        let key = sub.replace("${", "").replace("}", "");
+      var result = label;
+      for (var i = 0; i < list.length; i++) {
+        var sub = list[i];
+        var key = sub.replace("${", "").replace("}", "");
         result = result.replace(sub, item[key]);
       }
       return result;
     },
     // 从本地localStorage取 gaeaDict
     getOptionsFromLocalStorage() {
-      let dicts = JSON.parse(localStorage.getItem("gaeaDict"));
-      let options = [];
+      var dicts = getStorageItem("gaeaDict");
+      var options = [];
       if (!dicts.hasOwnProperty(this.dictCode)) {
         return [];
       }
-      let dictItems = dicts[this.dictCode];
-      for (let i = 0; i < dictItems.length; i++) {
-        let dictItem = dictItems[i];
-        options.push({
-          id: dictItem.id.toString(),
-          text: dictItem.text,
-          extend: dictItem.extend
-        });
+      var dictItems = dicts[this.dictCode];
+      for (var i = 0; i < dictItems.length; i++) {
+        var dictItem = dictItems[i];
+        options.push({ id: dictItem.id, text: dictItem.text });
       }
       return options;
     },
     queryData() {
       // 所有从本地localStorage取，因为在App.vue中已经请求远程保存到本地了
-      let options = this.getOptionsFromLocalStorage();
+      var options = this.getOptionsFromLocalStorage();
       if (this.isNotBlank(options)) {
         this.options = options;
         return;
@@ -283,7 +245,7 @@ export default {
       }
     },
     queryDataByGet(keyword) {
-      let param = this.deepClone(this.queryParam);
+      var param = this.deepClone(this.queryParam);
       if (this.isNotBlank(keyword)) {
         param["keyword"] = keyword;
       }
@@ -293,12 +255,11 @@ export default {
         headers: { noPrompt: true },
         params: param
       }).then(response => {
-        // console.log(response)
         this.setOptions(response.data);
       });
     },
     queryDataByPost(keyword) {
-      let param = this.deepClone(this.queryParam);
+      var param = this.deepClone(this.queryParam);
       if (this.isNotBlank(keyword)) {
         param["keyword"] = keyword;
       }
@@ -338,9 +299,9 @@ export default {
       this.options = resData.records;
     },
     remoteQuery(keyword) {
-      // if (this.isBlank(keyword)) {
-      //   return
-      // }
+      if (this.isBlank(keyword)) {
+        return;
+      }
       setTimeout(() => {
         if (
           this.method != null &&
@@ -355,11 +316,8 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-.el-select-dropdown__item.selected {
-  text-align: center;
-}
-.el-select-dropdown__item.is-disabled {
-  text-align: center;
+<style scoped>
+.filter-item {
+  width: 100%;
 }
 </style>

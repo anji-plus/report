@@ -1,10 +1,18 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: qianlishi
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 10:16:49
+ */
 import Cookies from 'js-cookie'
 export function setCookie(k, v) {
   if(typeof(v) == "undefined" || v == null){
     return;
   }
 
-  var val = v;
+  let val = v;
   if(typeof(v) == "object"){
     val = JSON.stringify(v);
   }
@@ -13,7 +21,7 @@ export function setCookie(k, v) {
 }
 
 export function getCookie(k) {
-  var val = Cookies.get(k);
+  let val = Cookies.get(k);
   try{
     //如果是number boolean jsonstring是不会报错的
     return JSON.parse(val);
@@ -32,7 +40,7 @@ export function setStorageItem(k, v) {
     return;
   }
 
-  var val = v;
+  let val = v;
   if(typeof(v) == "object"){
     val = JSON.stringify(v);
   }
@@ -40,7 +48,7 @@ export function setStorageItem(k, v) {
 }
 
 export function getStorageItem(k) {
-  var val = localStorage.getItem(k);
+  let val = localStorage.getItem(k);
   try{
     //如果是number boolean jsonstring是不会报错的
     return JSON.parse(val);

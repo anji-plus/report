@@ -4,8 +4,8 @@ function jsonString (obj) {
   if (isObject(obj)) {
     return sortObjByKey(obj);
   } else if (isArray(obj)) {
-    var sortArray = [];
-    for (var i = 0; i < obj.length; i++) {
+    let sortArray = [];
+    for (let i = 0; i < obj.length; i++) {
       if (isObject(obj[i])) {
         sortArray.push(sortObjByKey(obj[i]));
       } else {
@@ -20,10 +20,10 @@ function jsonString (obj) {
 
 // 将通讯录按照 ABCD字母的顺序排序
 function sortObjByKey (obj) {
-  var keys = Object.keys(obj).sort();
-  var newObj = {}
-  for (var i = 0; i < keys.length; i++) {
-    var index = keys[i];
+  let keys = Object.keys(obj).sort();
+  let newObj = {}
+  for (let i = 0; i < keys.length; i++) {
+    let index = keys[i];
     newObj[index] = jsonString(obj[index]);
   }
   return newObj;
@@ -50,13 +50,13 @@ export default {
     if (typeof (data) == "undefined" || data == null) {
       data = {};
     }
-    var gatewayRequest = {};//currentPage pageSize orderBy data  time token sign isFrom
-    var time = new Date().getTime();
+    let gatewayRequest = {};//currentPage pageSize orderBy data  time token sign isFrom
+    let time = new Date().getTime();
     //找出data中值非null的key，同时排除分页参数
     //ignoreKeyList data中哪些key不参与签名
-    var dataKeyArray = [];
-    var excludeKeyArray = ['currentPage', 'pageSize', 'orderBy', 'ignoreKeyList'];
-    for (var key in data) {
+    let dataKeyArray = [];
+    let excludeKeyArray = ['currentPage', 'pageSize', 'orderBy', 'ignoreKeyList'];
+    for (let key in data) {
       if (data[key] == null) {
         continue;
       }
@@ -65,7 +65,7 @@ export default {
         delete data[key];
         if (key === 'ignoreKeyList') {
           //遍历ignoreKeyList，不参与签名校验
-          for (var i = 0; i < data[key].length; i++) {
+          for (let i = 0; i < data[key].length; i++) {
             delete data[data[key][i]];
           }
         }
@@ -77,10 +77,10 @@ export default {
     dataKeyArray.sort();
 
     //生成签名串"time=%s&" + tempSignStr + "&token=%s"
-    var tempSignStr = "time=" + time;
-    for (var i = 0; i < dataKeyArray.length; i++) {
-      var key = dataKeyArray[i];
-      var value = data[key];
+    let tempSignStr = "time=" + time;
+    for (let i = 0; i < dataKeyArray.length; i++) {
+      let key = dataKeyArray[i];
+      let value = data[key];
       tempSignStr += "&";
       tempSignStr += key;
       tempSignStr += "=";
@@ -88,7 +88,7 @@ export default {
     }
     tempSignStr += "&token=";
     tempSignStr += token;
-    var signStr = md5(tempSignStr);
+    let signStr = md5(tempSignStr);
     gatewayRequest['data'] = data;
     gatewayRequest['time'] = time;
     gatewayRequest['token'] = token;
