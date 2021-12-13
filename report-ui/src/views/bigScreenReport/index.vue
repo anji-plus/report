@@ -49,7 +49,7 @@
             class="bg-img"
             :src="
               item.reportImage == null || item.reportImage == ''
-                ? require('../../../assets/images/charts.jpg')
+                ? require('@/assets/images/charts.jpg')
                 : item.reportImage
             "
             alt=""

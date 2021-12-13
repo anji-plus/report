@@ -155,7 +155,7 @@ export const constantRouterMap = [
       { 
         path: 'bigscreen', 
         name: 'bigscreen', 
-        component: () => import('@/views/bigScreenReport/bigscreen/index'), 
+        component: () => import('@/views/bigScreenReport/index'), 
         meta: { 
           title: '大屏报表', 
           icon: 'iconchufaqipeizhi-hui', 
