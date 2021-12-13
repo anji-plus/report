@@ -783,20 +783,6 @@ export default {
       this.queryParams.pageSize = val;
       this.handleQueryPageList();
     },
-    // table列文件缩略图
-    thumbnailUrl(row, field) {
-      // return 'http://10.108.3.123:9090/tms/file/download/79ee7e8b-2a9a-4142-b06d-706ac8089205'
-      // if (row.filePath) {
-      //   if (row.filePath.endsWith('xlsx') || row.filePath.endsWith('xls')) {
-      //     return fileExcel;
-      //   } else if (row.filePath.endsWith('pdf')) {
-      //     return filePdf;
-      //   }
-      //   return process.env.VUE_APP_BASE_API + '/tms/file/download/' + row.fileId;
-      // } else {
-      //   return logo;
-      // }
-    },
     // 带单位的列，需要转换
     fieldLabel(columnConfig) {
       let objUnitText = "";
@@ -828,6 +814,7 @@ export default {
     },
     // 带单位的输入框
     fieldValueByAnjiInput(value, columnConfig) {
+      console.log(1);
       const localStorageUnit = this.getSettingByName("unit_conversion");
       let objUnitConversion = "";
       let objUnitKeepPoint = "";

@@ -356,6 +356,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.el-select {
+  width: 100%;
+}
 .el-select-dropdown__item.selected {
   text-align: center;
 }
