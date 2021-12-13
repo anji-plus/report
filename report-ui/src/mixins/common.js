@@ -351,7 +351,7 @@ export default {
       if (gaeaSetting[settingName] != null) {
         return gaeaSetting[settingName]
       } else {
-        console.error('没有找到系统参数' + settingName + '，请与后端联系')
+        // console.error('没有找到系统参数' + settingName + '，请与后端联系')
         return null
       }
     },

@@ -573,6 +573,7 @@ export default {
         if (this.hasTreeFieldInQueryForm) {
           let treeVal = this.queryParams[this.queryFormTreeField.field];
           this.queryParams = {
+            showMoreSearch: false,
             pageNumber: 1,
             pageSize: 10
           };
