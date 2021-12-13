@@ -53,9 +53,9 @@
           >
         </template>
       </el-option>
-      <el-option v-if="totalPage >= 1" value="" disabled>{{
-        $lang("GLOBAL.placeholder_select_remote_search")
-      }}</el-option>
+      <el-option v-if="totalPage >= 1" value="" disabled
+        >输入关键词搜索更多</el-option
+      >
     </el-select>
   </div>
 </template>

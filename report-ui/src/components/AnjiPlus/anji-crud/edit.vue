@@ -9,7 +9,7 @@
     @close="handleCloseDialog('close')"
   >
     <template v-slot:title>
-      {{ option.title + "--" + $lang(`btn_${modelType}`) }}
+      {{ option.title + "--" + modelType }}
       <button
         type="button"
         aria-label="Close"
@@ -63,15 +63,15 @@
 
     <div slot="footer" style="text-align: center">
       <slot v-if="modelType == 'edit'" name="editBtn" :rowData="rowData" />
-      <el-button type="danger" plain @click="handleCloseDialog('close')">{{
-        $lang("btn_close")
-      }}</el-button>
+      <el-button type="danger" plain @click="handleCloseDialog('close')"
+        >关闭</el-button
+      >
       <el-button
         v-if="modelType != 'view'"
         type="primary"
         plain
         @click="handleValidateAndSave"
-        >{{ $lang("btn_save") }}</el-button
+        >保存</el-button
       >
     </div>
   </el-dialog>
@@ -415,13 +415,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// /deep/.el-dialog__body {
-//   background-color: rgb(240, 242, 245);
-//   padding: 5px;
-//   max-height: 60vh;
-//   overflow: auto;
-//   height: calc(100vh - 100px);
-// }
 .notfull-screen {
   /deep/.el-dialog__body {
     background-color: rgb(240, 242, 245);

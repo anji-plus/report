@@ -55,9 +55,7 @@
                   <el-input
                     v-if="item.inputType == 'input'"
                     v-model.trim="editForm[item.editField]"
-                    :placeholder="
-                      item.placeholder || $lang('placeholder_input')
-                    "
+                    :placeholder="item.placeholder || '请输入'"
                     :clearable="item.clearable !== false"
                     :disabled="fieldIsDisable(item.disabled)"
                     @change="value => formChange(item.editField, value, null)"
@@ -78,9 +76,7 @@
                     v-model.trim="editForm[item.editField]"
                     :min="item.inputNumberOption.min"
                     :max="item.inputNumberOption.max"
-                    :placeholder="
-                      item.placeholder || $lang('placeholder_input')
-                    "
+                    :placeholder="item.placeholder || '请输入'"
                     :clearable="item.clearable !== false"
                     :disabled="fieldIsDisable(item.disabled)"
                     @change="value => formChange(item.editField, value, null)"
@@ -91,9 +87,7 @@
                     v-model.trim="editForm[item.editField]"
                     :unit="item.anjiInput.unit"
                     :default-unit="item.anjiInput.defaultUnit"
-                    :placeholder="
-                      item.placeholder || $lang('placeholder_input')
-                    "
+                    :placeholder="item.placeholder || '请输入'"
                     :clearable="item.clearable !== false"
                     :disabled="fieldIsDisable(item.disabled)"
                     @change="value => formChange(item.editField, value, null)"
@@ -126,9 +120,7 @@
                     v-else-if="item.inputType.indexOf('date') >= 0"
                     v-model="editForm[item.editField]"
                     style="width: 100%"
-                    :placeholder="
-                      item.placeholder || $lang('placeholder_select')
-                    "
+                    :placeholder="item.placeholder || '请选择'"
                     :type="item.inputType"
                     :format="item.format"
                     :value-format="item.valueFormat"
@@ -186,9 +178,7 @@
                   <el-input
                     v-else-if="item.inputType == 'textarea'"
                     v-model.trim="editForm[item.editField]"
-                    :placeholder="
-                      item.placeholder || $lang('placeholder_input')
-                    "
+                    :placeholder="item.placeholder || '请输入'"
                     :clearable="item.clearable !== false"
                     :disabled="fieldIsDisable(item.disabled)"
                     type="textarea"
@@ -300,7 +290,7 @@ export default {
         }
         // 没有设定分组的，全部补全成 其它信息
         if (this.isBlank(item["group"])) {
-          item["group"] = this.$lang("crudEditDialogGroupOther");
+          item["group"] = "其它";
         }
         return item;
       });

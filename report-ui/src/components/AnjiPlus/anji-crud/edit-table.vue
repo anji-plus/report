@@ -16,11 +16,7 @@
         >
           <!-- <el-table-column fixed type="selection" width="50" align="center" /> -->
 
-          <el-table-column
-            :label="$lang('GLOBAL.table_index')"
-            min-width="50"
-            align="center"
-          >
+          <el-table-column label="序号" min-width="50" align="center">
             <template slot-scope="scope">
               {{ scope.$index + 1 }}
             </template>
@@ -47,9 +43,7 @@
                     v-if="item.inputType == 'input'"
                     v-model="scope.row[item.field]"
                     size="small"
-                    :placeholder="
-                      item.placeholder || $lang('placeholder_input')
-                    "
+                    :placeholder="item.placeholder || '请输入'"
                     :clearable="item.clearable !== false"
                     :disabled="
                       saveButtonStatus[scope.$index] == 'inShow' ||
@@ -82,9 +76,7 @@
                     size="small"
                     :min="item.inputNumberOption.min"
                     :max="item.inputNumberOption.max"
-                    :placeholder="
-                      item.placeholder || $lang('placeholder_input')
-                    "
+                    :placeholder="item.placeholder || '请输入'"
                     :clearable="item.clearable !== false"
                     :disabled="
                       saveButtonStatus[scope.$index] == 'inShow' ||
@@ -102,9 +94,7 @@
                     :default-value="item.defaultValue"
                     :unit="item.anjiInput.unit"
                     :conversion="item.anjiInput.conversion"
-                    :placeholder="
-                      item.placeholder || $lang('placeholder_input')
-                    "
+                    :placeholder="item.placeholder || '请输入'"
                     :clearable="item.clearable !== false"
                     :disabled="
                       saveButtonStatus[scope.$index] == 'inShow' ||
@@ -142,9 +132,7 @@
                     v-else-if="item.inputType.indexOf('date') >= 0"
                     v-model="scope.row[item.field]"
                     style="width: 100%"
-                    :placeholder="
-                      item.placeholder || $lang('placeholder_select')
-                    "
+                    :placeholder="item.placeholder || '请选择'"
                     :type="item.inputType"
                     :clearable="item.clearable !== false"
                     :disabled="
@@ -165,11 +153,7 @@
               </template>
             </el-table-column>
           </template>
-          <el-table-column
-            fixed="right"
-            :label="$lang('GLOBAL.table_operation')"
-            width="100"
-          >
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <el-button
                 type="text"
@@ -181,7 +165,7 @@
                 type="text"
                 size="small"
                 @click="handleDelete(scope.row, scope.$index)"
-                >{{ $lang("btn_delete") }}</el-button
+                >删除</el-button
               >
             </template>
           </el-table-column>
@@ -194,7 +178,7 @@
         @click="handleAdd"
       >
         <i class="el-icon-plus" />
-        <span>{{ $lang("btn_add") }}</span>
+        <span>新增</span>
       </button>
     </div>
   </div>
@@ -349,11 +333,11 @@ export default {
     // 获取行的提交按钮文字
     getRowEditButton(index) {
       if (this.saveButtonStatus[index] == "inEditing") {
-        return this.$lang("btn_savetemp");
+        return "btn_savetemp";
       } else if (this.saveButtonStatus[index] == "inAdding") {
-        return this.$lang("btn_savetemp");
+        return "btn_savetemp";
       } else if (this.saveButtonStatus[index] == "inShow") {
-        return this.$lang("btn_edit");
+        return "btn_edit";
       } else {
         return "not_permission";
       }
@@ -532,30 +516,6 @@ export default {
       row[ROW_DELETE_FLAG] = true;
       this.$set(this.form.records, realIndex, row);
       this.$emit("input", this.form.records);
-      // this.form.records.splice(index, 1)
-      // this.rowIdList.push(row.id)
-      // this.$emit('input', this.form.records)
-      // this.$emit('update:valueNew', this.rowIdList)
-      /*
-      之前是直接调用接口删除，后面统一改成在主表接口中增加、更新、删除
-      // 已经保存在数据库的的行，要调用删除按钮
-      let primaryKey = row[this.primaryKeyFieldName]
-      this.$confirm(this.$lang('promptMessage_deleteTip'), this.$lang('promptMessage_deleteTipTitle'), {
-        type: 'warning',
-        confirmButtonClass: 'delete_sure',
-        cancelButtonClass: 'el-button--danger is-plain',
-      })
-        .then(() => {
-          this.option.buttons.delete.api(primaryKey).then((res) => {
-            // {code: "200", message: "操作成功", data: true}
-            this.checkRecords = []
-            this.handleQueryPageList()
-          })
-        })
-        .catch((e) => {
-          e
-        })
-        */
     }
   }
 };

@@ -5,7 +5,7 @@
         <el-select
           v-model.trim="countryCode"
           filterable
-          :placeholder="$lang('GLOBAL.countryName')"
+          placeholder="请选择国家"
           :disabled="disabled"
           clearable
           @change="countryChange"
@@ -22,7 +22,7 @@
         <el-select
           v-model.trim="provinceCode"
           filterable
-          :placeholder="$lang('GLOBAL.provinceName')"
+          placeholder="请选择省"
           :disabled="disabled"
           clearable
           @change="provinceChange"
@@ -39,7 +39,7 @@
         <el-select
           v-model.trim="cityCode"
           filterable
-          :placeholder="$lang('GLOBAL.cityName')"
+          placeholder="请选择市"
           :disabled="disabled"
           clearable
           @change="cityChange"
@@ -56,7 +56,7 @@
         <el-select
           v-model.trim="areaCode"
           filterable
-          :placeholder="$lang('GLOBAL.districtName')"
+          placeholder="请选择区"
           :disabled="disabled"
           clearable
           @change="districtChange"

@@ -45,14 +45,14 @@
         type="danger"
         plain
         @click="handleDialogClose"
-        >{{ dialogConfig.isBtnClose.text || $lang("btn_close") }}</el-button
+        >{{ dialogConfig.isBtnClose.text || "关闭" }}</el-button
       >
       <el-button
         v-if="isBtnSave"
         type="primary"
         plain
         @click="handleDialogSave"
-        >{{ dialogConfig.isBtnSave.text || $lang("btn_save") }}</el-button
+        >{{ dialogConfig.isBtnSave.text || "保存" }}</el-button
       >
       <slot name="dialogBtn" />
     </div>
@@ -75,11 +75,11 @@ export default {
           isSetColRow: true,
           isBtnClose: {
             value: true,
-            text: this.$lang("btn_close")
+            text: "关闭"
           },
           isBtnSave: {
             value: true,
-            text: this.$lang("btn_save")
+            text: "保存"
           },
           column: 2,
           setColumnFn: () => {}
@@ -118,16 +118,16 @@ export default {
   },
   methods: {
     getDialogTitle(type) {
-      let title = this.$lang("btn_add");
+      let title = "新增";
       switch (type) {
         case "add":
-          title = this.$lang("btn_add");
+          title = "新增";
           break;
         case "edit":
-          title = this.$lang("btn_edit");
+          title = "编辑";
           break;
         case "view":
-          title = this.$lang("btn_view");
+          title = "查看";
           break;
         default:
           title = type;
