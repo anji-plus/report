@@ -1,8 +1,6 @@
 <template>
   <anji-crud ref="listPage" :option="crudOption">
-    <template v-slot:buttonLeftOnTable> </template>
-
-    <template slot="rowButton" slot-scope="props">
+    <template slot="rowButtonInMore" slot-scope="props">
       <el-button
         type="text"
         @click="handleOpenDialogSetAuthorityForRole(props)"
@@ -45,7 +43,7 @@ export default {
         // 使用菜单做为页面标题
         title: "角色管理",
         // 详情页中输入框左边文字宽度
-        labelWidth: "120px",
+        labelWidth: "160px",
         // 查询表单条件
         queryFormFields: [
           {
@@ -90,7 +88,7 @@ export default {
             permission: "roleManage:update"
           },
           customButton: {
-            operationWidth: "150px"
+            operationWidth: "160px"
           }
         },
         // 表格列
@@ -192,7 +190,6 @@ export default {
       }
     };
   },
-  created() {},
   methods: {
     handleOpenDialogSetAuthorityForRole(props) {
       this.roleCode = props.msg.roleCode;
