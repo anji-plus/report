@@ -66,20 +66,9 @@ export const constantRouterMap = [
   { path: '/excelreport/designer', component: () => import('@/views/report/excelreport/designer'), hidden: true, meta: { requireAuth: true }},
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   { path: '*', redirect: '/login', hidden: true },
-  /*
-  {
-    path: '/helpCenList', component: () => import('@/views/helpCenList/list'), hidden: true,
-    children: [
-      { path: 'list', component: () => import('@/views/helpCenList/list-title'), hidden: true },
-      { path: 'detail', component: () => import('@/views/helpCenList/list-detail'), hidden: true },
-      { path: 'search', component: () => import('@/views/helpCenList/list-search'), hidden: true }
-    ]
-  },
-  */
 ]
 
 export default new Router({
-  // mode: 'history', //后端支持可开
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
