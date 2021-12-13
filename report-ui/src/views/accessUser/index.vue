@@ -1,17 +1,13 @@
 <template>
   <anji-crud ref="listPage" :option="crudOption">
-    <template v-slot:buttonLeftOnTable> </template>
-
-    <template slot="rowButton" slot-scope="props">
+    <template slot="rowButtonInMore" slot-scope="props">
       <el-button
         type="text"
         @click="handleOpenDialogSetRoleForUser(props)"
         v-permission="'userManage:grantRole'"
         >分配角色</el-button
       >
-      <!--<el-button type="text" @click="handleOpenDialogSetRoleForUser(props)" v-permission="'userManage:resetPassword'">重置密码</el-button>-->
     </template>
-    <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
     <template v-slot:pageSection>
       <UserRole
         :login-name="loginName"
@@ -46,7 +42,7 @@ export default {
         // 使用菜单做为页面标题
         title: "用户管理",
         // 详情页中输入框左边文字宽度
-        labelWidth: "120px",
+        labelWidth: "140px",
         // 查询表单条件
         queryFormFields: [
           {
@@ -137,20 +133,6 @@ export default {
             ],
             disabled: false
           },
-          // {
-          //   label: '密码',
-          //   placeholder: '',
-          //   field: 'password',
-          //   tableHide: true, // 表格中不显示
-          //   editHide: true,
-          //   editField: 'password',
-          //   inputType: 'input',
-          //   rules: [
-          //     // { required: true, message: '密码必填', trigger: 'blur' },
-          //     { min: 1, max: 128, message: '不超过128个字符', trigger: 'blur' },
-          //   ],
-          //   disabled: false,
-          // },
           {
             label: "手机号码",
             placeholder: "",
@@ -269,8 +251,6 @@ export default {
       }
     };
   },
-
-  created() {},
   methods: {
     handleOpenDialogSetRoleForUser(props) {
       this.loginName = props.msg.loginName;

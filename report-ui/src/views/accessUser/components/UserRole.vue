@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: qianlishi
- * @Date: 2021-12-11 14:48:27
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 10:22:51
--->
 <template>
   <el-dialog
     class="tree_dialog"
@@ -57,7 +49,6 @@ export default {
     visib(val) {
       if (val) {
         // 弹窗弹出时需要执行的逻辑
-        console.log(1);
         this.getTreeData();
       }
     }
