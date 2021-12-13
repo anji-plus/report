@@ -33,6 +33,7 @@ import {widgetLineStack} from "./echartsConfigJson/widget-line-stack"
 import {widgetBarCompare} from "./echartsConfigJson/widget-bar-compare"
 import {widgetLineCompare} from "./echartsConfigJson/widget-line-compare"
 import {widgetDecoratePie} from "./echartsConfigJson/widget-decorate-pie";
+import {widgetMoreBarLine} from "./echartsConfigJson/widget-more-bar-line";
 
 export const widgetTool = [
   // type=html类型的组件
@@ -61,5 +62,6 @@ export const widgetTool = [
   widgetLineStack,
   widgetBarCompare,
   widgetLineCompare,
-  widgetDecoratePie
+  widgetDecoratePie,
+  widgetMoreBarLine
 ]
