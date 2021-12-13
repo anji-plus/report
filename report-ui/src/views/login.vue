@@ -1,9 +1,11 @@
 <!--
+ * @Descripttion: 登录
+ * @version: 
  * @Author: qianlishi
- * @Date: 2020-07-13 11:04:24
- * @Last Modified by:   qianlishi
- * @Last Modified time: 2020-07-13 11:04:24
- !-->
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 09:45:44
+-->
 <template>
   <div class="login_container">
     <!-- 顶部logo -->

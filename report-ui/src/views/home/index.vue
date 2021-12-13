@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 首页
+ * @version: 
+ * @Author: qianlishi
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 09:45:44
+-->
 <template>
   <div class="index-container">
     <el-row align="middle" justify="center">
@@ -10,15 +18,15 @@
 
 <script>
 export default {
-  name: 'index1',
+  name: "index1",
   data() {
-    return {}
+    return {};
   },
   components: {},
   watch: {},
   mounted() {},
-  methods: {},
-}
+  methods: {}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
@@ -56,7 +64,7 @@ export default {
     bottom: 0;
     position: relative;
     max-width: 1893px;
-    background: url('../../../static/index-center.png');
+    background: url("../../../static/index-center.png");
     background-size: 100% 100%;
   }
 }

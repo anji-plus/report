@@ -256,7 +256,9 @@ export const constantRouterMap = [
     path: '/excelreport/designer', 
     component: () => import('@/views/report/excelreport/designer'), 
     hidden: true, 
-    meta: { requireAuth: true }
+    meta: { 
+      requireAuth: true 
+    }
   },
   { 
     path: '/404', 
