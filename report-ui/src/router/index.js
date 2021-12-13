@@ -167,7 +167,7 @@ export const constantRouterMap = [
       { 
         path: 'excelreport', 
         name: 'excelreport', 
-        component: () => import('@/views/report/excelreport/index'), 
+        component: () => import('@/views/excelreport/index'), 
         meta: { 
           title: '表格报表', 
           icon: 'iconliebiao', 
@@ -246,7 +246,7 @@ export const constantRouterMap = [
   },
   { 
     path: '/excelreport/viewer', 
-    component: () => import('@/views/report/excelreport/viewer'), 
+    component: () => import('@/views/excelreport/viewer'), 
     hidden: true, 
     meta: { 
       requireAuth: true 
@@ -254,7 +254,7 @@ export const constantRouterMap = [
   },
   { 
     path: '/excelreport/designer', 
-    component: () => import('@/views/report/excelreport/designer'), 
+    component: () => import('@/views/excelreport/designer'), 
     hidden: true, 
     meta: { 
       requireAuth: true 

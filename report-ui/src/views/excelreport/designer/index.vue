@@ -133,7 +133,7 @@
 import draggable from "vuedraggable";
 import { queryAllDataSet, detail, detailByReportCode } from "@/api/GaeaReport";
 import { addReportExcel, editReportExcel } from "@/api/report";
-import ColorPicker from "../../bigscreen/designer/designerComponents/colorPicker.vue";
+import ColorPicker from "../components/colorPicker.vue";
 // import QRCode from 'qrcodejs2'
 // import JsBarcode from 'jsbarcode'
 export default {
@@ -457,7 +457,7 @@ export default {
 };
 </script>
 
-<style src="../../../../../static/luckysheet/assets/iconfont/iconfont.css" />
+<style src="../../../../static/luckysheet/assets/iconfont/iconfont.css" />
 <style scoped lang="scss">
 .position {
   position: absolute;

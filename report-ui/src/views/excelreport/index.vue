@@ -1,4 +1,5 @@
 <!--
+ * @Descripttion: 报表设计--表格报表
  * @Author: lide1202@hotmail.com
  * @Date: 2021-3-13 11:04:24
  * @Last Modified by:   lide1202@hotmail.com
@@ -49,7 +50,7 @@
             class="bg-img"
             :src="
               item.reportImage == null || item.reportImage == ''
-                ? require('../../../assets/images/charts.jpg')
+                ? require('@/assets/images/charts.jpg')
                 : item.reportImage
             "
             alt=""
