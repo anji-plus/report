@@ -1,12 +1,14 @@
 <!--
- * @Author: lide1202@hotmail.com
- * @Date: 2021-3-13 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24
- !-->
+ * @Descripttion: 报表设计--报表管理
+ * @version: 
+ * @Author: qianlishi
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 12:20:46
+-->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
-    <template slot="rowButton" slot-scope="props">
+    <template slot="rowButtonInMore" slot-scope="props">
       <el-button
         type="text"
         @click="preview(props.msg)"
@@ -45,7 +47,7 @@ import {
   reportUpdate,
   reportDetail
 } from "@/api/reportmanage";
-import Share from "@/views/report/report/components/share";
+import Share from "./components/share";
 import { validateEngOrNum } from "@/utils/validate";
 export default {
   name: "Report",

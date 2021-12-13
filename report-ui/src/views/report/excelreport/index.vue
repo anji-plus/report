@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import Share from "@/views/report/report/components/share";
+import Share from "./components/share";
 import { reportPageList } from "@/api/report";
 export default {
   name: "Login",

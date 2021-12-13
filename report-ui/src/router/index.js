@@ -143,7 +143,7 @@ export const constantRouterMap = [
       { 
         path: 'report', 
         name: 'reportIndex', 
-        component: () => import('@/views/report/report/index'), 
+        component: () => import('@/views/reportManage/index'), 
         meta: { 
           title: '报表管理', 
           icon: 'iconnavicon-ywcs', 
