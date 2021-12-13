@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 06:43:07
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-08-29 08:00:59
+ * @LastEditTime: 2021-12-13 10:22:37
  */
 import { widgetTool } from "./main"
 const screenConfig = {
@@ -76,7 +76,7 @@ const getToolByCode = function (code) {
     return screenConfig
   }
   // 获取组件
-  var item = widgetTools.find(function (item, index, arrs) {
+  let item = widgetTools.find(function (item, index, arrs) {
     return item.code === code
   })
   return item

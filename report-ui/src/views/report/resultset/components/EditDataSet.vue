@@ -15,7 +15,14 @@
         label-width="130px"
       >
         <el-row :gutter="10">
-          <el-col v-if="this.setType=='sql'" :xs="24" :sm="20" :md="8" :lg="8" :xl="8">
+          <el-col
+            v-if="this.setType == 'sql'"
+            :xs="24"
+            :sm="20"
+            :md="8"
+            :lg="8"
+            :xl="8"
+          >
             <el-form-item label="数据源" prop="sourceCode">
               <el-select
                 v-model.trim="formData.sourceCode"
@@ -52,10 +59,8 @@
               <el-input v-model.trim="formData.setDesc" size="mini" />
             </el-form-item>
           </el-col>
-
-
         </el-row>
-        <el-row v-if="this.setType=='sql'" :gutter="10">
+        <el-row v-if="this.setType == 'sql'" :gutter="10">
           <el-col
             :xs="24"
             :sm="20"
@@ -64,7 +69,7 @@
             :xl="22"
             class="code-mirror-form"
           >
-            <el-form-item  label="查询SQL">
+            <el-form-item label="查询SQL">
               <div class="codemirror">
                 <monaco-editor
                   v-model.trim="formData.dynSentence"
@@ -75,10 +80,18 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row v-if="this.setType=='http'">
-          <el-form-item  label="请求路径">
-            <el-input placeholder="请输入请求路径..." v-model="httpForm.apiUrl" class="input-with-select">
-              <el-select v-model="httpForm.method" slot="prepend" placeholder="请选择">
+        <el-row v-if="this.setType == 'http'">
+          <el-form-item label="请求路径">
+            <el-input
+              placeholder="请输入请求路径..."
+              v-model="httpForm.apiUrl"
+              class="input-with-select"
+            >
+              <el-select
+                v-model="httpForm.method"
+                slot="prepend"
+                placeholder="请选择"
+              >
                 <el-option label="GET" value="GET"></el-option>
                 <el-option label="POST" value="POST"></el-option>
                 <el-option label="PUT" value="PUT"></el-option>
@@ -86,13 +99,20 @@
               </el-select>
             </el-input>
           </el-form-item>
-          <el-form-item  label="请求头">
-            <el-input v-model.trim="httpForm.header" size="mini" placeholder="请输入请求头..."/>
+          <el-form-item label="请求头">
+            <el-input
+              v-model.trim="httpForm.header"
+              size="mini"
+              placeholder="请输入请求头..."
+            />
           </el-form-item>
-          <el-form-item  label="请求体">
-            <el-input v-model.trim="httpForm.body" size="mini" placeholder="请输入请求体..."/>
+          <el-form-item label="请求体">
+            <el-input
+              v-model.trim="httpForm.body"
+              size="mini"
+              placeholder="请输入请求体..."
+            />
           </el-form-item>
-
         </el-row>
         <el-row :gutter="10">
           <el-col :xs="24" :sm="20" :md="22" :lg="22" :xl="22">
@@ -184,11 +204,11 @@
                       </template>
                     </el-table-column>
                   </el-table>
-<!--                  <el-checkbox-->
-<!--                    v-model="isShowPagination"-->
-<!--                    @change="changePagination"-->
-<!--                    >加入分页参数-->
-<!--                  </el-checkbox>-->
+                  <!--                  <el-checkbox-->
+                  <!--                    v-model="isShowPagination"-->
+                  <!--                    @change="changePagination"-->
+                  <!--                    >加入分页参数-->
+                  <!--                  </el-checkbox>-->
                 </el-tab-pane>
                 <el-tab-pane label="数据转换" name="second">
                   <template>
@@ -408,7 +428,7 @@ import "codemirror/lib/codemirror.css"; // 核心样式
 import "codemirror/theme/cobalt.css"; // 引入主题后还需要在 options 中指定主题才会生效
 import vueJsonEditor from "vue-json-editor";
 import MonacoEditor from "./MonacoEditor.vue";
-import {validateEngOrNum} from "@/utils/validate";
+import { validateEngOrNum } from "@/utils/validate";
 export default {
   name: "Support",
   components: { Dictionary, codemirror, vueJsonEditor, MonacoEditor },
@@ -496,7 +516,7 @@ export default {
         ],
         setCode: [
           { required: true, message: "数据集编码必填", trigger: "blur" },
-          { validator: validateEngOrNum, trigger: 'blur' },
+          { validator: validateEngOrNum, trigger: "blur" }
         ],
         sourceCode: [
           { required: true, message: "数据源必选", trigger: "change" }
@@ -530,12 +550,13 @@ export default {
         setName: "",
         setCode: ""
       },
-      setType: '',  //数据集类型，主要用于区分http   addSql  addHttp  edit
-      httpForm: {   //http数据源相关数据
-        apiUrl: '',
-        method: 'GET',
+      setType: "", //数据集类型，主要用于区分http   addSql  addHttp  edit
+      httpForm: {
+        //http数据源相关数据
+        apiUrl: "",
+        method: "GET",
         header: '{"Content-Type":"application/json;charset=UTF-8"}',
-        body: '',
+        body: ""
       },
       //待删除
       dictionaryOptions: [], // 数据源类型
@@ -570,9 +591,9 @@ export default {
   methods: {
     // 编辑数据集,获取单条数据详情
     async addOrEditDataSet(row, type) {
-      this.setType = type
-      if (type == 'http' && row.dynSentence) {
-        this.httpForm = JSON.parse(row.dynSentence)
+      this.setType = type;
+      if (type == "http" && row.dynSentence) {
+        this.httpForm = JSON.parse(row.dynSentence);
       }
       //获取数据源下拉
       const { code, data } = await queryAllDataSourceSet();
@@ -592,7 +613,7 @@ export default {
             data.data.dataSetParamDtoList.length > 0
           ) {
             this.tableData = data.data.dataSetParamDtoList;
-            var count = 0;
+            let count = 0;
             this.tableData.find((value, i) => {
               if (
                 value.paramName === "pageNumber" ||
@@ -668,10 +689,10 @@ export default {
 
     // 测试预览
     async handleClickTabs(tab, event) {
-      if (this.setType == 'http') {
+      if (this.setType == "http") {
         //针对http数据源
         console.log("http数据集" + this.httpForm);
-        this.formData.dynSentence = JSON.stringify(this.httpForm)
+        this.formData.dynSentence = JSON.stringify(this.httpForm);
       }
       if (tab.paneName == "third") {
         const params = {
@@ -792,7 +813,7 @@ export default {
     // 删除filter
     reduceFilter(item) {
       if (this.itemFilterList.length > 0) {
-        var index = this.itemFilterList.indexOf(item);
+        let index = this.itemFilterList.indexOf(item);
         if (index > -1) {
           this.itemFilterList.splice(index, 1);
         }
@@ -840,11 +861,11 @@ export default {
     // 自定义高级规则
     async testResultset() {
       this.isRowData.validationRules = this.validationRules;
-      console.log(this.isRowData,"12345678")
+      console.log(this.isRowData, "12345678");
       const { code, message, data } = await verificationSet(this.isRowData);
       if (code == "200") {
         if (data) {
-          this.$message.success("返回结果："+ data);
+          this.$message.success("返回结果：" + data);
         } else {
           this.$message.warning("当前示例值校验不通过");
         }
@@ -869,12 +890,12 @@ export default {
       });
     },
     async submit(formName) {
-      if (this.setType == 'http') {
+      if (this.setType == "http") {
         //针对http数据源
         console.log("http数据集" + this.httpForm);
-        this.formData.dynSentence = JSON.stringify(this.httpForm)
+        this.formData.dynSentence = JSON.stringify(this.httpForm);
       }
-      this.formData.setType = this.setType
+      this.formData.setType = this.setType;
       this.$refs[formName].validate(async (valid, obj) => {
         if (valid) {
           if (this.testMassageCode == 200) {
@@ -884,12 +905,12 @@ export default {
             if (this.dialogFormVisibleTitle === "新增数据集") {
               const { code } = await addDataSet(this.formData);
               if (code != "200") return;
-              this.$emit('refreshList')
+              this.$emit("refreshList");
               this.closeDialog();
             } else {
               const { code } = await editDataSet(this.formData);
               if (code != "200") return;
-              this.$emit('refreshList')
+              this.$emit("refreshList");
               this.closeDialog();
             }
           } else {

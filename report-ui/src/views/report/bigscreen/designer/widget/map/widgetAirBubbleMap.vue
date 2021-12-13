@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 <script>
@@ -8,42 +8,41 @@ import echarts from "echarts";
 import "../../../../../../../node_modules/echarts/map/js/china.js";
 //https://www.makeapie.com/editor.html?c=x2yaz6dfRw
 //https://www.makeapie.com/editor.html?c=xMpGBbTEKU
-var geoCoordMap = {
-  '台湾': [121.5135, 25.0308],
-  '黑龙江': [127.9688, 45.368],
-  '内蒙古': [110.3467, 41.4899],
-  "吉林": [125.8154, 44.2584],
-  '北京': [116.4551, 40.2539],
-  "辽宁": [123.1238, 42.1216],
-  "河北": [114.4995, 38.1006],
-  "天津": [117.4219, 39.4189],
-  "山西": [112.3352, 37.9413],
-  "陕西": [109.1162, 34.2004],
-  "甘肃": [103.5901, 36.3043],
-  "宁夏": [106.3586, 38.1775],
-  "青海": [101.4038, 36.8207],
-  "新疆": [87.9236, 43.5883],
-  "西藏": [91.11, 29.97],
-  "四川": [103.9526, 30.7617],
-  "重庆": [108.384366, 30.439702],
-  "山东": [117.1582, 36.8701],
-  "河南": [113.4668, 34.6234],
-  "江苏": [118.8062, 31.9208],
-  "安徽": [117.29, 32.0581],
-  "湖北": [114.3896, 30.6628],
-  "浙江": [119.5313, 29.8773],
-  "福建": [119.4543, 25.9222],
-  "江西": [116.0046, 28.6633],
-  "湖南": [113.0823, 28.2568],
-  "贵州": [106.6992, 26.7682],
-  "云南": [102.9199, 25.4663],
-  "广东": [113.12244, 23.009505],
-  "广西": [108.479, 23.1152],
-  "海南": [110.3893, 19.8516],
-  '上海': [121.4648, 31.2891],
-
+let geoCoordMap = {
+  台湾: [121.5135, 25.0308],
+  黑龙江: [127.9688, 45.368],
+  内蒙古: [110.3467, 41.4899],
+  吉林: [125.8154, 44.2584],
+  北京: [116.4551, 40.2539],
+  辽宁: [123.1238, 42.1216],
+  河北: [114.4995, 38.1006],
+  天津: [117.4219, 39.4189],
+  山西: [112.3352, 37.9413],
+  陕西: [109.1162, 34.2004],
+  甘肃: [103.5901, 36.3043],
+  宁夏: [106.3586, 38.1775],
+  青海: [101.4038, 36.8207],
+  新疆: [87.9236, 43.5883],
+  西藏: [91.11, 29.97],
+  四川: [103.9526, 30.7617],
+  重庆: [108.384366, 30.439702],
+  山东: [117.1582, 36.8701],
+  河南: [113.4668, 34.6234],
+  江苏: [118.8062, 31.9208],
+  安徽: [117.29, 32.0581],
+  湖北: [114.3896, 30.6628],
+  浙江: [119.5313, 29.8773],
+  福建: [119.4543, 25.9222],
+  江西: [116.0046, 28.6633],
+  湖南: [113.0823, 28.2568],
+  贵州: [106.6992, 26.7682],
+  云南: [102.9199, 25.4663],
+  广东: [113.12244, 23.009505],
+  广西: [108.479, 23.1152],
+  海南: [110.3893, 19.8516],
+  上海: [121.4648, 31.2891]
 };
-var data = [
+let data = [
   {
     name: "南海诸岛",
     value: 1
@@ -183,12 +182,12 @@ var data = [
   {
     name: "澳门",
     value: 9
-  },
+  }
 ];
-var convertData = function (data) {
-  var res = [];
-  for (var i = 0; i < data.length; i++) {
-    var geoCoord = geoCoordMap[data[i].name];
+let convertData = function(data) {
+  let res = [];
+  for (let i = 0; i < data.length; i++) {
+    let geoCoord = geoCoordMap[data[i].name];
     if (geoCoord) {
       res.push({
         name: data[i].name,
@@ -198,9 +197,9 @@ var convertData = function (data) {
   }
   return res;
 };
-var max = 6000,
+let max = 6000,
   min = 10;
-var maxSize4Pin = 100,
+let maxSize4Pin = 100,
   minSize4Pin = 20;
 
 export default {
@@ -215,16 +214,28 @@ export default {
         //backgroundColor: '#0F1C3C',
         tooltip: {
           show: true,
-          formatter: function (params) {
+          formatter: function(params) {
             if (params.value.length > 1) {
-              return '&nbsp;&nbsp;' + params.name + '&nbsp;&nbsp;&nbsp;' + params.value[2] + '&nbsp;&nbsp;';
+              return (
+                "&nbsp;&nbsp;" +
+                params.name +
+                "&nbsp;&nbsp;&nbsp;" +
+                params.value[2] +
+                "&nbsp;&nbsp;"
+              );
             } else {
-              return '&nbsp;&nbsp;' + params.name + '&nbsp;&nbsp;&nbsp;' + params.value + '&nbsp;&nbsp;';
+              return (
+                "&nbsp;&nbsp;" +
+                params.name +
+                "&nbsp;&nbsp;&nbsp;" +
+                params.value +
+                "&nbsp;&nbsp;"
+              );
             }
-          },
+          }
         },
         geo: {
-          map: 'china',
+          map: "china",
           show: true,
           roam: false,
           label: {
@@ -235,15 +246,25 @@ export default {
           layoutSize: "80%",
           itemStyle: {
             normal: {
-              borderColor: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                offset: 0,
-                color: '#00F6FF'
-              }, {
-                offset: 1,
-                color: '#53D9FF'
-              }], false),
+              borderColor: new echarts.graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                  {
+                    offset: 0,
+                    color: "#00F6FF"
+                  },
+                  {
+                    offset: 1,
+                    color: "#53D9FF"
+                  }
+                ],
+                false
+              ),
               borderWidth: 3,
-              shadowColor: 'rgba(10,76,139,1)',
+              shadowColor: "rgba(10,76,139,1)",
               shadowOffsetY: 0,
               shadowBlur: 60
             }
@@ -251,19 +272,20 @@ export default {
         },
         series: [
           {
-            type: 'map',
-            map: 'china',
+            type: "map",
+            map: "china",
             aspectScale: 0.75,
             label: {
-              normal: {//调整数值
-                position: 'right',
+              normal: {
+                //调整数值
+                position: "right",
                 show: true,
-                color: '#53D9FF',
+                color: "#53D9FF",
                 fontSize: 20
               },
               emphasis: {
-                show: true,
-              },
+                show: true
+              }
             },
             itemStyle: {
               normal: {
@@ -273,16 +295,19 @@ export default {
                   y: 0,
                   x2: 0,
                   y2: 1,
-                  colorStops: [{
-                    offset: 0,
-                    color: '#073684' // 0% 处的颜色
-                  }, {
-                    offset: 1,
-                    color: '#061E3D' // 100% 处的颜色
-                  }],
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "#073684" // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: "#061E3D" // 100% 处的颜色
+                    }
+                  ]
                 },
-                borderColor: '#215495',
-                borderWidth: 1,
+                borderColor: "#215495",
+                borderWidth: 1
               },
               //鼠标放置颜色加深
               emphasis: {
@@ -291,81 +316,93 @@ export default {
                   y: 0,
                   x2: 0,
                   y2: 1,
-                  colorStops: [{
-                    offset: 0,
-                    color: '#073684' // 0% 处的颜色
-                  }, {
-                    offset: 1,
-                    color: '#2B91B7' // 100% 处的颜色
-                  }],
-                },
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "#073684" // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: "#2B91B7" // 100% 处的颜色
+                    }
+                  ]
+                }
               }
             },
-            data: data,
+            data: data
           },
           {
-            type: 'effectScatter',
-            coordinateSystem: 'geo',
+            type: "effectScatter",
+            coordinateSystem: "geo",
             rippleEffect: {
-              brushType: 'stroke'
+              brushType: "stroke"
             },
-            showEffectOn: 'render',
+            showEffectOn: "render",
             itemStyle: {
               normal: {
                 //气泡颜色
                 color: {
-                  type: 'radial',
+                  type: "radial",
                   x: 0.5,
                   y: 0.5,
                   r: 0.5,
-                  colorStops: [{
-                    offset: 0,
-                    color: 'rgba(5,80,151,0.2)'
-                  }, {
-                    offset: 0.8,
-                    color: 'rgba(5,80,151,0.8)'
-                  }, {
-                    offset: 1,
-                    color: 'rgba(0,108,255,0.7)'
-                  }],
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "rgba(5,80,151,0.2)"
+                    },
+                    {
+                      offset: 0.8,
+                      color: "rgba(5,80,151,0.8)"
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(0,108,255,0.7)"
+                    }
+                  ],
                   global: false
-                },
+                }
               }
             },
             label: {
               normal: {
                 show: true,
-                color: '#fff',
-                fontWeight: 'bold',
-                position: 'inside',
-                formatter: function (para) {
-                  return '{cnNum|' + para.data.value[2] + '}'
+                color: "#fff",
+                fontWeight: "bold",
+                position: "inside",
+                formatter: function(para) {
+                  return "{cnNum|" + para.data.value[2] + "}";
                 },
                 rich: {
                   cnNum: {
                     fontSize: 13,
-                    color: '#D4EEFF',
+                    color: "#D4EEFF"
                   }
                 }
-              },
+              }
             },
-            symbol: 'circle',
-            symbolSize: function (val) {
+            symbol: "circle",
+            symbolSize: function(val) {
               if (val[2] == 0) {
                 return 0;
               }
-              ;
-              return ((maxSize4Pin - minSize4Pin) / (max - min)) * val[2] + (maxSize4Pin - ((maxSize4Pin - minSize4Pin) / (max - min)) * max) * 1.2;
+              return (
+                ((maxSize4Pin - minSize4Pin) / (max - min)) * val[2] +
+                (maxSize4Pin -
+                  ((maxSize4Pin - minSize4Pin) / (max - min)) * max) *
+                  1.2
+              );
             },
             data: convertData(data),
-            zlevel: 1,
-          }]
+            zlevel: 1
+          }
+        ]
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
       optionsSetup: {}
-    }
+    };
   },
   computed: {
     styleObj() {
@@ -430,37 +467,40 @@ export default {
     },
     setOptionTextValue() {
       const optionsSetup = this.optionsSetup;
-      const label = this.options.series[0]['label'];
+      const label = this.options.series[0]["label"];
       const normal = {
-        position: 'right',
+        position: "right",
         show: true,
         color: optionsSetup.fontTextColor,
         fontSize: optionsSetup.fontTextSize,
-        fontWeight: optionsSetup.fontTextWeight,
+        fontWeight: optionsSetup.fontTextWeight
       };
-      label['normal'] = normal;
+      label["normal"] = normal;
     },
     setOptionMapBlocak() {
       const optionsSetup = this.optionsSetup;
-      const itemStyle = this.options.series[0]['itemStyle'];
+      const itemStyle = this.options.series[0]["itemStyle"];
       const normal = {
-          //地图块颜色
-          areaColor: {
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [{
+        //地图块颜色
+        areaColor: {
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            {
               offset: 0,
               color: optionsSetup.font0PreColor // 0% 处的颜色
-            }, {
+            },
+            {
               offset: 1,
               color: optionsSetup.font100PreColor // 100% 处的颜色
-            }],
-          },
-          borderColor: '#215495',
-          borderWidth: 1,
-        };
+            }
+          ]
+        },
+        borderColor: "#215495",
+        borderWidth: 1
+      };
       //鼠标放置颜色加深
       const emphasis = {
         areaColor: {
@@ -468,55 +508,55 @@ export default {
           y: 0,
           x2: 0,
           y2: 1,
-          colorStops: [{
-            offset: 0,
-            color: '#073684' // 0% 处的颜色
-          }, {
-            offset: 1,
-            color: optionsSetup.fontHighlightColor // 100% 处的颜色
-          }],
-        },
+          colorStops: [
+            {
+              offset: 0,
+              color: "#073684" // 0% 处的颜色
+            },
+            {
+              offset: 1,
+              color: optionsSetup.fontHighlightColor // 100% 处的颜色
+            }
+          ]
+        }
       };
-      itemStyle['normal'] = normal;
-      itemStyle['emphasis'] = emphasis;
+      itemStyle["normal"] = normal;
+      itemStyle["emphasis"] = emphasis;
     },
     setOptionAirSize() {
-      maxSize4Pin = this.optionsSetup.fontmaxSize4Pin
-      minSize4Pin = this.optionsSetup.fontminSize4Pin
+      maxSize4Pin = this.optionsSetup.fontmaxSize4Pin;
+      minSize4Pin = this.optionsSetup.fontminSize4Pin;
     },
     //数据解析
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(
-        optionsData.dynamicData,
-        optionsData.refreshTime
-        );
+        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      this.options.series[0]['data'] = val;
+      this.options.series[0]["data"] = val;
       const optionsSetup = this.optionsSetup;
-      const label = this.options.series[1]['label'];
+      const label = this.options.series[1]["label"];
       const normal = {
         show: true,
-        color: '#fff',
-        fontWeight: 'bold',
-        position: 'inside',
-        formatter: function (para) {
-          return '{cnNum|' + para.data.value[2] + '}'
+        color: "#fff",
+        fontWeight: "bold",
+        position: "inside",
+        formatter: function(para) {
+          return "{cnNum|" + para.data.value[2] + "}";
         },
         rich: {
           cnNum: {
             fontSize: optionsSetup.fontDataSize,
             color: optionsSetup.fontDataColor,
-            fontWeight: optionsSetup.fontDataWeight,
+            fontWeight: optionsSetup.fontDataWeight
           }
         }
       };
       const data = convertData(val);
-      this.options.series[1]['data']=data
-      label['normal'] = normal
+      this.options.series[1]["data"] = data;
+      label["normal"] = normal;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -536,28 +576,28 @@ export default {
       });
     },
     renderingFn(val) {
-      this.options.series[0]['data'] = val;
+      this.options.series[0]["data"] = val;
       const optionsSetup = this.optionsSetup;
-      const label = this.options.series[1]['label'];
+      const label = this.options.series[1]["label"];
       const normal = {
         show: true,
-        color: '#fff',
-        fontWeight: 'bold',
-        position: 'inside',
-        formatter: function (para) {
-          return '{cnNum|' + para.data.value[2] + '}'
+        color: "#fff",
+        fontWeight: "bold",
+        position: "inside",
+        formatter: function(para) {
+          return "{cnNum|" + para.data.value[2] + "}";
         },
         rich: {
           cnNum: {
             fontSize: optionsSetup.fontDataSize,
             color: optionsSetup.fontDataColor,
-            fontWeight: optionsSetup.fontDataWeight,
+            fontWeight: optionsSetup.fontDataWeight
           }
         }
       };
       const data = convertData(val);
-      this.options.series[1]['data']=data
-      label['normal'] = normal
+      this.options.series[1]["data"] = data;
+      label["normal"] = normal;
     }
   }
 };

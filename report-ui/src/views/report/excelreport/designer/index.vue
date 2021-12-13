@@ -258,7 +258,7 @@ export default {
       this.createSheet();
       if (data != null) {
         if (data.setCodes != null && data.setCodes !== "") {
-          var dataSetList = data.setCodes.split("|");
+          let dataSetList = data.setCodes.split("|");
           dataSetList.forEach(code => {
             this.dataSetData.forEach(setData => {
               if (code === setData.setCode) {
@@ -347,7 +347,7 @@ export default {
     },
     onStart(setCode, evt) {
       this.setCode = setCode;
-      var fieldLabel = evt.item.innerText; // 列名称
+      let fieldLabel = evt.item.innerText; // 列名称
       this.draggableFieldLabel = "#{" + this.setCode + "." + fieldLabel + "}";
       console.log("evt", evt);
       console.log("draggableFieldLabel", this.draggableFieldLabel);
@@ -371,15 +371,15 @@ export default {
       }
 
       this.reportExcelDto.jsonStr = JSON.stringify(luckysheet.getAllSheets());
-      var setCodeList = [];
-      var setParams = {};
+      let setCodeList = [];
+      let setParams = {};
       this.dataSet.forEach(code => {
         setCodeList.push(code.setCode);
         if (
           code.dataSetParamDtoList != null &&
           code.dataSetParamDtoList.length > 0
         ) {
-          var dataSetParam = {};
+          let dataSetParam = {};
           code.dataSetParamDtoList.forEach(value => {
             dataSetParam[value.paramName] = value.sampleItem;
           });
@@ -409,7 +409,7 @@ export default {
       }
     },
     async preview() {
-      var routeUrl = this.$router.resolve({
+      let routeUrl = this.$router.resolve({
         path: "/excelreport/viewer",
         query: { reportCode: this.reportCode }
       });
@@ -436,7 +436,7 @@ export default {
     async detail(id) {
       const { code, data } = await detail(id);
       if (code != 200) return;
-      var flag = true;
+      let flag = true;
       this.dataSet.forEach(value => {
         if (value.setCode === data.setCode) {
           flag = false;

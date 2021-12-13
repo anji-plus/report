@@ -120,7 +120,7 @@ export default {
       params: {
         reportCode: "",
         reportName: "",
-        reportType: 'report_screen',
+        reportType: "report_screen",
         pageNumber: 1,
         pageSize: 8,
         order: "DESC",
@@ -178,16 +178,16 @@ export default {
       this.visibleForShareDialog = true;
     },
     openDesign(val) {
-      var routeUrl = this.$router.resolve({
+      let routeUrl = this.$router.resolve({
         path: "/bigscreen/designer",
         query: {
-          reportCode: val.reportCode,
+          reportCode: val.reportCode
         }
       });
       window.open(routeUrl.href, "_blank");
     },
     viewDesign(val) {
-      var routeUrl = this.$router.resolve({
+      let routeUrl = this.$router.resolve({
         path: "/bigscreen/viewer",
         query: { reportCode: val.reportCode }
       });

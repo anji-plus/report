@@ -42,8 +42,8 @@ export default {
   },
   methods: {
     getImages(el) {
-      var file = el.target.files[0];
-      var type = file.type.split("/")[0];
+      let file = el.target.files[0];
+      let type = file.type.split("/")[0];
       if (type === "image") {
         this.upload(file);
       } else {
@@ -51,9 +51,9 @@ export default {
       }
     },
     upload(imgUrl) {
-      var that = this;
+      let that = this;
       console.log(that.headers);
-      var formdata = new FormData();
+      let formdata = new FormData();
       formdata.append("file", imgUrl);
       axios
         .post(this.requestUrl, formdata, {

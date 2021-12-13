@@ -5,7 +5,7 @@
       <div class="title">
         <div
           v-for="(item, index) in header"
-          :style="[headerTableStlye,tableFiledWidth(index),tableRowHeight()]"
+          :style="[headerTableStlye, tableFiledWidth(index), tableRowHeight()]"
           :key="index"
         >
           {{ item.name }}
@@ -14,11 +14,20 @@
       <!--数据-->
       <div class="bd">
         <ul class="infoList">
-          <li v-for="(item, index) in list" :key="index" :style="tableRowHeight()" >
+          <li
+            v-for="(item, index) in list"
+            :key="index"
+            :style="tableRowHeight()"
+          >
             <div
               v-for="(itemChild, idx) in header"
               :key="idx"
-              :style="[bodyTableStyle, bodyTable(index),tableFiledWidth(idx),tableRowHeight()]"
+              :style="[
+                bodyTableStyle,
+                bodyTable(index),
+                tableFiledWidth(idx),
+                tableRowHeight()
+              ]"
             >
               {{ item[itemChild.key] }}
             </div>
@@ -49,7 +58,7 @@ export default {
         //effect: "top",
         autoPlay: true,
         vis: 5,
-        rowHeight:'50px'
+        rowHeight: "50px"
       },
       header: [],
       list: [],
@@ -121,7 +130,7 @@ export default {
       this.handlerData();
       this.visConfig();
     },
-    visConfig(){
+    visConfig() {
       this.options.vis = this.optionsSetUp.vis;
     },
     handlerRollFn() {
@@ -175,31 +184,31 @@ export default {
     },
     // 计算 奇偶背景色
     bodyTable(index) {
-      var styleJson = {};
+      let styleJson = {};
       if (index % 2) {
-        styleJson["background-color"] = this.optionsSetUp.eventColor
+        styleJson["background-color"] = this.optionsSetUp.eventColor;
       } else {
-        styleJson["background-color"] = this.optionsSetUp.oldColor
+        styleJson["background-color"] = this.optionsSetUp.oldColor;
       }
       return styleJson;
     },
-    tableRowHeight(){
-      var styleJson = {};
-      if(this.optionsSetUp.rowHeight){
-        styleJson['height'] = this.optionsSetUp.rowHeight+'px';
-        styleJson['line-height'] = this.optionsSetUp.rowHeight+'px';
-      }else{
-        styleJson['height'] =this.options.rowHeight
-        styleJson['line-height'] = this.optionsSetUp.rowHeight+'px';
+    tableRowHeight() {
+      let styleJson = {};
+      if (this.optionsSetUp.rowHeight) {
+        styleJson["height"] = this.optionsSetUp.rowHeight + "px";
+        styleJson["line-height"] = this.optionsSetUp.rowHeight + "px";
+      } else {
+        styleJson["height"] = this.options.rowHeight;
+        styleJson["line-height"] = this.optionsSetUp.rowHeight + "px";
       }
       return styleJson;
     },
-    tableFiledWidth(index){
-      var styleJson = {};
-      if(this.optionsSetUp.dynamicAddTable[index].width ){
-        styleJson["width"] = this.optionsSetUp.dynamicAddTable[index].width
+    tableFiledWidth(index) {
+      let styleJson = {};
+      if (this.optionsSetUp.dynamicAddTable[index].width) {
+        styleJson["width"] = this.optionsSetUp.dynamicAddTable[index].width;
       }
-      return styleJson
+      return styleJson;
     }
   }
 };

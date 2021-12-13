@@ -1,13 +1,13 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 
 <script>
-var per = 60;
+let per = 60;
 export default {
-  name: "widgetPiePercentageChart",//百分比图参考：https://www.makeapie.com/editor.html?c=xFkzKG-bpl
+  name: "widgetPiePercentageChart", //百分比图参考：https://www.makeapie.com/editor.html?c=xFkzKG-bpl
   components: {},
   props: {
     value: Object,
@@ -18,199 +18,204 @@ export default {
       angle: 0,
       options: {
         title: {
-          text: '{nums|' + per + '}{percent|%}',
-          x: 'center',
-          y: 'center',
+          text: "{nums|" + per + "}{percent|%}",
+          x: "center",
+          y: "center",
           textStyle: {
             rich: {
               nums: {
                 fontSize: 60,
-                color: '#29EEF3',
+                color: "#29EEF3"
               },
               percent: {
                 fontSize: 30,
-                color: '#29EEF3',
-              },
-            },
-          },
+                color: "#29EEF3"
+              }
+            }
+          }
         },
         legend: {
-          type: 'plain',
-          orient: 'vertical',
+          type: "plain",
+          orient: "vertical",
           right: 0,
-          top: '10%',
-          align: 'auto',
-          data: [{
-            name: '1',
-            icon: "circle"
-          }, {
-            name: '2',
-            icon: "circle"
-          }, {
-            name: '3',
-            icon: "circle"
-          }, {
-            name: '4',
-            icon: "circle"
-          }],
+          top: "10%",
+          align: "auto",
+          data: [
+            {
+              name: "1",
+              icon: "circle"
+            },
+            {
+              name: "2",
+              icon: "circle"
+            },
+            {
+              name: "3",
+              icon: "circle"
+            },
+            {
+              name: "4",
+              icon: "circle"
+            }
+          ],
           textStyle: {
-            color: 'white',
+            color: "white",
             fontSize: 16,
-            padding: [10, 1, 10, 0],
+            padding: [10, 1, 10, 0]
           },
-          selectedMode: false,
+          selectedMode: false
         },
         series: [
           {
             //name: '环1',
-            type: 'custom',
-            coordinateSystem: 'none',
+            type: "custom",
+            coordinateSystem: "none",
             renderItem: (params, api) => {
               return {
-                type: 'arc',
+                type: "arc",
                 shape: {
                   cx: api.getWidth() / 2,
                   cy: api.getHeight() / 2,
                   r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.6,
                   startAngle: ((0 + this.angle) * Math.PI) / 180,
-                  endAngle: ((90 + this.angle) * Math.PI) / 180,
+                  endAngle: ((90 + this.angle) * Math.PI) / 180
                 },
                 style: {
-                  stroke: '#0CD3DB',
-                  fill: 'transparent',
-                  lineWidth: 1.5,
+                  stroke: "#0CD3DB",
+                  fill: "transparent",
+                  lineWidth: 1.5
                 },
-                silent: true,
+                silent: true
               };
             },
-            data: [0],
+            data: [0]
           },
           {
             //name: '环2',
-            type: 'custom',
-            coordinateSystem: 'none',
+            type: "custom",
+            coordinateSystem: "none",
             renderItem: (params, api) => {
               return {
-                type: 'arc',
+                type: "arc",
                 shape: {
                   cx: api.getWidth() / 2,
                   cy: api.getHeight() / 2,
                   r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.6,
                   startAngle: ((180 + this.angle) * Math.PI) / 180,
-                  endAngle: ((270 + this.angle) * Math.PI) / 180,
+                  endAngle: ((270 + this.angle) * Math.PI) / 180
                 },
                 style: {
-                  stroke: '#0CD3DB',
-                  fill: 'transparent',
-                  lineWidth: 1.5,
+                  stroke: "#0CD3DB",
+                  fill: "transparent",
+                  lineWidth: 1.5
                 },
-                silent: true,
+                silent: true
               };
             },
-            data: [0],
+            data: [0]
           },
           {
             //name: '环3',
-            type: 'custom',
-            coordinateSystem: 'none',
+            type: "custom",
+            coordinateSystem: "none",
             renderItem: (params, api) => {
               return {
-                type: 'arc',
+                type: "arc",
                 shape: {
                   cx: api.getWidth() / 2,
                   cy: api.getHeight() / 2,
                   r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.65,
                   startAngle: ((270 + -this.angle) * Math.PI) / 180,
-                  endAngle: ((40 + -this.angle) * Math.PI) / 180,
+                  endAngle: ((40 + -this.angle) * Math.PI) / 180
                 },
                 style: {
-                  stroke: '#0CD3DB',
-                  fill: 'transparent',
-                  lineWidth: 1.5,
+                  stroke: "#0CD3DB",
+                  fill: "transparent",
+                  lineWidth: 1.5
                 },
-                silent: true,
+                silent: true
               };
             },
-            data: [0],
+            data: [0]
           },
           {
             //name: '环4',
-            type: 'custom',
-            coordinateSystem: 'none',
+            type: "custom",
+            coordinateSystem: "none",
             renderItem: (params, api) => {
               return {
-                type: 'arc',
+                type: "arc",
                 shape: {
                   cx: api.getWidth() / 2,
                   cy: api.getHeight() / 2,
                   r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.65,
                   startAngle: ((90 + -this.angle) * Math.PI) / 180,
-                  endAngle: ((220 + -this.angle) * Math.PI) / 180,
+                  endAngle: ((220 + -this.angle) * Math.PI) / 180
                 },
                 style: {
-                  stroke: '#0CD3DB',
-                  fill: 'transparent',
-                  lineWidth: 1.5,
+                  stroke: "#0CD3DB",
+                  fill: "transparent",
+                  lineWidth: 1.5
                 },
-                silent: true,
+                silent: true
               };
             },
-            data: [0],
+            data: [0]
           },
           {
             //name: '绿点1',
-            type: 'custom',
-            coordinateSystem: 'none',
+            type: "custom",
+            coordinateSystem: "none",
             renderItem: (params, api) => {
               let x0 = api.getWidth() / 2;
               let y0 = api.getHeight() / 2;
               let r = (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.65;
               let point = this.getCirlPoint(x0, y0, r, 90 + -this.angle);
               return {
-                type: 'circle',
+                type: "circle",
                 shape: {
                   cx: point.x,
                   cy: point.y,
-                  r: 4,
+                  r: 4
                 },
                 style: {
-                  stroke: '#0CD3DB', //粉
-                  fill: '#0CD3DB',
+                  stroke: "#0CD3DB", //粉
+                  fill: "#0CD3DB"
                 },
-                silent: true,
+                silent: true
               };
             },
-            data: [0],
+            data: [0]
           },
           {
             //name: '绿点2',
-            type: 'custom',
-            coordinateSystem: 'none',
+            type: "custom",
+            coordinateSystem: "none",
             renderItem: (params, api) => {
               let x0 = api.getWidth() / 2;
               let y0 = api.getHeight() / 2;
               let r = (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.65;
               let point = this.getCirlPoint(x0, y0, r, 270 + -this.angle);
               return {
-                type: 'circle',
+                type: "circle",
                 shape: {
                   cx: point.x,
                   cy: point.y,
-                  r: 4,
+                  r: 4
                 },
                 style: {
-                  stroke: '#0CD3DB', //绿
-                  fill: '#0CD3DB',
+                  stroke: "#0CD3DB", //绿
+                  fill: "#0CD3DB"
                 },
-                silent: true,
+                silent: true
               };
             },
-            data: [0],
+            data: [0]
           },
           {
             //name: '圆环',
-            type: 'pie',
-            radius: ['58%', '45%'],
+            type: "pie",
+            radius: ["58%", "45%"],
             silent: true,
             clockwise: true,
             startAngle: 90,
@@ -218,13 +223,13 @@ export default {
             zlevel: 0,
             label: {
               normal: {
-                position: 'center',
-              },
+                position: "center"
+              }
             },
             data: [
               {
                 value: per,
-                name: '',
+                name: "",
                 itemStyle: {
                   normal: {
                     color: {
@@ -232,73 +237,75 @@ export default {
                       colorStops: [
                         {
                           offset: 0,
-                          color: '#4FADFD', // 0% 处的颜色
+                          color: "#4FADFD" // 0% 处的颜色
                         },
                         {
                           offset: 1,
-                          color: '#28E8FA', // 100% 处的颜色
-                        },
-                      ],
-                    },
-                  },
-                },
+                          color: "#28E8FA" // 100% 处的颜色
+                        }
+                      ]
+                    }
+                  }
+                }
               },
               {
                 value: 100 - per,
-                name: '',
+                name: "",
                 label: {
                   normal: {
-                    show: false,
-                  },
+                    show: false
+                  }
                 },
                 //剩余圆环颜色
                 itemStyle: {
                   normal: {
-                    color: '#173164',
-                  },
-                },
-              },
-            ],
+                    color: "#173164"
+                  }
+                }
+              }
+            ]
           },
           {
-            name: 'percent',
-            type: 'gauge',
-            radius: '58%',
-            center: ['50%', '50%'],
+            name: "percent",
+            type: "gauge",
+            radius: "58%",
+            center: ["50%", "50%"],
             startAngle: 0,
             endAngle: 359.9,
             splitNumber: 8,
             hoverAnimation: true,
             axisTick: {
-              show: false,
+              show: false
             },
             splitLine: {
               length: 15,
               lineStyle: {
                 width: 5,
-                color: '#061740',
-              },
+                color: "#061740"
+              }
             },
             axisLabel: {
-              show: false,
+              show: false
             },
             pointer: {
-              show: false,
+              show: false
             },
             axisLine: {
               lineStyle: {
-                opacity: 0,
-              },
+                opacity: 0
+              }
             },
             detail: {
-              show: false,
+              show: false
             },
-            data: [{
-              value: 0,
-              name: ""
-            }],
-          },
-        ],
+            data: [
+              {
+                value: 0,
+                name: ""
+              }
+            ]
+          }
+        ]
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
@@ -350,7 +357,7 @@ export default {
       let y1 = y0 + r * Math.sin((x * Math.PI) / 180);
       return {
         x: x1,
-        y: y1,
+        y: y1
       };
     },
     editorOptions() {
@@ -377,7 +384,7 @@ export default {
           fontWeight: optionsSetup.textPerFontWeight
         }
       };
-      title.textStyle['rich'] = rich;
+      title.textStyle["rich"] = rich;
       this.options.title = title;
     },
     setOptions() {
@@ -396,59 +403,56 @@ export default {
     //圆环0-100%颜色
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
-      const itemStyle = this.options.series[6]['data'][0]['itemStyle']
+      const itemStyle = this.options.series[6]["data"][0]["itemStyle"];
       const normal = {
         color: {
           // 完成的圆环的颜色
           colorStops: [
             {
               offset: 0,
-              color: optionsSetup.color0Start, // 0% 处的颜色
+              color: optionsSetup.color0Start // 0% 处的颜色
             },
             {
               offset: 1,
-              color: optionsSetup.color100End, // 100% 处的颜色
-            },
-          ],
-        },
+              color: optionsSetup.color100End // 100% 处的颜色
+            }
+          ]
+        }
       };
-      itemStyle['normal'] = normal
+      itemStyle["normal"] = normal;
     },
     setOptionSurplusColor() {
-      const itemStyle = this.options.series[6]['data'][1]['itemStyle']
+      const itemStyle = this.options.series[6]["data"][1]["itemStyle"];
       const normal = {
-        color: this.optionsSetup.colorsurplus,
+        color: this.optionsSetup.colorsurplus
       };
-      itemStyle['normal'] = normal
+      itemStyle["normal"] = normal;
     },
     setOptionLine() {
       const optionsSetup = this.optionsSetup;
-      const line = this.options.series[7]['splitLine'];
+      const line = this.options.series[7]["splitLine"];
       const num = this.options.series[7];
       num.splitNumber = optionsSetup.lineNumber;
       line.length = optionsSetup.lineLength;
       const lineStyle = {
         width: optionsSetup.lineWidth,
-        color: optionsSetup.lineColor,
+        color: optionsSetup.lineColor
       };
-      line['lineStyle'] = lineStyle
+      line["lineStyle"] = lineStyle;
     },
     // 数据解析
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(
-        optionsData.dynamicData,
-        optionsData.refreshTime
-        );
+        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
       const title = this.options.title;
-      const num = val[0]['num'];
-      title.text = '{nums|' + num + '}{percent|%}';
-      this.options.series[6]['data'][0]['value'] = num;
-      this.options.series[6]['data'][1]['value'] = 100 - num;
+      const num = val[0]["num"];
+      title.text = "{nums|" + num + "}{percent|%}";
+      this.options.series[6]["data"][0]["value"] = num;
+      this.options.series[6]["data"][1]["value"] = 100 - num;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -464,9 +468,9 @@ export default {
     getEchartData(val) {
       const data = this.queryEchartsData(val);
       data.then(res => {
-        this.options.title.text = '{nums|' + res[0].value + '}{percent|%}';
-        this.options.series[6]['data'][0]['value'] = res[0].value;
-        this.options.series[6]['data'][1]['value'] = 100 - res[0].value;
+        this.options.title.text = "{nums|" + res[0].value + "}{percent|%}";
+        this.options.series[6]["data"][0]["value"] = res[0].value;
+        this.options.series[6]["data"][1]["value"] = 100 - res[0].value;
       });
     }
   }

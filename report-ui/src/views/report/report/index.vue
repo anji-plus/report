@@ -23,7 +23,7 @@
         type="text"
         @click="shareReport(props.msg)"
         v-permission="'bigScreenManage:share'"
-      >分享</el-button
+        >分享</el-button
       >
     </template>
 
@@ -46,7 +46,7 @@ import {
   reportDetail
 } from "@/api/reportmanage";
 import Share from "@/views/report/report/components/share";
-import {validateEngOrNum} from "@/utils/validate";
+import { validateEngOrNum } from "@/utils/validate";
 export default {
   name: "Report",
   components: {
@@ -67,12 +67,12 @@ export default {
         // 查询表单条件
         queryFormFields: [
           {
-            inputType: 'anji-select', //form表单类型 input|input-number|anji-select(传递url或者dictCode)|anji-tree(左侧树)|date|datetime|datetimerange
+            inputType: "anji-select", //form表单类型 input|input-number|anji-select(传递url或者dictCode)|anji-tree(左侧树)|date|datetime|datetimerange
             anjiSelectOption: {
               dictCode: "REPORT_TYPE"
             },
-            label: '报表类型',
-            field: 'reportType'
+            label: "报表类型",
+            field: "reportType"
           },
           {
             inputType: "input",
@@ -83,15 +83,15 @@ export default {
             inputType: "input",
             label: "报表编码",
             field: "reportCode"
-          },
+          }
         ],
         // 操作按钮
         buttons: {
           query: {
             api: reportList,
             permission: "reportManage:query",
-            sort: 'update_time',
-            order: 'DESC'
+            sort: "update_time",
+            order: "DESC"
           },
           queryByPrimarykey: {
             api: reportDetail,
@@ -129,22 +129,22 @@ export default {
             editField: "reportName",
             inputType: "input",
             rules: [
-              { required: true, message: '请输入报表名称', trigger: 'blur' },
+              { required: true, message: "请输入报表名称", trigger: "blur" },
               { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" }
             ],
             disabled: false
           },
           {
             label: "报表编码", //报表编码
-            placeholder: '唯一标识',
+            placeholder: "唯一标识",
             field: "reportCode",
             editField: "reportCode",
             inputType: "input",
 
             rules: [
-              { required: true, message: '请输入报表编码', trigger: 'blur' },
+              { required: true, message: "请输入报表编码", trigger: "blur" },
               { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" },
-              { validator: validateEngOrNum, trigger: 'blur' },
+              { validator: validateEngOrNum, trigger: "blur" }
             ],
             disabled: "disableOnEdit"
           },
@@ -175,10 +175,10 @@ export default {
               dictCode: "REPORT_TYPE"
             },
             rules: [
-              { required: true, message: '请输入报表类型', trigger: 'blur' },
+              { required: true, message: "请输入报表类型", trigger: "blur" },
               { min: 1, max: 20, message: "不超过20个字符", trigger: "blur" }
             ],
-            disabled: "disableOnEdit",
+            disabled: "disableOnEdit"
           },
           {
             label: "描述", //报表描述
@@ -252,13 +252,12 @@ export default {
     // 预览
     preview(val) {
       let routePath = "";
-      if (val.reportType === 'report_excel') {
+      if (val.reportType === "report_excel") {
         routePath = "/excelreport/viewer";
-
       } else {
         routePath = "/bigscreen/viewer";
       }
-      var routeUrl = this.$router.resolve({
+      let routeUrl = this.$router.resolve({
         path: routePath,
         query: { reportCode: val.reportCode }
       });
@@ -267,24 +266,22 @@ export default {
     // 设计
     design(val) {
       let routePath = "";
-      if (val.reportType === 'report_excel') {
+      if (val.reportType === "report_excel") {
         routePath = "/excelreport/designer";
-
       } else {
         routePath = "/bigscreen/designer";
       }
-      var routeUrl = this.$router.resolve({
+      let routeUrl = this.$router.resolve({
         path: routePath,
         query: {
-          reportCode: val.reportCode,
+          reportCode: val.reportCode
         }
       });
       window.open(routeUrl.href, "_blank");
-
     },
     //分享
-    shareReport(val){
-      if (val.reportType == 'report_excel') {
+    shareReport(val) {
+      if (val.reportType == "report_excel") {
         //excel暂不支持
         this.$message.warning("暂不支持excel报表分享");
         return;

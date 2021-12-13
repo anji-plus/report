@@ -73,7 +73,7 @@ export default {
         "q+": Math.floor((date.getMonth() + 3) / 3), // 季度
         S: date.getMilliseconds() // 毫秒
       };
-      for (var k in o) {
+      for (let k in o) {
         if (new RegExp("(" + k + ")").test(fmt)) {
           fmt = fmt.replace(
             RegExp.$1,

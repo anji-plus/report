@@ -374,8 +374,8 @@ export default {
     };
   },
   computed: {
-    step () {
-      return Number(100 / (this.bigscreenScaleInWorkbench * 100))
+    step() {
+      return Number(100 / (this.bigscreenScaleInWorkbench * 100));
     },
     headers() {
       return {
@@ -384,14 +384,14 @@ export default {
     },
     // 左侧折叠切换时，动态计算中间区的宽度
     middleWidth() {
-      var widthLeftAndRight = 0;
+      let widthLeftAndRight = 0;
       if (this.toolIsShow) {
         widthLeftAndRight += this.widthLeftForTools; // 左侧工具栏宽度
       }
       widthLeftAndRight += this.widthLeftForToolsHideButton; // 左侧工具栏折叠按钮宽度
       widthLeftAndRight += this.widthLeftForOptions; // 右侧配置栏宽度
 
-      var middleWidth = this.bodyWidth - widthLeftAndRight;
+      let middleWidth = this.bodyWidth - widthLeftAndRight;
       return middleWidth;
     },
     middleHeight() {
@@ -399,9 +399,9 @@ export default {
     },
     // 设计台按大屏的缩放比例
     bigscreenScaleInWorkbench() {
-      var widthScale =
+      let widthScale =
         (this.middleWidth - this.widthPaddingTools) / this.bigscreenWidth;
-      var heightScale =
+      let heightScale =
         (this.middleHeight - this.widthPaddingTools) / this.bigscreenHeight;
       return Math.min(widthScale, heightScale);
     },
@@ -484,7 +484,7 @@ export default {
       const widgets = data.dashboard ? data.dashboard.widgets : [];
       const widgetsData = [];
       for (let i = 0; i < widgets.length; i++) {
-        var obj = {};
+        let obj = {};
         obj.type = widgets[i].type;
         obj.value = {
           setup: widgets[i].value.setup,
@@ -561,7 +561,7 @@ export default {
     },
     // 预览
     viewScreen() {
-      var routeUrl = this.$router.resolve({
+      let routeUrl = this.$router.resolve({
         path: "/bigscreen/viewer",
         query: { reportCode: this.$route.query.reportCode }
       });
@@ -579,7 +579,7 @@ export default {
         const that = this;
         const type = res.type;
         if (type == "application/json") {
-          var reader = new FileReader();
+          let reader = new FileReader();
           reader.readAsText(res, "utf-8");
           reader.onload = function() {
             const data = JSON.parse(reader.result);
@@ -633,23 +633,23 @@ export default {
 
     // 拖动一个组件放到工作区中去，在拖动结束时，放到工作区对应的坐标点上去
     widgetOnDragged(evt, widgetCode) {
-      var widgetType = widgetCode;
+      let widgetType = widgetCode;
 
       // 获取结束坐标和列名
-      var eventX = evt.originalEvent.clientX; // 结束在屏幕的x坐标
-      var eventY = evt.originalEvent.clientY; // 结束在屏幕的y坐标
+      let eventX = evt.originalEvent.clientX; // 结束在屏幕的x坐标
+      let eventY = evt.originalEvent.clientY; // 结束在屏幕的y坐标
 
-      var workbenchPosition = this.getDomTopLeftById("workbench");
-      var widgetTopInWorkbench = eventY - workbenchPosition.top;
-      var widgetLeftInWorkbench = eventX - workbenchPosition.left;
+      let workbenchPosition = this.getDomTopLeftById("workbench");
+      let widgetTopInWorkbench = eventY - workbenchPosition.top;
+      let widgetLeftInWorkbench = eventX - workbenchPosition.left;
 
       // 计算在缩放模式下的x y
-      var x = widgetLeftInWorkbench / this.bigscreenScaleInWorkbench;
-      var y = widgetTopInWorkbench / this.bigscreenScaleInWorkbench;
+      let x = widgetLeftInWorkbench / this.bigscreenScaleInWorkbench;
+      let y = widgetTopInWorkbench / this.bigscreenScaleInWorkbench;
 
       // 复制一个组件
-      var tool = getToolByCode(widgetType);
-      var widgetJson = {
+      let tool = getToolByCode(widgetType);
+      let widgetJson = {
         type: widgetType,
         value: {
           setup: {},

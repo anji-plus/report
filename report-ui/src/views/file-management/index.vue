@@ -239,7 +239,7 @@ export default {
       });
     },
     copyToClip(content, message) {
-      var aux = document.createElement("input");
+      let aux = document.createElement("input");
       aux.setAttribute("value", content);
       document.body.appendChild(aux);
       aux.select();

@@ -177,8 +177,8 @@ export default {
         this.dictionaryOptions.map(item => {
           if (item.id == newSourceType.sourceType) {
             newDataLink = JSON.parse(item.extend);
-            var sourceConfigJson = JSON.parse(newSourceType.sourceConfig);
-            for (var i = 0; i < newDataLink.length; i++) {
+            let sourceConfigJson = JSON.parse(newSourceType.sourceConfig);
+            for (let i = 0; i < newDataLink.length; i++) {
               newDataLink[i].value = sourceConfigJson[newDataLink[i].label];
             }
           }

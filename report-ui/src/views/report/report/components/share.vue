@@ -193,7 +193,7 @@ export default {
       });
     },
     copyToClip(content, message) {
-      var aux = document.createElement("input");
+      let aux = document.createElement("input");
       aux.setAttribute("value", content);
       document.body.appendChild(aux);
       aux.select();
@@ -202,7 +202,7 @@ export default {
     },
 
     async saveReportShare() {
-      var params = {};
+      let params = {};
       //const { code } = await saveAuthorityTree(params)
       //if (code != '200') return
       this.closeDialog();

@@ -346,8 +346,8 @@ export default {
       }
       this.$emit("onChanged", this.formData);
       // key为当前用户操作的表单组件
-      for (var i = 0; i < this.options.length; i++) {
-        var item = this.options[i];
+      for (let i = 0; i < this.options.length; i++) {
+        let item = this.options[i];
         if (item.relactiveDom == key) {
           this.inputShow[item.name] = val == item.relactiveDomValue;
           this.inputShow = Object.assign({}, this.inputShow);
