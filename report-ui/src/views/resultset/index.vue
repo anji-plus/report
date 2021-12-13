@@ -1,10 +1,15 @@
+<!--
+ * @Descripttion: 用户权限--数据集
+ * @version: 
+ * @Author: qianlishi
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 12:28:54
+-->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
-      <el-dropdown
-        placement="bottom"
-        @command="operateDataset"
-      >
+      <el-dropdown placement="bottom" @command="operateDataset">
         <el-button type="primary" icon="el-icon-plus">
           新增
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -21,7 +26,7 @@
         type="text"
         @click="operateDataset('edit', props)"
         v-permission="'resultsetManage:update'"
-      >编辑
+        >编辑
       </el-button>
     </template>
 
@@ -30,12 +35,9 @@
         type="text"
         @click="dataView(props)"
         v-permission="'resultsetManage:query'"
-      >数据预览
+        >数据预览
       </el-button>
     </template>
-    <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
-    <!--这里可以将自定义的弹出框代码，放入到page中
-    -->
     <template v-slot:pageSection>
       <EditDataSet
         ref="EditDataSet"
@@ -60,8 +62,8 @@ import {
   reportDataSetUpdate,
   reportDataSetDetail
 } from "@/api/reportDataSet";
-import EditDataSet from "@/views/report/resultset/components/EditDataSet";
-import DataView from "@/views/report/resultset/components/DataView";
+import EditDataSet from "./components/EditDataSet";
+import DataView from "./components/DataView";
 
 export default {
   name: "ReportDataSet",
@@ -109,12 +111,12 @@ export default {
             },
             label: "数据集类型",
             field: "setType"
-          },
+          }
         ],
         // 操作按钮
         buttons: {
           customButton: {
-            operationWidth: 150
+            operationWidth: 180
           },
           query: {
             api: reportDataSetList,
@@ -157,7 +159,7 @@ export default {
             editField: "setCode",
             inputType: "input",
             rules: [
-              {min: 1, max: 50, message: "不超过50个字符", trigger: "blur"}
+              { min: 1, max: 50, message: "不超过50个字符", trigger: "blur" }
             ],
             disabled: false
           },
@@ -168,7 +170,7 @@ export default {
             editField: "setName",
             inputType: "input",
             rules: [
-              {min: 1, max: 100, message: "不超过100个字符", trigger: "blur"}
+              { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" }
             ],
             disabled: false
           },
@@ -179,7 +181,7 @@ export default {
             editField: "setDesc",
             inputType: "input",
             rules: [
-              {min: 1, max: 255, message: "不超过255个字符", trigger: "blur"}
+              { min: 1, max: 255, message: "不超过255个字符", trigger: "blur" }
             ],
             disabled: false
           },
@@ -190,7 +192,7 @@ export default {
             editField: "sourceCode",
             inputType: "input",
             rules: [
-              {min: 1, max: 50, message: "不超过50个字符", trigger: "blur"}
+              { min: 1, max: 50, message: "不超过50个字符", trigger: "blur" }
             ],
             disabled: false
           },
@@ -201,7 +203,7 @@ export default {
             editField: "setType",
             inputType: "input",
             rules: [
-              {min: 1, max: 50, message: "不超过50个字符", trigger: "blur"}
+              { min: 1, max: 50, message: "不超过50个字符", trigger: "blur" }
             ],
             disabled: false
           },
@@ -270,8 +272,6 @@ export default {
     };
   },
 
-  created() {
-  },
   methods: {
     operateDataset(type, prop) {
       this.dialogVisibleSetDataSet = true;
@@ -296,3 +296,8 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+/deep/.el-dropdown {
+  margin-right: 20px;
+}
+</style>

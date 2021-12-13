@@ -131,7 +131,7 @@ export const constantRouterMap = [
       { 
         path: 'resultset', 
         name: 'resultset', 
-        component: () => import('@/views/report/resultset/index'),
+        component: () => import('@/views/resultset/index'),
         meta: { 
           title: '数据集', 
           icon: 'iconAPIwangguan', 

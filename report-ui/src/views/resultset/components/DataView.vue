@@ -16,48 +16,41 @@
       @json-save="onJsonSave"
     />
     <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="closeDialog"
-        >关闭</el-button
-        >
-      </span>
+      <el-button type="primary" @click="closeDialog">关闭</el-button>
+    </span>
   </el-dialog>
 </template>
 <script>
 import vueJsonEditor from "vue-json-editor";
 export default {
-  name: 'Support',
+  name: "Support",
   components: { vueJsonEditor },
   props: {
     visib: {
       required: true,
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
       dialogCaseResult: false,
       caseResultTitle: "",
-      caseResultContent: null,
-    }
+      caseResultContent: null
+    };
   },
-  // 在生命周期 beforeCreate里面改变this指向
-  beforeCreate: function () {},
-  mounted() {},
   methods: {
-
-    dataViewPreview(caseResultTitle, caseResultContent){
-      this.caseResultTitle = caseResultTitle
-      this.caseResultContent = caseResultContent
+    dataViewPreview(caseResultTitle, caseResultContent) {
+      this.caseResultTitle = caseResultTitle;
+      this.caseResultContent = caseResultContent;
     },
 
     // 关闭模态框
     closeDialog() {
-      this.$emit('handleClose')
+      this.$emit("handleClose");
     },
     onJsonChange(value) {},
-    onJsonSave(value) {},
-
-  },
-}
+    onJsonSave(value) {}
+  }
+};
 </script>

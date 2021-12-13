@@ -204,11 +204,6 @@
                       </template>
                     </el-table-column>
                   </el-table>
-                  <!--                  <el-checkbox-->
-                  <!--                    v-model="isShowPagination"-->
-                  <!--                    @change="changePagination"-->
-                  <!--                    >加入分页参数-->
-                  <!--                  </el-checkbox>-->
                 </el-tab-pane>
                 <el-tab-pane label="数据转换" name="second">
                   <template>
@@ -381,7 +376,6 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <!-- <el-button type="warning" @click="test">测试</el-button> -->
         <el-button @click="closeDialog">取消</el-button>
         <el-button type="primary" @click="submit('form')">保存</el-button>
       </div>
@@ -585,9 +579,6 @@ export default {
       testReplyCode: null
     };
   },
-  // 在生命周期 beforeCreate里面改变this指向
-  beforeCreate: function() {},
-  mounted() {},
   methods: {
     // 编辑数据集,获取单条数据详情
     async addOrEditDataSet(row, type) {
