@@ -1,10 +1,10 @@
 <!--
- * @Descripttion: 权限管理
+ * @Descripttion: 用户权限--权限管理
  * @version: 
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 09:48:59
+ * @LastEditTime: 2021-12-13 12:20:56
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption" />

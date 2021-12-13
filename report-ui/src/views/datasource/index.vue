@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 报表设计--数据源
+ * @version: 
+ * @Author: qianlishi
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 12:21:33
+-->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
@@ -18,9 +26,6 @@
         >编辑</el-button
       >
     </template>
-    <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
-    <!--这里可以将自定义的弹出框代码，放入到page中
-    -->
     <template v-slot:pageSection>
       <EditDataSource
         ref="EditDataSource"
@@ -40,7 +45,7 @@ import {
   reportDataSourceUpdate,
   reportDataSourceDetail
 } from "@/api/reportDataSource";
-import EditDataSource from "@/views/report/datasource/components/EditDataSource";
+import EditDataSource from "./components/EditDataSource";
 export default {
   name: "ReportDataSource",
   components: {
@@ -209,8 +214,6 @@ export default {
       }
     };
   },
-
-  created() {},
   methods: {
     operateDatasource(type, prop) {
       this.dialogVisibleSetDataSource = true;

@@ -119,7 +119,7 @@ export const constantRouterMap = [
       { 
         path: 'datasource', 
         name: 'datasource', 
-        component: () => import('@/views/report/datasource/index'), 
+        component: () => import('@/views/datasource/index'), 
         meta: { 
           title: '数据源', 
           icon: 'icondatabase', 

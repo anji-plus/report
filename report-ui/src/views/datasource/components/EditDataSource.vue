@@ -155,9 +155,6 @@ export default {
       testReplyCode: null
     };
   },
-  // 在生命周期 beforeCreate里面改变this指向
-  beforeCreate: function() {},
-  mounted() {},
   methods: {
     async setDataSource() {
       this.dialogForm = {
@@ -215,12 +212,10 @@ export default {
           if (this.dialogForm.id == undefined) {
             const { code } = await reportDataSourceAdd(this.dialogForm);
             if (code != "200") return;
-            // this.queryByPage()
             this.$emit("refreshList");
           } else {
             const { code } = await reportDataSourceUpdate(this.dialogForm);
             if (code != "200") return;
-            // this.queryByPage()
             this.$emit("refreshList");
           }
           this.closeDialog();
