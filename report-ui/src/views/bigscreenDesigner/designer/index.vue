@@ -287,10 +287,10 @@ import {
 } from "@/api/bigscreen";
 import { widgetTools, getToolByCode } from "./tools/index";
 import widget from "./widget/widget.vue";
-import dynamicForm from "./designerComponents/dynamicForm.vue";
+import dynamicForm from "./components/dynamicForm.vue";
 import draggable from "vuedraggable";
 import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
-import contentMenu from "./designerComponents/contentMenu";
+import contentMenu from "./components/contentMenu";
 import { getToken } from "@/utils/auth";
 
 export default {
@@ -944,9 +944,6 @@ export default {
         display: block;
         border: 1px solid #3a4659;
         background: #282a30;
-      }
-
-      .tools-item-text {
       }
     }
   }

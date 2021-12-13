@@ -5,7 +5,7 @@
 </template>
 <script>
 import echarts from "echarts";
-import "../../../../../../../node_modules/echarts/map/js/china.js";
+import "../../../../../../node_modules/echarts/map/js/china.js";
 //https://www.makeapie.com/editor.html?c=x2yaz6dfRw
 //https://www.makeapie.com/editor.html?c=xMpGBbTEKU
 let geoCoordMap = {

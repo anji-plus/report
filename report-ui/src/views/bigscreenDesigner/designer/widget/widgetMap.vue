@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import "../../../../../../node_modules/echarts/map/js/china.js";
+import "../../../../../node_modules/echarts/map/js/china.js";
 let GZData = [
   [
     {
