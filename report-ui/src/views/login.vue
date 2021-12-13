@@ -224,7 +224,7 @@ export default {
       });
     },
     async loginApi() {
-      let obj = {
+      const obj = {
         loginName: this.loginForm.loginName,
         password: transPsw(this.loginForm.password),
         verifyCode: ""
@@ -296,9 +296,6 @@ export default {
   right: 30%;
   transform: translate(50%, -50%);
 }
-</style>
-
-<style lang="scss" scoped>
 .take {
   position: absolute;
   top: 0;
