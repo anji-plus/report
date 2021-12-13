@@ -192,7 +192,7 @@ export const constantRouterMap = [
       { 
         path: 'file', 
         name: 'file', 
-        component: () => import('@/views/file-management/index'), 
+        component: () => import('@/views/fileManagement/index'), 
         meta: { 
           title: '文件管理', 
           icon: 'iconfill_folder', 

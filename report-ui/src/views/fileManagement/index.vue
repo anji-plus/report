@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 系统设置--文件管理
+ * @version: 
+ * @Author: qianlishi
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 13:14:13
+-->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
@@ -185,7 +193,6 @@ export default {
             label: "创建人",
             field: "createByView",
             columnType: "expand", // 表格中放在可展开行中
-
             inputType: "input", // 编辑和查看详情中显示的input
             disabled: true // 编辑和查看详情中不可编辑
           },
@@ -193,7 +200,6 @@ export default {
             label: "创建时间",
             field: "createTime",
             columnType: "expand",
-
             inputType: "input",
             disabled: true
           }
@@ -209,11 +215,9 @@ export default {
     }
   },
 
-  created() {},
   methods: {
     // 上传成功的回调
     handleUpload(response, file, fileList) {
-      console.log(this);
       // 触发查询按钮
       this.$refs.listPage.handleQueryForm();
       //清除el-upload组件中的文件
@@ -225,7 +229,7 @@ export default {
         type: "error"
       });
     },
-    async downloadFile(row) {
+    downloadFile(row) {
       window.open(row.urlPath);
     },
     customButtom(val) {
@@ -252,5 +256,6 @@ export default {
 <style scoped lang="scss">
 .el-upload {
   display: inline-block;
+  margin-right: 20px;
 }
 </style>

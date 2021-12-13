@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 系统设置--数字字典
+ * @version: 
+ * @Author: qianlishi
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 13:18:11
+-->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:buttonLeftOnTable>
@@ -10,7 +18,7 @@
       </el-button>
     </template>
 
-    <template slot="rowButton" slot-scope="props">
+    <template slot="rowButtonInMore" slot-scope="props">
       <el-button
         type="text"
         @click="editItem(props)"
@@ -24,23 +32,6 @@
         >刷新字典项</el-button
       >
     </template>
-
-    <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
-    <!--    <template v-slot:cardInEditPage>-->
-    <!--      <div class="anji-card">-->
-    <!--        <div class="card-head">-->
-    <!--          自定义标题-->
-    <!--        </div>-->
-    <!--        <div class="card-body">-->
-    <!--          自定义内容区-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </template>-->
-    <!--这里可以将自定义的弹出框代码，放入到page中
-    <template v-slot:pageSection>
-      <div>插入底部html片段</div>
-    </template>
-    -->
   </anji-crud>
 </template>
 <script>
@@ -195,8 +186,6 @@ export default {
       }
     };
   },
-
-  created() {},
   methods: {
     // 刷新当前面字典
     async dictRefresh() {

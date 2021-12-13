@@ -1,5 +1,5 @@
 <template>
-  <anji-crud ref="listPage" :option="crudOption"> </anji-crud>
+  <anji-crud ref="listPage" :option="crudOption" />
 </template>
 <script>
 import {
@@ -231,11 +231,6 @@ export default {
         ]
       }
     };
-  },
-
-  created() {
-    console.log(this.searchForm.dictCode);
-  },
-  methods: {}
+  }
 };
 </script>
