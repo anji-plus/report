@@ -164,9 +164,6 @@ export default {
         return [];
       } else {
         return this.option.joinEntitys;
-        // 找出所有hide != true的关联表
-        // let entitys = this.option.joinEntitys.filter((item) => item['hide'] == null || item['hide'] == false)
-        // return entitys
       }
     },
     // 一对一关联表的个数
@@ -354,7 +351,6 @@ export default {
       }
       // 修改
       if (this.modelType == "edit") {
-        // console.log(this.$slots.customCard[0].context.$refs.cardInEditData.updateData.settingValue)
         const { code, message } = await this.option.buttons.edit.api(params);
         if (code == "200") {
           // 保存结束，关闭对话框
@@ -367,32 +363,6 @@ export default {
           console.log(`提交表单调用更新接口失败：${message}`);
         }
       }
-      /* 分步提交
-      // 提交主表
-      this.$refs.mainForm.handleSave(() => {
-        // 如果没有一对一的关联表，直接关闭对话框
-        if (this.countJoinEntityOneToOne == 0) {
-          // 保存结束，关闭对话框
-          this.handleCloseDialog()
-          // 向外层发关闭事件
-          this.$emit('closeEvent')
-          return
-        }
-        // 主表保存成功后，保存子表
-        for (let i = 0; i < this.joinEntitys.length; i++) {
-          if (this.joinEntitys[i].joinType == 'OneToOne') {
-            this.$refs['joinForm' + i].handleSave(() => {
-              this.countForSavedOneToOneJoinEntity++
-              if (this.countForSavedOneToOneJoinEntity == this.countJoinEntityOneToOne) {
-                // 保存结束，关闭对话框
-                this.handleCloseDialog()
-                // 向外层发关闭事件
-                this.$emit('closeEvent')
-              }
-            })
-          }
-        }
-      })*/
     },
     // 子表单数据校验
     checkedChildrenValidate(list, confingList) {

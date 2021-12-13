@@ -168,9 +168,6 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-// /deep/.el-input-group__append {
-//   padding: 0 5px;
-// }
 /deep/.el-input__suffix {
   padding: 0 6px;
 }

@@ -814,7 +814,6 @@ export default {
     },
     // 带单位的输入框
     fieldValueByAnjiInput(value, columnConfig) {
-      console.log(1);
       const localStorageUnit = this.getSettingByName("unit_conversion");
       let objUnitConversion = "";
       let objUnitKeepPoint = "";
@@ -1025,8 +1024,6 @@ export default {
   .el-button--text:focus {
     color: #799ffc;
     border-color: transparent;
-    // background-color: transparent;
-    // background: red !important;
   }
   .el-button + .el-button {
     margin-left: 0 !important;

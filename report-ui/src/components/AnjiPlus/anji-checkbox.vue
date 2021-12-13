@@ -12,7 +12,6 @@
 
 <script>
 import request from "@/utils/request";
-import { valueOf } from "screenfull";
 export default {
   props: {
     dictCode: null, // 当传入dictCode时，可以不用传递url

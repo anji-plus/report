@@ -14,8 +14,6 @@
           @selection-change="handleSelectionChange"
           @row-click="handleTableRowClick"
         >
-          <!-- <el-table-column fixed type="selection" width="50" align="center" /> -->
-
           <el-table-column label="序号" min-width="50" align="center">
             <template slot-scope="scope">
               {{ scope.$index + 1 }}
@@ -377,8 +375,6 @@ export default {
     },
     // 表格选中某一行时
     handleTableRowClick(row, column, event) {
-      // console.log(row)
-      // console.log(column)
       // 行点击后，回调option中的tableRowClick事件
       if (typeof this.option.tableRowClick == "function") {
         this.option.tableRowClick(
@@ -457,43 +453,6 @@ export default {
           this.$emit("input", this.form.records);
         }
       });
-      /*
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          // 验证通过
-          if (this.isBlank(row[this.primaryKeyFieldName])) {
-            // 补全关联属性
-            if (typeof this.option.beforeInsert == 'function') {
-              this.option.beforeInsert(this.relateData, row)
-            }
-            // 主键为空，新增
-            this.option.buttons.add.api(row).then((response) => {
-              if (response.code == 200) {
-                this.$set(this.saveButtonStatus, index, 'inShow')
-                // 保存完成后刷新列表
-                this.handleQueryPageList()
-              }
-            })
-          } else {
-            // 补全关联属性
-            if (typeof this.option.beforeUpdate == 'function') {
-              this.option.beforeUpdate(this.relateData, row)
-            }
-            // 修改
-            this.option.buttons.edit.api(row).then((response) => {
-              if (response.code == 200) {
-                this.$set(this.saveButtonStatus, index, 'inShow')
-                // 保存完成后刷新列表
-                this.handleQueryPageList()
-              }
-            })
-          }
-        } else {
-          console.log('valid fail')
-          return false
-        }
-      })
-      */
     },
     // 删除
     handleDelete(row, index) {

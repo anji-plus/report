@@ -293,7 +293,6 @@ export default {
         headers: { noPrompt: true },
         params: param
       }).then(response => {
-        // console.log(response)
         this.setOptions(response.data);
       });
     },
@@ -331,16 +330,9 @@ export default {
         return;
       }
       this.totalPage = resData.pages;
-      // resData.records
-      // resData.total
-      // resData.size
-      // resData.current
       this.options = resData.records;
     },
     remoteQuery(keyword) {
-      // if (this.isBlank(keyword)) {
-      //   return
-      // }
       setTimeout(() => {
         if (
           this.method != null &&

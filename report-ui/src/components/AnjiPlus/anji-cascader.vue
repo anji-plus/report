@@ -75,7 +75,6 @@
 <script>
 import axios from "axios";
 import { getToken } from "@/utils/auth";
-import Cookies from "js-cookie";
 export default {
   name: "Cselect",
   props: {
