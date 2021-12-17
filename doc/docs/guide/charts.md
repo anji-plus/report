@@ -146,7 +146,7 @@
 ![img.17](../picture/dashboard/img_17.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
-## 数据格式
+### 数据格式
 
 ![img4](../picture/charts/img_3.png) <br>
 
