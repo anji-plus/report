@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 12:21:33
+ * @LastEditTime: 2021-12-24 14:00:47
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
@@ -18,7 +18,7 @@
       >
     </template>
 
-    <template slot="edit" slot-scope="props">
+    <template slot="rowButton" slot-scope="props">
       <el-button
         type="text"
         @click="operateDatasource('edit', props)"

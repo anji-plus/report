@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 12:28:54
+ * @LastEditTime: 2021-12-24 14:01:19
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
@@ -21,7 +21,7 @@
       </el-dropdown>
     </template>
 
-    <template slot="edit" slot-scope="props">
+    <template slot="rowButton" slot-scope="props">
       <el-button
         type="text"
         @click="operateDataset('edit', props)"
@@ -30,7 +30,7 @@
       </el-button>
     </template>
 
-    <template slot="rowButton" slot-scope="props">
+    <template slot="rowButtonInMore" slot-scope="props">
       <el-button
         type="text"
         @click="dataView(props)"
