@@ -126,20 +126,25 @@ export default {
       const optionsSetup = this.optionsSetup;
       const xAxis = {
         type: "category",
-        show: optionsSetup.hideX, // 坐标轴是否显示
-        name: optionsSetup.xName, // 坐标轴名称
+        // 坐标轴是否显示
+        show: optionsSetup.hideX,
+        // 坐标轴名称
+        name: optionsSetup.xName,
         nameTextStyle: {
           color: optionsSetup.xNameColor,
           fontSize: optionsSetup.xNameFontSize
         },
-        nameRotate: optionsSetup.textAngleX, // 文字角度
-        inverse: optionsSetup.reversalX, // 轴反转
+        // 轴反转
+        inverse: optionsSetup.reversalX,
         axisLabel: {
           show: true,
-          interval: optionsSetup.textInterval, // 文字角度
-          rotate: optionsSetup.textAngle, // 文字角度
+          // 文字间隔
+          interval: optionsSetup.textInterval,
+          // 文字角度
+          rotate: optionsSetup.textAngleX,
           textStyle: {
-            color: optionsSetup.Xcolor, // x轴 坐标文字颜色
+            // 坐标文字颜色
+            color: optionsSetup.Xcolor,
             fontSize: optionsSetup.fontSizeX
           }
         },
@@ -163,18 +168,23 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         type: "value",
-        show: optionsSetup.isShowY, // 坐标轴是否显示
-        name: optionsSetup.textNameY, // 坐标轴名称
+        // 坐标轴是否显示
+        show: optionsSetup.isShowY,
+        // 坐标轴名称
+        name: optionsSetup.textNameY,
         nameTextStyle: {
           color: optionsSetup.NameColorY,
           fontSize: optionsSetup.NameFontSizeY
         },
-        inverse: optionsSetup.reversalY, // y轴反转
+        // y轴反转
+        inverse: optionsSetup.reversalY,
         axisLabel: {
           show: true,
-          rotate: optionsSetup.textAngleY,// 文字角度
+          // 文字角度
+          rotate: optionsSetup.textAngleY,
           textStyle: {
-            color: optionsSetup.colorY, // y轴 坐标文字颜色
+            // y轴 坐标文字颜色
+            color: optionsSetup.colorY,
             fontSize: optionsSetup.fontSizeY
           }
         },
@@ -264,13 +274,14 @@ export default {
     // 数据解析
     setOptionsData() {
       const optionsSetup = this.optionsSetup;
-      const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      // 数据类型 静态 or 动态
+      const optionsData = this.optionsData;
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(
-        optionsData.dynamicData,
-        optionsData.refreshTime,
-        optionsSetup
+          optionsData.dynamicData,
+          optionsData.refreshTime,
+          optionsSetup
         );
     },
     //去重
@@ -298,14 +309,14 @@ export default {
         xAxisList[i] = val[i].axis
         yAxisList[i] = val[i].name
       }
-      xAxisList = this.setUnique(xAxisList) // x轴 0725 0726 0727
-      yAxisList = this.setUnique(yAxisList) // y轴 A B C
+      xAxisList = this.setUnique(xAxisList)
+      yAxisList = this.setUnique(yAxisList)
       for (const i in yAxisList) {
         const data = new Array(yAxisList.length).fill(0)
         for (const j in xAxisList) {
           for (const k in val) {
-            if (val[k].name == yAxisList[i]) { // a = a
-              if (val[k].axis == xAxisList[j]) { // 0725
+            if (val[k].name == yAxisList[i]) {
+              if (val[k].axis == xAxisList[j]) {
                 data[j] = val[k].data
               }
             }
