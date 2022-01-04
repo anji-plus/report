@@ -254,6 +254,10 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         if (dbObject.containsKey("celldata") && null != dbObject.get("celldata")) {
             List<JSONObject> celldata = new ArrayList<>();
             celldata.addAll((List<JSONObject>) dbObject.get("celldata"));
+            //清除原有的数据
+            dbObject.getJSONArray("celldata").clear();
+            //定义存储每一列动态扩展的行数
+            Map<Integer,Integer> colAddCntMap = new HashMap<>();
             // 遍历已存在的单元格，查看是否存在动态参数
             for (int i = 0; i < celldata.size(); i++) {
                 //单元格对象
@@ -269,50 +273,46 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 if (null != cell && cell.containsKey("v") && StringUtils.isNotBlank(cell.getString("v"))) {
                     String v = cell.getString("v");
                     DataSetDto dataSet = getDataSet(v, setParam);
+
+                    //获取此行已经动态增加的行数，默认0行
+                    int cnt = colAddCntMap.get(c) == null ? 0 : colAddCntMap.get(c);
+
                     if (null != dataSet) {
                         OriginalDataDto originalDataDto = dataSetService.getData(dataSet);
                         if (null != originalDataDto.getData()) {
                             List<JSONObject> data = originalDataDto.getData();
 
                             for (int j = 0; j < data.size(); j++) {
-                                if (j == 0) {
-                                    //处理当前行
-                                    //第一行，作为渲染参照数据
-                                    JSONObject jsonObject = data.get(j);
-                                    String fieldLabel = jsonObject.getString(dataSet.getFieldLabel());
 
-                                    String replace = v.replace("#{".concat(dataSet.getSetCode()).concat(".").concat(dataSet.getFieldLabel()).concat("}"), fieldLabel);
-                                    dbObject.getJSONArray("celldata").getJSONObject(i).getJSONObject("v").put("v", replace);
-                                    dbObject.getJSONArray("celldata").getJSONObject(i).getJSONObject("v").put("m", replace);
-                                } else {
-                                    //新增的行数据
-                                    JSONObject addCell = data.get(j);
-                                    //字段
-                                    String fieldLabel = addCell.getString(dataSet.getFieldLabel());
-                                    String replace = v.replace("#{".concat(dataSet.getSetCode()).concat(".").concat(dataSet.getFieldLabel()).concat("}"), fieldLabel);
+                                //新增的行数据
+                                JSONObject addCell = data.get(j);
+                                //字段
+                                String fieldLabel = addCell.getString(dataSet.getFieldLabel());
+                                String replace = v.replace("#{".concat(dataSet.getSetCode()).concat(".").concat(dataSet.getFieldLabel()).concat("}"), fieldLabel);
 
-                                    //转字符串，解决深拷贝问题
-                                    JSONObject addCellData = JSONObject.parseObject(cellStr);
+                                //转字符串，解决深拷贝问题
+                                JSONObject addCellData = JSONObject.parseObject(cellStr);
 
-                                    addCellData.put("r", r + j);
-                                    addCellData.put("c", c);
-                                    addCellData.getJSONObject("v").put("v", replace);
-                                    addCellData.getJSONObject("v").put("m", replace);
-                                    dbObject.getJSONArray("celldata").add(addCellData);
-
-                                }
-
+                                addCellData.put("r",  cnt + r + j); //行数增加
+                                addCellData.put("c", c);
+                                addCellData.getJSONObject("v").put("v", replace);
+                                addCellData.getJSONObject("v").put("m", replace);
+                                dbObject.getJSONArray("celldata").add(addCellData);
                             }
-
+                            //单元格数据动态赋值之后记录此列动态增加的行数
+                            colAddCntMap.put(c,cnt+data.size() - 1);
                         }
-
+                    }else{
+                        //没有对应的数据源，增加动态行数之后原样输出
+                        //转字符串，解决深拷贝问题
+                        JSONObject addCellData = JSONObject.parseObject(cellStr);
+                        addCellData.put("r", cnt  + r);//行数增加
+                        addCellData.put("c", c); //列数不变
+                        dbObject.getJSONArray("celldata").add(addCellData);
                     }
                 }
             }
-
         }
-
-
     }
 
 
