@@ -22,6 +22,7 @@ import com.anjiplus.template.gaea.business.modules.reportexcel.controller.dto.Re
 import com.anjiplus.template.gaea.business.modules.reportexcel.dao.ReportExcelMapper;
 import com.anjiplus.template.gaea.business.modules.reportexcel.dao.entity.ReportExcel;
 import com.anjiplus.template.gaea.business.modules.reportexcel.service.ReportExcelService;
+import com.anjiplus.template.gaea.business.modules.reportexcel.util.CellType;
 import com.anjiplus.template.gaea.business.modules.reportexcel.util.XlsSheetUtil;
 import com.anjiplus.template.gaea.business.modules.reportexcel.util.XlsUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -254,67 +255,333 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         if (dbObject.containsKey("celldata") && null != dbObject.get("celldata")) {
             List<JSONObject> celldata = new ArrayList<>();
             celldata.addAll((List<JSONObject>) dbObject.get("celldata"));
+
+            //整理celldata数据，转换为map格式，方便后续使用单元格位置获取对应的cell对象
+            Map<String,JSONObject> cellDataMap = cellDataList2Map(celldata);
+            //清除原有的数据
+            dbObject.getJSONArray("celldata").clear();
+            //获取配置项中的合并属性
+            JSONObject merge = dbObject.getJSONObject("config").getJSONObject("merge");
+            if(merge != null) merge.clear();
+            //定义存储每一列动态扩展的行数
+            Map<Integer,Integer> colAddCntMap = new HashMap<>();
             // 遍历已存在的单元格，查看是否存在动态参数
             for (int i = 0; i < celldata.size(); i++) {
                 //单元格对象
                 JSONObject cellObj = celldata.get(i);
                 //fastjson深拷贝问题
                 String cellStr = cellObj.toJSONString();
+                analysisCellData(cellObj,setParam,colAddCntMap,cellStr,merge, dbObject,cellDataMap);
+            }
+        }
+    }
 
-                //行号
-                Integer r = cellObj.getInteger("r");
-                //列号
-                Integer c = cellObj.getInteger("c");
-                JSONObject cell = cellObj.getJSONObject("v");
-                if (null != cell && cell.containsKey("v") && StringUtils.isNotBlank(cell.getString("v"))) {
-                    String v = cell.getString("v");
-                    DataSetDto dataSet = getDataSet(v, setParam);
-                    if (null != dataSet) {
-                        OriginalDataDto originalDataDto = dataSetService.getData(dataSet);
-                        if (null != originalDataDto.getData()) {
-                            List<JSONObject> data = originalDataDto.getData();
+    /**
+     * 开始解析并渲染 cellData
+     * @param cellObject
+     */
+    public void analysisCellData(JSONObject cellObject,String setParam,Map<Integer,Integer> colAddCntMap,String cellStr,
+                                 JSONObject merge,JSONObject dbObject,Map<String,JSONObject> cellDataMap){
+        //获取行号
+        Integer cellR = cellObject.getInteger("r");
+        //获取列数
+        Integer cellC = cellObject.getInteger("c");
+        //获取此行已经动态增加的行数，默认0行
+        int cnt = colAddCntMap.get(cellC) == null ? 0 : colAddCntMap.get(cellC);
+        //获取单元格类型
+        CellType cellType = getCellType(cellObject);
+        switch (cellType){
+            case BLACK:
+                //空数据单元格不处理
+                break;
+            case DYNAMIC_MERGE:
+            case DYNAMIC:
+                //处理动态单元格
+                String v = cellObject.getJSONObject("v").getString("v");
+                DataSetDto dataSet = getDataSet(v, setParam);
+                handleDynamicCellObject(dataSet,v,cellStr,cnt,cellR,cellC,merge,dbObject,colAddCntMap);
+                break;
+            default:
+                //处理静态单元格
+                handleStaticCellObject(cellStr,dbObject,cnt,cellR,cellC,cellDataMap,setParam,merge,colAddCntMap,cellType);
+                break;
+        }
+    }
 
-                            for (int j = 0; j < data.size(); j++) {
-                                if (j == 0) {
-                                    //处理当前行
-                                    //第一行，作为渲染参照数据
-                                    JSONObject jsonObject = data.get(j);
-                                    String fieldLabel = jsonObject.getString(dataSet.getFieldLabel());
+    /**
+     * 处理动态数据单元格自动扩展
+     * @param dataSet
+     * @param v
+     * @param cellStr
+     * @param cnt
+     * @param r
+     * @param c
+     * @param merge
+     * @param dbObject
+     * @param colAddCntMap
+     */
+    public void handleDynamicCellObject(DataSetDto dataSet,String v,String cellStr,int cnt,int r,int c,
+                                        JSONObject merge,JSONObject dbObject,Map<Integer,Integer> colAddCntMap){
+        //获取动态数据
+        OriginalDataDto originalDataDto = dataSetService.getData(dataSet);
+        List<JSONObject> cellDynamicData = originalDataDto.getData();
 
-                                    String replace = v.replace("#{".concat(dataSet.getSetCode()).concat(".").concat(dataSet.getFieldLabel()).concat("}"), fieldLabel);
-                                    dbObject.getJSONArray("celldata").getJSONObject(i).getJSONObject("v").put("v", replace);
-                                    dbObject.getJSONArray("celldata").getJSONObject(i).getJSONObject("v").put("m", replace);
-                                } else {
-                                    //新增的行数据
-                                    JSONObject addCell = data.get(j);
-                                    //字段
-                                    String fieldLabel = addCell.getString(dataSet.getFieldLabel());
-                                    String replace = v.replace("#{".concat(dataSet.getSetCode()).concat(".").concat(dataSet.getFieldLabel()).concat("}"), fieldLabel);
+        if(cellDynamicData != null){
+            //循环数据赋值
+            for (int j = 0; j < cellDynamicData.size(); j++) {
+                //新增的行数据
+                JSONObject addCell = cellDynamicData.get(j);
+                //字段
+                String fieldLabel = addCell.getString(dataSet.getFieldLabel());
+                String replace = v.replace("#{".concat(dataSet.getSetCode()).concat(".").concat(dataSet.getFieldLabel()).concat("}"), fieldLabel);
+                //转字符串，解决深拷贝问题
+                JSONObject addCellData = JSONObject.parseObject(cellStr);
 
-                                    //转字符串，解决深拷贝问题
-                                    JSONObject addCellData = JSONObject.parseObject(cellStr);
+                addCellData.put("r",  cnt + r + j); //行数增加
+                addCellData.put("c", c);
+                addCellData.getJSONObject("v").put("v", replace);
+                addCellData.getJSONObject("v").put("m", replace);
+                JSONObject cellMc = addCellData.getJSONObject("v").getJSONObject("mc");
+                //判断是否是合并单元格
+                if(null != cellMc){
+                    //处理合并单元格
+                    Integer rs = cellMc.getInteger("rs");
+                    cellMc.put("r",  cnt + r + rs*j); //行数增加
+                    cellMc.put("c", c);
+                    addCellData.put("r",  cnt + r + rs*j);
+                    //合并单元格需要处理config.merge
+                    merge.put(cellMc.getString("r")+"_"+cellMc.getString("c"),cellMc);
+                    //处理单元格扩展之后此列扩展的总行数
+                    colAddCntMap.put(c,cnt + rs * cellDynamicData.size() - 1);
+                }else{
+                    //处理单元格扩展之后此列扩展的总行数
+                    colAddCntMap.put(c,cnt + cellDynamicData.size() - 1);
+                }
+                dbObject.getJSONArray("celldata").add(addCellData);
+            }
+        }
+    }
 
-                                    addCellData.put("r", r + j);
-                                    addCellData.put("c", c);
-                                    addCellData.getJSONObject("v").put("v", replace);
-                                    addCellData.getJSONObject("v").put("m", replace);
-                                    dbObject.getJSONArray("celldata").add(addCellData);
+    /**
+     * 处理静态单元格数据
+     * @param cellStr
+     * @param dbObject
+     * @param cnt
+     * @param r
+     * @param c
+     * @param cellDataMap
+     * @param setParam
+     * @param merge
+     * @param colAddCntMap
+     * @param cellType
+     */
+    public void handleStaticCellObject(String cellStr,JSONObject dbObject,int cnt,int r,int c,
+                                       Map<String,JSONObject> cellDataMap,String setParam,
+                                       JSONObject merge,Map<Integer,Integer> colAddCntMap,CellType cellType){
+        //转字符串，解决深拷贝问题
+        JSONObject addCellData = JSONObject.parseObject(cellStr);
+        int rows = 0;
+        switch(cellType){
+            case STATIC:
+            case STATIC_MERGE:
+                //静态不扩展单元格只需要初始化位置就可以
+                initCellPosition(addCellData,cnt,merge);
+                break;
+            case STATIC_AUTO:
+                //获取静态单元格右侧动态单元格的总行数
+                rows = getRightDynamicCellRows(addCellData,cellDataMap,setParam,rows,cellType);
+                initCellPosition(addCellData,cnt,merge);
+                if(rows > 1){
+                    //需要把这个静态扩展单元格 改变为 静态合并扩展单元格，就是增加合并属性 mc 以及merge配置
+                    JSONObject mc = new JSONObject();
+                    mc.put("rs",rows);
+                    mc.put("cs",1);
+                    mc.put("r",addCellData.getIntValue("r"));
+                    mc.put("c",addCellData.getIntValue("c"));
+                    addCellData.getJSONObject("v").put("mc",mc);
+                    //合并单元格需要处理config.merge
+                    merge.put((mc.getInteger("r")) + "_" + mc.getString("c"),mc);
+                    //处理单元格扩展之后此列扩展的总行数
+                    colAddCntMap.put(c,cnt + rows - 1);
+                }
+                break;
+            case STATIC_MERGE_AUTO:
+                //获取静态单元格右侧动态单元格的总行数
+                rows = getRightDynamicCellRows(addCellData,cellDataMap,setParam,rows,cellType);
+                initCellPosition(addCellData,cnt,merge);
+                if(rows > 0){
+                    //需要修改单元格mc中的rs
+                    JSONObject cellMc = addCellData.getJSONObject("v").getJSONObject("mc");
+                    int addCnt = cellMc.getInteger("rs");
+                    cellMc.put("rs",rows);
+                    //合并单元格需要处理config.merge
+                    merge.put((cellMc.getInteger("r")) + "_" + cellMc.getString("c"),cellMc);
+                    //处理单元格扩展之后此列扩展的总行数
+                    colAddCntMap.put(c,cnt + rows - addCnt);
+                }
+                break;
+        }
+        dbObject.getJSONArray("celldata").add(addCellData);
+    }
 
-                                }
+    /**
+     * 初始化单元格位置，主要是这一列已经动态增加的行数
+     * @param addCellData
+     * @param cnt
+     * @param merge
+     */
+    public void initCellPosition(JSONObject addCellData,int cnt,JSONObject merge){
+        addCellData.put("r", cnt + addCellData.getInteger("r"));//行数增加
+        //是否是合并单元格
+        JSONObject mc = addCellData.getJSONObject("v").getJSONObject("mc");
+        if(mc != null){
+            mc.put("r",addCellData.getInteger("r"));
+            initCellMerge(merge,mc);
+        }
+    }
 
-                            }
+    /**
+     * 初始化单元格合并属性的行数
+     * @param merge
+     * @param mc
+     */
+    public void initCellMerge(JSONObject merge,JSONObject mc){
+        merge.put((mc.getInteger("r"))+"_"+mc.getString("c"),mc);
+    }
 
-                        }
+    /**
+     * 获取合并单元格右侧的动态扩展行数，用来设置当前单元格的实际
+     * @param addCellData
+     * @param cellDataMap
+     * @param setParam
+     * @param sumRows
+     * @param cellType
+     * @return
+     */
+    public int getRightDynamicCellRows(JSONObject addCellData,Map<String,JSONObject> cellDataMap,String setParam,int sumRows,CellType cellType){
+        //1、获取此单元格右侧关联的所有单元格
+        List<JSONObject> rightCellList = getRightDynamicCell(addCellData,cellDataMap,cellType);
+        //2、循环获取每个单元格的扩展行数
+        for (JSONObject rightCell : rightCellList) {
+            //首先判断这个单元格是否也是【静态扩展单元格】
+            CellType rightCellType = getCellType(rightCell);
+            switch (rightCellType){
+                case STATIC_AUTO:
+                case STATIC_MERGE_AUTO:
+                    //递归查找
+                    sumRows = getRightDynamicCellRows(rightCell,cellDataMap,setParam,sumRows,rightCellType);
+                    break;
+                case BLACK:
+                case STATIC:
+                    sumRows++;
+                    break;
+                case STATIC_MERGE:
+                    sumRows += rightCell.getJSONObject("v").getJSONObject("mc").getInteger("rs");
+                    break;
+                default:
+                    List<JSONObject> cellDynamicData = getDynamicDataList(rightCell.getJSONObject("v").getString("v"),setParam);
+                    if(cellDynamicData != null && cellDynamicData.size() > 1){
+                        int size = cellDynamicData.size();
+                        sumRows += size;
+                    }else{
+                        sumRows++;
+                    }
+                    break;
+            }
+        }
+        return sumRows;
+    }
 
+    /**
+     * 获取扩展单元格右侧相邻的所有单元格实体
+     * @param addCellData
+     * @param cellDataMap
+     * @param cellType
+     * @return
+     */
+    public List<JSONObject> getRightDynamicCell(JSONObject addCellData,Map<String,JSONObject> cellDataMap,CellType cellType){
+        //静态数据合并单元格需要根据右侧的单元格进行自动向下扩展
+        //1、先获取右侧一列的关联的单元格，根据自身的位置，以及自己合并的合并的信息推断
+        //如果自己位置是 2，5，并且本身合并 行数2，列数3，则需要推断出两个单元格的位置
+        //分别是2，8 和 3，8
+        Integer cellR = addCellData.getInteger("r");
+        Integer cellC = addCellData.getInteger("c");
+        Integer cellRs = 0;
+        Integer cellCs = 0;
+        switch (cellType){
+            case STATIC_AUTO:
+                cellRs = 1;
+                cellCs = 1;
+                break;
+            case STATIC_MERGE_AUTO:
+                cellRs = addCellData.getJSONObject("v").getJSONObject("mc").getInteger("rs");
+                cellCs = addCellData.getJSONObject("v").getJSONObject("mc").getInteger("cs");
+                break;
+        }
+        List<JSONObject> rightCells = new ArrayList<>();
+        for(int nums = 0;nums < cellRs;nums++){
+            int r = cellR + nums;
+            int c = cellC + cellCs;
+            String key = r + "," + c;
+            if(cellDataMap.containsKey(key)){
+                JSONObject cellData = cellDataMap.get(r + "," + c);
+                rightCells.add(cellData);
+            }
+        }
+        return rightCells;
+    }
+
+    /**
+     * 判断单元格类型
+     * @param cellObject
+     * @return
+     */
+    public CellType getCellType(JSONObject cellObject){
+        JSONObject cellV1 = cellObject.getJSONObject("v");
+        if (null != cellV1 && cellV1.containsKey("v") && StringUtils.isNotBlank(cellV1.getString("v"))) {
+            String cellV2 = cellObject.getJSONObject("v").getString("v");
+            String auto = cellObject.getJSONObject("v").getString("auto");
+            JSONObject mc = cellObject.getJSONObject("v").getJSONObject("mc");
+            if(cellV2.contains("#{") && cellV2.contains("}") ){
+                //动态单元格
+                if(mc != null){
+                    return CellType.DYNAMIC_MERGE;
+                }else{
+                    return CellType.DYNAMIC;
+                }
+            }else{
+                //静态单元格
+                if(mc != null && "1".equals(auto)){
+                    return CellType.STATIC_MERGE_AUTO;
+                }else {
+                    if("1".equals(auto)){
+                        return CellType.STATIC_AUTO;
+                    }else if(mc != null){
+                        return CellType.STATIC_MERGE;
+                    }else{
+                        return CellType.STATIC;
                     }
                 }
             }
-
+        }else{
+            return CellType.BLACK;
         }
-
-
     }
 
+    /**
+     * list转为map结构，方便使用行列号查找对应cell对象
+     * @param cellDataList
+     * @return
+     */
+    public Map<String,JSONObject> cellDataList2Map(List<JSONObject> cellDataList){
+        Map<String,JSONObject> cellDataMap = new HashMap<>();
+        for (JSONObject cellData : cellDataList) {
+            String r = cellData.getString("r");
+            String c = cellData.getString("c");
+            cellDataMap.put(r + "," + c, cellData);
+        }
+        return cellDataMap;
+    }
 
     /**
      * 解析 #{xxxx.xxxxx} 数据
@@ -339,6 +606,27 @@ public class ReportExcelServiceImpl implements ReportExcelService {
             }
         }
         return null;
+    }
+
+    /**
+     * 获取单元格对应的动态数据集
+     * @param v
+     * @param setParam
+     * @return
+     */
+    private List<JSONObject> getDynamicDataList(String v, String setParam){
+        if(StringUtils.isNotBlank(v)){
+            DataSetDto dataSet = getDataSet(v,setParam);
+            if(dataSet != null){
+                OriginalDataDto originalDataDto = dataSetService.getData(dataSet);
+                List<JSONObject> cellDynamicData = originalDataDto.getData();
+                return cellDynamicData;
+            }else{
+                return null;
+            }
+        }else{
+            return null;
+        }
     }
 
     /**

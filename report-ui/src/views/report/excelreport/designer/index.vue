@@ -91,12 +91,24 @@
     <div class="layout-right">
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="基础配置" name="first">
-          <el-form ref="rightForm" :model="rightForm" label-width="60px">
+          <el-form ref="rightForm" :model="rightForm" label-width="70px">
             <el-form-item label="坐标">
               <el-input v-model="rightForm.coordinate" />
             </el-form-item>
             <el-form-item label="值">
               <el-input v-model="rightForm.value" />
+            </el-form-item>
+            <el-form-item label="自动扩展" v-if="rightForm.autoIsShow">
+              <el-col :span="12">
+                <el-switch 
+                v-model="rightForm.auto" 
+                @change="autoChangeFunc($event)" />
+              </el-col>
+              <el-col :span="12">
+                <el-tooltip class="item" effect="dark" content="只针对静态数据的单元格，具体参考文档" placement="top">
+                <i class="el-icon-question"> </i>
+                </el-tooltip>
+              </el-col>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -163,7 +175,11 @@ export default {
       multipleSelection: [],
       rightForm: {
         coordinate: "",
-        value: ""
+        value: "",
+        r: "",
+        c: "",
+        auto: false,
+        autoIsShow: false
       },
       qrCodeForm: {
         type: "QRCode",
@@ -293,8 +309,24 @@ export default {
             );
           },
           cellMousedown: function(cell, postion, sheetFile, ctx) {
+
+            //单元格点击事件
             that.rightForm.coordinate = postion.r + "," + postion.c;
+            that.rightForm.r = postion.r;
+            that.rightForm.c = postion.c;
             that.rightForm.value = cell == null ? "" : cell.v;
+            that.rightForm.autoIsShow = true
+            //判断单元格是否是静态数据并且是合并单元格
+            if(cell != null && ( cell.v == undefined || cell.v.indexOf('#{') === -1)){
+                that.rightForm.autoIsShow = true
+                if(cell.auto != null && cell.auto == '1'){
+                  that.rightForm.auto = true
+                }else{
+                  that.rightForm.auto = false
+                }
+            }else{
+              that.rightForm.auto = false
+            }
           }
         },
         data: [
@@ -451,6 +483,13 @@ export default {
         if (this.dataSet[i].setCode === val.setCode) {
           this.dataSet.splice(i, 1);
         }
+      }
+    },
+    autoChangeFunc(auto){
+      if(auto){
+        luckysheet.setCellValue(this.rightForm.r, this.rightForm.c, { auto: "1"})
+      }else{
+        luckysheet.setCellValue(this.rightForm.r, this.rightForm.c, { auto: "0"})
       }
     }
   }
