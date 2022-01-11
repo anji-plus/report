@@ -653,7 +653,7 @@ public class XlsSheetUtil {
                         } else {
                             style.setDataFormat((short) 0);
                         }
-                        cell.setCellType(CellType.STRING);
+                        cell.setCellType(org.apache.poi.ss.usermodel.CellType.STRING);
                         break;
                     }
                     case "d": {
@@ -692,7 +692,7 @@ public class XlsSheetUtil {
                     }
                     case "b": {
                         //逻辑
-                        cell.setCellType(CellType.BOOLEAN);
+                        cell.setCellType(org.apache.poi.ss.usermodel.CellType.BOOLEAN);
                         if (_i >= 0) {
                             style.setDataFormat(_i.shortValue());
                         } else {
@@ -705,7 +705,7 @@ public class XlsSheetUtil {
                         //数值
 //                        cell.setCellType(CellType.NUMERIC);
                         //数字转字符串
-                        cell.setCellType(CellType.STRING);
+                        cell.setCellType(org.apache.poi.ss.usermodel.CellType.STRING);
                         if (_i >= 0) {
                             style.setDataFormat(_i.shortValue());
                         } else {
@@ -728,7 +728,7 @@ public class XlsSheetUtil {
                     }
                     case "e": {
                         //错误
-                        cell.setCellType(CellType.ERROR);
+                        cell.setCellType(org.apache.poi.ss.usermodel.CellType.ERROR);
                         if (_i >= 0) {
                             style.setDataFormat(_i.shortValue());
                         } else {
