@@ -80,7 +80,7 @@ export default {
       )
     },
     /**
-     * 
+     *
      */
     resetForm (data) {
       let formKeys = Object.keys(data)
@@ -274,7 +274,7 @@ export default {
     objToOne (obj) {
       let tmpData = {}
       for (let index in obj) {
-        if (typeof obj[index] == 'object') {
+        if (typeof obj[index] == 'object' && !this.isArrayFn(obj[index])) {
           let resObj = this.objToOne(obj[index])
           Object.assign(tmpData, resObj) // 这里使用对象合并
         } else {
@@ -282,6 +282,13 @@ export default {
         }
       }
       return tmpData
+    },
+    isArrayFn(value) {
+      if (typeof Array.isArray === "function") {
+        return Array.isArray(value);
+      } else {
+        return Object.prototype.toString.call(value) === "[object Array]";
+      }
     },
     urlEncode (val) {
       return encodeURIComponent(val)
