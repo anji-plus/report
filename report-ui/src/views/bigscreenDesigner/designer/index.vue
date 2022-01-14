@@ -461,6 +461,8 @@ export default {
       const screenData = this.handleBigScreen(data.dashboard);
       this.widgets = processData;
       this.dashboard = screenData;
+      this.bigscreenWidth = this.dashboard.width;
+      this.bigscreenHeight = this.dashboard.height;
     },
     handleBigScreen(data) {
       const optionScreen = getToolByCode("screen").options;
@@ -771,7 +773,23 @@ export default {
     // 将当前选中的组件，右侧属性值更新
     widgetValueChanged(key, val) {
       if (this.screenCode == "screen") {
+        let newSetup = new Array();
         this.dashboard = this.deepClone(val);
+        if(this.bigscreenWidth != this.dashboard.width){
+          this.bigscreenWidth = this.dashboard.width
+        }
+        if(this.bigscreenHeight != this.dashboard.height){
+          this.bigscreenHeight = this.dashboard.height
+        }
+        this.widgetOptions.setup.forEach(el => {
+          if(el.name == 'width'){
+            el.value = this.bigscreenWidth
+          }else if(el.name == 'height'){
+            el.value = this.bigscreenHeight
+          }
+          newSetup.push(el)
+        });
+        this.widgetOptions.setup = newSetup
       } else {
         for (let i = 0; i < this.widgets.length; i++) {
           if (this.widgetIndex == i) {
@@ -945,6 +963,8 @@ export default {
         display: block;
         border: 1px solid #3a4659;
         background: #282a30;
+      }
+      .tools-item-text{
       }
     }
   }
