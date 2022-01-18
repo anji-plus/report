@@ -386,7 +386,22 @@ export default {
       };
       this.options.grid = grid;
     },
-    // 图例颜色修改
+    setOptionsLegend() {
+      const optionsSetup = this.optionsSetup;
+      const legend = this.options.legend;
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
+      legend.bottom =
+        optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
+      legend.orient = optionsSetup.layoutFront;
+      legend.textStyle = {
+        color: optionsSetup.lengedColor,
+        fontSize: optionsSetup.lengedFontSize
+      };
+      legend.itemWidth = optionsSetup.lengedWidth;
+    },
+    // 颜色修改
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
       const customColor = optionsSetup.customColor;
