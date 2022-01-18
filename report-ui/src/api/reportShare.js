@@ -10,7 +10,7 @@ export function reportShareList(params) {
 
 export function reportShareAdd(data) {
   return request({
-    url: 'report/share',
+    url: 'reportDashboard/share',
     method: 'post',
     data
   })
