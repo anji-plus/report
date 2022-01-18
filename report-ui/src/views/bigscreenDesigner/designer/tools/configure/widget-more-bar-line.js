@@ -352,14 +352,6 @@ export const widgetMoreBarLine = {
               value: 14,
             },
             {
-              type: 'el-input-number',
-              label: '左均分',
-              name: 'splitNumberLeft',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
               type: 'el-switch',
               label: '右显示',
               name: 'isShowYRight',
@@ -392,14 +384,6 @@ export const widgetMoreBarLine = {
               value: 14,
             },
             {
-              type: 'el-input-number',
-              label: '右均分',
-              name: 'splitNumberRight',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
               type: 'vue-color',
               label: '数值颜色',
               name: 'colorY',
@@ -414,14 +398,6 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               value: 14,
-            },
-            {
-              type: 'el-switch',
-              label: '轴反转',
-              name: 'reversalY',
-              required: false,
-              placeholder: '',
-              value: false
             },
             {
               type: 'vue-color',
@@ -642,11 +618,14 @@ export const widgetMoreBarLine = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {"datetime": "2021-06-18", "unsales": 21, "manus": 252, "rework": 38, "sales": 231, "return": 7},
-          {"datetime": "2021-06-19", "unsales": 8, "manus": 133, "rework": 22, "sales": 140, "return": 14},
-          {"datetime": "2021-06-20", "unsales": 19, "manus": 189, "rework": 26, "sales": 170, "return": 7},
-          {"datetime": "2021-06-21", "unsales": 28, "manus": 219, "rework": 21, "sales": 191, "return": 6},
-          {"datetime": "2021-06-22", "unsales": 15, "manus": 159, "rework": 19, "sales": 144, "return": 9}
+          {"date": "2014", "unsales": 400, "manus": 300, "rework": 400, "sales": 4.2,},
+          {"date": "2015", "unsales": 400, "manus": 500, "rework": 300, "sales": 3.6,},
+          {"date": "2016", "unsales": 300, "manus": 500, "rework": 500, "sales": 5.8,},
+          {"date": "2017", "unsales": 300, "manus": 500, "rework": 700, "sales": 3.4,},
+          {"date": "2018", "unsales": 400, "manus": 400, "rework": 1000, "sales": 2.5,},
+          {"date": "2019", "unsales": 400, "manus": 500, "rework": 500, "sales": 5.8,},
+          {"date": "2020", "unsales": 300, "manus": 400, "rework": 600, "sales": 7.6,},
+          {"date": "2021", "unsales": 300, "manus": 600, "rework": 400, "sales": 3.4,},
         ]
       },
       {

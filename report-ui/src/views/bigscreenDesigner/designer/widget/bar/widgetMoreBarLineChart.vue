@@ -6,8 +6,9 @@
 
 <script>
 
+import echarts from "echarts";
+
 export default {
-  //https://echarts.apache.org/examples/zh/editor.html?c=multiple-y-axis
   name: "widgetMoreBarLineChart",
   components: {},
   props: {
@@ -18,99 +19,160 @@ export default {
     return {
       options: {
         tooltip: {
-          trigger: 'axis',
+          trigger: 'item',
           axisPointer: {
-            type: 'cross'
+            type: 'shadow'
           }
         },
         grid: {
-          right: '20%'
+          left: '2%',
+          right: '4%',
+          bottom: '14%',
+          top: '16%',
+          containLabel: true
         },
         legend: {
-          data: ['Evaporation', 'Precipitation', 'Temperature']
+          data: ['调解成功', '调解失败', '调解终止', '调解成功率'],
+          left: '7%',
+          top: '5%',
+          textStyle: {
+            color: "#666666"
+          },
+          itemWidth: 15,
+          itemHeight: 10,
+          itemGap: 25
         },
-        xAxis: [
-          {
-            type: 'category',
-            axisTick: {
-              alignWithLabel: true
-            },
-            // prettier-ignore
-            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-          }
-        ],
+        xAxis: {
+          type: 'category',
+          data: ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'],
+          axisLine: {
+            lineStyle: {
+              color: '#cdd5e2'
+
+            }
+          },
+          axisLabel: {
+            textStyle: {
+              color: "#666666"
+            }
+          },
+        },
         yAxis: [
           {
             type: 'value',
-            name: 'Evaporation',
-            min: 0,
-            max: 250,
-            position: 'right',
             axisLine: {
               show: true,
               lineStyle: {
-                color: '#5470C6'
+                color: '#cdd5e2'
               }
             },
+            splitLine: {
+              show: false,
+            },
             axisLabel: {
-              formatter: '{value} ml'
-            }
+              textStyle: {
+                color: "#666666"
+              }
+            },
           },
           {
-            type: 'value',
-            name: 'Precipitation',
-            min: 0,
-            max: 250,
-            position: 'right',
-            offset: 80,
+            type: "value",
+            nameTextStyle: {
+              color: "#666666"
+            },
+            position: "right",
             axisLine: {
-              show: true,
               lineStyle: {
-                color: '#91CC75'
+                color: '#cdd5e2'
               }
             },
-            axisLabel: {
-              formatter: '{value} ml'
-            }
-          },
-          {
-            type: 'value',
-            name: '温度',
-            min: 0,
-            max: 25,
-            position: 'left',
-            axisLine: {
-              show: true,
-              lineStyle: {
-                color: '#EE6666'
-              }
+            splitLine: {
+              show: false,
             },
             axisLabel: {
-              formatter: '{value} °C'
+              show: true,
+              textStyle: {
+                color: "#666666"
+              }
             }
           }
         ],
         series: [
           {
-            name: 'Evaporation',
+            name: '调解成功',
             type: 'bar',
-            data: [
-              2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3
-            ]
+            barWidth: '12px',
+            itemStyle: {
+              normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: '#29acff'
+                }, {
+                  offset: 1,
+                  color: '#4bdfff'
+                }]),
+                barBorderRadius: 6,
+              },
+            },
+            data: [400, 400, 300, 300, 300, 400, 400, 400, 300]
           },
           {
-            name: 'Precipitation',
+            name: '调解失败',
             type: 'bar',
-            yAxisIndex: 1,
-            data: [
-              2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3
-            ]
+            barWidth: '12px',
+            itemStyle: {
+              normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: '#3d93f2'
+                }, {
+                  offset: 1,
+                  color: '#5dc1fd'
+                }]),
+                barBorderRadius: 6,
+              }
+
+            },
+            data: [400, 500, 500, 500, 500, 400, 400, 500, 500]
           },
           {
-            name: 'Temperature',
-            type: 'line',
-            yAxisIndex: 2,
-            data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+            name: '调解终止',
+            type: 'bar',
+            barWidth: '12px',
+            itemStyle: {
+              normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: '#01c871'
+                }, {
+                  offset: 1,
+                  color: '#55f49c'
+                }]),
+                barBorderRadius: 6,
+              }
+            },
+            data: [400, 600, 700, 700, 1000, 400, 400, 600, 700]
+          },
+          {
+            name: "调解成功率",
+            type: "line",
+            yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
+            smooth: false, //平滑曲线显示
+
+            symbol: "circle", //标记的图形为实心圆
+            symbolSize: 8, //标记的大小
+            itemStyle: {
+              normal: {
+                color: '#ffa43a',
+                borderColor: 'rgba(255, 234, 0, 0.5)',  //圆点透明 边框
+                borderWidth: 5
+              },
+
+            },
+            lineStyle: {
+              color: "#ffa43a"
+            },
+            data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5]
           }
         ]
       }
@@ -151,8 +213,9 @@ export default {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
-      /*this.setOptionsX();
+      this.setOptionsX();
       this.setOptionsY();
+      /*
       this.setOptionsTop();
       this.setOptionsBar();
       this.setOptionsTooltip();
@@ -225,14 +288,12 @@ export default {
       const yAxis = [
         {
           type: "value",
-          splitNumber: optionsSetup.splitNumberLeft,// 均分
           show: optionsSetup.isShowYLeft, // 坐标轴是否显示
           name: optionsSetup.textNameYLeft, // 坐标轴名称
           nameTextStyle: { // 别名
             color: optionsSetup.nameColorYLeft,
             fontSize: optionsSetup.namefontSizeYLeft
           },
-          inverse: optionsSetup.reversalY, // 轴反转
           axisLabel: {
             show: true,
             textStyle: {
@@ -241,7 +302,7 @@ export default {
             }
           },
           axisLine: {
-            show: true,
+            show: optionsSetup.isShowYLeft,
             lineStyle: {
               color: optionsSetup.lineColorY
             }
@@ -252,14 +313,13 @@ export default {
         },
         {
           type: "value",
-          splitNumber: optionsSetup.splitNumberRight,// 均分
+          position: "right",
           show: optionsSetup.isShowYRight, // 坐标轴是否显示
           name: optionsSetup.textNameYRight, // 坐标轴名称
           nameTextStyle: { // 别名
             color: optionsSetup.nameColorYRight,
             fontSize: optionsSetup.namefontSizeYRight
           },
-          inverse: optionsSetup.reversalY, // 轴反转
           axisLabel: {
             show: true,
             textStyle: {
@@ -268,7 +328,7 @@ export default {
             }
           },
           axisLine: {
-            show: true,
+            show: optionsSetup.isShowYRight,
             lineStyle: {
               color: optionsSetup.lineColorY
             }
@@ -279,40 +339,6 @@ export default {
         }
       ];
       this.options.yAxis = yAxis;
-    },
-    // 折线设置 数值设置
-    setOptionsTop() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "line") {
-          series[key].showSymbol = optionsSetup.markPoint;
-          series[key].symbolSize = optionsSetup.pointSize;
-          series[key].smooth = optionsSetup.smoothCurve;
-          if (optionsSetup.area) {
-            series[key].areaStyle = {
-              opacity: optionsSetup.areaThickness / 100
-            };
-          } else {
-            series[key].areaStyle = {
-              opacity: 0
-            };
-          }
-          series[key].lineStyle = {
-            width: optionsSetup.lineWidth
-          };
-          series[key].itemStyle.borderRadius = optionsSetup.radius;
-          series[key].label = {
-            show: optionsSetup.isShowLine,
-            position: "top",
-            distance: optionsSetup.distanceLine,
-            fontSize: optionsSetup.fontSizeLine,
-            color: optionsSetup.subTextColorLine,
-            fontWeight: optionsSetup.fontWeightLine
-          };
-        }
-      }
-      this.options.series = series;
     },
     // 柱体设置 数值设置
     setOptionsBar() {
