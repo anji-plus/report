@@ -172,7 +172,7 @@ export default {
             lineStyle: {
               color: "#ffa43a"
             },
-            data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5]
+            data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5, 2]
           }
         ]
       }
@@ -215,14 +215,15 @@ export default {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
-      /*
-      this.setOptionsTop();
+      this.setOptionsLegend();
+      this.setOptionsLine();
       this.setOptionsBar();
       this.setOptionsTooltip();
-      this.setOptionsData();
       this.setOptionsMargin();
-      this.setOptionsLegend();
-      this.setOptionsColor();*/
+      this.setOptionsColor();
+      /*
+      this.setOptionsData();
+      */
     },
     // 标题修改
     setOptionsTitle() {
@@ -340,6 +341,40 @@ export default {
       ];
       this.options.yAxis = yAxis;
     },
+    // 折线设置 数值设置
+    setOptionsLine() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      for (const key in series) {
+        if (series[key].type == "line") {
+          series[key].showSymbol = optionsSetup.markPoint;
+          series[key].symbolSize = optionsSetup.pointSize;
+          series[key].smooth = optionsSetup.smoothCurve;
+          if (optionsSetup.area) {
+            series[key].areaStyle = {
+              opacity: optionsSetup.areaThickness / 100
+            };
+          } else {
+            series[key].areaStyle = {
+              opacity: 0
+            };
+          }
+          series[key].lineStyle = {
+            width: optionsSetup.lineWidth
+          };
+          series[key].itemStyle.borderRadius = optionsSetup.radius;
+          series[key].label = {
+            show: optionsSetup.isShowLine,
+            position: "top",
+            distance: optionsSetup.distanceLine,
+            fontSize: optionsSetup.fontSizeLine,
+            color: optionsSetup.subTextColorLine,
+            fontWeight: optionsSetup.fontWeightLine
+          };
+        }
+      }
+      this.options.series = series;
+    },
     // 柱体设置 数值设置
     setOptionsBar() {
       const optionsSetup = this.optionsSetup;
@@ -389,6 +424,9 @@ export default {
     setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
       const legend = this.options.legend;
+      let legendName = optionsSetup.legendName;
+      let arr = legendName.split(",")
+      legend.data = arr;
       legend.show = optionsSetup.isShowLegend;
       legend.left = optionsSetup.lateralPosition;
       legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";

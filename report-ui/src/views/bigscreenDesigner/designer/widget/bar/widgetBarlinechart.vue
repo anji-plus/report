@@ -134,7 +134,7 @@ export default {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
-      this.setOptionsTop();
+      this.setOptionsLine();
       this.setOptionsBar();
       this.setOptionsTooltip();
       this.setOptionsData();
@@ -262,7 +262,7 @@ export default {
       this.options.yAxis = yAxis;
     },
     // 折线设置 数值设置
-    setOptionsTop() {
+    setOptionsLine() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       for (const key in series) {

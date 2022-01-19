@@ -229,10 +229,10 @@ export const widgetMoreBarLine = {
             {
               type: 'el-input-text',
               label: '图例名称',
-              name: 'layerName',
+              name: 'legendName',
               required: false,
-              placeholder: '',
-              value: '',
+              placeholder: '多值以英文,隔开',
+              value: '成功,失败,终止,成功率'
             },
             {
               type: 'vue-color',
@@ -248,7 +248,7 @@ export const widgetMoreBarLine = {
               name: 'lengedFontSize',
               required: false,
               placeholder: '',
-              value: 16,
+              value: 12,
             },
             {
               type: 'el-input-number',
@@ -256,7 +256,7 @@ export const widgetMoreBarLine = {
               name: 'lengedWidth',
               required: false,
               placeholder: '',
-              value: 15,
+              value: 12,
             },
             {
               type: 'el-select',
@@ -268,7 +268,7 @@ export const widgetMoreBarLine = {
                 {code: 'left', name: '左对齐'},
                 {code: 'right', name: '右对齐'},
               ],
-              value: ''
+              value: 'left'
             },
             {
               type: 'el-select',
@@ -280,7 +280,7 @@ export const widgetMoreBarLine = {
                 {code: 'top', name: '顶部'},
                 {code: 'bottom', name: '底部'},
               ],
-              value: ''
+              value: 'top'
             },
             {
               type: 'el-select',
@@ -292,7 +292,7 @@ export const widgetMoreBarLine = {
                 {code: 'vertical', name: '竖排'},
                 {code: 'horizontal', name: '横排'},
               ],
-              value: '未销,核销,总共,比例'
+              value: 'horizontal'
             },
           ],
         },
@@ -655,7 +655,12 @@ export const widgetMoreBarLine = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{color: '#00F4FFFF'}, {color: '#e68b55'}],
+              value: [
+                {color: '#4bdfff'},
+                {color: '#5dc1fd'},
+                {color: '#55f49c'},
+                {color: '#ffa43a'},
+              ],
             },
           ],
         },
@@ -745,7 +750,7 @@ export const widgetMoreBarLine = {
         name: 'width',
         required: false,
         placeholder: '该容器在1920px大屏中的宽度',
-        value: 400,
+        value: 500,
       },
       {
         type: 'el-input-number',
@@ -753,7 +758,7 @@ export const widgetMoreBarLine = {
         name: 'height',
         required: false,
         placeholder: '该容器在1080px大屏中的高度',
-        value: 200,
+        value: 300,
       },
     ],
   }
