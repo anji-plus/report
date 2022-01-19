@@ -114,7 +114,7 @@ export default {
                 barBorderRadius: 6,
               },
             },
-            data: [400, 400, 300, 300, 300, 400, 400, 400, 300]
+            data: []
           },
           {
             name: '调解失败',
@@ -133,7 +133,7 @@ export default {
               }
 
             },
-            data: [400, 500, 500, 500, 500, 400, 400, 500, 500]
+            data: []
           },
           {
             name: '调解终止',
@@ -151,14 +151,13 @@ export default {
                 barBorderRadius: 6,
               }
             },
-            data: [400, 600, 700, 700, 1000, 400, 400, 600, 700]
+            data: []
           },
           {
             name: "调解成功率",
             type: "line",
             yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
             smooth: false, //平滑曲线显示
-
             symbol: "circle", //标记的图形为实心圆
             symbolSize: 8, //标记的大小
             itemStyle: {
@@ -172,7 +171,7 @@ export default {
             lineStyle: {
               color: "#ffa43a"
             },
-            data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5, 2]
+            data: []
           }
         ]
       }
@@ -221,9 +220,7 @@ export default {
       this.setOptionsTooltip();
       this.setOptionsMargin();
       this.setOptionsColor();
-      /*
       this.setOptionsData();
-      */
     },
     // 标题修改
     setOptionsTitle() {
@@ -390,8 +387,7 @@ export default {
             fontWeight: optionsSetup.fontWeightBar
           };
           series[key].barWidth = optionsSetup.maxWidth;
-          series[key].barMinHeight = optionsSetup.minHeight;
-          series[key].itemStyle.barBorderRadius = optionsSetup.radius;
+          series[key].itemStyle.normal['barBorderRadius'] = optionsSetup.radius;
         }
       }
       this.options.series = series;
@@ -423,9 +419,13 @@ export default {
     },
     setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
       const legend = this.options.legend;
       let legendName = optionsSetup.legendName;
       let arr = legendName.split(",")
+      for (const i in series) {
+        series[i].name = arr[i];
+      }
       legend.data = arr;
       legend.show = optionsSetup.isShowLegend;
       legend.left = optionsSetup.lateralPosition;
@@ -443,13 +443,19 @@ export default {
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
       const customColor = optionsSetup.customColor;
+      const series = this.options.series;
       if (!customColor) return;
       const arrColor = [];
       for (let i = 0; i < customColor.length; i++) {
         arrColor.push(customColor[i].color);
       }
-      this.options.color = arrColor;
-      this.options = Object.assign({}, this.options);
+      for (const i in series) {
+        if (series[i].type == "bar") {
+          series[i].itemStyle.normal['color'] = arrColor[i];
+        }else {
+          series[i].lineStyle["color"] = arrColor[i];
+        }
+      }
     },
     // 数据处理
     setOptionsData() {
@@ -461,23 +467,24 @@ export default {
     staticDataFn(val) {
       const series = this.options.series;
       let axis = [];
-      let bar = [];
+      let bar1 = [];
+      let bar2 = [];
+      let bar3 = [];
       let line = [];
       for (const i in val) {
-        axis[i] = val[i].axis;
-        bar[i] = val[i].bar;
-        line[i] = val[i].line;
+        axis[i] = val[i].date;
+        bar1[i] = val[i].unsales;
+        bar2[i] = val[i].manus;
+        bar3[i] = val[i].rework;
+        line[i] = val[i].sales;
       }
       // x轴
       this.options.xAxis.data = axis;
       // series
-      for (const i in series) {
-        if (series[i].type == "bar") {
-          series[i].data = bar;
-        } else {
-          series[i].data = line;
-        }
-      }
+      series[0].data = bar1;
+      series[1].data = bar2;
+      series[2].data = bar3;
+      series[3].data = line;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;

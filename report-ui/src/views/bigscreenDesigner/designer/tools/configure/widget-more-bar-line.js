@@ -48,7 +48,7 @@ export const widgetMoreBarLine = {
               name: 'pointSize',
               required: false,
               placeholder: '',
-              value: 5,
+              value: 3,
             },
             {
               type: 'el-switch',
@@ -56,7 +56,7 @@ export const widgetMoreBarLine = {
               name: 'smoothCurve',
               required: false,
               placeholder: '',
-              value: true,
+              value: false,
             },
             {
               type: 'el-switch',
@@ -102,14 +102,6 @@ export const widgetMoreBarLine = {
               require: false,
               placeholder: '',
               value: 5,
-            },
-            {
-              type: 'el-slider',
-              label: '最小高度',
-              name: 'minHeight',
-              require: false,
-              placeholder: '',
-              value: 0,
             },
           ],
         },
@@ -265,10 +257,11 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
+                {code: 'center', name: '居中'},
                 {code: 'left', name: '左对齐'},
                 {code: 'right', name: '右对齐'},
               ],
-              value: 'left'
+              value: 'center'
             },
             {
               type: 'el-select',
