@@ -363,9 +363,9 @@ export default {
       const legend = this.options.legend;
       legend.show = optionsSetup.isShowLegend;
       legend.left = optionsSetup.lateralPosition;
-      legend.top = optionsSetup.longitudinalPosition == 'top' ? 0 : 'auto';
+      legend.top = optionsSetup.longitudinalPosition;
       legend.bottom =
-        optionsSetup.longitudinalPosition == 'bottom' ? 0 : 'auto';
+        optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
         color: optionsSetup.lengedColor,
@@ -373,6 +373,7 @@ export default {
       };
       legend.itemWidth = optionsSetup.lengedWidth;
     },
+    // 图例名称设置
     setOptionsLegendName(name){
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
@@ -560,8 +561,8 @@ export default {
         }
         legendName.push(val.series[i].name);
       }
-      this.options.legend['data'] = legendName;
       this.options.series = series;
+      this.options.legend['data'] = legendName;
       this.setOptionsLegendName(legendName);
     },
   }
