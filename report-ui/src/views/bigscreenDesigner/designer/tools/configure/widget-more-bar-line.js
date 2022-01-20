@@ -224,7 +224,7 @@ export const widgetMoreBarLine = {
               name: 'legendName',
               required: false,
               placeholder: '多值以英文,隔开',
-              value: '成功,失败,终止,成功率'
+              value: ''
             },
             {
               type: 'vue-color',

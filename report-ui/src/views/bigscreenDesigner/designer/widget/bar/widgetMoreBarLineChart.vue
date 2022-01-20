@@ -215,8 +215,7 @@ export default {
       this.setOptionsX();
       this.setOptionsY();
       this.setOptionsLegend();
-      this.setOptionsLine();
-      this.setOptionsBar();
+      this.setOptionsLegendName();
       this.setOptionsTooltip();
       this.setOptionsMargin();
       this.setOptionsColor();
@@ -338,60 +337,6 @@ export default {
       ];
       this.options.yAxis = yAxis;
     },
-    // 折线设置 数值设置
-    setOptionsLine() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "line") {
-          series[key].showSymbol = optionsSetup.markPoint;
-          series[key].symbolSize = optionsSetup.pointSize;
-          series[key].smooth = optionsSetup.smoothCurve;
-          if (optionsSetup.area) {
-            series[key].areaStyle = {
-              opacity: optionsSetup.areaThickness / 100
-            };
-          } else {
-            series[key].areaStyle = {
-              opacity: 0
-            };
-          }
-          series[key].lineStyle = {
-            width: optionsSetup.lineWidth
-          };
-          series[key].itemStyle.borderRadius = optionsSetup.radius;
-          series[key].label = {
-            show: optionsSetup.isShowLine,
-            position: "top",
-            distance: optionsSetup.distanceLine,
-            fontSize: optionsSetup.fontSizeLine,
-            color: optionsSetup.subTextColorLine,
-            fontWeight: optionsSetup.fontWeightLine
-          };
-        }
-      }
-      this.options.series = series;
-    },
-    // 柱体设置 数值设置
-    setOptionsBar() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "bar") {
-          series[key].label = {
-            show: optionsSetup.isShowBar,
-            position: "top",
-            distance: optionsSetup.distanceBar,
-            fontSize: optionsSetup.fontSizeBar,
-            color: optionsSetup.subTextColorBar,
-            fontWeight: optionsSetup.fontWeightBar
-          };
-          series[key].barWidth = optionsSetup.maxWidth;
-          series[key].itemStyle.normal['barBorderRadius'] = optionsSetup.radius;
-        }
-      }
-      this.options.series = series;
-    },
     // tooltip 设置
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
@@ -419,14 +364,7 @@ export default {
     },
     setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
       const legend = this.options.legend;
-      let legendName = optionsSetup.legendName;
-      let arr = legendName.split(",")
-      for (const i in series) {
-        series[i].name = arr[i];
-      }
-      legend.data = arr;
       legend.show = optionsSetup.isShowLegend;
       legend.left = optionsSetup.lateralPosition;
       legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
@@ -438,6 +376,16 @@ export default {
         fontSize: optionsSetup.lengedFontSize
       };
       legend.itemWidth = optionsSetup.lengedWidth;
+    },
+    setOptionsLegendName() {
+      const optionsSetup = this.optionsSetup;
+      const legend = this.options.legend;
+      const legendName = optionsSetup.legendName;
+      if (legendName != null) {
+        const arr = legendName.split("|");
+        console.log(arr)
+        legend.data = arr;
+      }
     },
     // 颜色修改
     setOptionsColor() {
@@ -452,7 +400,7 @@ export default {
       for (const i in series) {
         if (series[i].type == "bar") {
           series[i].itemStyle.normal['color'] = arrColor[i];
-        }else {
+        } else {
           series[i].lineStyle["color"] = arrColor[i];
         }
       }
@@ -465,7 +413,9 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
+      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
+      const legendName = [];
       let axis = [];
       let bar1 = [];
       let bar2 = [];
@@ -481,10 +431,54 @@ export default {
       // x轴
       this.options.xAxis.data = axis;
       // series
+      for (const i in series) {
+        if (series[i].type == "bar") {
+          series[i].label = {
+            show: optionsSetup.isShowBar,
+            position: "top",
+            distance: optionsSetup.distanceBar,
+            fontSize: optionsSetup.fontSizeBar,
+            color: optionsSetup.subTextColorBar,
+            fontWeight: optionsSetup.fontWeightBar
+          };
+          series[i].barWidth = optionsSetup.maxWidth;
+          series[i].itemStyle.normal['barBorderRadius'] = optionsSetup.radius;
+        } else if (series[i].type == "line") {
+          series[i].yAxisIndex = 1;
+          series[i].showSymbol = optionsSetup.markPoint;
+          series[i].symbolSize = optionsSetup.pointSize;
+          series[i].smooth = optionsSetup.smoothCurve;
+          if (optionsSetup.area) {
+            series[i].areaStyle = {
+              opacity: optionsSetup.areaThickness / 100
+            };
+          } else {
+            series[i].areaStyle = {
+              opacity: 0
+            };
+          }
+          series[i].lineStyle = {
+            width: optionsSetup.lineWidth
+          };
+          series[i].label = {
+            show: optionsSetup.isShowLine,
+            position: "top",
+            distance: optionsSetup.distanceLine,
+            fontSize: optionsSetup.fontSizeLine,
+            color: optionsSetup.subTextColorLine,
+            fontWeight: optionsSetup.fontWeightLine
+          };
+        }
+      }
       series[0].data = bar1;
       series[1].data = bar2;
       series[2].data = bar3;
       series[3].data = line;
+      legendName.push(series[0].name);
+      legendName.push(series[1].name);
+      legendName.push(series[2].name);
+      legendName.push(series[3].name);
+      this.options.legend["data"] = legendName;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -504,16 +498,61 @@ export default {
       });
     },
     renderingFn(val) {
+      const optionsSetup = this.optionsSetup;
       this.options.xAxis.data = val.xAxis;
-      // series
-      const series = this.options.series;
-      for (const i in series) {
-        for (const j in val.series) {
-          if (series[i].type == val.series[j].type) {
-            series[i].data = val.series[j].data;
+      this.options.series = val.series;
+      const legendName = [];
+      for (const i in val.series) {
+        if (val.series[i].type == "bar") {
+          val.series[i].name = val.series[i].name;
+          val.series[i].type = val.series[i].type;
+          val.series[i].label = {
+            show: optionsSetup.isShowBar,
+            position: "top",
+            distance: optionsSetup.distanceBar,
+            fontSize: optionsSetup.fontSizeBar,
+            color: optionsSetup.subTextColorBar,
+            fontWeight: optionsSetup.fontWeightBar
+          };
+          val.series[i].barWidth = optionsSetup.maxWidth;
+          val.series[i].itemStyle = {
+            normal: {
+              barBorderRadius: optionsSetup.radius,
+            }
+          };
+          val.series[i].data = val.series[i].data;
+        } else if (val.series[i].type == "line") {
+          val.series[i].name = val.series[i].name;
+          val.series[i].type = val.series[i].type;
+          val.series[i].yAxisIndex = 1;
+          val.series[i].showSymbol = optionsSetup.markPoint;
+          val.series[i].symbolSize = optionsSetup.pointSize;
+          val.series[i].smooth = optionsSetup.smoothCurve;
+          if (optionsSetup.area) {
+            val.series[i].areaStyle = {
+              opacity: optionsSetup.areaThickness / 100
+            };
+          } else {
+            val.series[i].areaStyle = {
+              opacity: 0
+            };
           }
-        }
-      }
+          val.series[i].lineStyle = {
+            width: optionsSetup.lineWidth
+          };
+          val.series[i].label = {
+            show: optionsSetup.isShowLine,
+            position: "top",
+            distance: optionsSetup.distanceLine,
+            fontSize: optionsSetup.fontSizeLine,
+            color: optionsSetup.subTextColorLine,
+            fontWeight: optionsSetup.fontWeightLine
+          };
+          val.series[i].data = val.series[i].data;
+        };
+        legendName.push(val.series[i].name);
+      };
+     this.options.legend["data"] = legendName;
     }
   }
 };
