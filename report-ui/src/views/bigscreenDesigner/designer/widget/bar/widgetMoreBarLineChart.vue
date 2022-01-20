@@ -212,7 +212,6 @@ export default {
       this.setOptionsX();
       this.setOptionsY();
       this.setOptionsLegend();
-      this.setOptionsLegendName();
       this.setOptionsTooltip();
       this.setOptionsMargin();
       this.setOptionsColor();
@@ -374,28 +373,22 @@ export default {
       };
       legend.itemWidth = optionsSetup.lengedWidth;
     },
-    setOptionsLegendName(){
+    setOptionsLegendName(name){
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      if (this.optionsData.dataType == 'staticData') {
-        const legendName = optionsSetup.legendName;
-        if (null == legendName || legendName == '') {
-          const name = [];
-          name.push('调解成功');
-          name.push('调解失败');
-          name.push('调解终止');
-          name.push('调解成功率');
-          for (let i = 0; i < name.length; i++) {
-            series[i].name = name[i];
-          }
-          this.options.legend['data'] = name;
-        }else {
-          const arr = legendName.split('|');
-          for (let i = 0; i < arr.length; i++) {
-            series[i].name = arr[i];
-          }
-          this.options.legend['data'] = arr
+      const legendName = optionsSetup.legendName;
+      // 图例没有手动写则显示原值，写了则显示新值
+      if (null == legendName || legendName == '') {
+        for (let i = 0; i < name.length; i++) {
+          series[i].name = name[i];
         }
+        this.options.legend['data'] = name;
+      }else {
+        const arr = legendName.split('|');
+        for (let i = 0; i < arr.length; i++) {
+          series[i].name = arr[i];
+        }
+        this.options.legend['data'] = arr
       }
     },
     // 颜色修改
@@ -484,6 +477,13 @@ export default {
       series[1].data = bar2;
       series[2].data = bar3;
       series[3].data = line;
+      const legendName = [];
+      legendName.push('调解成功');
+      legendName.push('调解失败');
+      legendName.push('调解终止');
+      legendName.push('调解成功率');
+      this.options.legend['data'] = legendName;
+      this.setOptionsLegendName(legendName);
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -562,7 +562,8 @@ export default {
       }
       this.options.legend['data'] = legendName;
       this.options.series = series;
-    }
+      this.setOptionsLegendName(legendName);
+    },
   }
 };
 
