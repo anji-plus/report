@@ -223,7 +223,7 @@ export const widgetMoreBarLine = {
               label: '图例名称',
               name: 'legendName',
               required: false,
-              placeholder: '多值以英文,隔开',
+              placeholder: '多值以'|'隔开',
               value: ''
             },
             {
