@@ -383,7 +383,6 @@ export default {
       const legendName = optionsSetup.legendName;
       if (legendName != null) {
         const arr = legendName.split("|");
-        console.log(arr)
         legend.data = arr;
       }
     },
@@ -500,13 +499,15 @@ export default {
     renderingFn(val) {
       const optionsSetup = this.optionsSetup;
       this.options.xAxis.data = val.xAxis;
-      this.options.series = val.series;
+      const series = [];
+      // this.options.series = val.series;
       const legendName = [];
       for (const i in val.series) {
+        const obj = {};
         if (val.series[i].type == "bar") {
-          val.series[i].name = val.series[i].name;
-          val.series[i].type = val.series[i].type;
-          val.series[i].label = {
+          obj.name = val.series[i].name;
+          obj.type = val.series[i].type;
+          obj.label = {
             show: optionsSetup.isShowBar,
             position: "top",
             distance: optionsSetup.distanceBar,
@@ -514,33 +515,34 @@ export default {
             color: optionsSetup.subTextColorBar,
             fontWeight: optionsSetup.fontWeightBar
           };
-          val.series[i].barWidth = optionsSetup.maxWidth;
-          val.series[i].itemStyle = {
+          obj.barWidth = optionsSetup.maxWidth;
+          obj.itemStyle = {
             normal: {
               barBorderRadius: optionsSetup.radius,
             }
           };
-          val.series[i].data = val.series[i].data;
+          obj.data = val.series[i].data;
+          series.push(obj);
         } else if (val.series[i].type == "line") {
-          val.series[i].name = val.series[i].name;
-          val.series[i].type = val.series[i].type;
-          val.series[i].yAxisIndex = 1;
-          val.series[i].showSymbol = optionsSetup.markPoint;
-          val.series[i].symbolSize = optionsSetup.pointSize;
-          val.series[i].smooth = optionsSetup.smoothCurve;
+          obj.name = val.series[i].name;
+          obj.type = val.series[i].type;
+          obj.yAxisIndex = 1;
+          obj.showSymbol = optionsSetup.markPoint;
+          obj.symbolSize = optionsSetup.pointSize;
+          obj.smooth = optionsSetup.smoothCurve;
           if (optionsSetup.area) {
-            val.series[i].areaStyle = {
+            obj.areaStyle = {
               opacity: optionsSetup.areaThickness / 100
             };
           } else {
-            val.series[i].areaStyle = {
+            obj.areaStyle = {
               opacity: 0
             };
           }
-          val.series[i].lineStyle = {
+          obj.lineStyle = {
             width: optionsSetup.lineWidth
           };
-          val.series[i].label = {
+          obj.label = {
             show: optionsSetup.isShowLine,
             position: "top",
             distance: optionsSetup.distanceLine,
@@ -548,11 +550,13 @@ export default {
             color: optionsSetup.subTextColorLine,
             fontWeight: optionsSetup.fontWeightLine
           };
-          val.series[i].data = val.series[i].data;
-        };
+          obj.data = val.series[i].data;
+          series.push(obj);
+        }
         legendName.push(val.series[i].name);
-      };
-     this.options.legend["data"] = legendName;
+      }
+      this.options.legend["data"] = legendName;
+      this.options.series = series;
     }
   }
 };
