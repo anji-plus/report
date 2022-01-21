@@ -316,11 +316,15 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
                     LambdaQueryWrapper<GaeaFile> queryWrapper = Wrappers.lambdaQuery();
                     queryWrapper.eq(GaeaFile::getFileId, fileName);
                     GaeaFile gaeaFile = gaeaFileService.selectOne(queryWrapper);
+                    String uploadPath;
                     if (null == gaeaFile) {
                         GaeaFile upload = gaeaFileService.upload(imageFile, fileName);
                         log.info("存入图片: {}", upload.getFilePath());
-                        fileMap.put(fileName, upload.getUrlPath());
+                        uploadPath = upload.getUrlPath();
+                    }else {
+                        uploadPath = gaeaFile.getUrlPath();
                     }
+                    fileMap.put(fileName, uploadPath);
                 }
             }
 
