@@ -6,7 +6,6 @@ import com.anjiplus.template.gaea.business.modules.report.controller.param.Repor
 import com.anjiplus.template.gaea.business.modules.report.dao.entity.Report;
 
 /**
- * TODO
  *
  * @author chenkening
  * @date 2021/3/26 10:35
@@ -14,4 +13,10 @@ import com.anjiplus.template.gaea.business.modules.report.dao.entity.Report;
 public interface ReportService extends GaeaBaseService<ReportParam, Report> {
 
     void delReport(ReportDto reportDto);
+
+    /**
+     * 下载次数+1
+     * @param reportCode
+     */
+    void downloadStatistics(String reportCode);
 }

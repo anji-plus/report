@@ -16,6 +16,7 @@ import com.anjiplus.template.gaea.business.modules.dashboard.service.ReportDashb
 import com.anjiplus.template.gaea.business.modules.file.entity.GaeaFile;
 import com.anjiplus.template.gaea.business.modules.file.service.GaeaFileService;
 import com.anjiplus.template.gaea.business.modules.file.util.FileUtils;
+import com.anjiplus.template.gaea.business.modules.report.service.ReportService;
 import com.anjiplus.template.gaea.business.util.DateUtil;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.controller.dto.ReportDashboardWidgetDto;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.controller.dto.ReportDashboardWidgetValueDto;
@@ -26,6 +27,7 @@ import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.DataSe
 import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.OriginalDataDto;
 import com.anjiplus.template.gaea.business.modules.dataset.service.DataSetService;
 import com.anjiplus.template.gaea.business.util.FileUtil;
+import com.anjiplus.template.gaea.business.util.RequestUtil;
 import com.anjiplus.template.gaea.business.util.UuidUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -51,6 +53,7 @@ import java.io.File;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author Raod
@@ -73,6 +76,9 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
 
     @Autowired
     private GaeaFileService gaeaFileService;
+
+    @Autowired
+    private ReportService reportService;
 
     @Value("${customer.file.downloadPath:''}")
     private String fileDownloadPath;
@@ -271,6 +277,13 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
         //删除path临时文件夹
         FileUtil.delete(path);
         log.info("删除临时文件：{}，{}", zipPath, path);
+
+        //异步统计下载次数
+        CompletableFuture.runAsync(() -> {
+            log.info("=======>ip:{} 下载模板：{}", RequestUtil.getIpAddr(request), reportCode);
+            reportService.downloadStatistics(reportCode);
+        });
+
 
         return body;
     }

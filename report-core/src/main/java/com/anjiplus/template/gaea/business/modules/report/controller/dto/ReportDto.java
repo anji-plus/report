@@ -6,7 +6,6 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * TODO
  *
  * @author chenkening
  * @date 2021/3/26 10:34
@@ -49,5 +48,12 @@ public class ReportDto extends GaeaBaseDTO implements Serializable {
 
     /** 0--未删除 1--已删除 DIC_NAME=DELETE_FLAG */
     private Integer deleteFlag;
+
+
+    /** 报表作者 */
+    private String reportAuthor;
+
+    /** 下载次数 */
+    private Long downloadCount;
 
 }

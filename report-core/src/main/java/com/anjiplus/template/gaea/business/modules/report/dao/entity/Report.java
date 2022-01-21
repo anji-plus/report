@@ -36,6 +36,12 @@ public class Report extends GaeaBaseEntity {
     @ApiModelProperty(value = "报表缩略图")
     private String reportImage;
 
+    @ApiModelProperty(value = "报表作者")
+    private String reportAuthor;
+
+    @ApiModelProperty(value = "下载次数")
+    private Long downloadCount;
+
     @ApiModelProperty(value = "0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG")
     private Integer enableFlag;
 
