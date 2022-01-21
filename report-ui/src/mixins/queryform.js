@@ -139,6 +139,7 @@ export default {
         const seriesData = [];
         const value = chartProperties[key];
         obj["type"] = value;
+        obj["name"] = key;
         for (let i = 0; i < data.length; i++) {
           if (value.startsWith("xAxis")) {
             // 代表为x轴

@@ -1,15 +1,15 @@
 <template>
-  <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+  <div :style='styleObj'>
+    <v-chart :options='options' autoresize/>
   </div>
 </template>
 
 <script>
 
-import echarts from "echarts";
+import echarts from 'echarts';
 
 export default {
-  name: "widgetMoreBarLineChart",
+  name: 'widgetMoreBarLineChart',
   components: {},
   props: {
     value: Object,
@@ -36,7 +36,7 @@ export default {
           left: '7%',
           top: '5%',
           textStyle: {
-            color: "#666666"
+            color: '#666666'
           },
           itemWidth: 15,
           itemHeight: 10,
@@ -53,7 +53,7 @@ export default {
           },
           axisLabel: {
             textStyle: {
-              color: "#666666"
+              color: '#666666'
             }
           },
         },
@@ -71,16 +71,16 @@ export default {
             },
             axisLabel: {
               textStyle: {
-                color: "#666666"
+                color: '#666666'
               }
             },
           },
           {
-            type: "value",
+            type: 'value',
             nameTextStyle: {
-              color: "#666666"
+              color: '#666666'
             },
-            position: "right",
+            position: 'right',
             axisLine: {
               lineStyle: {
                 color: '#cdd5e2'
@@ -92,7 +92,7 @@ export default {
             axisLabel: {
               show: true,
               textStyle: {
-                color: "#666666"
+                color: '#666666'
               }
             }
           }
@@ -101,7 +101,6 @@ export default {
           {
             name: '调解成功',
             type: 'bar',
-            barWidth: '12px',
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -114,12 +113,11 @@ export default {
                 barBorderRadius: 6,
               },
             },
-            data: [400, 400, 300, 300, 300, 400, 400, 400, 300]
+            data: []
           },
           {
             name: '调解失败',
             type: 'bar',
-            barWidth: '12px',
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -133,12 +131,11 @@ export default {
               }
 
             },
-            data: [400, 500, 500, 500, 500, 400, 400, 500, 500]
+            data: []
           },
           {
             name: '调解终止',
             type: 'bar',
-            barWidth: '12px',
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -151,15 +148,14 @@ export default {
                 barBorderRadius: 6,
               }
             },
-            data: [400, 600, 700, 700, 1000, 400, 400, 600, 700]
+            data: []
           },
           {
-            name: "调解成功率",
-            type: "line",
+            name: '调解成功率',
+            type: 'line',
             yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
             smooth: false, //平滑曲线显示
-
-            symbol: "circle", //标记的图形为实心圆
+            symbol: 'circle', //标记的图形为实心圆
             symbolSize: 8, //标记的大小
             itemStyle: {
               normal: {
@@ -170,9 +166,9 @@ export default {
 
             },
             lineStyle: {
-              color: "#ffa43a"
+              color: '#ffa43a'
             },
-            data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5]
+            data: []
           }
         ]
       }
@@ -181,11 +177,11 @@ export default {
   computed: {
     styleObj() {
       return {
-        position: this.ispreview ? "absolute" : "static",
-        width: this.optionsStyle.width + "px",
-        height: this.optionsStyle.height + "px",
-        left: this.optionsStyle.left + "px",
-        top: this.optionsStyle.top + "px",
+        position: this.ispreview ? 'absolute' : 'static',
+        width: this.optionsStyle.width + 'px',
+        height: this.optionsStyle.height + 'px',
+        left: this.optionsStyle.left + 'px',
+        top: this.optionsStyle.top + 'px',
         background: this.optionsSetup.background
       };
     }
@@ -215,14 +211,11 @@ export default {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
-      /*
-      this.setOptionsTop();
-      this.setOptionsBar();
-      this.setOptionsTooltip();
-      this.setOptionsData();
-      this.setOptionsMargin();
       this.setOptionsLegend();
-      this.setOptionsColor();*/
+      this.setOptionsTooltip();
+      this.setOptionsMargin();
+      this.setOptionsColor();
+      this.setOptionsData();
     },
     // 标题修改
     setOptionsTitle() {
@@ -249,7 +242,7 @@ export default {
     setOptionsX() {
       const optionsSetup = this.optionsSetup;
       const xAxis = {
-        type: "category",
+        type: 'category',
         show: optionsSetup.hideX, // 坐标轴是否显示
         name: optionsSetup.xName, // 坐标轴名称
         nameTextStyle: {
@@ -287,7 +280,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = [
         {
-          type: "value",
+          type: 'value',
           show: optionsSetup.isShowYLeft, // 坐标轴是否显示
           name: optionsSetup.textNameYLeft, // 坐标轴名称
           nameTextStyle: { // 别名
@@ -312,8 +305,8 @@ export default {
           }
         },
         {
-          type: "value",
-          position: "right",
+          type: 'value',
+          position: 'right',
           show: optionsSetup.isShowYRight, // 坐标轴是否显示
           name: optionsSetup.textNameYRight, // 坐标轴名称
           nameTextStyle: { // 别名
@@ -340,32 +333,11 @@ export default {
       ];
       this.options.yAxis = yAxis;
     },
-    // 柱体设置 数值设置
-    setOptionsBar() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "bar") {
-          series[key].label = {
-            show: optionsSetup.isShowBar,
-            position: "top",
-            distance: optionsSetup.distanceBar,
-            fontSize: optionsSetup.fontSizeBar,
-            color: optionsSetup.subTextColorBar,
-            fontWeight: optionsSetup.fontWeightBar
-          };
-          series[key].barWidth = optionsSetup.maxWidth;
-          series[key].barMinHeight = optionsSetup.minHeight;
-          series[key].itemStyle.barBorderRadius = optionsSetup.radius;
-        }
-      }
-      this.options.series = series;
-    },
     // tooltip 设置
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
-        trigger: "item",
+        trigger: 'item',
         show: true,
         textStyle: {
           color: optionsSetup.lineColor,
@@ -391,9 +363,9 @@ export default {
       const legend = this.options.legend;
       legend.show = optionsSetup.isShowLegend;
       legend.left = optionsSetup.lateralPosition;
-      legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
+      legend.top = optionsSetup.longitudinalPosition;
       legend.bottom =
-        optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
+        optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
         color: optionsSetup.lengedColor,
@@ -401,45 +373,118 @@ export default {
       };
       legend.itemWidth = optionsSetup.lengedWidth;
     },
+    // 图例名称设置
+    setOptionsLegendName(name){
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      const legendName = optionsSetup.legendName;
+      // 图例没有手动写则显示原值，写了则显示新值
+      if (null == legendName || legendName == '') {
+        for (let i = 0; i < name.length; i++) {
+          series[i].name = name[i];
+        }
+        this.options.legend['data'] = name;
+      }else {
+        const arr = legendName.split('|');
+        for (let i = 0; i < arr.length; i++) {
+          series[i].name = arr[i];
+        }
+        this.options.legend['data'] = arr
+      }
+    },
     // 颜色修改
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
       const customColor = optionsSetup.customColor;
+      const series = this.options.series;
       if (!customColor) return;
       const arrColor = [];
       for (let i = 0; i < customColor.length; i++) {
         arrColor.push(customColor[i].color);
       }
-      this.options.color = arrColor;
-      this.options = Object.assign({}, this.options);
+      for (const i in series) {
+        if (series[i].type == 'bar') {
+          series[i].itemStyle.normal['color'] = arrColor[i];
+        } else {
+          series[i].lineStyle['color'] = arrColor[i];
+        }
+      }
     },
     // 数据处理
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
-      optionsData.dataType == "staticData"
+      optionsData.dataType == 'staticData'
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
+      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       let axis = [];
-      let bar = [];
+      let bar1 = [];
+      let bar2 = [];
+      let bar3 = [];
       let line = [];
       for (const i in val) {
-        axis[i] = val[i].axis;
-        bar[i] = val[i].bar;
-        line[i] = val[i].line;
+        axis[i] = val[i].date;
+        bar1[i] = val[i].unsales;
+        bar2[i] = val[i].manus;
+        bar3[i] = val[i].rework;
+        line[i] = val[i].sales;
       }
       // x轴
       this.options.xAxis.data = axis;
       // series
       for (const i in series) {
-        if (series[i].type == "bar") {
-          series[i].data = bar;
-        } else {
-          series[i].data = line;
+        if (series[i].type == 'bar') {
+          series[i].label = {
+            show: optionsSetup.isShowBar,
+            position: 'top',
+            distance: optionsSetup.distanceBar,
+            fontSize: optionsSetup.fontSizeBar,
+            color: optionsSetup.subTextColorBar,
+            fontWeight: optionsSetup.fontWeightBar
+          };
+          series[i].barWidth = optionsSetup.maxWidth;
+          series[i].itemStyle.normal['barBorderRadius'] = optionsSetup.radius;
+        } else if (series[i].type == 'line') {
+          series[i].yAxisIndex = 1;
+          series[i].showSymbol = optionsSetup.markPoint;
+          series[i].symbolSize = optionsSetup.pointSize;
+          series[i].smooth = optionsSetup.smoothCurve;
+          if (optionsSetup.area) {
+            series[i].areaStyle = {
+              opacity: optionsSetup.areaThickness / 100
+            };
+          } else {
+            series[i].areaStyle = {
+              opacity: 0
+            };
+          }
+          series[i].lineStyle = {
+            width: optionsSetup.lineWidth
+          };
+          series[i].label = {
+            show: optionsSetup.isShowLine,
+            position: 'top',
+            distance: optionsSetup.distanceLine,
+            fontSize: optionsSetup.fontSizeLine,
+            color: optionsSetup.subTextColorLine,
+            fontWeight: optionsSetup.fontWeightLine
+          };
         }
       }
+      series[0].data = bar1;
+      series[1].data = bar2;
+      series[2].data = bar3;
+      series[3].data = line;
+      const legendName = [];
+      legendName.push('调解成功');
+      legendName.push('调解失败');
+      legendName.push('调解终止');
+      legendName.push('调解成功率');
+      this.options.legend['data'] = legendName;
+      this.setOptionsLegendName(legendName);
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -459,23 +504,73 @@ export default {
       });
     },
     renderingFn(val) {
+      const optionsSetup = this.optionsSetup;
       this.options.xAxis.data = val.xAxis;
-      // series
-      const series = this.options.series;
-      for (const i in series) {
-        for (const j in val.series) {
-          if (series[i].type == val.series[j].type) {
-            series[i].data = val.series[j].data;
+      const series = [];
+      const legendName = [];
+      for (const i in val.series) {
+        const obj = {};
+        if (val.series[i].type == 'bar') {
+          obj.name = val.series[i].name;
+          obj.type = val.series[i].type;
+          obj.label = {
+            show: optionsSetup.isShowBar,
+            position: 'top',
+            distance: optionsSetup.distanceBar,
+            fontSize: optionsSetup.fontSizeBar,
+            color: optionsSetup.subTextColorBar,
+            fontWeight: optionsSetup.fontWeightBar
+          };
+          obj.barWidth = optionsSetup.maxWidth;
+          obj.itemStyle = {
+            normal: {
+              barBorderRadius: optionsSetup.radius,
+            }
+          };
+          obj.data = val.series[i].data;
+          series.push(obj);
+        } else if (val.series[i].type == 'line') {
+          obj.name = val.series[i].name;
+          obj.type = val.series[i].type;
+          obj.yAxisIndex = 1;
+          obj.showSymbol = optionsSetup.markPoint;
+          obj.symbolSize = optionsSetup.pointSize;
+          obj.smooth = optionsSetup.smoothCurve;
+          if (optionsSetup.area) {
+            obj.areaStyle = {
+              opacity: optionsSetup.areaThickness / 100
+            };
+          } else {
+            obj.areaStyle = {
+              opacity: 0
+            };
           }
+          obj.lineStyle = {
+            width: optionsSetup.lineWidth
+          };
+          obj.label = {
+            show: optionsSetup.isShowLine,
+            position: 'top',
+            distance: optionsSetup.distanceLine,
+            fontSize: optionsSetup.fontSizeLine,
+            color: optionsSetup.subTextColorLine,
+            fontWeight: optionsSetup.fontWeightLine
+          };
+          obj.data = val.series[i].data;
+          series.push(obj);
         }
+        legendName.push(val.series[i].name);
       }
-    }
+      this.options.series = series;
+      this.options.legend['data'] = legendName;
+      this.setOptionsLegendName(legendName);
+    },
   }
 };
 
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
 .echarts {
   width: 100%;
   height: 100%;
