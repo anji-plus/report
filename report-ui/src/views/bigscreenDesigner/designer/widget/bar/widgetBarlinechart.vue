@@ -139,7 +139,7 @@ export default {
       this.setOptionsTooltip();
       this.setOptionsData();
       this.setOptionsMargin();
-      //this.setOptionsLegend();
+      this.setOptionsLegend();
       this.setOptionsColor();
     },
     // 标题修改
@@ -341,6 +341,40 @@ export default {
       };
       this.options.grid = grid;
     },
+    setOptionsLegend() {
+      const optionsSetup = this.optionsSetup;
+      const legend = this.options.legend;
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition;
+      legend.bottom =
+        optionsSetup.longitudinalPosition;
+      legend.orient = optionsSetup.layoutFront;
+      legend.textStyle = {
+        color: optionsSetup.lengedColor,
+        fontSize: optionsSetup.lengedFontSize
+      };
+      legend.itemWidth = optionsSetup.lengedWidth;
+    },
+    // 图例名称设置
+    setOptionsLegendName(name){
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      const legendName = optionsSetup.legendName;
+      // 图例没有手动写则显示原值，写了则显示新值
+      if (null == legendName || legendName == '') {
+        for (let i = 0; i < name.length; i++) {
+          series[i].name = name[i];
+        }
+        this.options.legend['data'] = name;
+      }else {
+        const arr = legendName.split('|');
+        for (let i = 0; i < arr.length; i++) {
+          series[i].name = arr[i];
+        }
+        this.options.legend['data'] = arr
+      }
+    },
     // 图例颜色修改
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
@@ -380,6 +414,11 @@ export default {
           series[i].data = line;
         }
       }
+      const legendName = [];
+      legendName.push('bar');
+      legendName.push('line');
+      this.options.legend['data'] = legendName;
+      this.setOptionsLegendName(legendName);
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -402,13 +441,17 @@ export default {
       this.options.xAxis.data = val.xAxis;
       // series
       const series = this.options.series;
+      const legendName = [];
       for (const i in series) {
         for (const j in val.series) {
           if (series[i].type == val.series[j].type) {
             series[i].data = val.series[j].data;
           }
         }
+        legendName.push(val.series[i].name);
       }
+      this.options.legend['data'] = legendName;
+      this.setOptionsLegendName(legendName);
     }
   }
 };

@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 柱状对比图 json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:39:35
  * @LastEditors: qianlishi
@@ -113,6 +113,88 @@ export const widgetBarCompare = {
                   {code: 'right', name: '右对齐'},
                 ],
                 value: 'center'
+              },
+            ],
+          },
+          {
+            name: '图例操作',
+            list: [
+              {
+                type: 'el-switch',
+                label: '图例显示',
+                name: 'isShowLegend',
+                required: false,
+                placeholder: '',
+                value: true,
+              },
+              {
+                type: 'el-input-text',
+                label: '图例名称',
+                name: 'legendName',
+                required: false,
+                placeholder: '多值以'|'隔开',
+                value: ''
+              },
+              {
+                type: 'vue-color',
+                label: '字体颜色',
+                name: 'lengedColor',
+                required: false,
+                placeholder: '',
+                value: '#fff',
+              },
+              {
+                type: 'el-input-number',
+                label: '字体字号',
+                name: 'lengedFontSize',
+                required: false,
+                placeholder: '',
+                value: 12,
+              },
+              {
+                type: 'el-input-number',
+                label: '图例宽度',
+                name: 'lengedWidth',
+                required: false,
+                placeholder: '',
+                value: 12,
+              },
+              {
+                type: 'el-select',
+                label: '横向位置',
+                name: 'lateralPosition',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  {code: 'center', name: '居中'},
+                  {code: 'left', name: '左对齐'},
+                  {code: 'right', name: '右对齐'},
+                ],
+                value: 'center'
+              },
+              {
+                type: 'el-select',
+                label: '纵向位置',
+                name: 'longitudinalPosition',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  {code: 'top', name: '顶部'},
+                  {code: 'bottom', name: '底部'},
+                ],
+                value: 'top'
+              },
+              {
+                type: 'el-select',
+                label: '布局前置',
+                name: 'layoutFront',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  {code: 'vertical', name: '竖排'},
+                  {code: 'horizontal', name: '横排'},
+                ],
+                value: 'horizontal'
               },
             ],
           },
@@ -461,80 +543,6 @@ export const widgetBarCompare = {
             ],
           },
           {
-            name: '图例操作',
-            list: [
-              {
-                type: 'el-switch',
-                label: '显示',
-                name: 'isShowLegend',
-                required: false,
-                placeholder: '',
-                value: true,
-              },
-              {
-                type: 'vue-color',
-                label: '字体颜色',
-                name: 'lengedColor',
-                required: false,
-                placeholder: '',
-                value: '#fff',
-              },
-              {
-                type: 'el-input-number',
-                label: '字体大小',
-                name: 'lengedFontSize',
-                required: false,
-                placeholder: '',
-                value: 16,
-              },
-              {
-                type: 'el-input-number',
-                label: '图例宽度',
-                name: 'lengedWidth',
-                required: false,
-                placeholder: '',
-                value: 15,
-              },
-              {
-                type: 'el-select',
-                label: '横向位置',
-                name: 'lateralPosition',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  {code: 'center', name: '居中'},
-                  {code: 'left', name: '左对齐'},
-                  {code: 'right', name: '右对齐'},
-                ],
-                value: 'center'
-              },
-              {
-                type: 'el-select',
-                label: '纵向位置',
-                name: 'longitudinalPosition',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  {code: 'top', name: '顶部'},
-                  {code: 'bottom', name: '底部'},
-                ],
-                value: 'top'
-              },
-              {
-                type: 'el-select',
-                label: '布局前置',
-                name: 'layoutFront',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  {code: 'vertical', name: '竖排'},
-                  {code: 'horizontal', name: '横排'},
-                ],
-                value: 'horizontal'
-              },
-            ],
-          },
-          {
             name: '自定义配色',
             list: [
               {
@@ -635,7 +643,7 @@ export const widgetBarCompare = {
           name: 'width',
           required: false,
           placeholder: '该容器在1920px大屏中的宽度',
-          value: 400,
+          value: 500,
         },
         {
           type: 'el-input-number',
@@ -643,7 +651,7 @@ export const widgetBarCompare = {
           name: 'height',
           required: false,
           placeholder: '该容器在1080px大屏中的高度',
-          value: 200,
+          value: 250,
         },
       ],
     }

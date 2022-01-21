@@ -234,15 +234,34 @@ export default {
       const legend = this.options.legend;
       legend.show = optionsSetup.isShowLegend;
       legend.left = optionsSetup.lateralPosition;
-      legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
+      legend.top = optionsSetup.longitudinalPosition;
       legend.bottom =
-        optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
+        optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
         color: optionsSetup.lengedColor,
         fontSize: optionsSetup.lengedFontSize
       };
       legend.itemWidth = optionsSetup.lengedWidth;
+    },
+    // 图例名称设置
+    setOptionsLegendName(name){
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      const legendName = optionsSetup.legendName;
+      // 图例没有手动写则显示原值，写了则显示新值
+      if (null == legendName || legendName == '') {
+        for (let i = 0; i < name.length; i++) {
+          series[i].name = name[i];
+        }
+        this.options.legend['data'] = name;
+      }else {
+        const arr = legendName.split('|');
+        for (let i = 0; i < arr.length; i++) {
+          series[i].name = arr[i];
+        }
+        this.options.legend['data'] = arr
+      }
     },
     // 数据解析
     setOptionsData() {
@@ -285,21 +304,22 @@ export default {
       }
       //数据
       const series = [];
-      let xAxisList = []
-      let yAxisList = []
+      let xAxisList = [];
+      let yAxisList = [];
+      const legendName = [];
       for (const i in val) {
-        xAxisList[i] = val[i].axis
-        yAxisList[i] = val[i].name
+        xAxisList[i] = val[i].axis;
+        yAxisList[i] = val[i].name;
       }
-      xAxisList = this.setUnique(xAxisList)
-      yAxisList = this.setUnique(yAxisList)
+      xAxisList = this.setUnique(xAxisList);
+      yAxisList = this.setUnique(yAxisList);
       for (const i in yAxisList) {
-        const data = new Array(yAxisList.length).fill(0)
+        const data = new Array(yAxisList.length).fill(0);
         for (const j in xAxisList) {
           for (const k in val) {
-            if (val[k].name == yAxisList[i]) { // a = a
-              if (val[k].axis == xAxisList[j]) { // 0725
-                data[j] = val[k].data
+            if (val[k].name == yAxisList[i]) {
+              if (val[k].axis == xAxisList[j]) {
+                data[j] = val[k].data;
               }
             }
           }
@@ -317,7 +337,7 @@ export default {
             distance: 10,
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.subTextColor,
-            fontWeight: optionsSetup.fontWeight
+            fontWeight: optionsSetup.fontWeight,
           },
           //颜色，圆角属性
           itemStyle: {
@@ -327,8 +347,9 @@ export default {
             }
           }
         })
+        legendName.push(yAxisList[i]);
       }
-      this.options.series = series
+      this.options.series = series;
       if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];
         this.options.yAxis.data = xAxisList;
@@ -340,6 +361,8 @@ export default {
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
       }
+      this.options.legend['data'] = legendName;
+      this.setOptionsLegendName(legendName);
     },
     // 动态数据
     dynamicDataFn(val, refreshTime, optionsSetup) {
@@ -379,6 +402,7 @@ export default {
         this.options.yAxis.type = "value";
       }
       const series = [];
+      const legendName = [];
       for (const i in val.series) {
         if (val.series[i].type == "bar") {
           series.push({
@@ -394,7 +418,7 @@ export default {
               distance: 10,
               fontSize: optionsSetup.fontSize,
               color: optionsSetup.subTextColor,
-              fontWeight: optionsSetup.fontWeight
+              fontWeight: optionsSetup.fontWeight,
             },
             //颜色，圆角属性
             itemStyle: {
@@ -405,8 +429,11 @@ export default {
             }
           })
         }
+        legendName.push(val.series[i].name);
       }
-      this.options.series = series
+      this.options.series = series;
+      this.options.legend['data'] = legendName;
+      this.setOptionsLegendName(legendName);
     }
   }
 };
