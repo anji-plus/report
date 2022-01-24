@@ -387,19 +387,6 @@ export default {
       title.textStyle["rich"] = rich;
       this.options.title = title;
     },
-    setOptions() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "gauge") {
-          series[key].axisLine.lineStyle.width = optionsSetup.tickMarkWeight;
-          series[key].axisLabel.show = optionsSetup.showScaleValue;
-          series[key].axisLabel.fontSize = optionsSetup.scaleFontSize;
-          series[key].axisTick.show = optionsSetup.showTickMarks;
-          series[key].detail.textStyle.fontSize = optionsSetup.targetFontSize;
-        }
-      }
-    },
     //圆环0-100%颜色
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
