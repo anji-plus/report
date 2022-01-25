@@ -2,7 +2,7 @@ export const widgetWordCloud = {
   code: 'widgetWordCloud',
   type: 'chart',
   label: '词云图',
-  icon: 'iconnandinggeermeiguitu',
+  icon: 'iconciyuntu',
   options: {
     // 配置
     setup: [
