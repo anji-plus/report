@@ -3,7 +3,7 @@
     <div class="admin-title" @click="goBigScreen">
       <div class="con">
         <img src="../../../../../static/logo-dp.png" width="50" />
-        <span class="version">V0.9.5</span>
+        <span class="version">V0.9.6</span>
       </div>
     </div>
     <el-menu
@@ -67,7 +67,7 @@ export default {
       display: inline-block;
       font-size: 12px;
       color: #fff;
-      background: blue;
+      background: #4FADFD;
       padding: 2px;
       border-radius: 10px;
     }
