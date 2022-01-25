@@ -25,7 +25,7 @@ import {widgetPiechart} from "./configure/widget-piechart"
 import {widgetFunnel} from "./configure/widget-funnel"
 import {widgetGauge} from "./configure/widget-gauge"
 import {widgetMap} from "./configure/widget-map"
-import {WidgetPieNightingale} from "./configure/widget-pie-nightingale"
+import {widgetPieNightingale} from "./configure/widget-pie-nightingale"
 import {widgetPiePercentage} from "./configure/widget-pie-percentage"
 import {widgetAirbubbleMap} from "./configure/widget-airbubble-map"
 import {widgetBarStack} from "./configure/widget-bar-stack"
@@ -34,6 +34,7 @@ import {widgetBarCompare} from "./configure/widget-bar-compare"
 import {widgetLineCompare} from "./configure/widget-line-compare"
 import {widgetDecoratePie} from "./configure/widget-decorate-pie";
 import {widgetMoreBarLine} from "./configure/widget-more-bar-line";
+import {widgetWordCloud} from "./configure/widget-word-cloud";
 
 export const widgetTool = [
   // type=html类型的组件
@@ -55,7 +56,7 @@ export const widgetTool = [
   widgetFunnel,
   widgetGauge,
   widgetMap,
-  WidgetPieNightingale,
+  widgetPieNightingale,
   widgetPiePercentage,
   widgetAirbubbleMap,
   widgetBarStack,
@@ -63,5 +64,6 @@ export const widgetTool = [
   widgetBarCompare,
   widgetLineCompare,
   widgetDecoratePie,
-  widgetMoreBarLine
+  widgetMoreBarLine,
+  widgetWordCloud
 ]
