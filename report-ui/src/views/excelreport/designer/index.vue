@@ -100,8 +100,8 @@
             </el-form-item>
             <el-form-item label="自动扩展" v-if="rightForm.autoIsShow">
               <el-col :span="12">
-                <el-switch 
-                v-model="rightForm.auto" 
+                <el-switch
+                v-model="rightForm.auto"
                 @change="autoChangeFunc($event)" />
               </el-col>
               <el-col :span="12">
@@ -291,7 +291,7 @@ export default {
       const that = this;
       const options = {
         container: "luckysheet", // 设定DOM容器的id
-        title: "Luckysheet Demo", // 设定表格名称
+        title: "", // 设定表格名称
         lang: "zh", // 设定表格语言
         plugins: ["chart"],
         hook: {
