@@ -48,6 +48,7 @@ import widgetBarCompareChart from "./bar/widgetBarCompareChart";
 import widgetLineCompareChart from "./line/widgetLineCompareChart";
 import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
 import widgetMoreBarLineChart from "./bar/widgetMoreBarLineChart";
+import widgetWordCloud from "./wordcloud/widgetWordCloud";
 
 export default {
   name: "Widget",
@@ -77,7 +78,8 @@ export default {
     widgetBarCompareChart,
     widgetLineCompareChart,
     widgetDecoratePieChart,
-    widgetMoreBarLineChart
+    widgetMoreBarLineChart,
+    widgetWordCloud
   },
   model: {
     prop: "value",

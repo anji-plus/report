@@ -1,7 +1,10 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <div class="admin-title" @click="goBigScreen">
-      <img src="../../../../../static/logo-dp.png" width="50" class="mt10" />
+      <div class="con">
+        <img src="../../../../../static/logo-dp.png" width="50" />
+        <span class="version">V0.9.6</span>
+      </div>
     </div>
     <el-menu
       :show-timeout="200"
@@ -16,7 +19,6 @@
         :base-path="route.path"
       />
     </el-menu>
-    <div class="version">V0.9.5</div>
   </el-scrollbar>
 </template>
 
@@ -48,23 +50,30 @@ export default {
 
 <style lang="scss" scoped>
 .admin-title {
-  height: 60px;
-  line-height: 60px;
+  // height: 60px;
+  // line-height: 60px;
   text-align: center;
   width: 100%;
   font-weight: 500;
   color: #333;
   font-size: 14px;
   background: #fff;
+  .con {
+    margin: auto;
+    img {
+      margin-top: 10px;
+    }
+    .version {
+      display: inline-block;
+      font-size: 12px;
+      color: #fff;
+      background: #4FADFD;
+      padding: 2px;
+      border-radius: 10px;
+    }
+  }
 }
 .admin-title:hover {
   cursor: pointer;
-}
-.version {
-  color: #999;
-  position: absolute;
-  bottom: 10px;
-  font-size: 16px;
-  margin-left: 10px;
 }
 </style>

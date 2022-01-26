@@ -1,12 +1,12 @@
 /*
  * @Descripttion: 南丁格尔玫瑰图 json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:32:40
  * @LastEditors: qianlishi
  * @LastEditTime: 2021-09-28 14:18:05
  */
-export const WidgetPieNightingale = {
+export const widgetPieNightingale = {
     code: 'WidgetPieNightingaleRoseArea',
     type: 'chart',
     label: '南丁格尔玫瑰图',
