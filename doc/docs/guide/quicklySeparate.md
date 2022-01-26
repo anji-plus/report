@@ -1,5 +1,6 @@
-**前后端分离：请对自己有动手能力的小伙伴进行尝试**
-**请根据自己的实际情况对下面的步骤和内容进行调整**
+**前后端分离：** <br>
+**请对自己有动手能力的小伙伴进行尝试** <br>
+**请根据自己的实际情况对下面的步骤和内容进行调整** <br>
 
 ```
 linux：
@@ -42,11 +43,12 @@ report-core --> src --> main --> resources --> bootstrap.yml <br>
 
 ### 上传功能
 
-使用上传功能，必须修改此内容 <br>
+使用上传功能，必须修改此内容，注意路径格式，比如Win是 \ ,linux是 / <br>
 ![file.png](../picture/quickly/img_15.png) <br>
 
 ### maven打包
 
+**打包之前如果系统用的不止mysql数据源，需要自己在pom文件中加入对应的数据库的驱动，登陆系统之后，数据源提示无驱动，则选择通用JDBC数据源，这里不做演示了** <br>
 使用 maven package <br>
 **注**：不要使用maven install <br>
 ![img10](../picture/quickly/img_10.png) <br>

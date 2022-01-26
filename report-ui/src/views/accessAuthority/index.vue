@@ -1,19 +1,13 @@
+<!--
+ * @Descripttion: 用户权限--权限管理
+ * @version: 
+ * @Author: qianlishi
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 12:20:56
+-->
 <template>
-  <anji-crud ref="listPage" :option="crudOption">
-    <template v-slot:buttonLeftOnTable> </template>
-
-    <!--
-        <template slot="rowButton" slot-scope="props">
-            <el-button type="primary" @click="customButtom(props)">行按钮</el-button>
-        </template>
-        -->
-    <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
-    <!--这里可以将自定义的弹出框代码，放入到page中
-        <template v-slot:pageSection>
-          <div>插入底部html片段</div>
-        </template>
-        -->
-  </anji-crud>
+  <anji-crud ref="listPage" :option="crudOption" />
 </template>
 <script>
 import {
@@ -243,9 +237,6 @@ export default {
         ]
       }
     };
-  },
-
-  created() {},
-  methods: {}
+  }
 };
 </script>

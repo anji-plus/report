@@ -60,7 +60,7 @@ export default {
     },
     // 封装定制删除数组中的值
     contains (a, obj) {
-      var i = a.length
+      let i = a.length
       while (i--) {
         if (a[i] === obj) {
           return i
@@ -80,7 +80,7 @@ export default {
       )
     },
     /**
-     * 
+     *
      */
     resetForm (data) {
       let formKeys = Object.keys(data)
@@ -90,8 +90,8 @@ export default {
     },
     sortArray (propertyName) {
       return function (object1, object2) {
-        var value1 = object1[propertyName];
-        var value2 = object2[propertyName];
+        let value1 = object1[propertyName];
+        let value2 = object2[propertyName];
 
         if (value1 < value2) {
           return -1;
@@ -104,8 +104,8 @@ export default {
     },
     // 获取对象类型
     getObjectType (obj) {
-      var toString = Object.prototype.toString
-      var map = {
+      let toString = Object.prototype.toString
+      let map = {
         '[object Boolean]': 'boolean',
         '[object Number]': 'number',
         '[object String]': 'string',
@@ -146,7 +146,7 @@ export default {
         return val.trim() == ''
       }
       if (typeof val === 'object') {
-        for (var key in val) {
+        for (let key in val) {
           return false
         }
         return true
@@ -168,7 +168,7 @@ export default {
         list.forEach((ele) => {
           delete val[ele]
         })
-        for (var o in val) {
+        for (let o in val) {
           return false
         }
         return true
@@ -183,8 +183,8 @@ export default {
 
     // 对象深拷贝
     deepClone (data) {
-      var type = this.getObjectType(data)
-      var obj
+      let type = this.getObjectType(data)
+      let obj
       if (type === 'array') {
         obj = []
       } else if (type === 'object') {
@@ -194,7 +194,7 @@ export default {
         return data
       }
       if (type === 'array') {
-        for (var i = 0, len = data.length; i < len; i++) {
+        for (let i = 0, len = data.length; i < len; i++) {
           data[i] = (() => {
             if (data[i] === 0) {
               return data[i]
@@ -207,7 +207,7 @@ export default {
           obj.push(this.deepClone(data[i]))
         }
       } else if (type === 'object') {
-        for (var key in data) {
+        for (let key in data) {
           if (data) {
             delete data.$parent
           }
@@ -219,12 +219,12 @@ export default {
 
     // 合并json
     mergeObject () {
-      var target = arguments[0] || {}
-      var deep = false
-      var arr = Array.prototype.slice.call(arguments)
-      var i = 1
-      var options, src, key, copy
-      var isArray = false
+      let target = arguments[0] || {}
+      let deep = false
+      let arr = Array.prototype.slice.call(arguments)
+      let i = 1
+      let options, src, key, copy
+      let isArray = false
       if (typeof target === 'boolean') {
         deep = target
         i++
@@ -262,9 +262,9 @@ export default {
 
     // 获取dom在屏幕中的top和left
     getDomTopLeftById (id) {
-      var dom = document.getElementById(id)
-      var top = 0
-      var left = 0
+      let dom = document.getElementById(id)
+      let top = 0
+      let left = 0
       if (dom != null) {
         top = dom.getBoundingClientRect().top
         left = dom.getBoundingClientRect().left
@@ -272,16 +272,23 @@ export default {
       return { top: top, left: left }
     },
     objToOne (obj) {
-      var tmpData = {}
-      for (var index in obj) {
-        if (typeof obj[index] == 'object') {
-          var resObj = this.objToOne(obj[index])
+      let tmpData = {}
+      for (let index in obj) {
+        if (typeof obj[index] == 'object' && !this.isArrayFn(obj[index])) {
+          let resObj = this.objToOne(obj[index])
           Object.assign(tmpData, resObj) // 这里使用对象合并
         } else {
           tmpData[index] = obj[index]
         }
       }
       return tmpData
+    },
+    isArrayFn(value) {
+      if (typeof Array.isArray === "function") {
+        return Array.isArray(value);
+      } else {
+        return Object.prototype.toString.call(value) === "[object Array]";
+      }
     },
     urlEncode (val) {
       return encodeURIComponent(val)
@@ -293,8 +300,8 @@ export default {
       if (toString.call(obj) != '[object Object]') {
         return obj
       }
-      var result = {}
-      for (var key in obj) {
+      let result = {}
+      for (let key in obj) {
         if (this.isBlank(obj[key])) {
           continue
         }
@@ -309,13 +316,13 @@ export default {
 
     // 根据数据字典，查询指定字典dict指定值code的，返回整个dictItem{id, text, extend}
     getDictItemByCode (dict, code) {
-      var dicts = getStorageItem('gaeaDict')
+      let dicts = getStorageItem('gaeaDict')
       if (!dicts.hasOwnProperty(dict)) {
         return null
       }
-      var dictItems = dicts[dict]
-      for (var i = 0; i < dictItems.length; i++) {
-        var dictItem = dictItems[i]
+      let dictItems = dicts[dict]
+      for (let i = 0; i < dictItems.length; i++) {
+        let dictItem = dictItems[i]
         if (typeof (code) == 'number') {
           code = code.toString()
         }
@@ -327,7 +334,7 @@ export default {
     },
     // 根据数据字典，查询指定字典dict指定值code的dictItem.text
     getDictLabelByCode (dict, code) {
-      var dictItem = this.getDictItemByCode(dict, code)
+      let dictItem = this.getDictItemByCode(dict, code)
       if (dictItem != null) {
         return dictItem['text']
       } else {
@@ -336,15 +343,24 @@ export default {
     },
     // 根据数据字典，查询指定字典dict指定值code的dictItem.extend
     getDictExtendByCode (dict, code) {
-      var dictItem = this.getDictItemByCode(dict, code)
+      let dictItem = this.getDictItemByCode(dict, code)
       if (dictItem == null) {
         return null
       }
-      var extend = dictItem['extend']
+      let extend = dictItem['extend']
       if (extend == null || extend.trim() == 'null') {
         return null
       }
       return dictItem['extend']
+    },
+    getSettingByName(settingName) {
+      let gaeaSetting = JSON.parse(localStorage.getItem('gaeaDict'))
+      if (gaeaSetting[settingName] != null) {
+        return gaeaSetting[settingName]
+      } else {
+        // console.error('没有找到系统参数' + settingName + '，请与后端联系')
+        return null
+      }
     },
   }
 }

@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: qianlishi
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 13:40:00
+ */
 
 import { getStorageItem } from '@/utils/storage';
 // 字典
@@ -9,11 +17,11 @@ export function basecode(value, dicName) {
     return value
   }
 
-  var basecode = getStorageItem('queryForCodeSelect')
-  var dictList = basecode[dicName]
-  var dictLabel = value
-  for (var i = 0; i < dictList.length; i++) {
-    var codeItem = dictList[i]
+  let basecode = getStorageItem('queryForCodeSelect')
+  let dictList = basecode[dicName]
+  let dictLabel = value
+  for (let i = 0; i < dictList.length; i++) {
+    let codeItem = dictList[i]
     if(codeItem.value == value || codeItem.labelEng == value){
       dictLabel = codeItem.label
       break
@@ -25,9 +33,9 @@ export function basecode(value, dicName) {
 
 // 根据字典值获取数据
 export function getDataByCode(keyCode) {
-  var dict = basecode[this.keyCode]
+  let dict = basecode[this.keyCode]
   let list = []
-  for (var key in dict) {
+  for (let key in dict) {
       list.push({
           'value': key,
           'text': dict[key]
@@ -38,18 +46,18 @@ export function getDataByCode(keyCode) {
 
 //保留两位小数
 export function fixed(value){
-var intVal = null;
-if(typeof value == 'string' && /^[0-9.]+$/.test(value)){
-  intVal = parseInt(value);
-}
-if(typeof value == 'number'){
-  intVal = value;
-}
-if(intVal == null){
-  return value;
-}else{
-  return (Math.round(value*100)/100).toFixed(2);
-}
+  let intVal = null;
+  if(typeof value == 'string' && /^[0-9.]+$/.test(value)){
+    intVal = parseInt(value);
+  }
+  if(typeof value == 'number'){
+    intVal = value;
+  }
+  if(intVal == null){
+    return value;
+  }else{
+    return (Math.round(value*100)/100).toFixed(2);
+  }
 }
 
 // 时间戳转日期
@@ -57,16 +65,16 @@ export function formatTimestamp(value) {
   if (value == null) {
     return ''
   }
-  var date = new Date(value)
-  var y = date.getFullYear()
-  var m = date.getMonth() + 1
+  let date = new Date(value)
+  let y = date.getFullYear()
+  let m = date.getMonth() + 1
   m = m < 10 ? ('0' + m) : m
-  var d = date.getDate()
+  let d = date.getDate()
   d = d < 10 ? ('0' + d) : d
-  var h = date.getHours()
+  let h = date.getHours()
   h = h < 10 ? ('0' + h) : h
-  var minute = date.getMinutes()
-  var second = date.getSeconds()
+  let minute = date.getMinutes()
+  let second = date.getSeconds()
   minute = minute < 10 ? ('0' + minute) : minute
   second = second < 10 ? ('0' + second) : second
   return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second
@@ -78,11 +86,11 @@ export function formatDate(value) {
   if (value == null) {
     return ''
   }
-  var date = new Date(value)
-  var y = date.getFullYear()
-  var m = date.getMonth() + 1
+  let date = new Date(value)
+  let y = date.getFullYear()
+  let m = date.getMonth() + 1
   m = m < 10 ? ('0' + m) : m
-  var d = date.getDate()
+  let d = date.getDate()
   d = d < 10 ? ('0' + d) : d
   return y + '-' + m + '-' + d
 }

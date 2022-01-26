@@ -20,6 +20,10 @@ public class ReportParam extends PageParam implements Serializable{
     @Query(QueryEnum.LIKE)
     private String reportName;
 
+    /** 报表作者 */
+    @Query(QueryEnum.LIKE)
+    private String reportAuthor;
+
     /** 报表编码 */
     @Query(QueryEnum.LIKE)
     private String reportCode;
@@ -27,4 +31,6 @@ public class ReportParam extends PageParam implements Serializable{
     /** 报表类型 */
     @Query(QueryEnum.EQ)
     private String reportType;
+
+
 }

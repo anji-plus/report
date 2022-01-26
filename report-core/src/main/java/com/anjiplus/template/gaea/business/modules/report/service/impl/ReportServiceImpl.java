@@ -34,6 +34,27 @@ public class ReportServiceImpl implements ReportService {
         //...
     }
 
+    /**
+     * 下载次数+1
+     *
+     * @param reportCode
+     */
+    @Override
+    public void downloadStatistics(String reportCode) {
+        Report report = selectOne("report_code", reportCode);
+        if (null != report) {
+            Long downloadCount = report.getDownloadCount();
+            if (null == downloadCount) {
+                downloadCount = 0L;
+            }else {
+                downloadCount++;
+            }
+            report.setDownloadCount(downloadCount);
+            update(report);
+        }
+
+    }
+
     @Override
     public void processBeforeOperation(Report entity, BaseOperationEnum operationEnum) throws BusinessException {
 

@@ -1,6 +1,6 @@
 ## 图表和数据集之间的关系
 
-图表和数据集是强关联关系，一个图表需要什么样的数据才能进行展示下面都有说明，以柱状图举例，只能用俩个字段的数据集进行数据展示，那使用数据集有2个以上字段那肯定图表无法正常展示，反之有个数据集是3个字段，那就找能展示3个字段的图表，千万别搞小聪明定了好多个字段的数据集，然后从里面挑几个字段进行展示，不要在么干。<br>
+图表和数据集是强关联关系，一个图表需要什么样的数据才能进行展示下面都有说明，以柱状图举例，只能用俩个字段的数据集进行数据展示，那使用数据集有2个以上字段那肯定图表无法正常展示，反之有个数据集是3个字段，那就找能展示3个字段的图表，千万别搞小聪明定了好多个字段的数据集，然后从里面挑几个字段进行展示，不要这么干。<br>
 
 ## 文本框
 
@@ -42,7 +42,7 @@
 ![img](../picture/dashboard/img_22.png) <br>
 表格字段对应的数据只选择“文本数字”。<br>
 ![img14](../picture/dashboard/img_23.png) <br>
-**注意：** 多个字段的时候，需要在“配置-新增”添加你选择数据集所对应的字段，类似于映射关系。 <br>
+**注意：** 多个字段的时候，需要在“配置-新增”添加你选择数据集所对应的字段，即“配置”中“表体设置”的“key值”要和你“动态数据对应的字段名”保持一致，类似于映射关系。 <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ## 内联框架
@@ -52,6 +52,7 @@
 ## 柱状图
 
 柱状图数据集对应字典值需要选择一个“X轴”、“柱状”，只需要2个字段 <br>
+![img_13](../picture/charts/img_13.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 数据格式
@@ -65,7 +66,7 @@
 ## 折线图
 
 折线图数据集对应字典值需要选择一个“X轴”、“折线”，只需要2个字段 <br>
-![img_8.png](../picture/dashboard/img_8.png) <br>
+![img14.png](../picture/charts/img_14.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 数据格式
@@ -74,13 +75,23 @@
 
 ## 柱线图
 
-柱线图数据集对应字典值需要选择一个“X轴”、“柱状”、“折线”，需要3个字段 <br>
-![img9](../picture/dashboard/img_9.png) <br>
+柱线图数据集对应字典值需要选择一个“X轴”、“柱状”、“折线”，需要3个字段，图例名称用 | 进行分隔。<br>
+![img15](../picture/charts/img_15.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 数据格式
 
 ![img5](../picture/charts/img_4.png) <br>
+
+## 多柱线图
+
+多柱线图对应数据字典需要选择一个“X轴”，剩下的字段可任意选择为“柱状”、“折线”，图例名称用 | 进行分隔。<br>
+![img16](../picture/charts/img_16.png) <br>
+**如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
+
+### 数据格式
+
+![img17](../picture/charts/img_17.png) <br>
 
 ## 饼图
 
@@ -95,7 +106,7 @@
 
 ## 漏斗图
 
-![img13](../picture/dashboard/img_13.png) <br>
+![img18](../picture/charts/img_18.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 数据格式
@@ -127,7 +138,7 @@
 
 ## 百分百图
 
-![img16](../picture/dashboard/img_16.png) <br>
+![img19](../picture/charts/img_19.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 数据格式
@@ -146,7 +157,7 @@
 ![img.17](../picture/dashboard/img_17.png) <br>
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
-## 数据格式
+### 数据格式
 
 ![img4](../picture/charts/img_3.png) <br>
 
@@ -186,3 +197,12 @@
 
 装饰用，可单独使用或者配合文本框等图表组件来使整个大屏立体、丰满。<br>
 ![img12](../picture/charts/img_12.png) <br>
+
+## 词云图
+
+最大最小角度都为0时则文字显示为正。所有词云颜色皆是随机产生，动态数据每请求一次数据，所有词云颜色皆改变一次。<br>
+![img20](../picture/charts/img_20.png) <br>
+
+### 数据格式
+
+和饼图、南丁格尔玫瑰图数据保持一致。<br>

@@ -15,7 +15,7 @@ export default {
       return getToken()
     },
     getUser: function () {
-      var user = getAccessUser()
+      let user = getAccessUser()
       if (user != null) {
         return user;
       } else {

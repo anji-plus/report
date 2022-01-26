@@ -12,8 +12,6 @@
 
 #### &emsp; [在线体验](https://report.anji-plus.com/index.html "链接"): https://report.anji-plus.com/index.html  &emsp;体验账号：guest 密码：guest
 
-#### &emsp; [在线文档](https://report.anji-plus.com/report-doc/ "doc"): https://report.anji-plus.com/report-doc/ <br>
-
 #### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
 ## 发行版本
@@ -26,15 +24,11 @@
 
 &emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。 内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
 
-![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
-
-![视频](https://report.anji-plus.com/report-doc/static/Rhea.mp4) <br>
-
-**[更多社区大屏案例](https://report.anji-plus.com/report-doc/guide/bigScreenCase.html)** <br>
+![shipin](../picture/shipin.gif)
 
 ## 数据流程图
 
-![An image](https://images.gitee.com/uploads/images/2021/0630/160451_31bb9052_1728982.png)
+![liucheng](../picture/liucheng.png)
 
 ## 打包目录
 
@@ -45,7 +39,7 @@
 │   ├── start.sh
 │   └── stop.sh
 ├── conf                                       配置文件目录
-│   └── bootstrap-dev.yml
+│   └── bootstrap.yml
 ├── logs                                          启动日志目录
 ├── cache                                         本地缓存目录
 ├── lib                                           自定义扩展包&report-core核心包

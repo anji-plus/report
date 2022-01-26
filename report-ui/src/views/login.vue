@@ -1,9 +1,11 @@
 <!--
+ * @Descripttion: 登录
+ * @version: 
  * @Author: qianlishi
- * @Date: 2020-07-13 11:04:24
- * @Last Modified by:   qianlishi
- * @Last Modified time: 2020-07-13 11:04:24
- !-->
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 09:45:44
+-->
 <template>
   <div class="login_container">
     <!-- 顶部logo -->
@@ -124,22 +126,22 @@ export default {
   },
   data() {
     return {
-      activeTop: "-50%", // 色条滑块控制
-      rememberPsw: false, // 记住密码选择框
+      activeTop: "-50%",
+      rememberPsw: false,
       loginForm: {
         loginName: "",
         password: "",
         verifyCode: ""
-      }, // 登录表单
+      },
       loginRules: {
         loginName: [{ required: true, message: "用户名必填", trigger: "blur" }],
         password: [{ required: true, message: "用户密码必填", trigger: "blur" }]
-      }, // 登录表单验证
-      passwordType: "password", // 用来控制查看密码操作时的输入框类型
-      capsTooltip: false, // 键盘大写是否打开
-      loading: false, // 登录loding
-      redirect: undefined, // 记录重定向地址
-      otherQuery: {}, // 记录重定向地址中的参数
+      },
+      passwordType: "password",
+      capsTooltip: false,
+      loading: false,
+      redirect: undefined,
+      otherQuery: {},
       needCaptcha: false
     };
   },
@@ -157,14 +159,16 @@ export default {
     }
   },
   mounted() {
-    // 获取焦点
-    if (this.loginForm.loginName === "") {
-      this.$refs.loginName.focus();
-    } else if (this.loginForm.password === "") {
-      this.$refs.password.focus();
-    }
+    this.handleLoginFocus();
   },
   methods: {
+    handleLoginFocus() {
+      if (this.loginForm.loginName === "") {
+        this.$refs.loginName.focus();
+      } else if (this.loginForm.password === "") {
+        this.$refs.password.focus();
+      }
+    },
     // 获取存储的密码并解密
     getPsw() {
       const cookVal = cookies.get(`u_${this.loginForm.loginName}`);
@@ -224,7 +228,7 @@ export default {
       });
     },
     async loginApi() {
-      let obj = {
+      const obj = {
         loginName: this.loginForm.loginName,
         password: transPsw(this.loginForm.password),
         verifyCode: ""
@@ -269,7 +273,6 @@ export default {
   background: #fff;
 }
 
-/* reset element-ui css */
 .login_container {
   .el-input {
     display: inline-block;
@@ -296,9 +299,6 @@ export default {
   right: 30%;
   transform: translate(50%, -50%);
 }
-</style>
-
-<style lang="scss" scoped>
 .take {
   position: absolute;
   top: 0;
@@ -324,7 +324,6 @@ export default {
     position: relative;
     width: 100%;
     height: calc(100% - 60px);
-    // height: 100%;
     .login_img {
       display: block;
       width: 100%;
@@ -423,7 +422,6 @@ export default {
           p {
             padding-left: 8px;
           }
-          // justify-content: space-between;
           & > input {
             position: relative;
             width: 14px;

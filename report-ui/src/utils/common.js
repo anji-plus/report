@@ -2,8 +2,8 @@ export default {
   timestamp2String: function (timestamp, fmt) {
     if (timestamp == null) return;
     if (fmt == null || fmt == '') fmt = 'yyyy-MM-dd hh:mm:ss';
-    var date = new Date(timestamp);
-    var o = {
+    let date = new Date(timestamp);
+    let o = {
       "M+": date.getMonth() + 1, //月份   
       "d+": date.getDate(), //日   
       "h+": date.getHours(), //小时   
@@ -14,7 +14,7 @@ export default {
     };
     if (/(y+)/.test(fmt))
       fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
-    for (var k in o)
+    for (let k in o)
       if (new RegExp("(" + k + ")").test(fmt))
         fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
@@ -24,12 +24,12 @@ export default {
     if (second == null || second == 0) {
       return "0秒";
     }
-    var day = Math.floor(second / (24 * 3600));
-    var hour = Math.floor((second - day * 24 * 3600) / 3600);
-    var minute = Math.floor((second - day * 24 * 3600 - hour * 3600) / 60);
-    var second = second - day * 24 * 3600 - hour * 3600 - minute * 60;
+    let day = Math.floor(second / (24 * 3600));
+    let hour = Math.floor((second - day * 24 * 3600) / 3600);
+    let minute = Math.floor((second - day * 24 * 3600 - hour * 3600) / 60);
+    let second = second - day * 24 * 3600 - hour * 3600 - minute * 60;
 
-    var result = "";
+    let result = "";
     if (day > 0) {
       result = result + day + "天";
     }

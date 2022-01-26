@@ -41,17 +41,17 @@ export function hasPermission(permissionStr) {
   }
 
   // 登录用户的全部权限码
-  var user = getAccessUser()
+  let user = getAccessUser()
   if (user == null || user.authorities == null) {
     return false
   }
-  var opAuthoritiesStr = JSON.stringify(user.authorities)
+  let opAuthoritiesStr = JSON.stringify(user.authorities)
 
   // permissionStr可能是：authorityManage、authorityManage:insert、authorityManage:insert|authorityManage:update
-  var needPermissionArray = permissionStr.split('|')
-  for (var i = 0; i < needPermissionArray.length; i++) {
+  let needPermissionArray = permissionStr.split('|')
+  for (let i = 0; i < needPermissionArray.length; i++) {
     // 只要有其中的一个权限，就返回true
-    var needPermission = needPermissionArray[i] // authorityManage、authorityManage:insert
+    let needPermission = needPermissionArray[i] // authorityManage、authorityManage:insert
     needPermission = needPermission.replace(/\ /g, "") // 去除authorityManage : insert中:前后的空格
 
     if(opAuthoritiesStr.indexOf(needPermission)>=0){

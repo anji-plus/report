@@ -24,7 +24,7 @@ const user = {
       const userName = userInfo.userName.trim()
       const password = userInfo.password.trim()
       const captchaVerification = userInfo.captchaVerification.trim()
-      var data ={
+      let data ={
         userName, password,captchaVerification
       }
       return new Promise((resolve, reject) => {

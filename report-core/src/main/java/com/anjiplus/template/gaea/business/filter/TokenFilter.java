@@ -4,8 +4,10 @@ package com.anjiplus.template.gaea.business.filter;
 import com.alibaba.fastjson.JSONObject;
 import com.anji.plus.gaea.bean.ResponseBean;
 import com.anji.plus.gaea.cache.CacheHelper;
+import com.anji.plus.gaea.constant.GaeaConstant;
 import com.anji.plus.gaea.utils.JwtBean;
 import com.anjiplus.template.gaea.business.constant.BusinessConstant;
+import com.anjiplus.template.gaea.business.modules.accessuser.controller.dto.GaeaUserDto;
 import com.anjiplus.template.gaea.business.util.JwtUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.entity.ContentType;
@@ -14,13 +16,20 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.CollectionUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import static com.anji.plus.gaea.constant.GaeaConstant.URL_REPLACEMENT;
 
 /**
  * 简单的鉴权
@@ -33,6 +42,7 @@ public class TokenFilter implements Filter {
     private static final Pattern PATTERN = Pattern.compile(".*().*");
     private static final String USER_GUEST = "guest";
     private static final String SLASH = "/";
+    private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Autowired
     private CacheHelper cacheHelper;
@@ -115,31 +125,52 @@ public class TokenFilter implements Filter {
         }
         String gaeaUserJsonStr = cacheHelper.stringGet(userKey);
 
+        //判断接口权限
+        //请求路径
+        String requestUrl = request.getRequestURI();
+        String methodValue = request.getMethod();
+        //请求方法+#+请求路径
+        String urlKey = methodValue + GaeaConstant.URL_SPLIT + requestUrl;
+
+        GaeaUserDto gaeaUserDto = JSONObject.parseObject(gaeaUserJsonStr, GaeaUserDto.class);
+        List<String> authorities = gaeaUserDto.getAuthorities();
+        Map<String, String> applicationNameAllAuthorities = cacheHelper.hashGet(BusinessConstant.GAEA_SECURITY_AUTHORITIES);
+        AtomicBoolean authFlag = new AtomicBoolean(false);
+        //查询当前请求是否在对应的权限里。即：先精确匹配(保证当前路由是需要精确匹配还是模糊匹配，防止精确匹配的被模糊匹配）
+        // 比如：/user/info和/user/**同时存在，/user/info,被/user/**匹配掉
+        if (applicationNameAllAuthorities.containsKey(urlKey)) {
+            String permissionCode = applicationNameAllAuthorities.get(urlKey);
+            if (authorities.contains(permissionCode)) {
+                authFlag.set(true);
+            }
+        } else {
+            List<String> collect = applicationNameAllAuthorities.keySet().stream()
+                    .filter(key -> StringUtils.isNotBlank(key) && key.contains(URL_REPLACEMENT))
+                    .filter(key -> antPathMatcher.match(key, urlKey)).collect(Collectors.toList());
+            if (CollectionUtils.isEmpty(collect)) {
+                authFlag.set(true);
+            }else {
+                collect.forEach(key -> {
+                    String permissionCode = applicationNameAllAuthorities.getOrDefault(key, "");
+                    if (authorities.contains(permissionCode)) {
+                        authFlag.set(true);
+                    }
+                });
+            }
+        }
+
+        if (!authFlag.get()) {
+            //无权限
+            authError(response);
+            return;
+        }
+
+
+
+
         // 延长有效期
         cacheHelper.stringSetExpire(tokenKey, token, 3600);
         cacheHelper.stringSetExpire(userKey, gaeaUserJsonStr, 3600);
-
-        //在线体验版本
-        if (USER_GUEST.equals(loginName)
-                && !uri.endsWith("/dataSet/testTransform")
-                && !uri.endsWith("/reportDashboard/getData")
-                && !uri.startsWith("/dict")
-                && !uri.endsWith("/reportExcel/preview")
-        ) {
-            //不允许删除
-            String method = request.getMethod();
-            if (HttpMethod.POST.name().equalsIgnoreCase(method)
-                    || HttpMethod.PUT.name().equalsIgnoreCase(method)
-                    || HttpMethod.DELETE.name().equalsIgnoreCase(method)
-                    || uri.contains("/reportDashboard/export")
-            ) {
-                ResponseBean responseBean = ResponseBean.builder().code("50001")
-                        .message("在线体验版本，不允许此操作。请自行下载本地运行").build();
-                response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
-                response.getWriter().print(JSONObject.toJSONString(responseBean));
-                return;
-            }
-        }
 
         //执行
         filterChain.doFilter(request, response);
@@ -177,6 +208,12 @@ public class TokenFilter implements Filter {
 
     private void error(HttpServletResponse response) throws IOException {
         ResponseBean responseBean = ResponseBean.builder().code("50014").message("The Token has expired").build();
+        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
+        response.getWriter().print(JSONObject.toJSONString(responseBean));
+    }
+
+    private void authError(HttpServletResponse response) throws IOException {
+        ResponseBean responseBean = ResponseBean.builder().code("User.no.authority").message("没有权限").build();
         response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         response.getWriter().print(JSONObject.toJSONString(responseBean));
     }

@@ -9,12 +9,12 @@ import com.anjiplus.template.gaea.business.modules.report.controller.dto.ReportD
 import com.anjiplus.template.gaea.business.modules.report.controller.param.ReportParam;
 import com.anjiplus.template.gaea.business.modules.report.dao.entity.Report;
 import com.anjiplus.template.gaea.business.modules.report.service.ReportService;
-import com.anjiplus.template.gaea.business.modules.reportshare.controller.dto.ReportShareDto;
-import com.anjiplus.template.gaea.business.modules.reportshare.service.ReportShareService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * TODO
@@ -27,9 +27,6 @@ import org.springframework.web.bind.annotation.*;
 @Permission(code = "reportManage", name = "报表管理")
 @RequestMapping("/report")
 public class ReportController extends GaeaBaseController<ReportParam, Report, ReportDto> {
-
-    @Autowired
-    private ReportShareService reportShareService;
 
     @Autowired
     private ReportService reportService;
@@ -55,12 +52,5 @@ public class ReportController extends GaeaBaseController<ReportParam, Report, Re
     public ResponseBean delReport(@RequestBody ReportDto reportDto) {
         reportService.delReport(reportDto);
         return ResponseBean.builder().build();
-    }
-
-    @PostMapping("/share")
-    @Permission(code = "share", name = "分享")
-    @GaeaAuditLog(pageTitle = "分享")
-    public ResponseBean share(@Validated @RequestBody ReportShareDto dto) {
-        return ResponseBean.builder().data(reportShareService.insertShare(dto)).build();
     }
 }
