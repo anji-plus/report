@@ -1,6 +1,6 @@
 <!--
  * @Descripttion: 报表设计--报表管理
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
@@ -85,6 +85,11 @@ export default {
             inputType: "input",
             label: "报表编码",
             field: "reportCode"
+          },
+          {
+            inputType: "input",
+            label: "制作人",
+            field: "reportAuthor"
           }
         ],
         // 操作按钮
@@ -181,6 +186,17 @@ export default {
               { min: 1, max: 20, message: "不超过20个字符", trigger: "blur" }
             ],
             disabled: "disableOnEdit"
+          },
+          {
+            label: "制作人", //名称
+            placeholder: "",
+            field: "reportAuthor",
+            editField: "reportAuthor",
+            inputType: "input",
+            rules: [
+              { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" }
+            ],
+            disabled: false
           },
           {
             label: "描述", //报表描述
