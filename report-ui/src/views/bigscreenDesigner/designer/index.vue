@@ -140,36 +140,6 @@
             </li>
           </ul>
         </span>
-        <!--         <span class="btn border-left">
-                  <ul class="nav">
-                    <li>
-                      <i class="el-icon-brush"></i><i class="el-icon-arrow-down"></i>
-                      <ul>
-                        <li>
-                          <div>
-                            <i class="el-icon-full-screen mr10"></i>边框
-                            <i class="el-icon-arrow-right ml20"></i>
-                          </div>
-                          <ul class="three-level">
-                            <li><a href="#">边框1</a></li>
-                            <li><a href="#">边框2</a></li>
-                            <li><a href="#">边框3</a></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <div>
-                            <i class="el-icon-magic-stick mr10"></i>装饰<i
-                              class="el-icon-arrow-right ml20"
-                            ></i>
-                          </div>
-                          <ul class="three-level">
-                            <li><a href="#">装饰1</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </span>-->
       </div>
       <div
         class="workbench-container"
@@ -478,9 +448,9 @@ export default {
       return {
         backgroundColor: (data && data.backgroundColor) || "",
         backgroundImage: (data && data.backgroundImage) || "",
-        height: (data && data.height) || "",
+        height: (data && data.height) || "1080",
         title: (data && data.title) || "",
-        width: (data && data.width) || ""
+        width: (data && data.width) || "1920"
       };
     },
     handleInitEchartsData(data) {
@@ -775,21 +745,21 @@ export default {
       if (this.screenCode == "screen") {
         let newSetup = new Array();
         this.dashboard = this.deepClone(val);
-        if(this.bigscreenWidth != this.dashboard.width){
-          this.bigscreenWidth = this.dashboard.width
+        if (this.bigscreenWidth != this.dashboard.width) {
+          this.bigscreenWidth = this.dashboard.width;
         }
-        if(this.bigscreenHeight != this.dashboard.height){
-          this.bigscreenHeight = this.dashboard.height
+        if (this.bigscreenHeight != this.dashboard.height) {
+          this.bigscreenHeight = this.dashboard.height;
         }
         this.widgetOptions.setup.forEach(el => {
-          if(el.name == 'width'){
-            el.value = this.bigscreenWidth
-          }else if(el.name == 'height'){
-            el.value = this.bigscreenHeight
+          if (el.name == "width") {
+            el.value = this.bigscreenWidth;
+          } else if (el.name == "height") {
+            el.value = this.bigscreenHeight;
           }
-          newSetup.push(el)
+          newSetup.push(el);
         });
-        this.widgetOptions.setup = newSetup
+        this.widgetOptions.setup = newSetup;
       } else {
         for (let i = 0; i < this.widgets.length; i++) {
           if (this.widgetIndex == i) {
@@ -964,7 +934,7 @@ export default {
         border: 1px solid #3a4659;
         background: #282a30;
       }
-      .tools-item-text{
+      .tools-item-text {
       }
     }
   }
