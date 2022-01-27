@@ -3,7 +3,7 @@
     <div class="admin-title" @click="goBigScreen">
       <div class="con">
         <img src="../../../../../static/logo-dp.png" width="50" />
-        <span class="version">V0.9.6</span>
+        <span class="version">V0.9.6.1</span>
       </div>
     </div>
     <el-menu
