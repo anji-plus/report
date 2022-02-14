@@ -15,7 +15,9 @@ http://serverip:9095
 
 ## 编译环境
 
-请在Linux上先准备好maven、node.js、jdk
+请在Linux上先准备好maven、node.js、jdk <br>
+如果在Win10上部署，还需要下载一个 Git 软件，软件名就是 Git <br>
+以下内容需要特别注意的地方会有对应提示。<br>
 
 - [Apache Maven] 3.5 <br>
 - [Node.js] v14.16.0 <br>
@@ -33,6 +35,9 @@ git clone https://gitee.com/anji-plus/report.git <br>
 进入report目录，启动build.sh <br>
 ![img_4.png](../picture/quickly/img_4.png) <br>
 编译完成后是放在当前目录下的build文件夹中：aj-report-xxxx.zip <br>
+
+**注：** 如果Win10部署的话，如图用git执行sh build.sh就行了。Linux就直接去report目录下执行sh build.sh就行。 <br>
+**特别注意：** 如果是Win10编译，那么几个启动脚本的格式则是win的格式，放linux上执行会报错的，反之放linux编译在win10启动也会报错，需要转格式。 <br>
 
 ## 修改mysql连接
 
@@ -56,11 +61,12 @@ linux启动： <br>
 aj-report-XXX --> bin --> start.sh <br>
 sh bin/start.sh <br>
 
-注意啊，如果你在linux打包，然后在win上执行，要转化start.bat文件的格式，反之也是一样。
+win10启动：<br>
+aj-report-XXX --> bin --> start.bat <br>
+双击start.bat启动 <br>
 
 ## 日志位置
 
-看到控制台提示“The AJ-Report started!”，说明report正在启动，可以看看日志以确定程序启动到哪里了。<br>
 日志的位置是：report-xxx/logs/aj-report.log <br>
 
 ## 访问
