@@ -572,7 +572,7 @@ export default {
       xAxisList = this.setUnique(xAxisList);
       yAxisList = this.setUnique(yAxisList);
       for (const i in yAxisList) {
-        const data = new Array(yAxisList.length).fill(0);
+        const data = new Array(xAxisList.length).fill(0);
         for (const j in xAxisList) {
           for (const k in val) {
             if (val[k].name == yAxisList[i]) {

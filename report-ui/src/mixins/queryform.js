@@ -175,7 +175,7 @@ export default {
       for (const key in chartProperties) {
         if (chartProperties[key] !== 'yAxis' && !chartProperties[key].startsWith('xAxis')) {
           Object.keys(dataGroup).forEach(item => {
-            const data = new Array(yAxisList.length).fill(0)
+            const data = new Array(xAxisList.length).fill(0)
             dataGroup[item].forEach(res => {
               data[xAxisList.indexOf(res[xAxisField])]= res[key]
             })
