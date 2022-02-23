@@ -229,7 +229,8 @@
                             <el-button
                               v-if="
                                 item.transformType == 'js' ||
-                                  item.transformType == 'dict'
+                                  item.transformType == 'dict' ||
+                                  item.transformType == 'javaBean'
                               "
                               type="text"
                               class="editor"
@@ -251,7 +252,7 @@
                           min-height="400px"
                           append-to-body
                         >
-                          <div v-if="isItemFilterType.transformType == 'js'">
+                          <div v-if="isItemFilterType.transformType == 'js' || isItemFilterType.transformType == 'javaBean'">
                             <div class="codemirror">
                               <!-- //自定义高级规则？ -->
                               <monaco-editor
@@ -750,25 +751,30 @@ export default {
           ? item.transformScript
           : fnCont;
       } else if (item.transformType == "dict") {
-        // this.dialogTitle = '字典翻译'
-        // this.itemFilterScriptId = item.itemFilterSort
-        // const { code, data } = await getDictList('TRANSFORM_TYPE')
-        // if (code != '200') return
-        // const extend = data.find(function (y) {
-        //   if (y.id == item.transformType) {
-        //     return y
-        //   }
-        // })
-        // const extendArry = []
-        // const extendObj = JSON.parse(extend.extend)
-        // for (const i in extendObj) {
-        //   const children = []
-        //   for (const y in extendObj[i]) {
-        //     children.push({ name: y, value: extendObj[i][y] })
-        //   }
-        //   extendArry.push({ name: i, children: children })
-        // }
-        // this.tableData2 = extendArry
+
+      }else if (item.transformType == "javaBean") {
+        this.itemFilterScriptId = item.itemFilterSort;
+        const fnCont = `package com;
+
+import com.alibaba.fastjson.JSONObject;
+import com.anjiplus.template.gaea.business.modules.datasettransform.service.IGroovyHandler;
+
+import java.util.List;
+
+/**
+ * 建议在idea写好复制整个类到此处，位置report-core/src/test/java/com/DemoGroovyHandler.java
+ */
+public class DemoGroovyHandler implements IGroovyHandler {
+
+    @Override
+    public List<JSONObject> transform(List<JSONObject> data) {
+
+        return data;
+    }
+}`;
+        this.transformScript = item.transformScript
+          ? item.transformScript
+          : fnCont;
       }
     },
     // js 脚本编辑确定

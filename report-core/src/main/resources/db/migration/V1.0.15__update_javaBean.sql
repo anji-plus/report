@@ -1,0 +1,1 @@
+UPDATE `aj_report`.`gaea_dict_item` SET `dict_code` = 'TRANSFORM_TYPE', `item_name` = 'java脚本', `item_value` = 'javaBean', `item_extend` = NULL, `enabled` = 1, `locale` = 'zh', `remark` = NULL, `sort` = 2, `create_by` = 'admin', `create_time` = '2021-03-23 10:54:08', `update_by` = 'admin', `update_time` = '2021-03-23 10:54:08', `version` = 1 WHERE `id` = 151;
