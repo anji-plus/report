@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 图片json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:07:23
  * @LastEditors: qianlishi
@@ -29,6 +29,14 @@ export const widgetImage = {
           required: false,
           placeholder: '',
           value: false,
+        },
+        {
+          type: 'el-slider',
+          label: '旋转速度',
+          name: 'rotationSpeed',
+          required: false,
+          placeholder: '',
+          value: 70
         },
         {
           type: 'el-slider',
