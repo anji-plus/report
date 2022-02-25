@@ -1,6 +1,4 @@
 ## Online experience
-#### &emsp;  Computer online experience: [https://report.anji-plus.com/](https://report.anji-plus.com/ "链接")  &emsp;account：guest  password：guest
-#### &emsp;  Online documents: [https://report.anji-plus.com/report-doc/](https://report.anji-plus.com/report-doc/ "doc")<br>
 #### &emsp;  issues: [https://gitee.com/anji-plus/report/issues](https://gitee.com/anji-plus/report/issues "issue")
 
 ## Function overview
