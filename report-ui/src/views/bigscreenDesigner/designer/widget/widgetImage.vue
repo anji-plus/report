@@ -41,7 +41,8 @@ export default {
       return {
         imageAdress: this.transStyle.imageAdress,
         "border-radius": this.transStyle.borderRadius + "px",
-        opacity: this.transStyle.transparency / 100
+        opacity: this.transStyle.transparency / 100,
+        animation: this.transStyle.startRotate? "turn "+(101-this.transStyle.rotationSpeed)/10+"s linear infinite":"none"
       };
     }
   },
@@ -74,21 +75,5 @@ export default {
 .startImg {
   animation: turn 1s linear infinite;
 }
-@keyframes turn {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  25% {
-    -webkit-transform: rotate(90deg);
-  }
-  50% {
-    -webkit-transform: rotate(180deg);
-  }
-  75% {
-    -webkit-transform: rotate(270deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
+
 </style>
