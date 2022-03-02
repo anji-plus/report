@@ -1,3 +1,4 @@
+# **在线体验暂时下线，不要在问了**
 
 ## 简介
 
@@ -7,6 +8,10 @@
 
 ## 在线体验  
 **在线体验暂时下线**
+
+#### &emsp; [在线体验](https://report.anji-plus.com/index.html "链接"): https://report.anji-plus.com/index.html  &emsp;体验账号：guest 密码：guest
+
+#### &emsp; [在线文档](https://report.anji-plus.com/report-doc/ "doc"): https://report.anji-plus.com/report-doc/ <br>
 
 #### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
@@ -21,6 +26,10 @@
 &emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。 内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
 
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
+
+![视频](https://report.anji-plus.com/report-doc/static/Rhea.mp4) <br>
+
+**[更多社区大屏案例](https://report.anji-plus.com/report-doc/guide/bigScreenCase.html)** <br>
 
 ## 数据流程图
 
@@ -109,9 +118,19 @@ bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启�
 http://serverip:9095
 ```
 
+**[运行环境参考文档](https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html)** <br>
+
+**[源码编译部署参考文档](https://report.anji-plus.com/report-doc/guide/quicklySource.html)** <br>
+
+**[发行版部署参考文档](https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html)** <br>
+
+**[前后端分离部署参考文档](https://report.anji-plus.com/report-doc/guide/quicklySeparate.html)** <br>
+
 ## 操作手册
 
 新建数据源（重置mysql数据源） --> 新建数据集（编写sql） --> 新建大屏（设计大屏） <br>
+
+**[在线文档](https://report.anji-plus.com/report-doc/guide/datasource.html)**
 
 ## SQL初始化
 
@@ -119,6 +138,19 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 
 系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件。 <br>
 执行完将会创建 aj_report（存放系统基础数据） 和 aj_report_init（存放示例数据） 俩个库。 <br>
+
+## 谁在使用
+
+希望你们的logo出现在此，[请点此Issue进行登记](https://gitee.com/anji-plus/report/issues/I3ZXT4) ，我们将优先进行技术支持 <br>
+
+<a href='http://www.anji-plus.com/'> <img src="https://report.anji-plus.com/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/> </a>
+<a href='https://www.yunstech.cn/'><img src="https://www.yunstech.cn/images/logo.png" width = "130" height = "50" /> </a>
+<a href='http://www.fgkb.net/'><img src="https://report.anji-plus.com/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
+<a href='http://www.turingoal.com/'><img src="https://report.anji-plus.com/file/download/cda7bf68-376b-45dc-9a55-c52b21e4a8c8" width = "130" height = "50" /> </a>
+<a href='https://www.gykjweb.com/'><img src="https://report.anji-plus.com/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a> <br>
+<a href='http://www.plian.net/'><img src="https://report.anji-plus.com/file/download/7838f2c2-fdce-4ca7-8373-14d13dcda5cc" width = "130" height = "50" /> </a>
+<a href='https://www.zjjcl.cn/'><img src="https://report.anji-plus.com/file/download/8df07663-60c9-4e32-a0f2-0ea7d5c46ff9" width = "130" height = "50" /> </a>
+
 
 ## 未来计划
 
@@ -140,6 +172,8 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 - openJdk
 - Jdk 11
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
+
+**[常见问题](https://report.anji-plus.com/report-doc/guide/question.html)**
 
 ## 商业授权
 
