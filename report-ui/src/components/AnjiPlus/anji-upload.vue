@@ -31,6 +31,7 @@
           icon-class="Excel"
           class="iconFont"
         />
+
         <span class="el-upload-list__item-actions">
           <span
             v-if="typeImgShow(file)"
@@ -102,9 +103,9 @@ export default {
   computed: {
     requestUrl() {
       if (this.upLoadUrl != null && this.upLoadUrl.trim() != "") {
-        return process.env.VUE_APP_BASE_API + this.upLoadUrl;
+        return process.env.BASE_API + this.upLoadUrl;
       } else {
-        return process.env.VUE_APP_BASE_API + "/meta/file/upload";
+        return process.env.BASE_API + "/file/upload";
       }
     },
     headers() {
@@ -113,15 +114,9 @@ export default {
       };
     }
   },
-  watch: {
-    value: {
-      handler(val) {
-        this.echoUpload(val);
-      },
-      immediate: true
-    }
+  mounted() {
+    this.echoUpload(this.value);
   },
-  mounted() {},
   methods: {
     // 图片
     typeImgShow(file) {
@@ -175,7 +170,6 @@ export default {
     },
     // 上传成功的回调
     handleSuccess(response, file, fileList) {
-      console.log(fileList);
       if (response.code != 200) {
         this.$message.error("上传失败");
         return;
@@ -185,6 +179,7 @@ export default {
         fileId: file.response.data.fileId,
         fileType: file.response.data.fileType
       });
+      console.log(this.fileList);
       this.change();
     },
     // 回传出去
@@ -248,7 +243,7 @@ export default {
   width: 60px;
   height: 60px;
 }
-.hide_box .el-upload--picture-card {
+.hide_box /deep/.el-upload--picture-card {
   display: none;
 }
 .el-upload-list__item {

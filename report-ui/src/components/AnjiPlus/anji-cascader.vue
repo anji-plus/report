@@ -127,7 +127,7 @@ export default {
     },
     queryData() {
       axios({
-        url: process.env.VUE_APP_BASE_API + this.url,
+        url: process.env.BASE_API + this.url,
         methods: "get",
         headers: {
           Authorization: getToken(),
