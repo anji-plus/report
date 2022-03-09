@@ -91,9 +91,17 @@
 - [vuedraggable](https://github.com/SortableJS/Vue.Draggable/): 是一款基于Sortable.js实现的vue拖拽插件。
 - [luckysheet](https://gitee.com/mengshukeji/Luckysheet): Luckysheet ，一款纯前端类似excel的在线表格，功能强大、配置简单、完全开源。
 
-## 编译打包
+## 部署方式
 
-在Linux上先准备好maven、node.js、jdk
+**[运行环境参考](https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html)** <br>
+
+**[发行版部署参考](https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html)** <br>
+
+**[源码编译部署参考](https://report.anji-plus.com/report-doc/guide/quicklySource.html)** <br>
+
+**[前后端分离部署参考](https://report.anji-plus.com/report-doc/guide/quicklySeparate.html)** <br>
+
+以源码部署为例：在Linux上先准备好maven、node.js、jdk
 
 - [Apache Maven] 3.5 <br>
 - [Node.js] v14.16.0 <br>
@@ -113,15 +121,10 @@ bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启�
 
 启动后访问
 http://serverip:9095
+用户名密码：admin/123456
+
+登陆后修改"数据源->mysql数据源"用户名密码
 ```
-
-**[运行环境参考文档](https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html)** <br>
-
-**[源码编译部署参考文档](https://report.anji-plus.com/report-doc/guide/quicklySource.html)** <br>
-
-**[发行版部署参考文档](https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html)** <br>
-
-**[前后端分离部署参考文档](https://report.anji-plus.com/report-doc/guide/quicklySeparate.html)** <br>
 
 ## 操作手册
 
@@ -147,7 +150,6 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 <a href='https://www.gykjweb.com/'><img src="https://report.anji-plus.com/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a> <br>
 <a href='http://www.plian.net/'><img src="https://report.anji-plus.com/file/download/7838f2c2-fdce-4ca7-8373-14d13dcda5cc" width = "130" height = "50" /> </a>
 <a href='https://www.zjjcl.cn/'><img src="https://report.anji-plus.com/file/download/8df07663-60c9-4e32-a0f2-0ea7d5c46ff9" width = "130" height = "50" /> </a>
-
 
 ## 未来计划
 
@@ -188,7 +190,7 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 ## 技术支持
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
-个人企业微信：加微信进群备注AJ-Report或者Report <br>
+个人企业微信：加微信进群备注AJ-Report或者Report（不备注是看不到的） <br>
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "200" height = "200" align=left/>
 
 #### 开源不易，劳烦各位star ☺
