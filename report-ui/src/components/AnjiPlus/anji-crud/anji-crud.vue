@@ -147,57 +147,21 @@
         </el-form>
         <!-- 查询表单结束 -->
         <!-- 批量操作 -->
-        <template v-if="!option.tableButtons">
-          <div style="padding-bottom: 8px">
-            <slot name="buttonLeftOnTable" :selection="checkRecords" />
-            <el-button
-              v-if="
-                option.buttons.add.isShow == undefined
-                  ? true
-                  : option.buttons.add.isShow
-              "
-              v-permission="option.buttons.add.permission"
-              class="button"
-              plain
-              icon="el-icon-plus"
-              @click="handleOpenEditView('add')"
-              >新增</el-button
-            >
-            <el-button
-              v-if="
-                option.buttons.delete.isShow == undefined
-                  ? true
-                  : option.buttons.delete.isShow
-              "
-              v-permission="option.buttons.delete.permission"
-              class="button"
-              plain
-              :disabled="disableBatchDelete"
-              type="danger"
-              icon="el-icon-delete"
-              @click="handleDeleteBatch()"
-              >删除</el-button
-            >
-            <slot name="buttonRightOnTable" :selection="checkRecords" />
-          </div>
-        </template>
-        <template v-else>
-          <div style="padding-bottom: 8px">
-            <slot name="tableButtons" :selection="checkRecords" />
-            <el-button
-              v-for="(item, index) in option.tableButtons"
-              :key="index"
-              v-permission="item.permission"
-              class="tableButton"
-              :plain="item.plain"
-              :icon="item.icon"
-              :type="item.type"
-              :disabled="isDisabledButton(item, checkRecords)"
-              @click="item.click(checkRecords)"
-              >{{ handlegetLable(checkRecords, item.label) }}</el-button
-            >
-          </div>
-        </template>
+        <div style="padding-bottom: 8px">
+          <slot name="tableButtons" :selection="checkRecords" />
+          <el-button
+            v-for="(item, index) in option.tableButtons"
+            :key="index"
+            v-permission="item.permission"
+            class="tableButton"
+            :plain="item.plain"
+            :icon="item.icon"
+            :type="item.type"
+            :disabled="isDisabledButton(item, checkRecords)"
+            @click="item.click(checkRecords)"
+            >{{ handlegetLable(checkRecords, item.label) }}</el-button
+          >
+        </div>
       </div>
 
       <!-- 表格开始 -->
@@ -303,106 +267,56 @@
               label="操作"
               :width="option.buttons.rowButtonsWidth || 100"
             >
-              <!-- 插槽 -->
               <template slot-scope="scope">
-                <template v-if="!option.rowButtons">
-                  <slot name="rowButton" :msg="scope.row" />
+                <div v-if="option.rowButtons.length <= 2">
                   <el-button
-                    v-if="
-                      option.buttons.edit.isShow == undefined
-                        ? true
-                        : option.buttons.edit.isShow
-                    "
-                    type="text"
+                    v-for="(item, index) in option.rowButtons"
+                    :key="index"
+                    v-permission="item.permission"
+                    :disabled="isDisabledButton(item, scope.row)"
+                    :type="item.type || 'text'"
                     size="small"
-                    @click="handleOpenEditView('edit', scope.row)"
-                    >编辑</el-button
+                    @click="item.click(scope.row)"
+                    >{{ handlegetLable(scope.row, item.label) }}</el-button
                   >
+                </div>
+                <div v-else>
                   <el-button
-                    v-if="
-                      hasCustomButtonInRowMore == false &&
-                      option.buttons.delete.isShow == undefined
-                        ? true
-                        : option.buttons.edit.isShow
+                    v-permission="option.rowButtons[0].permission"
+                    :type="option.rowButtons[0].type || 'text'"
+                    :disabled="
+                      isDisabledButton(option.rowButtons[0], scope.row)
                     "
-                    type="text"
-                    size="small"
-                    @click="handleDeleteBatch(scope.row)"
-                    >删除</el-button
+                    @click="option.rowButtons[0].click(scope.row)"
+                    >{{
+                      handlegetLable(scope.row, option.rowButtons[0].label)
+                    }}</el-button
                   >
-                  <el-dropdown v-if="hasCustomButtonInRowMore" trigger="click">
-                    <span class="el-dropdown-link"
-                      >更多<i class="el-icon-caret-bottom el-icon--right" />
+                  <el-dropdown trigger="click">
+                    <span class="el-dropdown-link">
+                      更多
+                      <i class="el-icon-caret-bottom el-icon--right" />
                     </span>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item class="clearfix">
-                        <slot name="rowButtonInMore" :msg="scope.row" />
                         <el-button
-                          v-if="
-                            option.buttons.delete.isShow == undefined
-                              ? true
-                              : option.buttons.edit.isShow
-                          "
-                          type="text"
+                          v-for="(item, index) in option.rowButtons.filter(
+                            (el, index) => index > 0
+                          )"
+                          :key="index"
+                          v-permission="item.permission"
+                          :type="item.type || 'text'"
+                          :disabled="isDisabledButton(item, scope.row)"
                           size="small"
-                          @click="handleDeleteBatch(scope.row)"
-                          >删除</el-button
+                          @click="item.click(scope.row)"
+                          >{{
+                            handlegetLable(scope.row, item.label)
+                          }}</el-button
                         >
                       </el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
-                </template>
-                <template v-else>
-                  <div v-if="option.rowButtons.length <= 2">
-                    <el-button
-                      v-for="(item, index) in option.rowButtons"
-                      :key="index"
-                      v-permission="item.permission"
-                      :disabled="isDisabledButton(item, scope.row)"
-                      :type="item.type || 'text'"
-                      size="small"
-                      @click="item.click(scope.row)"
-                      >{{ handlegetLable(scope.row, item.label) }}</el-button
-                    >
-                  </div>
-                  <div v-else>
-                    <el-button
-                      v-permission="option.rowButtons[0].permission"
-                      :type="option.rowButtons[0].type || 'text'"
-                      :disabled="
-                        isDisabledButton(option.rowButtons[0], scope.row)
-                      "
-                      @click="option.rowButtons[0].click(scope.row)"
-                      >{{
-                        handlegetLable(scope.row, option.rowButtons[0].label)
-                      }}</el-button
-                    >
-                    <el-dropdown trigger="click">
-                      <span class="el-dropdown-link">
-                        更多
-                        <i class="el-icon-caret-bottom el-icon--right" />
-                      </span>
-                      <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item class="clearfix">
-                          <el-button
-                            v-for="(item, index) in option.rowButtons.filter(
-                              (el, index) => index > 0
-                            )"
-                            :key="index"
-                            v-permission="item.permission"
-                            :type="item.type || 'text'"
-                            :disabled="isDisabledButton(item, scope.row)"
-                            size="small"
-                            @click="item.click(scope.row)"
-                            >{{
-                              handlegetLable(scope.row, item.label)
-                            }}</el-button
-                          >
-                        </el-dropdown-item>
-                      </el-dropdown-menu>
-                    </el-dropdown>
-                  </div>
-                </template>
+                </div>
               </template>
             </el-table-column>
           </el-table>
