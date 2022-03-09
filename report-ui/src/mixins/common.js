@@ -272,6 +272,7 @@ export default {
       return { top: top, left: left }
     },
     objToOne (obj) {
+      console.log(obj)
       let tmpData = {}
       for (let index in obj) {
         if (typeof obj[index] == 'object' && !this.isArrayFn(obj[index])) {

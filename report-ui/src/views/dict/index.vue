@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 13:46:33
+ * @LastEditTime: 2022-03-09 10:02:26
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
@@ -75,6 +75,64 @@ export default {
             that.$store.commit("user/SET_PROJECT", queryForm["project"]);
           }
         },
+        // 表头按钮
+        tableButtons: [
+          {
+            label: "刷新字典项",
+            type: "primary", // primary、success、info、warning、danger
+            permission: "dictManage:fresh", // 按钮权限码
+            icon: "el-icon-edit",
+            plain: true,
+            click: this.dictRefresh
+          },
+          {
+            label: "新增",
+            type: "", // primary、success、info、warning、danger
+            permission: "dictManage:insert", // 按钮权限码
+            icon: "el-icon-plus",
+            plain: true,
+            click: () => {
+              return this.$refs.listPage.handleOpenEditView("add");
+            }
+          },
+          {
+            label: "删除",
+            type: "danger",
+            permission: "dictManage:delete",
+            icon: "el-icon-delete",
+            plain: false,
+            click: () => {
+              return this.$refs.listPage.handleDeleteBatch();
+            }
+          }
+        ],
+        // 表格行按钮
+        rowButtons: [
+          {
+            label: "编辑",
+            permission: "dictManage:update",
+            click: row => {
+              return this.$refs.listPage.handleOpenEditView("edit", row);
+            }
+          },
+          {
+            label: "编辑字典项",
+            permission: "dictItemManage:query",
+            click: this.editItem
+          },
+          {
+            label: "刷新字典项",
+            permission: "dictManage:fresh",
+            click: this.itemRefresh
+          },
+          {
+            label: "删除",
+            permission: "dictManage:delete",
+            click: row => {
+              return this.$refs.listPage.handleDeleteBatch(row);
+            }
+          }
+        ],
         // 操作按钮
         buttons: {
           query: {
@@ -97,10 +155,7 @@ export default {
             api: dictEdit,
             permission: "dictManage:update"
           },
-          // 自定义按钮
-          customButton: {
-            operationWidth: 160 // row自定义按钮表格宽度
-          }
+          rowButtonsWidth: 150 // row自定义按钮表格宽度
         },
         // 表格列
         columns: [
@@ -200,7 +255,7 @@ export default {
     },
     // 刷新某个字典
     async itemRefresh(val) {
-      const selectedList = val.msg;
+      const selectedList = val;
       let dictCodes = [];
       if (selectedList.length > 0) {
         dictCodes = selectedList.map(item => item.dictCode);
@@ -214,7 +269,7 @@ export default {
       this.$router.push({
         path: "/system/dictItem",
         query: {
-          dictCode: val.msg.dictCode,
+          dictCode: val.dictCode,
           project: this.$store.state.user.project
         }
       });

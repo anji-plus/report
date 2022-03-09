@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 12:20:56
+ * @LastEditTime: 2022-03-09 09:22:40
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption" />
@@ -67,6 +67,46 @@ export default {
             field: "actionName"
           }
         ],
+        // 表头按钮
+        tableButtons: [
+          {
+            label: "新增",
+            type: "", // primary、success、info、warning、danger
+            permission: "authorityManage:insert", // 按钮权限码
+            icon: "el-icon-plus",
+            plain: true,
+            click: () => {
+              return this.$refs.listPage.handleOpenEditView("add");
+            }
+          },
+          {
+            label: "删除",
+            type: "danger",
+            permission: "authorityManage:delete",
+            icon: "el-icon-delete",
+            plain: false,
+            click: () => {
+              return this.$refs.listPage.handleDeleteBatch();
+            }
+          }
+        ],
+        // 表格行按钮
+        rowButtons: [
+          {
+            label: "编辑",
+            permission: "authorityManage:update",
+            click: row => {
+              return this.$refs.listPage.handleOpenEditView("edit", row);
+            }
+          },
+          {
+            label: "删除",
+            permission: "authorityManage:delete",
+            click: row => {
+              return this.$refs.listPage.handleDeleteBatch(row);
+            }
+          }
+        ],
         // 操作按钮
         buttons: {
           query: {
@@ -89,9 +129,7 @@ export default {
             api: accessAuthorityUpdate,
             permission: "authorityManage:update"
           },
-          customButton: {
-            operationWidth: "150px"
-          }
+          rowButtonsWidth: 150 // row自定义按钮表格宽度
         },
         // 表格列
         columns: [
