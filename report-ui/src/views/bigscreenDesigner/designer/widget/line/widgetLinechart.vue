@@ -105,7 +105,6 @@ export default {
       this.setOptionsTooltip();
       this.setOptionsData();
       this.setOptionsMargin();
-      this.setOptionsLegend();
       this.setOptionsColor();
     },
     // 标题修改
@@ -244,7 +243,7 @@ export default {
         show: true,
         textStyle: {
           color: optionsSetup.lineColor,
-          fontSize: optionsSetup.fontSize
+          fontSize: optionsSetup.tipsFontSize
         }
       };
       this.options.tooltip = tooltip;
@@ -260,42 +259,6 @@ export default {
         containLabel: true
       };
       this.options.grid = grid;
-    },
-    // 图例操作 legend
-    setOptionsLegend() {
-      const optionsSetup = this.optionsSetup;
-      const legend = this.options.legend;
-      legend.show = optionsSetup.isShowLegend;
-      legend.left = optionsSetup.lateralPosition;
-      legend.right = optionsSetup.lateralPosition;
-      legend.top = optionsSetup.longitudinalPosition;
-      legend.bottom =
-        optionsSetup.longitudinalPosition;
-      legend.orient = optionsSetup.layoutFront;
-      legend.textStyle = {
-        color: optionsSetup.lengedColor,
-        fontSize: optionsSetup.fontSize
-      };
-      legend.itemWidth = optionsSetup.lengedWidth;
-    },
-    // 图例名称设置
-    setOptionsLegendName(name){
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      const legendName = optionsSetup.legendName;
-      // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == '') {
-        for (let i = 0; i < name.length; i++) {
-          series[i].name = name[i];
-        }
-        this.options.legend['data'] = name;
-      }else {
-        const arr = legendName.split('|');
-        for (let i = 0; i < arr.length; i++) {
-          series[i].name = arr[i];
-        }
-        this.options.legend['data'] = arr
-      }
     },
     // 图例颜色修改
     setOptionsColor() {
@@ -332,10 +295,6 @@ export default {
           series[i].data = data;
         }
       }
-      const legendName = [];
-      legendName.push('销售量')
-      this.options.legend['data'] = legendName;
-      this.setOptionsLegendName(legendName);
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -359,15 +318,11 @@ export default {
       this.options.xAxis.data = val.xAxis;
       // series
       const series = this.options.series;
-      const legendName = [];
       for (const i in series) {
         if (series[i].type == "line") {
           series[i].data = val.series[i].data;
         }
-        legendName.push(val.series[i].name);
       }
-      this.options.legend['data'] = legendName;
-      this.setOptionsLegendName(legendName);
     }
   }
 };
