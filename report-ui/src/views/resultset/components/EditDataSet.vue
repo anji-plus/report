@@ -219,6 +219,7 @@
                               v-model="item.transformType"
                               :updata-dict="item.transformType"
                               :dict-key="'TRANSFORM_TYPE'"
+                              @change="changeForm"
                             />
                             <el-button
                               type="text"
@@ -252,10 +253,16 @@
                           min-height="400px"
                           append-to-body
                         >
-                          <div v-if="isItemFilterType.transformType == 'js' || isItemFilterType.transformType == 'javaBean'">
+                          <div
+                            v-if="
+                              isItemFilterType.transformType == 'js' ||
+                                isItemFilterType.transformType == 'javaBean'
+                            "
+                          >
                             <div class="codemirror">
                               <!-- //自定义高级规则？ -->
                               <monaco-editor
+                                v-if="jsScriptVisible"
                                 v-model.trim="transformScript"
                                 language="javascript"
                                 style="height: 500px"
@@ -483,6 +490,7 @@ export default {
       dialogFormVisibleTitle: "",
       dialogPermissionVisible: false,
       dialogSwitchVisible: false,
+      jsScriptVisible: false,
       permissionTextarea: "",
       isItemFilterType: "", // 选中的转换类型id
       itemFilterList: [
@@ -663,6 +671,12 @@ export default {
         this.isShowPagination = false;
       }
     },
+    changeForm(val) {
+      if (!val) {
+        this.dialogSwitchVisible = false;
+        this.jsScriptVisible = false
+      }
+    },
     // 关闭模态框
     closeDialog() {
       this.$emit("handleClose");
@@ -744,6 +758,7 @@ export default {
       console.log(item);
       this.isItemFilterType = item;
       this.dialogSwitchVisible = true;
+      this.jsScriptVisible = true
       if (item.transformType == "js") {
         this.itemFilterScriptId = item.itemFilterSort;
         const fnCont = `function dataTransform(data){\n\t//自定义脚本内容\n\treturn data;\n}`;
@@ -751,8 +766,7 @@ export default {
           ? item.transformScript
           : fnCont;
       } else if (item.transformType == "dict") {
-
-      }else if (item.transformType == "javaBean") {
+      } else if (item.transformType == "javaBean") {
         this.itemFilterScriptId = item.itemFilterSort;
         const fnCont = `package com;
 
