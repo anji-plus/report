@@ -16,10 +16,12 @@
         <!-- 左侧组件栏-->
         <el-tab-pane label="工具栏">
           <!-- <el-divider content-position="center">html</el-divider>-->
-          <draggable
+          <li
             v-for="widget in widgetTools"
             :key="widget.code"
-            @end="evt => widgetOnDragged(evt, widget.code)"
+            draggable="true"
+            @dragstart="dragStart(widget.code)"
+            @dragend="dragEnd()"
           >
             <div class="tools-item">
               <span class="tools-item-icon">
@@ -27,7 +29,7 @@
               </span>
               <span class="tools-item-text">{{ widget.label }}</span>
             </div>
-          </draggable>
+          </li>
         </el-tab-pane>
         <!-- 左侧图层-->
         <el-tab-pane label="图层">
@@ -197,7 +199,7 @@
               'background-origin': 'initial',
               'background-clip': 'initial'
             }"
-            @click.self="setOptionsOnClickScreen"
+            @click.self="setOptionsOnClickScreen"  @drop="widgetOnDragged($event)" @dragover="dragOver($event)"
           >
             <div v-if="grade" class="bg-grid"></div>
             <widget
@@ -330,6 +332,7 @@ export default {
       },
       // 大屏的标记
       screenCode: "",
+      dragWidgetCode:'',   //从工具栏拖拽的组件code
       // 大屏画布中的组件
       widgets: [
         {
@@ -660,14 +663,24 @@ export default {
     getPXUnderScale(px) {
       return this.bigscreenScaleInWorkbench * px;
     },
-
+    dragStart( widgetCode) {
+        this.dragWidgetCode =widgetCode;
+    },
+    dragEnd() {
+        this.dragWidgetCode=''
+    },
+    dragOver(evt){
+      evt.preventDefault()
+      evt.stopPropagation()
+      evt.dataTransfer.dropEffect = 'copy'
+    },
     // 拖动一个组件放到工作区中去，在拖动结束时，放到工作区对应的坐标点上去
-    widgetOnDragged(evt, widgetCode) {
-      let widgetType = widgetCode;
+    widgetOnDragged(evt) {
+      let widgetType = this.dragWidgetCode;
 
       // 获取结束坐标和列名
-      let eventX = evt.originalEvent.clientX; // 结束在屏幕的x坐标
-      let eventY = evt.originalEvent.clientY; // 结束在屏幕的y坐标
+      let eventX = evt.clientX; // 结束在屏幕的x坐标
+      let eventY = evt.clientY; // 结束在屏幕的y坐标
 
       let workbenchPosition = this.getDomTopLeftById("workbench");
       let widgetTopInWorkbench = eventY - workbenchPosition.top;
