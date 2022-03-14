@@ -1,264 +1,189 @@
-<!--
- * @Descripttion: 大屏设计器
- * @Author: lide1202@hotmail.com
- * @Date: 2021-3-13 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24
- !-->
 <template>
   <div class="layout">
-    <div
-      v-if="toolIsShow"
-      class="layout-left"
-      :style="{ width: widthLeftForTools + 'px' }"
-    >
-      <el-tabs type="border-card" :stretch="true">
-        <!-- 左侧组件栏-->
-        <el-tab-pane label="工具栏">
-          <!-- <el-divider content-position="center">html</el-divider>-->
-          <li
-            v-for="widget in widgetTools"
-            :key="widget.code"
-            draggable="true"
-            @dragstart="dragStart(widget.code)"
-            @dragend="dragEnd()"
-          >
-            <div class="tools-item">
-              <span class="tools-item-icon">
-                <i class="iconfont" :class="widget.icon"></i>
-              </span>
-              <span class="tools-item-text">{{ widget.label }}</span>
-            </div>
-          </li>
-        </el-tab-pane>
-        <!-- 左侧图层-->
-        <el-tab-pane label="图层">
-          <draggable
-            v-model="layerWidget"
-            @update="datadragEnd"
-            :options="{ animation: 300 }"
-          >
-            <transition-group>
-              <div
-                v-for="(item, index) in layerWidget"
-                :key="'item' + index"
-                class="tools-item"
-                :class="widgetIndex == index ? 'is-active' : ''"
-                @click="layerClick(index)"
+    <!-- 操作栏 -->
+    <div class="layout-bar">
+      <div class="bar-item"><i class="iconfont iconsave"></i>保存</div>
+      <div class="bar-item"><i class="iconfont iconyulan"></i>预览</div>
+      <div class="bar-item"><i class="iconfont iconundo"></i>撤销</div>
+      <div class="bar-item"><i class="iconfont iconhuifubeifen"></i>恢复</div>
+      <div class="bar-item">
+        <!-- <el-upload
+          class="el-upload"
+          ref="upload"
+          :action="uploadUrl"
+          :headers="headers"
+          accept=".zip"
+          :on-success="handleUpload"
+          :on-error="handleError"
+          :show-file-list="false"
+          :limit="1"
+        >
+          <i class="iconfont icondaoru"></i>
+        </el-upload> -->
+        导入
+      </div>
+      <div class="bar-item">
+        <i class="iconfont icondaochu"></i>
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            导出<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>导出(包含数据集)</el-dropdown-item>
+            <el-dropdown-item>导出(不包含数据集)</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+    </div>
+
+    <div class="layout-container">
+      <!-- 图表 -->
+      <el-tabs class="layout-left" type="border-card">
+        <el-tab-pane>
+          <span slot="label"><i class="el-icon-date icon"></i>工具栏</span>
+          <div class="chart-type">
+            <el-tabs class="type-left" tab-position="left">
+              <el-tab-pane
+                v-for="(item, index) in widgetTools"
+                :key="index"
+                :label="item.name"
               >
-                <span class="tools-item-icon">
-                  <i class="iconfont" :class="item.icon"></i>
-                </span>
-                <span class="tools-item-text">{{ item.label }}</span>
-              </div>
-            </transition-group>
-          </draggable>
-        </el-tab-pane>
-      </el-tabs>
-    </div>
-
-    <div
-      class="layout-left-fold"
-      :style="{ width: widthLeftForToolsHideButton + 'px' }"
-      @click="toolIsShow = !toolIsShow"
-    >
-      <i class="el-icon-arrow-right" />
-    </div>
-
-    <div
-      class="layout-middle"
-      :style="{ width: middleWidth + 'px', height: middleHeight + 'px' }"
-    >
-      <div class="top-button">
-        <span class="btn">
-          <el-tooltip
-            class="item"
-            effect="dark"
-            content="保存"
-            placement="bottom"
-          >
-            <i class="iconfont iconsave" @click="saveData"></i>
-          </el-tooltip>
-        </span>
-        <span class="btn">
-          <el-tooltip
-            class="item"
-            effect="dark"
-            content="预览"
-            placement="bottom"
-          >
-            <i class="iconfont iconyulan" @click="viewScreen"></i>
-          </el-tooltip>
-        </span>
-
-        <span class="btn">
-          <el-tooltip
-            class="item"
-            effect="dark"
-            content="撤销"
-            placement="bottom"
-          >
-            <i class="iconfont" @click="handleUndo">撤销</i>
-          </el-tooltip>
-        </span>
-
-        <span class="btn">
-          <el-tooltip
-            class="item"
-            effect="dark"
-            content="恢复"
-            placement="bottom"
-          >
-            <i class="iconfont" @click="handleRedo">恢复</i>
-          </el-tooltip>
-        </span>
-
-        <span class="btn" v-permission="'bigScreenManage:export'">
-          <el-tooltip
-            class="item"
-            effect="dark"
-            content="导入"
-            placement="bottom"
-          >
-            <el-upload
-              class="el-upload"
-              ref="upload"
-              :action="uploadUrl"
-              :headers="headers"
-              accept=".zip"
-              :on-success="handleUpload"
-              :on-error="handleError"
-              :show-file-list="false"
-              :limit="1"
-            >
-              <i class="iconfont icondaoru"></i>
-            </el-upload>
-          </el-tooltip>
-        </span>
-        <span class="btn border-left" v-permission="'bigScreenManage:import'">
-          <ul class="nav">
-            <li>
-              <i class="iconfont icondaochu"></i
-              ><i class="el-icon-arrow-down"></i>
-              <ul>
-                <li>
-                  <el-tooltip
-                    class="item"
-                    effect="dark"
-                    content="适合当前系统"
-                    placement="right"
-                  >
-                    <div @click="exportDashboard(1)">导出(包含数据集)</div>
-                  </el-tooltip>
-                </li>
-                <li>
-                  <el-tooltip
-                    class="item"
-                    effect="dark"
-                    content="适合跨系统"
-                    placement="right"
-                  >
-                    <div @click="exportDashboard(0)">导出(不包含数据集)</div>
-                  </el-tooltip>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </span>
-      </div>
-      <div
-        class="workbench-container"
-        :style="{
-          width: bigscreenWidthInWorkbench + 'px',
-          height: bigscreenHeightInWorkbench + 'px'
-        }"
-        @mousedown="handleMouseDown"
-      >
-        <vue-ruler-tool
-          v-model="dashboard.presetLine"
-          class="vueRuler"
-          :step-length="50"
-          :parent="true"
-          :position="'relative'"
-          :is-scale-revise="true"
-          :visible.sync="dashboard.presetLineVisible"
-        >
-          <div
-            id="workbench"
-            class="workbench"
-            :style="{
-              transform: workbenchTransform,
-              width: bigscreenWidth + 'px',
-              height: bigscreenHeight + 'px',
-              'background-color': dashboard.backgroundColor,
-              'background-image': 'url(' + dashboard.backgroundImage + ')',
-              'background-position': '0% 0%',
-              'background-size': '100% 100%',
-              'background-repeat': 'initial',
-              'background-attachment': 'initial',
-              'background-origin': 'initial',
-              'background-clip': 'initial'
-            }"
-            @click.self="setOptionsOnClickScreen"  @drop="widgetOnDragged($event)" @dragover="dragOver($event)"
-          >
-            <div v-if="grade" class="bg-grid"></div>
-            <widget
-              ref="widgets"
-              v-for="(widget, index) in widgets"
-              :key="index"
-              v-model="widget.value"
-              :index="index"
-              :step="step"
-              :type="widget.type"
-              :bigscreen="{ bigscreenWidth, bigscreenHeight }"
-              @onActivated="setOptionsOnClickWidget"
-              @contextmenu.prevent.native="rightClick($event, index)"
-              @mousedown.prevent.native="widgetsClick(index)"
-              @mouseup.prevent.native="widgetsMouseup"
-            />
+                <draggable
+                  v-for="(it, idx) in item.list"
+                  :key="idx"
+                  @end="evt => widgetOnDragged(evt, it.code)"
+                >
+                  <div class="tools-item">
+                    <span class="tools-item-icon">
+                      <i class="iconfont" :class="it.icon"></i>
+                    </span>
+                    <span class="tools-item-text">{{ it.label }}</span>
+                  </div>
+                </draggable>
+              </el-tab-pane>
+            </el-tabs>
           </div>
-        </vue-ruler-tool>
-      </div>
-    </div>
-
-    <div class="layout-right" :style="{ width: widthLeftForOptions + 'px' }">
-      <el-tabs v-model="activeName" type="border-card" :stretch="true">
-        <el-tab-pane
-          v-if="
-            isNotNull(widgetOptions.setup) || isNotNull(widgetOptions.collapse)
-          "
-          name="first"
-          label="配置"
-        >
-          <dynamicForm
-            ref="formData"
-            :options="widgetOptions.setup"
-            @onChanged="val => widgetValueChanged('setup', val)"
-          />
         </el-tab-pane>
-        <el-tab-pane
-          v-if="isNotNull(widgetOptions.data)"
-          name="second"
-          label="数据"
-        >
-          <dynamicForm
-            ref="formData"
-            :options="widgetOptions.data"
-            @onChanged="val => widgetValueChanged('data', val)"
-          />
-        </el-tab-pane>
-        <el-tab-pane
-          v-if="isNotNull(widgetOptions.position)"
-          name="third"
-          label="坐标"
-        >
-          <dynamicForm
-            ref="formData"
-            :options="widgetOptions.position"
-            @onChanged="val => widgetValueChanged('position', val)"
-          />
+        <el-tab-pane>
+          <span slot="label" class="icon"
+            ><i class="el-icon-date icon"></i>图层</span
+          >
+          <div class="tools-item">
+            <span class="tools-item-icon">
+              <i class="iconfont iconkuangjia"></i>
+            </span>
+            <span class="tools-item-text">内联框架</span>
+          </div>
+          <div class="tools-item">
+            <span class="tools-item-icon">
+              <i class="iconfont iconkuangjia"></i>
+            </span>
+            <span class="tools-item-text">内联框架</span>
+          </div>
         </el-tab-pane>
       </el-tabs>
+
+      <!-- 设计器 -->
+      <div
+        class="layout-middle"
+        :style="{ width: middleWidth + 'px', height: middleHeight + 'px' }"
+      >
+        <div
+          class="workbench-container"
+          :style="{
+            width: bigscreenWidthInWorkbench + 'px',
+            height: bigscreenHeightInWorkbench + 'px'
+          }"
+          @mousedown="handleMouseDown"
+        >
+          <vue-ruler-tool
+            v-model="dashboard.presetLine"
+            class="vueRuler"
+            :step-length="50"
+            :parent="true"
+            :position="'relative'"
+            :is-scale-revise="true"
+            :visible.sync="dashboard.presetLineVisible"
+          >
+            <div
+              id="workbench"
+              class="workbench"
+              :style="{
+                transform: workbenchTransform,
+                width: bigscreenWidth + 'px',
+                height: bigscreenHeight + 'px',
+                'background-color': dashboard.backgroundColor,
+                'background-image': 'url(' + dashboard.backgroundImage + ')',
+                'background-position': '0% 0%',
+                'background-size': '100% 100%',
+                'background-repeat': 'initial',
+                'background-attachment': 'initial',
+                'background-origin': 'initial',
+                'background-clip': 'initial'
+              }"
+              @click.self="setOptionsOnClickScreen"
+            >
+              <div v-if="grade" class="bg-grid"></div>
+              <widget
+                ref="widgets"
+                v-for="(widget, index) in widgets"
+                :key="index"
+                v-model="widget.value"
+                :index="index"
+                :step="step"
+                :type="widget.type"
+                :bigscreen="{ bigscreenWidth, bigscreenHeight }"
+                @onActivated="setOptionsOnClickWidget"
+                @contextmenu.prevent.native="rightClick($event, index)"
+                @mousedown.prevent.native="widgetsClick(index)"
+                @mouseup.prevent.native="widgetsMouseup"
+              />
+            </div>
+          </vue-ruler-tool>
+        </div>
+      </div>
+
+      <!-- 设置 -->
+      <div class="layout-right">
+        <el-tabs v-model="activeName" type="border-card" :stretch="true">
+          <el-tab-pane
+            v-if="
+              isNotNull(widgetOptions.setup) ||
+                isNotNull(widgetOptions.collapse)
+            "
+            name="first"
+            label="配置"
+          >
+            <dynamicForm
+              ref="formData"
+              :options="widgetOptions.setup"
+              @onChanged="val => widgetValueChanged('setup', val)"
+            />
+          </el-tab-pane>
+          <el-tab-pane
+            v-if="isNotNull(widgetOptions.data)"
+            name="second"
+            label="数据"
+          >
+            <dynamicForm
+              ref="formData"
+              :options="widgetOptions.data"
+              @onChanged="val => widgetValueChanged('data', val)"
+            />
+          </el-tab-pane>
+          <el-tab-pane
+            v-if="isNotNull(widgetOptions.position)"
+            name="third"
+            label="坐标"
+          >
+            <dynamicForm
+              ref="formData"
+              :options="widgetOptions.position"
+              @onChanged="val => widgetValueChanged('position', val)"
+            />
+          </el-tab-pane>
+        </el-tabs>
+      </div>
     </div>
 
     <content-menu
@@ -273,7 +198,6 @@
     />
   </div>
 </template>
-
 <script>
 import {
   insertDashboard,
@@ -281,22 +205,21 @@ import {
   importDashboard,
   exportDashboard
 } from "@/api/bigscreen";
-import { widgetTools, getToolByCode } from "./tools/index";
-import widget from "./widget/widget.vue";
+import { screenConfig } from "./config/texts/screenConfig.js";
+import { widgetTools, getToolByCode } from "./config/index.js";
+import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
+import widget from "./widget/index.vue";
 import dynamicForm from "./components/dynamicForm.vue";
 import draggable from "vuedraggable";
-import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
 import contentMenu from "./components/contentMenu";
 import { getToken } from "@/utils/auth";
 import { Revoke } from "@/utils/revoke"; //处理历史记录 2022-02-22
-
 export default {
-  name: "Login",
   components: {
-    draggable,
     VueRulerTool,
     widget,
     dynamicForm,
+    draggable,
     contentMenu
   },
   data() {
@@ -332,7 +255,6 @@ export default {
       },
       // 大屏的标记
       screenCode: "",
-      dragWidgetCode:'',   //从工具栏拖拽的组件code
       // 大屏画布中的组件
       widgets: [
         {
@@ -436,14 +358,20 @@ export default {
     this.revoke = new Revoke();
   },
   mounted() {
+    this.initScreen();
     // 如果是新的设计工作台
-    this.initEchartData();
+    // this.initEchartData();
     this.widgets = [];
     window.addEventListener("mouseup", () => {
       this.grade = false;
     });
   },
   methods: {
+    // 初始化大屏
+    initScreen() {
+      this.widgetOptions = screenConfig["options"];
+    },
+
     /**
      * @description: 恢复
      * @param {*}
@@ -663,24 +591,14 @@ export default {
     getPXUnderScale(px) {
       return this.bigscreenScaleInWorkbench * px;
     },
-    dragStart( widgetCode) {
-        this.dragWidgetCode =widgetCode;
-    },
-    dragEnd() {
-        this.dragWidgetCode=''
-    },
-    dragOver(evt){
-      evt.preventDefault()
-      evt.stopPropagation()
-      evt.dataTransfer.dropEffect = 'copy'
-    },
+
     // 拖动一个组件放到工作区中去，在拖动结束时，放到工作区对应的坐标点上去
-    widgetOnDragged(evt) {
-      let widgetType = this.dragWidgetCode;
+    widgetOnDragged(evt, widgetCode) {
+      let widgetType = widgetCode;
 
       // 获取结束坐标和列名
-      let eventX = evt.clientX; // 结束在屏幕的x坐标
-      let eventY = evt.clientY; // 结束在屏幕的y坐标
+      let eventX = evt.originalEvent.clientX; // 结束在屏幕的x坐标
+      let eventY = evt.originalEvent.clientY; // 结束在屏幕的y坐标
 
       let workbenchPosition = this.getDomTopLeftById("workbench");
       let widgetTopInWorkbench = eventY - workbenchPosition.top;
@@ -942,405 +860,6 @@ export default {
   }
 };
 </script>
-
 <style scoped lang="scss">
-.mr10 {
-  margin-right: 10px;
-}
-
-.ml20 {
-  margin-left: 20px;
-}
-
-.border-right {
-  border-right: 1px solid #273b4d;
-}
-
-.border-left {
-  border-left: 1px solid #273b4d;
-}
-
-.el-icon-arrow-down {
-  font-size: 10px;
-}
-
-.is-active {
-  background: #31455d !important;
-  color: #bfcbd9 !important;
-}
-
-.layout {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  overflow: hidden;
-
-  .layout-left {
-    display: inline-block;
-    height: 100%;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    border: 0px;
-    background-color: #263445;
-
-    //工具栏一个元素
-    .tools-item {
-      display: flex;
-      position: relative;
-      width: 100%;
-      height: 48px;
-      align-items: center;
-      -webkit-box-align: center;
-      padding: 0 6px;
-      cursor: pointer;
-      font-size: 12px;
-      margin-bottom: 1px;
-
-      .tools-item-icon {
-        color: #409eff;
-        margin-right: 10px;
-        width: 53px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        display: block;
-        border: 1px solid #3a4659;
-        background: #282a30;
-      }
-      .tools-item-text {
-      }
-    }
-  }
-
-  .layout-left-fold {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-
-    font-size: 12px;
-    overflow: hidden;
-    background-color: #242a30;
-    cursor: pointer;
-    padding-top: 26%;
-
-    i {
-      font-size: 18px;
-      width: 18px;
-      height: 23px;
-      margin-left: 0px;
-      color: #bfcbd9;
-    }
-  }
-
-  .layout-middle {
-    // display: flex;
-    position: relative;
-    //width: calc(100% - 445px);
-    height: 100%;
-    background-color: rgb(36, 42, 48);
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    border: 1px solid rgb(36, 42, 48);
-    align-items: center;
-    vertical-align: middle;
-    text-align: center;
-
-    .top-button {
-      display: flex;
-      flex-direction: row;
-      height: 40px;
-      line-height: 40px;
-      margin-left: 9px;
-
-      .btn {
-        color: #788994;
-        width: 55px;
-        text-align: center;
-        display: block;
-        cursor: pointer;
-
-        .el-icon-arrow-down {
-          transform: rotate(0deg);
-          -ms-transform: rotate(0deg); /* IE 9 */
-          -moz-transform: rotate(0deg); /* Firefox */
-          -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
-          -o-transform: rotate(0deg); /* Opera */
-          transition: all 0.4s ease-in-out;
-        }
-
-        &:hover {
-          background: rgb(25, 29, 34);
-
-          .el-icon-arrow-down {
-            transform: rotate(180deg);
-            -ms-transform: rotate(180deg); /* IE 9 */
-            -moz-transform: rotate(180deg); /* Firefox */
-            -webkit-transform: rotate(180deg); /* Safari 和 Chrome */
-            -o-transform: rotate(180deg); /* Opera */
-            transition: all 0.4s ease-in-out;
-          }
-        }
-      }
-    }
-
-    .workbench-container {
-      position: relative;
-      -webkit-transform-origin: 0 0;
-      transform-origin: 0 0;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-
-      .vueRuler {
-        width: 100%;
-        padding: 18px 0px 0px 18px;
-      }
-
-      .workbench {
-        background-color: #1e1e1e;
-        position: relative;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        -webkit-transform-origin: 0 0;
-        transform-origin: 0 0;
-        margin: 0;
-        padding: 0;
-      }
-
-      .bg-grid {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: 30px 30px, 30px 30px;
-        background-image: linear-gradient(
-            hsla(0, 0%, 100%, 0.1) 1px,
-            transparent 0
-          ),
-          linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) 1px, transparent 0);
-        // z-index: 2;
-      }
-    }
-
-    .bottom-text {
-      width: 100%;
-      color: #a0a0a0;
-      font-size: 16px;
-      position: absolute;
-      bottom: 20px;
-    }
-  }
-
-  .layout-right {
-    display: inline-block;
-    height: 100%;
-  }
-
-  /deep/ .el-tabs--border-card {
-    border: 0;
-
-    .el-tabs__header {
-      .el-tabs__nav {
-        .el-tabs__item {
-          background-color: #242f3b;
-          border: 0px;
-        }
-
-        .el-tabs__item.is-active {
-          background-color: #31455d;
-        }
-      }
-    }
-
-    .el-tabs__content {
-      background-color: #242a30;
-      height: calc(100vh - 39px);
-      overflow-x: hidden;
-      overflow-y: auto;
-
-      .el-tab-pane {
-        color: #bfcbd9;
-      }
-
-      &::-webkit-scrollbar {
-        width: 5px;
-        height: 14px;
-      }
-
-      &::-webkit-scrollbar-track,
-      &::-webkit-scrollbar-thumb {
-        border-radius: 1px;
-        border: 0 solid transparent;
-      }
-
-      &::-webkit-scrollbar-track-piece {
-        /*修改滚动条的背景和圆角*/
-        background: #29405c;
-        -webkit-border-radius: 7px;
-      }
-
-      &::-webkit-scrollbar-track {
-        box-shadow: 1px 1px 5px rgba(116, 148, 170, 0.5) inset;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        min-height: 20px;
-        background-clip: content-box;
-        box-shadow: 0 0 0 5px rgba(116, 148, 170, 0.5) inset;
-      }
-
-      &::-webkit-scrollbar-corner {
-        background: transparent;
-      }
-
-      /*修改垂直滚动条的样式*/
-      &::-webkit-scrollbar-thumb:vertical {
-        background-color: #00113a;
-        -webkit-border-radius: 7px;
-      }
-
-      /*修改水平滚动条的样式*/
-      &::-webkit-scrollbar-thumb:horizontal {
-        background-color: #00113a;
-        -webkit-border-radius: 7px;
-      }
-    }
-  }
-}
-
-ul,
-li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav {
-  width: 40px;
-  padding: 0;
-  list-style: none;
-  /* overflow: hidden; */
-}
-
-.nav {
-  zoom: 1;
-}
-
-.nav:before,
-.nav:after {
-  content: "";
-  display: table;
-}
-
-.nav:after {
-  clear: both;
-}
-
-.nav > li {
-  width: 55px;
-  text-align: left;
-  position: relative;
-}
-
-.nav > li a {
-  float: left;
-  padding: 12px 30px;
-  color: #999;
-  font: bold 12px;
-  text-decoration: none;
-}
-
-.nav > li:hover {
-  color: #788994;
-}
-
-.nav > li ul {
-  visibility: hidden;
-  position: absolute;
-  z-index: 1000;
-  list-style: none;
-  left: 0;
-  padding: 0;
-  background-color: rgb(36, 42, 48);
-  opacity: 0;
-  _margin: 0;
-  width: 120px;
-  transition: all 0.2s ease-in-out;
-}
-
-.nav > li:hover > ul {
-  opacity: 1;
-  visibility: visible;
-  margin: 0;
-
-  li:hover {
-    background-color: rgb(25, 29, 34);
-  }
-}
-
-.nav ul li {
-  float: left;
-  display: block;
-  border: 0;
-  width: 100%;
-  font-size: 12px;
-}
-
-.nav ul a {
-  padding: 10px;
-  width: 100%;
-  display: block;
-  float: none;
-  height: 120px;
-  border: 1px solid #30445c;
-  background-color: rgb(25, 29, 34);
-  transition: all 0.2s ease-in-out;
-}
-
-.nav ul a:hover {
-  border: 1px solid #3c5e88;
-}
-
-.nav ul li:first-child > a:hover:before {
-  border-bottom-color: #04acec;
-}
-
-.nav ul ul {
-  top: 0;
-  left: 120px;
-  width: 400px;
-  height: 300px;
-  overflow: auto;
-  padding: 10px;
-  _margin: 0;
-}
-
-.nav ul ul li {
-  width: 120px;
-  height: 120px;
-  margin-right: 3px;
-  display: block;
-  float: left;
-}
-
-.nav .item {
-  padding: 5px;
-}
-
-/deep/ .vue-ruler-h {
-  opacity: 0.3;
-}
-
-/deep/ .vue-ruler-v {
-  opacity: 0.3;
-}
+@import "../../assets/styles/screenDesigner.scss";
 </style>

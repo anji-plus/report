@@ -1,13 +1,12 @@
 /*
- * @Descripttion: 主文件
+ * @Descripttion: 大屏配置
  * @version: 
  * @Author: qianlishi
- * @Date: 2021-08-29 06:43:07
+ * @Date: 2022-03-09 19:45:37
  * @LastEditors: qianlishi
- * @LastEditTime: 2022-03-11 10:35:35
+ * @LastEditTime: 2022-03-09 19:59:18
  */
-import { widgetTool } from "./main"
-const screenConfig = {
+export const screenConfig = {
   code: 'screen',
   type: 'screen',
   label: '大屏设置',
@@ -66,20 +65,3 @@ const screenConfig = {
     position: [],
   }
 }
-const widgetTools = [
-  ...widgetTool
-]
-
-const getToolByCode = function (code) {
-  // 获取大屏底层设置属性
-  if (code == 'screen') {
-    return screenConfig
-  }
-  // 获取组件
-  let item = widgetTools.find(function (item, index, arrs) {
-    return item.code === code
-  })
-  return item
-}
-console.log(widgetTools)
-export {widgetTools, getToolByCode}
