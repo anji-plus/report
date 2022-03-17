@@ -87,8 +87,27 @@
 - [vuedraggable](https://github.com/SortableJS/Vue.Draggable/): 是一款基于Sortable.js实现的vue拖拽插件。
 - [luckysheet](https://gitee.com/mengshukeji/Luckysheet): Luckysheet ，一款纯前端类似excel的在线表格，功能强大、配置简单、完全开源。
 
-## 编译打包
+## 部署方式
 
+源码 doc -> docs -> guide 目录下即所有文档
+
+
+### 发行版部署
+```
+下载最新发行版，解压
+cd aj-report-xxxx
+vim conf/bootstrap.yml 修改数据库连接等信息
+sh bin/start.sh Linux启动
+bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
+
+启动后访问
+http://serverip:9095
+用户名密码：admin/123456
+
+登陆后修改"数据源->mysql数据源"用户名密码
+```
+
+### 源码编译部署
 在Linux上先准备好maven、node.js、jdk
 
 - [Apache Maven] 3.5 <br>
@@ -109,6 +128,9 @@ bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启�
 
 启动后访问
 http://serverip:9095
+用户名密码：admin/123456
+
+登陆后修改"数据源->mysql数据源"用户名密码
 ```
 
 ## 操作手册
