@@ -93,6 +93,8 @@
 
 ## 部署方式
 
+源码 doc -> docs -> guide 目录下即所有文档
+
 **[运行环境参考](https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html)** <br>
 
 **[发行版部署参考](https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html)** <br>
@@ -101,7 +103,25 @@
 
 **[前后端分离部署参考](https://report.anji-plus.com/report-doc/guide/quicklySeparate.html)** <br>
 
-以源码部署为例：在Linux上先准备好maven、node.js、jdk
+### 发行版部署
+
+```
+下载最新发行版，解压
+cd aj-report-xxxx
+vim conf/bootstrap.yml 修改数据库连接等信息
+sh bin/start.sh Linux启动
+bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
+
+启动后访问
+http://serverip:9095
+用户名密码：admin/123456
+
+登陆后修改"数据源->mysql数据源"用户名密码
+```
+
+### 源码编译部署
+
+在Linux上先准备好maven、node.js、jdk
 
 - [Apache Maven] 3.5 <br>
 - [Node.js] v14.16.0 <br>
