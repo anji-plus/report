@@ -27,7 +27,7 @@ mv $BuildDir/report-ui/dist/* $BuildDir/report-core/src/main/resources/static/
 
 echo "build springboot"
 cd $BuildDir/report-core
-mvn clean deploy -Dmaven.test.skip=true
+mvn clean deploy -DskipTests -DaltDeploymentRepository=nexus-snapshots::default::http://10.108.10.53:8081/repository/maven-snapshots
 
 
 rm -rf $BuildDir/report-core/src/main/resources/static
