@@ -1,12 +1,5 @@
 #!/bin/bash
-
 #该脚本为私有化脚本，打包成内含网页的product-report-starter放在内网私服
-
-echo 'choose deploy type [1/2]'
-echo '1:deploy snapshot'
-echo '2:deploy release'
-read choose
-
 
 #判断node.js mvn是否存在
 command -v npm >/dev/null 2>&1 || { echo >&2 "I require node.js v14.16.0+ but it's not installed.  Aborting."; sleep 5; exit 1; }
@@ -34,12 +27,7 @@ mv $BuildDir/report-ui/dist/* $BuildDir/report-core/src/main/resources/static/
 echo "build springboot"
 cd $BuildDir/report-core
 
-
-if [ $choose = '2' ]; then
-	mvn clean deploy -DskipTests -DaltDeploymentRepository=nexus-releases::default::http://10.108.10.53:8081/repository/maven-releases
-else
-	mvn clean deploy -DskipTests -DaltDeploymentRepository=nexus-snapshots::default::http://10.108.10.53:8081/repository/maven-snapshots
-fi
+mvn clean deploy -DskipTests 
 
 rm -rf $BuildDir/report-core/src/main/resources/static
 git reset --hard
