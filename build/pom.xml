@@ -160,25 +160,50 @@
     </dependencies>
 	
 
-    <!--私服上传需以下配置，并注释以上build所有-->
-    <!--从私服下载配置-->
-    <repositories>
-        <!--本地-->
-        <repository>
-            <id>nexus</id>
-            <name>nexus</name>
-            <url>http://10.108.10.53:8081/repository/maven-public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <!--上传到私服配置-->
+    <!-- 上传到公司私服， mvn clean deploy -Dmaven.test.skip=true -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <updateReleaseInfo>true</updateReleaseInfo>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <distributionManagement>
         <repository>
             <id>nexus-releases</id>
