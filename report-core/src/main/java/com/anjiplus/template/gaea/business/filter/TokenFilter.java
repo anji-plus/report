@@ -41,6 +41,7 @@ import static com.anji.plus.gaea.constant.GaeaConstant.URL_REPLACEMENT;
 public class TokenFilter implements Filter {
     private static final Pattern PATTERN = Pattern.compile(".*().*");
     private static final String USER_GUEST = "guest";
+    @Value("${server.servlet.context-path:'/'}")
     private static final String SLASH = "/";
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
@@ -53,7 +54,6 @@ public class TokenFilter implements Filter {
     @Value("#{'${customer.skip-authenticate-urls}'.split(',')}")
     private List<String> skipAuthenticateUrls;
     private Pattern skipAuthenticatePattern;
-
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -74,8 +74,8 @@ public class TokenFilter implements Filter {
             return;
         }
 
-        if (SLASH.equals(uri)) {
-            response.sendRedirect("/index.html");
+        if (SLASH.equals(uri) || SLASH.concat("/").equals(uri)) {
+            response.sendRedirect(SLASH + "/index.html");
             return;
         }
 
@@ -128,6 +128,7 @@ public class TokenFilter implements Filter {
         //判断接口权限
         //请求路径
         String requestUrl = request.getRequestURI();
+        String servletPath = request.getServletPath();
         String methodValue = request.getMethod();
         //请求方法+#+请求路径
         String urlKey = methodValue + GaeaConstant.URL_SPLIT + requestUrl;
