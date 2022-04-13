@@ -158,35 +158,4 @@
         </dependency>
 
     </dependencies>
-
-
-    <!--私服上传需以下配置，并注释以上build所有-->
-    <!--从私服下载配置-->
-    <repositories>
-        <!--本地-->
-        <repository>
-            <id>nexus</id>
-            <name>nexus</name>
-            <url>http://10.108.10.53:8081/repository/maven-public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <!--上传到私服配置-->
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <url>http://10.108.10.53:8081/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>http://10.108.10.53:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
