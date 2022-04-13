@@ -127,11 +127,11 @@ public class TokenFilter implements Filter {
 
         //判断接口权限
         //请求路径
-        String requestUrl = request.getRequestURI();
+        //String requestUrl = request.getRequestURI();  requestUrl中可能会有contextpath，而底层扫描的controller是没有的
         String servletPath = request.getServletPath();
         String methodValue = request.getMethod();
         //请求方法+#+请求路径
-        String urlKey = methodValue + GaeaConstant.URL_SPLIT + requestUrl;
+        String urlKey = methodValue + GaeaConstant.URL_SPLIT + servletPath;
 
         GaeaUserDto gaeaUserDto = JSONObject.parseObject(gaeaUserJsonStr, GaeaUserDto.class);
         List<String> authorities = gaeaUserDto.getAuthorities();
