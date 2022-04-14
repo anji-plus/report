@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2022-03-09 09:49:23
+ * @LastEditTime: 2022-04-14 18:48:24
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
@@ -291,7 +291,7 @@ export default {
   methods: {
     operateDataset(type, prop) {
       this.dialogVisibleSetDataSet = true;
-      if (prop && prop) {
+      if (prop && prop.setType) {
         this.dataSet = prop;
         type = prop.setType;
       } else {
