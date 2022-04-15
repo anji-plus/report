@@ -1,6 +1,6 @@
 /*
  * @Descripttion: iframe json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:17:55
  * @LastEditors: qianlishi
@@ -28,7 +28,7 @@ export const widgetIframe =  {
           name: 'iframeAdress',
           required: false,
           placeholder: '',
-          value: 'https://report.anji-plus.com/index.html',
+          value: 'https://ajreport.beliefteam.cn/index.html',
         },
       ],
       // 数据
