@@ -12,7 +12,7 @@
 
 <br>
 
-## 版本问题：[开发环境参考](https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html)
+## 版本问题：[开发环境参考](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDevelop.html)
 
 - 底层数据库为Mysql8.0+时，flyway执行SQL报错<br>
 - Node.js是V16版本时 npm install失败 <br>

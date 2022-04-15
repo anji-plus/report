@@ -10,7 +10,7 @@
 
 ## 在线体验
 
-#### &emsp; [在线体验](https://report.anji-plus.com/index.html "链接"): https://report.anji-plus.com/index.html  &emsp;体验账号：guest 密码：guest
+#### &emsp; [在线体验](https://ajreport.beliefteam.cn/index.html "链接"): https://ajreport.beliefteam.cn/index.html  &emsp;体验账号：guest 密码：guest
 
 #### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
