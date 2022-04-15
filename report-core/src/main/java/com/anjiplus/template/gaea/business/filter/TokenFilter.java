@@ -14,7 +14,6 @@ import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.CollectionUtils;
@@ -41,8 +40,9 @@ import static com.anji.plus.gaea.constant.GaeaConstant.URL_REPLACEMENT;
 public class TokenFilter implements Filter {
     private static final Pattern PATTERN = Pattern.compile(".*().*");
     private static final String USER_GUEST = "guest";
-    private static final String SLASH = "/";
-    private AntPathMatcher antPathMatcher = new AntPathMatcher();
+
+    @Value("${server.servlet.context-path:'/'}")
+    private String SLASH = "/";
 
     @Autowired
     private CacheHelper cacheHelper;
@@ -54,6 +54,7 @@ public class TokenFilter implements Filter {
     private List<String> skipAuthenticateUrls;
     private Pattern skipAuthenticatePattern;
 
+    private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -74,8 +75,8 @@ public class TokenFilter implements Filter {
             return;
         }
 
-        if (SLASH.equals(uri)) {
-            response.sendRedirect("/index.html");
+        if (SLASH.equals(uri) || SLASH.concat("/").equals(uri)) {
+            response.sendRedirect(SLASH + "/index.html");
             return;
         }
 
@@ -127,10 +128,11 @@ public class TokenFilter implements Filter {
 
         //判断接口权限
         //请求路径
-        String requestUrl = request.getRequestURI();
+        //String requestUrl = request.getRequestURI();  requestUrl中可能会有contextpath，而底层扫描的controller是没有的
+        String servletPath = request.getServletPath();
         String methodValue = request.getMethod();
         //请求方法+#+请求路径
-        String urlKey = methodValue + GaeaConstant.URL_SPLIT + requestUrl;
+        String urlKey = methodValue + GaeaConstant.URL_SPLIT + servletPath;
 
         GaeaUserDto gaeaUserDto = JSONObject.parseObject(gaeaUserJsonStr, GaeaUserDto.class);
         List<String> authorities = gaeaUserDto.getAuthorities();
@@ -164,9 +166,6 @@ public class TokenFilter implements Filter {
             authError(response);
             return;
         }
-
-
-
 
         // 延长有效期
         cacheHelper.stringSetExpire(tokenKey, token, 3600);
