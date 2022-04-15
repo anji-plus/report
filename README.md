@@ -6,9 +6,9 @@
 
 ## 在线体验
 
-#### &emsp; [在线体验](https://report.anji-plus.com/index.html "链接"): https://report.anji-plus.com/index.html  &emsp;体验账号：guest 密码：guest
+#### &emsp; [在线体验](https://ajreport.beliefteam.cn/index.html "链接"): https://ajreport.beliefteam.cn/index.html  &emsp;体验账号：guest 密码：guest
 
-#### &emsp; [在线文档](https://report.anji-plus.com/report-doc/ "doc"): https://report.anji-plus.com/report-doc/ <br>
+#### &emsp; [在线文档](https://ajreport.beliefteam.cn/report-doc/ "doc"): https://ajreport.beliefteam.cn/report-doc/ <br>
 
 #### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
@@ -23,10 +23,8 @@
 &emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。 内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
 
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
-
-![视频](https://report.anji-plus.com/report-doc/static/Rhea.mp4) <br>
-
-**[更多社区大屏案例](https://report.anji-plus.com/report-doc/guide/bigScreenCase.html)** <br>
+![视频](https://ajreport.beliefteam.cn/report-doc/static/Rhea.mp4) <br>
+**[更多社区大屏案例](https://ajreport.beliefteam.cn/report-doc/guide/bigScreenCase.html)** <br>
 
 ## 数据流程图
 
@@ -93,15 +91,8 @@
 
 ## 部署方式
 
-源码 doc -> docs -> guide 目录下即所有文档
-
-**[运行环境参考](https://report.anji-plus.com/report-doc/guide/quicklyDevelop.html)** <br>
-
-**[发行版部署参考](https://report.anji-plus.com/report-doc/guide/quicklyDistribution.html)** <br>
-
-**[源码编译部署参考](https://report.anji-plus.com/report-doc/guide/quicklySource.html)** <br>
-
-**[前后端分离部署参考](https://report.anji-plus.com/report-doc/guide/quicklySeparate.html)** <br>
+**注意版本兼容性** <br>
+源码 doc -> docs -> guide 目录下即所有文档 <br>
 
 ### 发行版部署
 
@@ -146,11 +137,18 @@ http://serverip:9095
 登陆后修改"数据源->mysql数据源"用户名密码
 ```
 
+**[运行环境参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDevelop.html)** <br>
+
+**[源码编译部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySource.html)** <br>
+
+**[发行版部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDistribution.html)** <br>
+
+**[前后端分离部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySeparate.html)** <br>
+
 ## 操作手册
 
 新建数据源（重置mysql数据源） --> 新建数据集（编写sql） --> 新建大屏（设计大屏） <br>
-
-**[在线文档](https://report.anji-plus.com/report-doc/guide/datasource.html)**
+**[在线文档](https://ajreport.beliefteam.cn/report-doc/guide/datasource.html)**
 
 ## SQL初始化
 
@@ -163,13 +161,13 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 
 希望你们的logo出现在此，[请点此Issue进行登记](https://gitee.com/anji-plus/report/issues/I3ZXT4) ，我们将优先进行技术支持 <br>
 
-<a href='http://www.anji-plus.com/'> <img src="https://report.anji-plus.com/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/> </a>
+<a href='http://www.anji-plus.com/'> <img src="https://ajreport.beliefteam.cn/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/> </a>
 <a href='https://www.yunstech.cn/'><img src="https://www.yunstech.cn/images/logo.png" width = "130" height = "50" /> </a>
-<a href='http://www.fgkb.net/'><img src="https://report.anji-plus.com/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
-<a href='http://www.turingoal.com/'><img src="https://report.anji-plus.com/file/download/cda7bf68-376b-45dc-9a55-c52b21e4a8c8" width = "130" height = "50" /> </a>
-<a href='https://www.gykjweb.com/'><img src="https://report.anji-plus.com/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a> <br>
-<a href='http://www.plian.net/'><img src="https://report.anji-plus.com/file/download/7838f2c2-fdce-4ca7-8373-14d13dcda5cc" width = "130" height = "50" /> </a>
-<a href='https://www.zjjcl.cn/'><img src="https://report.anji-plus.com/file/download/8df07663-60c9-4e32-a0f2-0ea7d5c46ff9" width = "130" height = "50" /> </a>
+<a href='http://www.fgkb.net/'><img src="https://ajreport.beliefteam.cn/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
+<a href='http://www.turingoal.com/'><img src="https://ajreport.beliefteam.cn/file/download/cda7bf68-376b-45dc-9a55-c52b21e4a8c8" width = "130" height = "50" /> </a>
+<a href='https://www.gykjweb.com/'><img src="https://ajreport.beliefteam.cn/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a> <br>
+<a href='http://www.plian.net/'><img src="https://ajreport.beliefteam.cn/file/download/7838f2c2-fdce-4ca7-8373-14d13dcda5cc" width = "130" height = "50" /> </a>
+<a href='https://www.zjjcl.cn/'><img src="https://ajreport.beliefteam.cn/file/download/8df07663-60c9-4e32-a0f2-0ea7d5c46ff9" width = "130" height = "50" /> </a>
 
 ## 未来计划
 
@@ -191,8 +189,7 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 - openJdk
 - Jdk 11
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
-
-**[常见问题](https://report.anji-plus.com/report-doc/guide/question.html)**
+  **[常见问题](https://ajreport.beliefteam.cn/report-doc/guide/question.html)**
 
 ## 商业授权
 
@@ -210,7 +207,7 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 ## 技术支持
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
-个人企业微信：加微信进群备注AJ-Report或者Report（不备注是看不到的） <br>
+个人企业微信：加微信进群备注AJ-Report或者Report （不备注是看不到的）<br>
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "200" height = "200" align=left/>
 
 #### 开源不易，劳烦各位star ☺
