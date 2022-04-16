@@ -317,7 +317,7 @@ export default {
 
     // 根据数据字典，查询指定字典dict指定值code的，返回整个dictItem{id, text, extend}
     getDictItemByCode (dict, code) {
-      let dicts = getStorageItem('gaeaDict')
+      let dicts = getStorageItem('AJReportDict')
       if (!dicts.hasOwnProperty(dict)) {
         return null
       }
@@ -355,7 +355,7 @@ export default {
       return dictItem['extend']
     },
     getSettingByName(settingName) {
-      let gaeaSetting = JSON.parse(localStorage.getItem('gaeaDict'))
+      let gaeaSetting = JSON.parse(localStorage.getItem('AJReportDict'))
       if (gaeaSetting[settingName] != null) {
         return gaeaSetting[settingName]
       } else {
