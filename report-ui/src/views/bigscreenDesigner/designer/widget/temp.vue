@@ -38,6 +38,7 @@ import widgetLineCompareChart from "./line/widgetLineCompareChart";
 import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
 import widgetMoreBarLineChart from "./bar/widgetMoreBarLineChart";
 import widgetWordCloud from "./wordcloud/widgetWordCloud";
+import widgetHeatmap from "./heatmap/widgetHeatmap";
 
 export default {
   name: "WidgetTemp",
@@ -68,7 +69,8 @@ export default {
     widgetLineCompareChart,
     widgetDecoratePieChart,
     widgetMoreBarLineChart,
-    widgetWordCloud
+    widgetWordCloud,
+    widgetHeatmap
   },
   model: {
     prop: "value",
