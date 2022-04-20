@@ -290,11 +290,18 @@ export default {
       visualMap.show = optionsSetup.isShowLegend;
       visualMap.min = optionsSetup.dataMin;
       visualMap.max = optionsSetup.dataMax;
-      visualMap.textStyle.fontSize = optionsSetup.lengedFontSize;
-      visualMap.textStyle.color = optionsSetup.lengedColor;
+      visualMap.textStyle = {
+        fontSize : optionsSetup.lengedFontSize,
+        color : optionsSetup.lengedColor
+      };
       visualMap.inRange.color = optionsSetup.lengedColorList.map((x) => {
         return x.color;
       });
+      visualMap.left = optionsSetup.lateralPosition;
+      visualMap.top = optionsSetup.longitudinalPosition;
+      visualMap.bottom = optionsSetup.longitudinalPosition;
+      visualMap.orient = optionsSetup.layoutFront;
+      visualMap.itemWidth = optionsSetup.lengedWidth;
     },
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
@@ -302,9 +309,28 @@ export default {
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
+    //去重
+    setUnique(arr) {
+      let newArr = [];
+      arr.forEach(item => {
+        return newArr.includes(item) ? '' : newArr.push(item);
+      });
+      return newArr;
+    },
     staticDataFn(val) {
-      const staticData = typeof val == "string" ? JSON.parse(val) : val;
-      this.renderingFn(staticData);
+      const data = [];
+      let xAxisList = [];
+      let yAxisList = [];
+      for (const i in val) {
+        xAxisList[i] = val[i].axis;
+        yAxisList[i] = val[i].yaxis;
+        data[i] = [val[i].axis,val[i].yaxis,val[i].num]
+      }
+      xAxisList = this.setUnique(xAxisList);
+      yAxisList = this.setUnique(yAxisList);
+      this.options.xAxis.data = xAxisList;
+      this.options.yAxis.data = yAxisList;
+      this.options.series[0].data = data;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
