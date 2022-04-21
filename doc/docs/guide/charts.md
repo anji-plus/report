@@ -206,3 +206,17 @@
 ### 数据格式
 
 和饼图、南丁格尔玫瑰图数据保持一致。<br>
+
+## 热力图
+
+热力图是类似坐标轴一样的数据，当前的热力图数据集需要3个字段值，对应的字典是选择“X轴”，“Y轴”，“数值”，不明白可以看静态数据<br>
+![img21](../picture/charts/img_21.png) <br>
+
+注意：图设置功能中的最大最小值将会对热力图中的数值产生反应，主要根据设定的颜色来反应，数值越靠近最大值，颜色将更深 <br>
+![img22](../picture/charts/img_22.png) <br>
+
+### 数据格式
+
+![img23](../picture/charts/img_23.png) <br>
+
+**如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
