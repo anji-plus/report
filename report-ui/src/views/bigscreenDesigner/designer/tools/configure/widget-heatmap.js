@@ -10,7 +10,7 @@ export const widgetHeatmap = {
   code: 'widget-heatmap',
   type: 'chart',
   label: '热力图',
-  icon: 'iconicon_tubiao_bingtu',
+  icon: 'iconrelitu',
   options: {
     // 配置
     setup: [
