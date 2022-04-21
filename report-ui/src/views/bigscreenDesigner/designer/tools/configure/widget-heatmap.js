@@ -645,7 +645,7 @@ export const widgetHeatmap = {
         relactiveDom: 'dataType',
         chartType: 'widget-heatmap',
         relactiveDomValue: 'dynamicData',
-        dictKey: 'PIE_PROPERTIES',
+        dictKey: 'COORD_PROPERTIES',
         value: '',
       },
     ],
@@ -681,7 +681,7 @@ export const widgetHeatmap = {
         name: 'height',
         required: false,
         placeholder: '该容器在1080px大屏中的高度',
-        value: 250,
+        value: 300,
       },
     ],
   }

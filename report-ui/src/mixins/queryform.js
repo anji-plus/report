@@ -109,6 +109,7 @@ export default {
       // widget-text 文本框
       // widge-table 表格(数据不要转)
       // widget-stackchart 堆叠图
+      // widget-heatmap 热力图
       const chartType = params.chartType
       if (
         chartType == "widget-barchart" ||
@@ -125,7 +126,9 @@ export default {
         return this.widgettext(params.chartProperties, data)
       } else if (chartType == "widget-stackchart") {
         return this.stackChartFn(params.chartProperties, data)
-      } else {
+      } else if (chartType == "widget-heatmap") {
+        return this.heatmapChartFn(params.chartProperties, data)
+      }else {
         return data
       }
     },
@@ -222,6 +225,20 @@ export default {
         ananysicData.push(obj);
       }
       return ananysicData;
+    },
+    // 坐标系数据解析
+    heatmapChartFn(chartProperties,data){
+      const ananysicData = {};
+      const series = [];
+      //全部字段字典值
+      const types = Object.values(chartProperties)
+      //x轴字段、y轴字段名
+      const xAxisField = Object.keys(chartProperties)[types.indexOf('xAxis')]
+      const yAxisField = Object.keys(chartProperties)[types.indexOf('yAxis')]
+      //x轴数值去重，y轴去重
+      const xAxisList = this.setUnique(data.map(item => item[xAxisField]))
+      const yAxisList = this.setUnique(data.map(item => item[yAxisField]))
+
     },
     setUnique(arr) {
       let newArr = [];
