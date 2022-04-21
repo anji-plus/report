@@ -122,13 +122,13 @@ export default {
         chartType == "widget-funnel"
       ) {
         return this.piechartFn(params.chartProperties, data);
-      }  else if (chartType == "widget-text") {
+      } else if (chartType == "widget-text") {
         return this.widgettext(params.chartProperties, data)
       } else if (chartType == "widget-stackchart") {
         return this.stackChartFn(params.chartProperties, data)
-      } else if (chartType == "widget-heatmap") {
-        return this.heatmapChartFn(params.chartProperties, data)
-      }else {
+      } else if (chartType == "widget-coord") {
+        return this.coordChartFn(params.chartProperties, data)
+      } else {
         return data
       }
     },
@@ -180,7 +180,7 @@ export default {
           Object.keys(dataGroup).forEach(item => {
             const data = new Array(xAxisList.length).fill(0)
             dataGroup[item].forEach(res => {
-              data[xAxisList.indexOf(res[xAxisField])]= res[key]
+              data[xAxisList.indexOf(res[xAxisField])] = res[key]
             })
             series.push({
               name: yAxisList[item],
@@ -227,18 +227,25 @@ export default {
       return ananysicData;
     },
     // 坐标系数据解析
-    heatmapChartFn(chartProperties,data){
+    coordChartFn(chartProperties, data) {
       const ananysicData = {};
-      const series = [];
+      let series = [];
       //全部字段字典值
       const types = Object.values(chartProperties)
-      //x轴字段、y轴字段名
+      //x轴字段、y轴字段、数值字段名
       const xAxisField = Object.keys(chartProperties)[types.indexOf('xAxis')]
       const yAxisField = Object.keys(chartProperties)[types.indexOf('yAxis')]
+      const dataField = Object.keys(chartProperties)[types.indexOf('series')]
       //x轴数值去重，y轴去重
       const xAxisList = this.setUnique(data.map(item => item[xAxisField]))
       const yAxisList = this.setUnique(data.map(item => item[yAxisField]))
-
+      ananysicData["xAxis"] = xAxisList;
+      ananysicData["yAxis"] = yAxisList;
+      for (const i in data) {
+        series[i] = [data[i][xAxisField], data[i][yAxisField], data[i][dataField]];
+      }
+      ananysicData["series"] = series;
+      return ananysicData;
     },
     setUnique(arr) {
       let newArr = [];

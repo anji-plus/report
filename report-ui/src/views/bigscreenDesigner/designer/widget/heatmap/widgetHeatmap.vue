@@ -346,23 +346,13 @@ export default {
     getEchartData(val) {
       const data = this.queryEchartsData(val);
       data.then((res) => {
-        this.renderingFn(
-          res.map((item) => {
-            return [item.x, item.y, item.data];
-          })
-        );
+        this.renderingFn(res);
       });
     },
     renderingFn(val) {
-      let x = 0,
-        y = 0;
-      val.forEach((element) => {
-        x = element[0] > x ? element[0] : x;
-        y = element[1] > y ? element[1] : y;
-      });
-      this.options.xAxis.data = [...Array(x + 1).keys()];
-      this.options.yAxis.data = [...Array(y + 1).keys()];
-      this.options.series[0].data = val;
+      this.options.xAxis.data = val.xAxis;
+      this.options.yAxis.data = val.yAxis;
+      this.options.series[0].data = val.series;
     },
   },
 };

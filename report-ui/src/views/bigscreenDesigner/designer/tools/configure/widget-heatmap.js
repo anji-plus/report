@@ -296,96 +296,6 @@ export const widgetHeatmap = {
           ],
         },
         {
-          name: '图设置',
-          list: [
-            {
-              type: 'el-switch',
-              label: '图例',
-              name: 'isShowLegend',
-              required: false,
-              placeholder: '',
-              value: false,
-            },
-            {
-              type: 'el-input-number',
-              label: '最小值',
-              name: 'dataMin',
-              required: false,
-              placeholder: '',
-              value: 0,
-            },
-            {
-              type: 'el-input-number',
-              label: '最大值',
-              name: 'dataMax',
-              required: false,
-              placeholder: '',
-              value: 5000,
-            },
-            {
-              type: 'vue-color',
-              label: '数值颜色',
-              name: 'lengedColor',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '图例大小',
-              name: 'lengedFontSize',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'el-input-number',
-              label: '图例宽度',
-              name: 'lengedWidth',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'el-select',
-              label: '横向位置',
-              name: 'lateralPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
-              ],
-              value: 'center'
-            },
-            {
-              type: 'el-select',
-              label: '纵向位置',
-              name: 'longitudinalPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'top', name: '顶部'},
-                {code: 'bottom', name: '底部'},
-              ],
-              value: 'top'
-            },
-            {
-              type: 'el-select',
-              label: '布局前置',
-              name: 'layoutFront',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'vertical', name: '竖排'},
-                {code: 'horizontal', name: '横排'},
-              ],
-              value: 'horizontal'
-            },
-          ],
-        },
-        {
           name: '数值设定',
           list: [
             {
@@ -479,6 +389,96 @@ export const widgetHeatmap = {
               required: false,
               placeholder: '',
               value: 10,
+            },
+          ],
+        },
+        {
+          name: '图设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '图例',
+              name: 'isShowLegend',
+              required: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'el-input-number',
+              label: '最小值',
+              name: 'dataMin',
+              required: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-input-number',
+              label: '最大值',
+              name: 'dataMax',
+              required: false,
+              placeholder: '',
+              value: 5000,
+            },
+            {
+              type: 'vue-color',
+              label: '数值颜色',
+              name: 'lengedColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '图例大小',
+              name: 'lengedFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例宽度',
+              name: 'lengedWidth',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '横向位置',
+              name: 'lateralPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-select',
+              label: '纵向位置',
+              name: 'longitudinalPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'top', name: '顶部'},
+                {code: 'bottom', name: '底部'},
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-select',
+              label: '布局前置',
+              name: 'layoutFront',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'vertical', name: '竖排'},
+                {code: 'horizontal', name: '横排'},
+              ],
+              value: 'horizontal'
             },
           ],
         },
@@ -643,7 +643,7 @@ export const widgetHeatmap = {
         required: false,
         placeholder: '',
         relactiveDom: 'dataType',
-        chartType: 'widget-heatmap',
+        chartType: 'widget-coord',
         relactiveDomValue: 'dynamicData',
         dictKey: 'COORD_PROPERTIES',
         value: '',
