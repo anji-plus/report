@@ -98,7 +98,7 @@
             content="撤销"
             placement="bottom"
           >
-            <i class="iconfont" @click="handleUndo">撤销</i>
+            <i class="iconfont iconundo"></i>
           </el-tooltip>
         </span>
 
@@ -109,7 +109,7 @@
             content="恢复"
             placement="bottom"
           >
-            <i class="iconfont" @click="handleRedo">恢复</i>
+            <i class="iconfont iconhuifubeifen"></i>
           </el-tooltip>
         </span>
 
