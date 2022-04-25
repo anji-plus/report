@@ -542,7 +542,7 @@ export default {
       ],
       isRowData: {},
       tableData2: [],
-      dialogTitle: "js脚本填写",
+      dialogTitle: "脚本填写",
       isShowPagination: false,
       updataDisabled: false,
       dialogCaseResult: false,
