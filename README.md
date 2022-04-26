@@ -203,12 +203,13 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 - 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report
   LICENSE构成更改。
 
-如果您需要商业化增值服务，请加下面的微信沟通。
+如果您需要商业化增值服务，请加下面的微信沟通，并直接说明来意。
 
 ## 技术支持
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
-个人企业微信：加微信进群备注AJ-Report或者Report （不备注是看不到的）<br>
+个人企业微信：加微信进群备注 AJ-Report 或者 Report <br>
+如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请发送多次 <br>
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "200" height = "200" align=left/>
 
 #### 开源不易，劳烦各位star ☺
