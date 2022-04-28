@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 大屏配置
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2022-03-09 19:45:37
  * @LastEditors: qianlishi
@@ -58,7 +58,7 @@ export const screenConfig = {
         name: 'backgroundImage',
         required: false,
         placeholder: '',
-        value: 'https://report.anji-plus.com/file/download/bf566e48-ccad-40e1-8ee9-228427e5466b',
+        value: 'https://ajreport.beliefteam.cn/file/download/bf566e48-ccad-40e1-8ee9-228427e5466b',
       },
     ],
     data: [],
