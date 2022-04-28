@@ -266,6 +266,14 @@ export const constantRouterMap = [
     component: () => import('@/views/screenDesigner/index'),
     name: 'screenDesigner', 
   },
+  {
+    path: '/screen/preview', 
+    component: () => import('@/views/screenDesigner/preview'), 
+    hidden: true, 
+    meta: { 
+      requireAuth: true 
+    }
+  },
   { 
     path: '/404', 
     component: () => import('@/views/404'), 
