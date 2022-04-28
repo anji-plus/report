@@ -1,16 +1,16 @@
 /*
- * @Descripttion: 柱状图json
+ * @Descripttion: 柱状图渐变色 json
  * @version:
  * @Author: qianlishi
- * @Date: 2021-08-29 07:21:45
+ * @Date: 2021-08-29 07:23:41
  * @LastEditors: qianlishi
- * @LastEditTime: 2022-03-11 11:40:29
+ * @LastEditTime: 2021-09-28 14:14:08
  */
-export const widgetBarchart = {
-  code: 'widget-barchart',
+export const widgetGradientBarchart = {
+  code: 'widget-gradient-color-barchart',
   type: 'barChart',
   tabName: '柱状图',
-  label: '柱状图',
+  label: '柱状图-渐变色',
   icon: 'iconzhuzhuangtu',
   options: {
     // 配置
@@ -21,7 +21,7 @@ export const widgetBarchart = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '柱状图',
+        value: '柱形图-渐变色',
       },
       {
         type: 'el-switch',
@@ -59,14 +59,6 @@ export const widgetBarchart = {
               placeholder: '',
               value: 5,
             },
-            {
-              type: 'el-slider',
-              label: '最小高度',
-              name: 'minHeight',
-              require: false,
-              placeholder: '',
-              value: 0,
-            },
           ],
         },
         {
@@ -94,7 +86,7 @@ export const widgetBarchart = {
               name: 'textColor',
               required: false,
               placeholder: '',
-              value: '#FFD700'
+              value: '#fff'
             },
             {
               type: 'el-select',
@@ -112,11 +104,11 @@ export const widgetBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '字体字号',
+              label: '字体大小',
               name: 'textFontSize',
               required: false,
               placeholder: '',
-              value: 20
+              value: 22
             },
             {
               type: 'el-select',
@@ -145,10 +137,10 @@ export const widgetBarchart = {
               name: 'subTextColor',
               required: false,
               placeholder: '',
-              value: 'rgba(30, 144, 255, 1)'
+              value: '#90979c'
             },
             {
-              type: 'el-select',
+              type: 'el-input-text',
               label: '字体粗细',
               name: 'subTextFontWeight',
               required: false,
@@ -163,7 +155,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '字体字号',
+              label: '字体大小',
               name: 'subTextFontSize',
               required: false,
               placeholder: '',
@@ -196,7 +188,7 @@ export const widgetBarchart = {
               name: 'nameColorX',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: '#fff',
             },
             {
               type: 'el-input-number',
@@ -204,7 +196,7 @@ export const widgetBarchart = {
               name: 'nameFontSizeX',
               required: false,
               placeholder: '',
-              value: 14
+              value: 14,
             },
             {
               type: 'vue-color',
@@ -269,7 +261,6 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: '#fff',
-
             }
           ],
         },
@@ -291,8 +282,7 @@ export const widgetBarchart = {
               require: false,
               placeholder: '',
               value: ''
-            },
-            {
+            }, {
               type: 'vue-color',
               label: '坐标名颜色',
               name: 'nameColorY',
@@ -303,7 +293,7 @@ export const widgetBarchart = {
             {
               type: 'el-input-number',
               label: '坐标字号',
-              name: 'nameFontSizeY',
+              name: 'namefontSizeY',
               required: false,
               placeholder: '',
               value: 14,
@@ -363,21 +353,22 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: '#fff',
-            }, {
+            },
+            {
               type: 'el-switch',
               label: '分割线显示',
               name: 'isShowSplitLineY',
               require: false,
               placeholder: '',
               value: false,
-            }, {
+            },
+            {
               type: 'vue-color',
               label: '分割线颜色',
               name: 'splitLineColorY',
               required: false,
               placeholder: '',
               value: '#fff',
-
             }
           ],
         },
@@ -402,7 +393,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '字体字号',
+              label: '字体大小',
               name: 'fontSize',
               required: false,
               placeholder: '',
@@ -437,7 +428,7 @@ export const widgetBarchart = {
           list: [
             {
               type: 'el-input-number',
-              label: '字体字号',
+              label: '字体大小',
               name: 'tipsFontSize',
               required: false,
               placeholder: '',
@@ -448,7 +439,7 @@ export const widgetBarchart = {
               label: '字体颜色',
               name: 'lineColor',
               required: false,
-              placeholder: '',
+              placeholder: '#ff7f50',
             },
           ],
         },
@@ -487,14 +478,39 @@ export const widgetBarchart = {
           ],
         },
         {
-          name: '自定义配色',
+          name: '渐变色',
           list: [
             {
-              type: 'customColor',
-              label: '',
-              name: 'customColor',
+              type: 'vue-color',
+              label: '0%处',
+              name: 'bar0color',
               required: false,
-              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
+              placeholder: '',
+              value: 'rgba(0,244,255,1)'
+            },
+            {
+              type: 'vue-color',
+              label: '100%处',
+              name: 'bar100color',
+              required: false,
+              placeholder: '',
+              value: 'rgba(0,77,167,1)'
+            },
+            {
+              type: 'vue-color',
+              label: '阴影颜色',
+              name: 'shadowColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(0,160,221,1)'
+            },
+            {
+              type: 'el-input-number',
+              label: '模糊系数',
+              name: 'shadowBlur',
+              required: false,
+              placeholder: '',
+              value: 4,
             },
           ],
         },

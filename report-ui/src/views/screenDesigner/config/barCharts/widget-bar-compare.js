@@ -1,17 +1,17 @@
 /*
- * @Descripttion: 柱状图json
+ * @Descripttion: 柱状对比图 json
  * @version:
  * @Author: qianlishi
- * @Date: 2021-08-29 07:21:45
+ * @Date: 2021-08-29 07:39:35
  * @LastEditors: qianlishi
- * @LastEditTime: 2022-03-11 11:40:29
+ * @LastEditTime: 2021-09-28 14:09:58
  */
-export const widgetBarchart = {
-  code: 'widget-barchart',
+export const widgetBarCompare = {
+  code: 'widgetBarCompareChart',
   type: 'barChart',
   tabName: '柱状图',
-  label: '柱状图',
-  icon: 'iconzhuzhuangtu',
+  label: '柱状对比图',
+  icon: 'iconduibitupu',
   options: {
     // 配置
     setup: [
@@ -21,15 +21,7 @@ export const widgetBarchart = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '柱状图',
-      },
-      {
-        type: 'el-switch',
-        label: '竖展示',
-        name: 'verticalShow',
-        required: false,
-        placeholder: '',
-        value: false,
+        value: '柱状对比图',
       },
       {
         type: 'vue-color',
@@ -49,7 +41,7 @@ export const widgetBarchart = {
               name: 'maxWidth',
               required: false,
               placeholder: '',
-              value: 10,
+              value: 15,
             },
             {
               type: 'el-slider',
@@ -58,14 +50,6 @@ export const widgetBarchart = {
               require: false,
               placeholder: '',
               value: 5,
-            },
-            {
-              type: 'el-slider',
-              label: '最小高度',
-              name: 'minHeight',
-              require: false,
-              placeholder: '',
-              value: 0,
             },
           ],
         },
@@ -112,7 +96,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '字体字号',
+              label: '字体大小',
               name: 'textFontSize',
               required: false,
               placeholder: '',
@@ -131,85 +115,113 @@ export const widgetBarchart = {
               ],
               value: 'center'
             },
-            {
-              type: 'el-input-text',
-              label: '副标题',
-              name: 'subText',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'subTextColor',
-              required: false,
-              placeholder: '',
-              value: 'rgba(30, 144, 255, 1)'
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'subTextFontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'subTextFontSize',
-              required: false,
-              placeholder: '',
-              value: 20
-            },
           ],
         },
         {
-          name: 'X轴设置',
+          name: '图例操作',
           list: [
             {
               type: 'el-switch',
-              label: '显示',
-              name: 'hideX',
+              label: '图例显示',
+              name: 'isShowLegend',
               required: false,
               placeholder: '',
               value: true,
             },
             {
               type: 'el-input-text',
-              label: '坐标名',
-              name: 'xName',
+              label: '图例名称',
+              name: 'legendName',
+              required: false,
+              placeholder: '多值以' | '隔开',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'lengedColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'lengedFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例宽度',
+              name: 'lengedWidth',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '横向位置',
+              name: 'lateralPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-select',
+              label: '纵向位置',
+              name: 'longitudinalPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'top', name: '顶部'},
+                {code: 'bottom', name: '底部'},
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-select',
+              label: '布局前置',
+              name: 'layoutFront',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'vertical', name: '竖排'},
+                {code: 'horizontal', name: '横排'},
+              ],
+              value: 'horizontal'
+            },
+          ],
+        },
+        {
+          name: '左X轴设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'hideXLeft',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-number',
+              label: '数值间隔',
+              name: 'splitNumberLeft',
               required: false,
               placeholder: '',
               value: ''
             },
             {
               type: 'vue-color',
-              label: '坐标名颜色',
-              name: 'nameColorX',
-              required: false,
-              placeholder: '',
-              value: '#fff'
-            },
-            {
-              type: 'el-input-number',
-              label: '坐标字号',
-              name: 'nameFontSizeX',
-              required: false,
-              placeholder: '',
-              value: 14
-            },
-            {
-              type: 'vue-color',
               label: '数值颜色',
-              name: 'Xcolor',
+              name: 'XcolorLeft',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -217,47 +229,39 @@ export const widgetBarchart = {
             {
               type: 'el-input-number',
               label: '数值字号',
-              name: 'fontSizeX',
+              name: 'fontSizeXLeft',
               required: false,
               placeholder: '',
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'textAngle',
-              required: false,
+              type: 'el-switch',
+              label: '刻度线',
+              name: 'tickLineLeft',
+              require: false,
               placeholder: '',
-              value: 0
-            },
-            {
-              type: 'el-input-number',
-              label: '数值间隔',
-              name: 'textInterval',
-              required: false,
-              placeholder: '',
-              value: ''
+              value: false,
             },
             {
               type: 'el-switch',
-              label: '轴反转',
-              name: 'reversalX',
-              required: false,
+              label: 'X轴线',
+              name: 'xLineLeft',
+              require: false,
               placeholder: '',
-              value: false
+              value: false,
             },
             {
               type: 'vue-color',
               label: '轴颜色',
-              name: 'lineColorX',
+              name: 'lineColorXLeft',
               required: false,
               placeholder: '',
               value: '#fff',
             },
             {
               type: 'el-switch',
-              label: '分割线显示',
-              name: 'isShowSplitLineX',
+              label: '竖分割线',
+              name: 'SplitLineLeft',
               require: false,
               placeholder: '',
               value: false,
@@ -265,12 +269,120 @@ export const widgetBarchart = {
             {
               type: 'vue-color',
               label: '分割线颜色',
-              name: 'splitLineColorX',
+              name: 'SplitLineColorLeft',
               required: false,
               placeholder: '',
               value: '#fff',
-
-            }
+            },
+            {
+              type: 'el-input-number',
+              label: '分割线宽度',
+              name: 'SplitLinefontSizeLeft',
+              required: false,
+              placeholder: '',
+              value: 1,
+            },
+            {
+              type: 'el-switch',
+              label: '边框线',
+              name: 'frameLineLeft',
+              require: false,
+              placeholder: '',
+              value: false,
+            },
+          ],
+        },
+        {
+          name: '右X轴设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'hideXRight',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-number',
+              label: '数值间隔',
+              name: 'splitNumberRight',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '数值颜色',
+              name: 'XcolorRight',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '数值字号',
+              name: 'fontSizeXRight',
+              required: false,
+              placeholder: '',
+              value: 14,
+            },
+            {
+              type: 'el-switch',
+              label: '刻度线',
+              name: 'tickLineRight',
+              require: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'el-switch',
+              label: 'X轴线',
+              name: 'xLineRight',
+              require: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'vue-color',
+              label: '轴颜色',
+              name: 'lineColorXRight',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-switch',
+              label: '竖分割线',
+              name: 'SplitLineRight',
+              require: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'vue-color',
+              label: '分割线颜色',
+              name: 'SplitLineColorRight',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '分割线宽度',
+              name: 'SplitLinefontSizeRight',
+              required: false,
+              placeholder: '',
+              value: 1,
+            },
+            {
+              type: 'el-switch',
+              label: '边框线',
+              name: 'frameLineRight',
+              require: false,
+              placeholder: '',
+              value: false,
+            },
           ],
         },
         {
@@ -279,34 +391,10 @@ export const widgetBarchart = {
             {
               type: 'el-switch',
               label: '显示',
-              name: 'isShowY',
-              require: false,
+              name: 'hideY',
+              required: false,
               placeholder: '',
               value: true,
-            },
-            {
-              type: 'el-input-text',
-              label: '坐标名',
-              name: 'textNameY',
-              require: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '坐标名颜色',
-              name: 'nameColorY',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '坐标字号',
-              name: 'nameFontSizeY',
-              required: false,
-              placeholder: '',
-              value: 14,
             },
             {
               type: 'vue-color',
@@ -325,36 +413,33 @@ export const widgetBarchart = {
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'ytextAngle',
+              type: 'el-select',
+              label: '数值对齐',
+              name: 'textAlign',
               required: false,
               placeholder: '',
-              value: 0
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
             },
             {
               type: 'el-switch',
-              label: '缩放',
-              name: 'scale',
+              label: '刻度线',
+              name: 'tickLineY',
               require: false,
               placeholder: '',
               value: false,
             },
             {
-              type: 'el-input-number',
-              label: '均分',
-              name: 'splitNumber',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
               type: 'el-switch',
-              label: '轴反转',
-              name: 'reversalY',
-              required: false,
+              label: 'Y轴线',
+              name: 'lineY',
+              require: false,
               placeholder: '',
-              value: false
+              value: false,
             },
             {
               type: 'vue-color',
@@ -363,22 +448,7 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: '#fff',
-            }, {
-              type: 'el-switch',
-              label: '分割线显示',
-              name: 'isShowSplitLineY',
-              require: false,
-              placeholder: '',
-              value: false,
-            }, {
-              type: 'vue-color',
-              label: '分割线颜色',
-              name: 'splitLineColorY',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-
-            }
+            },
           ],
         },
         {
@@ -394,15 +464,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '距离',
-              name: 'distance',
-              required: false,
-              placeholder: '',
-              value: 5
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
+              label: '字体大小',
               name: 'fontSize',
               required: false,
               placeholder: '',
@@ -437,7 +499,7 @@ export const widgetBarchart = {
           list: [
             {
               type: 'el-input-number',
-              label: '字体字号',
+              label: '字体大小',
               name: 'tipsFontSize',
               required: false,
               placeholder: '',
@@ -457,26 +519,21 @@ export const widgetBarchart = {
           list: [
             {
               type: 'el-slider',
-              label: '左边距(像素)',
-              name: 'marginLeft',
+              label: '左右边距(像素)',
+              name: 'marginLeftRight',
               required: false,
               placeholder: '',
               value: 10,
-            }, {
+            },
+            {
               type: 'el-slider',
               label: '顶边距(像素)',
               name: 'marginTop',
               required: false,
               placeholder: '',
-              value: 50,
-            }, {
-              type: 'el-slider',
-              label: '右边距(像素)',
-              name: 'marginRight',
-              required: false,
-              placeholder: '',
               value: 40,
-            }, {
+            },
+            {
               type: 'el-slider',
               label: '底边距(像素)',
               name: 'marginBottom',
@@ -494,7 +551,7 @@ export const widgetBarchart = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
+              value: [{color: '#36c5e7'}, {color: '#e68b55'}],
             },
           ],
         },
@@ -538,11 +595,16 @@ export const widgetBarchart = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {"axis": "苹果", "data": 1000},
-          {"axis": "三星", "data": 2229},
-          {"axis": "小米", "data": 3879},
-          {"axis": "oppo", "data": 2379},
-          {"axis": "vivo", "data": 4079},
+          {"axis": "07-25", "name": "success", "data": "2"},
+          {"axis": "07-25", "name": "fail", "data": "10"},
+          {"axis": "07-26", "name": "success", "data": "5"},
+          {"axis": "07-26", "name": "fail", "data": "20"},
+          {"axis": "07-27", "name": "success", "data": "15"},
+          {"axis": "07-27", "name": "fail", "data": "30"},
+          {"axis": "07-28", "name": "success", "data": "10"},
+          {"axis": "07-28", "name": "fail", "data": "12"},
+          {"axis": "07-29", "name": "success", "data": "9"},
+          {"axis": "07-29", "name": "fail", "data": "16"},
         ],
       },
       {
@@ -553,8 +615,8 @@ export const widgetBarchart = {
         placeholder: '',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        chartType: 'widget-barchart',
-        dictKey: 'BAR_PROPERTIES',
+        chartType: 'widget-stackchart',
+        dictKey: 'STACK_PROPERTIES',
         value: '',
       },
     ],
@@ -582,7 +644,7 @@ export const widgetBarchart = {
         name: 'width',
         required: false,
         placeholder: '该容器在1920px大屏中的宽度',
-        value: 400,
+        value: 500,
       },
       {
         type: 'el-input-number',
@@ -590,7 +652,7 @@ export const widgetBarchart = {
         name: 'height',
         required: false,
         placeholder: '该容器在1080px大屏中的高度',
-        value: 200,
+        value: 250,
       },
     ],
   }

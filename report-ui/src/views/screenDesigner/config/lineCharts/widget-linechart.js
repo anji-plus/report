@@ -1,17 +1,17 @@
 /*
- * @Descripttion: 柱状图json
+ * @Descripttion: 折线图json
  * @version:
  * @Author: qianlishi
- * @Date: 2021-08-29 07:21:45
+ * @Date: 2021-08-29 07:24:48
  * @LastEditors: qianlishi
- * @LastEditTime: 2022-03-11 11:40:29
+ * @LastEditTime: 2021-09-28 14:17:10
  */
-export const widgetBarchart = {
-  code: 'widget-barchart',
-  type: 'barChart',
-  tabName: '柱状图',
-  label: '柱状图',
-  icon: 'iconzhuzhuangtu',
+export const widgetLinechart = {
+  code: 'widget-linechart',
+  type: 'lineChart',
+  tabName: '折线图',
+  label: '折线图',
+  icon: 'icontubiaozhexiantu',
   options: {
     // 配置
     setup: [
@@ -21,15 +21,7 @@ export const widgetBarchart = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '柱状图',
-      },
-      {
-        type: 'el-switch',
-        label: '竖展示',
-        name: 'verticalShow',
-        required: false,
-        placeholder: '',
-        value: false,
+        value: '折线图',
       },
       {
         type: 'vue-color',
@@ -41,31 +33,55 @@ export const widgetBarchart = {
       },
       [
         {
-          name: '柱体设置',
+          name: '折线设置',
           list: [
             {
+              type: 'el-switch',
+              label: '标记点',
+              name: 'markPoint',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
               type: 'el-slider',
-              label: '最大宽度',
-              name: 'maxWidth',
+              label: '点大小',
+              name: 'pointSize',
               required: false,
               placeholder: '',
               value: 10,
             },
             {
+              type: 'el-switch',
+              label: '平滑曲线',
+              name: 'smoothCurve',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '面积堆积',
+              name: 'area',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
               type: 'el-slider',
-              label: '圆角',
-              name: 'radius',
-              require: false,
+              label: '面积厚度',
+              name: 'areaThickness',
+              required: false,
               placeholder: '',
               value: 5,
             },
             {
               type: 'el-slider',
-              label: '最小高度',
-              name: 'minHeight',
-              require: false,
+              label: '线条宽度',
+              name: 'lineWidth',
+              required: false,
               placeholder: '',
-              value: 0,
+              value: 4,
             },
           ],
         },
@@ -78,7 +94,7 @@ export const widgetBarchart = {
               name: 'isNoTitle',
               required: false,
               placeholder: '',
-              value: true,
+              value: false
             },
             {
               type: 'el-input-text',
@@ -94,7 +110,7 @@ export const widgetBarchart = {
               name: 'textColor',
               required: false,
               placeholder: '',
-              value: '#FFD700'
+              value: '#fff'
             },
             {
               type: 'el-select',
@@ -145,7 +161,7 @@ export const widgetBarchart = {
               name: 'subTextColor',
               required: false,
               placeholder: '',
-              value: 'rgba(30, 144, 255, 1)'
+              value: '#fff'
             },
             {
               type: 'el-select',
@@ -196,7 +212,7 @@ export const widgetBarchart = {
               name: 'nameColorX',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: '#fff',
             },
             {
               type: 'el-input-number',
@@ -204,7 +220,7 @@ export const widgetBarchart = {
               name: 'nameFontSizeX',
               required: false,
               placeholder: '',
-              value: 14
+              value: 14,
             },
             {
               type: 'vue-color',
@@ -269,7 +285,6 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: '#fff',
-
             }
           ],
         },
@@ -303,7 +318,7 @@ export const widgetBarchart = {
             {
               type: 'el-input-number',
               label: '坐标字号',
-              name: 'nameFontSizeY',
+              name: 'namefontSizeY',
               required: false,
               placeholder: '',
               value: 14,
@@ -363,21 +378,22 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: '#fff',
-            }, {
+            },
+            {
               type: 'el-switch',
               label: '分割线显示',
               name: 'isShowSplitLineY',
               require: false,
               placeholder: '',
               value: false,
-            }, {
+            },
+            {
               type: 'vue-color',
               label: '分割线颜色',
               name: 'splitLineColorY',
               required: false,
               placeholder: '',
               value: '#fff',
-
             }
           ],
         },
@@ -390,23 +406,15 @@ export const widgetBarchart = {
               name: 'isShow',
               required: false,
               placeholder: '',
-              value: true
+              value: false
             },
             {
               type: 'el-input-number',
-              label: '距离',
-              name: 'distance',
-              required: false,
-              placeholder: '',
-              value: 5
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
+              label: '字体大小',
               name: 'fontSize',
               required: false,
               placeholder: '',
-              value: 14
+              value: 12
             },
             {
               type: 'vue-color',
@@ -437,7 +445,7 @@ export const widgetBarchart = {
           list: [
             {
               type: 'el-input-number',
-              label: '字体字号',
+              label: '字体大小',
               name: 'tipsFontSize',
               required: false,
               placeholder: '',
@@ -449,6 +457,7 @@ export const widgetBarchart = {
               name: 'lineColor',
               required: false,
               placeholder: '',
+              value: ''
             },
           ],
         },
@@ -462,21 +471,24 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: 10,
-            }, {
+            },
+            {
               type: 'el-slider',
               label: '顶边距(像素)',
               name: 'marginTop',
               required: false,
               placeholder: '',
               value: 50,
-            }, {
+            },
+            {
               type: 'el-slider',
               label: '右边距(像素)',
               name: 'marginRight',
               required: false,
               placeholder: '',
               value: 40,
-            }, {
+            },
+            {
               type: 'el-slider',
               label: '底边距(像素)',
               name: 'marginBottom',
@@ -494,7 +506,7 @@ export const widgetBarchart = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
+              value: [{color: '#1E90FF'}],
             },
           ],
         },
@@ -552,10 +564,9 @@ export const widgetBarchart = {
         required: false,
         placeholder: '',
         relactiveDom: 'dataType',
+        chartType: 'widget-linechart',
+        dictKey: 'LINE_PROPERTIES',
         relactiveDomValue: 'dynamicData',
-        chartType: 'widget-barchart',
-        dictKey: 'BAR_PROPERTIES',
-        value: '',
       },
     ],
     // 坐标

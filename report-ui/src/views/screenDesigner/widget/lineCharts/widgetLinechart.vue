@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "WidgetBarchart",
+  name: "WidgetLinechart",
   components: {},
   props: {
     value: Object,
@@ -16,6 +16,17 @@ export default {
     return {
       options: {
         grid: {},
+        color: [],
+        title: {
+          text: "",
+          textStyle: {
+            color: "#fff"
+          }
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c}%"
+        },
         legend: {
           textStyle: {
             color: "#fff"
@@ -23,7 +34,7 @@ export default {
         },
         xAxis: {
           type: "category",
-          data: [],
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
           axisLabel: {
             show: true,
             textStyle: {
@@ -33,7 +44,6 @@ export default {
         },
         yAxis: {
           type: "value",
-          data: [],
           axisLabel: {
             show: true,
             textStyle: {
@@ -44,18 +54,14 @@ export default {
         series: [
           {
             data: [],
-            type: "bar",
-            barGap: "0%",
-            itemStyle: {
-              borderRadius: null
-            }
+            type: "line"
           }
         ]
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
-      optionsSetup: {},
-      flagInter: null
+      optionsCollapse: {}, // 图标属性
+      optionsSetup: {}
     };
   },
   computed: {
@@ -75,17 +81,17 @@ export default {
       handler(val) {
         this.optionsStyle = val.position;
         this.optionsData = val.data;
-        this.optionsCollapse = val.setup;
+        this.optionsCollapse = val.collapse;
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
       deep: true
     }
   },
-  mounted() {
+  created() {
     this.optionsStyle = this.value.position;
     this.optionsData = this.value.data;
-    this.optionsCollapse = this.value.setup;
+    this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
   },
@@ -97,9 +103,9 @@ export default {
       this.setOptionsY();
       this.setOptionsTop();
       this.setOptionsTooltip();
+      this.setOptionsData();
       this.setOptionsMargin();
       this.setOptionsColor();
-      this.setOptionsData();
     },
     // 标题修改
     setOptionsTitle() {
@@ -119,7 +125,6 @@ export default {
         fontWeight: optionsSetup.subTextFontWeight,
         fontSize: optionsSetup.subTextFontSize
       };
-
       this.options.title = title;
     },
     // X轴设置
@@ -130,14 +135,14 @@ export default {
         show: optionsSetup.hideX, // 坐标轴是否显示
         name: optionsSetup.xName, // 坐标轴名称
         nameTextStyle: {
-          color: optionsSetup.xNameColor,
-          fontSize: optionsSetup.xNameFontSize
+          color: optionsSetup.nameColorX,
+          fontSize: optionsSetup.nameFontSizeX
         },
         nameRotate: optionsSetup.textAngle, // 文字角度
         inverse: optionsSetup.reversalX, // 轴反转
         axisLabel: {
           show: true,
-          interval: optionsSetup.textInterval, // 文字角度
+          interval: optionsSetup.textInterval, // 文字间隔
           rotate: optionsSetup.textAngle, // 文字角度
           textStyle: {
             color: optionsSetup.Xcolor, // x轴 坐标文字颜色
@@ -168,16 +173,16 @@ export default {
         splitNumber: optionsSetup.splitNumber,// 均分
         show: optionsSetup.isShowY, // 坐标轴是否显示
         name: optionsSetup.textNameY, // 坐标轴名称
-        nameTextStyle: {
+        nameTextStyle: { // 别名
           color: optionsSetup.nameColorY,
-          fontSize: optionsSetup.nameFontSizeY
+          fontSize: optionsSetup.namefontSizeY
         },
         inverse: optionsSetup.reversalY, // 轴反转
         axisLabel: {
           show: true,
           rotate: optionsSetup.ytextAngle, // 文字角度
           textStyle: {
-            color: optionsSetup.colorY, // x轴 坐标文字颜色
+            color: optionsSetup.colorY, // y轴 坐标文字颜色
             fontSize: optionsSetup.fontSizeY
           }
         },
@@ -194,38 +199,41 @@ export default {
           }
         }
       };
-
       this.options.yAxis = yAxis;
     },
-    // 数值设定 or 柱体设置
+    // 折线设置
     setOptionsTop() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      if (series[0].type == "bar") {
-        if (optionsSetup.verticalShow) {
-          series[0].label = {
-            show: optionsSetup.isShow,
-            position: 'right',
-            distance: optionsSetup.distance,
-            textStyle: {
-              fontSize: optionsSetup.fontSize,
-              color: optionsSetup.subTextColor,
-              fontWeight: optionsSetup.fontWeight
-            }
+      for (const key in series) {
+        if (series[key].type == "line") {
+          series[key].showSymbol = optionsSetup.markPoint;
+          series[key].symbolSize = optionsSetup.pointSize;
+          series[key].smooth = optionsSetup.smoothCurve;
+          if (optionsSetup.area) {
+            series[key].areaStyle = {
+              opacity: optionsSetup.areaThickness / 100
+            };
+          } else {
+            series[key].areaStyle = {
+              opacity: 0
+            };
           }
-        } else {
-          series[0].label = {
+
+          series[key].lineStyle = {
+            width: optionsSetup.lineWidth
+          };
+          series[key].label = {
             show: optionsSetup.isShow,
             position: "top",
-            distance: optionsSetup.distance,
+            distance: 10,
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.subTextColor,
             fontWeight: optionsSetup.fontWeight
-          }
+          };
         }
       }
-      series[0].barWidth = optionsSetup.maxWidth;
-      series[0].barMinHeight = optionsSetup.minHeight;
+      this.options.series = series;
     },
     // tooltip 设置
     setOptionsTooltip() {
@@ -261,36 +269,17 @@ export default {
       for (let i = 0; i < customColor.length; i++) {
         arrColor.push(customColor[i].color);
       }
-      const itemStyle = {
-        normal: {
-          color: params => {
-            return arrColor[params.dataIndex];
-          },
-          barBorderRadius: optionsSetup.radius
-        }
-      };
-      for (const key in this.options.series) {
-        if (this.options.series[key].type == "bar") {
-          this.options.series[key].itemStyle = itemStyle;
-        }
-      }
+      this.options.color = arrColor;
       this.options = Object.assign({}, this.options);
     },
-    // 数据解析
+    // 处理数据
     setOptionsData() {
-      const optionsSetup = this.optionsSetup;
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(
-          optionsData.dynamicData,
-          optionsData.refreshTime,
-          optionsSetup
-        );
+        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
-    // 静态数据
     staticDataFn(val) {
-      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       let axis = [];
       let data = [];
@@ -299,57 +288,38 @@ export default {
         data[i] = val[i].data
       }
       // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = axis;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = axis;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-      }
-      if (series[0].type == "bar") {
-        series[0].data = data;
+      this.options.xAxis.data = axis;
+      // series
+      for (const i in series) {
+        if (series[i].type == "line") {
+          series[i].data = data;
+        }
       }
     },
-    // 动态数据
-    dynamicDataFn(val, refreshTime, optionsSetup) {
+    dynamicDataFn(val, refreshTime) {
       if (!val) return;
       if (this.ispreview) {
-        this.getEchartData(val, optionsSetup);
+        this.getEchartData(val);
         this.flagInter = setInterval(() => {
-          this.getEchartData(val, optionsSetup);
+          this.getEchartData(val);
         }, refreshTime);
       } else {
-        this.getEchartData(val, optionsSetup);
+        this.getEchartData(val);
       }
     },
-    getEchartData(val, optionsSetup) {
+    getEchartData(val) {
       const data = this.queryEchartsData(val);
       data.then(res => {
-        this.renderingFn(optionsSetup, res);
+        this.renderingFn(res);
       });
     },
-    renderingFn(optionsSetup, val) {
+    renderingFn(val) {
       // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = val.xAxis;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = val.xAxis;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-      }
+      this.options.xAxis.data = val.xAxis;
       // series
       const series = this.options.series;
       for (const i in series) {
-        if (series[i].type == "bar") {
-          series[i].name = val.series[i].name;
+        if (series[i].type == "line") {
           series[i].data = val.series[i].data;
         }
       }

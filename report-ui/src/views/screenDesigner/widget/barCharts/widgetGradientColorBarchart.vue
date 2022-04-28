@@ -5,8 +5,10 @@
 </template>
 
 <script>
+import echarts from "echarts";
+
 export default {
-  name: "WidgetBarchart",
+  name: "WidgetGradientColorBarchart", //渐变色，参考https://www.makeapie.com/editor.html?c=x0oZWoncE
   components: {},
   props: {
     value: Object,
@@ -15,7 +17,31 @@ export default {
   data() {
     return {
       options: {
-        grid: {},
+        title: {
+          text: "",
+          x: "center",
+          y: "4%",
+          textStyle: {
+            color: "#fff",
+            fontSize: "22"
+          },
+          subtextStyle: {
+            color: "#90979c",
+            fontSize: "16"
+          }
+        },
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow"
+          }
+        },
+        grid: {
+          top: "15%",
+          right: "3%",
+          left: "5%",
+          bottom: "12%"
+        },
         legend: {
           textStyle: {
             color: "#fff"
@@ -24,38 +50,83 @@ export default {
         xAxis: {
           type: "category",
           data: [],
+          axisLine: {
+            lineStyle: {
+              color: "rgba(255,255,255,0.12)"
+            }
+          },
           axisLabel: {
-            show: true,
+            margin: 10,
+            color: "#e2e9ff",
             textStyle: {
-              color: "#fff"
+              fontSize: 14
             }
           }
         },
         yAxis: {
-          type: "value",
-          data: [],
+          name: "",
           axisLabel: {
-            show: true,
-            textStyle: {
-              color: "#fff"
+            formatter: "{value}",
+            color: "#e2e9ff"
+          },
+          axisLine: {
+            show: false,
+            lineStyle: {
+              color: "rgba(255,255,255,0)"
+            }
+          },
+          splitLine: {
+            lineStyle: {
+              color: "rgba(255,255,255,0.12)"
             }
           }
         },
         series: [
           {
-            data: [],
             type: "bar",
-            barGap: "0%",
+            data: [5000, 2600, 1300, 1300, 1250, 1500],
+            barWidth: "20px",
             itemStyle: {
-              borderRadius: null
+              normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1,
+                  [
+                    {
+                      offset: 0,
+                      color: "rgba(0,244,255,1)" // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(0,77,167,1)" // 100% 处的颜色
+                    }
+                  ],
+                  false
+                ),
+                shadowColor: "rgba(0,160,221,1)",
+                //模糊细数
+                shadowBlur: 4
+              }
+            },
+            label: {
+              normal: {
+                show: true,
+                position: ["-10", "-30"],
+                distance: 1,
+                formatter: "{a|{c}}",
+                rich: {
+                  a: {
+                    fontSize: 15,
+                    color: "#fff",
+                    align: "center"
+                  }
+                }
+              }
             }
           }
         ]
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
-      optionsSetup: {},
-      flagInter: null
+      optionsSetup: {}
     };
   },
   computed: {
@@ -96,7 +167,6 @@ export default {
       this.setOptionsX();
       this.setOptionsY();
       this.setOptionsTop();
-      this.setOptionsTooltip();
       this.setOptionsMargin();
       this.setOptionsColor();
       this.setOptionsData();
@@ -130,14 +200,14 @@ export default {
         show: optionsSetup.hideX, // 坐标轴是否显示
         name: optionsSetup.xName, // 坐标轴名称
         nameTextStyle: {
-          color: optionsSetup.xNameColor,
-          fontSize: optionsSetup.xNameFontSize
+          color: optionsSetup.nameColorX,
+          fontSize: optionsSetup.nameFontSizeX
         },
         nameRotate: optionsSetup.textAngle, // 文字角度
         inverse: optionsSetup.reversalX, // 轴反转
         axisLabel: {
           show: true,
-          interval: optionsSetup.textInterval, // 文字角度
+          interval: optionsSetup.textInterval, // 文字间隔
           rotate: optionsSetup.textAngle, // 文字角度
           textStyle: {
             color: optionsSetup.Xcolor, // x轴 坐标文字颜色
@@ -168,16 +238,16 @@ export default {
         splitNumber: optionsSetup.splitNumber,// 均分
         show: optionsSetup.isShowY, // 坐标轴是否显示
         name: optionsSetup.textNameY, // 坐标轴名称
-        nameTextStyle: {
+        nameTextStyle: { // 别名
           color: optionsSetup.nameColorY,
-          fontSize: optionsSetup.nameFontSizeY
+          fontSize: optionsSetup.namefontSizeY
         },
         inverse: optionsSetup.reversalY, // 轴反转
         axisLabel: {
           show: true,
           rotate: optionsSetup.ytextAngle, // 文字角度
           textStyle: {
-            color: optionsSetup.colorY, // x轴 坐标文字颜色
+            color: optionsSetup.colorY, // y轴 坐标文字颜色
             fontSize: optionsSetup.fontSizeY
           }
         },
@@ -194,7 +264,6 @@ export default {
           }
         }
       };
-
       this.options.yAxis = yAxis;
     },
     // 数值设定 or 柱体设置
@@ -205,13 +274,11 @@ export default {
         if (optionsSetup.verticalShow) {
           series[0].label = {
             show: optionsSetup.isShow,
-            position: 'right',
+            position: "right",
             distance: optionsSetup.distance,
-            textStyle: {
-              fontSize: optionsSetup.fontSize,
-              color: optionsSetup.subTextColor,
-              fontWeight: optionsSetup.fontWeight
-            }
+            fontSize: optionsSetup.fontSize,
+            color: optionsSetup.subTextColor,
+            fontWeight: optionsSetup.fontWeight
           }
         } else {
           series[0].label = {
@@ -223,11 +290,10 @@ export default {
             fontWeight: optionsSetup.fontWeight
           }
         }
+        series[0].barWidth = optionsSetup.maxWidth;
       }
-      series[0].barWidth = optionsSetup.maxWidth;
-      series[0].barMinHeight = optionsSetup.minHeight;
     },
-    // tooltip 设置
+    // tooltip 提示语设置
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
@@ -252,29 +318,49 @@ export default {
       };
       this.options.grid = grid;
     },
-    // 图例颜色修改
+    // 渐变色
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
-      const customColor = optionsSetup.customColor;
-      if (!customColor) return;
-      const arrColor = [];
-      for (let i = 0; i < customColor.length; i++) {
-        arrColor.push(customColor[i].color);
-      }
-      const itemStyle = {
-        normal: {
-          color: params => {
-            return arrColor[params.dataIndex];
-          },
-          barBorderRadius: optionsSetup.radius
+      const itemStyle = this.options.series[0]["itemStyle"];
+      let normal = {}
+      if (optionsSetup.verticalShow) {
+        normal = {
+          color: new echarts.graphic.LinearGradient(1, 0, 0, 0,
+            [
+              {
+                offset: 0,
+                color: optionsSetup.bar0color // 0% 处的颜色
+              },
+              {
+                offset: 1,
+                color: optionsSetup.bar100color // 100% 处的颜色
+              }
+            ],
+          ),
+          barBorderRadius: optionsSetup.radius, //圆角
+          shadowColor: optionsSetup.shadowColor, // 阴影颜色
+          shadowBlur: optionsSetup.shadowBlur //模糊系数
         }
-      };
-      for (const key in this.options.series) {
-        if (this.options.series[key].type == "bar") {
-          this.options.series[key].itemStyle = itemStyle;
+      } else {
+        normal = {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1,
+            [
+              {
+                offset: 0,
+                color: optionsSetup.bar0color // 0% 处的颜色
+              },
+              {
+                offset: 1,
+                color: optionsSetup.bar100color // 100% 处的颜色
+              }
+            ],
+          ),
+          barBorderRadius: optionsSetup.radius, //圆角
+          shadowColor: optionsSetup.shadowColor, // 阴影颜色
+          shadowBlur: optionsSetup.shadowBlur //模糊系数
         }
       }
-      this.options = Object.assign({}, this.options);
+      itemStyle["normal"] = normal;
     },
     // 数据解析
     setOptionsData() {
@@ -345,6 +431,7 @@ export default {
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
       }
+
       // series
       const series = this.options.series;
       for (const i in series) {
