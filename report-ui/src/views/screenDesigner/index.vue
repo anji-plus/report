@@ -583,7 +583,7 @@ export default {
     // 预览
     viewScreen() {
       let routeUrl = this.$router.resolve({
-        path: "/bigscreen/viewer",
+        path: "/screen/preview",
         query: { reportCode: this.$route.query.reportCode }
       });
       window.open(routeUrl.href, "_blank");
