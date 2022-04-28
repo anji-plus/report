@@ -9,7 +9,7 @@
 export const widgetGauge = {
   code: 'widget-gauge',
   type: 'percent',
-  tabName: '百分比图',
+  tabName: '百分比',
   label: '仪表盘',
   icon: 'iconyibiaopan',
   options: {

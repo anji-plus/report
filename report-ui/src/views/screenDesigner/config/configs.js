@@ -1,6 +1,7 @@
 /**
  *  文本栏：{type: 'text',tabName: '文本栏'}
  *  柱状图：{type: 'barChart',tabName: '柱状图'}
+ *  柱线图：{type: 'barlineChart',tabName: '柱线图'}
  *  装饰图：{type: 'decorate',tabName: '装饰图'}
  *  漏斗图：{type: 'funnel',tabName: '漏斗图'}
  *  热力图：{type: 'heatmap',tabName: '热力图'}
@@ -23,7 +24,7 @@ import {widgetVideo} from "./texts/widget-video"
 import {widgetBarchart} from './barCharts/widget-barchart'
 import {widgetGradientBarchart} from "./barCharts/widget-gradient-barchart"
 import {widgetLinechart} from "./lineCharts/widget-linechart"
-import {widgetBarlinechart} from "./barCharts/widget-barlinechart"
+import {widgetBarlinechart} from "./barlineCharts/widget-barlinechart"
 import {widgetPiechart} from "./pieCharts/widget-piechart"
 import {widgetFunnel} from "./funnelCharts/widget-funnel"
 import {widgetGauge} from "./percentCharts/widget-gauge"
@@ -36,7 +37,7 @@ import {widgetLineStack} from "./lineCharts/widget-line-stack"
 import {widgetBarCompare} from "./barCharts/widget-bar-compare"
 import {widgetLineCompare} from "./lineCharts/widget-line-compare"
 import {widgetDecoratePie} from "./decorateCharts/widget-decorate-pie";
-import {widgetMoreBarLine} from "./barCharts/widget-more-bar-line";
+import {widgetMoreBarLine} from "./barlineCharts/widget-more-bar-line";
 import {widgetWordCloud} from "./wordcloudCharts/widget-word-cloud";
 import {widgetHeatmap} from "./heatmap/widget-heatmap";
 

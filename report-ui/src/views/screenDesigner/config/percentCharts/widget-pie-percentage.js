@@ -9,7 +9,7 @@
 export const widgetPiePercentage = {
   code: 'widgetPiePercentageChart',
   type: 'percent',
-  tabName: '百分比图',
+  tabName: '百分比',
   label: '百分比图',
   icon: 'iconbaifenbi',
   options: {

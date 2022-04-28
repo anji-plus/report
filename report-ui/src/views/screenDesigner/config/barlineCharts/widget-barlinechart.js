@@ -8,8 +8,8 @@
  */
 export const widgetBarlinechart = {
   code: 'widget-barlinechart',
-  type: 'barChart',
-  tabName: '柱状图',
+  type: 'barlineChart',
+  tabName: '柱线图',
   label: '柱线图',
   icon: 'iconzhuxiantu',
   options: {

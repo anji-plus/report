@@ -10,7 +10,7 @@ export const widgetGradientBarchart = {
   code: 'widget-gradient-color-barchart',
   type: 'barChart',
   tabName: '柱状图',
-  label: '柱状图-渐变色',
+  label: '柱状-渐变色',
   icon: 'iconzhuzhuangtu',
   options: {
     // 配置

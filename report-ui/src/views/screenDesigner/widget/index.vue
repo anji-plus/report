@@ -27,7 +27,7 @@ import widgetVideo from "./texts/widgetVideo.vue";
 import widgetBarchart from "./barCharts/widgetBarchart.vue";
 import widgetGradientColorBarchart from "./barCharts/widgetGradientColorBarchart.vue";
 import widgetLinechart from "./lineCharts/widgetLinechart.vue";
-import widgetBarlinechart from "./barCharts/widgetBarlinechart";
+import widgetBarlinechart from "./barlineCharts/widgetBarlinechart";
 import WidgetPiechart from "./pieCharts/widgetPiechart.vue";
 import WidgetFunnel from "./funnelCharts/widgetFunnel.vue";
 import WidgetGauge from "./percentCharts/widgetGauge.vue";
@@ -40,7 +40,7 @@ import widgetLineStackChart from "./lineCharts/widgetLineStackChart";
 import widgetBarCompareChart from "./barCharts/widgetBarCompareChart";
 import widgetLineCompareChart from "./lineCharts/widgetLineCompareChart";
 import widgetDecoratePieChart from "./decorateCharts/widgetDecoratePieChart";
-import widgetMoreBarLineChart from "./barCharts/widgetMoreBarLineChart";
+import widgetMoreBarLineChart from "./barlineCharts/widgetMoreBarLineChart";
 import widgetWordCloud from "./wordcloudCharts/widgetWordCloud";
 import widgetHeatmap from "./heatmap/widgetHeatmap";
 

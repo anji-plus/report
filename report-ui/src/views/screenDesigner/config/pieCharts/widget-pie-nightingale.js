@@ -10,7 +10,7 @@ export const widgetPieNightingale = {
   code: 'WidgetPieNightingaleRoseArea',
   type: 'pieChart',
   tabName: '饼图',
-  label: '南丁格尔玫瑰图',
+  label: '南丁格尔',
   icon: 'iconnandinggeermeiguitu',
   options: {
     // 配置
