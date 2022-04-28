@@ -76,17 +76,17 @@
           <span slot="label" class="icon"
             ><i class="el-icon-date icon"></i>图层</span
           >
-          <div class="tools-item">
+          <div
+            v-for="(item, index) in layerWidget"
+            :key="'item' + index"
+            class="tools-item"
+            :class="widgetIndex == index ? 'is-active' : ''"
+            @click="layerClick(index)"
+          >
             <span class="tools-item-icon">
-              <i class="iconfont iconkuangjia"></i>
+              <i class="iconfont" :class="item.icon"></i>
             </span>
-            <span class="tools-item-text">内联框架</span>
-          </div>
-          <div class="tools-item">
-            <span class="tools-item-icon">
-              <i class="iconfont iconkuangjia"></i>
-            </span>
-            <span class="tools-item-text">内联框架</span>
+            <span class="tools-item-text">{{ item.label }}</span>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -463,7 +463,10 @@ export default {
       this.activeName = "first";
       this.widgetOptions = screenConfig["options"];
     },
-
+    layerClick(index) {
+      this.widgetIndex = index;
+      this.widgetsClick(index);
+    },
     // 如果是点击某个组件，获取该组件的配置项
     setOptionsOnClickWidget(obj) {
       console.log(obj);
