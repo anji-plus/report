@@ -24,6 +24,7 @@ import widgetTable from "./texts/widgetTable.vue";
 import widgetText from "./texts/widgetText.vue";
 import widgetTime from "./texts/widgetTime.vue";
 import widgetVideo from "./texts/widgetVideo.vue";
+import widgetBarchart from "./barCharts/widgetBarchart.vue";
 
 export default {
   name: "Widget",
@@ -36,7 +37,8 @@ export default {
     widgetTable,
     widgetText,
     widgetTime,
-    widgetVideo
+    widgetVideo,
+    widgetBarchart
   },
   model: {
     prop: "value",

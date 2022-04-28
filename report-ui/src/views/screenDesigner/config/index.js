@@ -5,6 +5,6 @@ export const widgetTools =  converArr([...widgetTool])
 
 export const getToolByCode = (code) => {
   return [...widgetTool].find((item) => {
-    return item.code = code
+    return item.code == code
   })
 }

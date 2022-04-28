@@ -1,6 +1,4 @@
-
 export const converArr = (data) => {
-  console.log(data)
   let tempArr = [], newArr = []
   for (let i = 0; i < data.length; i++) {
     const item = data[i]

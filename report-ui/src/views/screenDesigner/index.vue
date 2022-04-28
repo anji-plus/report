@@ -2,12 +2,20 @@
   <div class="layout">
     <!-- 操作栏 -->
     <div class="layout-bar">
-      <div class="bar-item"><i class="iconfont iconsave"></i>保存</div>
-      <div class="bar-item"><i class="iconfont iconyulan"></i>预览</div>
-      <div class="bar-item"><i class="iconfont iconundo"></i>撤销</div>
-      <div class="bar-item"><i class="iconfont iconhuifubeifen"></i>恢复</div>
+      <div class="bar-item" @click="saveData">
+        <i class="iconfont iconsave"></i>保存
+      </div>
+      <div class="bar-item" @click="viewScreen">
+        <i class="iconfont iconyulan"></i>预览
+      </div>
+      <div class="bar-item" @click="handleUndo">
+        <i class="iconfont iconundo"></i>撤销
+      </div>
+      <div class="bar-item" @click="handleRedo">
+        <i class="iconfont iconhuifubeifen"></i>恢复
+      </div>
       <div class="bar-item">
-        <!-- <el-upload
+        <el-upload
           class="el-upload"
           ref="upload"
           :action="uploadUrl"
@@ -19,18 +27,18 @@
           :limit="1"
         >
           <i class="iconfont icondaoru"></i>
-        </el-upload> -->
+        </el-upload>
         导入
       </div>
       <div class="bar-item">
         <i class="iconfont icondaochu"></i>
-        <el-dropdown>
+        <el-dropdown @command="exportDashboard">
           <span class="el-dropdown-link">
             导出<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>导出(包含数据集)</el-dropdown-item>
-            <el-dropdown-item>导出(不包含数据集)</el-dropdown-item>
+            <el-dropdown-item command="1">导出(包含数据集)</el-dropdown-item>
+            <el-dropdown-item command="0">导出(不包含数据集)</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -205,6 +213,15 @@ import {
   importDashboard,
   exportDashboard
 } from "@/api/bigscreen";
+import {
+  swapArr,
+  setDefaultValue,
+  handleDefaultValue,
+  getPXUnderScale,
+  handleInitEchartsData,
+  handleBigScreen,
+  handlerLayerWidget
+} from "./util/screen";
 import { screenConfig } from "./config/texts/screenConfig.js";
 import { widgetTools, getToolByCode } from "./config/index.js";
 import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
@@ -333,18 +350,22 @@ export default {
     },
     // 大屏在设计模式的大小
     bigscreenWidthInWorkbench() {
-      return this.getPXUnderScale(this.bigscreenWidth) + this.widthPaddingTools;
+      return (
+        getPXUnderScale(this.bigscreenScaleInWorkbench, this.bigscreenWidth) +
+        this.widthPaddingTools
+      );
     },
     bigscreenHeightInWorkbench() {
       return (
-        this.getPXUnderScale(this.bigscreenHeight) + this.widthPaddingTools
+        getPXUnderScale(this.bigscreenScaleInWorkbench, this.bigscreenHeight) +
+        this.widthPaddingTools
       );
     }
   },
   watch: {
     widgets: {
       handler(val) {
-        this.handlerLayerWidget(val);
+        this.layerWidget = handlerLayerWidget(val, getToolByCode);
         //以下部分是记录历史
         this.$nextTick(() => {
           this.revoke.push(this.widgets);
@@ -371,225 +392,21 @@ export default {
     initScreen() {
       this.widgetOptions = screenConfig["options"];
     },
-
-    /**
-     * @description: 恢复
-     * @param {*}
-     * @return {*}
-     */
-    handleUndo() {
-      const record = this.revoke.undo();
-      if (!record) {
-        return false;
-      }
-      this.widgets = record;
-    },
-    /**
-     * @description: 重做
-     * @param {*}
-     * @return {*}
-     */
-    handleRedo() {
-      const record = this.revoke.redo();
-      if (!record) {
-        return false;
-      }
-      this.widgets = record;
-    },
-    handlerLayerWidget(val) {
-      const layerWidgetArr = [];
-      for (let i = 0; i < val.length; i++) {
-        const obj = {};
-        obj.icon = getToolByCode(val[i].type).icon;
-        const options = val[i].options["setup"];
-        options.forEach(el => {
-          if (el.name == "layerName") {
-            obj.label = el.value;
-          }
-        });
-        layerWidgetArr.push(obj);
-      }
-      this.layerWidget = layerWidgetArr;
-    },
+    // 初始化 echrats
     async initEchartData() {
       const reportCode = this.$route.query.reportCode;
       const { code, data } = await detailDashboard(reportCode);
       if (code != 200) return;
-      const processData = this.handleInitEchartsData(data);
-      const screenData = this.handleBigScreen(data.dashboard);
+      const processData = handleInitEchartsData(data, getToolByCode);
+      const screenData = handleBigScreen(
+        data.dashboard,
+        getToolByCode,
+        this.setOptionsOnClickScreen
+      );
       this.widgets = processData;
       this.dashboard = screenData;
       this.bigscreenWidth = this.dashboard.width;
       this.bigscreenHeight = this.dashboard.height;
-    },
-    handleBigScreen(data) {
-      const optionScreen = getToolByCode("screen").options;
-      const setup = optionScreen.setup;
-      for (const key in data) {
-        for (let i = 0; i < setup.length; i++) {
-          if (key == setup[i].name) {
-            setup[i].value = data[key];
-          }
-        }
-      }
-      this.setOptionsOnClickScreen();
-      return {
-        backgroundColor: (data && data.backgroundColor) || "",
-        backgroundImage: (data && data.backgroundImage) || "",
-        height: (data && data.height) || "1080",
-        title: (data && data.title) || "",
-        width: (data && data.width) || "1920"
-      };
-    },
-    handleInitEchartsData(data) {
-      const widgets = data.dashboard ? data.dashboard.widgets : [];
-      const widgetsData = [];
-      for (let i = 0; i < widgets.length; i++) {
-        let obj = {};
-        obj.type = widgets[i].type;
-        obj.value = {
-          setup: widgets[i].value.setup,
-          data: widgets[i].value.data,
-          position: widgets[i].value.position
-        };
-        const tool = this.deepClone(getToolByCode(widgets[i].type));
-        const option = tool.options;
-        const options = this.handleOptionsData(widgets[i].value, option);
-        obj.options = options;
-        widgetsData.push(obj);
-      }
-      return widgetsData;
-    },
-    handleOptionsData(data, option) {
-      for (const key in data.setup) {
-        for (let i = 0; i < option.setup.length; i++) {
-          let item = option.setup[i];
-          if (Object.prototype.toString.call(item) == "[object Object]") {
-            if (key == option.setup[i].name) {
-              option.setup[i].value = data.setup[key];
-            }
-          } else if (Object.prototype.toString.call(item) == "[object Array]") {
-            for (let j = 0; j < item.length; j++) {
-              const list = item[j].list;
-              list.forEach(el => {
-                if (key == el.name) {
-                  el.value = data.setup[key];
-                }
-              });
-            }
-          }
-        }
-      }
-      // position
-      for (const key in data.position) {
-        for (let i = 0; i < option.position.length; i++) {
-          if (key == option.position[i].name) {
-            option.position[i].value = data.position[key];
-          }
-        }
-      }
-      // data
-      for (const key in data.data) {
-        for (let i = 0; i < option.data.length; i++) {
-          if (key == option.data[i].name) {
-            option.data[i].value = data.data[key];
-          }
-        }
-      }
-      return option;
-    },
-    // 保存数据
-    async saveData() {
-      if (!this.widgets || this.widgets.length == 0) {
-        this.$message.error("请添加组件");
-        return;
-      }
-      const screenData = {
-        reportCode: this.$route.query.reportCode,
-        dashboard: {
-          title: this.dashboard.title,
-          width: this.dashboard.width,
-          height: this.dashboard.height,
-          backgroundColor: this.dashboard.backgroundColor,
-          backgroundImage: this.dashboard.backgroundImage
-        },
-        widgets: this.widgets
-      };
-      const { code, data } = await insertDashboard(screenData);
-      if (code == "200") {
-        this.$message.success("保存成功！");
-      }
-    },
-    // 预览
-    viewScreen() {
-      let routeUrl = this.$router.resolve({
-        path: "/bigscreen/viewer",
-        query: { reportCode: this.$route.query.reportCode }
-      });
-      window.open(routeUrl.href, "_blank");
-    },
-    //  导出
-    async exportDashboard(val) {
-      const fileName = this.$route.query.reportCode + ".zip";
-
-      const param = {
-        reportCode: this.$route.query.reportCode,
-        showDataSet: val
-      };
-      exportDashboard(param).then(res => {
-        const that = this;
-        const type = res.type;
-        if (type == "application/json") {
-          let reader = new FileReader();
-          reader.readAsText(res, "utf-8");
-          reader.onload = function() {
-            const data = JSON.parse(reader.result);
-            that.$message.error(data.message);
-          };
-          return;
-        }
-
-        const blob = new Blob([res], { type: "application/octet-stream" });
-        if (window.navigator.msSaveOrOpenBlob) {
-          //msSaveOrOpenBlob方法返回bool值
-          navigator.msSaveBlob(blob, fileName); //本地保存
-        } else {
-          const link = document.createElement("a"); //a标签下载
-          link.href = window.URL.createObjectURL(blob);
-          link.download = fileName;
-          link.click();
-          window.URL.revokeObjectURL(link.href);
-        }
-      });
-    },
-    // 上传成功的回调
-    handleUpload(response, file, fileList) {
-      //清除el-upload组件中的文件
-      this.$refs.upload.clearFiles();
-      //刷新大屏页面
-      this.initEchartData();
-      if (response.code == "200") {
-        this.$message({
-          message: "导入成功！",
-          type: "success"
-        });
-      } else {
-        this.$message({
-          message: response.message,
-          type: "error"
-        });
-      }
-    },
-    handleError(err) {
-      this.$message({
-        message: "上传失败！",
-        type: "error"
-      });
-    },
-
-    // 在缩放模式下的大小
-    getPXUnderScale(px) {
-      return this.bigscreenScaleInWorkbench * px;
     },
 
     // 拖动一个组件放到工作区中去，在拖动结束时，放到工作区对应的坐标点上去
@@ -626,7 +443,7 @@ export default {
         options: tool.options
       };
       // 处理默认值
-      const widgetJsonValue = this.handleDefaultValue(widgetJson);
+      const widgetJsonValue = handleDefaultValue(widgetJson);
 
       //2022年02月22日 修复：可以拖拽放到鼠标的位置
       widgetJsonValue.value.position.left =
@@ -639,62 +456,17 @@ export default {
       // 激活新组件的配置属性
       this.setOptionsOnClickWidget(this.widgets.length - 1);
     },
-
-    // 对组件默认值处理
-    handleDefaultValue(widgetJson) {
-      for (const key in widgetJson) {
-        if (key == "options") {
-          // collapse、data、position、setup
-          // setup 处理
-          for (let i = 0; i < widgetJson.options.setup.length; i++) {
-            const item = widgetJson.options.setup[i];
-            if (Object.prototype.toString.call(item) == "[object Object]") {
-              widgetJson.value.setup[item.name] = item.value;
-            } else if (
-              Object.prototype.toString.call(item) == "[object Array]"
-            ) {
-              for (let j = 0; j < item.length; j++) {
-                const list = item[j].list;
-                list.forEach(el => {
-                  widgetJson.value.setup[el.name] = el.value;
-                });
-              }
-            }
-          }
-          // position
-          for (let i = 0; i < widgetJson.options.position.length; i++) {
-            const item = widgetJson.options.position[i];
-            if (item.value) {
-              widgetJson.value.position[item.name] = item.value;
-            }
-          }
-          // data 处理
-          if (widgetJson.options.data && widgetJson.options.data.length > 0) {
-            for (let i = 0; i < widgetJson.options.data.length; i++) {
-              const item = widgetJson.options.data[i];
-              if (item.value) {
-                widgetJson.value.data[item.name] = item.value;
-              }
-            }
-          }
-        }
-      }
-      return widgetJson;
-    },
-    layerClick(index) {
-      this.widgetIndex = index;
-      this.widgetsClick(index);
-    },
     // 如果是点击大屏设计器中的底层，加载大屏底层属性
     setOptionsOnClickScreen() {
       this.screenCode = "screen";
       // 选中不同的组件 右侧都显示第一栏
       this.activeName = "first";
-      this.widgetOptions = getToolByCode("screen")["options"];
+      this.widgetOptions = screenConfig["options"];
     },
 
     // 如果是点击某个组件，获取该组件的配置项
     setOptionsOnClickWidget(obj) {
+      console.log(obj);
       this.screenCode = "";
       if (typeof obj == "number") {
         this.widgetOptions = this.deepClone(this.widgets[obj]["options"]);
@@ -759,7 +531,7 @@ export default {
         for (let i = 0; i < this.widgets.length; i++) {
           if (this.widgetIndex == i) {
             this.widgets[i].value[key] = this.deepClone(val);
-            this.setDefaultValue(this.widgets[i].options[key], val);
+            setDefaultValue(this.widgets[i].options[key], val);
           }
         }
       }
@@ -778,38 +550,116 @@ export default {
       this.visibleContentMenu = true;
       return false;
     },
-    setDefaultValue(options, val) {
-      for (let i = 0; i < options.length; i++) {
-        if (Object.prototype.toString.call(options[i]) == "[object Object]") {
-          for (const k in val) {
-            if (options[i].name == k) {
-              options[i].value = val[k];
-            }
-          }
-        } else if (
-          Object.prototype.toString.call(options[i]) == "[object Array]"
-        ) {
-          for (let j = 0; j < options[i].length; j++) {
-            const list = options[i][j].list;
-            for (let z = 0; z < list.length; z++) {
-              for (const k in val) {
-                if (list[z].name == k) {
-                  list[z].value = val[k];
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     datadragEnd(evt) {
       evt.preventDefault();
-      this.widgets = this.swapArr(this.widgets, evt.oldIndex, evt.newIndex);
+      this.widgets = swapArr(this.widgets, evt.oldIndex, evt.newIndex);
     },
-    // 数组 元素互换位置
-    swapArr(arr, oldIndex, newIndex) {
-      arr[oldIndex] = arr.splice(newIndex, 1, arr[oldIndex])[0];
-      return arr;
+
+    // 保存
+    async saveData() {
+      if (!this.widgets || this.widgets.length == 0) {
+        this.$message.error("请添加组件");
+        return;
+      }
+      const screenData = {
+        reportCode: this.$route.query.reportCode,
+        dashboard: {
+          title: this.dashboard.title,
+          width: this.dashboard.width,
+          height: this.dashboard.height,
+          backgroundColor: this.dashboard.backgroundColor,
+          backgroundImage: this.dashboard.backgroundImage
+        },
+        widgets: this.widgets
+      };
+      const { code, data } = await insertDashboard(screenData);
+      if (code == "200") {
+        this.$message.success("保存成功！");
+      }
+    },
+    // 预览
+    viewScreen() {
+      let routeUrl = this.$router.resolve({
+        path: "/bigscreen/viewer",
+        query: { reportCode: this.$route.query.reportCode }
+      });
+      window.open(routeUrl.href, "_blank");
+    },
+    // 撤销
+    handleRedo() {
+      const record = this.revoke.redo();
+      if (!record) {
+        return false;
+      }
+      this.widgets = record;
+    },
+    // 恢复
+    handleUndo() {
+      const record = this.revoke.undo();
+      if (!record) {
+        return false;
+      }
+      this.widgets = record;
+    },
+    // 导入  成功回调
+    handleUpload(response, file, fileList) {
+      //清除el-upload组件中的文件
+      this.$refs.upload.clearFiles();
+      //刷新大屏页面
+      this.initEchartData();
+      if (response.code == "200") {
+        this.$message({
+          message: "导入成功！",
+          type: "success"
+        });
+      } else {
+        this.$message({
+          message: response.message,
+          type: "error"
+        });
+      }
+    },
+    // 导入失败
+    handleError(err) {
+      this.$message({
+        message: "上传失败！",
+        type: "error"
+      });
+    },
+    // 导出
+    async exportDashboard(val) {
+      console.log(val);
+      const fileName = this.$route.query.reportCode + ".zip";
+
+      const param = {
+        reportCode: this.$route.query.reportCode,
+        showDataSet: val
+      };
+      exportDashboard(param).then(res => {
+        const that = this;
+        const type = res.type;
+        if (type == "application/json") {
+          let reader = new FileReader();
+          reader.readAsText(res, "utf-8");
+          reader.onload = function() {
+            const data = JSON.parse(reader.result);
+            that.$message.error(data.message);
+          };
+          return;
+        }
+
+        const blob = new Blob([res], { type: "application/octet-stream" });
+        if (window.navigator.msSaveOrOpenBlob) {
+          //msSaveOrOpenBlob方法返回bool值
+          navigator.msSaveBlob(blob, fileName); //本地保存
+        } else {
+          const link = document.createElement("a"); //a标签下载
+          link.href = window.URL.createObjectURL(blob);
+          link.download = fileName;
+          link.click();
+          window.URL.revokeObjectURL(link.href);
+        }
+      });
     },
     // 删除
     deletelayer() {
