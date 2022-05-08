@@ -24,10 +24,12 @@ import {
   reportAdd,
   reportDeleteBatch,
   reportUpdate,
-  reportDetail
+  reportDetail,
+  reportCopy
 } from "@/api/reportmanage";
 import Share from "./components/share";
 import { validateEngOrNum } from "@/utils/validate";
+import {verificationSet} from "@/api/report";
 export default {
   name: "Report",
   components: {
@@ -117,6 +119,11 @@ export default {
             label: "分享",
             permission: "bigScreenManage:share",
             click: this.shareReport
+          },
+          {
+            label: "复制",
+            permission: "bigScreenManage:copy",
+            click: this.copyReport
           },
           {
             label: "删除",
@@ -339,6 +346,15 @@ export default {
       this.reportCodeForShareDialog = val.reportCode;
       this.reportNameForShareDialog = val.reportName;
       this.visibleForShareDialog = true;
+    },
+    //复制
+    async copyReport(val) {
+      const { code } = await reportCopy(val);
+      if (code != '200') {
+        return
+      }
+      this.$message.success("复制成功");
+      this.$refs.listPage.handleQueryForm("query");
     }
   }
 };
