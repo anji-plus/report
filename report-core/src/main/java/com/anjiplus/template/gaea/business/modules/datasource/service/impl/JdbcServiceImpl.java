@@ -26,18 +26,21 @@ public class JdbcServiceImpl implements JdbcService {
     /**
      * 所有数据源的连接池存在map里
      */
-    static Map<Long, DruidDataSource> map = new ConcurrentHashMap<>();
+    private Map<Long, DruidDataSource> map = new ConcurrentHashMap<>();
+    private Object lock = new Object();
 
     public DruidDataSource getJdbcConnectionPool(DataSourceDto dataSource) {
         if (map.containsKey(dataSource.getId())) {
             return map.get(dataSource.getId());
         } else {
             try {
-                if (!map.containsKey(dataSource.getId())) {
-                    DruidDataSource pool = druidProperties.dataSource(dataSource.getJdbcUrl(),
-                            dataSource.getUsername(), dataSource.getPassword(), dataSource.getDriverName());
-                    map.put(dataSource.getId(), pool);
-                    log.info("创建连接池成功：{}", dataSource.getJdbcUrl());
+                synchronized (lock) {
+                    if (!map.containsKey(dataSource.getId())) {
+                        DruidDataSource pool = druidProperties.dataSource(dataSource.getJdbcUrl(),
+                                dataSource.getUsername(), dataSource.getPassword(), dataSource.getDriverName());
+                        map.put(dataSource.getId(), pool);
+                        log.info("创建连接池成功：{}", dataSource.getJdbcUrl());
+                    }
                 }
                 return map.get(dataSource.getId());
             } finally {
