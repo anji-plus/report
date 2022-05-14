@@ -88,6 +88,11 @@ export default {
       };
     }
   },
+  watch: {
+    value(val) {
+      this.echoUpload(val);
+    }
+  },
   mounted() {
     this.echoUpload(this.value);
   },

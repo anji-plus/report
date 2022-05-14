@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2022-05-14 15:23:55
+ * @LastEditTime: 2022-05-14 15:42:53
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
@@ -297,6 +297,7 @@ export default {
         // fieldVal input最新值
         // fieldExtend 对于select型的扩展值
         formChange: (formData, fieldName, fieldVal, fieldExtend) => {
+          console.log(formData);
           if (fieldName == "reportImage" && fieldVal.length > 0) {
             formData["reportImage"] = fieldVal && fieldVal[0].url;
           }
