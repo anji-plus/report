@@ -244,9 +244,9 @@ export default {
       }
       return result;
     },
-    // 从本地localStorage取 gaeaDict
+    // 从本地localStorage取 AJReportDict
     getOptionsFromLocalStorage() {
-      let dicts = JSON.parse(localStorage.getItem("gaeaDict"));
+      let dicts = JSON.parse(localStorage.getItem("AJReportDict"));
       let options = [];
       if (!dicts.hasOwnProperty(this.dictCode)) {
         return [];

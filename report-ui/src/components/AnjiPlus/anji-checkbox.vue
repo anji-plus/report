@@ -80,7 +80,7 @@ export default {
     },
     // 从本地localStorage取 gaeaDict
     getOptionsFromLocalStorage() {
-      let dicts = JSON.parse(localStorage.getItem("gaeaDict"));
+      let dicts = JSON.parse(localStorage.getItem("AJReportDict"));
       let options = [];
       if (!dicts.hasOwnProperty(this.dictCode)) {
         return [];
