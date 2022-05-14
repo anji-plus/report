@@ -147,7 +147,7 @@ export default {
     // 回显
     echoUpload(val) {
       console.log(val);
-      if (val) {
+      if (val && val.length > 0) {
         this.fileList = [
           {
             url: val
