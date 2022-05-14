@@ -15,26 +15,9 @@
     >
       <i slot="default" class="el-icon-plus" />
       <div slot="file" slot-scope="{ file }" class="imgBox">
-        <img
-          v-if="typeImgShow(file)"
-          class="el-upload-list__item-thumbnail"
-          :src="file.url"
-          alt=""
-        />
-        <svg-icon
-          v-else-if="typePdfShow(file)"
-          icon-class="PDF"
-          class="iconFont"
-        />
-        <svg-icon
-          v-else-if="typeExcelShow(file)"
-          icon-class="Excel"
-          class="iconFont"
-        />
-
+        <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
         <span class="el-upload-list__item-actions">
           <span
-            v-if="typeImgShow(file)"
             class="el-upload-list__item-preview"
             @click="handlePictureCardPreview(file)"
           >
@@ -80,16 +63,7 @@ export default {
       }
     },
     value: {
-      type: Array,
-      default: () => {
-        return [];
-      }
-    },
-    uploadType: {
-      type: String,
-      default: () => {
-        return "img";
-      }
+      type: Array | String
     }
   },
   data() {
@@ -114,42 +88,15 @@ export default {
       };
     }
   },
+  watch: {
+    value(val) {
+      this.echoUpload(val);
+    }
+  },
   mounted() {
     this.echoUpload(this.value);
   },
   methods: {
-    // 图片
-    typeImgShow(file) {
-      if (!file.fileType) return;
-      const fileType = file.fileType.toLowerCase();
-      if (
-        fileType == "jpg" ||
-        fileType == "png" ||
-        fileType == "gif" ||
-        fileType == "icon"
-      ) {
-        return true;
-      }
-      return false;
-    },
-    // pdf
-    typePdfShow(file) {
-      if (!file.fileType) return;
-      const fileType = file.fileType.toLowerCase();
-      if (fileType == "pdf") {
-        return true;
-      }
-      return false;
-    },
-    // excel
-    typeExcelShow(file) {
-      if (!file.fileType) return;
-      const fileType = file.fileType.toLowerCase();
-      if (fileType == "xlsx" || fileType == "xls" || fileType == "csv") {
-        return true;
-      }
-      return false;
-    },
     handleRemove(file) {
       const fileList = [];
       this.fileList.forEach(el => {
@@ -185,6 +132,7 @@ export default {
     // 回传出去
     change() {
       const fileList = this.fileList;
+      console.log(fileList);
       this.$emit("input", fileList);
       this.$emit("change", fileList);
     },
@@ -214,18 +162,13 @@ export default {
     },
     // 回显
     echoUpload(val) {
-      if (val && val.length > 0) {
-        const fileList = [];
-        for (let i = 0; i < val.length; i++) {
-          const obj = {};
-          obj.url = val[i].urlPath || val[i].url;
-          obj.fileType = val[i].fileType;
-          obj.fileId = val[i].fileId;
-          fileList.push(obj);
-        }
-        fileList.forEach((el, index) => {
-          this.$set(this.fileList, index, el);
-        });
+      console.log(val);
+      if (val) {
+        this.fileList = [
+          {
+            url: val
+          }
+        ];
       } else {
         this.fileList = [];
       }
