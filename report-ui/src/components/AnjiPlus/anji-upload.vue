@@ -6,23 +6,16 @@
       :action="requestUrl"
       list-type="picture-card"
       :file-list="fileList"
-      :on-preview="handlePictureCardPreview"
       :on-remove="handleRemove"
+      :on-exceed="handleExceed"
       :on-success="handleSuccess"
       :show-file-list="true"
       :before-upload="handleBeforeUpload"
-      :class="fileList && fileList.length >= limit ? 'hide_box' : ''"
     >
       <i slot="default" class="el-icon-plus" />
       <div slot="file" slot-scope="{ file }" class="imgBox">
         <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
         <span class="el-upload-list__item-actions">
-          <span
-            class="el-upload-list__item-preview"
-            @click="handlePictureCardPreview(file)"
-          >
-            <i class="el-icon-zoom-in" />
-          </span>
           <span
             class="el-upload-list__item-delete"
             @click="handleDownload(file)"
@@ -35,9 +28,6 @@
         </span>
       </div>
     </el-upload>
-    <el-dialog :visible.sync="dialogVisibleImageUpload" :modal="false">
-      <img width="100%" :src="imageUploadUrl" alt="" />
-    </el-dialog>
   </div>
 </template>
 <script>
@@ -69,7 +59,6 @@ export default {
   data() {
     return {
       imageUploadUrl: "",
-      dialogVisibleImageUpload: false,
       fileList: [],
       modeString: ""
     };
@@ -98,18 +87,13 @@ export default {
   },
   methods: {
     handleRemove(file) {
-      const fileList = [];
-      this.fileList.forEach(el => {
-        if (el.fileId != file.fileId) {
-          fileList.push(el);
-        }
-      });
-      this.fileList = fileList;
+      this.fileList = [];
+      console.log(this.fileList);
+      console.log(this.limit);
       this.change();
     },
-    handlePictureCardPreview(file) {
-      this.imageUploadUrl = file.url;
-      this.dialogVisibleImageUpload = true;
+    handleExceed() {
+      this.$message.warning(`只能上传${this.limit}个文件`);
     },
     // 下载
     handleDownload(file) {
