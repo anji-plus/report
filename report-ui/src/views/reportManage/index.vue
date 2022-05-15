@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2022-05-14 15:42:53
+ * @LastEditTime: 2022-05-15 10:44:58
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
@@ -298,8 +298,12 @@ export default {
         // fieldExtend 对于select型的扩展值
         formChange: (formData, fieldName, fieldVal, fieldExtend) => {
           console.log(formData);
-          if (fieldName == "reportImage" && fieldVal.length > 0) {
-            formData["reportImage"] = fieldVal && fieldVal[0].url;
+          if (fieldName == "reportImage") {
+            if (fieldVal.length > 0) {
+              formData["reportImage"] = fieldVal && fieldVal[0].url;
+            } else {
+              formData["reportImage"] = "";
+            }
           }
         }
       }
