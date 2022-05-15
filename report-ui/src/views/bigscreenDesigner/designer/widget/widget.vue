@@ -17,7 +17,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <component :is="type" :value="value"/>
+    <component :is="type" :value="value" />
   </avue-draggable>
 </template>
 
@@ -49,6 +49,7 @@ import widgetLineCompareChart from "./line/widgetLineCompareChart";
 import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
 import widgetMoreBarLineChart from "./bar/widgetMoreBarLineChart";
 import widgetWordCloud from "./wordcloud/widgetWordCloud";
+import widgetHeatmap from "./heatmap/widgetHeatmap";
 
 export default {
   name: "Widget",
@@ -79,7 +80,8 @@ export default {
     widgetLineCompareChart,
     widgetDecoratePieChart,
     widgetMoreBarLineChart,
-    widgetWordCloud
+    widgetWordCloud,
+    widgetHeatmap
   },
   model: {
     prop: "value",
@@ -95,8 +97,7 @@ export default {
     bigscreen: Object,
     value: {
       type: [Object],
-      default: () => {
-      }
+      default: () => {}
     },
     step: Number
   },
@@ -126,13 +127,11 @@ export default {
       return this.value.position.zIndex || 1;
     }
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
-    handleFocus({index, left, top, width, height}) {
-    },
-    handleBlur({index, left, top, width, height}) {
-      this.$emit("onActivated", {index, left, top, width, height});
+    handleFocus({ index, left, top, width, height }) {},
+    handleBlur({ index, left, top, width, height }) {
+      this.$emit("onActivated", { index, left, top, width, height });
       this.$refs.draggable.setActive(true);
     }
   }

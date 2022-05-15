@@ -4,31 +4,10 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 12:20:46
+ * @LastEditTime: 2022-05-15 10:44:58
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
-    <template slot="rowButtonInMore" slot-scope="props">
-      <el-button
-        type="text"
-        @click="preview(props.msg)"
-        v-permission="'bigScreenManage:view'"
-        >预览</el-button
-      >
-      <el-button
-        type="text"
-        @click="design(props.msg)"
-        v-permission="'bigScreenManage:design'"
-        >设计</el-button
-      >
-      <el-button
-        type="text"
-        @click="shareReport(props.msg)"
-        v-permission="'bigScreenManage:share'"
-        >分享</el-button
-      >
-    </template>
-
     <template v-slot:pageSection>
       <Share
         :visib="visibleForShareDialog"
@@ -45,10 +24,12 @@ import {
   reportAdd,
   reportDeleteBatch,
   reportUpdate,
-  reportDetail
+  reportDetail,
+  reportCopy
 } from "@/api/reportmanage";
 import Share from "./components/share";
 import { validateEngOrNum } from "@/utils/validate";
+import { verificationSet } from "@/api/report";
 export default {
   name: "Report",
   components: {
@@ -92,6 +73,66 @@ export default {
             field: "reportAuthor"
           }
         ],
+        // 表头按钮
+        tableButtons: [
+          {
+            label: "新增",
+            type: "", // primary、success、info、warning、danger
+            permission: "reportManage:insert", // 按钮权限码
+            icon: "el-icon-plus",
+            plain: true,
+            click: () => {
+              return this.$refs.listPage.handleOpenEditView("add");
+            }
+          },
+          {
+            label: "删除",
+            type: "danger",
+            permission: "reportManage:delete",
+            icon: "el-icon-delete",
+            plain: false,
+            click: () => {
+              return this.$refs.listPage.handleDeleteBatch();
+            }
+          }
+        ],
+        // 表格行按钮
+        rowButtons: [
+          {
+            label: "编辑",
+            permission: "reportManage:update",
+            click: row => {
+              return this.$refs.listPage.handleOpenEditView("edit", row);
+            }
+          },
+          {
+            label: "预览",
+            permission: "bigScreenManage:view",
+            click: this.preview
+          },
+          {
+            label: "设计",
+            permission: "bigScreenManage:design",
+            click: this.design
+          },
+          {
+            label: "分享",
+            permission: "bigScreenManage:share",
+            click: this.shareReport
+          },
+          {
+            label: "复制",
+            permission: "bigScreenManage:copy",
+            click: this.copyReport
+          },
+          {
+            label: "删除",
+            permission: "reportManage:delete",
+            click: row => {
+              return this.$refs.listPage.handleDeleteBatch(row);
+            }
+          }
+        ],
         // 操作按钮
         buttons: {
           query: {
@@ -116,9 +157,7 @@ export default {
             api: reportUpdate,
             permission: "reportManage:update"
           },
-          customButton: {
-            operationWidth: "150px"
-          }
+          rowButtonsWidth: 150 // row自定义按钮表格宽度
         },
         // 表格列
         columns: [
@@ -257,7 +296,16 @@ export default {
         // fieldName 触发修改的input name
         // fieldVal input最新值
         // fieldExtend 对于select型的扩展值
-        formChange: (formData, fieldName, fieldVal, fieldExtend) => {}
+        formChange: (formData, fieldName, fieldVal, fieldExtend) => {
+          console.log(formData);
+          if (fieldName == "reportImage") {
+            if (fieldVal.length > 0) {
+              formData["reportImage"] = fieldVal && fieldVal[0].url;
+            } else {
+              formData["reportImage"] = "";
+            }
+          }
+        }
       }
     };
   },
@@ -307,6 +355,15 @@ export default {
       this.reportCodeForShareDialog = val.reportCode;
       this.reportNameForShareDialog = val.reportName;
       this.visibleForShareDialog = true;
+    },
+    //复制
+    async copyReport(val) {
+      const { code } = await reportCopy(val);
+      if (code != "200") {
+        return;
+      }
+      this.$message.success("复制成功");
+      this.$refs.listPage.handleQueryForm("query");
     }
   }
 };

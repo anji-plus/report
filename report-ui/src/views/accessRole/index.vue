@@ -4,19 +4,10 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 12:20:46
+ * @LastEditTime: 2022-03-09 09:40:01
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
-    <template slot="rowButtonInMore" slot-scope="props">
-      <el-button
-        type="text"
-        @click="handleOpenDialogSetAuthorityForRole(props)"
-        v-permission="'roleManage:grantAuthority'"
-        >分配权限</el-button
-      >
-    </template>
-    <!--自定义的卡片插槽，将在编辑详情页面，出现在底部新卡片-->
     <template v-slot:pageSection>
       <RoleAuthority
         :role-code="roleCode"
@@ -52,6 +43,51 @@ export default {
         title: "角色管理",
         // 详情页中输入框左边文字宽度
         labelWidth: "160px",
+        // 表头按钮
+        tableButtons: [
+          {
+            label: "新增",
+            type: "", // primary、success、info、warning、danger
+            permission: "roleManage:insert", // 按钮权限码
+            icon: "el-icon-plus",
+            plain: true,
+            click: () => {
+              return this.$refs.listPage.handleOpenEditView("add");
+            }
+          },
+          {
+            label: "删除",
+            type: "danger",
+            permission: "roleManage:delete",
+            icon: "el-icon-delete",
+            plain: false,
+            click: () => {
+              return this.$refs.listPage.handleDeleteBatch();
+            }
+          }
+        ],
+        // 表格行按钮
+        rowButtons: [
+          {
+            label: "编辑",
+            permission: "roleManage:update",
+            click: row => {
+              return this.$refs.listPage.handleOpenEditView("edit", row);
+            }
+          },
+          {
+            label: "分配权限",
+            permission: "roleManage:grantAuthority",
+            click: this.handleOpenDialogSetAuthorityForRole
+          },
+          {
+            label: "删除",
+            permission: "roleManage:delete",
+            click: row => {
+              return this.$refs.listPage.handleDeleteBatch(row);
+            }
+          }
+        ],
         // 查询表单条件
         queryFormFields: [
           {
@@ -95,9 +131,7 @@ export default {
             api: accessRoleUpdate,
             permission: "roleManage:update"
           },
-          customButton: {
-            operationWidth: "160px"
-          }
+          rowButtonsWidth: 140 // row自定义按钮表格宽度
         },
         // 表格列
         columns: [
@@ -200,7 +234,7 @@ export default {
   },
   methods: {
     handleOpenDialogSetAuthorityForRole(props) {
-      this.roleCode = props.msg.roleCode;
+      this.roleCode = props.roleCode;
       this.dialogVisibleSetAuthorityForRole = true;
     }
   }

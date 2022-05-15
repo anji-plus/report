@@ -66,9 +66,10 @@ logging:
 customer:
   # 开发测试用本地文件，如果是生产，请考虑使用对象存储
   file:
-    #上传对应本地全路径，路径必须是真实存在的
+    #上传对应本地全路径，目录必须是真实存在的，注意 Win是 \ 且有盘符，linux是 / 无盘符
     dist-path: /app/disk/upload/
-    white-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi
+    #dist-path: D:\Download
+    white-list: .png|.jpg|.jpeg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi
     excelSuffix: .xlsx|.xls|.csv
     #上传对应下载的下载链接路径 http://serverip:9095/file/download
     downloadPath: http://10.108.26.197:9095/file/download

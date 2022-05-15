@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 06:43:07
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 10:22:37
+ * @LastEditTime: 2022-03-11 10:35:35
  */
 import { widgetTool } from "./main"
 const screenConfig = {
@@ -81,5 +81,5 @@ const getToolByCode = function (code) {
   })
   return item
 }
-
+console.log(widgetTools)
 export {widgetTools, getToolByCode}

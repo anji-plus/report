@@ -71,7 +71,7 @@ export function initDictToLocalstorage(callback) {
     }
 
     // 保存数据字典到localStorage
-    setStorageItem('gaeaDict', res.data)
+    setStorageItem('AJReportDict', res.data)
     if (callback != null) {
       callback()
     }

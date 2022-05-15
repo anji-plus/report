@@ -13,7 +13,7 @@
       <img src="@/assets/images/home-logo.png" alt="logo" />
     </div>
     <div class="login_contant">
-      <img src="@/assets/images/login.png" alt="image" class="login_img" />
+      <img src="@/assets/images/login.jpg" alt="image" class="login_img" />
       <el-form
         ref="loginForm"
         :model="loginForm"

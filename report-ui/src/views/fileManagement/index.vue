@@ -4,11 +4,11 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 13:47:02
+ * @LastEditTime: 2022-03-09 09:57:17
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
-    <template v-slot:buttonLeftOnTable>
+    <template v-slot:tableButtons>
       <el-upload
         class="el-upload"
         ref="upload"
@@ -61,6 +61,37 @@ export default {
             field: "filePath"
           }
         ],
+        // 表头按钮
+        tableButtons: [
+          {
+            label: "删除",
+            type: "danger",
+            permission: "fileManage:delete",
+            icon: "el-icon-delete",
+            plain: false,
+            click: () => {
+              return this.$refs.listPage.handleDeleteBatch();
+            }
+          }
+        ],
+        // 表格行按钮
+        rowButtons: [
+          {
+            label: "复制url",
+            click: this.copyUrlPath
+          },
+          {
+            label: "下载",
+            click: this.customButtom
+          },
+          {
+            label: "删除",
+            permission: "fileManage:delete",
+            click: row => {
+              return this.$refs.listPage.handleDeleteBatch(row);
+            }
+          }
+        ],
         // 操作按钮
         buttons: {
           query: {
@@ -87,10 +118,7 @@ export default {
             permission: "fileManage:update",
             isShow: false
           },
-          // 自定义按钮
-          customButton: {
-            operationWidth: 160 // row自定义按钮表格宽度
-          }
+          rowButtonsWidth: 150 // row自定义按钮表格宽度
         },
         // 表格列
         columns: [
@@ -233,10 +261,10 @@ export default {
       window.open(row.urlPath);
     },
     customButtom(val) {
-      this.downloadFile(val.msg);
+      this.downloadFile(val);
     },
     copyUrlPath(val) {
-      this.copyToClip(val.msg.urlPath);
+      this.copyToClip(val.urlPath);
       this.$message({
         message: "已将url路径复制至剪切板！",
         type: "success"

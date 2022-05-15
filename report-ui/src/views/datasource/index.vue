@@ -4,28 +4,10 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-24 14:00:47
+ * @LastEditTime: 2022-03-09 09:43:31
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
-    <template v-slot:buttonLeftOnTable>
-      <el-button
-        type="primary"
-        icon="el-icon-plus"
-        @click="operateDatasource('add')"
-        v-permission="'datasourceManage:insert'"
-        >新增</el-button
-      >
-    </template>
-
-    <template slot="rowButton" slot-scope="props">
-      <el-button
-        type="text"
-        @click="operateDatasource('edit', props)"
-        v-permission="'datasourceManage:update'"
-        >编辑</el-button
-      >
-    </template>
     <template v-slot:pageSection>
       <EditDataSource
         ref="EditDataSource"
@@ -60,6 +42,46 @@ export default {
         title: "数据源",
         // 详情页中输入框左边文字宽度
         labelWidth: "120px",
+        // 表头按钮
+        tableButtons: [
+          {
+            label: "新增",
+            type: "", // primary、success、info、warning、danger
+            permission: "datasourceManage:insert", // 按钮权限码
+            icon: "el-icon-plus",
+            plain: true,
+            click: () => {
+              return this.operateDatasource("add");
+            }
+          },
+          {
+            label: "删除",
+            type: "danger",
+            permission: "datasourceManage:delete",
+            icon: "el-icon-delete",
+            plain: false,
+            click: () => {
+              return this.$refs.listPage.handleDeleteBatch();
+            }
+          }
+        ],
+        // 表格行按钮
+        rowButtons: [
+          {
+            label: "编辑",
+            permission: "datasourceManage:update",
+            click: row => {
+              return this.operateDatasource("edit", row);
+            }
+          },
+          {
+            label: "删除",
+            permission: "datasourceManage:delete",
+            click: row => {
+              return this.$refs.listPage.handleDeleteBatch(row);
+            }
+          }
+        ],
         // 查询表单条件
         queryFormFields: [
           {
@@ -83,9 +105,7 @@ export default {
         ],
         // 操作按钮
         buttons: {
-          customButton: {
-            operationWidth: 150
-          },
+          rowButtonsWidth: 150, // row自定义按钮表格宽度
           query: {
             api: reportDataSourceList,
             permission: "datasourceManage:query",
@@ -218,7 +238,7 @@ export default {
     operateDatasource(type, prop) {
       this.dialogVisibleSetDataSource = true;
       if (prop) {
-        this.dataSource = prop.msg;
+        this.dataSource = prop;
       } else {
         this.dataSource = {};
       }

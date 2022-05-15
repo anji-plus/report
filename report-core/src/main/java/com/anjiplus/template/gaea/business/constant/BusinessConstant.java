@@ -11,6 +11,11 @@ public interface BusinessConstant {
     String RIGTH_BIG_BOAST = "}";
     String LEFT_MIDDLE_BOAST = "[";
     String RIGHT_MIDDLE_BOAST = "]";
+    String SLASH = "/";
+
+    String USER_GUEST = "guest";
+    String USER_ADMIN = "admin";
+
 
     /**
      * 字典项重复

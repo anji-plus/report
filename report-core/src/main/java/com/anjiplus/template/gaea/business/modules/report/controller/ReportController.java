@@ -11,10 +11,7 @@ import com.anjiplus.template.gaea.business.modules.report.dao.entity.Report;
 import com.anjiplus.template.gaea.business.modules.report.service.ReportService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * TODO
@@ -46,11 +43,11 @@ public class ReportController extends GaeaBaseController<ReportParam, Report, Re
         return new ReportDto();
     }
 
-    @DeleteMapping("/delReport")
-    @Permission(code = "delete", name = "删除")
-    @GaeaAuditLog(pageTitle = "删除")
-    public ResponseBean delReport(@RequestBody ReportDto reportDto) {
-        reportService.delReport(reportDto);
+    @GetMapping("/copy")
+    @Permission(code = "copy", name = "复制")
+    @GaeaAuditLog(pageTitle = "复制")
+    public ResponseBean copy(@RequestParam("reportId") Long reportId) {
+        reportService.copy(reportId);
         return ResponseBean.builder().build();
     }
 }

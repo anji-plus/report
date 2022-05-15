@@ -187,88 +187,6 @@ export const widgetLinechart = {
           ],
         },
         {
-          name: '图例操作',
-          list: [
-            {
-              type: 'el-switch',
-              label: '图例显示',
-              name: 'isShowLegend',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-input-text',
-              label: '图例名称',
-              name: 'legendName',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'lengedColor',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'lengedFontSize',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'el-input-number',
-              label: '图例宽度',
-              name: 'lengedWidth',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'el-select',
-              label: '横向位置',
-              name: 'lateralPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
-              ],
-              value: 'center'
-            },
-            {
-              type: 'el-select',
-              label: '纵向位置',
-              name: 'longitudinalPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'top', name: '顶部'},
-                {code: 'bottom', name: '底部'},
-              ],
-              value: 'top'
-            },
-            {
-              type: 'el-select',
-              label: '布局前置',
-              name: 'layoutFront',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'vertical', name: '竖排'},
-                {code: 'horizontal', name: '横排'},
-              ],
-              value: 'horizontal'
-            },
-          ],
-        },
-        {
           name: 'X轴设置',
           list: [
             {
@@ -525,12 +443,12 @@ export const widgetLinechart = {
           name: '提示语设置',
           list: [
             {
-              type: 'el-input-text',
+              type: 'el-input-number',
               label: '字体大小',
-              name: 'fontSize',
+              name: 'tipsFontSize',
               required: false,
               placeholder: '',
-              value: ''
+              value: 16
             },
             {
               type: 'vue-color',

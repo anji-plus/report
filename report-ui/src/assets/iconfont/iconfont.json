@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "19004935",
+      "name": "热力图",
+      "font_class": "relitu",
+      "unicode": "e683",
+      "unicode_decimal": 59011
+    },
+    {
+      "icon_id": "15047024",
+      "name": "恢复备份",
+      "font_class": "huifubeifen",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "19657550",
+      "name": "撤销",
+      "font_class": "undo",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
       "icon_id": "23043843",
       "name": "词云图",
       "font_class": "ciyuntu",

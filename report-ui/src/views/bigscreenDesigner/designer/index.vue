@@ -16,10 +16,12 @@
         <!-- 左侧组件栏-->
         <el-tab-pane label="工具栏">
           <!-- <el-divider content-position="center">html</el-divider>-->
-          <draggable
+          <li
             v-for="widget in widgetTools"
             :key="widget.code"
-            @end="evt => widgetOnDragged(evt, widget.code)"
+            draggable="true"
+            @dragstart="dragStart(widget.code)"
+            @dragend="dragEnd()"
           >
             <div class="tools-item">
               <span class="tools-item-icon">
@@ -27,7 +29,7 @@
               </span>
               <span class="tools-item-text">{{ widget.label }}</span>
             </div>
-          </draggable>
+          </li>
         </el-tab-pane>
         <!-- 左侧图层-->
         <el-tab-pane label="图层">
@@ -88,6 +90,29 @@
             <i class="iconfont iconyulan" @click="viewScreen"></i>
           </el-tooltip>
         </span>
+
+        <span class="btn">
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="撤销"
+            placement="bottom"
+          >
+            <i class="iconfont iconundo"></i>
+          </el-tooltip>
+        </span>
+
+        <span class="btn">
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="恢复"
+            placement="bottom"
+          >
+            <i class="iconfont iconhuifubeifen"></i>
+          </el-tooltip>
+        </span>
+
         <span class="btn" v-permission="'bigScreenManage:export'">
           <el-tooltip
             class="item"
@@ -174,7 +199,7 @@
               'background-origin': 'initial',
               'background-clip': 'initial'
             }"
-            @click.self="setOptionsOnClickScreen"
+            @click.self="setOptionsOnClickScreen"  @drop="widgetOnDragged($event)" @dragover="dragOver($event)"
           >
             <div v-if="grade" class="bg-grid"></div>
             <widget
@@ -263,6 +288,7 @@ import draggable from "vuedraggable";
 import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
 import contentMenu from "./components/contentMenu";
 import { getToken } from "@/utils/auth";
+import { Revoke } from "@/utils/revoke"; //处理历史记录 2022-02-22
 
 export default {
   name: "Login",
@@ -290,6 +316,7 @@ export default {
 
       bigscreenWidth: 1920, // 大屏设计的大小
       bigscreenHeight: 1080,
+      revoke: null, //处理历史记录 2022-02-22
 
       // 工作台大屏画布，保存到表gaea_report_dashboard中
       dashboard: {
@@ -305,6 +332,7 @@ export default {
       },
       // 大屏的标记
       screenCode: "",
+      dragWidgetCode:'',   //从工具栏拖拽的组件code
       // 大屏画布中的组件
       widgets: [
         {
@@ -395,9 +423,17 @@ export default {
     widgets: {
       handler(val) {
         this.handlerLayerWidget(val);
+        //以下部分是记录历史
+        this.$nextTick(() => {
+          this.revoke.push(this.widgets);
+        });
       },
       deep: true
     }
+  },
+  created() {
+    /* 以下是记录历史的 */
+    this.revoke = new Revoke();
   },
   mounted() {
     // 如果是新的设计工作台
@@ -408,6 +444,30 @@ export default {
     });
   },
   methods: {
+    /**
+     * @description: 恢复
+     * @param {*}
+     * @return {*}
+     */
+    handleUndo() {
+      const record = this.revoke.undo();
+      if (!record) {
+        return false;
+      }
+      this.widgets = record;
+    },
+    /**
+     * @description: 重做
+     * @param {*}
+     * @return {*}
+     */
+    handleRedo() {
+      const record = this.revoke.redo();
+      if (!record) {
+        return false;
+      }
+      this.widgets = record;
+    },
     handlerLayerWidget(val) {
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
@@ -603,14 +663,24 @@ export default {
     getPXUnderScale(px) {
       return this.bigscreenScaleInWorkbench * px;
     },
-
+    dragStart( widgetCode) {
+        this.dragWidgetCode =widgetCode;
+    },
+    dragEnd() {
+        this.dragWidgetCode=''
+    },
+    dragOver(evt){
+      evt.preventDefault()
+      evt.stopPropagation()
+      evt.dataTransfer.dropEffect = 'copy'
+    },
     // 拖动一个组件放到工作区中去，在拖动结束时，放到工作区对应的坐标点上去
-    widgetOnDragged(evt, widgetCode) {
-      let widgetType = widgetCode;
+    widgetOnDragged(evt) {
+      let widgetType = this.dragWidgetCode;
 
       // 获取结束坐标和列名
-      let eventX = evt.originalEvent.clientX; // 结束在屏幕的x坐标
-      let eventY = evt.originalEvent.clientY; // 结束在屏幕的y坐标
+      let eventX = evt.clientX; // 结束在屏幕的x坐标
+      let eventY = evt.clientY; // 结束在屏幕的y坐标
 
       let workbenchPosition = this.getDomTopLeftById("workbench");
       let widgetTopInWorkbench = eventY - workbenchPosition.top;
@@ -639,6 +709,13 @@ export default {
       };
       // 处理默认值
       const widgetJsonValue = this.handleDefaultValue(widgetJson);
+
+      //2022年02月22日 修复：可以拖拽放到鼠标的位置
+      widgetJsonValue.value.position.left =
+        x - widgetJsonValue.value.position.width / 2;
+      widgetJsonValue.value.position.top =
+        y - widgetJsonValue.value.position.height / 2;
+
       // 将选中的复制组件，放到工作区中去
       this.widgets.push(this.deepClone(widgetJsonValue));
       // 激活新组件的配置属性

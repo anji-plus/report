@@ -66,6 +66,7 @@ export default {
     },
     selectChange(val) {
       this.$emit("input", val);
+      this.$emit("change", val);
     }
   }
 };

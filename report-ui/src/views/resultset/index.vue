@@ -4,11 +4,11 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-24 14:01:19
+ * @LastEditTime: 2022-04-14 18:48:24
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
-    <template v-slot:buttonLeftOnTable>
+    <template v-slot:tableButtons>
       <el-dropdown placement="bottom" @command="operateDataset">
         <el-button type="primary" icon="el-icon-plus">
           新增
@@ -21,23 +21,6 @@
       </el-dropdown>
     </template>
 
-    <template slot="rowButton" slot-scope="props">
-      <el-button
-        type="text"
-        @click="operateDataset('edit', props)"
-        v-permission="'resultsetManage:update'"
-        >编辑
-      </el-button>
-    </template>
-
-    <template slot="rowButtonInMore" slot-scope="props">
-      <el-button
-        type="text"
-        @click="dataView(props)"
-        v-permission="'resultsetManage:query'"
-        >数据预览
-      </el-button>
-    </template>
     <template v-slot:pageSection>
       <EditDataSet
         ref="EditDataSet"
@@ -113,11 +96,44 @@ export default {
             field: "setType"
           }
         ],
+        // 表头按钮
+        tableButtons: [
+          {
+            label: "删除",
+            type: "danger",
+            permission: "resultsetManage:delete",
+            icon: "el-icon-delete",
+            plain: false,
+            click: () => {
+              return this.$refs.listPage.handleDeleteBatch();
+            }
+          }
+        ],
+        // 表格行按钮
+        rowButtons: [
+          {
+            label: "编辑",
+            permission: "resultsetManage:update",
+            click: row => {
+              return this.operateDataset("edit", row);
+            }
+          },
+          {
+            label: "数据预览",
+            permission: "resultsetManage:query",
+            click: this.dataView
+          },
+          {
+            label: "删除",
+            permission: "resultsetManage:delete",
+            click: row => {
+              return this.$refs.listPage.handleDeleteBatch(row);
+            }
+          }
+        ],
         // 操作按钮
         buttons: {
-          customButton: {
-            operationWidth: 180
-          },
+          rowButtonsWidth: 180, // row自定义按钮表格宽度
           query: {
             api: reportDataSetList,
             permission: "resultsetManage:query",
@@ -275,9 +291,9 @@ export default {
   methods: {
     operateDataset(type, prop) {
       this.dialogVisibleSetDataSet = true;
-      if (prop && prop.msg) {
-        this.dataSet = prop.msg;
-        type = prop.msg.setType;
+      if (prop && prop.setType) {
+        this.dataSet = prop;
+        type = prop.setType;
       } else {
         this.dataSet = {};
       }
@@ -289,8 +305,8 @@ export default {
     dataView(prop) {
       this.dialogCaseResult = true;
       this.$refs.DataView.dataViewPreview(
-        prop.msg.setName,
-        JSON.parse(prop.msg.caseResult)
+        prop.setName,
+        JSON.parse(prop.caseResult)
       );
     }
   }

@@ -58,6 +58,7 @@ public class JsTransformServiceImpl implements TransformStrategy {
             }
 
         } catch (Exception ex) {
+            log.info("执行js异常", ex);
             throw BusinessExceptionBuilder.build(ResponseCode.EXECUTE_JS_ERROR, ex.getMessage());
         }
         return null;

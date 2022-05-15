@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Enumeration;
@@ -116,9 +117,11 @@ public class FileUtil {
      */
     public static String readFile(File file) {
         BufferedReader reader = null;
+        InputStreamReader isr = null;
         StringBuilder sbf = new StringBuilder();
         try {
-            reader = new BufferedReader(new FileReader(file));
+            isr = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
+            reader = new BufferedReader(isr);
             String tempStr;
             while ((tempStr = reader.readLine()) != null) {
                 sbf.append(tempStr);
@@ -129,6 +132,13 @@ public class FileUtil {
             log.error("读文件失败", e);
             throw BusinessExceptionBuilder.build(ResponseCode.FAIL_CODE, e.getMessage());
         } finally {
+            if (null != isr) {
+                try {
+                    isr.close();
+                } catch (IOException e) {
+                    throw BusinessExceptionBuilder.build(ResponseCode.FAIL_CODE, e.getMessage());
+                }
+            }
             if (reader != null) {
                 try {
                     reader.close();

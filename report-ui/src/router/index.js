@@ -260,6 +260,20 @@ export const constantRouterMap = [
       requireAuth: true 
     }
   },
+  // 重写大屏
+  {
+    path: '/screenDesigner', 
+    component: () => import('@/views/screenDesigner/index'),
+    name: 'screenDesigner', 
+  },
+  {
+    path: '/screen/preview', 
+    component: () => import('@/views/screenDesigner/preview'), 
+    hidden: true, 
+    meta: { 
+      requireAuth: true 
+    }
+  },
   { 
     path: '/404', 
     component: () => import('@/views/404'), 

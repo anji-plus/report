@@ -148,36 +148,19 @@
         <!-- 查询表单结束 -->
         <!-- 批量操作 -->
         <div style="padding-bottom: 8px">
-          <slot name="buttonLeftOnTable" :selection="checkRecords" />
+          <slot name="tableButtons" :selection="checkRecords" />
           <el-button
-            v-if="
-              option.buttons.add.isShow == undefined
-                ? true
-                : option.buttons.add.isShow
-            "
-            v-permission="option.buttons.add.permission"
-            class="button"
-            plain
-            icon="el-icon-plus"
-            @click="handleOpenEditView('add')"
-            >新增</el-button
+            v-for="(item, index) in option.tableButtons"
+            :key="index"
+            v-permission="item.permission"
+            class="tableButton"
+            :plain="item.plain"
+            :icon="item.icon"
+            :type="item.type"
+            :disabled="isDisabledButton(item, checkRecords)"
+            @click="item.click(checkRecords)"
+            >{{ handlegetLable(checkRecords, item.label) }}</el-button
           >
-          <el-button
-            v-if="
-              option.buttons.delete.isShow == undefined
-                ? true
-                : option.buttons.delete.isShow
-            "
-            v-permission="option.buttons.delete.permission"
-            class="button"
-            plain
-            :disabled="disableBatchDelete"
-            type="danger"
-            icon="el-icon-delete"
-            @click="handleDeleteBatch()"
-            >删除</el-button
-          >
-          <slot name="buttonRightOnTable" :selection="checkRecords" />
         </div>
       </div>
 
@@ -282,59 +265,58 @@
               align="center"
               fixed="right"
               label="操作"
-              :width="
-                option.buttons.customButton &&
-                option.buttons.customButton.operationWidth
-                  ? option.buttons.customButton.operationWidth
-                  : 100
-              "
+              :width="option.buttons.rowButtonsWidth || 100"
             >
               <template slot-scope="scope">
-                <slot name="rowButton" :msg="scope.row" />
-                <el-button
-                  v-if="
-                    option.buttons.edit.isShow == undefined
-                      ? true
-                      : option.buttons.edit.isShow
-                  "
-                  type="text"
-                  size="small"
-                  @click="handleOpenEditView('edit', scope.row)"
-                  >编辑</el-button
-                >
-                <el-button
-                  v-if="
-                    hasCustomButtonInRowMore == false &&
-                    option.buttons.delete.isShow == undefined
-                      ? true
-                      : option.buttons.edit.isShow
-                  "
-                  type="text"
-                  size="small"
-                  @click="handleDeleteBatch(scope.row)"
-                  >删除</el-button
-                >
-                <el-dropdown v-if="hasCustomButtonInRowMore" trigger="click">
-                  <span class="el-dropdown-link"
-                    >更多<i class="el-icon-caret-bottom el-icon--right" />
-                  </span>
-                  <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item class="clearfix">
-                      <slot name="rowButtonInMore" :msg="scope.row" />
-                      <el-button
-                        v-if="
-                          option.buttons.delete.isShow == undefined
-                            ? true
-                            : option.buttons.edit.isShow
-                        "
-                        type="text"
-                        size="small"
-                        @click="handleDeleteBatch(scope.row)"
-                        >删除</el-button
-                      >
-                    </el-dropdown-item>
-                  </el-dropdown-menu>
-                </el-dropdown>
+                <div v-if="option.rowButtons.length <= 2">
+                  <el-button
+                    v-for="(item, index) in option.rowButtons"
+                    :key="index"
+                    v-permission="item.permission"
+                    :disabled="isDisabledButton(item, scope.row)"
+                    :type="item.type || 'text'"
+                    size="small"
+                    @click="item.click(scope.row)"
+                    >{{ handlegetLable(scope.row, item.label) }}</el-button
+                  >
+                </div>
+                <div v-else>
+                  <el-button
+                    v-permission="option.rowButtons[0].permission"
+                    :type="option.rowButtons[0].type || 'text'"
+                    :disabled="
+                      isDisabledButton(option.rowButtons[0], scope.row)
+                    "
+                    @click="option.rowButtons[0].click(scope.row)"
+                    >{{
+                      handlegetLable(scope.row, option.rowButtons[0].label)
+                    }}</el-button
+                  >
+                  <el-dropdown trigger="click">
+                    <span class="el-dropdown-link">
+                      更多
+                      <i class="el-icon-caret-bottom el-icon--right" />
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item class="clearfix">
+                        <el-button
+                          v-for="(item, index) in option.rowButtons.filter(
+                            (el, index) => index > 0
+                          )"
+                          :key="index"
+                          v-permission="item.permission"
+                          :type="item.type || 'text'"
+                          :disabled="isDisabledButton(item, scope.row)"
+                          size="small"
+                          @click="item.click(scope.row)"
+                          >{{
+                            handlegetLable(scope.row, item.label)
+                          }}</el-button
+                        >
+                      </el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+                </div>
               </template>
             </el-table-column>
           </el-table>
@@ -667,6 +649,21 @@ export default {
         value: row
       };
       this.$emit("handleCustomValue", obj);
+    },
+    handlegetLable(item, label) {
+      if (typeof label == "function") {
+        return label(item);
+      } else {
+        return label;
+      }
+    },
+    // 是否disabled
+    isDisabledButton(item, row) {
+      if (typeof item.isDisable === "function") {
+        return item.isDisable(row);
+      } else {
+        return !!item.disabled;
+      }
     },
     // 弹框被关闭时的回调事件
     editDialogClosedEvent(value) {

@@ -189,7 +189,8 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 - openJdk
 - Jdk 11
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
-  **[常见问题](https://ajreport.beliefteam.cn/report-doc/guide/question.html)**
+
+**[常见问题](https://ajreport.beliefteam.cn/report-doc/guide/question.html)**
 
 ## 商业授权
 
