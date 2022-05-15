@@ -130,14 +130,8 @@ public class TokenFilter implements Filter {
             error(response);
             return;
         }
-        if (!cacheHelper.exist(userKey)) {
-            error(response);
-            return;
-        }
+
         String gaeaUserJsonStr = cacheHelper.stringGet(userKey);
-        // 延长有效期
-        cacheHelper.stringSetExpire(tokenKey, token, 3600);
-        cacheHelper.stringSetExpire(userKey, gaeaUserJsonStr, 3600);
 
         // 判断用户是否有该url的权限
         if (!BusinessConstant.USER_ADMIN.equals(loginName)) {
@@ -147,6 +141,10 @@ public class TokenFilter implements Filter {
                 return;
             }
         }
+
+        // 延长有效期
+        cacheHelper.stringSetExpire(tokenKey, token, 3600);
+        cacheHelper.stringSetExpire(userKey, gaeaUserJsonStr, 3600);
 
 
         //执行
