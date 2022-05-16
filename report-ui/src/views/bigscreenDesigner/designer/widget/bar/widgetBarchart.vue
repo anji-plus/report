@@ -349,7 +349,6 @@ export default {
       const series = this.options.series;
       for (const i in series) {
         if (series[i].type == "bar") {
-          series[i].name = val.series[i].name;
           series[i].data = val.series[i].data;
         }
       }
