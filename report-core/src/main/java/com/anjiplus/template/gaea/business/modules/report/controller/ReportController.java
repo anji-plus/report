@@ -43,11 +43,11 @@ public class ReportController extends GaeaBaseController<ReportParam, Report, Re
         return new ReportDto();
     }
 
-    @GetMapping("/copy")
+    @PostMapping("/copy")
     @Permission(code = "copy", name = "复制")
     @GaeaAuditLog(pageTitle = "复制")
-    public ResponseBean copy(@RequestParam("reportId") Long reportId) {
-        reportService.copy(reportId);
+    public ResponseBean copy(@RequestBody ReportDto dto) {
+        reportService.copy(dto);
         return ResponseBean.builder().build();
     }
 }

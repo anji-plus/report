@@ -3,7 +3,9 @@ package com.anjiplus.template.gaea.business.modules.report.service.impl;
 import com.anji.plus.gaea.constant.BaseOperationEnum;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessException;
+import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anji.plus.gaea.utils.GaeaBeanUtils;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.anjiplus.template.gaea.business.enums.ReportTypeEnum;
 import com.anjiplus.template.gaea.business.modules.dashboard.dao.entity.ReportDashboard;
 import com.anjiplus.template.gaea.business.modules.dashboard.service.ReportDashboardService;
@@ -16,6 +18,7 @@ import com.anjiplus.template.gaea.business.modules.report.service.ReportService;
 import com.anjiplus.template.gaea.business.modules.reportexcel.dao.entity.ReportExcel;
 import com.anjiplus.template.gaea.business.modules.reportexcel.service.ReportExcelService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -107,10 +110,16 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void copy(Long reportId) {
-        Report report = selectOne(reportId);
+    public void copy(ReportDto dto) {
+        if (null == dto.getId()) {
+            throw BusinessExceptionBuilder.build(ResponseCode.NOT_NULL, "id");
+        }
+        if (StringUtils.isBlank(dto.getReportCode())) {
+            throw BusinessExceptionBuilder.build(ResponseCode.NOT_NULL, "报表编码");
+        }
+        Report report = selectOne(dto.getId());
         String reportCode = report.getReportCode();
-        Report copyReport = copyReport(report);
+        Report copyReport = copyReport(report, dto);
         //复制主表数据
         insert(copyReport);
         String copyReportCode = copyReport.getReportCode();
@@ -150,17 +159,12 @@ public class ReportServiceImpl implements ReportService {
         }
     }
 
-    private Report copyReport(Report report){
+    private Report copyReport(Report report, ReportDto dto){
         //复制主表数据
         Report copyReport = new Report();
         GaeaBeanUtils.copyAndFormatter(report, copyReport);
-        copyReport.setId(null);
-        String copyReportCode = copyReport.getReportCode().concat("_").concat(String.valueOf(System.currentTimeMillis()));
-        if (copyReportCode.length() >= 100) {
-            copyReportCode = copyReportCode.substring(0, 100);
-        }
-        copyReport.setReportCode(copyReportCode);
-        copyReport.setReportName(copyReport.getReportName().concat("_copy"));
+        copyReport.setReportCode(dto.getReportCode());
+        copyReport.setReportName(dto.getReportName());
         return copyReport;
     }
 
