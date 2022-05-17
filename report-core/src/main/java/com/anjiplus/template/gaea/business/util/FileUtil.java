@@ -97,11 +97,13 @@ public class FileUtil {
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
-            FileWriter fw = new FileWriter(filePath);
-            BufferedWriter bw = new BufferedWriter(fw);
+            FileOutputStream outputStream = new FileOutputStream(filePath);
+            OutputStreamWriter outputWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
+            BufferedWriter bw = new BufferedWriter(outputWriter);
             bw.write(content);
             bw.close();
-            fw.close();
+            outputWriter.close();
+            outputStream.close();
         } catch (Exception e) {
             log.error("写入文件失败", e);
             throw BusinessExceptionBuilder.build(ResponseCode.FAIL_CODE, e.getMessage());
@@ -178,7 +180,7 @@ public class FileUtil {
         try {
             out = new FileOutputStream(dstFile);
             CheckedOutputStream cos = new CheckedOutputStream(out, new CRC32());
-            zipOut = new ZipOutputStream(cos);
+            zipOut = new ZipOutputStream(cos, StandardCharsets.UTF_8);
             String baseDir = "";
             compress(srcFile, zipOut, baseDir);
         } catch (IOException e) {
