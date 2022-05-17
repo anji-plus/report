@@ -21,7 +21,7 @@ public interface ReportService extends GaeaBaseService<ReportParam, Report> {
 
     /**
      * 复制大屏
-     * @param reportId
+     * @param dto
      */
-    void copy(Long reportId);
+    void copy(ReportDto dto);
 }
