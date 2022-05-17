@@ -42,8 +42,8 @@ export function reportDetail(data) {
 export function reportCopy(data) {
   return request({
     url: '/report/copy',
-    method: 'get',
-    params: { reportId: data.id }
+    method: 'post',
+    data
   })
 }
 
