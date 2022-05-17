@@ -199,7 +199,9 @@
               'background-origin': 'initial',
               'background-clip': 'initial'
             }"
-            @click.self="setOptionsOnClickScreen"  @drop="widgetOnDragged($event)" @dragover="dragOver($event)"
+            @click.self="setOptionsOnClickScreen"
+            @drop="widgetOnDragged($event)"
+            @dragover="dragOver($event)"
           >
             <div v-if="grade" class="bg-grid"></div>
             <widget
@@ -332,7 +334,7 @@ export default {
       },
       // 大屏的标记
       screenCode: "",
-      dragWidgetCode:'',   //从工具栏拖拽的组件code
+      dragWidgetCode: "", //从工具栏拖拽的组件code
       // 大屏画布中的组件
       widgets: [
         {
@@ -663,16 +665,16 @@ export default {
     getPXUnderScale(px) {
       return this.bigscreenScaleInWorkbench * px;
     },
-    dragStart( widgetCode) {
-        this.dragWidgetCode =widgetCode;
+    dragStart(widgetCode) {
+      this.dragWidgetCode = widgetCode;
     },
     dragEnd() {
-        this.dragWidgetCode=''
+      this.dragWidgetCode = "";
     },
-    dragOver(evt){
-      evt.preventDefault()
-      evt.stopPropagation()
-      evt.dataTransfer.dropEffect = 'copy'
+    dragOver(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      evt.dataTransfer.dropEffect = "copy";
     },
     // 拖动一个组件放到工作区中去，在拖动结束时，放到工作区对应的坐标点上去
     widgetOnDragged(evt) {
@@ -819,9 +821,14 @@ export default {
     },
     // 将当前选中的组件，右侧属性值更新
     widgetValueChanged(key, val) {
+      console.log("key", key);
+      console.log("val", val);
+      console.log(this.widgetOptions);
       if (this.screenCode == "screen") {
         let newSetup = new Array();
         this.dashboard = this.deepClone(val);
+        console.log("asd", this.dashboard);
+        console.log(this.widgetOptions);
         if (this.bigscreenWidth != this.dashboard.width) {
           this.bigscreenWidth = this.dashboard.width;
         }
@@ -833,9 +840,12 @@ export default {
             el.value = this.bigscreenWidth;
           } else if (el.name == "height") {
             el.value = this.bigscreenHeight;
+          } else if (this.dashboard.hasOwn(el.name)) {
+            el["value"] = this.dashboard[el.name];
           }
           newSetup.push(el);
         });
+        console.log(newSetup);
         this.widgetOptions.setup = newSetup;
       } else {
         for (let i = 0; i < this.widgets.length; i++) {

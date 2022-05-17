@@ -344,6 +344,7 @@ export default {
       } else {
         this.$set(this.formData, key, val);
       }
+
       this.$emit("onChanged", this.formData);
       // key为当前用户操作的表单组件
       for (let i = 0; i < this.options.length; i++) {

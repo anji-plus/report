@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2022-05-15 10:44:58
+ * @LastEditTime: 2022-05-17 17:38:44
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
@@ -15,6 +15,7 @@
         :reportName="reportNameForShareDialog"
         @handleClose="visibleForShareDialog = false"
       />
+      <copyDialog :visib.sync="copyVisible" :rowData="rowData" @close="close" />
     </template>
   </anji-crud>
 </template>
@@ -28,13 +29,15 @@ import {
   reportCopy
 } from "@/api/reportmanage";
 import Share from "./components/share";
+import copyDialog from "./components/copyDialog.vue";
 import { validateEngOrNum } from "@/utils/validate";
 import { verificationSet } from "@/api/report";
 export default {
   name: "Report",
   components: {
     anjiCrud: require("@/components/AnjiPlus/anji-crud/anji-crud").default,
-    Share
+    Share,
+    copyDialog
   },
   data() {
     return {
@@ -306,7 +309,11 @@ export default {
             }
           }
         }
-      }
+      },
+
+      // 复制
+      copyVisible: false,
+      rowData: {}
     };
   },
 
@@ -358,11 +365,17 @@ export default {
     },
     //复制
     async copyReport(val) {
-      const { code } = await reportCopy(val);
-      if (code != "200") {
-        return;
-      }
-      this.$message.success("复制成功");
+      this.copyVisible = true;
+      this.rowData = val;
+      // const { code } = await reportCopy(val);
+      // if (code != "200") {
+      //   return;
+      // }
+      // this.$message.success("复制成功");
+      // this.$refs.listPage.handleQueryForm("query");
+    },
+    close() {
+      this.copyVisible = false;
       this.$refs.listPage.handleQueryForm("query");
     }
   }
