@@ -6,98 +6,6 @@
 <script>
 import "../../../../../node_modules/echarts/map/js/china.js";
 
-let GZData = [
-  [
-    {
-      name: "广州"
-    },
-    {
-      name: "福州",
-      value: 95
-    }
-  ],
-  [
-    {
-      name: "上海"
-    },
-    {
-      name: "太原",
-      value: 90
-    }
-  ],
-  [
-    {
-      name: "上海"
-    },
-    {
-      name: "长春",
-      value: 80
-    }
-  ],
-  [
-    {
-      name: "广州"
-    },
-    {
-      name: "重庆",
-      value: 70
-    }
-  ],
-  [
-    {
-      name: "广州"
-    },
-    {
-      name: "西安",
-      value: 60
-    }
-  ],
-  [
-    {
-      name: "广州"
-    },
-    {
-      name: "成都",
-      value: 50
-    }
-  ],
-  [
-    {
-      name: "广州"
-    },
-    {
-      name: "常州",
-      value: 40
-    }
-  ],
-  [
-    {
-      name: "广州"
-    },
-    {
-      name: "北京",
-      value: 30
-    }
-  ],
-  [
-    {
-      name: "广州"
-    },
-    {
-      name: "北海",
-      value: 20
-    }
-  ],
-  [
-    {
-      name: "广州"
-    },
-    {
-      name: "海口",
-      value: 10
-    }
-  ]
-];
 let geoCoordMap = {
   上海: [121.4648, 31.2891],
   东莞: [113.8953, 22.901],
@@ -325,7 +233,75 @@ export default {
             }
           }
         },
-        series: []
+        series: [
+          {
+            //name: tempData[0],
+            type: "lines",
+            zlevel: 1,
+            effect: {
+              show: true,
+              period: 6,
+              trailLength: 0.7,
+              color: "#fff",
+              symbolSize: 3
+            },
+            lineStyle: {
+              normal: {
+                color: '#a6c84c',
+                width: 0,
+                curveness: 0.2
+              }
+            },
+            data: [],
+          },
+          {
+            type: "lines",
+            zlevel: 2,
+            symbol: ['none', 'arrow'],
+            symbolSize: 10,
+            effect: {
+              show: true,
+              period: 6,
+              trailLength: 0,
+              symbol: planePath,
+              symbolSize: 15
+            },
+            lineStyle: {
+              normal: {
+                color: '#ffa022',
+                width: 1,
+                opacity: 0.4,
+                curveness: 0.2
+              }
+            },
+            data: [],
+          },
+          {
+            //name: tempData[0],
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            zlevel: 2,
+            rippleEffect: {
+              brushType: 'stroke'
+            },
+            label: {
+              normal: {
+                show: true,
+                position: 'right',
+                formatter: '{b}'
+              }
+            },
+            symbolSize: function (val) {
+              return val[2] / 8;
+            },
+            itemStyle: {
+              normal: {
+                color: '#46bee9'
+              }
+            },
+            data: [],
+          }
+        ]
       },
       optionsSetup: {}
     };
@@ -359,145 +335,34 @@ export default {
     this.optionsSetup = this.value.setup;
   },
   mounted() {
-    this.initData2();
     this.editorOptions();
   },
   methods: {
-    initData() {
-      const options = this.options;
-      options.series.push(
-        {
-          //name: tempData[0],
-          type: "lines",
-          zlevel: 1,
-          effect: {
-            show: true,
-            period: 6,
-            trailLength: 0.7,
-            color: "#fff",
-            symbolSize: 3
-          },
-          lineStyle: {
-            normal: {
-              color: color[0],
-              width: 0,
-              curveness: 0.2
-            }
-          },
-          data: this.convertData(tempData[1])
-        },
-        {
-          name: tempData[0],
-          type: "lines",
-          zlevel: 2,
-          effect: {
-            show: true,
-            period: 6,
-            trailLength: 0,
-            symbol: planePath,
-            symbolSize: 15
-          },
-          lineStyle: {
-            normal: {
-              color: color[0],
-              width: 1,
-              opacity: 0.4,
-              curveness: 0.2
-            }
-          },
-          data: this.convertData(tempData[1])
-        },
-        {
-          name: tempData[0],
-          type: "effectScatter",
-          coordinateSystem: "geo",
-          zlevel: 2,
-          rippleEffect: {
-            brushType: "stroke"
-          },
-          label: {
-            normal: {
-              show: true,
-              position: "right",
-              formatter: "{b}"
-            }
-          },
-          symbolSize: function (val) {
-            return val[2] / 8;
-          },
-          itemStyle: {
-            normal: {
-              color: color[0]
-            }
-          },
-          data: tempData[1].map(function (dataItem) {
-            return {
-              name: dataItem[1].name,
-              value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value])
-            };
-          })
-        }
-      );
-      this.options = options;
-    },
-    initData2() {
-      const optins = this.options;
-      optins.series.push({
-          type: 'lines',
-          zlevel: 1,
-          effect: {
-            show: true,
-            period: 6,
-            trailLength: 0.7,
-            color: '#fff',
-            symbolSize: 3
-          },
-          lineStyle: {
-            normal: {
-              color: '#a6c84c',
-              width: 0,
-              curveness: 0.2
-            }
-          },
-          data: convertData(GZData)
-        },);
-    },
-
-    /*    convertData(data) {
-          let res = [];
-          for (let i = 0; i < data.length; i++) {
-            let dataItem = data[i];
-            let fromCoord = geoCoordMap[dataItem[0].name];
-            let toCoord = geoCoordMap[dataItem[1].name];
-            if ("流入" == type) {
-              fromCoord = geoCoordMap[dataItem[1].name];
-              toCoord = geoCoordMap[dataItem[0].name];
-            }
-            if (fromCoord && toCoord) {
-              res.push({
-                fromName: dataItem[0].name,
-                toName: dataItem[1].name,
-                coords: [fromCoord, toCoord],
-                value: dataItem[1].value
-              });
-            }
-          }
-          return res;
-        },*/
-    convertData2(data) {
+    convertData(data) {
       let res = [];
       for (let i = 0; i < data.length; i++) {
         let dataItem = data[i];
-        let fromCoord = geoCoordMap[dataItem[0].name];
-        let toCoord = geoCoordMap[dataItem[1].name];
-        if (fromCoord && toCoord) {
+        let sourceCoord = geoCoordMap[dataItem.source]
+        let targetCoord = geoCoordMap[dataItem.target]
+        if (sourceCoord && targetCoord) {
           res.push({
-            fromName: dataItem[0].name,
-            toName: dataItem[1].name,
-            coords: [fromCoord, toCoord],
-            value: dataItem[1].value
-          });
+              fromName: dataItem.source,
+              toName: dataItem.target,
+              coords: [sourceCoord, targetCoord],
+              value: dataItem.value
+            }
+          )
         }
+      }
+      return res;
+    },
+    transData(data) {
+      let res = [];
+      for (let i = 0; i < data.length; i++) {
+        res.push({
+          name: data[i].target,
+          value: data[i].value,
+        })
       }
       return res;
     },
@@ -533,28 +398,17 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      this.options.series[0]["data"] = val;
       const optionsSetup = this.optionsSetup;
-      const label = this.options.series[1]["label"];
-      /*const normal = {
-        show: true,
-        color: "#fff",
-        fontWeight: "bold",
-        position: "inside",
-        formatter: function(para) {
-          return "{cnNum|" + para.data.value[2] + "}";
-        },
-        rich: {
-          cnNum: {
-            fontSize: optionsSetup.fontDataSize,
-            color: optionsSetup.fontDataColor,
-            fontWeight: optionsSetup.fontDataWeight
-          }
+      const series = this.options.series;
+      series[0]["data"] = this.convertData(val)
+      series[1]["data"] = this.convertData(val)
+      series[2]["data"] = val.map(function (dataItem) {
+        return {
+          name: dataItem.target,
+          value: geoCoordMap[dataItem.target].concat([dataItem.value])
         }
-      };
-      const data = convertData(val);
-      this.options.series[1]["data"] = data;
-      label["normal"] = normal;*/
+      }),
+        console.log(series)
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -574,28 +428,6 @@ export default {
       });
     },
     renderingFn(val) {
-      this.options.series[0]["data"] = val;
-      const optionsSetup = this.optionsSetup;
-      const label = this.options.series[1]["label"];
-      const normal = {
-        show: true,
-        color: "#fff",
-        fontWeight: "bold",
-        position: "inside",
-        formatter: function (para) {
-          return "{cnNum|" + para.data.value[2] + "}";
-        },
-        rich: {
-          cnNum: {
-            fontSize: optionsSetup.fontDataSize,
-            color: optionsSetup.fontDataColor,
-            fontWeight: optionsSetup.fontDataWeight
-          }
-        }
-      };
-      const data = convertData(val);
-      this.options.series[1]["data"] = data;
-      label["normal"] = normal;
     }
   }
 };
