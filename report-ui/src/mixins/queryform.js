@@ -110,6 +110,7 @@ export default {
       // widge-table 表格(数据不要转)
       // widget-stackchart 堆叠图
       // widget-heatmap 热力图
+      // widget-mapline 中国地图-路线图
       const chartType = params.chartType
       if (
         chartType == "widget-barchart" ||
@@ -128,6 +129,8 @@ export default {
         return this.stackChartFn(params.chartProperties, data)
       } else if (chartType == "widget-coord") {
         return this.coordChartFn(params.chartProperties, data)
+      } else if (chartType == "widget-mapline") {
+        return this.maplineChartFn(params.chartProperties, data)
       } else {
         return data
       }
@@ -245,6 +248,25 @@ export default {
         series[i] = [data[i][xAxisField], data[i][yAxisField], data[i][dataField]];
       }
       ananysicData["series"] = series;
+      return ananysicData;
+    },
+    // 中国地图。路线图数据解析，适合source、target、value
+    maplineChartFn(chartProperties, data) {
+      const ananysicData = [];
+      for (let i = 0; i < data.length; i++) {
+        const obj = {};
+        for (const key in chartProperties) {
+          const value = chartProperties[key];
+          if (value === "source") {
+            obj["source"] = data[i][key];
+          } else if (value === "target") {
+            obj["target"] = data[i][key];
+          } else {
+            obj["value"] = data[i][key];
+          }
+        }
+        ananysicData.push(obj);
+      }
       return ananysicData;
     },
     setUnique(arr) {

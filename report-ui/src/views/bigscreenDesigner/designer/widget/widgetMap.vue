@@ -207,7 +207,6 @@ export default {
           orient: 'vertical',
           top: 'bottom',
           left: 'right',
-          //data:['北京 Top10', '上海 Top10', '广州 Top10'],
           textStyle: {
             color: '#fff'
           },
@@ -268,6 +267,7 @@ export default {
             },
             lineStyle: {
               normal: {
+                // 小飞机颜色+ 线条
                 color: '#ffa022',
                 width: 1,
                 opacity: 0.4,
@@ -296,6 +296,7 @@ export default {
             },
             itemStyle: {
               normal: {
+                // 地图点颜色
                 color: '#46bee9'
               }
             },
@@ -356,16 +357,6 @@ export default {
       }
       return res;
     },
-    transData(data) {
-      let res = [];
-      for (let i = 0; i < data.length; i++) {
-        res.push({
-          name: data[i].target,
-          value: data[i].value,
-        })
-      }
-      return res;
-    },
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionsData();
@@ -407,8 +398,7 @@ export default {
           name: dataItem.target,
           value: geoCoordMap[dataItem.target].concat([dataItem.value])
         }
-      }),
-        console.log(series)
+      });
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
