@@ -9,7 +9,7 @@
 export const widgetMap = {
   code: 'widget-map',
   type: 'chart',
-  label: '中国地图',
+  label: '路线地图',
   icon: 'iconzhongguoditu',
   options: {
     setup: [
@@ -19,7 +19,7 @@ export const widgetMap = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '路线图',
+        value: '中国地图-路线图',
       },
       {
         type: 'vue-color',
@@ -266,7 +266,7 @@ export const widgetMap = {
         required: false,
         placeholder: '',
         relactiveDom: 'dataType',
-        chartType: 'widget-mapline',
+        chartType: 'widget-linemap',
         dictKey: 'SOUTAR_PROPERTIES',
         relactiveDomValue: 'dynamicData',
         value: '',

@@ -129,8 +129,8 @@ export default {
         return this.stackChartFn(params.chartProperties, data)
       } else if (chartType == "widget-coord") {
         return this.coordChartFn(params.chartProperties, data)
-      } else if (chartType == "widget-mapline") {
-        return this.maplineChartFn(params.chartProperties, data)
+      } else if (chartType == "widget-linemap") {
+        return this.linemapChartFn(params.chartProperties, data)
       } else {
         return data
       }
@@ -251,7 +251,7 @@ export default {
       return ananysicData;
     },
     // 中国地图。路线图数据解析，适合source、target、value
-    maplineChartFn(chartProperties, data) {
+    linemapChartFn(chartProperties, data) {
       const ananysicData = [];
       for (let i = 0; i < data.length; i++) {
         const obj = {};

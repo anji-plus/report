@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 气泡地图json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:35:32
  * @LastEditors: qianlishi
@@ -20,7 +20,7 @@ export const widgetAirbubbleMap =   {
           name: 'layerName',
           required: false,
           placeholder: '',
-          value: '气泡地图',
+          value: '中国地图-气泡图',
         },
         {
           type: 'vue-color',

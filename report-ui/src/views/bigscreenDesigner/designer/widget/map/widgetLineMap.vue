@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import "../../../../../node_modules/echarts/map/js/china.js";
+import "echarts/map/js/china.js";
 
 let geoCoordMap = {
   上海: [121.4648, 31.2891],
