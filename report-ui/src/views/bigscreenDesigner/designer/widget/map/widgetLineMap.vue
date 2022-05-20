@@ -305,7 +305,8 @@ export default {
               value: dataItem.value,
             }
           )
-        };
+        }
+        ;
       }
       return res;
     },
@@ -313,6 +314,7 @@ export default {
       this.setOptionsTitle();
       this.setOptionsText();
       this.setOptionsPoint();
+      this.setOptionsColor();
       this.setOptionsData();
     },
     // 标题设置
@@ -336,7 +338,7 @@ export default {
       this.options.title = title;
     },
     // 地图字体设置
-    setOptionsText(){
+    setOptionsText() {
       const optionsSetup = this.optionsSetup;
       const lable = this.options.series[2].label;
       const normal = {
@@ -349,16 +351,32 @@ export default {
       lable["normal"] = normal;
     },
     // 地图点设置
-    setOptionsPoint(){
+    setOptionsPoint() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series[2];
       pointSize = optionsSetup.pointSize
-      const itemStyle= {
+      const itemStyle = {
         normal: {
           color: optionsSetup.pointColor,
         }
       };
       series["itemStyle"] = itemStyle;
+    },
+    // 地图颜色设置
+    setOptionsColor() {
+      const optionsSetup = this.optionsSetup;
+      const itemStyle = {
+        normal: {
+          // 地图的颜色
+          areaColor: optionsSetup.blockColor,
+          borderColor: optionsSetup.borderColor,
+        },
+        emphasis: {
+          // 地图块颜色
+          areaColor: optionsSetup.highlightColor,
+        }
+      };
+      this.options.geo["itemStyle"] = itemStyle;
     },
     //数据解析
     setOptionsData() {

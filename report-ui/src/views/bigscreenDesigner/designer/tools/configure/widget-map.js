@@ -188,6 +188,35 @@ export const widgetMap = {
             },
           ],
         },
+        {
+          name: '地图颜色',
+          list: [
+            {
+              type: 'vue-color',
+              label: '地图块颜色',
+              name: 'blockColor',
+              required: false,
+              placeholder: '',
+              value: '#073684'
+            },
+            {
+              type: 'vue-color',
+              label: '边界颜色',
+              name: 'borderColor',
+              required: false,
+              placeholder: '',
+              value: '#061E3D'
+            },
+            {
+              type: 'vue-color',
+              label: '高亮颜色',
+              name: 'highlightColor',
+              required: false,
+              placeholder: '',
+              value: '#2B91B7'
+            },
+          ],
+        },
       ]
     ],
     data: [
