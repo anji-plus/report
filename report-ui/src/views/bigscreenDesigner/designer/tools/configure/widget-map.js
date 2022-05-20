@@ -132,6 +132,62 @@ export const widgetMap = {
             },
           ],
         },
+        {
+          name: '字体设置',
+          list: [
+            {
+              type: 'el-input-number',
+              label: '文字大小',
+              name: 'fontTextSize',
+              required: false,
+              placeholder: '',
+              value: 15,
+            },
+            {
+              type: 'vue-color',
+              label: '文字颜色',
+              name: 'fontTextColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
+            {
+              type: 'el-select',
+              label: '文字粗细',
+              name: 'fontTextWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+          ],
+        },
+        {
+          name: '点设置',
+          list: [
+            {
+              type: 'el-input-number',
+              label: '点大小',
+              name: 'pointSize',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'vue-color',
+              label: '点颜色',
+              name: 'pointColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
+          ],
+        },
       ]
     ],
     data: [

@@ -122,6 +122,7 @@ let geoCoordMap = {
   青岛: [120.4651, 36.3373],
   韶关: [113.7964, 24.7028]
 };
+let pointSize = 3;
 let planePath =
   "path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z";
 export default {
@@ -139,57 +140,6 @@ export default {
             color: "#fff"
           }
         },
-        /*tooltip: {
-          trigger: "item",
-          formatter: function(params) {
-            if (params.seriesType == "effectScatter") {
-              if ("流入" == type) {
-                return (
-                  type +
-                  "<br>" +
-                  params.data.name +
-                  " ---> " +
-                  params.seriesName +
-                  "<br />" +
-                  params.data.value[2]
-                );
-              } else {
-                return (
-                  "流出<br>" +
-                  params.seriesName +
-                  " ---> " +
-                  params.data.name +
-                  "<br />" +
-                  params.data.value[2]
-                );
-              }
-            } else if (params.seriesType == "lines") {
-              if ("流入" == type) {
-                return (
-                  type +
-                  "<br>" +
-                  params.data.toName +
-                  " ---> " +
-                  params.data.fromName +
-                  "<br />" +
-                  params.data.value
-                );
-              } else {
-                return (
-                  type +
-                  "<br>" +
-                  params.data.fromName +
-                  " ---> " +
-                  params.data.toName +
-                  "<br />" +
-                  params.data.value
-                );
-              }
-            } else {
-              return params.name;
-            }
-          }
-        },*/
         tooltip: {
           trigger: 'item',
           formatter: function (params, ticket, callback) {
@@ -288,11 +238,13 @@ export default {
               normal: {
                 show: true,
                 position: 'right',
-                formatter: '{b}'
+                formatter: '{b}',
+                fontSize: 22,
               }
             },
+            // 点的大小
             symbolSize: function (val) {
-              return val[2] / 8;
+              return val[2] / pointSize;
             },
             itemStyle: {
               normal: {
@@ -343,22 +295,24 @@ export default {
       let res = [];
       for (let i = 0; i < data.length; i++) {
         let dataItem = data[i];
-        let sourceCoord = geoCoordMap[dataItem.source]
-        let targetCoord = geoCoordMap[dataItem.target]
+        let sourceCoord = geoCoordMap[dataItem.source];
+        let targetCoord = geoCoordMap[dataItem.target];
         if (sourceCoord && targetCoord) {
           res.push({
               fromName: dataItem.source,
               toName: dataItem.target,
               coords: [sourceCoord, targetCoord],
-              value: dataItem.value
+              value: dataItem.value,
             }
           )
-        }
+        };
       }
       return res;
     },
     editorOptions() {
       this.setOptionsTitle();
+      this.setOptionsText();
+      this.setOptionsPoint();
       this.setOptionsData();
     },
     // 标题设置
@@ -381,6 +335,31 @@ export default {
       };
       this.options.title = title;
     },
+    // 地图字体设置
+    setOptionsText(){
+      const optionsSetup = this.optionsSetup;
+      const lable = this.options.series[2].label;
+      const normal = {
+        show: true,
+        position: 'right',
+        color: optionsSetup.fontTextColor,
+        fontSize: optionsSetup.fontTextSize,
+        fontWeight: optionsSetup.fontTextWeight,
+      }
+      lable["normal"] = normal;
+    },
+    // 地图点设置
+    setOptionsPoint(){
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series[2];
+      pointSize = optionsSetup.pointSize
+      const itemStyle= {
+        normal: {
+          color: optionsSetup.pointColor,
+        }
+      };
+      series["itemStyle"] = itemStyle;
+    },
     //数据解析
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
@@ -389,7 +368,6 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       series[0]["data"] = this.convertData(val)
       series[1]["data"] = this.convertData(val)
