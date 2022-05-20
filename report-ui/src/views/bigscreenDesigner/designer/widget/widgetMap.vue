@@ -418,6 +418,15 @@ export default {
       });
     },
     renderingFn(val) {
+      const series = this.options.series;
+      series[0]["data"] = this.convertData(val)
+      series[1]["data"] = this.convertData(val)
+      series[2]["data"] = val.map(function (dataItem) {
+        return {
+          name: dataItem.target,
+          value: geoCoordMap[dataItem.target].concat([dataItem.value])
+        }
+      });
     }
   }
 };
