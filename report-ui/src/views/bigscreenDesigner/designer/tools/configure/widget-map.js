@@ -168,6 +168,47 @@ export const widgetMap = {
           ],
         },
         {
+          name: '图标设置',
+          list: [
+            {
+              type: 'el-select',
+              label: '图标样式',
+              name: 'symbol',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'arrow', name: '箭头'},
+                {code: 'plane', name: '飞机'},
+              ],
+              value: 'arrow'
+            },
+            {
+              type: 'el-input-number',
+              label: '动画速度',
+              name: 'symbolPeriod',
+              required: false,
+              placeholder: '',
+              value: 4,
+            },
+            {
+              type: 'el-input-number',
+              label: '图标大小',
+              name: 'symbolSize',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'vue-color',
+              label: '图标颜色',
+              name: 'symbolColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
+          ],
+        },
+        {
           name: '点设置',
           list: [
             {
@@ -185,6 +226,27 @@ export const widgetMap = {
               required: false,
               placeholder: '',
               value: '#46bee9'
+            },
+          ],
+        },
+        {
+          name: '线设置',
+          list: [
+            {
+              type: 'vue-color',
+              label: '线颜色',
+              name: 'lineColor',
+              required: false,
+              placeholder: '',
+              value: '#ffa022'
+            },
+            {
+              type: 'el-input-number',
+              label: '线宽度',
+              name: 'lineWidth',
+              required: false,
+              placeholder: '',
+              value: 2,
             },
           ],
         },

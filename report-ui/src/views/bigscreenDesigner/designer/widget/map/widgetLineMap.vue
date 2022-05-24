@@ -188,7 +188,7 @@ export default {
             type: "lines",
             zlevel: 1,
             effect: {
-              show: true,
+              show: false,
               period: 6,
               trailLength: 0.7,
               color: "#fff",
@@ -210,14 +210,14 @@ export default {
             symbolSize: 10,
             effect: {
               show: true,
-              period: 6,
+              period: 4,
               trailLength: 0,
-              symbol: planePath,
-              symbolSize: 15
+              symbol: 'arrow',
+              symbolSize: 5
             },
             lineStyle: {
               normal: {
-                // 小飞机颜色+ 线条
+                // 颜色+ 线条
                 color: '#ffa022',
                 width: 1,
                 opacity: 0.4,
@@ -313,7 +313,9 @@ export default {
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionsText();
+      this.setOptionsSymbol();
       this.setOptionsPoint();
+      this.setOptionsLine();
       this.setOptionsColor();
       this.setOptionsData();
     },
@@ -350,7 +352,39 @@ export default {
       }
       lable["normal"] = normal;
     },
-    // 地图点设置
+    // 图标设置
+    setOptionsSymbol(){
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series[1];
+      const effect = {
+        show: true,
+        period: this.setPeriod(optionsSetup),
+        trailLength: 0,
+        symbol: this.setSymbol(optionsSetup),
+        symbolSize: optionsSetup.symbolSize,
+        color: optionsSetup.symbolColor,
+      };
+      series['effect'] = effect;
+    },
+    setSymbol(optionsSetup) {
+      let symbol;
+      if (optionsSetup.symbol == 'plane') {
+        symbol = planePath;
+      } else {
+        symbol = "arrow";
+      }
+      return symbol;
+    },
+    setPeriod(optionsSetup){
+      let period;
+      if (optionsSetup.symbol == 'plane') {
+        period = optionsSetup.symbolPeriod - 1;
+      }else {
+        period = optionsSetup.symbolPeriod;
+      }
+      return period;
+    },
+    // 点设置
     setOptionsPoint() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series[2];
@@ -361,6 +395,21 @@ export default {
         }
       };
       series["itemStyle"] = itemStyle;
+    },
+    // 线设置
+    setOptionsLine() {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series[1];
+      const lineStyle = {
+        normal: {
+          // 线条颜色
+          color: optionsSetup.lineColor,
+          width: optionsSetup.lineWidth,
+          opacity: 0.4,
+          curveness: 0.2
+        }
+      };
+      series['lineStyle'] = lineStyle;
     },
     // 地图颜色设置
     setOptionsColor() {
