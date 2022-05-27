@@ -5,6 +5,7 @@
 </template>
 <script>
 import "echarts/map/js/china.js";
+import echarts from "echarts";
 
 let geoCoordMap = {
   上海市: [121.4648, 31.2891],
@@ -161,7 +162,6 @@ export default {
             color: '#fff'
           },
           selectedMode: 'multiple',
-          // selectedMode: "single"
         },
         geo: {
           map: "china",
@@ -175,12 +175,13 @@ export default {
           itemStyle: {
             normal: {
               areaColor: "#323c48",
-              borderColor: "#404a59"
+              borderColor: "#404a59",
+              borderWidth: 1,
             },
             emphasis: {
               areaColor: "#2a333d"
             }
-          }
+          },
         },
         series: [
           {
