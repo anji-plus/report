@@ -6,8 +6,8 @@
  * @LastEditors: qianlishi
  * @LastEditTime: 2021-09-28 14:17:20
  */
-export const widgetMap = {
-  code: 'widget-map',
+export const widgetLineMap = {
+  code: 'widgetLineMap',
   type: 'chart',
   label: '路线地图',
   icon: 'iconzhongguoditu',
