@@ -145,11 +145,11 @@ export const widgetLineMap = {
             },
             {
               type: 'el-input-number',
-              label: '点大小级别',
-              name: 'sourcePointLevel',
+              label: '点大小',
+              name: 'sourceSymbolSize',
               required: false,
               placeholder: '',
-              value: 5,
+              value: 10,
             },
             {
               type: 'vue-color',
@@ -205,7 +205,7 @@ export const widgetLineMap = {
             {
               type: 'el-input-number',
               label: '点大小',
-              name: 'targetPointLevel',
+              name: 'targetSymbolSize',
               required: false,
               placeholder: '',
               value: 5,

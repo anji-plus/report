@@ -124,7 +124,6 @@ import {conversionCity} from '@/utils/china';
   韶关市: [113.7964, 24.7028]
 };*/
 let geoCoordMap = conversionCity;
-let pointLevel = 3;
 let planePath =
   "path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z";
 export default {
@@ -246,9 +245,7 @@ export default {
               }
             },
             // 点的大小
-            symbolSize: function (val) {
-              return val[2] / pointLevel;
-            },
+            symbolSize: 10,
             itemStyle: {
               normal: {
                 // 地图点颜色
@@ -275,9 +272,7 @@ export default {
               }
             },
             // 点的大小
-            symbolSize: function (val) {
-              return val[2] / pointLevel;
-            },
+            symbolSize: 10,
             itemStyle: {
               normal: {
                 // 地图点颜色
@@ -387,7 +382,7 @@ export default {
           color: optionsSetup.sourcePointColor,
         }
       };
-      pointLevel = optionsSetup.sourcePointLevel;
+      series.symbolSize = optionsSetup.sourceSymbolSize;
       series.label.normal = normal;
       series.itemStyle = itemStyle;
     },
@@ -407,7 +402,7 @@ export default {
           color: optionsSetup.targetPointColor,
         }
       };
-      pointLevel = optionsSetup.targetPointLevel;
+      series.symbolSize = optionsSetup.targetSymbolSize;
       series.label.normal = normal;
       series.itemStyle = itemStyle;
     },
@@ -483,18 +478,23 @@ export default {
     },
     staticDataFn(val) {
       const series = this.options.series;
+      const optionsSetup = this.optionsSetup;
       series[0]["data"] = this.convertData(val);
       series[1]["data"] = this.convertData(val);
       series[2]["data"] = val.map(function (dataItem) {
-        return {
-          name: dataItem.source,
-          value: geoCoordMap[dataItem.source].concat([dataItem.value])
+        if (geoCoordMap[dataItem.source]) {
+          return {
+            name: dataItem.source,
+            value: geoCoordMap[dataItem.source].concat([dataItem.value])
+          }
         }
       });
       series[3]["data"] = val.map(function (dataItem) {
-        return {
-          name: dataItem.target,
-          value: geoCoordMap[dataItem.target].concat([dataItem.value])
+        if (geoCoordMap[dataItem.target]) {
+          return {
+            name: dataItem.target,
+            value: geoCoordMap[dataItem.target].concat([dataItem.value])
+          }
         }
       });
     },
@@ -520,15 +520,19 @@ export default {
       series[0]["data"] = this.convertData(val);
       series[1]["data"] = this.convertData(val);
       series[2]["data"] = val.map(function (dataItem) {
-        return {
-          name: dataItem.source,
-          value: geoCoordMap[dataItem.source].concat([dataItem.value])
+        if (geoCoordMap[dataItem.source]) {
+          return {
+            name: dataItem.source,
+            value: geoCoordMap[dataItem.source].concat([dataItem.value])
+          }
         }
       });
       series[3]["data"] = val.map(function (dataItem) {
-        return {
-          name: dataItem.target,
-          value: geoCoordMap[dataItem.target].concat([dataItem.value])
+        if (geoCoordMap[dataItem.target]) {
+          return {
+            name: dataItem.target,
+            value: geoCoordMap[dataItem.target].concat([dataItem.value])
+          }
         }
       });
     }
