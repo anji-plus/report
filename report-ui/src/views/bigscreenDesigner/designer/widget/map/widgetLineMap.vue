@@ -229,6 +229,7 @@ export default {
             data: [],
           },
           {
+            // 起点
             //name: tempData[0],
             type: 'effectScatter',
             coordinateSystem: 'geo',
@@ -255,7 +256,36 @@ export default {
               }
             },
             data: [],
-          }
+          },
+          {
+            // 终点
+            //name: tempData[0],
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            zlevel: 2,
+            rippleEffect: {
+              brushType: 'stroke'
+            },
+            label: {
+              normal: {
+                show: true,
+                position: 'right',
+                formatter: '{b}',
+                fontSize: 22,
+              }
+            },
+            // 点的大小
+            symbolSize: function (val) {
+              return val[2] / pointSize;
+            },
+            itemStyle: {
+              normal: {
+                // 地图点颜色
+                color: '#46bee9'
+              }
+            },
+            data: [],
+          },
         ]
       },
       optionsSetup: {}
@@ -314,10 +344,12 @@ export default {
     },
     editorOptions() {
       this.setOptionsTitle();
-      this.setOptionsText();
+      //this.setOptionsText();
       this.setOptionsSymbol();
-      this.setOptionsPoint();
+      //this.setOptionsPoint();
       this.setOptionsLine();
+      this.setOptionsSource();
+      this.setOptionsTarget();
       this.setOptionsColor();
       this.setOptionsData();
     },
@@ -341,10 +373,50 @@ export default {
       };
       this.options.title = title;
     },
+    // 起点设置
+    setOptionsSource(){
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series[2];
+      const normal = {
+        show: optionsSetup.isShowSource,
+        position: 'right',
+        color: optionsSetup.sourceFontTextColor,
+        fontSize: optionsSetup.sourceFontTextSize,
+        fontWeight: optionsSetup.sourceFontTextWeight,
+      };
+      const itemStyle = {
+        normal: {
+          color: optionsSetup.sourcePointColor,
+        }
+      };
+      pointSize = optionsSetup.sourcePointSize;
+      series.label.normal = normal;
+      series.itemStyle = itemStyle;
+    },
+    // 终点设置
+    setOptionsTarget(){
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series[3];
+      const normal = {
+        show: optionsSetup.isShowTarget,
+        position: 'right',
+        color: optionsSetup.targetFontTextColor,
+        fontSize: optionsSetup.targetFontTextSize,
+        fontWeight: optionsSetup.targetFontTextWeight,
+      };
+      const itemStyle = {
+        normal: {
+          color: optionsSetup.targetPointColor,
+        }
+      };
+      pointSize = optionsSetup.targetPointSize;
+      series.label.normal = normal;
+      series.itemStyle = itemStyle;
+    },
     // 地图字体设置
     setOptionsText() {
       const optionsSetup = this.optionsSetup;
-      const lable = this.options.series[2].label;
+      const series = this.options.series;
       const normal = {
         show: true,
         position: 'right',
@@ -352,7 +424,8 @@ export default {
         fontSize: optionsSetup.fontTextSize,
         fontWeight: optionsSetup.fontTextWeight,
       }
-      lable["normal"] = normal;
+      series[2].label["normal"] = normal;
+      series[3].label["normal"] = normal;
     },
     // 图标设置
     setOptionsSymbol(){
@@ -389,14 +462,15 @@ export default {
     // 点设置
     setOptionsPoint() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series[2];
+      const series = this.options.series;
       pointSize = optionsSetup.pointSize
       const itemStyle = {
         normal: {
           color: optionsSetup.pointColor,
         }
       };
-      series["itemStyle"] = itemStyle;
+      series[2]["itemStyle"] = itemStyle;
+      series[3]["itemStyle"] = itemStyle;
     },
     // 线设置
     setOptionsLine() {
@@ -438,9 +512,15 @@ export default {
     },
     staticDataFn(val) {
       const series = this.options.series;
-      series[0]["data"] = this.convertData(val)
-      series[1]["data"] = this.convertData(val)
+      series[0]["data"] = this.convertData(val);
+      series[1]["data"] = this.convertData(val);
       series[2]["data"] = val.map(function (dataItem) {
+        return {
+          name: dataItem.source,
+          value: geoCoordMap[dataItem.source].concat([dataItem.value])
+        }
+      });
+      series[3]["data"] = val.map(function (dataItem) {
         return {
           name: dataItem.target,
           value: geoCoordMap[dataItem.target].concat([dataItem.value])
@@ -466,9 +546,15 @@ export default {
     },
     renderingFn(val) {
       const series = this.options.series;
-      series[0]["data"] = this.convertData(val)
-      series[1]["data"] = this.convertData(val)
+      series[0]["data"] = this.convertData(val);
+      series[1]["data"] = this.convertData(val);
       series[2]["data"] = val.map(function (dataItem) {
+        return {
+          name: dataItem.source,
+          value: geoCoordMap[dataItem.source].concat([dataItem.value])
+        }
+      });
+      series[3]["data"] = val.map(function (dataItem) {
         return {
           name: dataItem.target,
           value: geoCoordMap[dataItem.target].concat([dataItem.value])

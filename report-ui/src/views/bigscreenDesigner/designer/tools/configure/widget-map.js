@@ -133,20 +133,44 @@ export const widgetMap = {
           ],
         },
         {
-          name: '字体设置',
+          name: '起点设置',
           list: [
+            {
+              type: 'el-switch',
+              label: '起点显示',
+              name: 'isShowSource',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-input-number',
+              label: '点大小级别',
+              name: 'sourcePointSize',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'vue-color',
+              label: '点颜色',
+              name: 'sourcePointColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
             {
               type: 'el-input-number',
               label: '文字大小',
-              name: 'fontTextSize',
+              name: 'sourceFontTextSize',
               required: false,
               placeholder: '',
-              value: 15,
+              value: 12,
             },
             {
               type: 'vue-color',
               label: '文字颜色',
-              name: 'fontTextColor',
+              name: 'sourceFontTextColor',
               required: false,
               placeholder: '',
               value: '#46bee9'
@@ -154,7 +178,66 @@ export const widgetMap = {
             {
               type: 'el-select',
               label: '文字粗细',
-              name: 'fontTextWeight',
+              name: 'sourceFontTextWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+          ],
+        },
+        {
+          name: '终点设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '终点显示',
+              name: 'isShowTarget',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-input-number',
+              label: '点大小',
+              name: 'targetPointSize',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'vue-color',
+              label: '点颜色',
+              name: 'targetPointColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
+            {
+              type: 'el-input-number',
+              label: '文字大小',
+              name: 'targetFontTextSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'vue-color',
+              label: '文字颜色',
+              name: 'targetFontTextColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
+            {
+              type: 'el-select',
+              label: '文字粗细',
+              name: 'targetFontTextWeight',
               required: false,
               placeholder: '',
               selectOptions: [
@@ -202,27 +285,6 @@ export const widgetMap = {
               type: 'vue-color',
               label: '图标颜色',
               name: 'symbolColor',
-              required: false,
-              placeholder: '',
-              value: '#46bee9'
-            },
-          ],
-        },
-        {
-          name: '点设置',
-          list: [
-            {
-              type: 'el-input-number',
-              label: '点大小',
-              name: 'pointSize',
-              required: false,
-              placeholder: '',
-              value: 5,
-            },
-            {
-              type: 'vue-color',
-              label: '点颜色',
-              name: 'pointColor',
               required: false,
               placeholder: '',
               value: '#46bee9'
@@ -318,7 +380,7 @@ export const widgetMap = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {source: '北京市', target: '上海市', value: 95},
+          /*{source: '北京市', target: '上海市', value: 95},
           {source: '北京市', target: '广州市', value: 90},
           {source: '北京市', target: '大连市', value: 80},
           {source: '北京市', target: '南宁市', value: 70},
@@ -347,7 +409,194 @@ export const widgetMap = {
           {source: '广州市', target: '常州市', value: 40},
           {source: '广州市', target: '北京市', value: 30},
           {source: '广州市', target: '北海市', value: 20},
-          {source: '广州市', target: '海口市', value: 10},
+          {source: '广州市', target: '海口市', value: 10},*/
+
+            {
+              "target": "南京市",
+              "value": 1,
+              "source": "乐山市"
+            },
+            {
+              "target": "丽江市",
+              "value": 3,
+              "source": "丽江市"
+            },
+            {
+              "target": "洛阳市",
+              "value": 4,
+              "source": "深圳市"
+            },
+            {
+              "target": "佛山市",
+              "value": 1,
+              "source": "北京市"
+            },
+            {
+              "target": "南阳市",
+              "value": 2,
+              "source": "上海市"
+            },
+            {
+              "target": "平顶山市",
+              "value": 4,
+              "source": "平顶山市"
+            },
+            {
+              "target": "郑州市",
+              "value": 2,
+              "source": "银川市"
+            },
+            {
+              "target": "淄博市",
+              "value": 2,
+              "source": "合肥市"
+            },
+            {
+              "target": "安庆市",
+              "value": 1,
+              "source": "安庆市"
+            },
+            {
+              "target": "杭州市",
+              "value": 2,
+              "source": "台州市"
+            },
+            {
+              "target": "塔城地区",
+              "value": 1,
+              "source": "漯河市"
+            },
+            {
+              "target": "塔城地区",
+              "value": 3,
+              "source": "塔城地区"
+            },
+            {
+              "target": "乐山市",
+              "value": 1,
+              "source": "巴中市"
+            },
+            {
+              "target": "佛山市",
+              "value": 1,
+              "source": "深圳市"
+            },
+            {
+              "target": "商洛市",
+              "value": 1,
+              "source": "平顶山市"
+            },
+            {
+              "target": "苏州市",
+              "value": 1,
+              "source": "上海市"
+            },
+            {
+              "target": "合肥市",
+              "value": 2,
+              "source": "平顶山市"
+            },
+            {
+              "target": "衡阳市",
+              "value": 3,
+              "source": "平顶山市"
+            },
+            {
+              "target": "佛山市",
+              "value": 3,
+              "source": "佛山市"
+            },
+            {
+              "target": "无锡市",
+              "value": 1,
+              "source": "宁波市"
+            },
+            {
+              "target": "上海市",
+              "value": 5,
+              "source": "上海市"
+            },
+            {
+              "target": "洛阳市",
+              "value": 3,
+              "source": "洛阳市"
+            },
+            {
+              "target": "漯河市",
+              "value": 3,
+              "source": "平顶山市"
+            },
+            {
+              "target": "上海市",
+              "value": 1,
+              "source": "呼和浩特市"
+            },
+            {
+              "target": "广州市",
+              "value": 1,
+              "source": "深圳市"
+            },
+            {
+              "target": "台州市",
+              "value": 1,
+              "source": "佛山市"
+            },
+            {
+              "target": "乌鲁木齐市",
+              "value": 4,
+              "source": "深圳市"
+            },
+            {
+              "target": "洛阳市",
+              "value": 2,
+              "source": "鹤岗市"
+            },
+            {
+              "target": "淄博市",
+              "value": 1,
+              "source": "商洛市"
+            },
+            {
+              "target": "南阳市",
+              "value": 1,
+              "source": "呼和浩特市"
+            },
+            {
+              "target": "杭州市",
+              "value": 1,
+              "source": "杭州市"
+            },
+            {
+              "target": "佛山市",
+              "value": 1,
+              "source": "台州市"
+            },
+            {
+              "target": "普洱市",
+              "value": 2,
+              "source": "丽江市"
+            },
+            {
+              "target": "深圳市",
+              "value": 1,
+              "source": "上海市"
+            },
+            {
+              "target": "衡阳市",
+              "value": 1,
+              "source": "深圳市"
+            },
+            {
+              "target": "平顶山市",
+              "value": 2,
+              "source": "商洛市"
+            },
+            {
+              "target": "安阳市",
+              "value": 1,
+              "source": "南阳市"
+            }
+
         ],
       },
       {
