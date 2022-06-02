@@ -94,11 +94,11 @@ export default {
     },
     formatWeek(date, fmt) {
       const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
-      const hours = date.getHours();
-      const minutes = date.getMinutes();
-      const seconds = date.getSeconds();
+      const month = this.check(date.getMonth() + 1);
+      const day = this.check(date.getDate());
+      const hours = this.check(date.getHours());
+      const minutes = this.check(date.getMinutes());
+      const seconds = this.check(date.getSeconds());
       let dayCycle = date.getDay();
       const dayCycleArray = ["日", "一", "二", "三", "四", "五", "六"];
       for (let i = 0; i < 7; i++) {

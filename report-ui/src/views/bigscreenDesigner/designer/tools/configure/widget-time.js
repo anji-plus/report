@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 时间控件json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:05:52
  * @LastEditors: qianlishi
@@ -56,7 +56,7 @@ export const widgetTime =  {
           name: 'fontSize',
           required: false,
           placeholder: '',
-          value: '26'
+          value: '36'
         },
         {
           type: 'vue-color',
@@ -128,7 +128,7 @@ export const widgetTime =  {
           name: 'width',
           required: false,
           placeholder: '该容器在1920px大屏中的宽度',
-          value: 300,
+          value: 400,
         },
         {
           type: 'el-input-number',
@@ -136,7 +136,7 @@ export const widgetTime =  {
           name: 'height',
           required: false,
           placeholder: '该容器在1080px大屏中的高度',
-          value: 100,
+          value: 50,
         },
       ],
     }
