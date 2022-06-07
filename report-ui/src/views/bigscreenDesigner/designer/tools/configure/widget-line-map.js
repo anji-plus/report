@@ -208,7 +208,7 @@ export const widgetLineMap = {
               name: 'targetSymbolSize',
               required: false,
               placeholder: '',
-              value: 5,
+              value: 10,
             },
             {
               type: 'vue-color',
