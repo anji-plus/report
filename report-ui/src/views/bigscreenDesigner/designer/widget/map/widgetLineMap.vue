@@ -478,11 +478,10 @@ export default {
     },
     staticDataFn(val) {
       const series = this.options.series;
-      const optionsSetup = this.optionsSetup;
       series[0]["data"] = this.convertData(val);
       series[1]["data"] = this.convertData(val);
       series[2]["data"] = val.map(function (dataItem) {
-        if (geoCoordMap[dataItem.source]) {
+        if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.source,
             value: geoCoordMap[dataItem.source].concat([dataItem.value])
@@ -490,7 +489,7 @@ export default {
         }
       });
       series[3]["data"] = val.map(function (dataItem) {
-        if (geoCoordMap[dataItem.target]) {
+        if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.target,
             value: geoCoordMap[dataItem.target].concat([dataItem.value])
@@ -520,7 +519,7 @@ export default {
       series[0]["data"] = this.convertData(val);
       series[1]["data"] = this.convertData(val);
       series[2]["data"] = val.map(function (dataItem) {
-        if (geoCoordMap[dataItem.source]) {
+        if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.source,
             value: geoCoordMap[dataItem.source].concat([dataItem.value])
@@ -528,7 +527,7 @@ export default {
         }
       });
       series[3]["data"] = val.map(function (dataItem) {
-        if (geoCoordMap[dataItem.target]) {
+        if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.target,
             value: geoCoordMap[dataItem.target].concat([dataItem.value])
