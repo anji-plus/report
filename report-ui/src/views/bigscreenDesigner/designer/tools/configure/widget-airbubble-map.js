@@ -28,7 +28,7 @@ export const widgetAirbubbleMap =   {
           name: 'background',
           required: false,
           placeholder: '',
-          value: '#0F1C3C'
+          value: ''
         },
         [
           {
