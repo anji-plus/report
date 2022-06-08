@@ -28,7 +28,7 @@ import {widgetBarlinechart} from "./barlineCharts/widget-barlinechart"
 import {widgetPiechart} from "./pieCharts/widget-piechart"
 import {widgetFunnel} from "./funnelCharts/widget-funnel"
 import {widgetGauge} from "./percentCharts/widget-gauge"
-import {widgetMap} from "./mapCharts/widget-map"
+import {widgetLineMap} from "./mapCharts/widget-line-map"
 import {widgetPieNightingale} from "./pieCharts/widget-pie-nightingale"
 import {widgetPiePercentage} from "./percentCharts/widget-pie-percentage"
 import {widgetAirbubbleMap} from "./mapCharts/widget-airbubble-map"
@@ -59,7 +59,7 @@ export const widgetTool = [
   widgetPiechart,
   widgetFunnel,
   widgetGauge,
-  widgetMap,
+  widgetLineMap,
   widgetPieNightingale,
   widgetPiePercentage,
   widgetAirbubbleMap,
