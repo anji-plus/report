@@ -134,8 +134,16 @@ export const widgetAirbubbleMap = {
           ],
         },
         {
-          name: '字体设置',
+          name: '地图设置',
           list: [
+            {
+              type: 'el-switch',
+              label: '文字显示',
+              name: 'isShowMap',
+              required: false,
+              placeholder: '',
+              value: true
+            },
             {
               type: 'el-input-number',
               label: '文字大小',

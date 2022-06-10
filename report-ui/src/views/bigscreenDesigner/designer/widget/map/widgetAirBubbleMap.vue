@@ -215,24 +215,12 @@ export default {
       options: {
         //backgroundColor: '#0F1C3C',
         tooltip: {
-          show: true,
-          formatter: function(params) {
-            if (params.value.length > 1) {
-              return (
-                "&nbsp;&nbsp;" +
-                params.name +
-                "&nbsp;&nbsp;&nbsp;" +
-                params.value[2] +
-                "&nbsp;&nbsp;"
-              );
+          trigger: 'item',
+          formatter: function (params) {
+            if (params.value.length >1 ) {
+              return params.data.name + "" + params.data.value[2];
             } else {
-              return (
-                "&nbsp;&nbsp;" +
-                params.name +
-                "&nbsp;&nbsp;&nbsp;" +
-                params.value +
-                "&nbsp;&nbsp;"
-              );
+              return params.name;
             }
           }
         },
@@ -472,7 +460,7 @@ export default {
       const label = this.options.series[0]["label"];
       const normal = {
         position: "right",
-        show: true,
+        show: optionsSetup.isShowMap,
         color: optionsSetup.fontTextColor,
         fontSize: optionsSetup.fontTextSize,
         fontWeight: optionsSetup.fontTextWeight
