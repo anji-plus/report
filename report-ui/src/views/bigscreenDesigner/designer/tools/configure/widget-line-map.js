@@ -1,19 +1,17 @@
 /*
- * @Descripttion: 气泡地图json
+ * @Descripttion: 中国地图 json
  * @version:
  * @Author: qianlishi
- * @Date: 2021-08-29 07:35:32
+ * @Date: 2021-08-29 07:31:21
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:10:01
+ * @LastEditTime: 2021-09-28 14:17:20
  */
-export const widgetAirbubbleMap = {
-  code: 'widgetAirBubbleMap',
-  type: 'mapChart',
-  tabName: '中国地图',
-  label: '气泡地图',
+export const widgetLineMap = {
+  code: 'widgetLineMap',
+  type: 'chart',
+  label: '路线地图',
   icon: 'iconzhongguoditu',
   options: {
-    // 配置
     setup: [
       {
         type: 'el-input-text',
@@ -21,7 +19,7 @@ export const widgetAirbubbleMap = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '中国地图-气泡图',
+        value: '中国地图-路线图',
       },
       {
         type: 'vue-color',
@@ -92,7 +90,7 @@ export const widgetAirbubbleMap = {
                 {code: 'left', name: '左对齐'},
                 {code: 'right', name: '右对齐'},
               ],
-              value: 'left'
+              value: 'center'
             },
             {
               type: 'el-input-text',
@@ -135,28 +133,52 @@ export const widgetAirbubbleMap = {
           ],
         },
         {
-          name: '字体设置',
+          name: '起点设置',
           list: [
+            {
+              type: 'el-switch',
+              label: '起点显示',
+              name: 'isShowSource',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-input-number',
+              label: '点大小',
+              name: 'sourceSymbolSize',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'vue-color',
+              label: '点颜色',
+              name: 'sourcePointColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
             {
               type: 'el-input-number',
               label: '文字大小',
-              name: 'fontTextSize',
+              name: 'sourceFontTextSize',
               required: false,
               placeholder: '',
-              value: 15,
+              value: 12,
             },
             {
               type: 'vue-color',
               label: '文字颜色',
-              name: 'fontTextColor',
+              name: 'sourceFontTextColor',
               required: false,
               placeholder: '',
-              value: '#D4EEFF'
+              value: '#46bee9'
             },
             {
               type: 'el-select',
               label: '文字粗细',
-              name: 'fontTextWeight',
+              name: 'sourceFontTextWeight',
               required: false,
               placeholder: '',
               selectOptions: [
@@ -167,26 +189,55 @@ export const widgetAirbubbleMap = {
               ],
               value: 'normal'
             },
+          ],
+        },
+        {
+          name: '终点设置',
+          list: [
             {
-              type: 'el-input-number',
-              label: '数值大小',
-              name: 'fontDataSize',
+              type: 'el-switch',
+              label: '终点显示',
+              name: 'isShowTarget',
               required: false,
               placeholder: '',
-              value: 15,
+              value: true
+            },
+            {
+              type: 'el-input-number',
+              label: '点大小',
+              name: 'targetSymbolSize',
+              required: false,
+              placeholder: '',
+              value: 10,
             },
             {
               type: 'vue-color',
-              label: '数值颜色',
-              name: 'fontDataColor',
+              label: '点颜色',
+              name: 'targetPointColor',
               required: false,
               placeholder: '',
-              value: '#D4EEFF'
+              value: '#46bee9'
+            },
+            {
+              type: 'el-input-number',
+              label: '文字大小',
+              name: 'targetFontTextSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'vue-color',
+              label: '文字颜色',
+              name: 'targetFontTextColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
             },
             {
               type: 'el-select',
-              label: '数值粗细',
-              name: 'fontDataWeight',
+              label: '文字粗细',
+              name: 'targetFontTextWeight',
               required: false,
               placeholder: '',
               selectOptions: [
@@ -200,64 +251,97 @@ export const widgetAirbubbleMap = {
           ],
         },
         {
-          name: '气泡设置',
+          name: '图标设置',
           list: [
             {
-              type: 'el-input-number',
-              label: '最小半径',
-              name: 'fontminSize4Pin',
+              type: 'el-select',
+              label: '图标样式',
+              name: 'symbol',
               required: false,
               placeholder: '',
-              value: 20,
+              selectOptions: [
+                {code: 'arrow', name: '箭头'},
+                {code: 'plane', name: '飞机'},
+              ],
+              value: 'arrow'
             },
             {
               type: 'el-input-number',
-              label: '最大半径',
-              name: 'fontmaxSize4Pin',
+              label: '动画速度',
+              name: 'symbolPeriod',
               required: false,
               placeholder: '',
-              value: 100,
+              value: 4,
             },
-            /*{
-              type: 'vue-color',
-              label: '气泡颜色',
-              name: 'fontPieColor',
+            {
+              type: 'el-input-number',
+              label: '图标大小',
+              name: 'symbolSize',
               required: false,
               placeholder: '',
-              value: ''
-            },*/
+              value: 10,
+            },
+            {
+              type: 'vue-color',
+              label: '图标颜色',
+              name: 'symbolColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
           ],
         },
         {
-          name: '地图块颜色',
+          name: '线设置',
           list: [
             {
               type: 'vue-color',
-              label: '0%处颜色',
-              name: 'font0PreColor',
+              label: '线颜色',
+              name: 'lineColor',
+              required: false,
+              placeholder: '',
+              value: '#ffa022'
+            },
+            {
+              type: 'el-input-number',
+              label: '线宽度',
+              name: 'lineWidth',
+              required: false,
+              placeholder: '',
+              value: 2,
+            },
+          ],
+        },
+        {
+          name: '地图颜色',
+          list: [
+            {
+              type: 'vue-color',
+              label: '地图块颜色',
+              name: 'blockColor',
               required: false,
               placeholder: '',
               value: '#073684'
             },
             {
               type: 'vue-color',
-              label: '100%颜色',
-              name: 'font100PreColor',
+              label: '边界颜色',
+              name: 'borderColor',
               required: false,
               placeholder: '',
               value: '#061E3D'
             },
             {
               type: 'vue-color',
-              label: '高亮渐变色',
-              name: 'fontHighlightColor',
+              label: '高亮颜色',
+              name: 'highlightColor',
               required: false,
               placeholder: '',
               value: '#2B91B7'
             },
           ],
         },
-      ],
+      ]
     ],
     data: [
       {
@@ -296,41 +380,37 @@ export const widgetAirbubbleMap = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {"name": "南海诸岛", "value": 1},
-          {"name": "北京市", "value": 524},
-          {"name": "天津市", "value": 14},
-          {"name": "上海市", "value": 150},
-          {"name": "重庆市", "value": 75},
-          {"name": "河北省", "value": 13},
-          {"name": "河南省", "value": 83},
-          {"name": "云南省", "value": 11},
-          {"name": "辽宁省", "value": 19},
-          {"name": "黑龙江省", "value": 15},
-          {"name": "湖南省", "value": 69},
-          {"name": "安徽省", "value": 260},
-          {"name": "山东省", "value": 39},
-          {"name": "新疆维吾尔自治区", "value": 4},
-          {"name": "江苏省", "value": 31},
-          {"name": "浙江省", "value": 104},
-          {"name": "江西省", "value": 36},
-          {"name": "湖北省", "value": 1052},
-          {"name": "广西壮族自治区", "value": 33},
-          {"name": "甘肃省", "value": 347},
-          {"name": "山西省", "value": 8},
-          {"name": "内蒙古自治区", "value": 157},
-          {"name": "陕西省", "value": 22},
-          {"name": "吉林省", "value": 4},
-          {"name": "福建省", "value": 36},
-          {"name": "贵州省", "value": 39},
-          {"name": "广东省", "value": 996},
-          {"name": "青海省", "value": 27},
-          {"name": "西藏自治区", "value": 31},
-          {"name": "四川省", "value": 46},
-          {"name": "宁夏回族自治区", "value": 16},
-          {"name": "海南省", "value": 22},
-          {"name": "台湾省", "value": 6},
-          {"name": "香港", "value": 2},
-          {"name": "澳门", "value": 9}],
+          {source: '北京市', target: '上海市', value: 95},
+          {source: '北京市', target: '广州市', value: 90},
+          {source: '北京市', target: '大连市', value: 80},
+          {source: '北京市', target: '南宁市', value: 70},
+          {source: '北京市', target: '南昌市', value: 60},
+          {source: '北京市', target: '拉萨市', value: 50},
+          {source: '北京市', target: '长春市', value: 40},
+          {source: '北京市', target: '包头市', value: 30},
+          {source: '北京市', target: '重庆市', value: 20},
+          {source: '北京市', target: '常州市', value: 10},
+          {source: '上海市', target: '包头市', value: 95},
+          {source: '上海市', target: '昆明市', value: 90},
+          {source: '上海市', target: '广州市', value: 80},
+          {source: '上海市', target: '郑州市', value: 70},
+          {source: '上海市', target: '长春市', value: 60},
+          {source: '上海市', target: '重庆市', value: 50},
+          {source: '上海市', target: '长沙市', value: 40},
+          {source: '上海市', target: '北京市', value: 30},
+          {source: '上海市', target: '丹东市', value: 20},
+          {source: '上海市', target: '大连市', value: 10},
+          {source: '广州市', target: '福州市', value: 95},
+          {source: '广州市', target: '太原市', value: 90},
+          {source: '广州市', target: '长春市', value: 80},
+          {source: '广州市', target: '重庆市', value: 70},
+          {source: '广州市', target: '西安市', value: 60},
+          {source: '广州市', target: '成都市', value: 50},
+          {source: '广州市', target: '常州市', value: 40},
+          {source: '广州市', target: '北京市', value: 30},
+          {source: '广州市', target: '北海市', value: 20},
+          {source: '广州市', target: '海口市', value: 10},
+        ],
       },
       {
         type: 'dycustComponents',
@@ -339,8 +419,8 @@ export const widgetAirbubbleMap = {
         required: false,
         placeholder: '',
         relactiveDom: 'dataType',
-        chartType: 'widget-piechart',
-        dictKey: 'MAP_PROPERTIES',
+        chartType: 'widget-linemap',
+        dictKey: 'SOUTAR_PROPERTIES',
         relactiveDomValue: 'dynamicData',
         value: '',
       },

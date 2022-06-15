@@ -30,7 +30,7 @@ import WidgetPiechart from "../widget/pieCharts/widgetPiechart.vue";
 import WidgetFunnel from "../widget/funnelCharts/widgetFunnel.vue";
 import WidgetGauge from "../widget/percentCharts/widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "../widget/pieCharts/widgetPieNightingaleRose";
-import widgetMap from "../widget/mapCharts/widgetMap.vue";
+import widgetLineMap from "../widget/mapCharts/widgetLineMap.vue";
 import widgetPiePercentageChart from "../widget/percentCharts/widgetPiePercentageChart";
 import widgetAirBubbleMap from "../widget/mapCharts/widgetAirBubbleMap";
 import widgetBarStackChart from "../widget/barCharts/widgetBarStackChart";
@@ -62,7 +62,7 @@ export default {
     WidgetFunnel,
     WidgetGauge,
     WidgetPieNightingaleRoseArea,
-    widgetMap,
+    widgetLineMap,
     widgetPiePercentageChart,
     widgetAirBubbleMap,
     widgetBarStackChart,

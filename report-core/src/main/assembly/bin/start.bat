@@ -38,5 +38,5 @@ IF "%JAVA_HOME%" == "" (
 	set JAVA_OPTS= -server -Xms1g -Xmx2g -Xmn256m -XX:PermSize=128m -Xss256k
 
 	rem 正式启动
-	%JAVA_HOME%\bin\java %JAVA_OPTS% -Xbootclasspath/a:%LIB_JARS% -jar -Dspring.config.location=%CONF_YML% %BIN_DIR%\lib\%BOOT_JAR%
+	"%JAVA_HOME%"\bin\java %JAVA_OPTS% -Xbootclasspath/a:%LIB_JARS% -jar -Dspring.config.location=%CONF_YML% %BIN_DIR%\lib\%BOOT_JAR%
 	pause
