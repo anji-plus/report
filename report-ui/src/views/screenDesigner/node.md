@@ -13,6 +13,10 @@
 │ │ ├── pieCharts(文件夹) (饼图)
 │ │ ├── texts(文件夹) (文本、滚动文本、超链接、当前时间、图片、视频、表格、内联框架)
 │ │ ├── wordcloudCharts(文件夹) (词云图)
+│ ├── layout(文件夹)
+│ │ ├── left.vue 大屏左侧工具栏
+│ │ ├── middle.vue 大屏中间配置
+│ │ ├── right.vue 大屏右侧配置
 │ ├── util(文件夹) 公共 js
 │ ├── widget(文件夹) 图表组件
 │ │ ├── barCharts(文件夹) (柱状图)

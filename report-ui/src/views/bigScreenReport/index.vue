@@ -180,7 +180,8 @@ export default {
     },
     openDesign(val) {
       let routeUrl = this.$router.resolve({
-        path: "/bigscreen/designer",
+        path: "/screenDesigner",
+        // path: "/bigscreen/designer",
         query: {
           reportCode: val.reportCode
         }
