@@ -333,6 +333,9 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 JSONObject addCell = cellDynamicData.get(j);
                 //字段
                 String fieldLabel = addCell.getString(dataSet.getFieldLabel());
+                if (StringUtils.isBlank(fieldLabel)) {
+                    fieldLabel = StringUtils.EMPTY;
+                }
                 String replace = v.replace("#{".concat(dataSet.getSetCode()).concat(".").concat(dataSet.getFieldLabel()).concat("}"), fieldLabel);
                 //转字符串，解决深拷贝问题
                 JSONObject addCellData = JSONObject.parseObject(cellStr);
