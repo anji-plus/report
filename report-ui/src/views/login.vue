@@ -4,13 +4,30 @@
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2021-12-13 09:45:44
+ * @LastEditTime: 2022-06-23 17:23:23
 -->
 <template>
   <div class="login_container">
     <!-- 顶部logo -->
     <div class="login_title">
-      <img src="@/assets/images/home-logo.png" alt="logo" />
+      <div class="left">
+        <div class="box">
+          <img src="../../static/logo-dp.png" alt="" />
+        </div>
+        <div class="name">AJ-Report</div>
+      </div>
+      <div class="right">
+        <div class="item" @click="centerDialogVisible = true">说明</div>
+        <div class="item">
+          <a href="https://ajreport.beliefteam.cn/report-doc/" target="blank"
+            >文档</a
+          >
+        </div>
+        <div class="item">
+          <a href="https://gitee.com/anji-plus/report" target="blank">社区</a>
+        </div>
+      </div>
+      <!-- <img src="@/assets/images/home-logo.png" alt="logo" /> -->
     </div>
     <div class="login_contant">
       <img src="@/assets/images/login.jpg" alt="image" class="login_img" />
@@ -109,6 +126,22 @@
       :img-size="{ width: '400px', height: '200px' }"
       @success="verifylogin"
     />
+
+    <el-dialog
+      title="提示"
+      :visible.sync="centerDialogVisible"
+      width="30%"
+      center
+    >
+      <span style="font-size: 30px; line-height:50px"
+        >AJ-Report由安吉加加遵循Apache2.0在gitee上开源。</span
+      >
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="centerDialogVisible = false"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -142,7 +175,8 @@ export default {
       loading: false,
       redirect: undefined,
       otherQuery: {},
-      needCaptcha: false
+      needCaptcha: false,
+      centerDialogVisible: false
     };
   },
   watch: {
@@ -314,10 +348,47 @@ export default {
     height: 60px;
     padding: 10px 60px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    img {
-      width: 10%;
-      display: block;
+    .left {
+      display: flex;
+      flex-direction: row;
+      .box {
+        width: 40px;
+        height: 40px;
+        margin-top: 6px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .name {
+        font-size: 20px;
+        font-weight: bold;
+        padding-bottom: 5px;
+        margin-left: 10px;
+        border-left: 1px solid #ccc;
+        padding-top: 14px;
+        padding-left: 10px;
+      }
+      .box1 {
+        width: 100px;
+        margin-left: 40px;
+        cursor: pointer;
+        img {
+          width: 100%;
+          margin-top: 10px;
+          margin-left: 10px;
+        }
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: row;
+      .item {
+        margin-right: 20px;
+        cursor: pointer;
+      }
     }
   }
   .login_contant {
