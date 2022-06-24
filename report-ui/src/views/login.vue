@@ -1,6 +1,6 @@
 <!--
  * @Descripttion: 登录
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
@@ -128,14 +128,20 @@
     />
 
     <el-dialog
-      title="提示"
+      title="说明"
       :visible.sync="centerDialogVisible"
-      width="30%"
+      width="34%"
       center
     >
-      <span style="font-size: 30px; line-height:50px"
-        >AJ-Report由安吉加加遵循Apache2.0在gitee上开源。</span
-      >
+      <div style="font-size: 30px; line-height: 50px; margin-bottom: 50px">
+        AJ-Report由<a href="http://www.anji-plus.com/" target="_blank" style="text-decoration: underline"><b>安吉加加信息技术有限公司</b></a
+      >遵循 <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank" style="word-wrap: break-word"><strong style="color: orangered">Apache2.0开源协议</strong></a
+      >在<a href="https://gitee.com/explore" target="_blank" style="text-decoration: underline; word-wrap: break-word"><b>Gitee平台</b></a
+      >进行开源。
+      </div>
+      <div style="font-size: 30px; line-height: 50px">
+        <strong style="color: orangered">个人/商业使用须遵循Apache2.0开源协议。</strong>
+      </div>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="centerDialogVisible = false"
           >确 定</el-button
