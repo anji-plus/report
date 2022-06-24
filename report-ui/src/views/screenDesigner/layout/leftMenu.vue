@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2022-05-12 11:05:21
  * @LastEditors: qianlishi
- * @LastEditTime: 2022-05-14 11:51:45
+ * @LastEditTime: 2022-06-17 17:26:22
 -->
 <template>
   <el-tabs class="layout-left" type="border-card">
@@ -22,7 +22,7 @@
               :key="idx"
               @end="evt => widgetOnDragged(evt, it.code)"
             >
-              <div class="tools-item">
+              <div class="tools-item" v-if="it.code != 'screen'">
                 <span class="tools-item-icon">
                   <i class="iconfont" :class="it.icon"></i>
                 </span>
