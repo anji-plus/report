@@ -141,6 +141,7 @@
       </div>
       <div style="font-size: 30px; line-height: 50px">
         <strong style="color: orangered">个人/商业使用须遵循Apache2.0开源协议。</strong>
+        <strong style="color: orangered">禁止将AJ-Report产品用于违法违规业务。</strong>
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="centerDialogVisible = false"
@@ -392,7 +393,7 @@ export default {
       display: flex;
       flex-direction: row;
       .item {
-        margin-right: 20px;
+        margin-right: 60px;
         cursor: pointer;
       }
     }
