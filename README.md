@@ -91,10 +91,12 @@
 
 ## 部署方式
 
+**[运行环境参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDevelop.html)** <br>
 **注意版本兼容性** <br>
 源码 doc -> docs -> guide 目录下即所有文档 <br>
 
 ### 发行版部署
+**[发行版部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDistribution.html)** <br>
 
 ```
 下载最新发行版，解压
@@ -111,6 +113,7 @@ http://serverip:9095
 ```
 
 ### 源码编译部署
+**[源码编译部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySource.html)** <br>
 
 在Linux上先准备好maven、node.js、jdk
 
@@ -136,12 +139,6 @@ http://serverip:9095
 
 登陆后修改"数据源->mysql数据源"用户名密码
 ```
-
-**[运行环境参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDevelop.html)** <br>
-
-**[源码编译部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySource.html)** <br>
-
-**[发行版部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDistribution.html)** <br>
 
 **[前后端分离部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySeparate.html)** <br>
 
@@ -213,7 +210,7 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 个人企业微信：加微信进群备注 AJ-Report 或者 Report <br>
-如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请发送多次 <br>
+如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请发送多次。如果加了之后一言不发，不好意思，我直接忽略，我也不知道你要干嘛。 <br>
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "200" height = "200" align=left/>
 
 
