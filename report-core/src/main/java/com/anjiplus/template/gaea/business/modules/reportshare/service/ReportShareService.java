@@ -24,4 +24,10 @@ public interface ReportShareService extends GaeaBaseService<ReportShareParam, Re
     ReportShareDto insertShare(ReportShareDto dto);
 
     ReportShare detailByCode(String shareCode);
+
+    /**
+     * 延期过期时间
+     * @param dto
+     */
+    void shareDelay(ReportShareDto dto);
 }

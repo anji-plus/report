@@ -62,6 +62,23 @@ public class DateUtil {
         return calendar.getTime();
     }
 
+    /**未来时间
+     * 根据指定时间获取
+     * @param time
+     * @param day
+     * @return
+     */
+    public static Date getFutureDateTmdHmsByTime(Date time, int day) {
+        if (day <= 0) {
+            //默认2099年
+            return parse("2099-01-01", defaultDatePattern);
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(time);
+        calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + day);
+        return calendar.getTime();
+    }
+
     public static void main(String[] args) {
         Date futureDateTmdHms = getFutureDateTmdHms(7);
         System.out.println(futureDateTmdHms);

@@ -86,6 +86,23 @@ public class ReportShareServiceImpl implements ReportShareService {
         return reportShare;
     }
 
+    /**
+     * 延期过期时间
+     *
+     * @param dto
+     */
+    @Override
+    public void shareDelay(ReportShareDto dto) {
+        Integer shareValidType = dto.getShareValidType();
+        if (null == dto.getId() || null == shareValidType) {
+            throw BusinessExceptionBuilder.build("入参不完整");
+        }
+        ReportShare entity = selectOne(dto.getId());
+        entity.setShareValidTime(DateUtil.getFutureDateTmdHmsByTime(entity.getShareValidTime(), shareValidType));
+        entity.setShareToken(JwtUtil.createToken(entity.getReportCode(), entity.getShareCode(), entity.getSharePassword(), entity.getShareValidTime()));
+        update(entity);
+    }
+
     @Override
     public void processBeforeOperation(ReportShare entity, BaseOperationEnum operationEnum) throws BusinessException {
         switch (operationEnum) {

@@ -2,6 +2,8 @@
 package com.anjiplus.template.gaea.business.modules.reportshare.controller.dto;
 
 import java.io.Serializable;
+
+import com.anji.plus.gaea.annotation.Formatter;
 import com.anji.plus.gaea.curd.dto.GaeaBaseDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
