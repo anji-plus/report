@@ -60,4 +60,6 @@ public class ReportShareDto extends GaeaBaseDTO implements Serializable {
 
     private boolean sharePasswordFlag = false;
 
+    private String reportType;
+
 }

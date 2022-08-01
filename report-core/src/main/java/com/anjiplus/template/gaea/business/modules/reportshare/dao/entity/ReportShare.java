@@ -45,5 +45,8 @@ public class ReportShare extends GaeaBaseEntity {
     @TableField(exist = false)
     private boolean sharePasswordFlag;
 
+    /** 大屏类型 report excel */
+    @TableField(exist = false)
+    private String reportType;
 
 }

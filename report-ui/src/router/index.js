@@ -36,6 +36,11 @@ export const constantRouterMap = [
     hidden: true
   },
   {
+    path: '/el/**',
+    component: () => import('@/views/excelreport/el'),
+    hidden: true
+  },
+  {
     path: '/index',
     component: Layout,
     name: 'index',
