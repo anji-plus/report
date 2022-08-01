@@ -182,7 +182,7 @@ export const constantRouterMap = [
         component: () => import('@/views/reportShare/index'),
         meta: {
           title: '报表分享',
-          icon: 'iconliebiao',
+          icon: 'iconfenxiang1',
           keepAlive: true,
           requireAuth: true,
           permission: 'reportShareManage'

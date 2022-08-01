@@ -36,6 +36,14 @@ export default {
             label: "报表编码",
             field: "reportCode"
           },
+          {
+            inputType: "anji-select",
+            anjiSelectOption: {
+              dictCode: "SHARE_VAILD"
+            },
+            label: "分享类型",
+            field: "shareValidType"
+          },
         ],
         // 表头按钮
         tableButtons: [
@@ -83,7 +91,9 @@ export default {
         buttons: {
           query: {
             api: reportShareList,
-            permission: 'ReportShare:query'
+            permission: 'ReportShare:query',
+            sort: "create_time",
+            order: "DESC"
           },
           queryByPrimarykey: {
             api: reportShareDetail,
@@ -127,7 +137,7 @@ export default {
             disabled: false,
           },
           {
-            label: '分享有效期类型',//分享有效期类型，DIC_NAME=SHARE_VAILD
+            label: '分享类型',//分享有效期类型，DIC_NAME=SHARE_VAILD
             placeholder: '',
             field: 'shareValidType',
             fieldTableRowRenderer: row => {
@@ -140,7 +150,7 @@ export default {
             disabled: false,
           },
           {
-            label: '分享有效期',//分享有效期
+            label: '分享过期时间',//分享有效期
             placeholder: '',
             field: 'shareValidTime',
             editField: 'shareValidTime',
@@ -154,6 +164,7 @@ export default {
             placeholder: '',
             field: 'shareToken',
             editField: 'shareToken',
+            tableHide: true,
             inputType: 'input',
             rules: [
               { min: 1, max: 255, message: '不超过255个字符', trigger: 'blur' }
@@ -168,6 +179,16 @@ export default {
             inputType: 'input',
             rules: [
               { min: 1, max: 100, message: '不超过100个字符', trigger: 'blur' }
+            ],
+            disabled: false,
+          },
+          {
+            label: '分享码',
+            placeholder: '',
+            field: 'sharePassword',
+            editField: 'sharePassword',
+            inputType: 'input',
+            rules: [
             ],
             disabled: false,
           },

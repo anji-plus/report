@@ -40,7 +40,6 @@ public class ReportShare extends GaeaBaseEntity {
     private Integer deleteFlag;
 
     /** 分享码 */
-    @TableField(exist = false)
     private String sharePassword;
 
     @TableField(exist = false)
