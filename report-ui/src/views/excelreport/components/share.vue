@@ -54,7 +54,11 @@
         <el-form-item label="链接" prop="reportShareUrl">
           <el-input v-model="reportShareUrl" :disabled="true" />
         </el-form-item>
-        <el-form-item label="分享码" prop="sharePassword">
+        <el-form-item
+          v-if="dialogForm.sharePasswordFlag"
+          label="分享码"
+          prop="sharePassword"
+        >
           <el-input v-model="dialogForm.sharePassword" :disabled="true" />
         </el-form-item>
 
