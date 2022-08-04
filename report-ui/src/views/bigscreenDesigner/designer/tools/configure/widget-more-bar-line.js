@@ -420,7 +420,7 @@ export const widgetMoreBarLine = {
             {
               type: 'el-input-number',
               label: '左坐标字号',
-              name: 'namefontSizeYLeft',
+              name: 'nameFontSizeYLeft',
               required: false,
               placeholder: '',
               value: 14,
@@ -452,7 +452,7 @@ export const widgetMoreBarLine = {
             {
               type: 'el-input-number',
               label: '右坐标字号',
-              name: 'namefontSizeYRight',
+              name: 'nameFontSizeYRight',
               required: false,
               placeholder: '',
               value: 14,
@@ -650,7 +650,6 @@ export const widgetMoreBarLine = {
               required: false,
               value: [
                 {color: '#4bdfff'},
-                {color: '#5dc1fd'},
                 {color: '#55f49c'},
                 {color: '#ffa43a'},
               ],
@@ -697,14 +696,14 @@ export const widgetMoreBarLine = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {"date": "2014", "unsales": 400, "manus": 300, "rework": 400, "sales": 4.2,},
-          {"date": "2015", "unsales": 400, "manus": 500, "rework": 300, "sales": 3.6,},
-          {"date": "2016", "unsales": 300, "manus": 500, "rework": 500, "sales": 5.8,},
-          {"date": "2017", "unsales": 300, "manus": 500, "rework": 700, "sales": 3.4,},
-          {"date": "2018", "unsales": 400, "manus": 400, "rework": 1000, "sales": 2.5,},
-          {"date": "2019", "unsales": 400, "manus": 500, "rework": 500, "sales": 5.8,},
-          {"date": "2020", "unsales": 300, "manus": 400, "rework": 600, "sales": 7.6,},
-          {"date": "2021", "unsales": 300, "manus": 600, "rework": 400, "sales": 3.4,},
+          {"date": "2014", "unsales": 400, "manus": 300, "sales": 4.2,},
+          {"date": "2015", "unsales": 400, "manus": 500, "sales": 3.6,},
+          {"date": "2016", "unsales": 300, "manus": 500, "sales": 5.8,},
+          {"date": "2017", "unsales": 300, "manus": 500, "sales": 3.4,},
+          {"date": "2018", "unsales": 400, "manus": 400, "sales": 2.5,},
+          {"date": "2019", "unsales": 400, "manus": 500, "sales": 5.8,},
+          {"date": "2020", "unsales": 300, "manus": 400, "sales": 7.6,},
+          {"date": "2021", "unsales": 300, "manus": 600, "sales": 3.4,},
         ]
       },
       {

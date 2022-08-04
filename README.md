@@ -176,7 +176,7 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 - nodeV16适配
 - 增加省市区地图等图
 - 增加基础边框样式
-- Execl报表功能增加与bug修复
+- Excel报表功能增加与bug修复
 
 ## 已知问题
 

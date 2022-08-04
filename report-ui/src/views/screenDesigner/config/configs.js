@@ -12,6 +12,7 @@
  *  词云图：{type: 'wordCloud',tabName: '词云图'}
  * **/
 
+import { screenConfig } from './texts/screenConfig'
 import {widgetHref} from "./texts/widget-href"
 import {widgetIframe} from "./texts/widget-iframe"
 import {widgetImage} from "./texts/widget-image"
@@ -43,6 +44,7 @@ import {widgetHeatmap} from "./heatmap/widget-heatmap";
 
 
 export const widgetTool = [
+  screenConfig,
   widgetHref,
   widgetIframe,
   widgetImage,

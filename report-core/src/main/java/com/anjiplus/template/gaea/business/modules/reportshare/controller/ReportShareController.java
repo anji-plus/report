@@ -66,4 +66,11 @@ public class ReportShareController extends GaeaBaseController<ReportShareParam, 
         return ResponseBean.builder().data(reportShareService.detailByCode(shareCode)).build();
     }
 
+    @PostMapping({"/shareDelay"})
+    @Permission(code = "shareDelay", name = "分享延期")
+    public ResponseBean shareDelay(@RequestBody ReportShareDto dto) {
+        reportShareService.shareDelay(dto);
+        return ResponseBean.builder().build();
+    }
+
 }

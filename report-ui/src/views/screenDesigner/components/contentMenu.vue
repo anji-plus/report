@@ -24,7 +24,9 @@
 export default {
   props: {
     styleObj: Object,
-    visible: Boolean
+    visible: Boolean,
+    widgets: Array,
+    rightClickIndex: Number
   },
   data() {
     return {};
@@ -49,7 +51,8 @@ export default {
         type: "warning"
       })
         .then(() => {
-          this.$emit("deletelayer");
+          console.log(this.rightClickIndex);
+          this.widgets.splice(this.rightClickIndex, 1);
           this.$message({
             type: "success",
             message: "删除成功!"
@@ -63,19 +66,41 @@ export default {
         });
     },
     copyLayer() {
-      this.$emit("copylayer");
+      const obj = this.deepClone(this.widgets[this.rightClickIndex]);
+      this.widgets.splice(this.widgets.length, 0, obj);
     },
     istopLayer() {
-      this.$emit("istopLayer");
+      if (this.rightClickIndex + 1 < this.widgets.length) {
+        const temp = this.widgets.splice(this.rightClickIndex, 1)[0];
+        this.widgets.push(temp);
+      }
     },
     setlowLayer() {
-      this.$emit("setlowLayer");
+      if (this.rightClickIndex != 0) {
+        this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
+      }
     },
     moveupLayer() {
-      this.$emit("moveupLayer");
+      if (this.rightClickIndex != 0) {
+        this.widgets[this.rightClickIndex] = this.widgets.splice(
+          this.rightClickIndex - 1,
+          1,
+          this.widgets[this.rightClickIndex]
+        )[0];
+      } else {
+        this.widgets.push(this.widgets.shift());
+      }
     },
     movedownLayer() {
-      this.$emit("movedownLayer");
+      if (this.rightClickIndex != this.widgets.length - 1) {
+        this.widgets[this.rightClickIndex] = this.widgets.splice(
+          this.rightClickIndex + 1,
+          1,
+          this.widgets[this.rightClickIndex]
+        )[0];
+      } else {
+        this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
+      }
     }
   }
 };

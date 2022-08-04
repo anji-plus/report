@@ -3,27 +3,7 @@
   height: 100%;
   background: #242a30;
   color: #fff;
-  .layout-bar {
-    height: 40px;
-    line-height: 40px;
-    font-size: 12px;
-    padding: 0 10px;
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    .bar-item {
-      margin-right: 20px;
-      cursor: pointer;
-      .iconfont {
-        font-size: 12px;
-        margin-right: 4px;
-      }
-      .el-dropdown-link {
-        color: #fff;
-        cursor: pointer;
-      }
-    }
-  }
+
   .layout-container {
     width: 100%;
     height: calc(100vh - 40px);
@@ -31,70 +11,6 @@
     flex-direction: row;
     justify-content: space-between;
     overflow: hidden;
-    .layout-left {
-      width: 200px;
-      background: #242a30;
-      overflow-x: hidden;
-      overflow-y: auto;
-      .chart-type {
-        display: flex;
-        flex-direction: row;
-        overflow: hidden;
-        .type-left {
-          width: 100%;
-          height: calc(100vh - 80px);
-          text-align: center;
-          /deep/.el-tabs__header {
-            width: 30%;
-            margin-right: 0;
-            .el-tabs__nav-wrap {
-              &::after {
-                background: transparent;
-              }
-              .el-tabs__item {
-                text-align: center;
-                width: 100%;
-                color: #fff;
-                padding: 0;
-              }
-            }
-          }
-          /deep/.el-tabs__content {
-            width: 70%;
-          }
-        }
-      }
-      //工具栏一个元素
-      .tools-item {
-        display: flex;
-        position: relative;
-        width: 100%;
-        height: 48px;
-        align-items: center;
-        -webkit-box-align: center;
-        padding: 0 6px;
-        cursor: pointer;
-        font-size: 12px;
-        margin-bottom: 1px;
-
-        .tools-item-icon {
-          color: #409eff;
-          margin-right: 10px;
-          width: 53px;
-          height: 30px;
-          line-height: 30px;
-          text-align: center;
-          display: block;
-          border: 1px solid #3a4659;
-          background: #282a30;
-        }
-        .tools-item-text {
-        }
-      }
-      /deep/.el-tabs__content {
-        padding: 0;
-      }
-    }
     .layout-middle {
       // display: flex;
       position: relative;
@@ -107,50 +23,7 @@
       align-items: center;
       vertical-align: middle;
       text-align: center;
-      .workbench-container {
-        position: relative;
-        -webkit-transform-origin: 0 0;
-        transform-origin: 0 0;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-
-        .vueRuler {
-          width: 100%;
-          padding: 18px 0px 0px 18px;
-        }
-
-        .workbench {
-          background-color: #1e1e1e;
-          position: relative;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-          -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
-          margin: 0;
-          padding: 0;
-        }
-
-        .bg-grid {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-size: 30px 30px, 30px 30px;
-          background-image: linear-gradient(
-              hsla(0, 0%, 100%, 0.1) 1px,
-              transparent 0
-            ),
-            linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) 1px, transparent 0);
-          // z-index: 2;
-        }
-      }
     }
-
     .layout-right {
       width: 300px;
     }
@@ -232,6 +105,4 @@
     }
   }
 }
-/deep/.el-dropdown-menu__item {
-  max-width: none;
-}
+

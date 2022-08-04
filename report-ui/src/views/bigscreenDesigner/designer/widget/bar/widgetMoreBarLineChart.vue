@@ -80,7 +80,6 @@ export default {
             nameTextStyle: {
               color: '#666666'
             },
-            position: 'right',
             axisLine: {
               lineStyle: {
                 color: '#cdd5e2'
@@ -283,9 +282,9 @@ export default {
           type: 'value',
           show: optionsSetup.isShowYLeft, // 坐标轴是否显示
           name: optionsSetup.textNameYLeft, // 坐标轴名称
-          nameTextStyle: { // 别名
+          nameTextStyle: { //颜色字号
             color: optionsSetup.nameColorYLeft,
-            fontSize: optionsSetup.namefontSizeYLeft
+            fontSize: optionsSetup.nameFontSizeYLeft
           },
           axisLabel: {
             show: true,
@@ -295,7 +294,7 @@ export default {
             }
           },
           axisLine: {
-            show: optionsSetup.isShowYLeft,
+            show: true,
             lineStyle: {
               color: optionsSetup.lineColorY
             }
@@ -306,12 +305,11 @@ export default {
         },
         {
           type: 'value',
-          position: 'right',
           show: optionsSetup.isShowYRight, // 坐标轴是否显示
           name: optionsSetup.textNameYRight, // 坐标轴名称
-          nameTextStyle: { // 别名
+          nameTextStyle: { // 颜色字号
             color: optionsSetup.nameColorYRight,
-            fontSize: optionsSetup.namefontSizeYRight
+            fontSize: optionsSetup.nameFontSizeYRight
           },
           axisLabel: {
             show: true,
@@ -321,7 +319,7 @@ export default {
             }
           },
           axisLine: {
-            show: optionsSetup.isShowYRight,
+            show: true,
             lineStyle: {
               color: optionsSetup.lineColorY
             }
@@ -423,13 +421,11 @@ export default {
       let axis = [];
       let bar1 = [];
       let bar2 = [];
-      let bar3 = [];
       let line = [];
       for (const i in val) {
         axis[i] = val[i].date;
         bar1[i] = val[i].unsales;
         bar2[i] = val[i].manus;
-        bar3[i] = val[i].rework;
         line[i] = val[i].sales;
       }
       // x轴
@@ -476,12 +472,10 @@ export default {
       }
       series[0].data = bar1;
       series[1].data = bar2;
-      series[2].data = bar3;
       series[3].data = line;
       const legendName = [];
       legendName.push('调解成功');
       legendName.push('调解失败');
-      legendName.push('调解终止');
       legendName.push('调解成功率');
       this.options.legend['data'] = legendName;
       this.setOptionsLegendName(legendName);

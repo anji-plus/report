@@ -13,6 +13,7 @@
         :visib="visibleForShareDialog"
         :reportCode="reportCodeForShareDialog"
         :reportName="reportNameForShareDialog"
+        :reportType="reportTypeForShareDialog"
         @handleClose="visibleForShareDialog = false"
       />
       <copyDialog :visib.sync="copyVisible" :rowData="rowData" @close="close" />
@@ -45,6 +46,7 @@ export default {
       visibleForShareDialog: false,
       reportCodeForShareDialog: "",
       reportNameForShareDialog: "",
+      reportTypeForShareDialog: "",
       crudOption: {
         // 使用菜单做为页面标题
         title: "报表管理",
@@ -354,13 +356,9 @@ export default {
     },
     //分享
     shareReport(val) {
-      if (val.reportType == "report_excel") {
-        //excel暂不支持
-        this.$message.warning("暂不支持excel报表分享");
-        return;
-      }
       this.reportCodeForShareDialog = val.reportCode;
       this.reportNameForShareDialog = val.reportName;
+      this.reportTypeForShareDialog = val.reportType;
       this.visibleForShareDialog = true;
     },
     //复制

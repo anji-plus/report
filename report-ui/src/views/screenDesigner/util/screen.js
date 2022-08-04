@@ -15,6 +15,7 @@ export const handlerLayerWidget = (val, getToolByCode) => {
 }
 
 export const handleBigScreen = (data, getToolByCode, callBcak) => {
+  console.log('aa', getToolByCode("screen"))
   const optionScreen = getToolByCode("screen").options;
   const setup = optionScreen.setup;
   for (const key in data) {

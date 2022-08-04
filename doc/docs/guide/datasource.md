@@ -36,6 +36,7 @@
 - 第二种，在pom.xml中添加 <br>
   使用build.sh脚本编译或者maven package编译都可以，前端页面选择jdbc数据源，填上对应驱动。<br>
 
+**注意：** 底层只实现了mysql的解析，如果你的数据库和mysql差异较大，比如一些函数、关键字和mysql是不同的用法、含义，那就需要重写底层解析代码(datasource) <br>
 <br>
 
 ### 非JDBC驱动类数据源添加

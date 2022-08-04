@@ -1,7 +1,7 @@
 ```
- 第一步，下载zip包，解压<br>
- 第二步，conf->bootstrap.yml，修改mysql连接<br>
- 第三步，启动bin目录下start.sh<br>
+ 第一步，下载zip包，解压
+ 第二步，conf->bootstrap.yml，修改mysql连接
+ 第三步，启动bin目录下start.sh
  第四步，访问 http://localhost:9095
 ```
 

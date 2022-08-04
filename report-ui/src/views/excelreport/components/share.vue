@@ -54,7 +54,11 @@
         <el-form-item label="链接" prop="reportShareUrl">
           <el-input v-model="reportShareUrl" :disabled="true" />
         </el-form-item>
-        <el-form-item label="分享码" prop="sharePassword">
+        <el-form-item
+          v-if="dialogForm.sharePasswordFlag"
+          label="分享码"
+          prop="sharePassword"
+        >
           <el-input v-model="dialogForm.sharePassword" :disabled="true" />
         </el-form-item>
 
@@ -110,6 +114,13 @@ export default {
       default: () => {
         return "";
       }
+    },
+    reportType: {
+      required : true,
+      type: String,
+      default: () =>{
+        return "";
+      }
     }
   },
   data() {
@@ -120,6 +131,7 @@ export default {
       dialogForm: {
         shareValidType: 0,
         reportCode: "",
+        reportType: "",
         shareUrl: "",
         shareCode: "",
         sharePassword: "",
@@ -160,12 +172,12 @@ export default {
       this.dialogForm.sharePassword = "";
     },
     async createShare() {
+      this.dialogForm.reportType = this.reportType;
       this.dialogForm.reportCode = this.reportCode;
       this.dialogForm.shareUrl = window.location.href;
-      // console.log(this.dialogForm)
+      console.log(this.dialogForm)
       const { code, data } = await reportShareAdd(this.dialogForm);
       if (code != "200") return;
-      // console.log(data)
       this.shareLinkFlag1 = false;
       this.$message({
         message: "创建链接成功！",

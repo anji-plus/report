@@ -101,6 +101,7 @@
       :visib="visibleForShareDialog"
       :reportCode="reportCodeForShareDialog"
       :reportName="reportNameForShareDialog"
+      :reportType="reportTypeForShareDialog"
       @handleClose="visibleForShareDialog = false"
     />
   </div>
@@ -130,7 +131,8 @@ export default {
       // 分享
       visibleForShareDialog: false,
       reportCodeForShareDialog: "",
-      reportNameForShareDialog: ""
+      reportNameForShareDialog: "",
+      reportTypeForShareDialog: ""
     };
   },
   mounted() {},
@@ -174,12 +176,9 @@ export default {
     },
     // 分享
     share(val) {
-      //excel暂不支持
-      this.$message.warning("暂不支持excel报表分享");
-      return;
-
       this.reportCodeForShareDialog = val.reportCode;
       this.reportNameForShareDialog = val.reportName;
+      this.reportTypeForShareDialog = val.reportType;
       this.visibleForShareDialog = true;
     },
     openDesign(val) {

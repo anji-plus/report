@@ -29,7 +29,11 @@ import org.springframework.stereotype.Service;
 **/
 @Service
 public class ReportShareServiceImpl implements ReportShareService {
+    private static final String SHARE_AJFLAG = "#/aj/";
+    private static final String SHARE_ELFLAG = "#/el/";
 
+    private static final String REPORT = "report_screen";
+    private static final String EXCEL = "report_excel";
     /**
      * 默认跳转路由为aj的页面
      */
@@ -86,6 +90,23 @@ public class ReportShareServiceImpl implements ReportShareService {
         return reportShare;
     }
 
+    /**
+     * 延期过期时间
+     *
+     * @param dto
+     */
+    @Override
+    public void shareDelay(ReportShareDto dto) {
+        Integer shareValidType = dto.getShareValidType();
+        if (null == dto.getId() || null == shareValidType) {
+            throw BusinessExceptionBuilder.build("入参不完整");
+        }
+        ReportShare entity = selectOne(dto.getId());
+        entity.setShareValidTime(DateUtil.getFutureDateTmdHmsByTime(entity.getShareValidTime(), shareValidType));
+        entity.setShareToken(JwtUtil.createToken(entity.getReportCode(), entity.getShareCode(), entity.getSharePassword(), entity.getShareValidTime()));
+        update(entity);
+    }
+
     @Override
     public void processBeforeOperation(ReportShare entity, BaseOperationEnum operationEnum) throws BusinessException {
         switch (operationEnum) {
@@ -109,11 +130,31 @@ public class ReportShareServiceImpl implements ReportShareService {
         //http://127.0.0.1:9095/reportDashboard/getData
         String shareCode = UuidUtil.generateShortUuid();
         entity.setShareCode(shareCode);
-        if (entity.getShareUrl().contains(SHARE_URL)) {
-            String prefix = entity.getShareUrl().substring(0, entity.getShareUrl().indexOf("#"));
-            entity.setShareUrl(prefix + SHARE_FLAG + shareCode);
-        } else {
-            entity.setShareUrl(entity.getShareUrl() + SHARE_FLAG + shareCode);
+
+//        if (entity.getShareUrl().contains(SHARE_URL)) {
+//            String prefix = entity.getShareUrl().substring(0, entity.getShareUrl().indexOf("#"));
+//            entity.setShareUrl(prefix + SHARE_FLAG + shareCode);
+//        } else {
+//            entity.setShareUrl(entity.getShareUrl() + SHARE_FLAG + shareCode);
+//        }
+
+
+        if (REPORT.equals(entity.getReportType())) {
+            if (entity.getShareUrl().contains(SHARE_URL)) {
+                String prefix = entity.getShareUrl().substring(0, entity.getShareUrl().indexOf("#"));
+                entity.setShareUrl(prefix + SHARE_AJFLAG + shareCode);
+            }else {
+                entity.setShareUrl(entity.getShareUrl() + SHARE_AJFLAG + shareCode);
+            }
+        }else if (EXCEL.equals(entity.getReportType())) {
+            if (entity.getShareUrl().contains(SHARE_URL)) {
+                String prefix = entity.getShareUrl().substring(0, entity.getShareUrl().indexOf("#"));
+                entity.setShareUrl(prefix + SHARE_ELFLAG + shareCode);
+            }else {
+                entity.setShareUrl(entity.getShareUrl() + SHARE_ELFLAG + shareCode);
+            }
+        }else {
+            return;
         }
 
         entity.setShareValidTime(DateUtil.getFutureDateTmdHms(entity.getShareValidType()));
