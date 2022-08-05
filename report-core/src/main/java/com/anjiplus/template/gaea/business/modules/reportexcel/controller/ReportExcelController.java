@@ -10,8 +10,11 @@ import com.anjiplus.template.gaea.business.modules.reportexcel.controller.dto.Re
 import com.anjiplus.template.gaea.business.modules.reportexcel.controller.param.ReportExcelParam;
 import com.anjiplus.template.gaea.business.modules.reportexcel.dao.entity.ReportExcel;
 import com.anjiplus.template.gaea.business.modules.reportexcel.service.ReportExcelService;
+import com.anjiplus.template.gaea.business.modules.reportshare.controller.dto.ReportShareDto;
+import com.anjiplus.template.gaea.business.modules.reportshare.service.ReportShareService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,6 +29,9 @@ public class ReportExcelController extends GaeaBaseController<ReportExcelParam, 
 
     @Autowired
     private ReportExcelService reportExcelService;
+
+    @Autowired
+    private ReportShareService reportShareService;
 
     @Override
     public GaeaBaseService<ReportExcelParam, ReportExcel> getService() {
@@ -75,4 +81,11 @@ public class ReportExcelController extends GaeaBaseController<ReportExcelParam, 
 //        return ResponseBean.builder().code(ResponseCode.SUCCESS_CODE)
 //                .build();
 //    }
+
+    @PostMapping("/share")
+    @GaeaAuditLog(pageTitle = "excel分享")
+    @Permission(code = "reportExcel", name = "分享报表")
+    public ResponseBean share(@Validated @RequestBody ReportShareDto dto) {
+        return ResponseBean.builder().data(reportShareService.insertShare(dto)).build();
+    }
 }

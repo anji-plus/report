@@ -91,6 +91,7 @@
 </template>
 <script>
 import { reportShareAdd } from "@/api/reportShare";
+import { excelShareAdd } from "@/api/reportShare";
 import { getDictList } from "@/api/dict-data"; // 获取数据字典
 import Dictionary from "@/components/Dictionary/index";
 export default {
@@ -175,7 +176,8 @@ export default {
       this.dialogForm.reportType = this.reportType;
       this.dialogForm.reportCode = this.reportCode;
       this.dialogForm.shareUrl = window.location.href;
-      const { code, data } = await reportShareAdd(this.dialogForm);
+      const urlType = this.reportType == 'report_screen' ? reportShareAdd(this.dialogForm) : excelShareAdd(this.dialogForm)
+      const { code, data } = await urlType
       if (code != "200") return;
       this.shareLinkFlag1 = false;
       this.$message({

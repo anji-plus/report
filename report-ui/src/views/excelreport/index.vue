@@ -64,7 +64,7 @@
                   class="view"
                   type="text"
                   @click="share(item)"
-                  v-permission="'bigScreenManage:share'"
+                  v-permission="'excelManage:share'"
                 />
                 <el-button
                   icon="el-icon-view"

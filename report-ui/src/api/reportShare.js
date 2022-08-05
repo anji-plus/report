@@ -16,6 +16,14 @@ export function reportShareAdd(data) {
   })
 }
 
+export function excelShareAdd(data) {
+  return request({
+    url: 'reportExcel/share',
+    method: 'post',
+    data
+  })
+}
+
 export function reportShareDelay(data) {
   return request({
     url: 'reportShare/shareDelay',
