@@ -269,16 +269,19 @@
             >
               <template slot-scope="scope">
                 <div v-if="option.rowButtons.length <= 2">
-                  <el-button
-                    v-for="(item, index) in option.rowButtons"
-                    :key="index"
-                    v-permission="item.permission"
-                    :disabled="isDisabledButton(item, scope.row)"
-                    :type="item.type || 'text'"
-                    size="small"
-                    @click="item.click(scope.row)"
+                  <template v-for="(item, index) in option.rowButtons">
+                    <el-button
+                      v-if="isHide(item, scope.row)"
+                      :key="index"
+                      v-permission="item.permission"
+                      :disabled="isDisabledButton(item, scope.row)"
+                      :type="item.type || 'text'"
+                      size="small"
+                      @click="item.click(scope.row)"
                     >{{ handlegetLable(scope.row, item.label) }}</el-button
-                  >
+                    >
+                  </template>
+
                 </div>
                 <div v-else>
                   <el-button
@@ -299,20 +302,22 @@
                     </span>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item class="clearfix">
-                        <el-button
-                          v-for="(item, index) in option.rowButtons.filter(
+                        <template v-for="(item, index) in option.rowButtons.filter(
                             (el, index) => index > 0
-                          )"
-                          :key="index"
-                          v-permission="item.permission"
-                          :type="item.type || 'text'"
-                          :disabled="isDisabledButton(item, scope.row)"
-                          size="small"
-                          @click="item.click(scope.row)"
+                          )">
+                          <el-button
+                            v-if="isHide(item, scope.row)"
+                            :key="index"
+                            v-permission="item.permission"
+                            :type="item.type || 'text'"
+                            :disabled="isDisabledButton(item, scope.row)"
+                            size="small"
+                            @click="item.click(scope.row)"
                           >{{
-                            handlegetLable(scope.row, item.label)
-                          }}</el-button
-                        >
+                              handlegetLable(scope.row, item.label)
+                            }}</el-button
+                          >
+                        </template>
                       </el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
@@ -663,6 +668,14 @@ export default {
         return item.isDisable(row);
       } else {
         return !!item.disabled;
+      }
+    },
+    // 是否显示
+    isHide(item, row) {
+      if (typeof item.isHide === "function") {
+        return item.isHide(row);
+      } else {
+        return !item.isHide;
       }
     },
     // 弹框被关闭时的回调事件

@@ -123,6 +123,17 @@ export default {
           {
             label: "分享",
             permission: "bigScreenManage:share",
+            isHide: (row) => {
+              return row.reportType == 'report_screen'
+            },
+            click: this.shareReport
+          },
+          {
+            label: "分享",
+            permission: "excelManage:share",
+            isHide: (row) => {
+              return row.reportType == 'report_excel'
+            },
             click: this.shareReport
           },
           {
@@ -360,6 +371,20 @@ export default {
       this.reportNameForShareDialog = val.reportName;
       this.reportTypeForShareDialog = val.reportType;
       this.visibleForShareDialog = true;
+    },
+    checkReport(val) {
+      if ("report_screen" == val.reportType) {
+        return true;
+      }else {
+        return false;
+      }
+    },
+    checkExcel(val) {
+      if ("report_excel" == val.reportType) {
+        return true;
+      }else {
+        return false;
+      }
     },
     //复制
     async copyReport(val) {
