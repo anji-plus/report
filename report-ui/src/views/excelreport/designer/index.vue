@@ -25,7 +25,7 @@
           <el-collapse-item :title="item.setName" :name="item.id">
             <el-popconfirm
               :title="'确定删除' + item.setName + '吗？'"
-              @onConfirm="del(item)"
+              @confirm="del(item)"
             >
               <el-button
                 slot="reference"
