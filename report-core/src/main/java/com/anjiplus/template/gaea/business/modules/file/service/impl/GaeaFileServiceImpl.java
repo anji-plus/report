@@ -123,8 +123,7 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             // 将完整的http访问路径返回
             return gaeaFile;
         } catch (Exception e) {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            log.error("file upload error: {}", e);
+            log.error("file upload error", e);
             throw BusinessExceptionBuilder.build(ResponseCode.FILE_UPLOAD_ERROR);
         }
     }
