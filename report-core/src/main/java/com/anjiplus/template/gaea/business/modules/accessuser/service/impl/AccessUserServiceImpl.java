@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.anji.plus.gaea.bean.TreeNode;
 import com.anji.plus.gaea.cache.CacheHelper;
 import com.anji.plus.gaea.constant.BaseOperationEnum;
+import com.anji.plus.gaea.constant.GaeaConstant;
 import com.anji.plus.gaea.exception.BusinessException;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
@@ -163,7 +164,7 @@ public class AccessUserServiceImpl implements AccessUserService {
         } else {
             // 生成用户token
             String uuid = GaeaUtils.UUID();
-            token = jwtBean.createToken(loginName, uuid);
+            token = jwtBean.createToken(loginName, uuid, 0, GaeaConstant.TENANT_CODE);
             cacheHelper.stringSetExpire(tokenKey, token, 3600);
         }
 

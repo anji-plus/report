@@ -231,7 +231,7 @@ public class TokenFilter implements Filter {
     }
 
     private void error(HttpServletResponse response) throws IOException {
-        ResponseBean responseBean = ResponseBean.builder().code("50008").message("The Token has expired").build();
+        ResponseBean responseBean = ResponseBean.builder().code("User.credentials.expired").message("The Token has expired").build();
         response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         response.getWriter().print(JSONObject.toJSONString(responseBean));
     }
