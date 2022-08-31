@@ -122,7 +122,9 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             }
             // 将完整的http访问路径返回
             return gaeaFile;
-        } catch (Exception e) {
+        } catch (BusinessException e){
+            throw BusinessExceptionBuilder.build(e.getCode());
+        }catch (Exception e) {
             log.error("file upload error", e);
             throw BusinessExceptionBuilder.build(ResponseCode.FILE_UPLOAD_ERROR);
         }
