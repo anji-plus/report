@@ -90,14 +90,14 @@
       width="34%"
       center
     >
-      <div style="font-size: 30px; line-height: 50px; margin-bottom: 50px">
+      <div style="font-size: 20px; line-height: 50px; margin-bottom: 50px">
         AJ-Report由<a href="http://www.anji-plus.com/" target="_blank" style="text-decoration: underline"><b>安吉加加信息技术有限公司</b></a
-      >遵循 <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank" style="word-wrap: break-word"><strong style="color: orangered">Apache2.0开源协议</strong></a
+      >遵循 <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank" style="text-decoration: underline; word-wrap: break-word"><strong style="color: orangered" >Apache2.0开源协议</strong></a
       >在<a href="https://gitee.com/explore" target="_blank" style="text-decoration: underline; word-wrap: break-word"><b>Gitee平台</b></a
       >进行开源。
       </div>
-      <div style="font-size: 30px; line-height: 50px">
-        <strong style="color: orangered">个人/商业使用须遵循Apache2.0开源协议。</strong>
+      <div style="font-size: 20px; line-height: 50px">
+        <strong> 个人/商业使用须遵循Apache2.0开源协议。</strong>
         <strong style="color: orangered">禁止将AJ-Report产品用于违法违规业务。</strong>
       </div>
       <span slot="footer" class="dialog-footer">
