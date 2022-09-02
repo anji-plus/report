@@ -58,10 +58,10 @@ public class ReportExcelServiceImpl implements ReportExcelService {
     @Autowired
     private ReportMapper reportMapper;
 
-    @Value("${customer.file.dist-path:''}")
+    @Value("${customer.file.tmp-path:.}")
     private String dictPath;
 
-    @Value("${customer.file.downloadPath:''}")
+    @Value("${spring.gaea.subscribes.oss.downloadPath:''}")
     private String fileDownloadPath;
 
     @Autowired

@@ -4,58 +4,50 @@ import com.anji.plus.gaea.constant.BaseOperationEnum;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessException;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
+import com.anji.plus.gaea.oss.exceptions.GaeaOSSException;
+import com.anji.plus.gaea.oss.exceptions.GaeaOSSTypeLimitedException;
+import com.anji.plus.gaea.oss.ossbuilder.GaeaOSSTemplate;
+import com.anji.plus.gaea.oss.utils.ResponseUtil;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.anjiplus.template.gaea.business.modules.file.dao.GaeaFileMapper;
 import com.anjiplus.template.gaea.business.modules.file.entity.GaeaFile;
 import com.anjiplus.template.gaea.business.modules.file.service.GaeaFileService;
-import com.anjiplus.template.gaea.business.modules.file.util.FileUtils;
-import com.anjiplus.template.gaea.business.modules.file.util.StringPatternUtil;
-import com.anjiplus.template.gaea.business.util.FileUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.CacheControl;
-import org.springframework.http.MediaType;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.FileInputStream;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
- * (GaeaFile)ServiceImpl
- *
- * @author peiyanni
- * @since 2021-02-18 14:48:26
+ * 文件管理服务实现
+ * @author: Raod
+ * @since: 2022-08-31
  */
 @Service
 @Slf4j
+@RefreshScope
 public class GaeaFileServiceImpl implements GaeaFileService {
 
-    @Value("${customer.file.dist-path:''}")
-    private String dictPath;
-
-    @Value("${customer.file.white-list:''}")
-    private String whiteList;
-
-    @Value("${customer.file.excelSuffix:''}")
-    private String excelSuffix;
-
-    @Value("${customer.file.downloadPath:''}")
+    @Value("${spring.gaea.subscribes.oss.downloadPath:''}")
     private String fileDownloadPath;
+
+    @Autowired
+    private GaeaOSSTemplate gaeaOSSTemplate;
 
     @Autowired
     private GaeaFileMapper gaeaFileMapper;
@@ -69,65 +61,60 @@ public class GaeaFileServiceImpl implements GaeaFileService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public GaeaFile upload(MultipartFile multipartFile, File file, String customFileName) {
-        try {
-            String fileName = "";
-            if (null != multipartFile) {
-                fileName = multipartFile.getOriginalFilename();
-            }else {
-                fileName = file.getName();
-            }
+        String originalFilename =  multipartFile.getOriginalFilename();
 
-            if (StringUtils.isBlank(fileName)) {
-                throw BusinessExceptionBuilder.build(ResponseCode.FILE_EMPTY_FILENAME);
-            }
-
-            String suffixName = fileName.substring(fileName.lastIndexOf("."));
-            String fileInstruction = fileName.substring(0, fileName.lastIndexOf("."));
-            //白名单校验(不区分大小写)
-            List<String> list = new ArrayList<>(Arrays.asList(whiteList.split("\\|")));
-            list.addAll(list.stream().map(String::toUpperCase).collect(Collectors.toList()));
-            if (!list.contains(suffixName)) {
-                throw BusinessExceptionBuilder.build(ResponseCode.FILE_SUFFIX_UNSUPPORTED);
-            }
-            // 生成文件唯一性标识
-            String fileId;
-            if (StringUtils.isBlank(customFileName)) {
-                fileId = UUID.randomUUID().toString();
-            } else {
-                fileId = customFileName;
-            }
-            String newFileName = fileId + suffixName;
-            // 本地文件保存路径
-            String filePath = dictPath + newFileName;
-            String urlPath = fileDownloadPath + "/" + fileId;
-
-            GaeaFile gaeaFile = new GaeaFile();
-            gaeaFile.setFilePath(filePath);
-            gaeaFile.setFileId(fileId);
-            gaeaFile.setUrlPath(urlPath);
-            gaeaFile.setFileType(suffixName.replace(".", ""));
-            gaeaFile.setFileInstruction(fileInstruction);
-            gaeaFileMapper.insert(gaeaFile);
-
-            //写文件 将文件保存/app/dictPath/upload/下
-            java.io.File dest = new java.io.File(dictPath + newFileName);
-            java.io.File parentFile = dest.getParentFile();
-            if (!parentFile.exists()) {
-                parentFile.mkdirs();
-            }
-            if (null != multipartFile) {
-                multipartFile.transferTo(dest);
-            }else {
-                FileUtil.copyFileUsingFileChannels(file, dest);
-            }
-            // 将完整的http访问路径返回
-            return gaeaFile;
-        } catch (BusinessException e){
-            throw BusinessExceptionBuilder.build(e.getCode());
-        }catch (Exception e) {
-            log.error("file upload error", e);
-            throw BusinessExceptionBuilder.build(ResponseCode.FILE_UPLOAD_ERROR);
+        if (StringUtils.isBlank(originalFilename)) {
+            throw BusinessExceptionBuilder.build(ResponseCode.FILE_EMPTY_FILENAME);
         }
+        // 文件后缀 .png
+        String suffixName = originalFilename.substring(originalFilename.lastIndexOf("."));
+        // 生成文件唯一性标识
+        String fileId;
+        if (StringUtils.isBlank(customFileName)) {
+            fileId = UUID.randomUUID().toString();
+        } else {
+            fileId = customFileName;
+        }
+        // 生成在oss中存储的文件名 402b6193e70e40a9bf5b73a78ea1e8ab.png
+        String fileObjectName = fileId + suffixName;
+        // 生成链接通过fileId http访问路径 http://10.108.3.121:9089/meta/file/download/402b6193e70e40a9bf5b73a78ea1e8ab
+        String urlPath = fileDownloadPath + "/" + fileId;
+
+        // 上传文件
+        try{
+            gaeaOSSTemplate.uploadFileByInputStream(multipartFile, fileObjectName);
+        }catch (GaeaOSSTypeLimitedException e){
+            log.error("上传失败GaeaOSSTypeLimitedException", e);
+            throw BusinessExceptionBuilder.build(ResponseCode.FILE_SUFFIX_UNSUPPORTED, e.getMessage());
+        }catch (GaeaOSSException e){
+            log.error("上传失败GaeaOSSException", e);
+            throw BusinessExceptionBuilder.build(ResponseCode.FILE_UPLOAD_ERROR, e.getMessage());
+        }
+
+        // 保存到文件管理中
+        GaeaFile gaeaFile = new GaeaFile();
+        gaeaFile.setFileId(fileId);
+        gaeaFile.setFilePath(fileObjectName);
+        gaeaFile.setUrlPath(urlPath);
+        gaeaFile.setFileType(suffixName.replace(".", ""));
+        gaeaFile.setFileInstruction(originalFilename);
+        insert(gaeaFile);
+
+        return gaeaFile;
+    }
+
+    private MultipartFile getMultipartFile(File file){
+        FileInputStream fileInputStream;
+        MultipartFile multipartFile;
+        try {
+            fileInputStream = new FileInputStream(file);
+            multipartFile = new MockMultipartFile(file.getName(),file.getName(),
+                    ContentType.APPLICATION_OCTET_STREAM.toString(),fileInputStream);
+        } catch (Exception e) {
+            log.error("file转MultipartFile失败", e);
+            throw BusinessExceptionBuilder.build(ResponseCode.FILE_OPERATION_FAILED, e.getMessage());
+        }
+        return multipartFile;
     }
 
     /**
@@ -150,52 +137,73 @@ public class GaeaFileServiceImpl implements GaeaFileService {
      */
     @Override
     public GaeaFile upload(File file, String customFileName) {
-        return upload(null, file, customFileName);
+        return upload(getMultipartFile(file));
     }
 
     @Override
     public ResponseEntity<byte[]> download(HttpServletRequest request, HttpServletResponse response, String fileId) {
         try {
-            String userAgent = request.getHeader("User-Agent");
-            boolean isIeBrowser = userAgent.indexOf("MSIE") > 0;
-            //根据fileId，从gaea_file中读出filePath
+            // fileId必填
+            if(StringUtils.isBlank(fileId)){
+                throw BusinessExceptionBuilder.build(ResponseCode.FILE_ONT_EXSIT);
+            }
+            // 根据fileId，从gaea_file中读出filePath
             LambdaQueryWrapper<GaeaFile> queryWrapper = Wrappers.lambdaQuery();
             queryWrapper.eq(GaeaFile::getFileId, fileId);
             GaeaFile gaeaFile = gaeaFileMapper.selectOne(queryWrapper);
             if (null == gaeaFile) {
                 throw BusinessExceptionBuilder.build(ResponseCode.FILE_ONT_EXSIT);
             }
-            //解析文件路径、文件名和后缀
-            String filePath = gaeaFile.getFilePath();
-            if (StringUtils.isBlank(filePath)) {
+
+            String userAgent = request.getHeader("User-Agent");
+            boolean isIEBrowser = userAgent.indexOf("MSIE") > 0;
+            // 在oss中存储的文件名 402b6193e70e40a9bf5b73a78ea1e8ab.png
+            String fileObjectName = gaeaFile.getFilePath();
+            String originalFilename = gaeaFile.getFileInstruction();
+            if (StringUtils.isBlank(fileObjectName) || StringUtils.isBlank(originalFilename)) {
                 throw BusinessExceptionBuilder.build(ResponseCode.FILE_ONT_EXSIT);
             }
-            String filename = filePath.substring(filePath.lastIndexOf(File.separator));
-            String fileSuffix = filename.substring(filename.lastIndexOf("."));
 
-            //根据文件后缀来判断，是显示图片\视频\音频，还是下载文件
-            File file = new File(filePath);
-            ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
-            builder.contentLength(file.length());
-            if (StringPatternUtil.stringMatchIgnoreCase(fileSuffix, "(.png|.jpg|.jpeg|.bmp|.gif|.icon)")) {
-                builder.cacheControl(CacheControl.noCache()).contentType(MediaType.IMAGE_PNG);
-            } else if (StringPatternUtil.stringMatchIgnoreCase(fileSuffix, "(.flv|.swf|.mkv|.avi|.rm|.rmvb|.mpeg|.mpg|.ogg|.ogv|.mov|.wmv|.mp4|.webm|.wav|.mid|.mp3|.aac)")) {
-                builder.header("Content-Type", "video/mp4; charset=UTF-8");
-            } else {
-                //application/octet-stream 二进制数据流（最常见的文件下载）
-                builder.contentType(MediaType.APPLICATION_OCTET_STREAM);
-                filename = URLEncoder.encode(filename, "UTF-8");
-                if (isIeBrowser) {
-                    builder.header("Content-Disposition", "attachment; filename=" + filename);
-                } else {
-                    builder.header("Content-Disposition", "attacher; filename*=UTF-8''" + filename);
-                }
-            }
-            return builder.body(FileUtils.readFileToByteArray(file));
+            // 调用文件存储工厂，读取文件，返回字节数组
+            byte[] fileBytes = gaeaOSSTemplate.downloadFile(fileObjectName);
+
+            // 根据文件后缀来判断，是显示图片\视频\音频，还是下载文件
+            return ResponseUtil.writeBody(originalFilename, fileBytes, isIEBrowser);
         } catch (Exception e) {
-            log.error("file download error: {}", e);
-            return null;
+            log.error("file download error", e);
+            throw BusinessExceptionBuilder.build(ResponseCode.FILE_OPERATION_FAILED, e.getMessage());
         }
+    }
+
+    /**
+     * 获取文件
+     *
+     * @param fileId
+     * @return
+     */
+    @Override
+    public byte[] getFile(String fileId) {
+        // fileId必填
+        if(StringUtils.isBlank(fileId)){
+            throw BusinessExceptionBuilder.build(ResponseCode.FILE_ONT_EXSIT);
+        }
+        // 根据fileId，从gaea_file中读出filePath
+        LambdaQueryWrapper<GaeaFile> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(GaeaFile::getFileId, fileId);
+        GaeaFile gaeaFile = gaeaFileMapper.selectOne(queryWrapper);
+        if (null == gaeaFile) {
+            throw BusinessExceptionBuilder.build(ResponseCode.FILE_ONT_EXSIT);
+        }
+
+        // 在oss中存储的文件名 402b6193e70e40a9bf5b73a78ea1e8ab.png
+        String fileObjectName = gaeaFile.getFilePath();
+        String originalFilename = gaeaFile.getFileInstruction();
+        if (StringUtils.isBlank(fileObjectName) || StringUtils.isBlank(originalFilename)) {
+            throw BusinessExceptionBuilder.build(ResponseCode.FILE_ONT_EXSIT);
+        }
+
+        // 调用文件存储工厂，读取文件，返回字节数组
+        return gaeaOSSTemplate.downloadFile(fileObjectName);
     }
 
     /**
@@ -212,10 +220,7 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             // 删除本地文件
             entities.forEach(gaeaFile -> {
                 String filePath = gaeaFile.getFilePath();
-                File file = new File(filePath);
-                if (file.exists()) {
-                    file.delete();
-                }
+                gaeaOSSTemplate.deleteFile(filePath);
             });
         }
 

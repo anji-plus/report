@@ -54,4 +54,11 @@ public interface GaeaFileService extends GaeaBaseService<GaeaFileParam, GaeaFile
      * @return
      */
     ResponseEntity<byte[]> download(HttpServletRequest request, HttpServletResponse response, String fileId);
+
+    /**
+     * 获取文件
+     * @param fileId
+     * @return
+     */
+    byte[] getFile(String fileId);
 }
