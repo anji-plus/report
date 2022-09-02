@@ -7,6 +7,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.anji.plus.gaea.constant.BaseOperationEnum;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessException;
+import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anji.plus.gaea.utils.GaeaAssert;
 import com.anji.plus.gaea.utils.GaeaBeanUtils;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
@@ -14,8 +15,7 @@ import com.anjiplus.template.gaea.business.enums.ExportTypeEnum;
 import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.DataSetDto;
 import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.OriginalDataDto;
 import com.anjiplus.template.gaea.business.modules.dataset.service.DataSetService;
-import com.anjiplus.template.gaea.business.modules.file.dao.GaeaFileMapper;
-import com.anjiplus.template.gaea.business.modules.file.entity.GaeaFile;
+import com.anjiplus.template.gaea.business.modules.file.service.GaeaFileService;
 import com.anjiplus.template.gaea.business.modules.report.dao.ReportMapper;
 import com.anjiplus.template.gaea.business.modules.report.dao.entity.Report;
 import com.anjiplus.template.gaea.business.modules.reportexcel.controller.dto.ReportExcelDto;
@@ -23,7 +23,6 @@ import com.anjiplus.template.gaea.business.modules.reportexcel.dao.ReportExcelMa
 import com.anjiplus.template.gaea.business.modules.reportexcel.dao.entity.ReportExcel;
 import com.anjiplus.template.gaea.business.modules.reportexcel.service.ReportExcelService;
 import com.anjiplus.template.gaea.business.modules.reportexcel.util.CellType;
-import com.anjiplus.template.gaea.business.modules.reportexcel.util.XlsSheetUtil;
 import com.anjiplus.template.gaea.business.modules.reportexcel.util.XlsUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.commons.lang3.StringUtils;
@@ -34,8 +33,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * TODO
@@ -54,6 +60,9 @@ public class ReportExcelServiceImpl implements ReportExcelService {
     @Autowired
     private DataSetService dataSetService;
 
+    @Autowired
+    private GaeaFileService gaeaFileService;
+
 
     @Autowired
     private ReportMapper reportMapper;
@@ -61,11 +70,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
     @Value("${customer.file.tmp-path:.}")
     private String dictPath;
 
-    @Value("${spring.gaea.subscribes.oss.downloadPath:''}")
-    private String fileDownloadPath;
-
-    @Autowired
-    private GaeaFileMapper gaeaFileMapper;
+    private final static String ZIP_PATH = "/tmp_zip/";
 
 
     @Override
@@ -139,26 +144,30 @@ public class ReportExcelServiceImpl implements ReportExcelService {
             reportExcelDto.setJsonStr(report.getJsonStr());
             String jsonStr = analysisReportData(reportExcelDto);
             List<JSONObject> lists=(List<JSONObject> ) JSON.parse(jsonStr);
-            OutputStream out;
+            OutputStream out = null;
+            File file = null;
             try {
-                String fileId = UUID.randomUUID().toString();
-                String filePath = dictPath + File.separator + fileId + ".xlsx";
-                String urlPath = fileDownloadPath + java.io.File.separator + fileId;
-
-                GaeaFile gaeaFile = new GaeaFile();
-                gaeaFile.setFilePath(filePath);
-                gaeaFile.setFileId(fileId);
-                gaeaFile.setUrlPath(urlPath);
-                gaeaFile.setFileType("xlsx");
-                gaeaFile.setFileInstruction(reportCode + ".xlsx");
-
-                out = new FileOutputStream(filePath);
+                String fileName = report.getReportCode();
+                File dir = new File(dictPath + ZIP_PATH);
+                if (!dir.exists()){
+                    dir.mkdirs();
+                }
+                String filePath = dir.getAbsolutePath() + File.separator + fileName + ".xlsx";
+                file = new File(filePath);
+                out = Files.newOutputStream(Paths.get(filePath));
                 XlsUtil.exportXlsFile(out, true, lists);
+                gaeaFileService.upload(file);
 
-                gaeaFileMapper.insert(gaeaFile);
-                logger.info("导出成功：{}", gaeaFile);
             } catch (IOException e) {
                 logger.error("导出失败", e);
+            }finally {
+                try {
+                    out.close();
+                    file.delete();
+                } catch (IOException e) {
+                    throw BusinessExceptionBuilder.build(ResponseCode.FILE_OPERATION_FAILED, e.getMessage());
+                }
+
             }
         }
         return true;

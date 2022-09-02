@@ -331,7 +331,7 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
                     GaeaFile gaeaFile = gaeaFileService.selectOne(queryWrapper);
                     String uploadPath;
                     if (null == gaeaFile) {
-                        GaeaFile upload = gaeaFileService.upload(imageFile, fileName);
+                        GaeaFile upload = gaeaFileService.upload(imageFile);
                         log.info("存入图片: {}", upload.getFilePath());
                         uploadPath = upload.getUrlPath();
                     }else {

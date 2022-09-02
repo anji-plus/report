@@ -57,10 +57,14 @@ public class GaeaFileServiceImpl implements GaeaFileService {
         return gaeaFileMapper;
     }
 
-
+    /**
+     * 文件上传
+     *
+     * @param multipartFile 文件
+     * @return
+     */
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public GaeaFile upload(MultipartFile multipartFile, File file, String customFileName) {
+    public GaeaFile upload(MultipartFile multipartFile) {
         String originalFilename =  multipartFile.getOriginalFilename();
 
         if (StringUtils.isBlank(originalFilename)) {
@@ -69,12 +73,8 @@ public class GaeaFileServiceImpl implements GaeaFileService {
         // 文件后缀 .png
         String suffixName = originalFilename.substring(originalFilename.lastIndexOf("."));
         // 生成文件唯一性标识
-        String fileId;
-        if (StringUtils.isBlank(customFileName)) {
-            fileId = UUID.randomUUID().toString();
-        } else {
-            fileId = customFileName;
-        }
+        String fileId = UUID.randomUUID().toString();
+
         // 生成在oss中存储的文件名 402b6193e70e40a9bf5b73a78ea1e8ab.png
         String fileObjectName = fileId + suffixName;
         // 生成链接通过fileId http访问路径 http://10.108.3.121:9089/meta/file/download/402b6193e70e40a9bf5b73a78ea1e8ab
@@ -120,23 +120,11 @@ public class GaeaFileServiceImpl implements GaeaFileService {
     /**
      * 文件上传
      *
-     * @param multipartFile 文件
-     * @return
-     */
-    @Override
-    public GaeaFile upload(MultipartFile multipartFile) {
-        return upload(multipartFile, null, null);
-    }
-
-    /**
-     * 文件上传
-     *
      * @param file           文件
-     * @param customFileName 自定义文件名
      * @return
      */
     @Override
-    public GaeaFile upload(File file, String customFileName) {
+    public GaeaFile upload(File file) {
         return upload(getMultipartFile(file));
     }
 
