@@ -55,6 +55,7 @@ spring:
         # 用于文件上传成功后，生成文件的下载公网完整URL
         downloadPath: http://10.108.26.197:9095/file/download
         nfs:
+          #上传对应本地全路径，目录必须是真实存在的，注意 Win是 \ 且有盘符，linux是 / 无盘符
           path: /app/disk/upload/
         #若要使用minio文件存储，请启用以下配置
         #minio:
