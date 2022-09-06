@@ -206,10 +206,7 @@ public class GaeaFileServiceImpl implements GaeaFileService {
     public void processBatchAfterOperation(List<GaeaFile> entities, BaseOperationEnum operationEnum) throws BusinessException {
         if (operationEnum.equals(BaseOperationEnum.DELETE_BATCH)) {
             // 删除本地文件
-            entities.forEach(gaeaFile -> {
-                String filePath = gaeaFile.getFilePath();
-                gaeaOSSTemplate.deleteFile(filePath);
-            });
+            entities.forEach(gaeaFile -> gaeaOSSTemplate.deleteFile(gaeaFile.getFileId().concat(".").concat(gaeaFile.getFileType())));
         }
 
     }
