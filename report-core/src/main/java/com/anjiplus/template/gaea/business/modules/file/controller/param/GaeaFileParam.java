@@ -4,6 +4,7 @@ package com.anjiplus.template.gaea.business.modules.file.controller.param;
 import com.anji.plus.gaea.annotation.Query;
 import com.anji.plus.gaea.constant.QueryEnum;
 import com.anji.plus.gaea.curd.params.PageParam;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
  * @author peiyanni
  * @since 2021-02-18 14:48:29
  */
+@Data
 public class GaeaFileParam extends PageParam implements Serializable {
 
     /** 模糊查询 */
