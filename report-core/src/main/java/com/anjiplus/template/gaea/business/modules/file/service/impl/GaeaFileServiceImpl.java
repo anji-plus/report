@@ -151,6 +151,9 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             if (StringUtils.isBlank(fileObjectName) || StringUtils.isBlank(originalFilename)) {
                 throw BusinessExceptionBuilder.build(ResponseCode.FILE_ONT_EXSIT);
             }
+            if (!originalFilename.endsWith(".".concat(gaeaFile.getFileType()))) {
+                originalFilename = originalFilename.concat(".").concat(gaeaFile.getFileType());
+            }
 
             // 调用文件存储工厂，读取文件，返回字节数组
             byte[] fileBytes = gaeaOSSTemplate.downloadFile(fileObjectName);
