@@ -146,7 +146,7 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             String userAgent = request.getHeader("User-Agent");
             boolean isIEBrowser = userAgent.indexOf("MSIE") > 0;
             // 在oss中存储的文件名 402b6193e70e40a9bf5b73a78ea1e8ab.png
-            String fileObjectName = gaeaFile.getFilePath();
+            String fileObjectName = gaeaFile.getFileId().concat(".").concat(gaeaFile.getFileType());
             String originalFilename = gaeaFile.getFileInstruction();
             if (StringUtils.isBlank(fileObjectName) || StringUtils.isBlank(originalFilename)) {
                 throw BusinessExceptionBuilder.build(ResponseCode.FILE_ONT_EXSIT);
