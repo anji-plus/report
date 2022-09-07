@@ -9,8 +9,10 @@ cd aj-report-xxxx
 vim conf/bootstrap.yml 修改数据库连接、上传文件的路径以及地址
 sh bin/start.sh
 
-访问
-http://serverip:9095
+访问：http://serverip:9095
+admin 123456
+
+修改："数据源->mysql数据源"用户名密码
 ```
 
 ## 编译环境
@@ -37,7 +39,8 @@ git clone https://gitee.com/anji-plus/report.git <br>
 编译完成后是放在当前目录下的build文件夹中：aj-report-xxxx.zip <br>
 
 **注：** 如果Win10部署的话，如图用git执行sh build.sh就行了。Linux就直接去report目录下执行sh build.sh就行。 <br>
-**特别注意：** 如果是Win10编译，那么几个启动脚本的格式则是win的格式，放linux上执行会报错的，反之放linux编译在win10启动也会报错，需要转格式。 <br>
+**特别注意：**
+如果是Win10编译，那么几个启动脚本的格式则是win的格式，放linux上执行会报错的，反之放linux编译在win10启动也会报错，需要转格式。 <br>
 
 ## 修改mysql连接
 
@@ -50,10 +53,10 @@ git clone https://gitee.com/anji-plus/report.git <br>
 ![bootstrap.png](../picture/quickly/img_2.png) <br>
 **注**：请确认你的Mysql是否支持远程连接，登陆用户是否有DDL权限 <br>
 
-## 上传功能
+## OSS配置
 
-使用上传功能，必须修改此内容，注意路径格式，比如Win是 \ ,linux是 / <br>
-![file.png](../picture/quickly/img_15.png)
+OSS底层已支持minio、amazonS3、dfs，都配置的情况下优先级minio->amazonS3->nfs <br>
+![file.png](../picture/quickly/img.png) <br>
 
 ## 启动
 

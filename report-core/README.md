@@ -7,7 +7,7 @@
 <dependency>
     <groupId>com.anji-plus</groupId>
     <artifactId>spring-boot-gaea</artifactId>
-    <version>2.0.3.RELEASE</version>
+    <version>2.0.5.RELEASE</version>
     <exclusions>
         <exclusion>
             <groupId>org.springframework.boot</groupId>
