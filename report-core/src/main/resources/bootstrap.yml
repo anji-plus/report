@@ -22,6 +22,14 @@ spring:
     url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: appuser@anji
+
+  #如果要使用redis，请参考report-core目录下的README.md文件中写的进行调整
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    password: root
+#    database: 1
+
   #数据源连接池配置
   druid:
     initial-size: 10 # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
@@ -46,6 +54,31 @@ spring:
     placeholder-replacement: false
     init-sqls:
       - CREATE DATABASE IF NOT EXISTS `aj_report` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+  gaea:
+    subscribes:
+      oss: #文件存储 都配置的情况下优先级minio->amazonS3->nfs
+        enabled: true
+        ##允许上传的文件后缀
+        file-type-while-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg|.aaa
+        # 用于文件上传成功后，生成文件的下载公网完整URL
+        downloadPath: http://10.108.26.197:9095/file/download
+        nfs:
+          #上传对应本地全路径，目录必须是真实存在的，注意 Win是 \ 且有盘符，linux是 / 无盘符
+          path: /app/disk/upload/
+        #若要使用minio文件存储，请启用以下配置
+        #minio:
+        #  url: http://127.0.0.1
+        #  port: 9000
+        #  access-key: minioreport
+        #  secret-key: minioreport
+        #  bucket-name: aj-report
+        #若要使用amazonS3文件存储，请启用以下配置
+        #amazonS3:
+        #  url: http://127.0.0.1
+        #  access-key: access-key
+        #  secret-key: secret-key
+        #  bucket-name: AJ-Report
+        #若minio和amazonS3都没有，使用服务器高可用的nfs共享盘
 
 mybatis-plus:
   configuration:
@@ -64,18 +97,11 @@ logging:
 
 # 本应用自定义参数
 customer:
-  # 开发测试用本地文件，如果是生产，请考虑使用对象存储
-  file:
-    #上传对应本地全路径，目录必须是真实存在的，注意 Win是 \ 且有盘符，linux是 / 无盘符
-    dist-path: /app/disk/upload/
-    #dist-path: D:\Download
-    white-list: .png|.jpg|.jpeg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi
-    excelSuffix: .xlsx|.xls|.csv
-    #上传对应下载的下载链接路径 http://serverip:9095/file/download
-    downloadPath: http://10.108.26.197:9095/file/download
-
   # 跳过token验证和权限验证的url清单
   skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html, /favicon.ico, /reportShare/detailByCode
+  file:
+    #导入导出临时文件夹 默认.代表当前目录，拼接/tmp_zip/目录
+    tmpPath: .
   user:
     ##新增用户默认密码
     default:

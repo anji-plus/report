@@ -1,8 +1,9 @@
 ```
  第一步，下载zip包，解压
- 第二步，conf->bootstrap.yml，修改mysql连接
+ 第二步，conf->bootstrap.yml，修改mysql连接等信息
  第三步，启动bin目录下start.sh
- 第四步，访问 http://localhost:9095
+ 第四步，访问 http://localhost:9095  admin 123456
+ 第五步，修改"数据源->mysql数据源"用户名密码
 ```
 
 ## 下载发行版
@@ -21,10 +22,10 @@
 ![bootstrap.png](../picture/quickly/img_2.png) <br>
 **注**：请确认你的Mysql是否支持远程连接，登陆用户是否有DDL权限 <br>
 
-## 上传功能
+## OSS配置
 
-使用上传功能，必须修改此内容，注意路径格式，比如Win是 \ ,linux是 / <br>
-![file.png](../picture/quickly/img_15.png) <br>
+OSS底层已支持minio、amazonS3、dfs，都配置的情况下优先级minio->amazonS3->nfs <br>
+![file.png](../picture/quickly/img.png) <br>
 
 ## 启动
 
@@ -38,9 +39,7 @@ aj-report-XXX --> bin --> start.bat <br>
 
 如果start.bat启动有问题的话，可以尝试以下方法解决。<br>
 修改第4行的JAVA_HOME，改成你自己的JAVA_HOME，并去掉**rem**注释，双击启动<br>
-![java.png](../picture/quickly/img_7.png) <br>
-**注**：如果你JAVA_HOME目录存在空格，将bat文件最下面的JAVA_HOME添加""号
-![img.png](../picture/quickly/img_8.png) <br>
+![java.png](../picture/quickly/img_7.png) 
 
 ## 访问
 

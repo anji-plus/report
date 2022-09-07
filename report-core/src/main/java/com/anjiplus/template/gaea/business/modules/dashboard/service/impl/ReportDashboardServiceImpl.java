@@ -80,13 +80,13 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
     @Autowired
     private ReportService reportService;
 
-    @Value("${customer.file.downloadPath:''}")
+    @Value("${spring.gaea.subscribes.oss.downloadPath:}")
     private String fileDownloadPath;
 
-    @Value("${customer.file.dist-path:''}")
+    @Value("${customer.file.tmp-path:.}")
     private String dictPath;
 
-    private final static String ZIP_PATH = "/zip/";
+    private final static String ZIP_PATH = "/tmp_zip/";
     private final static String JSON_PATH = "dashboard.json";
 
     private Map<String, ChartStrategy> queryServiceImplMap = new HashMap<>();
@@ -331,7 +331,7 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
                     GaeaFile gaeaFile = gaeaFileService.selectOne(queryWrapper);
                     String uploadPath;
                     if (null == gaeaFile) {
-                        GaeaFile upload = gaeaFileService.upload(imageFile, fileName);
+                        GaeaFile upload = gaeaFileService.upload(imageFile);
                         log.info("存入图片: {}", upload.getFilePath());
                         uploadPath = upload.getUrlPath();
                     }else {
@@ -395,13 +395,9 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
             queryWrapper.eq(GaeaFile::getFileId, fileName);
             GaeaFile gaeaFile = gaeaFileService.selectOne(queryWrapper);
             if (null != gaeaFile) {
-                String fileType = gaeaFile.getFileType();
-                path = path + "/image/" + fileName + "." + fileType;
-                //path = /app/disk/upload/zip/UUID/image
-
-                //原始文件的路径
-                String filePath = gaeaFile.getFilePath();
-                FileUtil.copyFileUsingFileChannels(filePath, path);
+                byte[] file = gaeaFileService.getFile(gaeaFile.getFileId());
+                path = path + "/image/";
+                FileUtil.byte2File(file, path, gaeaFile.getFileId().concat(".").concat(gaeaFile.getFileType()));
             }
         }
 
