@@ -84,7 +84,7 @@ public class ReportExcelController extends GaeaBaseController<ReportExcelParam, 
 
     @PostMapping("/share")
     @GaeaAuditLog(pageTitle = "excel分享")
-    @Permission(code = "reportExcel", name = "分享报表")
+    @Permission(code = "share", name = "分享报表")
     public ResponseBean share(@Validated @RequestBody ReportShareDto dto) {
         return ResponseBean.builder().data(reportShareService.insertShare(dto)).build();
     }
