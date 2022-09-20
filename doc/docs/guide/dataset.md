@@ -38,6 +38,11 @@
 ![img4](../picture/dateset/img_4.png) <br>
 入参是data，返回值也必须是data，中间是JS的处理过程，注意入参返回都是List<JSONObject>，记得保存。 <br>
 
+#### java脚本
+
+通过Groovy来进行实现的 <br>
+[Groovy用法参考](https://my.oschina.net/u/4517014/blog/5526324) <br>
+
 #### 字典项
 
 ![img6.png](../picture/dateset/img_6.png) <br>

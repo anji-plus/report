@@ -80,34 +80,48 @@
 
 <br>
 
-- flyway执行报错1.0.10sql失败 <br>
-  错误提示：Caused by: org.flywaydb.core.api.FlywayException: Validate failed: Detected failed <br>
-  migration to version 1.0.10 (create report share) <br>
-  请参考此 [Issue](https://gitee.com/anji-plus/report/issues/I47JNE) 解决此问题 <br>
+- flyway执行sql相关错误 <br>
+  错误提示：** Error creating bean with name 'flywayInitializer' defined in class XXX migration to version V1.0.XXX.sql failed ** <br>
+  解析：flyway在执行某个版本里面包含的sql时报错了 <br>
+  
+- 可能原因：<br>
+  1、mysql版本问题，在不同版本的mysql中，部分语法可能存在异同 <br>
+  2、mysql配置问题 <br>
+  
+  解决方案：
+  一、禁用flyway，手动执行已有的各版本sql文件 <br>
+  1、在bootstrap.yml配置文件中找到flyway配置项，如图示 <br>
+  [img6.png](../picture/qusetion/img_6.png) <br>
+  2、将report-core/src/main/resources/db.migration目录下所有的sql文件都执行一次，遇到报错，手动修改sql文件。<br>
+  3、sql文件中，只有** aj_report **数据库相关的sql是必须的依赖，在确保和aj_report数据库相关sql都执行后在启动服务。<br>
+
+  二、保持flyway开启状态，手动执行报错的那个版本sql文件 <br>
+  1、在report-core/src/main/resources/db.migration目录下找到报错的那个版本sql <br>
+  2、根据报错提示找到sql文件中具体报错的那一段sql，或者和数据库已有的数据对比，找到没有执行成功的那部分sql <br>
+  3、手动执行flyway没执行成功的那部分，根据提示，对sql进行修改调整 <br>
+  4、执行完毕后，在aj_report数据库下flyway_schema_history表中找到报错对应的sql文件版本，将对应的success改完1 <br>
+  [img7.png](../picture/qusetion/img_7.png) <br>
 
 <br>
 
 ## 数据集相关
 
 - 系统异常，后台日志显示“** Data too long for colum ** ” <br>
+  查询到的数据太多了，无法入库，这里查询入库的数据只作为在使用动态数据时做解析用 <br>
   1、建议不要使用 "select *"  <br>
   2、一张图表能承载的数据量是有限的，太多则图表展示不出来、页面卡死等 <br>
   3、必须使用 "select *" ，或者展示很多数据。解决方法，将测试预览的值删掉只剩一条，注意数据的结构 [{}] <br>
 
 ## 大屏图表组件相关
 
-- 访问白屏 <br>
+- 访问大屏，浏览器白屏 <br>
   设计完大屏，保存后进行预览，发现背景全白 <br>
   1、回到编辑页面，查看大屏背景颜色是否设置 <br>
-  2、查看大屏的宽高，如果宽高都是0（大屏宽高在设计时，有概率性变成0，不知原因）大屏背景图片，颜色，皆无法显示 <br>
+  2、查看大屏的宽高，如果宽高都是0，大屏背景图片，颜色，皆无法显示 <br>
   3、大屏宽高改成 1920 1080 <br>
 
 <br>
 
-- 文本框颜色无法改变 <br>
-  使用文本框，改变颜色，无法改变。已知有概率性的出现无法修改文本框颜色的情况。解决方法有以下 <br>
-  1、保存退出大屏，重新进入大屏修改文本框颜色 <br>
-  2、删掉文本框，重新拖动一个 <br>
 
 
 
