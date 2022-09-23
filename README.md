@@ -218,9 +218,9 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 #### 开源不易，劳烦各位star ☺
 
 
-#### 感谢JetBrains 的支持
+## 感谢JetBrains 的支持
 
-##### JetBrains:[https://www.jetbrains.com/?from=AJ-Report](https://www.jetbrains.com/?from=AJ-Report"链接")
+#### JetBrains:[https://www.jetbrains.com/?from=AJ-Report](https://www.jetbrains.com/?from=AJ-Report"链接")
 
 <br>
 
