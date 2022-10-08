@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import {getShareToken, getToken} from "@/utils/auth";
 
 // 设计报表
 export function design(data) {
@@ -14,6 +15,7 @@ export function preview(data) {
   return request({
     url: 'reportExcel/preview',
     method: 'post',
+    headers: { 'Share-Token': getShareToken(), 'Authorization': getToken() },
     data,
   })
 }
