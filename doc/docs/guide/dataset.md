@@ -50,4 +50,5 @@
 
 ## HTTP数据集
 
-即原有http数据源的功能，原有http数据源不动
+即原有http数据源的功能 <br>
+**注：** Http接口返回类型必须是Json、不能是text，text无法解析

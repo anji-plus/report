@@ -185,11 +185,11 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 
 ## 版本问题
 
-已知以下版本存在兼容性问题
+已知以下版本存在兼容性问题，请不要使用
 
-- Node.js V16
+- Node.js V16及以上
 - openJdk
-- Jdk 11
+- Jdk 1.7及以下/11及以上
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
 
 **[常见问题](https://ajreport.beliefteam.cn/report-doc/guide/question.html)**
