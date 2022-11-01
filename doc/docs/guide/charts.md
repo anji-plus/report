@@ -230,3 +230,14 @@
 ![img23](../picture/charts/img_23.png) <br>
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
+
+## 雷达图
+
+基本操作和表格是一致，通过配置栏的新增按钮和操作按钮对雷达顶点数量进行修改，可生成5边雷达，6边雷达等等，key值和雷达顶点保持一致，从最上端顶点逆时针规划其他顶点。<br>
+![img26](../picture/charts/img_26.png) <br>
+
+### 数据格式
+
+数据格式和柱线、多柱线都是类似的，注意实际作为name的字段，比如时间字段，有且只能有1个，数据集选择时选择名称，其余是顶点字段，不明白可以看静态数据格式。<br>
+![img27](../picture/charts/img_27.png) <br>
+![img28](../picture/charts/img_28.png) <br>
