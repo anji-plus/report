@@ -111,6 +111,7 @@ export default {
       // widget-stackchart 堆叠图
       // widget-heatmap 热力图
       // widget-mapline 中国地图-路线图
+      // widget-radar 雷达图
       const chartType = params.chartType
       if (
         chartType == "widget-barchart" ||
@@ -131,6 +132,8 @@ export default {
         return this.coordChartFn(params.chartProperties, data)
       } else if (chartType == "widget-linemap") {
         return this.linemapChartFn(params.chartProperties, data)
+      } else if (chartType == "widget-radar") {
+        return this.radarChartFn(params.chartProperties, data)
       } else {
         return data
       }
@@ -267,6 +270,25 @@ export default {
         }
         ananysicData.push(obj);
       }
+      return ananysicData;
+    },
+    radarChartFn(chartProperties, data) {
+      const ananysicData = {};
+      // 字段名
+      const radarField = [];
+      let nameField;
+      for(const key in chartProperties) {
+        if (chartProperties[key] == 'radar') {
+          radarField.push(key)
+        }
+        if (chartProperties[key] == 'name') {
+          nameField = key;
+        }
+      }
+      // 拿到数值
+      ananysicData["name"] = nameField;
+      ananysicData["keys"] = radarField;
+      ananysicData["value"] = data;
       return ananysicData;
     },
     setUnique(arr) {

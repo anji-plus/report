@@ -262,7 +262,7 @@ export const widgetTable = {
           relactiveDom: 'dataType',
           relactiveDomValue: 'dynamicData',
           chartType: 'widget-table',
-          dictKey: 'TEXT_PROPERTIES', //表格的暂不起作用
+          dictKey: 'TEXT_PROPERTIES',
           value: '',
         },
       ],

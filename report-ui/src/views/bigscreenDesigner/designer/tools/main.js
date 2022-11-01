@@ -36,6 +36,7 @@ import {widgetDecoratePie} from "./configure/widget-decorate-pie";
 import {widgetMoreBarLine} from "./configure/widget-more-bar-line";
 import {widgetWordCloud} from "./configure/widget-word-cloud";
 import {widgetHeatmap} from "./configure/widget-heatmap";
+import {widgetRadar} from "./configure/widget-radar";
 
 export const widgetTool = [
   // type=html类型的组件
@@ -67,5 +68,6 @@ export const widgetTool = [
   widgetDecoratePie,
   widgetMoreBarLine,
   widgetWordCloud,
-  widgetHeatmap
+  widgetHeatmap,
+  widgetRadar
 ]
