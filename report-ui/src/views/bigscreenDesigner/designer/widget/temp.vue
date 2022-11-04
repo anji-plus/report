@@ -40,6 +40,7 @@ import widgetMoreBarLineChart from "./bar/widgetMoreBarLineChart";
 import widgetWordCloud from "./wordcloud/widgetWordCloud";
 import widgetHeatmap from "./heatmap/widgetHeatmap";
 import widgetRadar from "./radar/widgetRadar";
+import widgetBarLineStackChart from "./bar/widgetBarLineStackChart";
 
 export default {
   name: "WidgetTemp",
@@ -72,7 +73,8 @@ export default {
     widgetMoreBarLineChart,
     widgetWordCloud,
     widgetHeatmap,
-    widgetRadar
+    widgetRadar,
+    widgetBarLineStackChart
   },
   model: {
     prop: "value",

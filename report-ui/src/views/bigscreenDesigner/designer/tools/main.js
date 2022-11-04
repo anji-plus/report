@@ -37,6 +37,7 @@ import {widgetMoreBarLine} from "./configure/widget-more-bar-line";
 import {widgetWordCloud} from "./configure/widget-word-cloud";
 import {widgetHeatmap} from "./configure/widget-heatmap";
 import {widgetRadar} from "./configure/widget-radar";
+import {widgetBarLineStack} from "./configure/widget-bar-line-stack";
 
 export const widgetTool = [
   // type=html类型的组件
@@ -69,5 +70,6 @@ export const widgetTool = [
   widgetMoreBarLine,
   widgetWordCloud,
   widgetHeatmap,
-  widgetRadar
+  widgetRadar,
+  widgetBarLineStack
 ]
