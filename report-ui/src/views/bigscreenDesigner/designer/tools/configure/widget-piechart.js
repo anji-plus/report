@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 饼图
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:28:20
  * @LastEditors: qianlishi
@@ -239,7 +239,7 @@ export const widgetPiechart =   {
               {
                 type: 'vue-color',
                 label: '字体颜色',
-                name: 'lengedColor',
+                name: 'legendColor',
                 required: false,
                 placeholder: '',
                 value: '#fff',
@@ -247,7 +247,7 @@ export const widgetPiechart =   {
               {
                 type: 'el-input-text',
                 label: '字体大小',
-                name: 'lengedFontSize',
+                name: 'legendFontSize',
                 required: false,
                 placeholder: '',
                 value: 16,
@@ -255,7 +255,7 @@ export const widgetPiechart =   {
               {
                 type: 'el-input-number',
                 label: '图例宽度',
-                name: 'lengedWidth',
+                name: 'legendWidth',
                 required: false,
                 placeholder: '',
                 value: 15,
@@ -267,10 +267,11 @@ export const widgetPiechart =   {
                 required: false,
                 placeholder: '',
                 selectOptions: [
+                  {code: 'center', name: '居中'},
                   {code: 'left', name: '左对齐'},
                   {code: 'right', name: '右对齐'},
                 ],
-                value: ''
+                value: 'center'
               },
               {
                 type: 'el-select',
@@ -282,7 +283,7 @@ export const widgetPiechart =   {
                   {code: 'top', name: '顶部'},
                   {code: 'bottom', name: '底部'},
                 ],
-                value: ''
+                value: 'top'
               },
               {
                 type: 'el-select',
@@ -294,7 +295,7 @@ export const widgetPiechart =   {
                   {code: 'vertical', name: '竖排'},
                   {code: 'horizontal', name: '横排'},
                 ],
-                value: ''
+                value: 'horizontal'
               },
             ],
           },

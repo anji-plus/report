@@ -422,7 +422,7 @@ export const widgetHeatmap = {
             {
               type: 'vue-color',
               label: '数值颜色',
-              name: 'lengedColor',
+              name: 'legendColor',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -430,7 +430,7 @@ export const widgetHeatmap = {
             {
               type: 'el-input-number',
               label: '图例大小',
-              name: 'lengedFontSize',
+              name: 'legendFontSize',
               required: false,
               placeholder: '',
               value: 12,
@@ -438,7 +438,7 @@ export const widgetHeatmap = {
             {
               type: 'el-input-number',
               label: '图例宽度',
-              name: 'lengedWidth',
+              name: 'legendWidth',
               required: false,
               placeholder: '',
               value: 12,
@@ -488,7 +488,7 @@ export const widgetHeatmap = {
             {
               type: 'customColor',
               label: '',
-              name: 'lengedColorList',
+              name: 'legendColorList',
               required: false,
               value: [{color: '#abd9e9'}, {color: '#74add1'}, {color: '#4575b4'}, {color: '#313695'}],
             },

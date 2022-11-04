@@ -351,10 +351,10 @@ export default {
         optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
-        color: optionsSetup.lengedColor,
-        fontSize: optionsSetup.lengedFontSize
+        color: optionsSetup.legendColor,
+        fontSize: optionsSetup.legendFontSize
       };
-      legend.itemWidth = optionsSetup.lengedWidth;
+      legend.itemWidth = optionsSetup.legendWidth;
     },
     // 图例名称设置
     setOptionsLegendName(name){

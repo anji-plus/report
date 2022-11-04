@@ -174,10 +174,10 @@ export default {
         optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
-        color: optionsSetup.lengedColor,
+        color: optionsSetup.legendColor,
         fontSize: optionsSetup.fontSize
       };
-      legend.itemWidth = optionsSetup.lengedWidth;
+      legend.itemWidth = optionsSetup.legendWidth;
     },
     // 图例颜色修改
     setOptionsColor() {

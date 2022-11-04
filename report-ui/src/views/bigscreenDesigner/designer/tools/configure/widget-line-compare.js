@@ -170,7 +170,7 @@ export const widgetLineCompare = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'lengedColor',
+              name: 'legendColor',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -178,7 +178,7 @@ export const widgetLineCompare = {
             {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'lengedFontSize',
+              name: 'legendFontSize',
               required: false,
               placeholder: '',
               value: 12,
@@ -186,7 +186,7 @@ export const widgetLineCompare = {
             {
               type: 'el-input-number',
               label: '图例宽度',
-              name: 'lengedWidth',
+              name: 'legendWidth',
               required: false,
               placeholder: '',
               value: 12,

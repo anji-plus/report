@@ -175,10 +175,10 @@ export default {
         optionsCollapse.longitudinalPosition == "bottom" ? 0 : "auto";
       legend.orient = optionsCollapse.layoutFront;
       legend.textStyle = {
-        color: optionsCollapse.lengedColor,
+        color: optionsCollapse.legendColor,
         fontSize: optionsCollapse.fontSize
       };
-      legend.itemWidth = optionsCollapse.lengedWidth;
+      legend.itemWidth = optionsCollapse.legendWidth;
     },
     // 图例颜色修改
     setOptionsColor() {

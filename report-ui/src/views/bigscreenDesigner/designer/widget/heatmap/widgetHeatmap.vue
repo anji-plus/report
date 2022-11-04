@@ -291,17 +291,17 @@ export default {
       visualMap.min = optionsSetup.dataMin;
       visualMap.max = optionsSetup.dataMax;
       visualMap.textStyle = {
-        fontSize : optionsSetup.lengedFontSize,
-        color : optionsSetup.lengedColor
+        fontSize : optionsSetup.legendFontSize,
+        color : optionsSetup.legendColor
       };
-      visualMap.inRange.color = optionsSetup.lengedColorList.map((x) => {
+      visualMap.inRange.color = optionsSetup.legendColorList.map((x) => {
         return x.color;
       });
       visualMap.left = optionsSetup.lateralPosition;
       visualMap.top = optionsSetup.longitudinalPosition;
       visualMap.bottom = optionsSetup.longitudinalPosition;
       visualMap.orient = optionsSetup.layoutFront;
-      visualMap.itemWidth = optionsSetup.lengedWidth;
+      visualMap.itemWidth = optionsSetup.legendWidth;
     },
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
