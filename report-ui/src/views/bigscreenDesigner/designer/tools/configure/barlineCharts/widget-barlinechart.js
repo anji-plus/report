@@ -1,12 +1,16 @@
 /*
- * @Descripttion: 柱线堆叠图
- * @Author: foming
+ * @Descripttion: 柱线图
+ * @version:
+ * @Author: qianlishi
+ * @Date: 2021-08-29 07:26:48
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2022-11-07 15:39:29
  */
-export const widgetBarLineStack = {
-  code: 'widgetBarLineStackChart',
-  type: 'barChart',
-  tabName: '柱状图',
-  label: '柱线堆叠图',
+export const widgetBarlinechart = {
+  code: 'widget-barlinechart',
+  type: 'barlineCharts',
+  tabName: '柱线图',
+  label: '柱线图',
   icon: 'iconzhuxiantu',
   options: {
     // 配置
@@ -17,7 +21,7 @@ export const widgetBarLineStack = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '柱线堆叠图',
+        value: '柱线图',
       },
       {
         type: 'vue-color',
@@ -28,27 +32,6 @@ export const widgetBarLineStack = {
         value: ''
       },
       [
-        {
-          name: '柱体设置',
-          list: [
-            {
-              type: 'el-slider',
-              label: '宽度',
-              name: 'maxWidth',
-              required: false,
-              placeholder: '',
-              value: 20,
-            },
-            {
-              type: 'el-slider',
-              label: '圆角',
-              name: 'radius',
-              require: false,
-              placeholder: '',
-              value: 5,
-            },
-          ],
-        },
         {
           name: '折线设置',
           list: [
@@ -66,7 +49,7 @@ export const widgetBarLineStack = {
               name: 'pointSize',
               required: false,
               placeholder: '',
-              value: 3,
+              value: 5,
             },
             {
               type: 'el-switch',
@@ -74,7 +57,23 @@ export const widgetBarLineStack = {
               name: 'smoothCurve',
               required: false,
               placeholder: '',
-              value: false,
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '面积堆积',
+              name: 'area',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-slider',
+              label: '面积厚度',
+              name: 'areaThickness',
+              required: false,
+              placeholder: '',
+              value: 5,
             },
             {
               type: 'el-slider',
@@ -83,6 +82,35 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               value: 3,
+            },
+          ],
+        },
+        {
+          name: '柱体设置',
+          list: [
+            {
+              type: 'el-slider',
+              label: '最大宽度',
+              name: 'maxWidth',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'el-slider',
+              label: '圆角',
+              name: 'radius',
+              require: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'el-slider',
+              label: '最小高度',
+              name: 'minHeight',
+              require: false,
+              placeholder: '',
+              value: 0,
             },
           ],
         },
@@ -230,7 +258,7 @@ export const widgetBarLineStack = {
               label: '图例名称',
               name: 'legendName',
               required: false,
-              placeholder: '多值以' | '隔开',
+              placeholder: '',
               value: ''
             },
             {
@@ -309,27 +337,59 @@ export const widgetBarLineStack = {
             },
             {
               type: 'el-input-text',
-              label: '轴别名',
-              name: 'nameX',
+              label: '坐标名',
+              name: 'xName',
               required: false,
               placeholder: '',
               value: ''
             },
             {
               type: 'vue-color',
-              label: '别名颜色',
+              label: '坐标名颜色',
               name: 'nameColorX',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: '#fff',
             },
             {
               type: 'el-input-number',
-              label: '别名字号',
+              label: '坐标字号',
               name: 'nameFontSizeX',
               required: false,
               placeholder: '',
-              value: 14
+              value: 14,
+            },
+            {
+              type: 'vue-color',
+              label: '数值颜色',
+              name: 'Xcolor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '数值字号',
+              name: 'fontSizeX',
+              required: false,
+              placeholder: '',
+              value: 14,
+            },
+            {
+              type: 'el-slider',
+              label: '数值角度',
+              name: 'textAngle',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+            {
+              type: 'el-input-number',
+              label: '数值间隔',
+              name: 'textInterval',
+              required: false,
+              placeholder: '',
+              value: ''
             },
             {
               type: 'el-switch',
@@ -338,38 +398,6 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               value: false
-            },
-            {
-              type: 'el-slider',
-              label: '文字角度',
-              name: 'textAngleX',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
-              type: 'el-input-number',
-              label: '文字间隔',
-              name: 'textInterval',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '文字颜色',
-              name: 'colorX',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '文字字号',
-              name: 'fontSizeX',
-              required: false,
-              placeholder: '',
-              value: 14,
             },
             {
               type: 'vue-color',
@@ -410,7 +438,7 @@ export const widgetBarLineStack = {
             },
             {
               type: 'el-input-text',
-              label: '坐标名',
+              label: '左坐标名',
               name: 'textNameYLeft',
               require: false,
               placeholder: '',
@@ -418,7 +446,7 @@ export const widgetBarLineStack = {
             },
             {
               type: 'vue-color',
-              label: '坐标名颜色',
+              label: '左坐标名颜色',
               name: 'nameColorYLeft',
               required: false,
               placeholder: '',
@@ -426,43 +454,19 @@ export const widgetBarLineStack = {
             },
             {
               type: 'el-input-number',
-              label: '坐标名字号',
-              name: 'nameFontSizeYLeft',
-              required: false,
-              placeholder: '',
-              value: 14,
-            },
-            {
-              type: 'vue-color',
-              label: '数值颜色',
-              name: 'colorYLeft',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '数值字号',
-              name: 'fontSizeYLeft',
+              label: '左坐标字号',
+              name: 'namefontSizeYLeft',
               required: false,
               placeholder: '',
               value: 14,
             },
             {
               type: 'el-input-number',
-              label: '均分',
+              label: '左均分',
               name: 'splitNumberLeft',
               required: false,
               placeholder: '',
               value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '轴颜色',
-              name: 'lineColorYLeft',
-              required: false,
-              placeholder: '',
-              value: '#fff',
             },
             {
               type: 'el-switch',
@@ -474,7 +478,7 @@ export const widgetBarLineStack = {
             },
             {
               type: 'el-input-text',
-              label: '坐标名',
+              label: '右坐标名',
               name: 'textNameYRight',
               require: false,
               placeholder: '',
@@ -482,7 +486,7 @@ export const widgetBarLineStack = {
             },
             {
               type: 'vue-color',
-              label: '坐标名颜色',
+              label: '右坐标名颜色',
               name: 'nameColorYRight',
               required: false,
               placeholder: '',
@@ -490,30 +494,15 @@ export const widgetBarLineStack = {
             },
             {
               type: 'el-input-number',
-              label: '坐标名字号',
-              name: 'nameFontSizeYRight',
-              required: false,
-              placeholder: '',
-              value: 14,
-            }, {
-              type: 'vue-color',
-              label: '数值颜色',
-              name: 'colorYRight',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '数值字号',
-              name: 'fontSizeYRight',
+              label: '右坐标字号',
+              name: 'namefontSizeYRight',
               required: false,
               placeholder: '',
               value: 14,
             },
             {
               type: 'el-input-number',
-              label: '均分',
+              label: '右均分',
               name: 'splitNumberRight',
               required: false,
               placeholder: '',
@@ -521,62 +510,35 @@ export const widgetBarLineStack = {
             },
             {
               type: 'vue-color',
-              label: '轴颜色',
-              name: 'lineColorYRight',
+              label: '数值颜色',
+              name: 'colorY',
               required: false,
               placeholder: '',
               value: '#fff',
             },
-          ],
-        },
-        {
-          name: '柱体数值设定',
-          list: [
+            {
+              type: 'el-input-number',
+              label: '数值字号',
+              name: 'fontSizeY',
+              required: false,
+              placeholder: '',
+              value: 14,
+            },
             {
               type: 'el-switch',
-              label: '显示',
-              name: 'isShowBar',
+              label: '轴反转',
+              name: 'reversalY',
               required: false,
               placeholder: '',
               value: false
             },
             {
-              type: 'el-input-number',
-              label: '距离',
-              name: 'distanceBar',
-              required: false,
-              placeholder: '',
-              value: 10
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'fontSizeBar',
-              required: false,
-              placeholder: '',
-              value: 14
-            },
-            {
               type: 'vue-color',
-              label: '字体颜色',
-              name: 'subTextColorBar',
+              label: '轴颜色',
+              name: 'lineColorY',
               required: false,
               placeholder: '',
-              value: '#fff'
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'fontWeightBar',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
-              ],
-              value: 'normal'
+              value: '#fff',
             },
           ],
         },
@@ -597,7 +559,7 @@ export const widgetBarLineStack = {
               name: 'distanceLine',
               required: false,
               placeholder: '',
-              value: 10
+              value: 5
             },
             {
               type: 'el-input-number',
@@ -619,6 +581,57 @@ export const widgetBarLineStack = {
               type: 'el-select',
               label: '字体粗细',
               name: 'fontWeightLine',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+          ],
+        },
+        {
+          name: '柱体数值设定',
+          list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowBar',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-input-number',
+              label: '距离',
+              name: 'distanceBar',
+              required: false,
+              placeholder: '',
+              value: 5
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'fontSizeBar',
+              required: false,
+              placeholder: '',
+              value: 14
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'subTextColorBar',
+              required: false,
+              placeholder: '',
+              value: '#fff'
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'fontWeightBar',
               required: false,
               placeholder: '',
               selectOptions: [
@@ -694,7 +707,7 @@ export const widgetBarLineStack = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
+              value: [{ color: '#00F4FFFF' }, { color: '#e68b55' }],
             },
           ],
         },
@@ -738,17 +751,19 @@ export const widgetBarLineStack = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          { "axis": "2021-07", "name": "A", "bar": "12", "line": "20" },
-          { "axis": "2021-07", "name": "B", "bar": "20", "line": "12" },
-          { "axis": "2021-08", "name": "A", "bar": "0", "line": "8" },
-          { "axis": "2021-08", "name": "B", "bar": "5", "line": "3" },
-          { "axis": "2021-09", "name": "A", "bar": "15", "line": "9" },
-          { "axis": "2021-09", "name": "B", "bar": "30", "line": "19" },
-          { "axis": "2021-10", "name": "A", "bar": "10", "line": "27" },
-          { "axis": "2021-10", "name": "B", "bar": "24", "line": "6" },
-          { "axis": "2021-11", "name": "A", "bar": "23", "line": "29" },
-          { "axis": "2021-11", "name": "B", "bar": "8", "line": "9" },
-        ],
+          { "axis": "1月", "bar": 2.6, "line": 2 },
+          { "axis": "2月", "bar": 5.9, "line": 2.2 },
+          { "axis": "3月", "bar": 9, "line": 3.3 },
+          { "axis": "4月", "bar": 26.4, "line": 4.5 },
+          { "axis": "5月", "bar": 28.7, "line": 6.3 },
+          { "axis": "6月", "bar": 70.7, "line": 10.2 },
+          { "axis": "7月", "bar": 175.6, "line": 20.3 },
+          { "axis": "8月", "bar": 182.2, "line": 23.4 },
+          { "axis": "9月", "bar": 48.7, "line": 23 },
+          { "axis": "10月", "bar": 18.8, "line": 16.5 },
+          { "axis": "11月", "bar": 6, "line": 12 },
+          { "axis": "12月", "bar": 2.3, "line": 6.2 },
+        ]
       },
       {
         type: 'dycustComponents',
@@ -757,10 +772,9 @@ export const widgetBarLineStack = {
         required: false,
         placeholder: '',
         relactiveDom: 'dataType',
+        chartType: 'widget-barlinechart',
+        dictKey: 'BAR_LINE_PROPERTIES',
         relactiveDomValue: 'dynamicData',
-        chartType: 'widget-stackchart',
-        dictKey: 'STACK_PROPERTIES',
-        value: '',
       },
     ],
     // 坐标

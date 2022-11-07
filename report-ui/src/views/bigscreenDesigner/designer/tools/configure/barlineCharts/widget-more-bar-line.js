@@ -1,17 +1,17 @@
 /*
- * @Descripttion: 柱状图渐变色 json
+ * @Descripttion: 多柱线图
  * @version:
- * @Author: qianlishi
- * @Date: 2021-08-29 07:23:41
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:14:08
+ * @Author: foming
+ * @Date:
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2022-11-07 15:39:52
  */
-export const widgetGradientBarchart = {
-  code: 'widget-gradient-color-barchart',
-  type: 'barlineChart',
+export const widgetMoreBarLine = {
+  code: 'widgetMoreBarLineChart',
+  type: 'barlineCharts',
   tabName: '柱线图',
-  label: '柱状图-渐变色',
-  icon: 'iconzhuzhuangtu',
+  label: '多柱线图',
+  icon: 'iconzhuxiantu',
   options: {
     // 配置
     setup: [
@@ -21,15 +21,7 @@ export const widgetGradientBarchart = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '柱形图-渐变色',
-      },
-      {
-        type: 'el-switch',
-        label: '竖展示',
-        name: 'verticalShow',
-        required: false,
-        placeholder: '',
-        value: false,
+        value: '多柱线图',
       },
       {
         type: 'vue-color',
@@ -40,6 +32,59 @@ export const widgetGradientBarchart = {
         value: ''
       },
       [
+        {
+          name: '折线设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '标记点',
+              name: 'markPoint',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-slider',
+              label: '点大小',
+              name: 'pointSize',
+              required: false,
+              placeholder: '',
+              value: 3,
+            },
+            {
+              type: 'el-switch',
+              label: '平滑曲线',
+              name: 'smoothCurve',
+              required: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'el-switch',
+              label: '面积堆积',
+              name: 'area',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-slider',
+              label: '面积厚度',
+              name: 'areaThickness',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'el-slider',
+              label: '线条宽度',
+              name: 'lineWidth',
+              required: false,
+              placeholder: '',
+              value: 3,
+            },
+          ],
+        },
         {
           name: '柱体设置',
           list: [
@@ -190,6 +235,88 @@ export const widgetGradientBarchart = {
           ],
         },
         {
+          name: '图例操作',
+          list: [
+            {
+              type: 'el-switch',
+              label: '图例显示',
+              name: 'isShowLegend',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '图例名称',
+              name: 'legendName',
+              required: false,
+              placeholder: '多值以' | '隔开',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'legendColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'legendFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例宽度',
+              name: 'legendWidth',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '横向位置',
+              name: 'lateralPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-select',
+              label: '纵向位置',
+              name: 'longitudinalPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'top', name: '顶部' },
+                { code: 'bottom', name: '底部' },
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-select',
+              label: '布局前置',
+              name: 'layoutFront',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'vertical', name: '竖排' },
+                { code: 'horizontal', name: '横排' },
+              ],
+              value: 'horizontal'
+            },
+          ],
+        },
+        {
           name: 'X轴设置',
           list: [
             {
@@ -295,31 +422,64 @@ export const widgetGradientBarchart = {
           list: [
             {
               type: 'el-switch',
-              label: '显示',
-              name: 'isShowY',
+              label: '左显示',
+              name: 'isShowYLeft',
               require: false,
               placeholder: '',
               value: true,
             },
             {
               type: 'el-input-text',
-              label: '坐标名',
-              name: 'textNameY',
+              label: '左坐标名',
+              name: 'textNameYLeft',
               require: false,
               placeholder: '',
               value: ''
-            }, {
+            },
+            {
               type: 'vue-color',
-              label: '坐标名颜色',
-              name: 'nameColorY',
+              label: '左坐标名颜色',
+              name: 'nameColorYLeft',
               required: false,
               placeholder: '',
               value: '#fff',
             },
             {
               type: 'el-input-number',
-              label: '坐标字号',
-              name: 'namefontSizeY',
+              label: '左坐标字号',
+              name: 'nameFontSizeYLeft',
+              required: false,
+              placeholder: '',
+              value: 14,
+            },
+            {
+              type: 'el-switch',
+              label: '右显示',
+              name: 'isShowYRight',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '右坐标名',
+              name: 'textNameYRight',
+              require: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '右坐标名颜色',
+              name: 'nameColorYRight',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '右坐标字号',
+              name: 'nameFontSizeYRight',
               required: false,
               placeholder: '',
               value: 14,
@@ -341,38 +501,6 @@ export const widgetGradientBarchart = {
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'ytextAngle',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
-              type: 'el-switch',
-              label: '缩放',
-              name: 'scale',
-              require: false,
-              placeholder: '',
-              value: false,
-            },
-            {
-              type: 'el-input-number',
-              label: '均分',
-              name: 'splitNumber',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'el-switch',
-              label: '轴反转',
-              name: 'reversalY',
-              required: false,
-              placeholder: '',
-              value: false
-            },
-            {
               type: 'vue-color',
               label: '轴颜色',
               name: 'lineColorY',
@@ -380,39 +508,23 @@ export const widgetGradientBarchart = {
               placeholder: '',
               value: '#fff',
             },
-            {
-              type: 'el-switch',
-              label: '分割线显示',
-              name: 'isShowSplitLineY',
-              require: false,
-              placeholder: '',
-              value: false,
-            },
-            {
-              type: 'vue-color',
-              label: '分割线颜色',
-              name: 'splitLineColorY',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            }
           ],
         },
         {
-          name: '数值设定',
+          name: '折线数值设定',
           list: [
             {
               type: 'el-switch',
               label: '显示',
-              name: 'isShow',
+              name: 'isShowLine',
               required: false,
               placeholder: '',
-              value: true
+              value: false
             },
             {
               type: 'el-input-number',
               label: '距离',
-              name: 'distance',
+              name: 'distanceLine',
               required: false,
               placeholder: '',
               value: 5
@@ -420,7 +532,7 @@ export const widgetGradientBarchart = {
             {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'fontSize',
+              name: 'fontSizeLine',
               required: false,
               placeholder: '',
               value: 14
@@ -428,7 +540,7 @@ export const widgetGradientBarchart = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'subTextColor',
+              name: 'subTextColorLine',
               required: false,
               placeholder: '',
               value: '#fff'
@@ -436,14 +548,65 @@ export const widgetGradientBarchart = {
             {
               type: 'el-select',
               label: '字体粗细',
-              name: 'fontWeight',
+              name: 'fontWeightLine',
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+          ],
+        },
+        {
+          name: '柱体数值设定',
+          list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowBar',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-input-number',
+              label: '距离',
+              name: 'distanceBar',
+              required: false,
+              placeholder: '',
+              value: 5
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'fontSizeBar',
+              required: false,
+              placeholder: '',
+              value: 14
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'subTextColorBar',
+              required: false,
+              placeholder: '',
+              value: '#fff'
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'fontWeightBar',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -505,39 +668,18 @@ export const widgetGradientBarchart = {
           ],
         },
         {
-          name: '渐变色',
+          name: '自定义配色',
           list: [
             {
-              type: 'vue-color',
-              label: '0%处',
-              name: 'bar0color',
+              type: 'customColor',
+              label: '',
+              name: 'customColor',
               required: false,
-              placeholder: '',
-              value: 'rgba(0,244,255,1)'
-            },
-            {
-              type: 'vue-color',
-              label: '100%处',
-              name: 'bar100color',
-              required: false,
-              placeholder: '',
-              value: 'rgba(0,77,167,1)'
-            },
-            {
-              type: 'vue-color',
-              label: '阴影颜色',
-              name: 'shadowColor',
-              required: false,
-              placeholder: '',
-              value: 'rgba(0,160,221,1)'
-            },
-            {
-              type: 'el-input-number',
-              label: '模糊系数',
-              name: 'shadowBlur',
-              required: false,
-              placeholder: '',
-              value: 4,
+              value: [
+                { color: '#4bdfff' },
+                { color: '#55f49c' },
+                { color: '#ffa43a' },
+              ],
             },
           ],
         },
@@ -581,12 +723,15 @@ export const widgetGradientBarchart = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {"axis": "苹果", "data": 1000},
-          {"axis": "三星", "data": 2229},
-          {"axis": "小米", "data": 3879},
-          {"axis": "oppo", "data": 2379},
-          {"axis": "vivo", "data": 4079},
-        ],
+          { "date": "2014", "unsales": 400, "manus": 300, "sales": 4.2, },
+          { "date": "2015", "unsales": 400, "manus": 500, "sales": 3.6, },
+          { "date": "2016", "unsales": 300, "manus": 500, "sales": 5.8, },
+          { "date": "2017", "unsales": 300, "manus": 500, "sales": 3.4, },
+          { "date": "2018", "unsales": 400, "manus": 400, "sales": 2.5, },
+          { "date": "2019", "unsales": 400, "manus": 500, "sales": 5.8, },
+          { "date": "2020", "unsales": 300, "manus": 400, "sales": 7.6, },
+          { "date": "2021", "unsales": 300, "manus": 600, "sales": 3.4, },
+        ]
       },
       {
         type: 'dycustComponents',
@@ -595,10 +740,9 @@ export const widgetGradientBarchart = {
         required: false,
         placeholder: '',
         relactiveDom: 'dataType',
+        chartType: 'widget-barlinechart',
+        dictKey: 'BAR_LINE_PROPERTIES',
         relactiveDomValue: 'dynamicData',
-        chartType: 'widget-barchart',
-        dictKey: 'BAR_PROPERTIES',
-        value: '',
       },
     ],
     // 坐标
@@ -625,7 +769,7 @@ export const widgetGradientBarchart = {
         name: 'width',
         required: false,
         placeholder: '该容器在1920px大屏中的宽度',
-        value: 400,
+        value: 500,
       },
       {
         type: 'el-input-number',
@@ -633,7 +777,7 @@ export const widgetGradientBarchart = {
         name: 'height',
         required: false,
         placeholder: '该容器在1080px大屏中的高度',
-        value: 200,
+        value: 300,
       },
     ],
   }

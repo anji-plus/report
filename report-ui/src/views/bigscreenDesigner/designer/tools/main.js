@@ -18,9 +18,9 @@ import { widgetTable } from "./configure/texts/widget-table"
 import { widgetIframe } from "./configure/texts/widget-iframe"
 import { widgetUniversal } from "./configure/widget-universal"
 import { widgetBarchart } from "./configure/barCharts/widget-barchart"
-import { widgetGradientBarchart } from "./configure/barlineChart/widget-gradient-barchart"
+import { widgetGradientBarchart } from "./configure/barCharts/widget-gradient-barchart"
 import { widgetLinechart } from "./configure/lineCharts/widget-linechart"
-import { widgetBarlinechart } from "./configure/barlineChart/widget-barlinechart"
+import { widgetBarlinechart } from "./configure/barlineCharts/widget-barlinechart"
 import { widgetPiechart } from "./configure/pieCharts/widget-piechart"
 import { widgetFunnel } from "./configure/funnelCharts/widget-funnel"
 import { widgetGauge } from "./configure/percentCharts/widget-gauge"
@@ -33,11 +33,11 @@ import { widgetLineStack } from "./configure/lineCharts/widget-line-stack"
 import { widgetBarCompare } from "./configure/barCharts/widget-bar-compare"
 import { widgetLineCompare } from "./configure/lineCharts/widget-line-compare"
 import { widgetDecoratePie } from "./configure/decorateCharts/widget-decorate-pie";
-import { widgetMoreBarLine } from "./configure/barlineChart/widget-more-bar-line";
+import { widgetMoreBarLine } from "./configure/barlineCharts/widget-more-bar-line";
 import { widgetWordCloud } from "./configure/wordcloudCharts/widget-word-cloud";
 import { widgetHeatmap } from "./configure/heatmap/widget-heatmap";
-import { widgetRadar } from "./configure/texts/widget-radar";
-import { widgetBarLineStack } from "./configure/barCharts/widget-bar-line-stack";
+import { widgetRadar } from "./configure/radarCharts/widget-radar";
+import { widgetBarLineStack } from "./configure/barlineCharts/widget-bar-line-stack";
 
 export const widgetTool = [
   // type=html类型的组件

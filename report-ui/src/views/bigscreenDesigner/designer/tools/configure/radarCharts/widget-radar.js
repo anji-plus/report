@@ -3,8 +3,8 @@
  */
 export const widgetRadar = {
   code: 'widget-radar',
-  type: 'text',
-  tabName: '文本栏',
+  type: 'radarCharts',
+  tabName: '雷达图',
   label: '雷达图',
   icon: 'iconleidatu',
   options: {
