@@ -12,24 +12,34 @@
       class="layout-left"
       :style="{ width: widthLeftForTools + 'px' }"
     >
-      <el-tabs type="border-card" :stretch="true">
+      <el-tabs class="layout-left" type="border-card" :stretch="true">
         <!-- 左侧组件栏-->
         <el-tab-pane label="工具栏">
-          <!-- <el-divider content-position="center">html</el-divider>-->
-          <li
-            v-for="widget in widgetTools"
-            :key="widget.code"
-            draggable="true"
-            @dragstart="dragStart(widget.code)"
-            @dragend="dragEnd()"
-          >
-            <div class="tools-item">
-              <span class="tools-item-icon">
-                <i class="iconfont" :class="widget.icon"></i>
-              </span>
-              <span class="tools-item-text">{{ widget.label }}</span>
-            </div>
-          </li>
+          <span slot="label"><i class="el-icon-date icon"></i>工具栏</span>
+          <div class="chart-type">
+            <el-tabs class="type-left" tab-position="left">
+              <el-tab-pane
+                v-for="(item, index) in widgetTools"
+                :key="index"
+                :label="item.name"
+              >
+                <li
+                  v-for="(it, idx) in item.list"
+                  :key="idx"
+                  draggable="true"
+                  @dragstart="dragStart(it.code)"
+                  @dragend="dragEnd()"
+                >
+                  <div class="tools-item">
+                    <span class="tools-item-icon">
+                      <i class="iconfont" :class="it.icon"></i>
+                    </span>
+                    <span class="tools-item-text">{{ it.label }}</span>
+                  </div>
+                </li>
+              </el-tab-pane>
+            </el-tabs>
+          </div>
         </el-tab-pane>
         <!-- 左侧图层-->
         <el-tab-pane label="图层">
@@ -170,7 +180,7 @@
         class="workbench-container"
         :style="{
           width: bigscreenWidthInWorkbench + 'px',
-          height: bigscreenHeightInWorkbench + 'px'
+          height: bigscreenHeightInWorkbench + 'px',
         }"
         @mousedown="handleMouseDown"
       >
@@ -197,7 +207,7 @@
               'background-repeat': 'initial',
               'background-attachment': 'initial',
               'background-origin': 'initial',
-              'background-clip': 'initial'
+              'background-clip': 'initial',
             }"
             @click.self="setOptionsOnClickScreen"
             @drop="widgetOnDragged($event)"
@@ -235,7 +245,7 @@
           <dynamicForm
             ref="formData"
             :options="widgetOptions.setup"
-            @onChanged="val => widgetValueChanged('setup', val)"
+            @onChanged="(val) => widgetValueChanged('setup', val)"
           />
         </el-tab-pane>
         <el-tab-pane
@@ -246,7 +256,7 @@
           <dynamicForm
             ref="formData"
             :options="widgetOptions.data"
-            @onChanged="val => widgetValueChanged('data', val)"
+            @onChanged="(val) => widgetValueChanged('data', val)"
           />
         </el-tab-pane>
         <el-tab-pane
@@ -257,7 +267,7 @@
           <dynamicForm
             ref="formData"
             :options="widgetOptions.position"
-            @onChanged="val => widgetValueChanged('position', val)"
+            @onChanged="(val) => widgetValueChanged('position', val)"
           />
         </el-tab-pane>
       </el-tabs>
@@ -281,7 +291,7 @@ import {
   insertDashboard,
   detailDashboard,
   importDashboard,
-  exportDashboard
+  exportDashboard,
 } from "@/api/bigscreen";
 import { widgetTools, getToolByCode } from "./tools/index";
 import widget from "./widget/widget.vue";
@@ -299,7 +309,7 @@ export default {
     VueRulerTool,
     widget,
     dynamicForm,
-    contentMenu
+    contentMenu,
   },
   data() {
     return {
@@ -330,7 +340,7 @@ export default {
         backgroundImage: "", // 大屏背景图片
         refreshSeconds: null, // 大屏刷新时间间隔
         presetLine: [], // 辅助线
-        presetLineVisible: true // 辅助线是否显示
+        presetLineVisible: true, // 辅助线是否显示
       },
       // 大屏的标记
       screenCode: "",
@@ -348,12 +358,12 @@ export default {
               height: 100,
               left: 0,
               top: 0,
-              zIndex: 0
-            }
+              zIndex: 0,
+            },
           },
           // options属性是从工具栏中拿到的tools中拿到
-          options: []
-        }
+          options: [],
+        },
       ], // 工作区中拖放的组件
 
       // 当前激活组件
@@ -362,16 +372,16 @@ export default {
       widgetOptions: {
         setup: [], // 配置
         data: [], // 数据
-        position: [] // 坐标
+        position: [], // 坐标
       },
       flagWidgetClickStopPropagation: false, // 点击组件时阻止事件冒泡传递到画布click事件上
       styleObj: {
         left: 0,
-        top: 0
+        top: 0,
       },
       visibleContentMenu: false,
       rightClickIndex: -1,
-      activeName: "first"
+      activeName: "first",
     };
   },
   computed: {
@@ -380,7 +390,7 @@ export default {
     },
     headers() {
       return {
-        Authorization: getToken() // 直接从本地获取token就行
+        Authorization: getToken(), // 直接从本地获取token就行
       };
     },
     // 左侧折叠切换时，动态计算中间区的宽度
@@ -407,9 +417,7 @@ export default {
       return Math.min(widthScale, heightScale);
     },
     workbenchTransform() {
-      return `scale(${this.bigscreenScaleInWorkbench}, ${
-        this.bigscreenScaleInWorkbench
-      })`;
+      return `scale(${this.bigscreenScaleInWorkbench}, ${this.bigscreenScaleInWorkbench})`;
     },
     // 大屏在设计模式的大小
     bigscreenWidthInWorkbench() {
@@ -419,7 +427,7 @@ export default {
       return (
         this.getPXUnderScale(this.bigscreenHeight) + this.widthPaddingTools
       );
-    }
+    },
   },
   watch: {
     widgets: {
@@ -430,8 +438,8 @@ export default {
           this.revoke.push(this.widgets);
         });
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   created() {
     /* 以下是记录历史的 */
@@ -476,7 +484,7 @@ export default {
         const obj = {};
         obj.icon = getToolByCode(val[i].type).icon;
         const options = val[i].options["setup"];
-        options.forEach(el => {
+        options.forEach((el) => {
           if (el.name == "layerName") {
             obj.label = el.value;
           }
@@ -512,7 +520,7 @@ export default {
         backgroundImage: (data && data.backgroundImage) || "",
         height: (data && data.height) || "1080",
         title: (data && data.title) || "",
-        width: (data && data.width) || "1920"
+        width: (data && data.width) || "1920",
       };
     },
     handleInitEchartsData(data) {
@@ -524,7 +532,7 @@ export default {
         obj.value = {
           setup: widgets[i].value.setup,
           data: widgets[i].value.data,
-          position: widgets[i].value.position
+          position: widgets[i].value.position,
         };
         const tool = this.deepClone(getToolByCode(widgets[i].type));
         const option = tool.options;
@@ -545,7 +553,7 @@ export default {
           } else if (Object.prototype.toString.call(item) == "[object Array]") {
             for (let j = 0; j < item.length; j++) {
               const list = item[j].list;
-              list.forEach(el => {
+              list.forEach((el) => {
                 if (key == el.name) {
                   el.value = data.setup[key];
                 }
@@ -585,9 +593,9 @@ export default {
           width: this.dashboard.width,
           height: this.dashboard.height,
           backgroundColor: this.dashboard.backgroundColor,
-          backgroundImage: this.dashboard.backgroundImage
+          backgroundImage: this.dashboard.backgroundImage,
         },
-        widgets: this.widgets
+        widgets: this.widgets,
       };
       const { code, data } = await insertDashboard(screenData);
       if (code == "200") {
@@ -598,7 +606,7 @@ export default {
     viewScreen() {
       let routeUrl = this.$router.resolve({
         path: "/bigscreen/viewer",
-        query: { reportCode: this.$route.query.reportCode }
+        query: { reportCode: this.$route.query.reportCode },
       });
       window.open(routeUrl.href, "_blank");
     },
@@ -608,15 +616,15 @@ export default {
 
       const param = {
         reportCode: this.$route.query.reportCode,
-        showDataSet: val
+        showDataSet: val,
       };
-      exportDashboard(param).then(res => {
+      exportDashboard(param).then((res) => {
         const that = this;
         const type = res.type;
         if (type == "application/json") {
           let reader = new FileReader();
           reader.readAsText(res, "utf-8");
-          reader.onload = function() {
+          reader.onload = function () {
             const data = JSON.parse(reader.result);
             that.$message.error(data.message);
           };
@@ -645,19 +653,19 @@ export default {
       if (response.code == "200") {
         this.$message({
           message: "导入成功！",
-          type: "success"
+          type: "success",
         });
       } else {
         this.$message({
           message: response.message,
-          type: "error"
+          type: "error",
         });
       }
     },
     handleError(err) {
       this.$message({
         message: "上传失败！",
-        type: "error"
+        type: "error",
       });
     },
 
@@ -704,10 +712,10 @@ export default {
             height: 0,
             left: 0,
             top: 0,
-            zIndex: 0
-          }
+            zIndex: 0,
+          },
         },
-        options: tool.options
+        options: tool.options,
       };
       // 处理默认值
       const widgetJsonValue = this.handleDefaultValue(widgetJson);
@@ -739,7 +747,7 @@ export default {
             ) {
               for (let j = 0; j < item.length; j++) {
                 const list = item[j].list;
-                list.forEach(el => {
+                list.forEach((el) => {
                   widgetJson.value.setup[el.name] = el.value;
                 });
               }
@@ -789,7 +797,7 @@ export default {
       }
       this.widgetIndex = obj.index;
       this.widgets[obj.index].value.position = obj;
-      this.widgets[obj.index].options.position.forEach(el => {
+      this.widgets[obj.index].options.position.forEach((el) => {
         for (const key in obj) {
           if (el.name == key) {
             el.value = obj[key];
@@ -835,7 +843,7 @@ export default {
         if (this.bigscreenHeight != this.dashboard.height) {
           this.bigscreenHeight = this.dashboard.height;
         }
-        this.widgetOptions.setup.forEach(el => {
+        this.widgetOptions.setup.forEach((el) => {
           if (el.name == "width") {
             el.value = this.bigscreenWidth;
           } else if (el.name == "height") {
@@ -864,7 +872,7 @@ export default {
         this.styleObj = {
           left: left + "px",
           top: top + "px",
-          display: "block"
+          display: "block",
         };
       }
       this.visibleContentMenu = true;
@@ -948,8 +956,8 @@ export default {
       } else {
         this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -1352,5 +1360,93 @@ li {
 
 /deep/ .vue-ruler-v {
   opacity: 0.3;
+}
+.layout-left {
+  width: 200px;
+  background: #242a30;
+  overflow-x: hidden;
+  overflow-y: auto;
+  .chart-type {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    .type-left {
+      width: 100%;
+      height: calc(100vh - 80px);
+      text-align: center;
+      /deep/.el-tabs__header {
+        width: 30%;
+        margin-right: 0;
+        .el-tabs__nav-wrap {
+          &::after {
+            background: transparent;
+          }
+          .el-tabs__item {
+            text-align: center;
+            width: 100% !important;
+            color: #fff;
+            padding: 0;
+            font-size: 12px !important;
+          }
+        }
+      }
+      /deep/.el-tabs__content {
+        width: 70%;
+      }
+    }
+  }
+  //工具栏一个元素
+  .tools-item {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 48px;
+    align-items: center;
+    -webkit-box-align: center;
+    padding: 0 6px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 1px;
+
+    .tools-item-icon {
+      color: #409eff;
+      margin-right: 10px;
+      width: 53px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      display: block;
+      border: 1px solid #3a4659;
+      background: #282a30;
+    }
+    .tools-item-text {
+      font-size: 12px !important;
+    }
+  }
+  /deep/.el-tabs__content {
+    padding: 0;
+  }
+}
+/* 设置滚动条的样式 */
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+/* 滚动槽 */
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.3);
+}
+
+/* 滚动条滑块 */
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 0, 0, 0.4);
 }
 </style>
