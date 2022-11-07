@@ -111,8 +111,8 @@ export default {
         setup: {},
         data: {},
         position: {},
-        leftMargin: null,
-        topMargin: null
+/*        leftMargin: null,
+        topMargin: null*/
       }
     };
   },
@@ -124,10 +124,10 @@ export default {
       return this.value.position.height;
     },
     widgetsLeft() {
-      return this.value.position.left >= this.leftMargin ? this.leftMargin : this.value.position.left;
+      return this.value.position.left// >= this.leftMargin ? this.leftMargin : this.value.position.left;
     },
     widgetsTop() {
-      return this.value.position.top >= this.topMargin ? this.topMargin : this.value.position.top;
+      return this.value.position.top// >= this.topMargin ? this.topMargin : this.value.position.top;
     },
     widgetsZIndex() {
       return this.value.position.zIndex || 1;
@@ -140,7 +140,7 @@ export default {
       this.$emit("onActivated", { index, left, top, width, height });
       this.$refs.draggable.setActive(true);
       // 处理widget超出workbench的问题
-      this.handleBoundary({ index, left, top, width, height })
+      //this.handleBoundary({ index, left, top, width, height })
     },
     handleBoundary({ index, left, top, width, height }) {
       // 计算workbench的X轴边界值

@@ -310,7 +310,7 @@ export const widgetBarLineStack = {
             {
               type: 'el-input-text',
               label: '轴别名',
-              name: 'xName',
+              name: 'nameX',
               required: false,
               placeholder: '',
               value: ''
@@ -318,7 +318,7 @@ export const widgetBarLineStack = {
             {
               type: 'vue-color',
               label: '别名颜色',
-              name: 'xNameColor',
+              name: 'nameColorX',
               required: false,
               placeholder: '',
               value: '#fff'
@@ -326,7 +326,7 @@ export const widgetBarLineStack = {
             {
               type: 'el-input-number',
               label: '别名字号',
-              name: 'xNameFontSize',
+              name: 'nameFontSizeX',
               required: false,
               placeholder: '',
               value: 14

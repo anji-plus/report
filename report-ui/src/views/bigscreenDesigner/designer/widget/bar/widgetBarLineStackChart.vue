@@ -166,10 +166,10 @@ export default {
         // 坐标轴是否显示
         show: optionsSetup.hideX,
         // 坐标轴名称
-        name: optionsSetup.xName,
+        name: optionsSetup.nameX,
         nameTextStyle: {
-          color: optionsSetup.xNameColor,
-          fontSize: optionsSetup.xNameFontSize
+          color: optionsSetup.nameColorX,
+          fontSize: optionsSetup.nameFontSizeX
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -206,17 +206,22 @@ export default {
       const yAxis = [
         {
           type: "value",
-          splitNumber: optionsSetup.splitNumberLeft,// 均分
-          show: optionsSetup.isShowYLeft, // 坐标轴是否显示
-          name: optionsSetup.textNameYLeft, // 坐标轴名称
-          nameTextStyle: { // 别名
+          // 均分
+          splitNumber: optionsSetup.splitNumberLeft,
+          // 坐标轴是否显示
+          show: optionsSetup.isShowYLeft,
+          // 坐标轴名称
+          name: optionsSetup.textNameYLeft,
+          // 别名
+          nameTextStyle: {
             color: optionsSetup.nameColorYLeft,
             fontSize: optionsSetup.nameFontSizeYLeft
           },
           axisLabel: {
             show: true,
             textStyle: {
-              color: optionsSetup.colorYLeft, // y轴 坐标文字颜色
+              // 坐标文字颜色
+              color: optionsSetup.colorYLeft,
               fontSize: optionsSetup.fontSizeYLeft
             }
           },
@@ -232,17 +237,22 @@ export default {
         },
         {
           type: "value",
-          splitNumber: optionsSetup.splitNumberRight,// 均分
-          show: optionsSetup.isShowYRight, // 坐标轴是否显示
-          name: optionsSetup.textNameYRight, // 坐标轴名称
-          nameTextStyle: { // 别名
+          // 均分
+          splitNumber: optionsSetup.splitNumberRight,
+          // 坐标轴是否显示
+          show: optionsSetup.isShowYRight,
+          // 坐标轴名称
+          name: optionsSetup.textNameYRight,
+          // 别名
+          nameTextStyle: {
             color: optionsSetup.nameColorYRight,
             fontSize: optionsSetup.nameFontSizeYRight
           },
           axisLabel: {
             show: true,
             textStyle: {
-              color: optionsSetup.colorYRight, // y轴 坐标文字颜色
+              // 坐标文字颜色
+              color: optionsSetup.colorYRight,
               fontSize: optionsSetup.fontSizeYRight
             }
           },

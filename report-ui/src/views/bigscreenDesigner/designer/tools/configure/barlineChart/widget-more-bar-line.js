@@ -111,19 +111,19 @@ export const widgetMoreBarLine = {
           list: [
             {
               type: 'el-switch',
-              label: '标题',
+              label: '标题显示',
               name: 'isNoTitle',
               required: false,
               placeholder: '',
-              value: true
+              value: true,
             },
             {
               type: 'el-input-text',
-              label: '标题',
+              label: '标题名',
               name: 'titleText',
               required: false,
               placeholder: '',
-              value: ''
+              value: '',
             },
             {
               type: 'vue-color',
@@ -131,7 +131,15 @@ export const widgetMoreBarLine = {
               name: 'textColor',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: '#FFD700'
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'textFontSize',
+              required: false,
+              placeholder: '',
+              value: 20
             },
             {
               type: 'el-select',
@@ -148,12 +156,17 @@ export const widgetMoreBarLine = {
               value: 'normal'
             },
             {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'textFontSize',
+              type: 'el-select',
+              label: '字体风格',
+              name: 'textFontStyle',
               required: false,
               placeholder: '',
-              value: 20
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
             },
             {
               type: 'el-select',
@@ -166,11 +179,11 @@ export const widgetMoreBarLine = {
                 { code: 'left', name: '左对齐' },
                 { code: 'right', name: '右对齐' },
               ],
-              value: 'left'
+              value: 'center'
             },
             {
               type: 'el-input-text',
-              label: '副标题',
+              label: '副标题名',
               name: 'subText',
               required: false,
               placeholder: '',
@@ -182,7 +195,15 @@ export const widgetMoreBarLine = {
               name: 'subTextColor',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: 'rgba(30, 144, 255, 1)'
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'subTextFontSize',
+              required: false,
+              placeholder: '',
+              value: 20
             },
             {
               type: 'el-select',
@@ -199,12 +220,17 @@ export const widgetMoreBarLine = {
               value: 'normal'
             },
             {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'subTextFontSize',
+              type: 'el-select',
+              label: '字体风格',
+              name: 'subTextFontStyle',
               required: false,
               placeholder: '',
-              value: 20
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
             },
           ],
         },

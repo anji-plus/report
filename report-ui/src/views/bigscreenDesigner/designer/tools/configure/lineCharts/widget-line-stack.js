@@ -98,7 +98,7 @@ export const widgetLineStack = {
           list: [
             {
               type: 'el-switch',
-              label: '标题',
+              label: '标题显示',
               name: 'isNoTitle',
               required: false,
               placeholder: '',
@@ -106,7 +106,7 @@ export const widgetLineStack = {
             },
             {
               type: 'el-input-text',
-              label: '标题',
+              label: '标题名',
               name: 'titleText',
               required: false,
               placeholder: '',
@@ -119,6 +119,14 @@ export const widgetLineStack = {
               required: false,
               placeholder: '',
               value: '#FFD700'
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'textFontSize',
+              required: false,
+              placeholder: '',
+              value: 20
             },
             {
               type: 'el-select',
@@ -135,12 +143,17 @@ export const widgetLineStack = {
               value: 'normal'
             },
             {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'textFontSize',
+              type: 'el-select',
+              label: '字体风格',
+              name: 'textFontStyle',
               required: false,
               placeholder: '',
-              value: 20
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
             },
             {
               type: 'el-select',
@@ -157,7 +170,7 @@ export const widgetLineStack = {
             },
             {
               type: 'el-input-text',
-              label: '副标题',
+              label: '副标题名',
               name: 'subText',
               required: false,
               placeholder: '',
@@ -170,6 +183,14 @@ export const widgetLineStack = {
               required: false,
               placeholder: '',
               value: 'rgba(30, 144, 255, 1)'
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'subTextFontSize',
+              required: false,
+              placeholder: '',
+              value: 20
             },
             {
               type: 'el-select',
@@ -186,12 +207,17 @@ export const widgetLineStack = {
               value: 'normal'
             },
             {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'subTextFontSize',
+              type: 'el-select',
+              label: '字体风格',
+              name: 'subTextFontStyle',
               required: false,
               placeholder: '',
-              value: 20
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
             },
           ],
         },

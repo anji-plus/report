@@ -350,19 +350,21 @@ export default {
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
       const title = {};
-      title.show = optionsSetup.isNoTitle;
       title.text = optionsSetup.titleText;
+      title.show = optionsSetup.isNoTitle;
       title.left = optionsSetup.textAlign;
       title.textStyle = {
         color: optionsSetup.textColor,
         fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight
+        fontWeight: optionsSetup.textFontWeight,
+        fontStyle: optionsSetup.textFontStyle,
       };
       title.subtext = optionsSetup.subText;
       title.subtextStyle = {
         color: optionsSetup.subTextColor,
         fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize
+        fontSize: optionsSetup.subTextFontSize,
+        fontStyle: optionsSetup.subTextFontStyle,
       };
       this.options.title = title;
     },

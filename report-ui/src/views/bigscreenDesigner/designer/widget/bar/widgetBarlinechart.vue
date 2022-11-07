@@ -152,15 +152,16 @@ export default {
       title.textStyle = {
         color: optionsSetup.textColor,
         fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight
+        fontWeight: optionsSetup.textFontWeight,
+        fontStyle: optionsSetup.textFontStyle,
       };
       title.subtext = optionsSetup.subText;
       title.subtextStyle = {
         color: optionsSetup.subTextColor,
         fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize
+        fontSize: optionsSetup.subTextFontSize,
+        fontStyle: optionsSetup.subTextFontStyle,
       };
-
       this.options.title = title;
     },
     // X轴设置
@@ -168,20 +169,25 @@ export default {
       const optionsSetup = this.optionsSetup;
       const xAxis = {
         type: "category",
-        show: optionsSetup.hideX, // 坐标轴是否显示
-        name: optionsSetup.xName, // 坐标轴名称
+        // 坐标轴是否显示
+        show: optionsSetup.hideX,
+        // 坐标轴名称
+        name: optionsSetup.nameX,
         nameTextStyle: {
           color: optionsSetup.nameColorX,
           fontSize: optionsSetup.nameFontSizeX
         },
-        nameRotate: optionsSetup.textAngle, // 文字角度
-        inverse: optionsSetup.reversalX, // 轴反转
+        // 轴反转
+        inverse: optionsSetup.reversalX,
         axisLabel: {
           show: true,
-          interval: optionsSetup.textInterval, // 文字间隔
-          rotate: optionsSetup.textAngle, // 文字角度
+          // 文字间隔
+          interval: optionsSetup.textInterval,
+          // 文字角度
+          rotate: optionsSetup.textAngleX,
           textStyle: {
-            color: optionsSetup.Xcolor, // x轴 坐标文字颜色
+            // 坐标文字颜色
+            color: optionsSetup.colorX,
             fontSize: optionsSetup.fontSizeX
           }
         },
@@ -206,25 +212,29 @@ export default {
       const yAxis = [
         {
           type: "value",
-          splitNumber: optionsSetup.splitNumberLeft,// 均分
-          show: optionsSetup.isShowYLeft, // 坐标轴是否显示
-          name: optionsSetup.textNameYLeft, // 坐标轴名称
-          nameTextStyle: { // 别名
+          // 均分
+          splitNumber: optionsSetup.splitNumberLeft,
+          // 坐标轴是否显示
+          show: optionsSetup.isShowYLeft,
+          // 坐标轴名称
+          name: optionsSetup.textNameYLeft,
+          // 别名
+          nameTextStyle: {
             color: optionsSetup.nameColorYLeft,
-            fontSize: optionsSetup.namefontSizeYLeft
+            fontSize: optionsSetup.nameFontSizeYLeft
           },
-          inverse: optionsSetup.reversalY, // 轴反转
           axisLabel: {
             show: true,
             textStyle: {
-              color: optionsSetup.colorY, // y轴 坐标文字颜色
-              fontSize: optionsSetup.fontSizeY
+              // 坐标文字颜色
+              color: optionsSetup.colorYLeft,
+              fontSize: optionsSetup.fontSizeYLeft
             }
           },
           axisLine: {
             show: true,
             lineStyle: {
-              color: optionsSetup.lineColorY
+              color: optionsSetup.lineColorYLeft
             }
           },
           splitLine: {
@@ -233,25 +243,29 @@ export default {
         },
         {
           type: "value",
-          splitNumber: optionsSetup.splitNumberRight,// 均分
-          show: optionsSetup.isShowYRight, // 坐标轴是否显示
-          name: optionsSetup.textNameYRight, // 坐标轴名称
-          nameTextStyle: { // 别名
+          // 均分
+          splitNumber: optionsSetup.splitNumberRight,
+          // 坐标轴是否显示
+          show: optionsSetup.isShowYRight,
+          // 坐标轴名称
+          name: optionsSetup.textNameYRight,
+          // 别名
+          nameTextStyle: {
             color: optionsSetup.nameColorYRight,
-            fontSize: optionsSetup.namefontSizeYRight
+            fontSize: optionsSetup.nameFontSizeYRight
           },
-          inverse: optionsSetup.reversalY, // 轴反转
           axisLabel: {
             show: true,
             textStyle: {
-              color: optionsSetup.colorY, // y轴 坐标文字颜色
-              fontSize: optionsSetup.fontSizeY
+              // 坐标文字颜色
+              color: optionsSetup.colorYRight,
+              fontSize: optionsSetup.fontSizeYRight
             }
           },
           axisLine: {
             show: true,
             lineStyle: {
-              color: optionsSetup.lineColorY
+              color: optionsSetup.lineColorYRight
             }
           },
           splitLine: {

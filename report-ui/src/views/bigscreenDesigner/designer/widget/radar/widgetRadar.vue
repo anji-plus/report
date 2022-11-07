@@ -61,12 +61,35 @@ export default {
   },
   methods: {
     editorOptions() {
+      this.setOptionsTitle();
       this.setOptionIndicator();
       this.setOptionsRadar();
       this.setOptionsLegend();
       this.setOptionsTooltip();
       this.setOptionsMargin();
       this.setOptionsData();
+    },
+    // 标题修改
+    setOptionsTitle() {
+      const optionsSetup = this.optionsSetup;
+      const title = {};
+      title.text = optionsSetup.titleText;
+      title.show = optionsSetup.isNoTitle;
+      title.left = optionsSetup.textAlign;
+      title.textStyle = {
+        color: optionsSetup.textColor,
+        fontSize: optionsSetup.textFontSize,
+        fontWeight: optionsSetup.textFontWeight,
+        fontStyle: optionsSetup.textFontStyle,
+      };
+      title.subtext = optionsSetup.subText;
+      title.subtextStyle = {
+        color: optionsSetup.subTextColor,
+        fontWeight: optionsSetup.subTextFontWeight,
+        fontSize: optionsSetup.subTextFontSize,
+        fontStyle: optionsSetup.subTextFontStyle,
+      };
+      this.options.title = title;
     },
     // 雷达设置相关
     setOptionIndicator() {
@@ -105,7 +128,6 @@ export default {
       this.options.radar.shape = optionsSetup.radarShape;
       this.options.radar.splitNumber = optionsSetup.splitNumber;
     },
-
     // 图例配置
     setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
@@ -200,7 +222,7 @@ export default {
         for (const j in radarKeys) {
           for (const k in val) {
             if (val[k].name == name[i]) {
-                values[j] = val[k][radarKeys[j]];
+              values[j] = val[k][radarKeys[j]];
             }
           }
         }

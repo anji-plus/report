@@ -150,21 +150,22 @@ export default {
     // 标题修改
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {
-        text: optionsSetup.titleText,
-        show: optionsSetup.isNoTitle,
-        left: optionsSetup.textAlign,
-        textStyle: {
-          color: optionsSetup.textColor,
-          fontSize: optionsSetup.textFontSize,
-          fontWeight: optionsSetup.textFontWeight
-        },
-        subtext: optionsSetup.subText,
-        subtextStyle: {
-          color: optionsSetup.subTextColor,
-          fontWeight: optionsSetup.subTextFontWeight,
-          fontSize: optionsSetup.subTextFontSize
-        },
+      const title = {};
+      title.text = optionsSetup.titleText;
+      title.show = optionsSetup.isNoTitle;
+      title.left = optionsSetup.textAlign;
+      title.textStyle = {
+        color: optionsSetup.textColor,
+        fontSize: optionsSetup.textFontSize,
+        fontWeight: optionsSetup.textFontWeight,
+        fontStyle: optionsSetup.textFontStyle,
+      };
+      title.subtext = optionsSetup.subText;
+      title.subtextStyle = {
+        color: optionsSetup.subTextColor,
+        fontWeight: optionsSetup.subTextFontWeight,
+        fontSize: optionsSetup.subTextFontSize,
+        fontStyle: optionsSetup.subTextFontStyle,
       };
       this.options.title = title;
     },

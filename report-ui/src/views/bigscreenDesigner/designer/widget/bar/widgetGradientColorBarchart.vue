@@ -181,15 +181,16 @@ export default {
       title.textStyle = {
         color: optionsSetup.textColor,
         fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight
+        fontWeight: optionsSetup.textFontWeight,
+        fontStyle: optionsSetup.textFontStyle,
       };
       title.subtext = optionsSetup.subText;
       title.subtextStyle = {
         color: optionsSetup.subTextColor,
         fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize
+        fontSize: optionsSetup.subTextFontSize,
+        fontStyle: optionsSetup.subTextFontStyle,
       };
-
       this.options.title = title;
     },
     // X轴设置

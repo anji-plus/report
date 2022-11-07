@@ -437,21 +437,23 @@ export default {
     },
     // 标题设置
     setOptionsTitle() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const title = {};
-      title.show = optionsCollapse.isNoTitle;
-      title.text = optionsCollapse.titleText;
-      title.left = optionsCollapse.textAlign;
+      title.text = optionsSetup.titleText;
+      title.show = optionsSetup.isNoTitle;
+      title.left = optionsSetup.textAlign;
       title.textStyle = {
-        color: optionsCollapse.textColor,
-        fontSize: optionsCollapse.textFontSize,
-        fontWeight: optionsCollapse.textFontWeight
+        color: optionsSetup.textColor,
+        fontSize: optionsSetup.textFontSize,
+        fontWeight: optionsSetup.textFontWeight,
+        fontStyle: optionsSetup.textFontStyle,
       };
-      title.subtext = optionsCollapse.subText;
+      title.subtext = optionsSetup.subText;
       title.subtextStyle = {
-        color: optionsCollapse.subTextColor,
-        fontWeight: optionsCollapse.subTextFontWeight,
-        fontSize: optionsCollapse.subTextFontSize
+        color: optionsSetup.subTextColor,
+        fontWeight: optionsSetup.subTextFontWeight,
+        fontSize: optionsSetup.subTextFontSize,
+        fontStyle: optionsSetup.subTextFontStyle,
       };
       this.options.title = title;
     },

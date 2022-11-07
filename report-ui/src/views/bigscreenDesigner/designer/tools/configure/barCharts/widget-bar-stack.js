@@ -78,7 +78,7 @@ export const widgetBarStack =  {
             list: [
               {
                 type: 'el-switch',
-                label: '标题',
+                label: '标题显示',
                 name: 'isNoTitle',
                 required: false,
                 placeholder: '',
@@ -86,7 +86,7 @@ export const widgetBarStack =  {
               },
               {
                 type: 'el-input-text',
-                label: '标题',
+                label: '标题名',
                 name: 'titleText',
                 required: false,
                 placeholder: '',
@@ -101,20 +101,6 @@ export const widgetBarStack =  {
                 value: '#FFD700'
               },
               {
-                type: 'el-select',
-                label: '字体粗细',
-                name: 'textFontWeight',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  {code: 'normal', name: '正常'},
-                  {code: 'bold', name: '粗体'},
-                  {code: 'bolder', name: '特粗体'},
-                  {code: 'lighter', name: '细体'}
-                ],
-                value: 'normal'
-              },
-              {
                 type: 'el-input-number',
                 label: '字体字号',
                 name: 'textFontSize',
@@ -124,20 +110,47 @@ export const widgetBarStack =  {
               },
               {
                 type: 'el-select',
+                label: '字体粗细',
+                name: 'textFontWeight',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  { code: 'normal', name: '正常' },
+                  { code: 'bold', name: '粗体' },
+                  { code: 'bolder', name: '特粗体' },
+                  { code: 'lighter', name: '细体' }
+                ],
+                value: 'normal'
+              },
+              {
+                type: 'el-select',
+                label: '字体风格',
+                name: 'textFontStyle',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  { code: 'normal', name: '正常' },
+                  { code: 'italic', name: 'italic斜体' },
+                  { code: 'oblique', name: 'oblique斜体' },
+                ],
+                value: 'normal'
+              },
+              {
+                type: 'el-select',
                 label: '字体位置',
                 name: 'textAlign',
                 required: false,
                 placeholder: '',
                 selectOptions: [
-                  {code: 'center', name: '居中'},
-                  {code: 'left', name: '左对齐'},
-                  {code: 'right', name: '右对齐'},
+                  { code: 'center', name: '居中' },
+                  { code: 'left', name: '左对齐' },
+                  { code: 'right', name: '右对齐' },
                 ],
                 value: 'center'
               },
               {
                 type: 'el-input-text',
-                label: '副标题',
+                label: '副标题名',
                 name: 'subText',
                 required: false,
                 placeholder: '',
@@ -152,26 +165,39 @@ export const widgetBarStack =  {
                 value: 'rgba(30, 144, 255, 1)'
               },
               {
-                type: 'el-select',
-                label: '字体粗细',
-                name: 'subTextFontWeight',
-                required: false,
-                placeholder: '',
-                selectOptions: [
-                  {code: 'normal', name: '正常'},
-                  {code: 'bold', name: '粗体'},
-                  {code: 'bolder', name: '特粗体'},
-                  {code: 'lighter', name: '细体'}
-                ],
-                value: 'normal'
-              },
-              {
                 type: 'el-input-number',
                 label: '字体字号',
                 name: 'subTextFontSize',
                 required: false,
                 placeholder: '',
                 value: 20
+              },
+              {
+                type: 'el-select',
+                label: '字体粗细',
+                name: 'subTextFontWeight',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  { code: 'normal', name: '正常' },
+                  { code: 'bold', name: '粗体' },
+                  { code: 'bolder', name: '特粗体' },
+                  { code: 'lighter', name: '细体' }
+                ],
+                value: 'normal'
+              },
+              {
+                type: 'el-select',
+                label: '字体风格',
+                name: 'subTextFontStyle',
+                required: false,
+                placeholder: '',
+                selectOptions: [
+                  { code: 'normal', name: '正常' },
+                  { code: 'italic', name: 'italic斜体' },
+                  { code: 'oblique', name: 'oblique斜体' },
+                ],
+                value: 'normal'
               },
             ],
           },
