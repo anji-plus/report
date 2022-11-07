@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 文本json文件
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 06:52:13
  * @LastEditors: qianlishi
@@ -32,7 +32,7 @@ export const widgetText =  {
         },
         {
           type: 'el-input-number',
-          label: '字体大小',
+          label: '字体字号',
           name: 'fontSize',
           required: false,
           placeholder: '',

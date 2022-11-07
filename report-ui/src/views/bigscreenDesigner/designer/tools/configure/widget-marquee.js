@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 滚动文件json
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:00:00
  * @LastEditors: qianlishi
@@ -32,7 +32,7 @@ export const widgetMarquee = {
         },
         {
           type: 'el-input-number',
-          label: '字体大小',
+          label: '字体字号',
           name: 'fontSize',
           required: false,
           placeholder: '',

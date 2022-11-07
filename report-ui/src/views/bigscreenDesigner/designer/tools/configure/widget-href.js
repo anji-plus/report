@@ -1,6 +1,6 @@
 /*
  * @Descripttion: 超链接文本
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:03:58
  * @LastEditors: qianlishi
@@ -32,7 +32,7 @@ export const widgetHref =  {
         },
         {
           type: 'el-input-number',
-          label: '字体大小',
+          label: '字体字号',
           name: 'fontSize',
           required: false,
           placeholder: '',

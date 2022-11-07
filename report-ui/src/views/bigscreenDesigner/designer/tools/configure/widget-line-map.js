@@ -73,7 +73,7 @@ export const widgetLineMap = {
             },
             {
               type: 'el-input-number',
-              label: '字体大小',
+              label: '字体字号',
               name: 'textFontSize',
               required: false,
               placeholder: '',
@@ -124,7 +124,7 @@ export const widgetLineMap = {
             },
             {
               type: 'el-input-number',
-              label: '字体大小',
+              label: '字体字号',
               name: 'subTextFontSize',
               required: false,
               placeholder: '',
@@ -161,7 +161,7 @@ export const widgetLineMap = {
             },
             {
               type: 'el-input-number',
-              label: '文字大小',
+              label: '文字字号',
               name: 'sourceFontTextSize',
               required: false,
               placeholder: '',

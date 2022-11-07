@@ -409,7 +409,7 @@ export const widgetLinechart = {
             },
             {
               type: 'el-input-number',
-              label: '字体大小',
+              label: '字体字号',
               name: 'fontSize',
               required: false,
               placeholder: '',

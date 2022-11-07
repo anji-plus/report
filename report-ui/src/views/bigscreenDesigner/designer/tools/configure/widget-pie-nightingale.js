@@ -86,7 +86,7 @@ export const widgetPieNightingale = {
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'textFontSize',
                 required: false,
                 placeholder: '',
@@ -137,7 +137,7 @@ export const widgetPieNightingale = {
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'subTextFontSize',
                 required: false,
                 placeholder: '',
@@ -174,7 +174,7 @@ export const widgetPieNightingale = {
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'fontSize',
                 required: false,
                 placeholder: '',
@@ -246,7 +246,7 @@ export const widgetPieNightingale = {
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'legendFontSize',
                 required: false,
                 placeholder: '',

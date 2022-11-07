@@ -156,7 +156,7 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-number',
-              label: '字体大小',
+              label: '字体字号',
               name: 'textFontSize',
               required: false,
               placeholder: '',
@@ -207,7 +207,7 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-number',
-              label: '字体大小',
+              label: '字体字号',
               name: 'subTextFontSize',
               required: false,
               placeholder: '',

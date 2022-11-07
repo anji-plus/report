@@ -95,7 +95,7 @@ export const widgetBarCompare = {
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'textFontSize',
                 required: false,
                 placeholder: '',
@@ -463,7 +463,7 @@ export const widgetBarCompare = {
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'fontSize',
                 required: false,
                 placeholder: '',
