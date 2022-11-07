@@ -157,7 +157,7 @@ export default {
         show: true,
         textStyle: {
           color: optionsSetup.lineColor,
-          fontSize: optionsSetup.fontSize
+          fontSize: optionsSetup.tipFontSize
         }
       };
       this.options.tooltip = tooltip;

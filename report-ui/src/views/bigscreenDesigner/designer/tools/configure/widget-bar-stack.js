@@ -498,7 +498,7 @@ export const widgetBarStack =  {
             list: [
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'tipsFontSize',
                 required: false,
                 placeholder: '',
@@ -507,9 +507,10 @@ export const widgetBarStack =  {
               {
                 type: 'vue-color',
                 label: '字体颜色',
-                name: 'lineColor',
+                name: 'tipsColor',
                 required: false,
                 placeholder: '',
+                value: '#00FEFF'
               },
             ],
           },

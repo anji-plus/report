@@ -622,19 +622,19 @@ export const widgetBarlinechart = {
           list: [
             {
               type: 'el-input-number',
-              label: '字体大小',
-              name: 'tipFontSize',
+              label: '字体字号',
+              name: 'tipsFontSize',
               required: false,
               placeholder: '',
-              value: 12
+              value: 16
             },
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'lineColor',
+              name: 'tipsColor',
               required: false,
               placeholder: '',
-              value: '#e68b55'
+              value: '#00FEFF'
             },
           ],
         },

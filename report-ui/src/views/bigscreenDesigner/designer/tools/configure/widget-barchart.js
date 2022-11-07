@@ -445,9 +445,10 @@ export const widgetBarchart = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'lineColor',
+              name: 'tipsColor',
               required: false,
               placeholder: '',
+              value: '#00FEFF'
             },
           ],
         },

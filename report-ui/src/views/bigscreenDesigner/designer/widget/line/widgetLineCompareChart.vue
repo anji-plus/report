@@ -476,30 +476,30 @@ export default {
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       let tooltip = {}
-      if (optionsSetup.tipType == "line") {
+      if (optionsSetup.tipsType == "line") {
         tooltip = {
-          show: optionsSetup.tipShow,
+          show: optionsSetup.tipsShow,
           trigger: 'axis',
           axisPointer: {
-            type: optionsSetup.tipType,
+            type: optionsSetup.tipsType,
             lineStyle: {
-              color: optionsSetup.tipColor,
+              color: optionsSetup.tipsColor,
               type: 'dashed',
             },
           },
         }
       } else {
         tooltip = {
-          show: optionsSetup.tipShow,
+          show: optionsSetup.tipsShow,
           trigger: 'axis',
           axisPointer: {
-            type: optionsSetup.tipType,
+            type: optionsSetup.tipsType,
             lineStyle: {
-              color: optionsSetup.tipColor,
+              color: optionsSetup.tipsColor,
               type: 'dashed',
             },
             crossStyle: {
-              color: optionsSetup.tipColor,
+              color: optionsSetup.tipsColor,
             }
           },
         }

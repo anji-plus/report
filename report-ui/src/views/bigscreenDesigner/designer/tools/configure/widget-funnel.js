@@ -264,18 +264,18 @@ export const widgetFunnel = {
             {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'tipFontSize',
+              name: 'tipsFontSize',
               required: false,
               placeholder: '',
-              value: 14
+              value: 16
             },
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'lineColor',
+              name: 'tipsColor',
               required: false,
               placeholder: '',
-              value: ''
+              value: '#00FEFF'
             },
           ],
         },

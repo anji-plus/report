@@ -604,7 +604,7 @@ export const widgetLineCompare = {
             {
               type: 'el-switch',
               label: '显示',
-              name: 'tipShow',
+              name: 'tipsShow',
               required: false,
               placeholder: '',
               value: true,
@@ -612,7 +612,7 @@ export const widgetLineCompare = {
             {
               type: 'el-select',
               label: '类型',
-              name: 'tipType',
+              name: 'tipsType',
               required: false,
               placeholder: '',
               selectOptions: [
@@ -624,9 +624,10 @@ export const widgetLineCompare = {
             {
               type: 'vue-color',
               label: '颜色',
-              name: 'tipColor',
+              name: 'tipsColor',
               required: false,
-              placeholder: '#e68b55',
+              placeholder: '',
+              value: '#00FEFF'
             },
           ],
         },
@@ -768,7 +769,7 @@ export const widgetLineCompare = {
         name: 'width',
         required: false,
         placeholder: '该容器在1920px大屏中的宽度',
-        value: 400,
+        value: 500,
       },
       {
         type: 'el-input-number',
@@ -776,7 +777,7 @@ export const widgetLineCompare = {
         name: 'height',
         required: false,
         placeholder: '该容器在1080px大屏中的高度',
-        value: 200,
+        value: 250,
       },
     ],
   }

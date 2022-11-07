@@ -174,11 +174,11 @@ export const widgetPiechart =   {
               },
               {
                 type: 'el-input-number',
-                label: '字体大小',
+                label: '字体字号',
                 name: 'fontSize',
                 required: false,
                 placeholder: '',
-                value: 14,
+                value: 12,
               },
               {
                 type: 'vue-color',
@@ -209,19 +209,19 @@ export const widgetPiechart =   {
             list: [
               {
                 type: 'el-input-number',
-                label: '字体大小',
-                name: 'fontSize',
+                label: '字体字号',
+                name: 'tipFontSize',
                 required: false,
                 placeholder: '',
-                value: 12
+                value: 16
               },
               {
                 type: 'vue-color',
-                label: '网格线颜色',
-                name: 'lineColor',
+                label: '字体颜色',
+                name: 'tipsColor',
                 required: false,
                 placeholder: '',
-                value: ''
+                value: '#00FEFF'
               },
             ],
           },

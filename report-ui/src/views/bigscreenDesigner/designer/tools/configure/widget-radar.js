@@ -313,7 +313,7 @@ export const widgetRadar = {
           list: [
             {
               type: 'el-input-number',
-              label: '字体大小',
+              label: '字体字号',
               name: 'tipsFontSize',
               required: false,
               placeholder: '',
@@ -322,10 +322,10 @@ export const widgetRadar = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'lineColor',
+              name: 'tipsColor',
               required: false,
               placeholder: '',
-              value: 'rgba(0, 206, 209, 1)'
+              value: '#00FEFF'
             },
           ],
         },

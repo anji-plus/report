@@ -427,7 +427,7 @@ export const widgetGradientBarchart = {
           list: [
             {
               type: 'el-input-number',
-              label: '字体大小',
+              label: '字体字号',
               name: 'tipsFontSize',
               required: false,
               placeholder: '',
@@ -436,9 +436,10 @@ export const widgetGradientBarchart = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'lineColor',
+              name: 'tipsColor',
               required: false,
-              placeholder: '#ff7f50',
+              placeholder: '',
+              value: '#00FEFF'
             },
           ],
         },

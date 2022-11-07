@@ -352,9 +352,10 @@ export const widgetHeatmap = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'tipsLineColor',
+              name: 'tipsColor',
               required: false,
               placeholder: '',
+              value: '#00FEFF'
             },
           ],
         },

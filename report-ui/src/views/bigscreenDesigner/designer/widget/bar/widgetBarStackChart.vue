@@ -210,7 +210,7 @@ export default {
         trigger: "item",
         show: true,
         textStyle: {
-          color: optionsSetup.lineColor,
+          color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize
         }
       };

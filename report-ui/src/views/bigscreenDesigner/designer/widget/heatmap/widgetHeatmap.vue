@@ -277,8 +277,8 @@ export default {
         position: "top",
         show: true,
         textStyle: {
-          color: optionsSetup.lineColor,
-          fontSize: optionsSetup.tipsLineColor
+          color: optionsSetup.tipsColor,
+          fontSize: optionsSetup.tipsFontSize,
         }
       };
       this.options.tooltip = tooltip;

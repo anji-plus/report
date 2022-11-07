@@ -130,8 +130,8 @@ export default {
         trigger: "item",
         show: true,
         textStyle: {
-          color: optionsSetup.lineColor,
-          fontSize: optionsSetup.fontSize
+          color: optionsSetup.tipsColor,
+          fontSize: optionsSetup.tipsFontSize
         }
       };
       this.options.tooltip = tooltip;

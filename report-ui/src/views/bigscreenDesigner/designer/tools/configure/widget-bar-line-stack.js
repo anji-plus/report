@@ -644,10 +644,10 @@ export const widgetBarLineStack = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'lineColor',
+              name: 'tipsColor',
               required: false,
               placeholder: '',
-              value: 'rgba(0, 206, 209, 1)'
+              value: '#00FEFF'
             },
           ],
         },
