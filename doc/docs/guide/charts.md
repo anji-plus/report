@@ -241,3 +241,15 @@
 数据格式和柱线、多柱线都是类似的，注意实际作为name的字段，比如时间字段，有且只能有1个，数据集选择时选择名称，其余是顶点字段，不明白可以看静态数据格式。<br>
 ![img27](../picture/charts/img_27.png) <br>
 ![img28](../picture/charts/img_28.png) <br>
+
+
+## 柱线堆叠图
+
+图表的基本操作和柱状堆叠图、折线堆叠并无大区别，需要在意的是数据格式的区别，绑定动态数据的时候，需要你数据集有4个字段，其中俩个字段作为x，y区分字段，另外俩个作为数值字段。<br>
+![img29](../picture/charts/img_29.png) <br>
+![img30](../picture/charts/img_30.png) <br>
+
+### 数据格式
+
+和另外俩个堆叠图相比，多了查询的一列数据，比如 "select a,b,sum(c),sum(d) from aa group by a,b"
+![img31](../picture/charts/img_31.png) <br>
