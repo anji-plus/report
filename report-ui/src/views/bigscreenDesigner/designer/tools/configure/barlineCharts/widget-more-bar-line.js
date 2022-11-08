@@ -418,11 +418,11 @@ export const widgetMoreBarLine = {
           ],
         },
         {
-          name: 'Y轴设置',
+          name: '左Y轴设置',
           list: [
             {
               type: 'el-switch',
-              label: '左显示',
+              label: '显示',
               name: 'isShowYLeft',
               require: false,
               placeholder: '',
@@ -485,12 +485,36 @@ export const widgetMoreBarLine = {
               value: 0
             },
             {
+              type: 'el-switch',
+              label: '刻度线显示',
+              name: 'tickLineYLeft',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '坐标轴显示',
+              name: 'lineYLeft',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
               type: 'vue-color',
-              label: '轴颜色',
+              label: '坐标轴颜色',
               name: 'lineColorYLeft',
               required: false,
               placeholder: '',
               value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '坐标轴宽度',
+              name: 'lineWidthYLeft',
+              required: false,
+              placeholder: '',
+              value: 1,
             },
             {
               type: 'el-switch',
@@ -509,8 +533,21 @@ export const widgetMoreBarLine = {
               value: '#fff',
             },
             {
+              type: 'el-input-number',
+              label: '分割线宽度',
+              name: 'splitLineFontWidthYLeft',
+              required: false,
+              placeholder: '',
+              value: 1,
+            },
+          ],
+        },
+        {
+          name: '右Y轴设置',
+          list: [
+            {
               type: 'el-switch',
-              label: '右显示',
+              label: '显示',
               name: 'isShowYRight',
               require: false,
               placeholder: '',
@@ -572,12 +609,36 @@ export const widgetMoreBarLine = {
               value: 0
             },
             {
+              type: 'el-switch',
+              label: '刻度线显示',
+              name: 'tickLineYRight',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '坐标轴显示',
+              name: 'lineYRight',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
               type: 'vue-color',
-              label: '轴颜色',
+              label: '坐标轴颜色',
               name: 'lineColorYRight',
               required: false,
               placeholder: '',
               value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '坐标轴宽度',
+              name: 'lineWidthYRight',
+              required: false,
+              placeholder: '',
+              value: 1,
             },
             {
               type: 'el-switch',
@@ -594,6 +655,14 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '分割线宽度',
+              name: 'splitLineFontWidthYRight',
+              required: false,
+              placeholder: '',
+              value: 1,
             },
           ],
         },

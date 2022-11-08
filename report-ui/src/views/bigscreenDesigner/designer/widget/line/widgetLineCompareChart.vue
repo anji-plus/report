@@ -367,7 +367,7 @@ export default {
         name: optionsSetup.textNameYTop, // 坐标轴名称
         nameTextStyle: {
           color: optionsSetup.nameColorYTop,
-          fontSize: optionsSetup.namefontSizeYTop
+          fontSize: optionsSetup.nameFontSizeYTop
         },
         axisLabel: {
           show: true,
@@ -388,7 +388,7 @@ export default {
         splitLine: {
           show: optionsSetup.splitLineYTop,
           lineStyle: {
-            width: optionsSetup.splitLinefontSizeYTop,
+            width: optionsSetup.splitLineFontWidthYTop,
             color: optionsSetup.splitLineColorYTop,
           },
         },
@@ -409,7 +409,7 @@ export default {
         name: optionsSetup.textNameYBottom, // 坐标轴名称
         nameTextStyle: {
           color: optionsSetup.nameColorYBottom,
-          fontSize: optionsSetup.namefontSizeYBottom
+          fontSize: optionsSetup.nameFontSizeYBottom
         },
         inverse: true, // 翻转
         axisLabel: {
@@ -431,7 +431,7 @@ export default {
         splitLine: {
           show: optionsSetup.splitLineYBottom,
           lineStyle: {
-            width: optionsSetup.splitLinefontSizeYBottom,
+            width: optionsSetup.splitLineFontWidthYBottom,
             color: optionsSetup.splitLineColorYBottom,
           },
         },

@@ -314,8 +314,9 @@ export default {
         type: 'value',
         show : optionsSetup.hideXLeft,
         inverse: true,
-        axisLine: {//X轴线
-          show: optionsSetup.xLineLeft,
+        //X轴线
+        axisLine: {
+          show: optionsSetup.lineXLeft,
           lineStyle: {
             color: optionsSetup.lineColorXLeft,
           },
@@ -323,19 +324,19 @@ export default {
         axisTick: {
           show: optionsSetup.tickLineLeft,
         },
-        position: 'bottom',
+        position: optionsSetup.positionXLeft,
         axisLabel: { // x轴
           show: true,
           textStyle: {
-            color: optionsSetup.XcolorLeft,
+            color: optionsSetup.colorXLeft,
             fontSize: optionsSetup.fontSizeXLeft
           }
         },
         splitLine: { // 分割线
-          show: optionsSetup.SplitLineLeft,
+          show: optionsSetup.isShowSplitLineLeft,
           lineStyle: {
-            color: optionsSetup.SplitLineColorLeft,
-            width: optionsSetup.SplitLinefontSizeLeft,
+            color: optionsSetup.splitLineColorLeft,
+            width: optionsSetup.splitLineFontWidthLeft,
             type: 'solid'
           }
         }
@@ -351,7 +352,7 @@ export default {
         show : optionsSetup.hideXRight,
         type: 'value',
         axisLine: {//X轴线
-          show: optionsSetup.xLineRight,
+          show: optionsSetup.lineXRight,
           lineStyle: {
             color: optionsSetup.lineColorXRight,
           },
@@ -359,19 +360,19 @@ export default {
         axisTick: {
           show: optionsSetup.tickLineRight,
         },
-        position: 'bottom',
+        position: optionsSetup.positionXRight,
         axisLabel: { // x轴
           show: true,
           textStyle: {
-            color: optionsSetup.XcolorRight,
+            color: optionsSetup.colorXRight,
             fontSize: optionsSetup.fontSizeXRight
           }
         },
         splitLine: { // 分割线
-          show: optionsSetup.SplitLineRight,
+          show: optionsSetup.isShowSplitLineRight,
           lineStyle: {
-            color: optionsSetup.SplitLineColorRight,
-            width: optionsSetup.SplitLinefontSizeRight,
+            color: optionsSetup.splitLineColorRight,
+            width: optionsSetup.splitLineFontWidthRight,
             type: 'solid'
           }
         }
@@ -393,7 +394,7 @@ export default {
       const axisLabel = {
         show: optionsSetup.hideY,
         textStyle: {
-          align: optionsSetup.textAlign,
+          align: optionsSetup.textAlignY,
           color: optionsSetup.colorY,
           fontSize: optionsSetup.fontSizeY,
         }
@@ -461,6 +462,8 @@ export default {
       const grid = [
         {//左
           show: optionsSetup.frameLineLeft,
+          borderColor: optionsSetup.borderColorLeft,
+          borderWidth: optionsSetup.borderWidthLeft,
           left: optionsSetup.marginLeftRight,
           top: optionsSetup.marginTop,
           bottom: optionsSetup.marginBottom,
@@ -476,6 +479,8 @@ export default {
         },
         {//右
           show: optionsSetup.frameLineRight,
+          borderColor: optionsSetup.borderColorRight,
+          borderWidth: optionsSetup.borderWidthRight,
           right: optionsSetup.marginLeftRight,
           top: optionsSetup.marginTop,
           bottom: optionsSetup.marginBottom,

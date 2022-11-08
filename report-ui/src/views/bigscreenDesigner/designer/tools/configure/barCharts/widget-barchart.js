@@ -242,7 +242,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '文字字号',
+              label: '数值字号',
               name: 'fontSizeX',
               required: false,
               placeholder: '',
@@ -250,7 +250,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '文字间隔',
+              label: '数值间隔',
               name: 'textInterval',
               required: false,
               placeholder: '',
@@ -258,7 +258,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-slider',
-              label: '文字角度',
+              label: '数值角度',
               name: 'textAngleX',
               required: false,
               placeholder: '',

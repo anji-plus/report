@@ -233,9 +233,13 @@ export default {
               fontSize: optionsSetup.fontSizeYLeft
             }
           },
+          axisTick: { // 刻度
+            show: optionsSetup.tickLineYLeft,
+          },
           axisLine: {
-            show: true,
+            show: optionsSetup.lineYLeft,
             lineStyle: {
+              width: optionsSetup.lineWidthYLeft,
               color: optionsSetup.lineColorYLeft,
             }
           },
@@ -243,6 +247,7 @@ export default {
             show: optionsSetup.isShowSplitLineYLeft,
             lineStyle: {
               color: optionsSetup.splitLineColorYLeft,
+              width: optionsSetup.splitLineFontWidthYLeft,
             }
           }
         },
@@ -269,9 +274,13 @@ export default {
               fontSize: optionsSetup.fontSizeYRight
             }
           },
+          axisTick: { // 刻度
+            show: optionsSetup.tickLineYRight,
+          },
           axisLine: {
-            show: true,
+            show: optionsSetup.lineYRight,
             lineStyle: {
+              width: optionsSetup.lineWidthYRight,
               color: optionsSetup.lineColorYRight,
             }
           },
@@ -279,6 +288,7 @@ export default {
             show: optionsSetup.isShowSplitLineYRight,
             lineStyle: {
               color: optionsSetup.splitLineColorYRight,
+              width: optionsSetup.splitLineFontWidthYRight,
             }
           }
         }
