@@ -177,10 +177,10 @@ export default {
         // 坐标轴是否显示
         show: optionsSetup.hideX,
         // 坐标轴名称
-        name: optionsSetup.xName,
+        name: optionsSetup.nameX,
         nameTextStyle: {
-          color: optionsSetup.xNameColor,
-          fontSize: optionsSetup.xNameFontSize
+          color: optionsSetup.nameColorX,
+          fontSize: optionsSetup.nameFontSizeX
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -192,18 +192,16 @@ export default {
           rotate: optionsSetup.textAngleX,
           textStyle: {
             // 坐标文字颜色
-            color: optionsSetup.Xcolor,
+            color: optionsSetup.colorX,
             fontSize: optionsSetup.fontSizeX
           }
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsSetup.lineColorX
+            color: optionsSetup.lineColorX,
+            width: optionsSetup.lineWidthX,
           }
-        },
-        splitArea: {
-          show: false,
         },
       };
       this.options.xAxis = xAxis;
@@ -212,16 +210,19 @@ export default {
     setOptionsY() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
-        type: "category",
+        type: "value",
+        scale: optionsSetup.scale,
+        // 均分
+        splitNumber: optionsSetup.splitNumberY,
         // 坐标轴是否显示
         show: optionsSetup.isShowY,
         // 坐标轴名称
         name: optionsSetup.textNameY,
         nameTextStyle: {
-          color: optionsSetup.NameColorY,
-          fontSize: optionsSetup.NameFontSizeY
+          color: optionsSetup.nameColorY,
+          fontSize: optionsSetup.nameFontSizeY
         },
-        // y轴反转
+        // 轴反转
         inverse: optionsSetup.reversalY,
         axisLabel: {
           show: true,
@@ -236,11 +237,9 @@ export default {
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsSetup.lineColorY
+            color: optionsSetup.lineColorY,
+            width: optionsSetup.lineWidthY,
           }
-        },
-        splitArea: {
-          show: false,
         },
       };
       this.options.yAxis = yAxis;

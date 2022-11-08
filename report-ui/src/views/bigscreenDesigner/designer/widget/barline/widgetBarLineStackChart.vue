@@ -188,13 +188,15 @@ export default {
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsSetup.lineColorX
+            color: optionsSetup.lineColorX,
+            width: optionsSetup.lineWidthX,
           }
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineX,
           lineStyle: {
-            color: optionsSetup.splitLineColorX
+            color: optionsSetup.splitLineColorX,
+            width: optionsSetup.splitLineWidthX,
           }
         }
       };

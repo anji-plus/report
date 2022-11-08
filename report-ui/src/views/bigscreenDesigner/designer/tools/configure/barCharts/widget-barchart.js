@@ -234,7 +234,7 @@ export const widgetBarchart = {
             },
             {
               type: 'vue-color',
-              label: '文字颜色',
+              label: '数值颜色',
               name: 'colorX',
               required: false,
               placeholder: '',
@@ -266,7 +266,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-switch',
-              label: '轴反转',
+              label: '坐标轴反转',
               name: 'reversalX',
               required: false,
               placeholder: '',
@@ -274,11 +274,19 @@ export const widgetBarchart = {
             },
             {
               type: 'vue-color',
-              label: '轴颜色',
+              label: '坐标轴颜色',
               name: 'lineColorX',
               required: false,
               placeholder: '',
               value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '坐标轴宽度',
+              name: 'lineWidthX',
+              required: false,
+              placeholder: '',
+              value: 1,
             },
             {
               type: 'el-switch',
@@ -295,7 +303,15 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: '#fff',
-            }
+            },
+            {
+              type: 'el-input-number',
+              label: '分割线宽度',
+              name: 'splitLineWidthX',
+              required: false,
+              placeholder: '',
+              value: 1,
+            },
           ],
         },
         {
@@ -375,7 +391,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-switch',
-              label: '轴反转',
+              label: '坐标轴反转',
               name: 'reversalY',
               required: false,
               placeholder: '',
@@ -383,11 +399,19 @@ export const widgetBarchart = {
             },
             {
               type: 'vue-color',
-              label: '轴颜色',
+              label: '坐标轴颜色',
               name: 'lineColorY',
               required: false,
               placeholder: '',
               value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '坐标轴宽度',
+              name: 'lineWidthY',
+              required: false,
+              placeholder: '',
+              value: 1,
             },
             {
               type: 'el-switch',
@@ -404,6 +428,14 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '分割线宽度',
+              name: 'splitLineWidthY',
+              required: false,
+              placeholder: '',
+              value: 1,
             },
           ],
         },

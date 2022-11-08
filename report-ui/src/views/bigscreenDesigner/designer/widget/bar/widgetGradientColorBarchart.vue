@@ -223,13 +223,15 @@ export default {
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsSetup.lineColorX
+            color: optionsSetup.lineColorX,
+            width: optionsSetup.lineWidthX,
           }
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineX,
           lineStyle: {
-            color: optionsSetup.splitLineColorX
+            color: optionsSetup.splitLineColorX,
+            width: optionsSetup.splitLineWidthX,
           }
         }
       };
@@ -266,13 +268,15 @@ export default {
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsSetup.lineColorY
+            color: optionsSetup.lineColorY,
+            width: optionsSetup.lineWidthY,
           }
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineY,
           lineStyle: {
-            color: optionsSetup.splitLineColorY
+            color: optionsSetup.splitLineColorY,
+            width: optionsSetup.splitLineWidthY,
           }
         }
       };

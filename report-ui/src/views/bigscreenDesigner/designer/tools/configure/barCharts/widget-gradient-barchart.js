@@ -226,7 +226,7 @@ export const widgetGradientBarchart = {
             },
             {
               type: 'vue-color',
-              label: '文字颜色',
+              label: '数值颜色',
               name: 'colorX',
               required: false,
               placeholder: '',
@@ -234,7 +234,7 @@ export const widgetGradientBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '文字字号',
+              label: '数值字号',
               name: 'fontSizeX',
               required: false,
               placeholder: '',
@@ -242,7 +242,7 @@ export const widgetGradientBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '文字间隔',
+              label: '数值间隔',
               name: 'textInterval',
               required: false,
               placeholder: '',
@@ -250,7 +250,7 @@ export const widgetGradientBarchart = {
             },
             {
               type: 'el-slider',
-              label: '文字角度',
+              label: '数值角度',
               name: 'textAngleX',
               required: false,
               placeholder: '',
@@ -258,7 +258,7 @@ export const widgetGradientBarchart = {
             },
             {
               type: 'el-switch',
-              label: '轴反转',
+              label: '坐标轴反转',
               name: 'reversalX',
               required: false,
               placeholder: '',
@@ -266,11 +266,19 @@ export const widgetGradientBarchart = {
             },
             {
               type: 'vue-color',
-              label: '轴颜色',
+              label: '坐标轴颜色',
               name: 'lineColorX',
               required: false,
               placeholder: '',
               value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '坐标轴宽度',
+              name: 'lineWidthX',
+              required: false,
+              placeholder: '',
+              value: 1,
             },
             {
               type: 'el-switch',
@@ -287,7 +295,15 @@ export const widgetGradientBarchart = {
               required: false,
               placeholder: '',
               value: '#fff',
-            }
+            },
+            {
+              type: 'el-input-number',
+              label: '分割线宽度',
+              name: 'splitLineWidthX',
+              required: false,
+              placeholder: '',
+              value: 1,
+            },
           ],
         },
         {
