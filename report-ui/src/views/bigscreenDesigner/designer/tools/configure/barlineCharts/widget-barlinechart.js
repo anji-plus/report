@@ -33,6 +33,35 @@ export const widgetBarlinechart = {
       },
       [
         {
+          name: '柱体设置',
+          list: [
+            {
+              type: 'el-slider',
+              label: '最大宽度',
+              name: 'maxWidth',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'el-slider',
+              label: '圆角',
+              name: 'radius',
+              require: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'el-slider',
+              label: '最小高度',
+              name: 'minHeight',
+              require: false,
+              placeholder: '',
+              value: 0,
+            },
+          ],
+        },
+        {
           name: '折线设置',
           list: [
             {
@@ -82,35 +111,6 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               value: 3,
-            },
-          ],
-        },
-        {
-          name: '柱体设置',
-          list: [
-            {
-              type: 'el-slider',
-              label: '最大宽度',
-              name: 'maxWidth',
-              required: false,
-              placeholder: '',
-              value: 10,
-            },
-            {
-              type: 'el-slider',
-              label: '圆角',
-              name: 'radius',
-              require: false,
-              placeholder: '',
-              value: 5,
-            },
-            {
-              type: 'el-slider',
-              label: '最小高度',
-              name: 'minHeight',
-              require: false,
-              placeholder: '',
-              value: 0,
             },
           ],
         },
@@ -337,59 +337,27 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-text',
-              label: '坐标名',
-              name: 'xName',
+              label: '轴别名',
+              name: 'nameX',
               required: false,
               placeholder: '',
               value: ''
             },
             {
               type: 'vue-color',
-              label: '坐标名颜色',
+              label: '别名颜色',
               name: 'nameColorX',
               required: false,
               placeholder: '',
-              value: '#fff',
+              value: '#fff'
             },
             {
               type: 'el-input-number',
-              label: '坐标字号',
+              label: '别名字号',
               name: 'nameFontSizeX',
               required: false,
               placeholder: '',
-              value: 14,
-            },
-            {
-              type: 'vue-color',
-              label: '数值颜色',
-              name: 'Xcolor',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '数值字号',
-              name: 'fontSizeX',
-              required: false,
-              placeholder: '',
-              value: 14,
-            },
-            {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'textAngle',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
-              type: 'el-input-number',
-              label: '数值间隔',
-              name: 'textInterval',
-              required: false,
-              placeholder: '',
-              value: ''
+              value: 14
             },
             {
               type: 'el-switch',
@@ -398,6 +366,38 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               value: false
+            },
+            {
+              type: 'el-slider',
+              label: '文字角度',
+              name: 'textAngleX',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+            {
+              type: 'el-input-number',
+              label: '文字间隔',
+              name: 'textInterval',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '文字颜色',
+              name: 'colorX',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '文字字号',
+              name: 'fontSizeX',
+              required: false,
+              placeholder: '',
+              value: 14,
             },
             {
               type: 'vue-color',
@@ -438,7 +438,7 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-text',
-              label: '左坐标名',
+              label: '坐标名',
               name: 'textNameYLeft',
               require: false,
               placeholder: '',
@@ -446,7 +446,7 @@ export const widgetBarlinechart = {
             },
             {
               type: 'vue-color',
-              label: '左坐标名颜色',
+              label: '坐标名颜色',
               name: 'nameColorYLeft',
               required: false,
               placeholder: '',
@@ -454,19 +454,67 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-number',
-              label: '左坐标字号',
-              name: 'namefontSizeYLeft',
+              label: '坐标名字号',
+              name: 'nameFontSizeYLeft',
               required: false,
               placeholder: '',
               value: 14,
             },
             {
+              type: 'vue-color',
+              label: '数值颜色',
+              name: 'colorYLeft',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
               type: 'el-input-number',
-              label: '左均分',
+              label: '数值字号',
+              name: 'fontSizeYLeft',
+              required: false,
+              placeholder: '',
+              value: 14,
+            },
+            {
+              type: 'el-slider',
+              label: '数值角度',
+              name: 'textAngleYLeft',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+            {
+              type: 'el-input-number',
+              label: '均分',
               name: 'splitNumberLeft',
               required: false,
               placeholder: '',
               value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '轴颜色',
+              name: 'lineColorYLeft',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-switch',
+              label: '分割线显示',
+              name: 'isShowSplitLineYLeft',
+              require: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'vue-color',
+              label: '分割线颜色',
+              name: 'splitLineColorYLeft',
+              required: false,
+              placeholder: '',
+              value: '#fff',
             },
             {
               type: 'el-switch',
@@ -478,7 +526,7 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-text',
-              label: '右坐标名',
+              label: '坐标名',
               name: 'textNameYRight',
               require: false,
               placeholder: '',
@@ -486,7 +534,7 @@ export const widgetBarlinechart = {
             },
             {
               type: 'vue-color',
-              label: '右坐标名颜色',
+              label: '坐标名颜色',
               name: 'nameColorYRight',
               required: false,
               placeholder: '',
@@ -494,24 +542,15 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-number',
-              label: '右坐标字号',
-              name: 'namefontSizeYRight',
+              label: '坐标名字号',
+              name: 'nameFontSizeYRight',
               required: false,
               placeholder: '',
               value: 14,
-            },
-            {
-              type: 'el-input-number',
-              label: '右均分',
-              name: 'splitNumberRight',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
+            }, {
               type: 'vue-color',
               label: '数值颜色',
-              name: 'colorY',
+              name: 'colorYRight',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -519,23 +558,47 @@ export const widgetBarlinechart = {
             {
               type: 'el-input-number',
               label: '数值字号',
-              name: 'fontSizeY',
+              name: 'fontSizeYRight',
               required: false,
               placeholder: '',
               value: 14,
             },
             {
-              type: 'el-switch',
-              label: '轴反转',
-              name: 'reversalY',
+              type: 'el-slider',
+              label: '数值角度',
+              name: 'textAngleYRight',
               required: false,
               placeholder: '',
-              value: false
+              value: 0
+            },
+            {
+              type: 'el-input-number',
+              label: '均分',
+              name: 'splitNumberRight',
+              required: false,
+              placeholder: '',
+              value: ''
             },
             {
               type: 'vue-color',
               label: '轴颜色',
-              name: 'lineColorY',
+              name: 'lineColorYRight',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-switch',
+              label: '分割线显示',
+              name: 'isShowSplitLineYRight',
+              require: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'vue-color',
+              label: '分割线颜色',
+              name: 'splitLineColorYRight',
               required: false,
               placeholder: '',
               value: '#fff',

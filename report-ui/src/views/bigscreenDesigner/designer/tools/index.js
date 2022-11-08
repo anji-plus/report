@@ -44,6 +44,7 @@ const screenConfig = {
         name: 'description',
         required: false,
         placeholder: '',
+        value: ''
       },
       {
         type: 'vue-color',
@@ -51,7 +52,7 @@ const screenConfig = {
         name: 'backgroundColor',
         required: false,
         placeholder: '',
-        value: '#000',
+        value: 'rgba(45, 86, 126, 1)',
       },
       {
         type: 'custom-upload',
@@ -59,7 +60,7 @@ const screenConfig = {
         name: 'backgroundImage',
         required: false,
         placeholder: '',
-        value: 'https://ajreport.beliefteam.cn/file/download/bf566e48-ccad-40e1-8ee9-228427e5466b',
+        value: '',
       },
     ],
     data: [],

@@ -225,6 +225,8 @@ export default {
           },
           axisLabel: {
             show: true,
+            // 文字角度
+            rotate: optionsSetup.textAngleYLeft,
             textStyle: {
               // 坐标文字颜色
               color: optionsSetup.colorYLeft,
@@ -234,11 +236,14 @@ export default {
           axisLine: {
             show: true,
             lineStyle: {
-              color: optionsSetup.lineColorYLeft
+              color: optionsSetup.lineColorYLeft,
             }
           },
           splitLine: {
-            show: false,
+            show: optionsSetup.isShowSplitLineYLeft,
+            lineStyle: {
+              color: optionsSetup.splitLineColorYLeft,
+            }
           }
         },
         {
@@ -256,6 +261,8 @@ export default {
           },
           axisLabel: {
             show: true,
+            // 文字角度
+            rotate: optionsSetup.textAngleYRight,
             textStyle: {
               // 坐标文字颜色
               color: optionsSetup.colorYRight,
@@ -265,11 +272,14 @@ export default {
           axisLine: {
             show: true,
             lineStyle: {
-              color: optionsSetup.lineColorYRight
+              color: optionsSetup.lineColorYRight,
             }
           },
           splitLine: {
-            show: false,
+            show: optionsSetup.isShowSplitLineYRight,
+            lineStyle: {
+              color: optionsSetup.splitLineColorYRight,
+            }
           }
         }
       ];
