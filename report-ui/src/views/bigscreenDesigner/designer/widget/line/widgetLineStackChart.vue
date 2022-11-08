@@ -131,10 +131,10 @@ export default {
         // 坐标轴是否显示
         show: optionsSetup.hideX,
         // 坐标轴名称
-        name: optionsSetup.xName,
+        name: optionsSetup.nameX,
         nameTextStyle: {
-          color: optionsSetup.xNameColor,
-          fontSize: optionsSetup.xNameFontSize
+          color: optionsSetup.nameColorX,
+          fontSize: optionsSetup.nameFontSizeX
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -146,7 +146,7 @@ export default {
           rotate: optionsSetup.textAngleX,
           textStyle: {
             // 坐标文字颜色
-            color: optionsSetup.Xcolor,
+            color: optionsSetup.colorX,
             fontSize: optionsSetup.fontSizeX
           }
         },
@@ -170,22 +170,25 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         type: "value",
+        scale: optionsSetup.scale,
+        // 均分
+        splitNumber: optionsSetup.splitNumberY,
         // 坐标轴是否显示
         show: optionsSetup.isShowY,
         // 坐标轴名称
         name: optionsSetup.textNameY,
         nameTextStyle: {
-          color: optionsSetup.NameColorY,
-          fontSize: optionsSetup.NameFontSizeY
+          color: optionsSetup.nameColorY,
+          fontSize: optionsSetup.nameFontSizeY
         },
-        // y轴反转
+        // 轴反转
         inverse: optionsSetup.reversalY,
         axisLabel: {
           show: true,
           // 文字角度
           rotate: optionsSetup.textAngleY,
           textStyle: {
-            // y轴 坐标文字颜色
+            // 坐标文字颜色
             color: optionsSetup.colorY,
             fontSize: optionsSetup.fontSizeY
           }
@@ -262,7 +265,7 @@ export default {
       legend.itemWidth = optionsSetup.legendWidth;
     },
     // 图例名称设置
-    setOptionsLegendName(name){
+    setOptionsLegendName(name) {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
@@ -272,7 +275,7 @@ export default {
           series[i].name = name[i];
         }
         this.options.legend['data'] = name;
-      }else {
+      } else {
         const arr = legendName.split('|');
         for (let i = 0; i < arr.length; i++) {
           series[i].name = arr[i];

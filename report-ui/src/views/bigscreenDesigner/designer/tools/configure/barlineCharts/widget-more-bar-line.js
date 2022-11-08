@@ -148,10 +148,10 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -162,9 +162,9 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -175,9 +175,9 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
               ],
               value: 'center'
             },
@@ -212,10 +212,10 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -226,9 +226,9 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -284,9 +284,9 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
               ],
               value: 'center'
             },
@@ -297,8 +297,8 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'top', name: '顶部' },
-                { code: 'bottom', name: '底部' },
+                {code: 'top', name: '顶部'},
+                {code: 'bottom', name: '底部'},
               ],
               value: 'top'
             },
@@ -309,8 +309,8 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'vertical', name: '竖排' },
-                { code: 'horizontal', name: '横排' },
+                {code: 'vertical', name: '竖排'},
+                {code: 'horizontal', name: '横排'},
               ],
               value: 'horizontal'
             },
@@ -329,7 +329,7 @@ export const widgetMoreBarLine = {
             },
             {
               type: 'el-input-text',
-              label: '轴别名',
+              label: '坐标名',
               name: 'nameX',
               required: false,
               placeholder: '',
@@ -337,7 +337,7 @@ export const widgetMoreBarLine = {
             },
             {
               type: 'vue-color',
-              label: '别名颜色',
+              label: '坐标名颜色',
               name: 'nameColorX',
               required: false,
               placeholder: '',
@@ -345,35 +345,11 @@ export const widgetMoreBarLine = {
             },
             {
               type: 'el-input-number',
-              label: '别名字号',
+              label: '坐标名字号',
               name: 'nameFontSizeX',
               required: false,
               placeholder: '',
               value: 14
-            },
-            {
-              type: 'el-switch',
-              label: '轴反转',
-              name: 'reversalX',
-              required: false,
-              placeholder: '',
-              value: false
-            },
-            {
-              type: 'el-slider',
-              label: '文字角度',
-              name: 'textAngleX',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
-              type: 'el-input-number',
-              label: '文字间隔',
-              name: 'textInterval',
-              required: false,
-              placeholder: '',
-              value: ''
             },
             {
               type: 'vue-color',
@@ -390,6 +366,30 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               value: 14,
+            },
+            {
+              type: 'el-input-number',
+              label: '文字间隔',
+              name: 'textInterval',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'el-slider',
+              label: '文字角度',
+              name: 'textAngleX',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+            {
+              type: 'el-switch',
+              label: '轴反转',
+              name: 'reversalX',
+              required: false,
+              placeholder: '',
+              value: false
             },
             {
               type: 'vue-color',
@@ -469,20 +469,20 @@ export const widgetMoreBarLine = {
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'textAngleYLeft',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
               type: 'el-input-number',
               label: '均分',
               name: 'splitNumberLeft',
               required: false,
               placeholder: '',
               value: ''
+            },
+            {
+              type: 'el-slider',
+              label: '数值角度',
+              name: 'textAngleYLeft',
+              required: false,
+              placeholder: '',
+              value: 0
             },
             {
               type: 'vue-color',
@@ -556,20 +556,20 @@ export const widgetMoreBarLine = {
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'textAngleYRight',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
               type: 'el-input-number',
               label: '均分',
               name: 'splitNumberRight',
               required: false,
               placeholder: '',
               value: ''
+            },
+            {
+              type: 'el-slider',
+              label: '数值角度',
+              name: 'textAngleYRight',
+              required: false,
+              placeholder: '',
+              value: 0
             },
             {
               type: 'vue-color',
@@ -639,10 +639,10 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -690,10 +690,10 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -763,9 +763,9 @@ export const widgetMoreBarLine = {
               name: 'customColor',
               required: false,
               value: [
-                { color: '#4bdfff' },
-                { color: '#55f49c' },
-                { color: '#ffa43a' },
+                {color: '#4bdfff'},
+                {color: '#55f49c'},
+                {color: '#ffa43a'},
               ],
             },
           ],
@@ -810,14 +810,14 @@ export const widgetMoreBarLine = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          { "date": "2014", "unsales": 400, "manus": 300, "sales": 4.2, },
-          { "date": "2015", "unsales": 400, "manus": 500, "sales": 3.6, },
-          { "date": "2016", "unsales": 300, "manus": 500, "sales": 5.8, },
-          { "date": "2017", "unsales": 300, "manus": 500, "sales": 3.4, },
-          { "date": "2018", "unsales": 400, "manus": 400, "sales": 2.5, },
-          { "date": "2019", "unsales": 400, "manus": 500, "sales": 5.8, },
-          { "date": "2020", "unsales": 300, "manus": 400, "sales": 7.6, },
-          { "date": "2021", "unsales": 300, "manus": 600, "sales": 3.4, },
+          {"date": "2014", "unsales": 400, "manus": 300, "sales": 4.2,},
+          {"date": "2015", "unsales": 400, "manus": 500, "sales": 3.6,},
+          {"date": "2016", "unsales": 300, "manus": 500, "sales": 5.8,},
+          {"date": "2017", "unsales": 300, "manus": 500, "sales": 3.4,},
+          {"date": "2018", "unsales": 400, "manus": 400, "sales": 2.5,},
+          {"date": "2019", "unsales": 400, "manus": 500, "sales": 5.8,},
+          {"date": "2020", "unsales": 300, "manus": 400, "sales": 7.6,},
+          {"date": "2021", "unsales": 300, "manus": 600, "sales": 3.4,},
         ]
       },
       {

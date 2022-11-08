@@ -127,10 +127,10 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -141,9 +141,9 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -154,9 +154,9 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
               ],
               value: 'center'
             },
@@ -191,10 +191,10 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -205,9 +205,9 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -227,7 +227,7 @@ export const widgetLinechart = {
             {
               type: 'el-input-text',
               label: '坐标名',
-              name: 'xName',
+              name: 'nameX',
               required: false,
               placeholder: '',
               value: ''
@@ -238,47 +238,47 @@ export const widgetLinechart = {
               name: 'nameColorX',
               required: false,
               placeholder: '',
-              value: '#fff',
+              value: '#fff'
             },
             {
               type: 'el-input-number',
-              label: '坐标字号',
+              label: '坐标名字号',
               name: 'nameFontSizeX',
               required: false,
               placeholder: '',
-              value: 14,
+              value: 14
             },
             {
               type: 'vue-color',
-              label: '数值颜色',
-              name: 'Xcolor',
+              label: '文字颜色',
+              name: 'colorX',
               required: false,
               placeholder: '',
               value: '#fff',
             },
             {
               type: 'el-input-number',
-              label: '数值字号',
+              label: '文字字号',
               name: 'fontSizeX',
               required: false,
               placeholder: '',
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'textAngle',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
               type: 'el-input-number',
-              label: '数值间隔',
+              label: '文字间隔',
               name: 'textInterval',
               required: false,
               placeholder: '',
               value: ''
+            },
+            {
+              type: 'el-slider',
+              label: '文字角度',
+              name: 'textAngleX',
+              required: false,
+              placeholder: '',
+              value: 0
             },
             {
               type: 'el-switch',
@@ -343,8 +343,8 @@ export const widgetLinechart = {
             },
             {
               type: 'el-input-number',
-              label: '坐标字号',
-              name: 'namefontSizeY',
+              label: '坐标名字号',
+              name: 'nameFontSizeY',
               required: false,
               placeholder: '',
               value: 14,
@@ -366,14 +366,6 @@ export const widgetLinechart = {
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'ytextAngle',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
               type: 'el-switch',
               label: '缩放',
               name: 'scale',
@@ -384,10 +376,18 @@ export const widgetLinechart = {
             {
               type: 'el-input-number',
               label: '均分',
-              name: 'splitNumber',
+              name: 'splitNumberY',
               required: false,
               placeholder: '',
               value: ''
+            },
+            {
+              type: 'el-slider',
+              label: '数值角度',
+              name: 'textAngleY',
+              required: false,
+              placeholder: '',
+              value: 0
             },
             {
               type: 'el-switch',
@@ -420,7 +420,7 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               value: '#fff',
-            }
+            },
           ],
         },
         {

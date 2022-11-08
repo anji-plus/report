@@ -128,10 +128,10 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -142,9 +142,9 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -155,9 +155,9 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
               ],
               value: 'center'
             },
@@ -192,10 +192,10 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -206,9 +206,9 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -264,9 +264,9 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
               ],
               value: 'center'
             },
@@ -277,8 +277,8 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'top', name: '顶部' },
-                { code: 'bottom', name: '底部' },
+                {code: 'top', name: '顶部'},
+                {code: 'bottom', name: '底部'},
               ],
               value: 'top'
             },
@@ -289,8 +289,8 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'vertical', name: '竖排' },
-                { code: 'horizontal', name: '横排' },
+                {code: 'vertical', name: '竖排'},
+                {code: 'horizontal', name: '横排'},
               ],
               value: 'horizontal'
             },
@@ -309,7 +309,7 @@ export const widgetBarLineStack = {
             },
             {
               type: 'el-input-text',
-              label: '轴别名',
+              label: '坐标名',
               name: 'nameX',
               required: false,
               placeholder: '',
@@ -317,7 +317,7 @@ export const widgetBarLineStack = {
             },
             {
               type: 'vue-color',
-              label: '别名颜色',
+              label: '坐标名颜色',
               name: 'nameColorX',
               required: false,
               placeholder: '',
@@ -325,35 +325,11 @@ export const widgetBarLineStack = {
             },
             {
               type: 'el-input-number',
-              label: '别名字号',
+              label: '坐标名字号',
               name: 'nameFontSizeX',
               required: false,
               placeholder: '',
               value: 14
-            },
-            {
-              type: 'el-switch',
-              label: '轴反转',
-              name: 'reversalX',
-              required: false,
-              placeholder: '',
-              value: false
-            },
-            {
-              type: 'el-slider',
-              label: '文字角度',
-              name: 'textAngleX',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
-              type: 'el-input-number',
-              label: '文字间隔',
-              name: 'textInterval',
-              required: false,
-              placeholder: '',
-              value: ''
             },
             {
               type: 'vue-color',
@@ -370,6 +346,30 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               value: 14,
+            },
+            {
+              type: 'el-input-number',
+              label: '文字间隔',
+              name: 'textInterval',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'el-slider',
+              label: '文字角度',
+              name: 'textAngleX',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+            {
+              type: 'el-switch',
+              label: '轴反转',
+              name: 'reversalX',
+              required: false,
+              placeholder: '',
+              value: false
             },
             {
               type: 'vue-color',
@@ -449,20 +449,20 @@ export const widgetBarLineStack = {
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'textAngleYLeft',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
               type: 'el-input-number',
               label: '均分',
               name: 'splitNumberLeft',
               required: false,
               placeholder: '',
               value: ''
+            },
+            {
+              type: 'el-slider',
+              label: '数值角度',
+              name: 'textAngleYLeft',
+              required: false,
+              placeholder: '',
+              value: 0
             },
             {
               type: 'vue-color',
@@ -536,20 +536,20 @@ export const widgetBarLineStack = {
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'textAngleYRight',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
               type: 'el-input-number',
               label: '均分',
               name: 'splitNumberRight',
               required: false,
               placeholder: '',
               value: ''
+            },
+            {
+              type: 'el-slider',
+              label: '数值角度',
+              name: 'textAngleYRight',
+              required: false,
+              placeholder: '',
+              value: 0
             },
             {
               type: 'vue-color',
@@ -619,10 +619,10 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -670,10 +670,10 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -742,7 +742,7 @@ export const widgetBarLineStack = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
+              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
             },
           ],
         },
@@ -786,16 +786,16 @@ export const widgetBarLineStack = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          { "axis": "2021-07", "name": "A", "bar": "12", "line": "20" },
-          { "axis": "2021-07", "name": "B", "bar": "20", "line": "12" },
-          { "axis": "2021-08", "name": "A", "bar": "0", "line": "8" },
-          { "axis": "2021-08", "name": "B", "bar": "5", "line": "3" },
-          { "axis": "2021-09", "name": "A", "bar": "15", "line": "9" },
-          { "axis": "2021-09", "name": "B", "bar": "30", "line": "19" },
-          { "axis": "2021-10", "name": "A", "bar": "10", "line": "27" },
-          { "axis": "2021-10", "name": "B", "bar": "24", "line": "6" },
-          { "axis": "2021-11", "name": "A", "bar": "23", "line": "29" },
-          { "axis": "2021-11", "name": "B", "bar": "8", "line": "9" },
+          {"axis": "2021-07", "name": "A", "bar": "12", "line": "20"},
+          {"axis": "2021-07", "name": "B", "bar": "20", "line": "12"},
+          {"axis": "2021-08", "name": "A", "bar": "0", "line": "8"},
+          {"axis": "2021-08", "name": "B", "bar": "5", "line": "3"},
+          {"axis": "2021-09", "name": "A", "bar": "15", "line": "9"},
+          {"axis": "2021-09", "name": "B", "bar": "30", "line": "19"},
+          {"axis": "2021-10", "name": "A", "bar": "10", "line": "27"},
+          {"axis": "2021-10", "name": "B", "bar": "24", "line": "6"},
+          {"axis": "2021-11", "name": "A", "bar": "23", "line": "29"},
+          {"axis": "2021-11", "name": "B", "bar": "8", "line": "9"},
         ],
       },
       {

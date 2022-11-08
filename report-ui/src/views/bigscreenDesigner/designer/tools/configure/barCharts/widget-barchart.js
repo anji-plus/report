@@ -111,10 +111,10 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -125,9 +125,9 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -138,9 +138,9 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
               ],
               value: 'center'
             },
@@ -175,10 +175,10 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -189,9 +189,9 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -211,7 +211,7 @@ export const widgetBarchart = {
             {
               type: 'el-input-text',
               label: '坐标名',
-              name: 'xName',
+              name: 'nameX',
               required: false,
               placeholder: '',
               value: ''
@@ -226,7 +226,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '坐标字号',
+              label: '坐标名字号',
               name: 'nameFontSizeX',
               required: false,
               placeholder: '',
@@ -234,35 +234,35 @@ export const widgetBarchart = {
             },
             {
               type: 'vue-color',
-              label: '数值颜色',
-              name: 'Xcolor',
+              label: '文字颜色',
+              name: 'colorX',
               required: false,
               placeholder: '',
               value: '#fff',
             },
             {
               type: 'el-input-number',
-              label: '数值字号',
+              label: '文字字号',
               name: 'fontSizeX',
               required: false,
               placeholder: '',
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'textAngle',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
               type: 'el-input-number',
-              label: '数值间隔',
+              label: '文字间隔',
               name: 'textInterval',
               required: false,
               placeholder: '',
               value: ''
+            },
+            {
+              type: 'el-slider',
+              label: '文字角度',
+              name: 'textAngleX',
+              required: false,
+              placeholder: '',
+              value: 0
             },
             {
               type: 'el-switch',
@@ -295,7 +295,6 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: '#fff',
-
             }
           ],
         },
@@ -328,7 +327,7 @@ export const widgetBarchart = {
             },
             {
               type: 'el-input-number',
-              label: '坐标字号',
+              label: '坐标名字号',
               name: 'nameFontSizeY',
               required: false,
               placeholder: '',
@@ -351,14 +350,6 @@ export const widgetBarchart = {
               value: 14,
             },
             {
-              type: 'el-slider',
-              label: '数值角度',
-              name: 'ytextAngle',
-              required: false,
-              placeholder: '',
-              value: 0
-            },
-            {
               type: 'el-switch',
               label: '缩放',
               name: 'scale',
@@ -369,10 +360,18 @@ export const widgetBarchart = {
             {
               type: 'el-input-number',
               label: '均分',
-              name: 'splitNumber',
+              name: 'splitNumberY',
               required: false,
               placeholder: '',
               value: ''
+            },
+            {
+              type: 'el-slider',
+              label: '数值角度',
+              name: 'textAngleY',
+              required: false,
+              placeholder: '',
+              value: 0
             },
             {
               type: 'el-switch',
@@ -389,22 +388,23 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: '#fff',
-            }, {
+            },
+            {
               type: 'el-switch',
               label: '分割线显示',
               name: 'isShowSplitLineY',
               require: false,
               placeholder: '',
               value: false,
-            }, {
+            },
+            {
               type: 'vue-color',
               label: '分割线颜色',
               name: 'splitLineColorY',
               required: false,
               placeholder: '',
               value: '#fff',
-
-            }
+            },
           ],
         },
         {
@@ -449,10 +449,10 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -521,7 +521,7 @@ export const widgetBarchart = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
+              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
             },
           ],
         },
@@ -565,11 +565,11 @@ export const widgetBarchart = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          { "axis": "苹果", "data": 1000 },
-          { "axis": "三星", "data": 2229 },
-          { "axis": "小米", "data": 3879 },
-          { "axis": "oppo", "data": 2379 },
-          { "axis": "vivo", "data": 4079 },
+          {"axis": "苹果", "data": 1000},
+          {"axis": "三星", "data": 2229},
+          {"axis": "小米", "data": 3879},
+          {"axis": "oppo", "data": 2379},
+          {"axis": "vivo", "data": 4079},
         ],
       },
       {

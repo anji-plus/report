@@ -128,20 +128,25 @@ export default {
       const optionsSetup = this.optionsSetup;
       const xAxis = {
         type: "category",
-        show: optionsSetup.hideX, // 坐标轴是否显示
-        name: optionsSetup.xName, // 坐标轴名称
+        // 坐标轴是否显示
+        show: optionsSetup.hideX,
+        // 坐标轴名称
+        name: optionsSetup.nameX,
         nameTextStyle: {
-          color: optionsSetup.xNameColor,
-          fontSize: optionsSetup.xNameFontSize
+          color: optionsSetup.nameColorX,
+          fontSize: optionsSetup.nameFontSizeX
         },
-        nameRotate: optionsSetup.textAngle, // 文字角度
-        inverse: optionsSetup.reversalX, // 轴反转
+        // 轴反转
+        inverse: optionsSetup.reversalX,
         axisLabel: {
           show: true,
-          interval: optionsSetup.textInterval, // 文字角度
-          rotate: optionsSetup.textAngle, // 文字角度
+          // 文字间隔
+          interval: optionsSetup.textInterval,
+          // 文字角度
+          rotate: optionsSetup.textAngleX,
           textStyle: {
-            color: optionsSetup.Xcolor, // x轴 坐标文字颜色
+            // 坐标文字颜色
+            color: optionsSetup.colorX,
             fontSize: optionsSetup.fontSizeX
           }
         },
@@ -166,19 +171,25 @@ export default {
       const yAxis = {
         type: "value",
         scale: optionsSetup.scale,
-        splitNumber: optionsSetup.splitNumber,// 均分
-        show: optionsSetup.isShowY, // 坐标轴是否显示
-        name: optionsSetup.textNameY, // 坐标轴名称
+        // 均分
+        splitNumber: optionsSetup.splitNumberY,
+        // 坐标轴是否显示
+        show: optionsSetup.isShowY,
+        // 坐标轴名称
+        name: optionsSetup.textNameY,
         nameTextStyle: {
           color: optionsSetup.nameColorY,
           fontSize: optionsSetup.nameFontSizeY
         },
-        inverse: optionsSetup.reversalY, // 轴反转
+        // 轴反转
+        inverse: optionsSetup.reversalY,
         axisLabel: {
           show: true,
-          rotate: optionsSetup.ytextAngle, // 文字角度
+          // 文字角度
+          rotate: optionsSetup.textAngleY,
           textStyle: {
-            color: optionsSetup.colorY, // x轴 坐标文字颜色
+            // 坐标文字颜色
+            color: optionsSetup.colorY,
             fontSize: optionsSetup.fontSizeY
           }
         },
@@ -195,7 +206,6 @@ export default {
           }
         }
       };
-
       this.options.yAxis = yAxis;
     },
     // 数值设定 or 柱体设置
