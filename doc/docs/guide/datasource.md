@@ -17,7 +17,7 @@
 表aj_report.gaea_dict_item，字段dict_code：SOURCE_TYPE
 表aj_report.gaea_dict_item, item_extend字段是下拉选择后动态表单渲染的json数据
 ```
-**注：** Http接口返回类型必须是Json、不能是text，text无法解析
+**注：** Http数据源功能已经移动到Http数据集中，数据源功能不变，有Http接口数据请直接使用Http数据集
 
 ## 操作
 

@@ -1,3 +1,5 @@
+## 介绍
+
 ![img5](../picture/dateset/img_5.png) <br>
 
 [数据源数据集用法总结](https://my.oschina.net/u/4517014/blog/5270828) <br>
@@ -19,6 +21,11 @@
 ### Kudu数据集
 
 ![kudu.png](../picture/dateset/img_2.png) <br>
+
+## HTTP数据集
+
+即原有Http数据源的功能，请注意：Http接口返回类型必须是Json、不能是text，text无法解析 <br>
+![http.png](../picture/dateset/img_7.png) <br>
 
 ## 功能栏
 
@@ -48,7 +55,3 @@
 ![img6.png](../picture/dateset/img_6.png) <br>
 记得保存
 
-## HTTP数据集
-
-即原有http数据源的功能 <br>
-**注：** Http接口返回类型必须是Json、不能是text，text无法解析
