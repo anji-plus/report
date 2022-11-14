@@ -81,6 +81,18 @@ export const widgetBarlinechart = {
               value: 5,
             },
             {
+              type: 'el-select',
+              label: '点样式',
+              name: 'symbol',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'circle', name: '实心点'},
+                {code: 'emptyCircle', name: '空心点'},
+              ],
+              value: 'circle'
+            },
+            {
               type: 'el-switch',
               label: '平滑曲线',
               name: 'smoothCurve',
@@ -855,7 +867,7 @@ export const widgetBarlinechart = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{color: '#00F4FFFF'}, {color: '#e68b55'}],
+              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
             },
           ],
         },

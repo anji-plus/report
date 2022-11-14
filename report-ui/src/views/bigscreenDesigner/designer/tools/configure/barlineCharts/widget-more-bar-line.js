@@ -73,6 +73,18 @@ export const widgetMoreBarLine = {
               value: 3,
             },
             {
+              type: 'el-select',
+              label: '点样式',
+              name: 'symbol',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'circle', name: '实心点'},
+                {code: 'emptyCircle', name: '空心点'},
+              ],
+              value: 'circle'
+            },
+            {
               type: 'el-switch',
               label: '平滑曲线',
               name: 'smoothCurve',
@@ -847,11 +859,7 @@ export const widgetMoreBarLine = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [
-                {color: '#4bdfff'},
-                {color: '#55f49c'},
-                {color: '#ffa43a'},
-              ],
+              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
             },
           ],
         },
