@@ -447,6 +447,7 @@ export default {
       const series = this.options.series
       // 折线
       for (const key in series) {
+        series[key].symbol = optionsSetup.symbol
         series[key].showSymbol = optionsSetup.markPoint
         series[key].symbolSize = optionsSetup.pointSize
         series[key].smooth = optionsSetup.smoothCurve

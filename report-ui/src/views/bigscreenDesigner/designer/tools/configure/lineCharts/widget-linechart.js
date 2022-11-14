@@ -52,6 +52,18 @@ export const widgetLinechart = {
               value: 10,
             },
             {
+              type: 'el-select',
+              label: '点样式',
+              name: 'symbol',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'circle', name: '实心点'},
+                {code: 'emptyCircle', name: '空心点'},
+              ],
+              value: 'circle'
+            },
+            {
               type: 'el-switch',
               label: '平滑曲线',
               name: 'smoothCurve',

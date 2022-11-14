@@ -224,6 +224,7 @@ export default {
       const series = this.options.series;
       for (const key in series) {
         if (series[key].type == "line") {
+          series[key].symbol = optionsSetup.symbol;
           series[key].showSymbol = optionsSetup.markPoint;
           series[key].symbolSize = optionsSetup.pointSize;
           series[key].smooth = optionsSetup.smoothCurve;
@@ -236,7 +237,6 @@ export default {
               opacity: 0
             };
           }
-
           series[key].lineStyle = {
             width: optionsSetup.lineWidth
           };

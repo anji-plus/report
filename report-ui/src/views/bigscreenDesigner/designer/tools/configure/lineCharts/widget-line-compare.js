@@ -49,7 +49,19 @@ export const widgetLineCompare = {
               name: 'pointSize',
               required: false,
               placeholder: '',
-              value: 5,
+              value: 10,
+            },
+            {
+              type: 'el-select',
+              label: '点样式',
+              name: 'symbol',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'circle', name: '实心点'},
+                {code: 'emptyCircle', name: '空心点'},
+              ],
+              value: 'circle'
             },
             {
               type: 'el-switch',

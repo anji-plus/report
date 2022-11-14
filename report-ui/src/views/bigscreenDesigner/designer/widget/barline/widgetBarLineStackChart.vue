@@ -435,9 +435,15 @@ export default {
           type: 'line',
           data: line,
           yAxisIndex: 1,
+          symbol: optionsSetup.symbol,
           showSymbol: optionsSetup.markPoint,
           symbolSize: optionsSetup.pointSize,
           smooth: optionsSetup.smoothCurve,
+          itemStyle: {
+            normal: {
+              color: arrColor[i],
+            }
+          },
           // 线条
           lineStyle: {
             color: arrColor[i],
@@ -528,9 +534,15 @@ export default {
           type: "line",
           data: line,
           yAxisIndex: 1,
+          symbol: optionsSetup.symbol,
           showSymbol: optionsSetup.markPoint,
           symbolSize: optionsSetup.pointSize,
           smooth: optionsSetup.smoothCurve,
+          itemStyle: {
+            normal: {
+              color: arrColor[i],
+            }
+          },
           // 线条
           lineStyle: {
             color: arrColor[i],
