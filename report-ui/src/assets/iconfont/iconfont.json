@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9013588",
+      "name": "雷达图2",
+      "font_class": "leidatu",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
       "icon_id": "19004935",
       "name": "热力图",
       "font_class": "relitu",

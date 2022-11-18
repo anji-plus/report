@@ -286,15 +286,23 @@ export default {
     },
     // 标题修改
     setOptionsTitle() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const title = {};
-      title.text = optionsCollapse.titleText;
-      title.show = optionsCollapse.isNoTitle;
-      title.left = optionsCollapse.textAlign;
+      title.text = optionsSetup.titleText;
+      title.show = optionsSetup.isNoTitle;
+      title.left = optionsSetup.textAlign;
       title.textStyle = {
-        color: optionsCollapse.textColor,
-        fontSize: optionsCollapse.textFontSize,
-        fontWeight: optionsCollapse.textFontWeight
+        color: optionsSetup.textColor,
+        fontSize: optionsSetup.textFontSize,
+        fontWeight: optionsSetup.textFontWeight,
+        fontStyle: optionsSetup.textFontStyle,
+      };
+      title.subtext = optionsSetup.subText;
+      title.subtextStyle = {
+        color: optionsSetup.subTextColor,
+        fontWeight: optionsSetup.subTextFontWeight,
+        fontSize: optionsSetup.subTextFontSize,
+        fontStyle: optionsSetup.subTextFontStyle,
       };
       this.options.title = title;
     },
@@ -306,8 +314,9 @@ export default {
         type: 'value',
         show : optionsSetup.hideXLeft,
         inverse: true,
-        axisLine: {//X轴线
-          show: optionsSetup.xLineLeft,
+        //X轴线
+        axisLine: {
+          show: optionsSetup.lineXLeft,
           lineStyle: {
             color: optionsSetup.lineColorXLeft,
           },
@@ -315,19 +324,19 @@ export default {
         axisTick: {
           show: optionsSetup.tickLineLeft,
         },
-        position: 'bottom',
+        position: optionsSetup.positionXLeft,
         axisLabel: { // x轴
           show: true,
           textStyle: {
-            color: optionsSetup.XcolorLeft,
+            color: optionsSetup.colorXLeft,
             fontSize: optionsSetup.fontSizeXLeft
           }
         },
         splitLine: { // 分割线
-          show: optionsSetup.SplitLineLeft,
+          show: optionsSetup.isShowSplitLineLeft,
           lineStyle: {
-            color: optionsSetup.SplitLineColorLeft,
-            width: optionsSetup.SplitLinefontSizeLeft,
+            color: optionsSetup.splitLineColorLeft,
+            width: optionsSetup.splitLineFontWidthLeft,
             type: 'solid'
           }
         }
@@ -343,7 +352,7 @@ export default {
         show : optionsSetup.hideXRight,
         type: 'value',
         axisLine: {//X轴线
-          show: optionsSetup.xLineRight,
+          show: optionsSetup.lineXRight,
           lineStyle: {
             color: optionsSetup.lineColorXRight,
           },
@@ -351,19 +360,19 @@ export default {
         axisTick: {
           show: optionsSetup.tickLineRight,
         },
-        position: 'bottom',
+        position: optionsSetup.positionXRight,
         axisLabel: { // x轴
           show: true,
           textStyle: {
-            color: optionsSetup.XcolorRight,
+            color: optionsSetup.colorXRight,
             fontSize: optionsSetup.fontSizeXRight
           }
         },
         splitLine: { // 分割线
-          show: optionsSetup.SplitLineRight,
+          show: optionsSetup.isShowSplitLineRight,
           lineStyle: {
-            color: optionsSetup.SplitLineColorRight,
-            width: optionsSetup.SplitLinefontSizeRight,
+            color: optionsSetup.splitLineColorRight,
+            width: optionsSetup.splitLineFontWidthRight,
             type: 'solid'
           }
         }
@@ -385,7 +394,7 @@ export default {
       const axisLabel = {
         show: optionsSetup.hideY,
         textStyle: {
-          align: optionsSetup.textAlign,
+          align: optionsSetup.textAlignY,
           color: optionsSetup.colorY,
           fontSize: optionsSetup.fontSizeY,
         }
@@ -441,8 +450,8 @@ export default {
         trigger: "item",
         show: true,
         textStyle: {
-          color: optionsSetup.lineColor,
-          fontSize: optionsSetup.fontSize
+          color: optionsSetup.tipsColor,
+          fontSize: optionsSetup.tipsFontSize
         }
       };
       this.options.tooltip = tooltip;
@@ -453,6 +462,8 @@ export default {
       const grid = [
         {//左
           show: optionsSetup.frameLineLeft,
+          borderColor: optionsSetup.borderColorLeft,
+          borderWidth: optionsSetup.borderWidthLeft,
           left: optionsSetup.marginLeftRight,
           top: optionsSetup.marginTop,
           bottom: optionsSetup.marginBottom,
@@ -468,6 +479,8 @@ export default {
         },
         {//右
           show: optionsSetup.frameLineRight,
+          borderColor: optionsSetup.borderColorRight,
+          borderWidth: optionsSetup.borderWidthRight,
           right: optionsSetup.marginLeftRight,
           top: optionsSetup.marginTop,
           bottom: optionsSetup.marginBottom,
@@ -488,10 +501,10 @@ export default {
         optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
-        color: optionsSetup.lengedColor,
-        fontSize: optionsSetup.lengedFontSize
+        color: optionsSetup.legendColor,
+        fontSize: optionsSetup.legendFontSize
       };
-      legend.itemWidth = optionsSetup.lengedWidth;
+      legend.itemWidth = optionsSetup.legendWidth;
     },
     // 图例名称设置
     setOptionsLegendName(name){

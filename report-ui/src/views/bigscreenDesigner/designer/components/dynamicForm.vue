@@ -145,6 +145,11 @@
             :chart-type="item.chartType"
             @change="changed($event, item.name)"
           />
+          <dynamic-add-radar
+            v-if="item.type == 'dynamic-add-radar' && inputShow[item.name]"
+            v-model="formData[item.name]"
+            :chart-type="item.chartType"
+            @change="changed($event, item.name)"/>
         </div>
         <div v-else-if="isShowForm(item, '[object Array]')" :key="'a-' + index">
           <el-collapse accordion>
@@ -276,6 +281,7 @@ import dynamicComponents from "./dynamicComponents.vue";
 import customColorComponents from "./customColorComponents";
 import dynamicAddTable from "./dynamicAddTable.vue";
 import customUpload from "./customUpload.vue";
+import dynamicAddRadar from "./dynamicAddRadar";
 export default {
   name: "DynamicForm",
   components: {
@@ -284,7 +290,8 @@ export default {
     dynamicComponents,
     customColorComponents,
     dynamicAddTable,
-    customUpload
+    customUpload,
+    dynamicAddRadar
   },
   model: {
     prop: "value",

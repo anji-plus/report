@@ -150,21 +150,22 @@ export default {
     // 标题修改
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {
-        text: optionsSetup.titleText,
-        show: optionsSetup.isNoTitle,
-        left: optionsSetup.textAlign,
-        textStyle: {
-          color: optionsSetup.textColor,
-          fontSize: optionsSetup.textFontSize,
-          fontWeight: optionsSetup.textFontWeight
-        },
-        subtext: optionsSetup.subText,
-        subtextStyle: {
-          color: optionsSetup.subTextColor,
-          fontWeight: optionsSetup.subTextFontWeight,
-          fontSize: optionsSetup.subTextFontSize
-        },
+      const title = {};
+      title.text = optionsSetup.titleText;
+      title.show = optionsSetup.isNoTitle;
+      title.left = optionsSetup.textAlign;
+      title.textStyle = {
+        color: optionsSetup.textColor,
+        fontSize: optionsSetup.textFontSize,
+        fontWeight: optionsSetup.textFontWeight,
+        fontStyle: optionsSetup.textFontStyle,
+      };
+      title.subtext = optionsSetup.subText;
+      title.subtextStyle = {
+        color: optionsSetup.subTextColor,
+        fontWeight: optionsSetup.subTextFontWeight,
+        fontSize: optionsSetup.subTextFontSize,
+        fontStyle: optionsSetup.subTextFontStyle,
       };
       this.options.title = title;
     },
@@ -176,10 +177,10 @@ export default {
         // 坐标轴是否显示
         show: optionsSetup.hideX,
         // 坐标轴名称
-        name: optionsSetup.xName,
+        name: optionsSetup.nameX,
         nameTextStyle: {
-          color: optionsSetup.xNameColor,
-          fontSize: optionsSetup.xNameFontSize
+          color: optionsSetup.nameColorX,
+          fontSize: optionsSetup.nameFontSizeX
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -191,18 +192,16 @@ export default {
           rotate: optionsSetup.textAngleX,
           textStyle: {
             // 坐标文字颜色
-            color: optionsSetup.Xcolor,
+            color: optionsSetup.colorX,
             fontSize: optionsSetup.fontSizeX
           }
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsSetup.lineColorX
+            color: optionsSetup.lineColorX,
+            width: optionsSetup.lineWidthX,
           }
-        },
-        splitArea: {
-          show: false,
         },
       };
       this.options.xAxis = xAxis;
@@ -211,16 +210,19 @@ export default {
     setOptionsY() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
-        type: "category",
+        type: "value",
+        scale: optionsSetup.scale,
+        // 均分
+        splitNumber: optionsSetup.splitNumberY,
         // 坐标轴是否显示
         show: optionsSetup.isShowY,
         // 坐标轴名称
         name: optionsSetup.textNameY,
         nameTextStyle: {
-          color: optionsSetup.NameColorY,
-          fontSize: optionsSetup.NameFontSizeY
+          color: optionsSetup.nameColorY,
+          fontSize: optionsSetup.nameFontSizeY
         },
-        // y轴反转
+        // 轴反转
         inverse: optionsSetup.reversalY,
         axisLabel: {
           show: true,
@@ -235,11 +237,9 @@ export default {
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsSetup.lineColorY
+            color: optionsSetup.lineColorY,
+            width: optionsSetup.lineWidthY,
           }
-        },
-        splitArea: {
-          show: false,
         },
       };
       this.options.yAxis = yAxis;
@@ -277,8 +277,8 @@ export default {
         position: "top",
         show: true,
         textStyle: {
-          color: optionsSetup.lineColor,
-          fontSize: optionsSetup.tipsLineColor
+          color: optionsSetup.tipsColor,
+          fontSize: optionsSetup.tipsFontSize,
         }
       };
       this.options.tooltip = tooltip;
@@ -291,17 +291,17 @@ export default {
       visualMap.min = optionsSetup.dataMin;
       visualMap.max = optionsSetup.dataMax;
       visualMap.textStyle = {
-        fontSize : optionsSetup.lengedFontSize,
-        color : optionsSetup.lengedColor
+        fontSize : optionsSetup.legendFontSize,
+        color : optionsSetup.legendColor
       };
-      visualMap.inRange.color = optionsSetup.lengedColorList.map((x) => {
+      visualMap.inRange.color = optionsSetup.legendColorList.map((x) => {
         return x.color;
       });
       visualMap.left = optionsSetup.lateralPosition;
       visualMap.top = optionsSetup.longitudinalPosition;
       visualMap.bottom = optionsSetup.longitudinalPosition;
       visualMap.orient = optionsSetup.layoutFront;
-      visualMap.itemWidth = optionsSetup.lengedWidth;
+      visualMap.itemWidth = optionsSetup.legendWidth;
     },
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态

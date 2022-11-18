@@ -11,9 +11,13 @@ export function getShareToken() {
   return getStorageItem(ShareTokenKey) == null ? '' : getStorageItem(ShareTokenKey);
 }
 export function setToken(token) {
-  return setStorageItem(TokenKey, token)
+  return setStorageItem(TokenKey, token);
 }
 export function setShareToken(shareToken) {
+  const originalShareToken = getShareToken();
+  if ((originalShareToken != null || originalShareToken != '') && originalShareToken.indexOf(shareToken) == -1) {
+    shareToken = originalShareToken + ',' + shareToken
+  }
   return setStorageItem(ShareTokenKey, shareToken)
 }
 export function delToken() {

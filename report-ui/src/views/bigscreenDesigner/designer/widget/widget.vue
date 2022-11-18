@@ -33,9 +33,9 @@ import WidgetIframe from "./widgetIframe.vue";
 import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
 import widgetLinechart from "./line/widgetLinechart.vue";
-import widgetBarlinechart from "./bar/widgetBarlinechart";
+import widgetBarlinechart from "./barline/widgetBarlinechart";
 import WidgetPiechart from "./pie/widgetPiechart.vue";
-import WidgetFunnel from "./widgetFunnel.vue";
+import WidgetFunnel from "./funnel/widgetFunnel.vue";
 import WidgetGauge from "./percent/widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRose";
 import widgetTable from "./widgetTable.vue";
@@ -47,9 +47,11 @@ import widgetLineStackChart from "./line/widgetLineStackChart";
 import widgetBarCompareChart from "./bar/widgetBarCompareChart";
 import widgetLineCompareChart from "./line/widgetLineCompareChart";
 import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
-import widgetMoreBarLineChart from "./bar/widgetMoreBarLineChart";
+import widgetMoreBarLineChart from "./barline/widgetMoreBarLineChart";
 import widgetWordCloud from "./wordcloud/widgetWordCloud";
 import widgetHeatmap from "./heatmap/widgetHeatmap";
+import widgetRadar from "./radar/widgetRadar";
+import widgetBarLineStackChart from "./barline/widgetBarLineStackChart";
 
 export default {
   name: "Widget",
@@ -81,7 +83,9 @@ export default {
     widgetDecoratePieChart,
     widgetMoreBarLineChart,
     widgetWordCloud,
-    widgetHeatmap
+    widgetHeatmap,
+    widgetRadar,
+    widgetBarLineStackChart
   },
   model: {
     prop: "value",
@@ -106,7 +110,9 @@ export default {
       data: {
         setup: {},
         data: {},
-        position: {}
+        position: {},
+/*        leftMargin: null,
+        topMargin: null*/
       }
     };
   },
@@ -118,10 +124,10 @@ export default {
       return this.value.position.height;
     },
     widgetsLeft() {
-      return this.value.position.left;
+      return this.value.position.left// >= this.leftMargin ? this.leftMargin : this.value.position.left;
     },
     widgetsTop() {
-      return this.value.position.top;
+      return this.value.position.top// >= this.topMargin ? this.topMargin : this.value.position.top;
     },
     widgetsZIndex() {
       return this.value.position.zIndex || 1;
@@ -133,6 +139,28 @@ export default {
     handleBlur({ index, left, top, width, height }) {
       this.$emit("onActivated", { index, left, top, width, height });
       this.$refs.draggable.setActive(true);
+      // 处理widget超出workbench的问题
+      //this.handleBoundary({ index, left, top, width, height })
+    },
+    handleBoundary({ index, left, top, width, height }) {
+      // 计算workbench的X轴边界值
+      // 组件距离左侧宽度 + 组件宽度 > 大屏总宽度时，右侧边界值 = (大屏宽度 - 组件宽度)；左侧边界值 = 0
+      const { bigscreenWidth, bigscreenHeight } = this.bigscreen;
+      const xBoundaryValue = (left + width) > bigscreenWidth ? bigscreenWidth - width : left < 0 ? 0 : left;
+      // 初始化X轴边界值
+      this.leftMargin = left;
+      // 计算Y轴边界值
+      const yBoundaryValue = (top + height) > bigscreenHeight ? bigscreenHeight - height : top < 0 ? 0 : top;
+      // 初始化Y轴边界值
+      this.topMargin = top;
+      // 若位置超出边界值则重新设置位置
+      if (this.leftMargin != xBoundaryValue || this.topMargin != yBoundaryValue) {
+        this.$nextTick(() => {
+          this.leftMargin = xBoundaryValue;
+          this.topMargin = yBoundaryValue;
+          this.$emit("onActivated", { index, left: xBoundaryValue, top: yBoundaryValue, width, height });
+        })
+      }
     }
   }
 };

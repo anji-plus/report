@@ -1,3 +1,5 @@
+## 介绍
+
 ![img5](../picture/dateset/img_5.png) <br>
 
 [数据源数据集用法总结](https://my.oschina.net/u/4517014/blog/5270828) <br>
@@ -20,6 +22,11 @@
 
 ![kudu.png](../picture/dateset/img_2.png) <br>
 
+## HTTP数据集
+
+即原有Http数据源的功能，请注意：Http接口返回类型必须是Json、不能是text，text无法解析 <br>
+![http.png](../picture/dateset/img_7.png) <br>
+
 ## 功能栏
 
 **可以看在线环境，有示例参考** <br>
@@ -38,11 +45,13 @@
 ![img4](../picture/dateset/img_4.png) <br>
 入参是data，返回值也必须是data，中间是JS的处理过程，注意入参返回都是List<JSONObject>，记得保存。 <br>
 
+#### java脚本
+
+通过Groovy来进行实现的 <br>
+[Groovy用法参考](https://my.oschina.net/u/4517014/blog/5526324) <br>
+
 #### 字典项
 
 ![img6.png](../picture/dateset/img_6.png) <br>
 记得保存
 
-## HTTP数据集
-
-即原有http数据源的功能，原有http数据源不动

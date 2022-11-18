@@ -1,5 +1,6 @@
 package com.anjiplus.template.gaea.business.util;
 
+import com.anji.plus.gaea.constant.GaeaConstant;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.auth0.jwt.JWT;
@@ -9,8 +10,11 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by raodeming on 2021/8/18.
@@ -51,6 +55,15 @@ public class JwtUtil {
             throw BusinessExceptionBuilder.build(ResponseCode.REPORT_SHARE_LINK_INVALID);
         }
         return claim.asString();
+    }
+
+    /**
+     * 存在多个分享token
+     * @param tokenList
+     * @return
+     */
+    public static List<String> getReportCodeList(String tokenList) {
+        return Arrays.stream(tokenList.split(GaeaConstant.SPLIT)).filter(StringUtils::isNotBlank).map(JwtUtil::getReportCode).distinct().collect(Collectors.toList());
     }
 
     public static String getShareCode(String token) {

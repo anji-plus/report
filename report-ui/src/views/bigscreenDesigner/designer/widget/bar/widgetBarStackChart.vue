@@ -111,13 +111,15 @@ export default {
       title.textStyle = {
         color: optionsSetup.textColor,
         fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight
+        fontWeight: optionsSetup.textFontWeight,
+        fontStyle: optionsSetup.textFontStyle,
       };
       title.subtext = optionsSetup.subText;
       title.subtextStyle = {
         color: optionsSetup.subTextColor,
         fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize
+        fontSize: optionsSetup.subTextFontSize,
+        fontStyle: optionsSetup.subTextFontStyle,
       };
       this.options.title = title;
     },
@@ -129,10 +131,10 @@ export default {
         // 坐标轴是否显示
         show: optionsSetup.hideX,
         // 坐标轴名称
-        name: optionsSetup.xName,
+        name: optionsSetup.nameX,
         nameTextStyle: {
-          color: optionsSetup.xNameColor,
-          fontSize: optionsSetup.xNameFontSize
+          color: optionsSetup.nameColorX,
+          fontSize: optionsSetup.nameFontSizeX
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -144,20 +146,22 @@ export default {
           rotate: optionsSetup.textAngleX,
           textStyle: {
             // 坐标文字颜色
-            color: optionsSetup.Xcolor,
+            color: optionsSetup.colorX,
             fontSize: optionsSetup.fontSizeX
           }
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsSetup.lineColorX
+            color: optionsSetup.lineColorX,
+            width: optionsSetup.lineWidthX,
           }
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineX,
           lineStyle: {
-            color: optionsSetup.splitLineColorX
+            color: optionsSetup.splitLineColorX,
+            width: optionsSetup.splitLineWidthX,
           }
         }
       };
@@ -168,15 +172,18 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         type: "value",
+        scale: optionsSetup.scale,
+        // 均分
+        splitNumber: optionsSetup.splitNumberY,
         // 坐标轴是否显示
         show: optionsSetup.isShowY,
         // 坐标轴名称
         name: optionsSetup.textNameY,
         nameTextStyle: {
-          color: optionsSetup.NameColorY,
-          fontSize: optionsSetup.NameFontSizeY
+          color: optionsSetup.nameColorY,
+          fontSize: optionsSetup.nameFontSizeY
         },
-        // y轴反转
+        // 轴反转
         inverse: optionsSetup.reversalY,
         axisLabel: {
           show: true,
@@ -191,13 +198,15 @@ export default {
         axisLine: {
           show: true,
           lineStyle: {
-            color: optionsSetup.lineColorY
+            color: optionsSetup.lineColorY,
+            width: optionsSetup.lineWidthY,
           }
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineY,
           lineStyle: {
-            color: optionsSetup.splitLineColorY
+            color: optionsSetup.splitLineColorY,
+            width: optionsSetup.splitLineWidthY,
           }
         }
       };
@@ -210,7 +219,7 @@ export default {
         trigger: "item",
         show: true,
         textStyle: {
-          color: optionsSetup.lineColor,
+          color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize
         }
       };
@@ -239,10 +248,10 @@ export default {
         optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
-        color: optionsSetup.lengedColor,
-        fontSize: optionsSetup.lengedFontSize
+        color: optionsSetup.legendColor,
+        fontSize: optionsSetup.legendFontSize
       };
-      legend.itemWidth = optionsSetup.lengedWidth;
+      legend.itemWidth = optionsSetup.legendWidth;
     },
     // 图例名称设置
     setOptionsLegendName(name){

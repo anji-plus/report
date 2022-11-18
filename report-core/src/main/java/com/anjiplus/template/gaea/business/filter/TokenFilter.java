@@ -101,15 +101,17 @@ public class TokenFilter implements Filter {
             filterChain.doFilter(request, response);
             return;
         }
-
+        //获取token
+        String token = request.getHeader("Authorization");
         //针对大屏分享，优先处理
         String shareToken = request.getHeader("Share-Token");
-        if (StringUtils.isNotBlank(shareToken)) {
-            //两个接口需要处理
+        if (StringUtils.isNotBlank(shareToken) && StringUtils.isBlank(token)) {
+            //需要处理
             //  /reportDashboard/getData
             //  /reportDashboard/{reportCode}
-            String reportCode = JwtUtil.getReportCode(shareToken);
-            if (!uri.endsWith("/getData") && !uri.contains(reportCode)) {
+            //  /reportExcel/preview
+            List<String> reportCodeList = JwtUtil.getReportCodeList(shareToken);
+            if (!uri.endsWith("/reportDashboard/getData") && !uri.endsWith("/reportExcel/preview") && reportCodeList.stream().noneMatch(uri::contains)) {
                 ResponseBean responseBean = ResponseBean.builder().code("50014")
                         .message("分享链接已过期").build();
                 response.getWriter().print(JSONObject.toJSONString(responseBean));
@@ -120,8 +122,7 @@ public class TokenFilter implements Filter {
         }
 
 
-        //获取token
-        String token = request.getHeader("Authorization");
+
         if (StringUtils.isBlank(token)) {
             error(response);
             return;

@@ -21,10 +21,10 @@ import widgetVideo from "./widgetVideo.vue";
 import WidgetIframe from "./widgetIframe.vue";
 import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetLinechart from "./line/widgetLinechart.vue";
-import widgetBarlinechart from "./bar/widgetBarlinechart";
+import widgetBarlinechart from "./barline/widgetBarlinechart";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
 import WidgetPiechart from "./pie/widgetPiechart.vue";
-import WidgetFunnel from "./widgetFunnel.vue";
+import WidgetFunnel from "./funnel/widgetFunnel.vue";
 import WidgetGauge from "./percent/widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRose";
 import widgetTable from "./widgetTable.vue";
@@ -36,9 +36,11 @@ import widgetLineStackChart from "./line/widgetLineStackChart";
 import widgetBarCompareChart from "./bar/widgetBarCompareChart";
 import widgetLineCompareChart from "./line/widgetLineCompareChart";
 import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
-import widgetMoreBarLineChart from "./bar/widgetMoreBarLineChart";
+import widgetMoreBarLineChart from "./barline/widgetMoreBarLineChart";
 import widgetWordCloud from "./wordcloud/widgetWordCloud";
 import widgetHeatmap from "./heatmap/widgetHeatmap";
+import widgetRadar from "./radar/widgetRadar";
+import widgetBarLineStackChart from "./barline/widgetBarLineStackChart";
 
 export default {
   name: "WidgetTemp",
@@ -70,7 +72,9 @@ export default {
     widgetDecoratePieChart,
     widgetMoreBarLineChart,
     widgetWordCloud,
-    widgetHeatmap
+    widgetHeatmap,
+    widgetRadar,
+    widgetBarLineStackChart
   },
   model: {
     prop: "value",

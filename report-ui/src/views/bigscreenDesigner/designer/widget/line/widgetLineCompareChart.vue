@@ -282,15 +282,23 @@ export default {
     },
     // 标题修改
     setOptionsTitle() {
-      const optionsCollapse = this.optionsSetup;
+      const optionsSetup = this.optionsSetup;
       const title = {};
-      title.text = optionsCollapse.titleText;
-      title.show = optionsCollapse.isNoTitle;
-      title.left = optionsCollapse.textAlign;
+      title.text = optionsSetup.titleText;
+      title.show = optionsSetup.isNoTitle;
+      title.left = optionsSetup.textAlign;
       title.textStyle = {
-        color: optionsCollapse.textColor,
-        fontSize: optionsCollapse.textFontSize,
-        fontWeight: optionsCollapse.textFontWeight
+        color: optionsSetup.textColor,
+        fontSize: optionsSetup.textFontSize,
+        fontWeight: optionsSetup.textFontWeight,
+        fontStyle: optionsSetup.textFontStyle,
+      };
+      title.subtext = optionsSetup.subText;
+      title.subtextStyle = {
+        color: optionsSetup.subTextColor,
+        fontWeight: optionsSetup.subTextFontWeight,
+        fontSize: optionsSetup.subTextFontSize,
+        fontStyle: optionsSetup.subTextFontStyle,
       };
       this.options.title = title;
     },
@@ -359,7 +367,7 @@ export default {
         name: optionsSetup.textNameYTop, // 坐标轴名称
         nameTextStyle: {
           color: optionsSetup.nameColorYTop,
-          fontSize: optionsSetup.namefontSizeYTop
+          fontSize: optionsSetup.nameFontSizeYTop
         },
         axisLabel: {
           show: true,
@@ -380,7 +388,7 @@ export default {
         splitLine: {
           show: optionsSetup.splitLineYTop,
           lineStyle: {
-            width: optionsSetup.splitLinefontSizeYTop,
+            width: optionsSetup.splitLineFontWidthYTop,
             color: optionsSetup.splitLineColorYTop,
           },
         },
@@ -401,7 +409,7 @@ export default {
         name: optionsSetup.textNameYBottom, // 坐标轴名称
         nameTextStyle: {
           color: optionsSetup.nameColorYBottom,
-          fontSize: optionsSetup.namefontSizeYBottom
+          fontSize: optionsSetup.nameFontSizeYBottom
         },
         inverse: true, // 翻转
         axisLabel: {
@@ -423,7 +431,7 @@ export default {
         splitLine: {
           show: optionsSetup.splitLineYBottom,
           lineStyle: {
-            width: optionsSetup.splitLinefontSizeYBottom,
+            width: optionsSetup.splitLineFontWidthYBottom,
             color: optionsSetup.splitLineColorYBottom,
           },
         },
@@ -439,6 +447,7 @@ export default {
       const series = this.options.series
       // 折线
       for (const key in series) {
+        series[key].symbol = optionsSetup.symbol
         series[key].showSymbol = optionsSetup.markPoint
         series[key].symbolSize = optionsSetup.pointSize
         series[key].smooth = optionsSetup.smoothCurve
@@ -476,30 +485,30 @@ export default {
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       let tooltip = {}
-      if (optionsSetup.tipType == "line") {
+      if (optionsSetup.tipsType == "line") {
         tooltip = {
-          show: optionsSetup.tipShow,
+          show: optionsSetup.tipsShow,
           trigger: 'axis',
           axisPointer: {
-            type: optionsSetup.tipType,
+            type: optionsSetup.tipsType,
             lineStyle: {
-              color: optionsSetup.tipColor,
+              color: optionsSetup.tipsColor,
               type: 'dashed',
             },
           },
         }
       } else {
         tooltip = {
-          show: optionsSetup.tipShow,
+          show: optionsSetup.tipsShow,
           trigger: 'axis',
           axisPointer: {
-            type: optionsSetup.tipType,
+            type: optionsSetup.tipsType,
             lineStyle: {
-              color: optionsSetup.tipColor,
+              color: optionsSetup.tipsColor,
               type: 'dashed',
             },
             crossStyle: {
-              color: optionsSetup.tipColor,
+              color: optionsSetup.tipsColor,
             }
           },
         }
@@ -538,10 +547,10 @@ export default {
         optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
-        color: optionsSetup.lengedColor,
-        fontSize: optionsSetup.lengedFontSize
+        color: optionsSetup.legendColor,
+        fontSize: optionsSetup.legendFontSize
       };
-      legend.itemWidth = optionsSetup.lengedWidth;
+      legend.itemWidth = optionsSetup.legendWidth;
     },
     // 图例名称设置
     setOptionsLegendName(name){

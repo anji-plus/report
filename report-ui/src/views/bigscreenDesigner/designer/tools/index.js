@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 06:43:07
- * @LastEditors: qianlishi
- * @LastEditTime: 2022-03-11 10:35:35
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2022-11-07 15:35:42
  */
 import { widgetTool } from "./main"
 const screenConfig = {
@@ -44,6 +44,7 @@ const screenConfig = {
         name: 'description',
         required: false,
         placeholder: '',
+        value: ''
       },
       {
         type: 'vue-color',
@@ -51,7 +52,7 @@ const screenConfig = {
         name: 'backgroundColor',
         required: false,
         placeholder: '',
-        value: '#000',
+        value: 'rgba(45, 86, 126, 1)',
       },
       {
         type: 'custom-upload',
@@ -59,16 +60,37 @@ const screenConfig = {
         name: 'backgroundImage',
         required: false,
         placeholder: '',
-        value: 'https://ajreport.beliefteam.cn/file/download/bf566e48-ccad-40e1-8ee9-228427e5466b',
+        value: '',
       },
     ],
     data: [],
     position: [],
   }
 }
-const widgetTools = [
-  ...widgetTool
-]
+
+export const converArr = (data) => {
+  let tempArr = [], newArr = []
+  for (let i = 0; i < data.length; i++) {
+    const item = data[i]
+    if (tempArr.indexOf(item.type) === -1) {
+      newArr.push({
+        name: item.tabName,
+        type: item.type,
+        list: [item]
+      })
+      tempArr.push(item.type);
+    } else {
+      for (let j = 0; j < newArr.length; j++) {
+        if (newArr[j].type == item.type) {
+          newArr[j].list.push(item)
+        }
+      }
+    }
+  }
+  return newArr
+}
+
+const widgetTools = converArr([...widgetTool])
 
 const getToolByCode = function (code) {
   // 获取大屏底层设置属性
@@ -76,10 +98,8 @@ const getToolByCode = function (code) {
     return screenConfig
   }
   // 获取组件
-  let item = widgetTools.find(function (item, index, arrs) {
-    return item.code === code
+  return [...widgetTool].find((item) => {
+    return item.code == code
   })
-  return item
 }
-console.log(widgetTools)
-export {widgetTools, getToolByCode}
+export { widgetTools, getToolByCode }
