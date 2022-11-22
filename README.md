@@ -171,13 +171,6 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 <a href='https://www.wenkai.net/'><img src="https://ajreport.beliefteam.cn/file/download/ec788c55-bffd-4809-ae3c-0ce2cbd1a9d0" width = "130" height = "50" /> </a>
 <a href='http://www.sungcor.com/'><img src="https://ajreport.beliefteam.cn/file/download/0514a4a6-787b-4e25-be94-03ff94309553" width = "130" height = "50" /> </a>
 
-## 未来计划
-
-- 大屏宽高动态可视化
-- nodeV16适配
-- 增加省市区地图等图
-- 增加基础边框样式
-- Excel报表功能增加与bug修复
 
 ## 已知问题
 
@@ -205,13 +198,12 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 - 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report
   LICENSE构成更改。
 
-如果您需要商业化增值服务，请加下面的微信沟通，并直接说明来意。
 
 ## 技术支持
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
-个人企业微信：加微信进群备注 AJ-Report 或者 Report <br>
-如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请发送多次。如果加了之后一言不发，不好意思，我直接忽略，我也不知道你要干嘛。 <br>
+个人企业微信：加微信进群备注 **AJ-Report** 或者 **Report** <br>
+如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请过段时间再发送。如果加了之后一言不发，不好意思，我直接忽略，我也不知道你要干嘛。 <br>
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "300" height = "300" align=left/>
 
 
