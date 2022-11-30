@@ -321,7 +321,7 @@ export const widgetLineCompare = {
             {
               type: 'el-input-text',
               label: '坐标名',
-              name: 'xName',
+              name: 'nameX',
               required: false,
               placeholder: '',
               value: ''
@@ -414,14 +414,15 @@ export const widgetLineCompare = {
             {
               type: 'el-input-text',
               label: '坐标名',
-              name: 'textNameYTop',
+              name: 'textNameY',
               require: false,
               placeholder: '',
               value: ''
-            }, {
+            },
+            {
               type: 'vue-color',
               label: '坐标名颜色',
-              name: 'nameColorYTop',
+              name: 'nameColorY',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -429,7 +430,7 @@ export const widgetLineCompare = {
             {
               type: 'el-input-number',
               label: '坐标名字号',
-              name: 'nameFontSizeYTop',
+              name: 'nameFontSizeY',
               required: false,
               placeholder: '',
               value: 14,
@@ -530,14 +531,15 @@ export const widgetLineCompare = {
             {
               type: 'el-input-text',
               label: '坐标名',
-              name: 'textNameYBottom',
+              name: 'textNameY',
               require: false,
               placeholder: '',
               value: ''
-            }, {
+            },
+            {
               type: 'vue-color',
               label: '坐标名颜色',
-              name: 'nameColorYBottom',
+              name: 'nameColorY',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -545,7 +547,7 @@ export const widgetLineCompare = {
             {
               type: 'el-input-number',
               label: '坐标名字号',
-              name: 'nameFontSizeYBottom',
+              name: 'nameFontSizeY',
               required: false,
               placeholder: '',
               value: 14,

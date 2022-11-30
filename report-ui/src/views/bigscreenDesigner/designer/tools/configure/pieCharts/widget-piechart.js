@@ -272,12 +272,12 @@ export const widgetPiechart = {
               value: '#fff',
             },
             {
-              type: 'el-input-text',
+              type: 'el-input-number',
               label: '字体字号',
               name: 'legendFontSize',
               required: false,
               placeholder: '',
-              value: 16,
+              value: 12,
             },
             {
               type: 'el-input-number',

@@ -277,7 +277,7 @@ export const widgetPieNightingale = {
               name: 'legendFontSize',
               required: false,
               placeholder: '',
-              value: 16,
+              value: 12,
             },
             {
               type: 'el-input-number',

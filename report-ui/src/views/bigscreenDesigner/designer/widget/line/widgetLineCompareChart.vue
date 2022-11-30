@@ -308,7 +308,7 @@ export default {
       const xAxis0 = {
         gridIndex: 0,
         show: optionsSetup.isShowX,
-        name: optionsSetup.xName, // 坐标轴名称
+        name: optionsSetup.nameX, // 坐标轴名称
         nameTextStyle: {
           color: optionsSetup.nameColorX,
           fontSize: optionsSetup.nameFontSizeX
@@ -364,10 +364,10 @@ export default {
         splitNumber: optionsSetup.splitNumberYTop,
         show: optionsSetup.isShowYTop,
         scale: optionsSetup.scaleYTop, // 缩放
-        name: optionsSetup.textNameYTop, // 坐标轴名称
+        name: optionsSetup.textNameY, // 坐标轴名称
         nameTextStyle: {
-          color: optionsSetup.nameColorYTop,
-          fontSize: optionsSetup.nameFontSizeYTop
+          color: optionsSetup.nameColorY,
+          fontSize: optionsSetup.nameFontSizeY
         },
         axisLabel: {
           show: true,
@@ -406,10 +406,10 @@ export default {
         splitNumber: optionsSetup.splitNumberYBottom,
         show: optionsSetup.isShowYBottom,
         scale: optionsSetup.scaleYBottom, // 缩放
-        name: optionsSetup.textNameYBottom, // 坐标轴名称
+        name: optionsSetup.textNameY, // 坐标轴名称
         nameTextStyle: {
-          color: optionsSetup.nameColorYBottom,
-          fontSize: optionsSetup.nameFontSizeYBottom
+          color: optionsSetup.nameColorY,
+          fontSize: optionsSetup.nameFontSizeY
         },
         inverse: true, // 翻转
         axisLabel: {
