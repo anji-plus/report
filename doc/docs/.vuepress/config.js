@@ -56,6 +56,7 @@ module.exports = {
                         {title: '大屏报表', path: '/guide/dashboard'},
                         {title: '表格报表', path: '/guide/excel'},
                         {title: '导入导出', path: '/guide/importexport'},
+                        {title: '图表配置项', path: '/guide/chartsconfig'},
                         {title: '图表组件', path: '/guide/charts'},
                     ]
                 },
