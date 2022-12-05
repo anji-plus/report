@@ -1,7 +1,8 @@
 ## 简介
 
 &emsp; &emsp; AJ-Report是全开源的一个BI平台，酷炫大屏展示，能随时随地掌控业务动态，让每个决策都有数据支撑。<br>
-&emsp; &emsp; 多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，目前已支持25种大屏组件/图表，不会开发，照着设计稿也可以制作大屏。<br>
+&emsp; &emsp;
+多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，目前已支持25种大屏组件/图表，不会开发，照着设计稿也可以制作大屏。<br>
 &emsp; &emsp; 三步轻松完成大屏设计：配置数据源---->写SQL配置数据集---->拖拽配置大屏---->保存发布。欢迎体验。
 
 ## 在线体验
@@ -20,7 +21,8 @@
 
 #### &emsp; 组件介绍
 
-&emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。 内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
+&emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。
+内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
 
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
 
@@ -96,6 +98,7 @@
 源码 doc -> docs -> guide 目录下即所有文档 <br>
 
 ### 发行版部署
+
 **[发行版部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDistribution.html)** <br>
 
 ```
@@ -113,6 +116,7 @@ http://serverip:9095
 ```
 
 ### 源码编译部署
+
 **[源码编译部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySource.html)** <br>
 
 在Linux上先准备好maven、node.js、jdk
@@ -156,7 +160,8 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 
 ## 谁在使用
 
-希望你们的logo出现在此，[请点此Issue进行登记](https://gitee.com/anji-plus/report/issues/I3ZXT4) ，我们将优先进行技术支持 <br>
+希望你们的logo出现在此，[请点此Issue进行登记](https://gitee.com/anji-plus/report/issues/I3ZXT4)
+，我们将优先进行技术支持 <br>
 
 <a href='http://www.anji-plus.com/'> <img src="https://ajreport.beliefteam.cn/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/> </a>
 <a href='https://www.yunstech.cn/'><img src="https://www.yunstech.cn/images/logo.png" width = "130" height = "50" /> </a>
@@ -170,7 +175,6 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 <a href='http://www.yourongyun.cn/'><img src="https://ajreport.beliefteam.cn/file/download/90e15ed9-5594-4c14-b318-72aeb6816fb9" width = "130" height = "50" /> </a> </br>
 <a href='https://www.wenkai.net/'><img src="https://ajreport.beliefteam.cn/file/download/ec788c55-bffd-4809-ae3c-0ce2cbd1a9d0" width = "130" height = "50" /> </a>
 <a href='http://www.sungcor.com/'><img src="https://ajreport.beliefteam.cn/file/download/0514a4a6-787b-4e25-be94-03ff94309553" width = "130" height = "50" /> </a>
-
 
 ## 已知问题
 
@@ -195,27 +199,28 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 - 包含AJ-Report LICENSE文件（授权使用者免费使用AJ-Report专利和知识产权）
 - 如果修改了代码，需要在被修改的文件中说明
 - 在修改和有源代码衍生的代码中，需要带有原来代码中的协议，商标
-- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report
+- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report
+  LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report
   LICENSE构成更改。
-
 
 ## 技术支持
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
-个人企业微信：加微信进群备注 **AJ-Report** 或者 **Report** <br>
-如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请过段时间再发送。如果加了之后一言不发，不好意思，我直接忽略，我也不知道你要干嘛。 <br>
+
+AJ-Report技术交流四群，新群可直接加，**如果要加1/2/3号群，请加下面个人企微，并备注你要加的群号** <br>
+<img src="https://images.gitee.com/uploads/images/2021/1101/130421_caa25124_7492051.jpeg" width = "300" height = "300" align=left/> <br>
+
+个人企业微信：加微信进群备注 **AJ-Report** 或者 **Report**，**一定要加备注 ！！！**<br>
+如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请过段时间再发送。 <br>
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "300" height = "300" align=left/>
 
-
 #### 开源不易，劳烦各位star ☺
-
 
 ## 感谢JetBrains 的支持
 
 #### JetBrains:[https://www.jetbrains.com/?from=AJ-Report](https://www.jetbrains.com/?from=AJ-Report"链接")
 
 <br>
-
 
 ## Stargazers over time
 
