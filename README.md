@@ -27,6 +27,7 @@
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
 
 **[更多社区大屏案例](https://ajreport.beliefteam.cn/report-doc/guide/bigScreenCase.html)** <br>
+**[社区大屏下载链接](https://ajreport.beliefteam.cn/download/)** <br>
 
 ## 数据流程图
 
@@ -160,8 +161,8 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 
 ## 谁在使用
 
-希望你们的logo出现在此，[请点此Issue进行登记](https://gitee.com/anji-plus/report/issues/I3ZXT4)
-，我们将优先进行技术支持 <br>
+感谢关注并使用AJ-Report的朋友，如果贵公司、组织、学校等正在使用AJ-Report，希望可以按照此[Issue](https://gitee.com/anji-plus/report/issues/I3ZXT4)
+登记并提供贵公司、组织、学校的logo，我们将把贵方的logo放在项目首页进行展示并优先进行技术支持 <br>
 
 <a href='http://www.anji-plus.com/'> <img src="https://ajreport.beliefteam.cn/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/> </a>
 <a href='https://www.yunstech.cn/'><img src="https://www.yunstech.cn/images/logo.png" width = "130" height = "50" /> </a>
@@ -186,7 +187,7 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 
 - Node.js V16及以上
 - openJdk
-- Jdk 1.7及以下/11及以上
+- Jdk 1.7及以下/11及以上（jdk11部分版本有问题）
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
 
 **[常见问题](https://ajreport.beliefteam.cn/report-doc/guide/question.html)**
@@ -213,6 +214,18 @@ AJ-Report技术交流四群，新群可直接加，**如果要加1/2/3号群，�
 个人企业微信：加微信进群备注 **AJ-Report** 或者 **Report**，**一定要加备注 ！！！**<br>
 如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请过段时间再发送。 <br>
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "300" height = "300" align=left/>
+
+## 加入我们
+
+- 提交PR是最快的加入方式:<br>
+  · PR可以包含新功能、现有功能的改进。<br>
+  . PR请提交到dev分支 <br>
+- 提供文档原文或者文档链接:<br>
+  . 文档原文的话，请放在doc/docs/guide/community目录下，可直接提交pr <br>
+  . 文档链接的话，文档需要完全的公开，不掺杂收费等相关内容，审核通过会放在首页 <br>
+- 提供大屏模板:<br>
+  . 可将自己设计好的大屏进行导出(不包含数据集)，将导出产生的压缩包提供给我们（加个人企微） <br>
+  . 提供的大屏将会在AJ-Report在线演示环境进行展示和供其他人下载 <br>
 
 #### 开源不易，劳烦各位star ☺
 
