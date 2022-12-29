@@ -167,6 +167,7 @@ export default {
       this.setOptionsX();
       this.setOptionsY();
       this.setOptionsTop();
+      this.setOptionsTooltip();
       this.setOptionsMargin();
       this.setOptionsColor();
       this.setOptionsData();
