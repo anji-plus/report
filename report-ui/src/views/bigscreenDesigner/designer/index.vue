@@ -270,6 +270,17 @@
             @onChanged="(val) => widgetValueChanged('position', val)"
           />
         </el-tab-pane>
+        <el-tab-pane
+          v-if="isNotNull(widgetOptions.methods)"
+          name="four"
+          label="方法"
+        >
+          <dynamicForm
+            ref="formData"
+            :options="widgetOptions.methods"
+            @onChanged="(val) => widgetValueChanged('methods', val)"
+          />
+        </el-tab-pane>
       </el-tabs>
     </div>
 
@@ -360,6 +371,7 @@ export default {
               top: 0,
               zIndex: 0,
             },
+            methods: {},
           },
           // options属性是从工具栏中拿到的tools中拿到
           options: [],

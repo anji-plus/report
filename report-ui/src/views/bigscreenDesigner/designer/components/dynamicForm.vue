@@ -12,8 +12,8 @@
           <el-form-item
             v-if="
               inputShow[item.name] &&
-                item.type != 'dycustComponents' &&
-                item.type != 'dynamic-add-table'
+              item.type != 'dycustComponents' &&
+              item.type != 'dynamic-add-table'
             "
             :label="item.label"
             :prop="item.name"
@@ -22,7 +22,7 @@
             <el-input-number
               v-if="item.type == 'el-input-number'"
               size="mini"
-              style="width:100%"
+              style="width: 100%"
               v-model.trim="formData[item.name]"
               controls-position="right"
               @change="changed($event, item.name)"
@@ -58,7 +58,7 @@
             <ColorPicker
               v-if="item.type == 'vue-color'"
               v-model="formData[item.name]"
-              @change="val => changed(val, item.name)"
+              @change="(val) => changed(val, item.name)"
             />
             <customUpload
               v-if="item.type == 'custom-upload'"
@@ -69,7 +69,7 @@
             <el-radio-group
               v-if="item.type == 'el-radio-group'"
               v-model="formData[item.name]"
-              @change="val => changed(val, item.name)"
+              @change="(val) => changed(val, item.name)"
             >
               <el-radio
                 v-for="itemChild in item.selectOptions"
@@ -85,7 +85,7 @@
               v-model="formData[item.name]"
               clearable
               placeholder="请选择"
-              @change="val => changed(val, item.name)"
+              @change="(val) => changed(val, item.name)"
             >
               <el-option
                 v-for="itemChild in item.selectOptions"
@@ -98,7 +98,7 @@
             <el-slider
               v-if="item.type == 'el-slider'"
               v-model="formData[item.name]"
-              @change="val => changed(val, item.name)"
+              @change="(val) => changed(val, item.name)"
             />
 
             <el-button
@@ -108,6 +108,14 @@
               plain
               @click="addStaticData"
               >编辑</el-button
+            >
+
+            <el-button
+              v-if="item.type == 'methods'"
+              type="primary"
+              size="mini"
+              @click="methodsVisible = true"
+              >添加事件</el-button
             >
 
             <!-- 弹窗 -->
@@ -131,6 +139,23 @@
                 <el-button type="primary" @click="saveData">确 定</el-button>
               </span>
             </el-dialog>
+
+            <el-dialog
+              title="代码编辑"
+              :visible.sync="methodsVisible"
+              width="50%"
+              :before-close="handleClose"
+            >
+              <monaco-editor
+                v-model.trim="formData[item.name]"
+                language="javascript"
+                style="height: 500px"
+              />
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="methodsVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveData">确 定</el-button>
+              </span>
+            </el-dialog>
           </el-form-item>
           <dynamicComponents
             v-if="item.type == 'dycustComponents' && inputShow[item.name]"
@@ -149,7 +174,8 @@
             v-if="item.type == 'dynamic-add-radar' && inputShow[item.name]"
             v-model="formData[item.name]"
             :chart-type="item.chartType"
-            @change="changed($event, item.name)"/>
+            @change="changed($event, item.name)"
+          />
         </div>
         <div v-else-if="isShowForm(item, '[object Array]')" :key="'a-' + index">
           <el-collapse accordion>
@@ -169,7 +195,7 @@
                   <el-input-number
                     v-if="itemChildList.type == 'el-input-number'"
                     size="mini"
-                    style="width:100%"
+                    style="width: 100%"
                     v-model="formData[itemChildList.name]"
                     controls-position="right"
                     :placeholder="itemChildList.placeholder"
@@ -207,7 +233,7 @@
                   <ColorPicker
                     v-if="itemChildList.type == 'vue-color'"
                     v-model="formData[itemChildList.name]"
-                    @change="val => changed(val, itemChildList.name)"
+                    @change="(val) => changed(val, itemChildList.name)"
                   />
 
                   <el-upload
@@ -220,7 +246,7 @@
                   <el-radio-group
                     v-if="itemChildList.type == 'el-radio-group'"
                     v-model="formData[itemChildList.name]"
-                    @change="val => changed(val, itemChildList.name)"
+                    @change="(val) => changed(val, itemChildList.name)"
                   >
                     <el-radio
                       v-for="it in itemChildList.selectOptions"
@@ -236,7 +262,7 @@
                     v-model="formData[itemChildList.name]"
                     clearable
                     placeholder="请选择"
-                    @change="val => changed(val, itemChildList.name)"
+                    @change="(val) => changed(val, itemChildList.name)"
                   >
                     <el-option
                       v-for="it in itemChildList.selectOptions"
@@ -249,7 +275,7 @@
                   <el-slider
                     v-if="itemChildList.type == 'el-slider'"
                     v-model="formData[itemChildList.name]"
-                    @change="val => changed(val, itemChildList.name)"
+                    @change="(val) => changed(val, itemChildList.name)"
                   />
                 </el-form-item>
                 <customColorComponents
@@ -282,6 +308,7 @@ import customColorComponents from "./customColorComponents";
 import dynamicAddTable from "./dynamicAddTable.vue";
 import customUpload from "./customUpload.vue";
 import dynamicAddRadar from "./dynamicAddRadar";
+import MonacoEditor from "@/components/MonacoEditor/index";
 export default {
   name: "DynamicForm",
   components: {
@@ -291,24 +318,26 @@ export default {
     customColorComponents,
     dynamicAddTable,
     customUpload,
-    dynamicAddRadar
+    dynamicAddRadar,
+    MonacoEditor,
   },
   model: {
     prop: "value",
-    event: "input"
+    event: "input",
   },
   props: {
     options: Array,
     value: {
       type: [Object],
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   data() {
     return {
       formData: {},
       inputShow: {}, // 控制表单是否显示
       dialogVisibleStaticData: false,
+      methodsVisible: false,
       validationRules: "",
       optionsJavascript: {
         mode: "text/javascript",
@@ -318,9 +347,9 @@ export default {
         styleActiveLine: true, // 高亮选中行
 
         hintOptions: {
-          completeSingle: true // 当匹配只有一项的时候是否自动补全
-        }
-      }
+          completeSingle: true, // 当匹配只有一项的时候是否自动补全
+        },
+      },
     };
   },
   watch: {
@@ -330,7 +359,7 @@ export default {
     options(val) {
       this.setDefaultValue();
       this.isShowData();
-    }
+    },
   },
   created() {
     this.isShowData();
@@ -365,6 +394,7 @@ export default {
     saveData() {
       this.$emit("onChanged", this.formData);
       this.dialogVisibleStaticData = false;
+      this.methodsVisible = false;
     },
     // 静态数据
     addStaticData() {
@@ -372,6 +402,7 @@ export default {
     },
     handleClose() {
       this.dialogVisibleStaticData = false;
+      this.methodsVisible = false;
     },
     // 组件属性 数据是否展示动态还是静态数据
     isShowData() {
@@ -386,7 +417,7 @@ export default {
           data.push(this.options[i]);
         }
       }
-      data.forEach(el => {
+      data.forEach((el) => {
         if (el.relactiveDomValue != currentData.value) {
           this.inputShow[el.name] = false;
         }
@@ -404,7 +435,7 @@ export default {
           } else if (Object.prototype.toString.call(obj) == "[object Array]") {
             for (let j = 0; j < obj.length; j++) {
               const list = obj[j].list;
-              list.forEach(el => {
+              list.forEach((el) => {
                 this.formData[el.name] = el.value;
               });
             }
@@ -416,8 +447,8 @@ export default {
     // 是否显示 那种格式
     isShowForm(val, type) {
       return Object.prototype.toString.call(val) == type;
-    }
-  }
+    },
+  },
 };
 </script>
 
