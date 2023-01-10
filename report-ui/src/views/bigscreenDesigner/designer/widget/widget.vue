@@ -52,6 +52,7 @@ import widgetWordCloud from "./wordcloud/widgetWordCloud";
 import widgetHeatmap from "./heatmap/widgetHeatmap";
 import widgetRadar from "./radar/widgetRadar";
 import widgetBarLineStackChart from "./barline/widgetBarLineStackChart";
+import widgetSelect from "./form/widgetSelect";
 
 export default {
   name: "Widget",
@@ -85,11 +86,12 @@ export default {
     widgetWordCloud,
     widgetHeatmap,
     widgetRadar,
-    widgetBarLineStackChart
+    widgetBarLineStackChart,
+    widgetSelect,
   },
   model: {
     prop: "value",
-    event: "input"
+    event: "input",
   },
   props: {
     /*
@@ -101,9 +103,9 @@ export default {
     bigscreen: Object,
     value: {
       type: [Object],
-      default: () => {}
+      default: () => {},
     },
-    step: Number
+    step: Number,
   },
   data() {
     return {
@@ -111,9 +113,9 @@ export default {
         setup: {},
         data: {},
         position: {},
-/*        leftMargin: null,
+        /*        leftMargin: null,
         topMargin: null*/
-      }
+      },
     };
   },
   computed: {
@@ -124,14 +126,14 @@ export default {
       return this.value.position.height;
     },
     widgetsLeft() {
-      return this.value.position.left// >= this.leftMargin ? this.leftMargin : this.value.position.left;
+      return this.value.position.left; // >= this.leftMargin ? this.leftMargin : this.value.position.left;
     },
     widgetsTop() {
-      return this.value.position.top// >= this.topMargin ? this.topMargin : this.value.position.top;
+      return this.value.position.top; // >= this.topMargin ? this.topMargin : this.value.position.top;
     },
     widgetsZIndex() {
       return this.value.position.zIndex || 1;
-    }
+    },
   },
   mounted() {},
   methods: {
@@ -146,23 +148,42 @@ export default {
       // 计算workbench的X轴边界值
       // 组件距离左侧宽度 + 组件宽度 > 大屏总宽度时，右侧边界值 = (大屏宽度 - 组件宽度)；左侧边界值 = 0
       const { bigscreenWidth, bigscreenHeight } = this.bigscreen;
-      const xBoundaryValue = (left + width) > bigscreenWidth ? bigscreenWidth - width : left < 0 ? 0 : left;
+      const xBoundaryValue =
+        left + width > bigscreenWidth
+          ? bigscreenWidth - width
+          : left < 0
+          ? 0
+          : left;
       // 初始化X轴边界值
       this.leftMargin = left;
       // 计算Y轴边界值
-      const yBoundaryValue = (top + height) > bigscreenHeight ? bigscreenHeight - height : top < 0 ? 0 : top;
+      const yBoundaryValue =
+        top + height > bigscreenHeight
+          ? bigscreenHeight - height
+          : top < 0
+          ? 0
+          : top;
       // 初始化Y轴边界值
       this.topMargin = top;
       // 若位置超出边界值则重新设置位置
-      if (this.leftMargin != xBoundaryValue || this.topMargin != yBoundaryValue) {
+      if (
+        this.leftMargin != xBoundaryValue ||
+        this.topMargin != yBoundaryValue
+      ) {
         this.$nextTick(() => {
           this.leftMargin = xBoundaryValue;
           this.topMargin = yBoundaryValue;
-          this.$emit("onActivated", { index, left: xBoundaryValue, top: yBoundaryValue, width, height });
-        })
+          this.$emit("onActivated", {
+            index,
+            left: xBoundaryValue,
+            top: yBoundaryValue,
+            width,
+            height,
+          });
+        });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

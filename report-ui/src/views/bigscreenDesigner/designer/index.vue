@@ -491,6 +491,7 @@ export default {
       this.widgets = record;
     },
     handlerLayerWidget(val) {
+      console.log(val)
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
         const obj = {};
@@ -504,6 +505,7 @@ export default {
         layerWidgetArr.push(obj);
       }
       this.layerWidget = layerWidgetArr;
+      console.log(this.layerWidget);
     },
     async initEchartData() {
       const reportCode = this.$route.query.reportCode;
@@ -742,6 +744,8 @@ export default {
       this.widgets.push(this.deepClone(widgetJsonValue));
       // 激活新组件的配置属性
       this.setOptionsOnClickWidget(this.widgets.length - 1);
+
+      console.log("123", this.widgets);
     },
 
     // 对组件默认值处理

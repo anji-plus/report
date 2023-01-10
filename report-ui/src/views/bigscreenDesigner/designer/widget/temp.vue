@@ -6,7 +6,7 @@
  !-->
 <template>
   <div>
-    <component :is="type" :value="value" :ispreview="true"/>
+    <component :is="type" :value="value" :ispreview="true" />
   </div>
 </template>
 
@@ -41,6 +41,7 @@ import widgetWordCloud from "./wordcloud/widgetWordCloud";
 import widgetHeatmap from "./heatmap/widgetHeatmap";
 import widgetRadar from "./radar/widgetRadar";
 import widgetBarLineStackChart from "./barline/widgetBarLineStackChart";
+import widgetSelect from "./form/widgetSelect";
 
 export default {
   name: "WidgetTemp",
@@ -74,26 +75,25 @@ export default {
     widgetWordCloud,
     widgetHeatmap,
     widgetRadar,
-    widgetBarLineStackChart
+    widgetBarLineStackChart,
+    widgetSelect,
   },
   model: {
     prop: "value",
-    event: "input"
+    event: "input",
   },
   props: {
     type: String,
     value: {
       type: [Object],
-      default: () => {
-      }
-    }
+      default: () => {},
+    },
   },
   data() {
     return {};
   },
-  mounted() {
-  },
-  methods: {}
+  mounted() {},
+  methods: {},
 };
 </script>
 

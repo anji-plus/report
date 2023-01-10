@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:21:45
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-01-09 09:53:31
+ * @LastEditTime: 2023-01-09 13:01:34
  */
 export const widgetBarchart = {
   code: 'widget-barchart',
@@ -654,18 +654,18 @@ export const widgetBarchart = {
     ],
     // 事件
     methods: [
-      {
-        type: 'methods',
-        label: '前置钩子',
-        name: 'beforeMethods',
-        value: 'function beforeMethods(data){\n\t//自定义脚本内容1\n\treturn data;\n}',
-      },
-      {
-        type: 'methods',
-        label: '后置钩子',
-        name: 'afterMethods',
-        value: 'function afterMethods(data){\n\t//自定义脚本内容2\n\treturn data;\n}',
-      },
+      // {
+      //   type: 'methods',
+      //   label: '前置钩子',
+      //   name: 'beforeMethods',
+      //   value: 'function beforeMethods(data){\n\t//自定义脚本内容1\n\treturn data;\n}',
+      // },
+      // {
+      //   type: 'methods',
+      //   label: '后置钩子',
+      //   name: 'afterMethods',
+      //   value: 'function afterMethods(data){\n\t//自定义脚本内容2\n\treturn data;\n}',
+      // },
     ]
   }
 }
