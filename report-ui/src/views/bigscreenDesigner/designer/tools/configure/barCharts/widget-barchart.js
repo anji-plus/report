@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:21:45
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-01-09 13:01:34
+ * @LastEditTime: 2023-01-10 13:59:59
  */
 export const widgetBarchart = {
   code: 'widget-barchart',
@@ -22,6 +22,13 @@ export const widgetBarchart = {
         required: false,
         placeholder: '',
         value: '柱状图',
+      },
+      {
+        type: 'el-input-text',
+        label: 'uuid',
+        name: 'uuid',
+        disabled: true,
+        value: 'widget-barchart' + Date.now()
       },
       {
         type: 'el-switch',

@@ -24,6 +24,7 @@
               size="mini"
               style="width: 100%"
               v-model.trim="formData[item.name]"
+              :disabled="item.disabled"
               controls-position="right"
               @change="changed($event, item.name)"
             />
@@ -31,6 +32,7 @@
             <el-input
               v-if="item.type == 'el-input-text'"
               v-model.trim="formData[item.name]"
+              :disabled="item.disabled"
               type="text"
               size="mini"
               placeholder="请输入内容"
@@ -44,6 +46,7 @@
               type="textarea"
               size="mini"
               rows="2"
+              :disabled="item.disabled"
               placeholder="请输入内容"
               @change="changed($event, item.name)"
             />
@@ -53,6 +56,7 @@
               v-model="formData[item.name]"
               size="mini"
               placeholder="请输入内容"
+              :disabled="item.disabled"
               @change="changed($event, item.name)"
             />
             <ColorPicker
@@ -82,6 +86,7 @@
             <el-select
               v-if="item.type == 'el-select'"
               size="mini"
+              :disabled="item.disabled"
               v-model="formData[item.name]"
               clearable
               placeholder="请选择"
@@ -197,6 +202,7 @@
                     size="mini"
                     style="width: 100%"
                     v-model="formData[itemChildList.name]"
+                    :disabled="item.disabled"
                     controls-position="right"
                     :placeholder="itemChildList.placeholder"
                     @change="changed($event, itemChildList.name)"
@@ -205,6 +211,7 @@
                   <el-input
                     v-if="itemChildList.type == 'el-input-text'"
                     v-model.trim="formData[itemChildList.name]"
+                    :disabled="item.disabled"
                     type="text"
                     size="mini"
                     placeholder="请输入内容"
@@ -215,6 +222,7 @@
                   <el-input
                     v-if="itemChildList.type == 'el-input-textarea'"
                     v-model.trim="formData[itemChildList.name]"
+                    :disabled="item.disabled"
                     size="mini"
                     type="textarea"
                     rows="2"
@@ -225,6 +233,7 @@
                   <el-switch
                     v-if="itemChildList.type == 'el-switch'"
                     v-model="formData[itemChildList.name]"
+                    :disabled="item.disabled"
                     placeholder="请输入内容"
                     size="mini"
                     @change="changed($event, itemChildList.name)"
