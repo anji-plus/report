@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:23:41
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:14:08
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-01-10 14:09:49
  */
 export const widgetGradientBarchart = {
   code: 'widget-gradient-color-barchart',
@@ -22,6 +22,13 @@ export const widgetGradientBarchart = {
         required: false,
         placeholder: '',
         value: '柱形图-渐变色',
+      },
+      {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'widget-gradient-color-barchart' + Date.now()
       },
       {
         type: 'el-switch',
@@ -457,10 +464,10 @@ export const widgetGradientBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -598,11 +605,11 @@ export const widgetGradientBarchart = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {"axis": "苹果", "data": 1000},
-          {"axis": "三星", "data": 2229},
-          {"axis": "小米", "data": 3879},
-          {"axis": "oppo", "data": 2379},
-          {"axis": "vivo", "data": 4079},
+          { "axis": "苹果", "data": 1000 },
+          { "axis": "三星", "data": 2229 },
+          { "axis": "小米", "data": 3879 },
+          { "axis": "oppo", "data": 2379 },
+          { "axis": "vivo", "data": 4079 },
         ],
       },
       {

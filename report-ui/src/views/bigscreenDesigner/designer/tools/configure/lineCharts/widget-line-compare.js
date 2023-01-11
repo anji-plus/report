@@ -4,7 +4,7 @@
  * @Author: foming
  * @Date: 2021-08-29 07:39:35
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:40:44
+ * @LastEditTime: 2023-01-10 14:05:37
  */
 export const widgetLineCompare = {
   code: 'widgetLineCompareChart',
@@ -22,6 +22,13 @@ export const widgetLineCompare = {
         required: false,
         placeholder: '',
         value: '折线对比图',
+      },
+      {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'widgetLineCompareChart' + Date.now()
       },
       {
         type: 'vue-color',
@@ -58,8 +65,8 @@ export const widgetLineCompare = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'circle', name: '实心点'},
-                {code: 'emptyCircle', name: '空心点'},
+                { code: 'circle', name: '实心点' },
+                { code: 'emptyCircle', name: '空心点' },
               ],
               value: 'circle'
             },

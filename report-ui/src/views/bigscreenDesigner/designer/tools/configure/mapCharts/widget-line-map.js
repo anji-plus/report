@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:31:21
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:17:20
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-01-10 14:06:32
  */
 export const widgetLineMap = {
   code: 'widgetLineMap',
@@ -21,6 +21,13 @@ export const widgetLineMap = {
         required: false,
         placeholder: '',
         value: '中国地图-路线图',
+      },
+      {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'widgetLineMap' + Date.now()
       },
       {
         type: 'vue-color',

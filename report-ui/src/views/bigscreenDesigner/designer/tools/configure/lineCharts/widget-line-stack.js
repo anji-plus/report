@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:38:17
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:16:28
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-01-10 14:05:48
  */
 export const widgetLineStack = {
   code: 'widgetLineStackChart',
@@ -22,6 +22,13 @@ export const widgetLineStack = {
         required: false,
         placeholder: '',
         value: '折线堆叠图',
+      },
+      {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'widgetLineStackChart' + Date.now()
       },
       {
         type: 'el-switch',
@@ -66,8 +73,8 @@ export const widgetLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'circle', name: '实心点'},
-                {code: 'emptyCircle', name: '空心点'},
+                { code: 'circle', name: '实心点' },
+                { code: 'emptyCircle', name: '空心点' },
               ],
               value: 'circle'
             },

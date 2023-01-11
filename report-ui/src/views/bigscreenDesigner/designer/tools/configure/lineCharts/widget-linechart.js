@@ -24,6 +24,13 @@ export const widgetLinechart = {
         value: '折线图',
       },
       {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'widget-linechart' + Date.now()
+      },
+      {
         type: 'vue-color',
         label: '背景颜色',
         name: 'background',
@@ -58,8 +65,8 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'circle', name: '实心点'},
-                {code: 'emptyCircle', name: '空心点'},
+                { code: 'circle', name: '实心点' },
+                { code: 'emptyCircle', name: '空心点' },
               ],
               value: 'circle'
             },
@@ -139,10 +146,10 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -153,9 +160,9 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
             },
@@ -166,9 +173,9 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
               ],
               value: 'center'
             },
@@ -203,10 +210,10 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -217,9 +224,9 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
             },
@@ -501,10 +508,10 @@ export const widgetLinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -576,7 +583,7 @@ export const widgetLinechart = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{color: '#1E90FF'}],
+              value: [{ color: '#1E90FF' }],
             },
           ],
         },
@@ -620,11 +627,11 @@ export const widgetLinechart = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {"axis": "苹果", "data": 1000},
-          {"axis": "三星", "data": 2229},
-          {"axis": "小米", "data": 3879},
-          {"axis": "oppo", "data": 2379},
-          {"axis": "vivo", "data": 4079},
+          { "axis": "苹果", "data": 1000 },
+          { "axis": "三星", "data": 2229 },
+          { "axis": "小米", "data": 3879 },
+          { "axis": "oppo", "data": 2379 },
+          { "axis": "vivo", "data": 4079 },
         ],
       },
       {

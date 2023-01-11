@@ -4,7 +4,7 @@
  * @Author: whw
  * @Date: 2021-11-3
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:40:35
+ * @LastEditTime: 2023-01-11 13:14:37
  */
 export const widgetHeatmap = {
   code: 'widget-heatmap',
@@ -22,6 +22,13 @@ export const widgetHeatmap = {
         required: false,
         placeholder: '',
         value: '热力图',
+      },
+      {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'widget-heatmap' + Date.now()
       },
       {
         type: 'vue-color',

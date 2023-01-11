@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:32:40
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:41:37
+ * @LastEditTime: 2023-01-11 13:15:38
  */
 export const widgetPieNightingale = {
   code: 'WidgetPieNightingaleRoseArea',
@@ -22,6 +22,13 @@ export const widgetPieNightingale = {
         required: false,
         placeholder: '',
         value: '南丁格尔玫瑰图',
+      },
+      {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'WidgetPieNightingaleRoseArea' + Date.now()
       },
       {
         type: 'vue-color',

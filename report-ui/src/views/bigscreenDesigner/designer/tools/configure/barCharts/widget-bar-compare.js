@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:39:35
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:09:58
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-01-10 14:08:40
  */
 export const widgetBarCompare = {
   code: 'widgetBarCompareChart',
@@ -22,6 +22,13 @@ export const widgetBarCompare = {
         required: false,
         placeholder: '',
         value: '柱状对比图',
+      },
+      {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'widgetBarCompareChart' + Date.now()
       },
       {
         type: 'vue-color',

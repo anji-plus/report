@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:29:23
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:40:21
+ * @LastEditTime: 2023-01-10 14:05:07
  */
 export const widgetFunnel = {
   code: 'widget-funnel',
@@ -22,6 +22,13 @@ export const widgetFunnel = {
         required: false,
         placeholder: '',
         value: '漏斗图',
+      },
+      {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'widget-funnel' + Date.now()
       },
       {
         type: 'vue-color',

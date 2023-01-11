@@ -4,7 +4,7 @@
  * @Author: foming
  * @Date:
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:40:07
+ * @LastEditTime: 2023-01-10 14:04:50
  */
 export const widgetDecoratePie = {
   code: 'widgetDecoratePieChart',
@@ -22,6 +22,13 @@ export const widgetDecoratePie = {
         required: false,
         placeholder: '',
         value: '静态装饰饼图',
+      },
+      {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'widgetDecoratePieChart' + Date.now()
       },
       {
         type: 'vue-color',

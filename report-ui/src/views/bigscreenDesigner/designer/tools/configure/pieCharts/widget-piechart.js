@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:28:20
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:19:19
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-01-11 13:15:48
  */
 export const widgetPiechart = {
   code: 'widget-piechart',
@@ -22,6 +22,13 @@ export const widgetPiechart = {
         required: false,
         placeholder: '',
         value: '饼图',
+      },
+      {
+        type: 'el-input-text',
+        label: '图层唯一标识',
+        name: 'uuid',
+        disabled: true,
+        value: 'widget-piechart' + Date.now()
       },
       {
         type: 'vue-color',
