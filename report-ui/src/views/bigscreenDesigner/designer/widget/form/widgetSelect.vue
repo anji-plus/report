@@ -4,11 +4,13 @@
     :style="styleObj"
     v-model="selectValue"
     :localOptions="options"
-    label="text"
-    option="id"
+    label="name"
+    option="code"
+    @[eventChange]="change"
   />
 </template>
 <script>
+import { eventBus } from "@/utils/eventBus";
 export default {
   name: "WidgetSelect",
   props: {
@@ -17,28 +19,6 @@ export default {
   },
   data() {
     return {
-      options: [
-        {
-          id: "选项1",
-          text: "黄金糕",
-        },
-        {
-          id: "选项2",
-          text: "双皮奶",
-        },
-        {
-          id: "选项3",
-          text: "蚵仔煎",
-        },
-        {
-          id: "选项4",
-          text: "龙须面",
-        },
-        {
-          id: "选项5",
-          text: "北京烤鸭",
-        },
-      ],
       selectValue: "",
       optionsStyle: {},
       optionsData: {},
@@ -55,10 +35,18 @@ export default {
         top: this.optionsStyle.top + "px",
       };
     },
+    options() {
+      const data = this.optionsData;
+      return data.dataType == "staticData" ? data.staticData : data.dynamicData;
+    },
+    eventChange() {
+      return this.optionsSetup.event || "change";
+    },
   },
   watch: {
     value: {
       handler(val) {
+        console.log("val", val);
         this.optionsSetup = val.setup;
         this.optionsData = val.data;
         this.optionsStyle = val.position;
@@ -71,7 +59,15 @@ export default {
     this.optionsData = this.value.data;
     this.optionsStyle = this.value.position;
   },
-  methods: {},
+  methods: {
+    change(event) {
+      const optionsSetup = this.optionsSetup;
+      const params = {};
+      params[optionsSetup.field] = event;
+      params["assChart"] = optionsSetup.assChart;
+      eventBus.$emit("params", params);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

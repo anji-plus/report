@@ -3,7 +3,7 @@
  * @Author: qianlishi qianlishi@anji-plus.com
  * @Date: 2023-01-09 13:02:59
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-01-10 09:40:53
+ * @LastEditTime: 2023-01-12 14:39:29
  */
 
 export const widgetSelect = {
@@ -24,11 +24,11 @@ export const widgetSelect = {
       },
       {
         type: 'el-input-text',
-        label: '默认值',
-        name: 'text',
+        label: '字段属性值',
+        name: 'field',
         required: false,
-        placeholder: '',
-        value: '超链接',
+        placeholder: '请输入',
+        value: '',
       },
       {
         type: 'vue-color',
@@ -52,11 +52,8 @@ export const widgetSelect = {
         name: 'assChart',
         required: false,
         placeholder: '',
-        selectOptions: [
-          { code: 'center', name: '居中' },
-          { code: 'left', name: '左对齐' },
-          { code: 'right', name: '右对齐' },
-        ],
+        multiple: true,
+        selectOptions: [],
         value: '',
       },
       {
@@ -102,11 +99,11 @@ export const widgetSelect = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          { "axis": "苹果", "data": 1000 },
-          { "axis": "三星", "data": 2229 },
-          { "axis": "小米", "data": 3879 },
-          { "axis": "oppo", "data": 2379 },
-          { "axis": "vivo", "data": 4079 },
+          { "name": "苹果", "code": 1000 },
+          { "name": "三星", "code": 2229 },
+          { "name": "小米", "code": 3879 },
+          { "name": "oppo", "code": 2379 },
+          { "name": "vivo", "code": 4079 },
         ],
       },
       {
@@ -117,8 +114,8 @@ export const widgetSelect = {
         placeholder: '',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        chartType: 'widget-barchart',
-        dictKey: 'BAR_PROPERTIES',
+        chartType: 'widget-select',
+        dictKey: 'SELECT_PROPERTIES',
         value: '',
       },
     ],

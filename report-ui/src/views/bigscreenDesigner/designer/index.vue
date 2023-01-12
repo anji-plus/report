@@ -312,6 +312,7 @@ import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
 import contentMenu from "./components/contentMenu";
 import { getToken } from "@/utils/auth";
 import { Revoke } from "@/utils/revoke"; //处理历史记录 2022-02-22
+import { setAssChartData } from "@/utils/screen.js";
 
 export default {
   name: "Login",
@@ -444,7 +445,6 @@ export default {
   watch: {
     widgets: {
       handler(val) {
-        this.handlerLayerWidget(val);
         //以下部分是记录历史
         this.$nextTick(() => {
           this.revoke.push(this.widgets);
@@ -491,7 +491,7 @@ export default {
       this.widgets = record;
     },
     handlerLayerWidget(val) {
-      console.log(val)
+      console.log(val);
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
         const obj = {};
@@ -501,11 +501,14 @@ export default {
           if (el.name == "layerName") {
             obj.label = el.value;
           }
+          if (el.name == "uuid") {
+            obj.uuid = el.value;
+          }
         });
         layerWidgetArr.push(obj);
       }
       this.layerWidget = layerWidgetArr;
-      console.log(this.layerWidget);
+      setAssChartData(this.widgets, this.layerWidget);
     },
     async initEchartData() {
       const reportCode = this.$route.query.reportCode;
@@ -517,6 +520,7 @@ export default {
       this.dashboard = screenData;
       this.bigscreenWidth = this.dashboard.width;
       this.bigscreenHeight = this.dashboard.height;
+      this.handlerLayerWidget(this.widgets);
     },
     handleBigScreen(data) {
       const optionScreen = getToolByCode("screen").options;
@@ -746,6 +750,7 @@ export default {
       this.setOptionsOnClickWidget(this.widgets.length - 1);
 
       console.log("123", this.widgets);
+      this.handlerLayerWidget(this.widgets);
     },
 
     // 对组件默认值处理

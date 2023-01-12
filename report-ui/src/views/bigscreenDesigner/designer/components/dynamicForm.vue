@@ -88,6 +88,7 @@
               size="mini"
               :disabled="item.disabled"
               v-model="formData[item.name]"
+              :multiple="item.multiple"
               clearable
               placeholder="请选择"
               @change="(val) => changed(val, item.name)"
@@ -384,6 +385,8 @@ export default {
     },
     // 无论哪个输入框改变 都需要触发事件 将值回传
     changed(val, key) {
+      console.log(val);
+      console.log(key);
       if (val.extend) {
         this.$set(this.formData, key, val.value);
       } else {
