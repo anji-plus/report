@@ -6,7 +6,7 @@
 - 可动态扩展
   ![source.png](../picture/datasource/img_1.png)
 
-## 数据源类型
+## 类型
 
 查看已有的数据源类型 <br>
 ![img2](../picture/datasource/img_2.png)  <br>
@@ -29,7 +29,7 @@
 
 ### JDBC驱动类数据源添加
 
-##### 发行版
+**发行版**
 
 ```text
 1、将jar包上传到 "aj-report.xxx/lib"目录下
@@ -39,8 +39,8 @@
 
 ![img4](../picture/datasource/img_4.png) <br>
 ![img5](../picture/datasource/img_5.png) <br>
-
-##### 源码
+ 
+**源码**
 
 源码推荐使用第二种方式。<br>
 
