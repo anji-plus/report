@@ -1,16 +1,17 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import { eventBusParams } from "@/utils/screen";
 export default {
   name: "WidgetBarchart",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
@@ -18,8 +19,8 @@ export default {
         grid: {},
         legend: {
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         xAxis: {
           type: "category",
@@ -27,9 +28,9 @@ export default {
           axisLabel: {
             show: true,
             textStyle: {
-              color: "#fff"
-            }
-          }
+              color: "#fff",
+            },
+          },
         },
         yAxis: {
           type: "value",
@@ -37,9 +38,9 @@ export default {
           axisLabel: {
             show: true,
             textStyle: {
-              color: "#fff"
-            }
-          }
+              color: "#fff",
+            },
+          },
         },
         series: [
           {
@@ -47,15 +48,15 @@ export default {
             type: "bar",
             barGap: "0%",
             itemStyle: {
-              borderRadius: null
-            }
-          }
-        ]
+              borderRadius: null,
+            },
+          },
+        ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsSetup: {},
-      flagInter: null
+      flagInter: null,
     };
   },
   computed: {
@@ -66,9 +67,9 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
   },
   watch: {
     value: {
@@ -79,8 +80,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.optionsStyle = this.value.position;
@@ -88,6 +89,14 @@ export default {
     this.optionsCollapse = this.value.setup;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+
+    eventBusParams(
+      this.optionsSetup,
+      this.optionsData,
+      (dynamicData, optionsSetup) => {
+        this.getEchartData(dynamicData, optionsSetup);
+      }
+    );
   },
   methods: {
     // 修改图标options属性
@@ -134,7 +143,7 @@ export default {
         name: optionsSetup.nameX,
         nameTextStyle: {
           color: optionsSetup.nameColorX,
-          fontSize: optionsSetup.nameFontSizeX
+          fontSize: optionsSetup.nameFontSizeX,
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -147,23 +156,23 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX
-          }
+            fontSize: optionsSetup.fontSizeX,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorX,
             width: optionsSetup.lineWidthX,
-          }
+          },
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineX,
           lineStyle: {
             color: optionsSetup.splitLineColorX,
             width: optionsSetup.splitLineWidthX,
-          }
-        }
+          },
+        },
       };
       this.options.xAxis = xAxis;
     },
@@ -181,7 +190,7 @@ export default {
         name: optionsSetup.textNameY,
         nameTextStyle: {
           color: optionsSetup.nameColorY,
-          fontSize: optionsSetup.nameFontSizeY
+          fontSize: optionsSetup.nameFontSizeY,
         },
         // 轴反转
         inverse: optionsSetup.reversalY,
@@ -192,23 +201,23 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorY,
-            fontSize: optionsSetup.fontSizeY
-          }
+            fontSize: optionsSetup.fontSizeY,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorY,
             width: optionsSetup.lineWidthY,
-          }
+          },
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineY,
           lineStyle: {
             color: optionsSetup.splitLineColorY,
             width: optionsSetup.splitLineWidthY,
-          }
-        }
+          },
+        },
       };
       this.options.yAxis = yAxis;
     },
@@ -220,14 +229,14 @@ export default {
         if (optionsSetup.verticalShow) {
           series[0].label = {
             show: optionsSetup.isShow,
-            position: 'right',
+            position: "right",
             distance: optionsSetup.distance,
             textStyle: {
               fontSize: optionsSetup.fontSize,
               color: optionsSetup.subTextColor,
-              fontWeight: optionsSetup.fontWeight
-            }
-          }
+              fontWeight: optionsSetup.fontWeight,
+            },
+          };
         } else {
           series[0].label = {
             show: optionsSetup.isShow,
@@ -235,8 +244,8 @@ export default {
             distance: optionsSetup.distance,
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.subTextColor,
-            fontWeight: optionsSetup.fontWeight
-          }
+            fontWeight: optionsSetup.fontWeight,
+          };
         }
       }
       series[0].barWidth = optionsSetup.maxWidth;
@@ -250,8 +259,8 @@ export default {
         show: true,
         textStyle: {
           color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize
-        }
+          fontSize: optionsSetup.tipsFontSize,
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -263,7 +272,7 @@ export default {
         right: optionsSetup.marginRight,
         bottom: optionsSetup.marginBottom,
         top: optionsSetup.marginTop,
-        containLabel: true
+        containLabel: true,
       };
       this.options.grid = grid;
     },
@@ -278,11 +287,11 @@ export default {
       }
       const itemStyle = {
         normal: {
-          color: params => {
+          color: (params) => {
             return arrColor[params.dataIndex];
           },
-          barBorderRadius: optionsSetup.radius
-        }
+          barBorderRadius: optionsSetup.radius,
+        },
       };
       for (const key in this.options.series) {
         if (this.options.series[key].type == "bar") {
@@ -297,11 +306,7 @@ export default {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(
-          optionsData.dynamicData,
-          optionsData.refreshTime,
-          optionsSetup
-        );
+        : this.dynamicDataFn(optionsData.refreshTime);
     },
     // 静态数据
     staticDataFn(val) {
@@ -311,7 +316,7 @@ export default {
       let data = [];
       for (const i in val) {
         axis[i] = val[i].axis;
-        data[i] = val[i].data
+        data[i] = val[i].data;
       }
       // x轴
       if (optionsSetup.verticalShow) {
@@ -330,7 +335,10 @@ export default {
       }
     },
     // 动态数据
-    dynamicDataFn(val, refreshTime, optionsSetup) {
+    dynamicDataFn(refreshTime) {
+      const optionsSetup = this.optionsSetup;
+      const optionsData = this.optionsData;
+      const val = optionsData.dynamicData;
       if (!val) return;
       if (this.ispreview) {
         this.getEchartData(val, optionsSetup);
@@ -343,7 +351,7 @@ export default {
     },
     getEchartData(val, optionsSetup) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(optionsSetup, res);
       });
     },
@@ -367,8 +375,8 @@ export default {
           series[i].data = val.series[i].data;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
