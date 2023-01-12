@@ -94,6 +94,7 @@ export default {
       this.optionsSetup,
       this.optionsData,
       (dynamicData, optionsSetup) => {
+        console.log("dynamicData", dynamicData);
         this.getEchartData(dynamicData, optionsSetup);
       }
     );

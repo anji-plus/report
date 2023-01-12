@@ -3,7 +3,7 @@
  * @Author: qianlishi qianlishi@anji-plus.com
  * @Date: 2023-01-09 13:02:59
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-01-12 14:39:29
+ * @LastEditTime: 2023-01-12 16:44:50
  */
 
 export const widgetSelect = {
