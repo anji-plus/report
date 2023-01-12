@@ -30,6 +30,13 @@ module.exports = {
                     ]
                 },
                 {
+                    title: 'Releases',
+                    collapsable: false,
+                    children: [
+                        {title: 'V1.0.0', path: '/guide/releases/1.0.0'},
+                    ]
+                },
+                {
                     title: '快速入门',
                     collapsable: false,
                     children: [
