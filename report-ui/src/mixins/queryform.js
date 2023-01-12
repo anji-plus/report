@@ -1,6 +1,5 @@
 import miment from 'miment'
-import {getData} from '@/api/bigscreen'
-
+import { getData } from '@/api/bigscreen'
 export default {
   data() {
     return {
@@ -59,6 +58,7 @@ export default {
   },
   computed: {},
   created() {
+
   },
   mounted() {
   },
@@ -96,7 +96,7 @@ export default {
     // 查询echarts 数据
     queryEchartsData(params) {
       return new Promise(async (resolve) => {
-        const {code, data} = await getData(params);
+        const { code, data } = await getData(params);
         if (code != 200) return
         const analysisData = this.analysisChartsData(params, data);
         resolve(analysisData)
@@ -277,7 +277,7 @@ export default {
       // 字段名
       const radarField = [];
       let nameField;
-      for(const key in chartProperties) {
+      for (const key in chartProperties) {
         if (chartProperties[key] == 'radar') {
           radarField.push(key)
         }

@@ -65,7 +65,7 @@ export default {
       const params = {};
       params[optionsSetup.field] = event;
       params["assChart"] = optionsSetup.assChart;
-      eventBus.$emit("params", params);
+      eventBus.$emit("eventParams", params);
     },
   },
 };

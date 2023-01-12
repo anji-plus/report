@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { eventBus } from "@/utils/eventBus";
+import { eventBusParams } from "@/utils/screen";
 export default {
   name: "WidgetBarchart",
   components: {},
@@ -89,20 +89,14 @@ export default {
     this.optionsCollapse = this.value.setup;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
-    eventBus.$on("params", (formParams) => {
-      const optionsSetup = this.optionsSetup;
-      const optionsData = this.optionsData;
-      const uuid = optionsSetup.uuid;
-      if (formParams.assChart.includes(uuid)) {
-        const contextData = optionsData.dynamicData.contextData;
-        for (const key in contextData) {
-          if (formParams.hasOwnProperty(key)) {
-            contextData[key] = formParams[key];
-          }
-        }
-        this.getEchartData(optionsData.dynamicData, optionsSetup);
+
+    eventBusParams(
+      this.optionsSetup,
+      this.optionsData,
+      (dynamicData, optionsSetup) => {
+        this.getEchartData(dynamicData, optionsSetup);
       }
-    });
+    );
   },
   methods: {
     // 修改图标options属性

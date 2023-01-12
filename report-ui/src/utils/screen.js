@@ -1,3 +1,5 @@
+import { eventBus } from "@/utils/eventBus";
+
 export function setAssChartData(widgets, options) {
   const selectOptions = options.filter(item => item.uuid).map(item => {
     return {
@@ -14,4 +16,19 @@ export function setAssChartData(widgets, options) {
       }
     })
   })
+}
+
+export function eventBusParams(optionsSetup, optionsData, callback) {
+  eventBus.$on("eventParams", (formParams) => {
+    const uuid = optionsSetup.uuid;
+    if (formParams.assChart.includes(uuid)) {
+      const contextData = optionsData.dynamicData.contextData;
+      for (const key in contextData) {
+        if (formParams.hasOwnProperty(key)) {
+          contextData[key] = formParams[key];
+        }
+      }
+      callback(optionsData.dynamicData, optionsSetup)
+    }
+  });
 }
