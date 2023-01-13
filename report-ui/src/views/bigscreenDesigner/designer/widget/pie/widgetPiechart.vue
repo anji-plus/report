@@ -1,16 +1,17 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import { eventBusParams } from "@/utils/screen";
 export default {
   name: "WidgetPiechart",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
@@ -19,15 +20,15 @@ export default {
           text: "",
           left: "center",
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         legend: {
           orient: "vertical",
           left: "left",
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         series: [
           {
@@ -38,16 +39,16 @@ export default {
               itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
-              }
-            }
-          }
-        ]
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+              },
+            },
+          },
+        ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
-      optionsSetup: {}
+      optionsSetup: {},
     };
   },
   computed: {
@@ -58,9 +59,9 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
   },
   watch: {
     value: {
@@ -71,8 +72,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   created() {
     this.optionsStyle = this.value.position;
@@ -80,6 +81,14 @@ export default {
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    eventBusParams(
+      this.optionsSetup,
+      this.optionsData,
+      (dynamicData, optionsSetup) => {
+        console.log("dynamicData", dynamicData);
+        this.getEchartData(dynamicData, optionsSetup);
+      }
+    );
   },
   methods: {
     // 修改图标options属性
@@ -137,17 +146,17 @@ export default {
             padding: [-30, 15, -20, 15],
             color: optionsSetup.subTextColor,
             fontSize: optionsSetup.fontSize,
-            fontWeight: optionsSetup.fontWeight
-          }
+            fontWeight: optionsSetup.fontWeight,
+          },
         },
         fontSize: optionsSetup.fontSize,
 
-        fontWeight: optionsSetup.optionsSetup
+        fontWeight: optionsSetup.optionsSetup,
       };
       for (const key in series) {
         if (series[key].type == "pie") {
           series[key].label = label;
-          series[key].labelLine = {show: optionsSetup.isShow};
+          series[key].labelLine = { show: optionsSetup.isShow };
         }
       }
     },
@@ -159,8 +168,8 @@ export default {
         show: true,
         textStyle: {
           color: optionsSetup.lineColor,
-          fontSize: optionsSetup.tipFontSize
-        }
+          fontSize: optionsSetup.tipFontSize,
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -177,7 +186,7 @@ export default {
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
         color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize
+        fontSize: optionsSetup.legendFontSize,
       };
       legend.itemWidth = optionsSetup.legendWidth;
     },
@@ -220,7 +229,7 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(res);
       });
     },
@@ -230,8 +239,8 @@ export default {
           this.options.series[key].data = val;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

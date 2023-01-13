@@ -1,12 +1,13 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 <script>
+import { eventBusParams } from "@/utils/screen";
 import "echarts/map/js/china.js";
 import echarts from "echarts";
-import {conversionCity} from '@/utils/china';
+import { conversionCity } from "@/utils/china";
 /*let geoCoordMap = {
   上海市: [121.4648, 31.2891],
   东莞市: [113.8953, 22.901],
@@ -130,7 +131,7 @@ export default {
   name: "widgetLineMap",
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
@@ -138,38 +139,44 @@ export default {
         title: {
           left: "center",
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         tooltip: {
-          trigger: 'item',
+          trigger: "item",
           formatter: function (params, ticket, callback) {
             if (params.seriesType == "effectScatter") {
               return "线路：" + params.data.name + "" + params.data.value[2];
             } else if (params.seriesType == "lines") {
-              return params.data.fromName + ">" + params.data.toName + "<br />" + params.data.value;
+              return (
+                params.data.fromName +
+                ">" +
+                params.data.toName +
+                "<br />" +
+                params.data.value
+              );
             } else {
               return params.name;
             }
-          }
+          },
         },
         legend: {
           show: true,
-          orient: 'vertical',
-          top: 'bottom',
-          left: 'right',
+          orient: "vertical",
+          top: "bottom",
+          left: "right",
           textStyle: {
-            color: '#fff'
+            color: "#fff",
           },
-          selectedMode: 'multiple',
+          selectedMode: "multiple",
         },
         geo: {
           map: "china",
           label: {
             emphasis: {
               show: true,
-              color: "white"
-            }
+              color: "white",
+            },
           },
           roam: true,
           itemStyle: {
@@ -179,8 +186,8 @@ export default {
               borderWidth: 1,
             },
             emphasis: {
-              areaColor: "#2a333d"
-            }
+              areaColor: "#2a333d",
+            },
           },
         },
         series: [
@@ -193,97 +200,97 @@ export default {
               period: 6,
               trailLength: 0.7,
               color: "#fff",
-              symbolSize: 3
+              symbolSize: 3,
             },
             lineStyle: {
               normal: {
-                color: '#a6c84c',
+                color: "#a6c84c",
                 width: 0,
-                curveness: 0.2
-              }
+                curveness: 0.2,
+              },
             },
             data: [],
           },
           {
             type: "lines",
             zlevel: 2,
-            symbol: ['none', 'arrow'],
+            symbol: ["none", "arrow"],
             symbolSize: 10,
             effect: {
               show: true,
               period: 4,
               trailLength: 0,
-              symbol: 'arrow',
-              symbolSize: 5
+              symbol: "arrow",
+              symbolSize: 5,
             },
             lineStyle: {
               normal: {
                 // 颜色+ 线条
-                color: '#ffa022',
+                color: "#ffa022",
                 width: 1,
                 opacity: 0.4,
-                curveness: 0.2
-              }
+                curveness: 0.2,
+              },
             },
             data: [],
           },
           {
             // 起点
             //name: tempData[0],
-            type: 'effectScatter',
-            coordinateSystem: 'geo',
+            type: "effectScatter",
+            coordinateSystem: "geo",
             zlevel: 2,
             rippleEffect: {
-              brushType: 'stroke'
+              brushType: "stroke",
             },
             label: {
               normal: {
                 show: true,
-                position: 'right',
-                formatter: '{b}',
+                position: "right",
+                formatter: "{b}",
                 fontSize: 22,
-              }
+              },
             },
             // 点的大小
             symbolSize: 10,
             itemStyle: {
               normal: {
                 // 地图点颜色
-                color: '#46bee9'
-              }
+                color: "#46bee9",
+              },
             },
             data: [],
           },
           {
             // 终点
             //name: tempData[0],
-            type: 'effectScatter',
-            coordinateSystem: 'geo',
+            type: "effectScatter",
+            coordinateSystem: "geo",
             zlevel: 2,
             rippleEffect: {
-              brushType: 'stroke'
+              brushType: "stroke",
             },
             label: {
               normal: {
                 show: true,
-                position: 'right',
-                formatter: '{b}',
+                position: "right",
+                formatter: "{b}",
                 fontSize: 22,
-              }
+              },
             },
             // 点的大小
             symbolSize: 10,
             itemStyle: {
               normal: {
                 // 地图点颜色
-                color: '#46bee9'
-              }
+                color: "#46bee9",
+              },
             },
             data: [],
           },
-        ]
+        ],
       },
-      optionsSetup: {}
+      optionsSetup: {},
     };
   },
   computed: {
@@ -294,9 +301,9 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
   },
   watch: {
     value: {
@@ -306,8 +313,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   created() {
     this.optionsStyle = this.value.position;
@@ -316,6 +323,14 @@ export default {
   },
   mounted() {
     this.editorOptions();
+    eventBusParams(
+      this.optionsSetup,
+      this.optionsData,
+      (dynamicData, optionsSetup) => {
+        console.log("dynamicData", dynamicData);
+        this.getEchartData(dynamicData, optionsSetup);
+      }
+    );
   },
   methods: {
     convertData(data) {
@@ -326,14 +341,12 @@ export default {
         let targetCoord = geoCoordMap[dataItem.target];
         if (sourceCoord && targetCoord) {
           res.push({
-              fromName: dataItem.source,
-              toName: dataItem.target,
-              coords: [sourceCoord, targetCoord],
-              value: dataItem.value,
-            }
-          )
+            fromName: dataItem.source,
+            toName: dataItem.target,
+            coords: [sourceCoord, targetCoord],
+            value: dataItem.value,
+          });
         }
-        ;
       }
       return res;
     },
@@ -369,12 +382,12 @@ export default {
       this.options.title = title;
     },
     // 起点设置
-    setOptionsSource(){
+    setOptionsSource() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series[2];
       const normal = {
         show: optionsSetup.isShowSource,
-        position: 'right',
+        position: "right",
         color: optionsSetup.sourceFontTextColor,
         fontSize: optionsSetup.sourceFontTextSize,
         fontWeight: optionsSetup.sourceFontTextWeight,
@@ -382,19 +395,19 @@ export default {
       const itemStyle = {
         normal: {
           color: optionsSetup.sourcePointColor,
-        }
+        },
       };
       series.symbolSize = optionsSetup.sourceSymbolSize;
       series.label.normal = normal;
       series.itemStyle = itemStyle;
     },
     // 终点设置
-    setOptionsTarget(){
+    setOptionsTarget() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series[3];
       const normal = {
         show: optionsSetup.isShowTarget,
-        position: 'right',
+        position: "right",
         color: optionsSetup.targetFontTextColor,
         fontSize: optionsSetup.targetFontTextSize,
         fontWeight: optionsSetup.targetFontTextWeight,
@@ -402,14 +415,14 @@ export default {
       const itemStyle = {
         normal: {
           color: optionsSetup.targetPointColor,
-        }
+        },
       };
       series.symbolSize = optionsSetup.targetSymbolSize;
       series.label.normal = normal;
       series.itemStyle = itemStyle;
     },
     // 图标设置
-    setOptionsSymbol(){
+    setOptionsSymbol() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series[1];
       const effect = {
@@ -420,22 +433,22 @@ export default {
         symbolSize: optionsSetup.symbolSize,
         color: optionsSetup.symbolColor,
       };
-      series['effect'] = effect;
+      series["effect"] = effect;
     },
     setSymbol(optionsSetup) {
       let symbol;
-      if (optionsSetup.symbol == 'plane') {
+      if (optionsSetup.symbol == "plane") {
         symbol = planePath;
       } else {
         symbol = "arrow";
       }
       return symbol;
     },
-    setPeriod(optionsSetup){
+    setPeriod(optionsSetup) {
       let period;
-      if (optionsSetup.symbol == 'plane') {
+      if (optionsSetup.symbol == "plane") {
         period = optionsSetup.symbolPeriod - 1;
-      }else {
+      } else {
         period = optionsSetup.symbolPeriod;
       }
       return period;
@@ -450,10 +463,10 @@ export default {
           color: optionsSetup.lineColor,
           width: optionsSetup.lineWidth,
           opacity: 0.4,
-          curveness: 0.2
-        }
+          curveness: 0.2,
+        },
       };
-      series['lineStyle'] = lineStyle;
+      series["lineStyle"] = lineStyle;
     },
     // 地图颜色设置
     setOptionsColor() {
@@ -467,7 +480,7 @@ export default {
         emphasis: {
           // 地图块颜色
           areaColor: optionsSetup.highlightColor,
-        }
+        },
       };
       this.options.geo["itemStyle"] = itemStyle;
     },
@@ -486,16 +499,16 @@ export default {
         if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.source,
-            value: geoCoordMap[dataItem.source].concat([dataItem.value])
-          }
+            value: geoCoordMap[dataItem.source].concat([dataItem.value]),
+          };
         }
       });
       series[3]["data"] = val.map(function (dataItem) {
         if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.target,
-            value: geoCoordMap[dataItem.target].concat([dataItem.value])
-          }
+            value: geoCoordMap[dataItem.target].concat([dataItem.value]),
+          };
         }
       });
     },
@@ -512,7 +525,7 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(res);
       });
     },
@@ -524,20 +537,20 @@ export default {
         if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.source,
-            value: geoCoordMap[dataItem.source].concat([dataItem.value])
-          }
+            value: geoCoordMap[dataItem.source].concat([dataItem.value]),
+          };
         }
       });
       series[3]["data"] = val.map(function (dataItem) {
         if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.target,
-            value: geoCoordMap[dataItem.target].concat([dataItem.value])
-          }
+            value: geoCoordMap[dataItem.target].concat([dataItem.value]),
+          };
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

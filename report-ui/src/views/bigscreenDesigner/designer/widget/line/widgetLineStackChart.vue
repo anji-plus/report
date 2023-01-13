@@ -1,16 +1,17 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import { eventBusParams } from "@/utils/screen";
 export default {
   name: "WidgetBarStackchart",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
@@ -18,8 +19,8 @@ export default {
         grid: {},
         legend: {
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         xAxis: {
           type: "category",
@@ -27,9 +28,9 @@ export default {
           axisLabel: {
             show: true,
             textStyle: {
-              color: "#fff"
-            }
-          }
+              color: "#fff",
+            },
+          },
         },
         yAxis: {
           type: "value",
@@ -37,26 +38,26 @@ export default {
           axisLabel: {
             show: true,
             textStyle: {
-              color: "#fff"
-            }
-          }
+              color: "#fff",
+            },
+          },
         },
         series: [
           {
             data: [],
-            name: '',
+            name: "",
             type: "line",
             barGap: "0%",
             itemStyle: {
-              barBorderRadius: null
-            }
-          }
-        ]
+              barBorderRadius: null,
+            },
+          },
+        ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsSetup: {},
-      flagInter: null
+      flagInter: null,
     };
   },
   computed: {
@@ -67,9 +68,9 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
   },
   watch: {
     value: {
@@ -80,8 +81,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.optionsStyle = this.value.position;
@@ -89,6 +90,14 @@ export default {
     this.optionsCollapse = this.value.setup;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    eventBusParams(
+      this.optionsSetup,
+      this.optionsData,
+      (dynamicData, optionsSetup) => {
+        console.log("dynamicData", dynamicData);
+        this.getEchartData(dynamicData, optionsSetup);
+      }
+    );
   },
   methods: {
     // 修改图标options属性
@@ -134,7 +143,7 @@ export default {
         name: optionsSetup.nameX,
         nameTextStyle: {
           color: optionsSetup.nameColorX,
-          fontSize: optionsSetup.nameFontSizeX
+          fontSize: optionsSetup.nameFontSizeX,
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -147,23 +156,23 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX
-          }
+            fontSize: optionsSetup.fontSizeX,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorX,
             width: optionsSetup.lineWidthX,
-          }
+          },
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineX,
           lineStyle: {
             color: optionsSetup.splitLineColorX,
             width: optionsSetup.splitLineWidthX,
-          }
-        }
+          },
+        },
       };
       this.options.xAxis = xAxis;
     },
@@ -181,7 +190,7 @@ export default {
         name: optionsSetup.textNameY,
         nameTextStyle: {
           color: optionsSetup.nameColorY,
-          fontSize: optionsSetup.nameFontSizeY
+          fontSize: optionsSetup.nameFontSizeY,
         },
         // 轴反转
         inverse: optionsSetup.reversalY,
@@ -192,23 +201,23 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorY,
-            fontSize: optionsSetup.fontSizeY
-          }
+            fontSize: optionsSetup.fontSizeY,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorY,
             width: optionsSetup.lineWidthY,
-          }
+          },
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineY,
           lineStyle: {
             color: optionsSetup.splitLineColorY,
             width: optionsSetup.splitLineWidthY,
-          }
-        }
+          },
+        },
       };
       this.options.yAxis = yAxis;
     },
@@ -218,14 +227,14 @@ export default {
       let areaStyle = [];
       if (optionsSetup.area) {
         areaStyle = {
-          opacity: optionsSetup.areaThickness / 100
-        }
+          opacity: optionsSetup.areaThickness / 100,
+        };
       } else {
         areaStyle = {
-          opacity: 0
-        }
+          opacity: 0,
+        };
       }
-      return areaStyle
+      return areaStyle;
     },
     // tooltip 提示语设置，鼠标放置显示
     setOptionsTooltip() {
@@ -235,8 +244,8 @@ export default {
         show: true,
         textStyle: {
           color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize
-        }
+          fontSize: optionsSetup.tipsFontSize,
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -248,7 +257,7 @@ export default {
         right: optionsSetup.marginRight,
         bottom: optionsSetup.marginBottom,
         top: optionsSetup.marginTop,
-        containLabel: true
+        containLabel: true,
       };
       this.options.grid = grid;
     },
@@ -259,12 +268,11 @@ export default {
       legend.show = optionsSetup.isShowLegend;
       legend.left = optionsSetup.lateralPosition;
       legend.top = optionsSetup.longitudinalPosition;
-      legend.bottom =
-        optionsSetup.longitudinalPosition;
+      legend.bottom = optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
         color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize
+        fontSize: optionsSetup.legendFontSize,
       };
       legend.itemWidth = optionsSetup.legendWidth;
     },
@@ -274,17 +282,17 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == '') {
+      if (null == legendName || legendName == "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
-        this.options.legend['data'] = name;
+        this.options.legend["data"] = name;
       } else {
-        const arr = legendName.split('|');
+        const arr = legendName.split("|");
         for (let i = 0; i < arr.length; i++) {
           series[i].name = arr[i];
         }
-        this.options.legend['data'] = arr
+        this.options.legend["data"] = arr;
       }
     },
     // 图例颜色修改
@@ -307,16 +315,16 @@ export default {
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(
-          optionsData.dynamicData,
-          optionsData.refreshTime,
-          optionsSetup
-        );
+            optionsData.dynamicData,
+            optionsData.refreshTime,
+            optionsSetup
+          );
     },
     //去重
     setUnique(arr) {
       let newArr = [];
-      arr.forEach(item => {
-        return newArr.includes(item) ? '' : newArr.push(item);
+      arr.forEach((item) => {
+        return newArr.includes(item) ? "" : newArr.push(item);
       });
       return newArr;
     },
@@ -379,7 +387,7 @@ export default {
             color: optionsSetup.subTextColor,
             fontWeight: optionsSetup.fontWeight,
           },
-        })
+        });
         legendName.push(yAxisList[i]);
       }
       this.options.series = series;
@@ -394,7 +402,7 @@ export default {
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
       }
-      this.options.legend['data'] = legendName;
+      this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
     // 动态数据
@@ -411,7 +419,7 @@ export default {
     },
     getEchartData(val, optionsSetup) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(optionsSetup, res);
       });
     },
@@ -467,15 +475,15 @@ export default {
               color: optionsSetup.subTextColor,
               fontWeight: optionsSetup.fontWeight,
             },
-          })
+          });
         }
         legendName.push(val.series[i].name);
       }
       this.options.series = series;
-      this.options.legend['data'] = legendName;
+      this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -485,5 +493,4 @@ export default {
   height: 100%;
   overflow: hidden;
 }
-
 </style>

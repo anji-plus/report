@@ -1,17 +1,17 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 <script>
 import vue from "vue";
 import VueSuperSlide from "vue-superslide";
-
+import { eventBusParams } from "@/utils/screen";
 vue.use(VueSuperSlide);
 export default {
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
@@ -20,13 +20,13 @@ export default {
         title: {},
         legend: {},
         radar: {
-          indicator: []
+          indicator: [],
         },
-        series: []
+        series: [],
       },
       optionsSetup: {},
       optionsPosition: {},
-      optionsData: {}
+      optionsData: {},
     };
   },
   computed: {
@@ -38,7 +38,7 @@ export default {
         height: allStyle.height + "px",
         left: allStyle.left + "px",
         top: allStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
     },
   },
@@ -50,14 +50,22 @@ export default {
         this.optionsData = val.data;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.optionsSetup = this.value.setup;
     this.optionsPosition = this.value.position;
     this.optionsData = this.value.data;
     this.editorOptions();
+    eventBusParams(
+      this.optionsSetup,
+      this.optionsData,
+      (dynamicData, optionsSetup) => {
+        console.log("dynamicData", dynamicData);
+        this.getEchartData(dynamicData, optionsSetup);
+      }
+    );
   },
   methods: {
     editorOptions() {
@@ -105,7 +113,7 @@ export default {
         lineStyle: {
           color: optionsSetup.axisLineColor,
           opacity: optionsSetup.axisLineOpacity / 100,
-        }
+        },
       };
       const axisName = {
         show: optionsSetup.axisNameShow,
@@ -113,14 +121,14 @@ export default {
         fontSize: optionsSetup.axisNameFontSize,
         fontStyle: optionsSetup.axisNamFontStyle,
         fontWeight: optionsSetup.axisNamFontWeight,
-      }
+      };
       const splitLine = {
         show: optionsSetup.splitLineShow,
         lineStyle: {
           color: optionsSetup.splitLineColor,
           opacity: optionsSetup.splitLineOpacity / 100,
-        }
-      }
+        },
+      };
       this.options.radar.axisLine = axisLine;
       // echarts5.X以上，name属性被替换为axisName
       this.options.radar.name = axisName;
@@ -142,7 +150,7 @@ export default {
           fontSize: optionsSetup.legendFontSize,
         },
         itemWidth: optionsSetup.legendWidth,
-      }
+      };
       this.options.legend = legend;
     },
     // 图例名称设置
@@ -151,17 +159,17 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == '') {
+      if (null == legendName || legendName == "") {
         for (let i = 0; i < name.length; i++) {
           series[0].data[i].name = name[i];
         }
-        this.options.legend['data'] = name;
+        this.options.legend["data"] = name;
       } else {
-        const arr = legendName.split('|');
+        const arr = legendName.split("|");
         for (let i = 0; i < arr.length; i++) {
           series[0].data[i].name = arr[i];
         }
-        this.options.legend['data'] = arr;
+        this.options.legend["data"] = arr;
       }
     },
     // tooltip 提示语设置，鼠标放置显示
@@ -173,13 +181,13 @@ export default {
         textStyle: {
           color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize,
-        }
+        },
       };
       this.options.tooltip = tooltip;
     },
     // 雷达大小设置
     setOptionsMargin() {
-      this.options.radar.radius = '70%';
+      this.options.radar.radius = "70%";
     },
     setOptionsData() {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
@@ -190,8 +198,8 @@ export default {
     //去重
     setUnique(arr) {
       let newArr = [];
-      arr.forEach(item => {
-        return newArr.includes(item) ? '' : newArr.push(item);
+      arr.forEach((item) => {
+        return newArr.includes(item) ? "" : newArr.push(item);
       });
       return newArr;
     },
@@ -247,16 +255,16 @@ export default {
         legendName.push(name[i]);
       }
       this.options.series[0] = {
-        type: 'radar',
+        type: "radar",
         data: data,
         symbolSize: optionsSetup.symbolSize,
         areaStyle: {
           normal: {
             opacity: optionsSetup.opacity / 100,
-          }
+          },
         },
       };
-      this.options.legend['data'] = legendName;
+      this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
     dynamicDataFn(data, refreshTime) {
@@ -272,7 +280,7 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(res);
       });
     },
@@ -328,19 +336,19 @@ export default {
         legendName.push(name[i]);
       }
       this.options.series[0] = {
-        type: 'radar',
+        type: "radar",
         data: data,
         symbolSize: optionsSetup.symbolSize,
         areaStyle: {
           normal: {
             opacity: optionsSetup.opacity / 100,
-          }
+          },
         },
       };
-      this.options.legend['data'] = legendName;
+      this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

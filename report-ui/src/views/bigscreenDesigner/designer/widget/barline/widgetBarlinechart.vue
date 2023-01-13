@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { eventBusParams } from "@/utils/screen";
 export default {
   name: "WidgetBarlinechart",
   components: {},
@@ -127,6 +128,14 @@ export default {
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    eventBusParams(
+      this.optionsSetup,
+      this.optionsData,
+      (dynamicData, optionsSetup) => {
+        console.log("dynamicData", dynamicData);
+        this.getEchartData(dynamicData, optionsSetup);
+      }
+    );
   },
   methods: {
     // 修改图标options属性

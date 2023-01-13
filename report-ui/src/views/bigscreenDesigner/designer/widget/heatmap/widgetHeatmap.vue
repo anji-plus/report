@@ -1,10 +1,11 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import { eventBusParams } from "@/utils/screen";
 export default {
   name: "widgetHeatmap",
   components: {},
@@ -135,6 +136,14 @@ export default {
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    eventBusParams(
+      this.optionsSetup,
+      this.optionsData,
+      (dynamicData, optionsSetup) => {
+        console.log("dynamicData", dynamicData);
+        this.getEchartData(dynamicData, optionsSetup);
+      }
+    );
   },
   methods: {
     // 修改图标options属性
@@ -180,7 +189,7 @@ export default {
         name: optionsSetup.nameX,
         nameTextStyle: {
           color: optionsSetup.nameColorX,
-          fontSize: optionsSetup.nameFontSizeX
+          fontSize: optionsSetup.nameFontSizeX,
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -193,15 +202,15 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX
-          }
+            fontSize: optionsSetup.fontSizeX,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorX,
             width: optionsSetup.lineWidthX,
-          }
+          },
         },
       };
       this.options.xAxis = xAxis;
@@ -220,7 +229,7 @@ export default {
         name: optionsSetup.textNameY,
         nameTextStyle: {
           color: optionsSetup.nameColorY,
-          fontSize: optionsSetup.nameFontSizeY
+          fontSize: optionsSetup.nameFontSizeY,
         },
         // 轴反转
         inverse: optionsSetup.reversalY,
@@ -231,15 +240,15 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorY,
-            fontSize: optionsSetup.fontSizeY
-          }
+            fontSize: optionsSetup.fontSizeY,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorY,
             width: optionsSetup.lineWidthY,
-          }
+          },
         },
       };
       this.options.yAxis = yAxis;
@@ -252,9 +261,9 @@ export default {
         textStyle: {
           fontSize: optionsSetup.fontSize,
           color: optionsSetup.subTextColor,
-          fontWeight: optionsSetup.fontWeight
-        }
-      }
+          fontWeight: optionsSetup.fontWeight,
+        },
+      };
       this.options.series[0].label = lable;
     },
     // 边距设置
@@ -265,7 +274,7 @@ export default {
         right: optionsSetup.marginRight,
         bottom: optionsSetup.marginBottom,
         top: optionsSetup.marginTop,
-        containLabel: true
+        containLabel: true,
       };
       this.options.grid = grid;
     },
@@ -279,7 +288,7 @@ export default {
         textStyle: {
           color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize,
-        }
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -291,8 +300,8 @@ export default {
       visualMap.min = optionsSetup.dataMin;
       visualMap.max = optionsSetup.dataMax;
       visualMap.textStyle = {
-        fontSize : optionsSetup.legendFontSize,
-        color : optionsSetup.legendColor
+        fontSize: optionsSetup.legendFontSize,
+        color: optionsSetup.legendColor,
       };
       visualMap.inRange.color = optionsSetup.legendColorList.map((x) => {
         return x.color;
@@ -312,8 +321,8 @@ export default {
     //去重
     setUnique(arr) {
       let newArr = [];
-      arr.forEach(item => {
-        return newArr.includes(item) ? '' : newArr.push(item);
+      arr.forEach((item) => {
+        return newArr.includes(item) ? "" : newArr.push(item);
       });
       return newArr;
     },
@@ -324,7 +333,7 @@ export default {
       for (const i in val) {
         xAxisList[i] = val[i].axis;
         yAxisList[i] = val[i].yaxis;
-        data[i] = [val[i].axis,val[i].yaxis,val[i].num]
+        data[i] = [val[i].axis, val[i].yaxis, val[i].num];
       }
       xAxisList = this.setUnique(xAxisList);
       yAxisList = this.setUnique(yAxisList);

@@ -19,11 +19,11 @@ export default {
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
-      options: {}
+      options: {},
     };
   },
   computed: {
@@ -52,22 +52,22 @@ export default {
         top: this.transStyle.top + "px",
         right: this.transStyle.right + "px",
         linkAdress: this.transStyle.linkAdress,
-        jumpMode: this.transStyle.jumpMode == "other" ? "_blank" : "_self"
+        jumpMode: this.transStyle.jumpMode == "other" ? "_blank" : "_self",
       };
-    }
+    },
   },
   watch: {
     value: {
       handler(val) {
         this.options = val;
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.options = this.value;
   },
-  methods: {}
+  methods: {},
 };
 </script>
 
