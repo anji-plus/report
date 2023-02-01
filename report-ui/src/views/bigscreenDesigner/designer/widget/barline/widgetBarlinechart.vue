@@ -493,9 +493,9 @@ export default {
         for (const j in val.series) {
           if (series[i].type == val.series[j].type) {
             series[i].data = val.series[j].data;
+            legendName.push(val.series[j].name);
           }
         }
-        legendName.push(val.series[i].name);
       }
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
