@@ -91,6 +91,14 @@ export const widgetSelect = {
         value: 'staticData',
       },
       {
+        type: 'el-input-number',
+        label: '刷新时间(毫秒)',
+        name: 'refreshTime',
+        relactiveDom: 'dataType',
+        relactiveDomValue: 'dynamicData',
+        value: 5000
+      },
+      {
         type: 'el-button',
         label: '静态数据',
         name: 'staticData',
@@ -99,11 +107,11 @@ export const widgetSelect = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          { "name": "苹果", "code": 1000 },
-          { "name": "三星", "code": 2229 },
-          { "name": "小米", "code": 3879 },
-          { "name": "oppo", "code": 2379 },
-          { "name": "vivo", "code": 4079 },
+          { "label": "苹果", "value": 1000 },
+          { "label": "三星", "value": 2229 },
+          { "label": "小米", "value": 3879 },
+          { "label": "oppo", "value": 2379 },
+          { "label": "vivo", "value": 4079 },
         ],
       },
       {

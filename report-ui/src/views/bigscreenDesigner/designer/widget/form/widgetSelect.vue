@@ -4,13 +4,14 @@
     :style="styleObj"
     v-model="selectValue"
     :localOptions="options"
-    label="name"
-    option="code"
+    label="label"
+    option="value"
     @[eventChange]="change"
   />
 </template>
 <script>
-import { eventBus } from "@/utils/eventBus";
+import {eventBus} from "@/utils/eventBus";
+
 export default {
   name: "WidgetSelect",
   props: {
@@ -23,6 +24,7 @@ export default {
       optionsStyle: {},
       optionsData: {},
       optionsSetup: {},
+      options:{}
     };
   },
   computed: {
@@ -35,10 +37,6 @@ export default {
         top: this.optionsStyle.top + "px",
       };
     },
-    options() {
-      const data = this.optionsData;
-      return data.dataType == "staticData" ? data.staticData : data.dynamicData;
-    },
     eventChange() {
       return this.optionsSetup.event || "change";
     },
@@ -46,10 +44,10 @@ export default {
   watch: {
     value: {
       handler(val) {
-        console.log("val", val);
         this.optionsSetup = val.setup;
         this.optionsData = val.data;
         this.optionsStyle = val.position;
+        this.setOptions()
       },
       deep: true,
     },
@@ -58,6 +56,7 @@ export default {
     this.optionsSetup = this.value.setup;
     this.optionsData = this.value.data;
     this.optionsStyle = this.value.position;
+    this.setOptions()
   },
   methods: {
     change(event) {
@@ -67,14 +66,46 @@ export default {
       params["assChart"] = optionsSetup.assChart;
       eventBus.$emit("eventParams", params);
     },
+    setOptions() {
+        const optionsData = this.optionsData;
+        return optionsData.dataType == "staticData"
+          ? this.staticData(optionsData.staticData)
+          : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
+    },
+    staticData(data) {
+      this.options = data
+    },
+    //动态数据字典解析
+    dynamicDataFn(val, refreshTime) {
+      if (!val) return;
+      if (this.ispreview) {
+        this.getEchartData(val);
+        this.flagInter = setInterval(() => {
+          this.getEchartData(val);
+        }, refreshTime);
+      } else {
+        this.getEchartData(val);
+      }
+    },
+    getEchartData(val) {
+      const data = this.queryEchartsData(val);
+      data.then((res) => {
+        this.renderingFn(res);
+      });
+    },
+    renderingFn(val) {
+      this.options = val;
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
-/deep/.el-select {
+/deep/ .el-select {
   height: 100%;
+
   .el-input {
     height: 100%;
+
     .el-input__inner {
       height: 100%;
     }

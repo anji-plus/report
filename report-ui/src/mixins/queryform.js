@@ -112,6 +112,7 @@ export default {
       // widget-heatmap 热力图
       // widget-mapline 中国地图-路线图
       // widget-radar 雷达图
+      // widget-select 下拉框
       const chartType = params.chartType
       if (
         chartType == "widget-barchart" ||
@@ -134,13 +135,15 @@ export default {
         return this.linemapChartFn(params.chartProperties, data)
       } else if (chartType == "widget-radar") {
         return this.radarChartFn(params.chartProperties, data)
+      } else if (chartType == "widget-select") {
+        return this.selectChartFn(params.chartProperties, data)
       } else {
         return data
       }
     },
     // 柱状图、折线图、柱线图
     barOrLineChartFn(chartProperties, data) {
-      const ananysicData = {};
+      const analysisData = {};
       const xAxisList = [];
       const series = [];
       for (const key in chartProperties) {
@@ -163,13 +166,13 @@ export default {
           series.push(obj);
         }
       }
-      ananysicData["xAxis"] = xAxisList;
-      ananysicData["series"] = series;
-      return ananysicData;
+      analysisData["xAxis"] = xAxisList;
+      analysisData["series"] = series;
+      return analysisData;
     },
     //堆叠图
     stackChartFn(chartProperties, data) {
-      const ananysicData = {};
+      const analysisData = {};
       const series = [];
       //全部字段字典值
       const types = Object.values(chartProperties)
@@ -196,13 +199,13 @@ export default {
           })
         }
       }
-      ananysicData["xAxis"] = xAxisList;
-      ananysicData["series"] = series;
-      return ananysicData;
+      analysisData["xAxis"] = xAxisList;
+      analysisData["series"] = series;
+      return analysisData;
     },
     // 饼图、漏斗图
     piechartFn(chartProperties, data) {
-      const ananysicData = [];
+      const analysisData = [];
       for (let i = 0; i < data.length; i++) {
         const obj = {};
         for (const key in chartProperties) {
@@ -213,12 +216,12 @@ export default {
             obj["value"] = data[i][key];
           }
         }
-        ananysicData.push(obj);
+        analysisData.push(obj);
       }
-      return ananysicData;
+      return analysisData;
     },
     widgettext(chartProperties, data) {
-      const ananysicData = [];
+      const analysisData = [];
       for (let i = 0; i < data.length; i++) {
         const obj = {};
         for (const key in chartProperties) {
@@ -228,13 +231,13 @@ export default {
             obj["value"] = data[i][key];
           }
         }
-        ananysicData.push(obj);
+        analysisData.push(obj);
       }
-      return ananysicData;
+      return analysisData;
     },
     // 坐标系数据解析
     coordChartFn(chartProperties, data) {
-      const ananysicData = {};
+      const analysisData = {};
       let series = [];
       //全部字段字典值
       const types = Object.values(chartProperties)
@@ -245,17 +248,17 @@ export default {
       //x轴数值去重，y轴去重
       const xAxisList = this.setUnique(data.map(item => item[xAxisField]))
       const yAxisList = this.setUnique(data.map(item => item[yAxisField]))
-      ananysicData["xAxis"] = xAxisList;
-      ananysicData["yAxis"] = yAxisList;
+      analysisData["xAxis"] = xAxisList;
+      analysisData["yAxis"] = yAxisList;
       for (const i in data) {
         series[i] = [data[i][xAxisField], data[i][yAxisField], data[i][dataField]];
       }
-      ananysicData["series"] = series;
-      return ananysicData;
+      analysisData["series"] = series;
+      return analysisData;
     },
     // 中国地图。路线图数据解析，适合source、target、value
     linemapChartFn(chartProperties, data) {
-      const ananysicData = [];
+      const analysisData = [];
       for (let i = 0; i < data.length; i++) {
         const obj = {};
         for (const key in chartProperties) {
@@ -268,12 +271,13 @@ export default {
             obj["value"] = data[i][key];
           }
         }
-        ananysicData.push(obj);
+        analysisData.push(obj);
       }
-      return ananysicData;
+      return analysisData;
     },
+    // 雷达图
     radarChartFn(chartProperties, data) {
-      const ananysicData = {};
+      const analysisData = {};
       // 字段名
       const radarField = [];
       let nameField;
@@ -286,10 +290,37 @@ export default {
         }
       }
       // 拿到数值
-      ananysicData["name"] = nameField;
-      ananysicData["keys"] = radarField;
-      ananysicData["value"] = data;
-      return ananysicData;
+      analysisData["name"] = nameField;
+      analysisData["keys"] = radarField;
+      analysisData["value"] = data;
+      return analysisData;
+    },
+    // 下拉框
+    selectChartFn(chartProperties, data){
+      let valueField;
+      let labelField;
+      for (const key in chartProperties) {
+        if (chartProperties[key] == "value") {
+          valueField = key;
+        }
+        if (chartProperties[key] == "label") {
+          labelField = key;
+        }
+      }
+      if (valueField == null && labelField != null) {
+        valueField = labelField;
+      }
+      if (labelField == null && valueField != null) {
+        labelField = valueField
+      }
+      const analysisData = [];
+      for (let i = 0; i < data.length; i++) {
+        const obj = {};
+        obj["value"] = data[i][valueField];
+        obj["label"] = data[i][labelField];
+        analysisData.push(obj);
+      }
+      return analysisData;
     },
     setUnique(arr) {
       let newArr = [];
