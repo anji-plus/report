@@ -42,6 +42,7 @@ import widgetHeatmap from "./heatmap/widgetHeatmap";
 import widgetRadar from "./radar/widgetRadar";
 import widgetBarLineStackChart from "./barline/widgetBarLineStackChart";
 import widgetSelect from "./form/widgetSelect";
+import widgetInput from "./form/widgetInput.vue";
 
 export default {
   name: "WidgetTemp",
@@ -77,6 +78,7 @@ export default {
     widgetRadar,
     widgetBarLineStackChart,
     widgetSelect,
+    widgetInput
   },
   model: {
     prop: "value",
