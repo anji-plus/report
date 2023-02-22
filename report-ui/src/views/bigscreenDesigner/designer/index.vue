@@ -123,6 +123,66 @@
           </el-tooltip>
         </span>
 
+        <span
+          :class="{
+            'btn': true,
+            'btn-disable': currentSizeRangeIndex === 0
+          }"
+          @click="setSize(0)"
+        >
+          <el-tooltip
+            class="item"
+            :disabled="currentSizeRangeIndex === 0"
+            effect="dark"
+            content="缩小"
+            placement="bottom"
+          >
+            <!-- <svg-icon style="font-size:16px;" icon-class="jianhao" class-name="icon" /> -->
+            <i class="el-icon-minus" style="font-size:16px;" />
+          </el-tooltip>
+        </span>
+        <!--
+          class="btn scale-num"
+          :style="currentSizeRangeIndex === defaultSize.index ? 'cursor: no-drop;' : ''" -->
+        <span
+          :class="{
+            'btn': true,
+            'scale-num': true,
+            'btn-disable': currentSizeRangeIndex === defaultSize.index
+          }"
+          @click="setSize(2)"
+        >
+          <el-tooltip
+            class="item"
+            :disabled="currentSizeRangeIndex === defaultSize.index"
+            effect="dark"
+            content="默认比例"
+            placement="bottom"
+          >
+            <span>
+              {{ parseInt(scaleNum) }}%
+            </span>
+          </el-tooltip>
+        </span>
+        <span
+          :class="{
+            'btn': true,
+            'btn-disable': currentSizeRangeIndex === 8
+          }"
+          @click="setSize(1)"
+        >
+          <el-tooltip
+            class="item"
+            :disabled="currentSizeRangeIndex === 8"
+            effect="dark"
+            content="放大"
+            placement="bottom"
+          >
+            <!-- <svg-icon style="font-size:16px;" icon-class="jiahao" class-name="icon" /> -->
+            <i class="el-icon-plus" style="font-size:16px;" />
+          </el-tooltip>
+        </span>
+
         <span class="btn" v-permission="'bigScreenManage:export'">
           <el-tooltip
             class="item"
@@ -176,60 +236,76 @@
           </ul>
         </span>
       </div>
-      <div
-        class="workbench-container"
-        :style="{
+      <!-- 中间操作内容  主体 -->
+        <!-- :style="{
           width: bigscreenWidthInWorkbench + 'px',
           height: bigscreenHeightInWorkbench + 'px',
-        }"
+        }" -->
+      <div
+        class="workbench-container"
         @mousedown="handleMouseDown"
       >
-        <vue-ruler-tool
-          v-model="dashboard.presetLine"
-          class="vueRuler"
-          :step-length="50"
-          :parent="true"
-          :position="'relative'"
-          :is-scale-revise="true"
-          :visible.sync="dashboard.presetLineVisible"
+        <div
+          :style="{
+            width: ((+bigscreenWidth + 18) * bigscreenScaleInWorkbench) + 'px',
+            height: ((+bigscreenHeight + 18) * bigscreenScaleInWorkbench) + 'px'
+          }"
+          class="vue-ruler-tool-wrap"
         >
-          <div
-            id="workbench"
-            class="workbench"
+          <!-- 大屏设计页面的标尺插件 -->
+          <vue-ruler-tool
+            ref="vue-ruler-tool"
+            v-model="dashboard.presetLine"
+            class="vueRuler"
+            :step-length="50"
+            :parent="true"
+            :position="'relative'"
+            :is-scale-revise="true"
+            :visible.sync="dashboard.presetLineVisible"
             :style="{
-              transform: workbenchTransform,
-              width: bigscreenWidth + 'px',
-              height: bigscreenHeight + 'px',
-              'background-color': dashboard.backgroundColor,
-              'background-image': 'url(' + dashboard.backgroundImage + ')',
-              'background-position': '0% 0%',
-              'background-size': '100% 100%',
-              'background-repeat': 'initial',
-              'background-attachment': 'initial',
-              'background-origin': 'initial',
-              'background-clip': 'initial',
+              width: +bigscreenWidth + 18 + 'px',
+              height: +bigscreenHeight + 18 +'px',
+              transform: currentSizeRangeIndex === defaultSize.index ? workbenchTransform : `scale(${sizeRange[currentSizeRangeIndex]/100})`,
+              transformOrigin: '0 0'
             }"
-            @click.self="setOptionsOnClickScreen"
-            @drop="widgetOnDragged($event)"
-            @dragover="dragOver($event)"
           >
-            <div v-if="grade" class="bg-grid"></div>
-            <widget
-              ref="widgets"
-              v-for="(widget, index) in widgets"
-              :key="index"
-              v-model="widget.value"
-              :index="index"
-              :step="step"
-              :type="widget.type"
-              :bigscreen="{ bigscreenWidth, bigscreenHeight }"
-              @onActivated="setOptionsOnClickWidget"
-              @contextmenu.prevent.native="rightClick($event, index)"
-              @mousedown.prevent.native="widgetsClick(index)"
-              @mouseup.prevent.native="widgetsMouseup"
-            />
-          </div>
-        </vue-ruler-tool>
+            <div
+              id="workbench"
+              class="workbench"
+              :style="{
+                width: bigscreenWidth + 'px',
+                height: bigscreenHeight + 'px',
+                'background-color': dashboard.backgroundColor,
+                'background-image': 'url(' + dashboard.backgroundImage + ')',
+                'background-position': '0% 0%',
+                'background-size': '100% 100%',
+                'background-repeat': 'initial',
+                'background-attachment': 'initial',
+                'background-origin': 'initial',
+                'background-clip': 'initial',
+              }"
+              @click.self="setOptionsOnClickScreen"
+              @drop="widgetOnDragged($event)"
+              @dragover="dragOver($event)"
+            >
+              <div v-if="grade" class="bg-grid"></div>
+              <widget
+                ref="widgets"
+                v-for="(widget, index) in widgets"
+                :key="index"
+                v-model="widget.value"
+                :index="index"
+                :step="step"
+                :type="widget.type"
+                :bigscreen="{ bigscreenWidth, bigscreenHeight }"
+                @onActivated="setOptionsOnClickWidget"
+                @contextmenu.prevent.native="rightClick($event, index)"
+                @mousedown.prevent.native="widgetsClick(index)"
+                @mouseup.prevent.native="widgetsMouseup"
+              />
+            </div>
+          </vue-ruler-tool>
+        </div>
       </div>
     </div>
 
@@ -270,17 +346,6 @@
             @onChanged="(val) => widgetValueChanged('position', val)"
           />
         </el-tab-pane>
-        <el-tab-pane
-          v-if="isNotNull(widgetOptions.methods)"
-          name="four"
-          label="方法"
-        >
-          <dynamicForm
-            ref="formData"
-            :options="widgetOptions.methods"
-            @onChanged="(val) => widgetValueChanged('methods', val)"
-          />
-        </el-tab-pane>
       </el-tabs>
     </div>
 
@@ -312,7 +377,6 @@ import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
 import contentMenu from "./components/contentMenu";
 import { getToken } from "@/utils/auth";
 import { Revoke } from "@/utils/revoke"; //处理历史记录 2022-02-22
-import { setAssChartData } from "@/utils/screen.js";
 
 export default {
   name: "Login",
@@ -372,7 +436,6 @@ export default {
               top: 0,
               zIndex: 0,
             },
-            methods: {},
           },
           // options属性是从工具栏中拿到的tools中拿到
           options: [],
@@ -395,6 +458,9 @@ export default {
       visibleContentMenu: false,
       rightClickIndex: -1,
       activeName: "first",
+      scaleNum: 0, // 当前缩放百分比的值
+      sizeRange: [20, 40, 60, 80, 100, 150, 200, 300, 400], // 缩放百分比
+      currentSizeRangeIndex: -1 // 当前是哪个缩放比分比
     };
   },
   computed: {
@@ -432,6 +498,24 @@ export default {
     workbenchTransform() {
       return `scale(${this.bigscreenScaleInWorkbench}, ${this.bigscreenScaleInWorkbench})`;
     },
+    // 初始的缩放百分比 和 下标
+    defaultSize() {
+      const obj = {
+        index: -1,
+        size: '50'
+      }
+      this.sizeRange.some((item, index) => {
+        if (item <= (100 * this.bigscreenScaleInWorkbench)) {
+          obj.index = index
+          obj.size = 100 * this.bigscreenScaleInWorkbench // item
+        }
+      })
+      if (obj.index === -1) {
+        obj.index = 0
+        obj.size = this.sizeRange[0]
+      }
+      return obj
+    },
     // 大屏在设计模式的大小
     bigscreenWidthInWorkbench() {
       return this.getPXUnderScale(this.bigscreenWidth) + this.widthPaddingTools;
@@ -445,6 +529,7 @@ export default {
   watch: {
     widgets: {
       handler(val) {
+        this.handlerLayerWidget(val);
         //以下部分是记录历史
         this.$nextTick(() => {
           this.revoke.push(this.widgets);
@@ -452,6 +537,21 @@ export default {
       },
       deep: true,
     },
+    defaultSize: {
+      handler(val) {
+        if (val !== -1) {
+          this.currentSizeRangeIndex = val.index
+          this.scaleNum = val.size
+        }
+      },
+      immediate: true
+    },
+    bigscreenWidth() {
+      this.initVueRulerTool()
+    },
+    bigscreenHeight() {
+      this.initVueRulerTool()
+    }
   },
   created() {
     /* 以下是记录历史的 */
@@ -464,8 +564,52 @@ export default {
     window.addEventListener("mouseup", () => {
       this.grade = false;
     });
+    this.$nextTick(() => {
+      this.initVueRulerTool() // 初始化 修正插件样式
+    })
   },
   methods: {
+    /**
+     * @param num: 0缩小 1放大 2默认比例
+     * sizeRange: [20, 40, 60, 72, 100, 150, 200, 300, 400]
+     */
+    setSize(num) {
+      if (num === 0) { // 缩小
+        if (this.currentSizeRangeIndex === 0) return
+        this.currentSizeRangeIndex -= 1
+      } else if (num === 1) { // 放大
+        if (this.currentSizeRangeIndex === 8) return
+        this.currentSizeRangeIndex += 1
+      } else if (num === 2) { // 正常比例
+        this.currentSizeRangeIndex = this.defaultSize.index
+      }
+      this.scaleNum = this.currentSizeRangeIndex === this.defaultSize.index ? this.defaultSize.size : this.sizeRange[this.currentSizeRangeIndex]
+    },
+    // 初始化 修正插件样式
+    initVueRulerTool() {
+      const vueRulerToolDom = this.$refs['vue-ruler-tool'].$el // 操作面板 第三方插件工具
+      const contentDom = vueRulerToolDom.querySelector('.vue-ruler-content')
+      const vueRulerX = vueRulerToolDom.querySelector('.vue-ruler-h') // 横向标尺
+      const vueRulerY = vueRulerToolDom.querySelector('.vue-ruler-v') // 纵向标尺
+      // vueRulerToolDom.style.cssText += ';width:' + (this.bigscreenWidth + 18) + 'px !important;height:' + (this.bigscreenHeight + 18) + 'px !important;'
+      contentDom.style.width = '100%'
+      contentDom.style.height = '100%'
+
+      let xHtmlContent = '' // '<span class="n" style="left: 2px;">0</span>'
+      let yHtmlContent = '' // '<span class="n" style="top: 2px;">0</span>'
+      let currentNum = 0
+      while (currentNum < +this.bigscreenWidth) {
+        xHtmlContent += `<span class="n" style="left: ${currentNum + 2}px;">${currentNum}</span>`
+        currentNum += 50
+      }
+      currentNum = 0
+      while (currentNum < +this.bigscreenHeight) {
+        yHtmlContent += `<span class="n" style="top: ${currentNum + 2}px;">${currentNum}</span>`
+        currentNum += 50
+      }
+      vueRulerX.innerHTML = xHtmlContent
+      vueRulerY.innerHTML = yHtmlContent
+    },
     /**
      * @description: 恢复
      * @param {*}
@@ -491,7 +635,6 @@ export default {
       this.widgets = record;
     },
     handlerLayerWidget(val) {
-      console.log(val);
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
         const obj = {};
@@ -501,14 +644,10 @@ export default {
           if (el.name == "layerName") {
             obj.label = el.value;
           }
-          if (el.name == "uuid") {
-            obj.uuid = el.value;
-          }
         });
         layerWidgetArr.push(obj);
       }
       this.layerWidget = layerWidgetArr;
-      setAssChartData(this.widgets, this.layerWidget);
     },
     async initEchartData() {
       const reportCode = this.$route.query.reportCode;
@@ -520,7 +659,6 @@ export default {
       this.dashboard = screenData;
       this.bigscreenWidth = this.dashboard.width;
       this.bigscreenHeight = this.dashboard.height;
-      this.handlerLayerWidget(this.widgets);
     },
     handleBigScreen(data) {
       const optionScreen = getToolByCode("screen").options;
@@ -714,9 +852,15 @@ export default {
       let widgetTopInWorkbench = eventY - workbenchPosition.top;
       let widgetLeftInWorkbench = eventX - workbenchPosition.left;
 
+      const targetScale =
+        this.currentSizeRangeIndex === this.defaultSize.index
+          ? this.bigscreenScaleInWorkbench
+          : this.sizeRange[this.currentSizeRangeIndex] / 100
       // 计算在缩放模式下的x y
-      let x = widgetLeftInWorkbench / this.bigscreenScaleInWorkbench;
-      let y = widgetTopInWorkbench / this.bigscreenScaleInWorkbench;
+      // const x = widgetLeftInWorkbench / this.bigscreenScaleInWorkbench
+      // const y = widgetTopInWorkbench / this.bigscreenScaleInWorkbench
+      const x = widgetLeftInWorkbench / targetScale
+      const y = widgetTopInWorkbench / targetScale
 
       // 复制一个组件
       let tool = getToolByCode(widgetType);
@@ -748,9 +892,6 @@ export default {
       this.widgets.push(this.deepClone(widgetJsonValue));
       // 激活新组件的配置属性
       this.setOptionsOnClickWidget(this.widgets.length - 1);
-
-      console.log("123", this.widgets);
-      this.handlerLayerWidget(this.widgets);
     },
 
     // 对组件默认值处理
@@ -869,7 +1010,7 @@ export default {
             el.value = this.bigscreenWidth;
           } else if (el.name == "height") {
             el.value = this.bigscreenHeight;
-          } else if (this.dashboard.hasOwn(el.name)) {
+          } else if (this.dashboard.hasOwnProperty(el.name)) {
             el["value"] = this.dashboard[el.name];
           }
           newSetup.push(el);
@@ -1125,6 +1266,21 @@ export default {
           }
         }
       }
+      .btn-disable {
+        opacity: 0.3;
+        cursor: no-drop;
+      }
+      .scale-num {
+        color: #788994;
+        opacity: 1;
+        cursor: pointer;
+        &.btn-disable {
+          cursor: no-drop;
+          &:hover {
+            background: #20262C
+          }
+        }
+      }
     }
 
     .workbench-container {
@@ -1135,10 +1291,12 @@ export default {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      overflow: auto;
 
       .vueRuler {
-        width: 100%;
-        padding: 18px 0px 0px 18px;
+        // width: 100%;
+        // padding: 18px 0px 0px 18px;
+        padding: 0;
       }
 
       .workbench {
