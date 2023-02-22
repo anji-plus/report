@@ -13,10 +13,10 @@
     :top="widgetsTop"
     ref="draggable"
     :index="index"
-    :z-index="-1"
     @focus="handleFocus"
     @blur="handleBlur"
   >
+    <!-- :z-index="-1" -->
     <component :is="type" :value="value" />
   </avue-draggable>
 </template>
