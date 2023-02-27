@@ -17,7 +17,7 @@
     @blur="handleBlur"
   >
     <!-- :z-index="-1" -->
-    <component :is="type" :value="value" />
+    <component :is="type":widget-index="index" :value="value" />
   </avue-draggable>
 </template>
 

@@ -80,46 +80,46 @@
       :style="{ width: middleWidth + 'px', height: middleHeight + 'px' }"
     >
       <div class="top-button">
-        <span class="btn">
+        <span class="btn"  @click="saveData">
           <el-tooltip
             class="item"
             effect="dark"
             content="保存"
             placement="bottom"
           >
-            <i class="iconfont iconsave" @click="saveData"></i>
+            <i class="iconfont iconsave"></i>
           </el-tooltip>
         </span>
-        <span class="btn">
+        <span class="btn"  @click="viewScreen">
           <el-tooltip
             class="item"
             effect="dark"
             content="预览"
             placement="bottom"
           >
-            <i class="iconfont iconyulan" @click="viewScreen"></i>
+            <i class="iconfont iconyulan"></i>
           </el-tooltip>
         </span>
 
-        <span class="btn">
+        <span class="btn"  @click="handleUndo">
           <el-tooltip
             class="item"
             effect="dark"
             content="撤销"
             placement="bottom"
           >
-            <i class="iconfont iconundo" @click="handleUndo"></i>
+            <i class="iconfont iconundo"></i>
           </el-tooltip>
         </span>
 
-        <span class="btn">
+        <span class="btn"  @click="handleRedo">
           <el-tooltip
             class="item"
             effect="dark"
             content="恢复"
             placement="bottom"
           >
-            <i class="iconfont iconhuifubeifen" @click="handleRedo"></i>
+            <i class="iconfont iconhuifubeifen"></i>
           </el-tooltip>
         </span>
 
@@ -321,6 +321,9 @@
           <dynamicForm
             ref="formData"
             :options="widgetOptions.setup"
+            :layer-widget="layerWidget"
+            :widget-index="widgetIndex"
+            :widget-params-config="widgetParamsConfig"
             @onChanged="(val) => widgetValueChanged('setup', val)"
           />
         </el-tab-pane>
@@ -412,7 +415,7 @@ export default {
         title: "", // 大屏页面标题
         width: 1920, // 大屏设计宽度
         height: 1080, // 大屏设计高度
-        backgroundColor: "", // 大屏背景色
+        backgroundColor: "#1E1E1E", // 大屏背景色
         backgroundImage: "", // 大屏背景图片
         refreshSeconds: null, // 大屏刷新时间间隔
         presetLine: [], // 辅助线
@@ -460,7 +463,9 @@ export default {
       activeName: "first",
       scaleNum: 0, // 当前缩放百分比的值
       sizeRange: [20, 40, 60, 80, 100, 150, 200, 300, 400], // 缩放百分比
-      currentSizeRangeIndex: -1 // 当前是哪个缩放比分比
+      currentSizeRangeIndex: -1, // 当前是哪个缩放比分比,
+      currentWidgetTotal: 0,
+       widgetParamsConfig: [], // 各组件动态数据集的参数配置情况
     };
   },
   computed: {
@@ -530,6 +535,7 @@ export default {
     widgets: {
       handler(val) {
         this.handlerLayerWidget(val);
+        this.handlerdynamicDataParamsConfig(val)
         //以下部分是记录历史
         this.$nextTick(() => {
           this.revoke.push(this.widgets);
@@ -638,7 +644,13 @@ export default {
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
         const obj = {};
-        obj.icon = getToolByCode(val[i].type).icon;
+        const myItem = getToolByCode(val[i].type)
+        obj.icon = myItem.icon;
+        obj.code = myItem.code // 组件类型code
+        obj.widgetId = val[i].value.widgetId || '' // 唯一id
+        if (val[i].value.paramsKeys) {
+          obj.paramsKeys = val[i].value.paramsKeys
+        }
         const options = val[i].options["setup"];
         options.forEach((el) => {
           if (el.name == "layerName") {
@@ -648,6 +660,12 @@ export default {
         layerWidgetArr.push(obj);
       }
       this.layerWidget = layerWidgetArr;
+    },
+    // 返回每个组件的动态数据集参数配置情况
+    handlerdynamicDataParamsConfig(val) {
+      this.widgetParamsConfig = val.map(item => {
+        return item.value.data
+      })
     },
     async initEchartData() {
       const reportCode = this.$route.query.reportCode;
@@ -672,7 +690,7 @@ export default {
       }
       this.setOptionsOnClickScreen();
       return {
-        backgroundColor: (data && data.backgroundColor) || "",
+        backgroundColor: (data && data.backgroundColor) || (!data ? '#1e1e1e' : ''),
         backgroundImage: (data && data.backgroundImage) || "",
         height: (data && data.height) || "1080",
         title: (data && data.title) || "",
@@ -690,10 +708,19 @@ export default {
           data: widgets[i].value.data,
           position: widgets[i].value.position,
         };
-        const tool = this.deepClone(getToolByCode(widgets[i].type));
+        const tool = this.deepClone(getToolByCode(widgets[i].type))
+        if (!tool) {
+          const message = '暂未提供该组件或该组件下线了，组件code: ' + widgets[i].type
+          console.error(message)
+          if (process.env.NODE_ENV === 'development') { // 40@remarks 看生产要不要提示
+            this.$message.error(message)
+          }
+          continue // 找不到就跳过，避免整个报表都加载不出来
+        }
         const option = tool.options;
         const options = this.handleOptionsData(widgets[i].value, option);
         obj.options = options;
+        obj.value.widgetId = obj.value.setup.widgetId
         widgetsData.push(obj);
       }
       return widgetsData;
@@ -753,6 +780,9 @@ export default {
         },
         widgets: this.widgets,
       };
+      screenData.widgets.forEach(widget => {
+        widget.value.setup.widgetId = widget.value.widgetId
+      })
       const { code, data } = await insertDashboard(screenData);
       if (code == "200") {
         this.$message.success("保存成功！");
@@ -831,9 +861,24 @@ export default {
     },
     dragStart(widgetCode) {
       this.dragWidgetCode = widgetCode;
+      this.currentWidgetTotal = this.widgets.length // 当前操作面板上有多少各组件
     },
     dragEnd() {
-      this.dragWidgetCode = "";
+      this.dragWidgetCode = "";/**
+       * 40@remarks 新增组件到操作面板后，右边的配置有更新，但是当前选中的组件没更新，导致配置错乱的bug;
+       * 由于拖动组件拖到非操作面板上是不会添加组件，还需判断是否添加组件到操作面板上;
+       */
+      this.$nextTick(()=>{
+        if (this.widgets.length === this.currentWidgetTotal + 1) { // 确实新增了一个组件到操作面板上
+          console.log(`新添加 '${this.widgets[this.currentWidgetTotal].value.setup.layerName}' 组件到操作面板`)
+          const uuid = Number(Math.random().toString().substr(2)).toString(36)
+          this.widgets[this.currentWidgetTotal].value.widgetId = uuid
+          this.layerWidget[this.currentWidgetTotal].widgetId = uuid
+          const index = this.widgets.length - 1
+          this.layerClick(index) // 选中当前新增的组件
+          this.grade = false // 去除网格线
+        }
+      })
     },
     dragOver(evt) {
       evt.preventDefault();
@@ -1080,7 +1125,13 @@ export default {
     // 复制
     copylayer() {
       const obj = this.deepClone(this.widgets[this.rightClickIndex]);
+      obj.value.position.top += 40 // 复制的元素向右下角偏移一点
+      obj.value.position.left += 40
+      obj.value.widgetId = Number(Math.random().toString().substr(2)).toString(36)
       this.widgets.splice(this.widgets.length, 0, obj);
+      this.$nextTick(() => {
+        this.layerClick(this.widgets.length - 1) // 复制后定位到最新的组件
+      })
     },
     // 置顶
     istopLayer() {

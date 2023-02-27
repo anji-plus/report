@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:46:46
- * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-01-09 13:16:19
+ * @LastEditors: chengsl
+ * @LastEditTime: 2023-02-23 15:23:20
  */
 
 import { widgetText } from "./configure/texts/widget-text"
@@ -70,7 +70,7 @@ export const widgetTool = [
   widgetLineCompare,
   widgetDecoratePie,
   widgetMoreBarLine,
-  widgetWordCloud,
+  // widgetWordCloud,
   widgetHeatmap,
   widgetRadar,
   widgetBarLineStack,

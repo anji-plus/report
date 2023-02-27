@@ -1,10 +1,11 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import { originWidgetLinkageLogic, targetWidgetLinkageLogic } from '@/views/bigscreenDesigner/designer/linkageLogic'
 import { eventBusParams } from "@/utils/screen";
 export default {
   name: "WidgetLinechart",
@@ -12,6 +13,10 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
+    widgetIndex: {
+      type: Number,
+      default: 0
+    }, // 当前组件，在工作区变量widgetInWorkbench中的索引
   },
   data() {
     return {
@@ -76,6 +81,9 @@ export default {
         background: this.optionsSetup.background,
       };
     },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage
+    }
   },
   watch: {
     value: {
@@ -89,12 +97,14 @@ export default {
       deep: true,
     },
   },
-  created() {
+  mounted() {
     this.optionsStyle = this.value.position;
     this.optionsData = this.value.data;
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    targetWidgetLinkageLogic(this) // 联动-目标组件逻辑
+    originWidgetLinkageLogic(this) // 联动-源组件逻辑
     eventBusParams(
       this.optionsSetup,
       this.optionsData,
@@ -299,8 +309,19 @@ export default {
       this.options = Object.assign({}, this.options);
     },
     // 处理数据
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      optionsData.dynamicData = optionsData.dynamicData || {} // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData
+      clearInterval(this.flagInter) // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (e && optionsData.dataType !== 'staticData' && Object.keys(myDynamicData.contextData).length) {
+        const keyArr = Object.keys(myDynamicData.contextData)
+        paramsConfig.forEach(conf => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey]
+          }
+        })
+      }
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
