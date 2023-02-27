@@ -294,6 +294,15 @@
                   v-model="formData[itemChildList.name]"
                   @change="changed($event, itemChildList.name)"
                 />
+                <componentLinkage
+                  v-if="itemChildList.type == 'componentLinkage'"
+                  :key="'cl-' + idx"
+                  v-model="formData[itemChildList.name]"
+                  :layer-widget="layerWidget"
+                  :widget-params-config="widgetParamsConfig"
+                  :widget-index="widgetIndex"
+                  @change="changed($event, itemChildList.name)"
+                />
               </template>
             </el-collapse-item>
           </el-collapse>
@@ -319,6 +328,7 @@ import dynamicAddTable from "./dynamicAddTable.vue";
 import customUpload from "./customUpload.vue";
 import dynamicAddRadar from "./dynamicAddRadar";
 import MonacoEditor from "@/components/MonacoEditor/index";
+import componentLinkage from './componentLinkage';
 export default {
   name: "DynamicForm",
   components: {
@@ -330,6 +340,7 @@ export default {
     customUpload,
     dynamicAddRadar,
     MonacoEditor,
+    componentLinkage
   },
   model: {
     prop: "value",
@@ -341,6 +352,18 @@ export default {
       type: [Object],
       default: () => {},
     },
+    layerWidget: {
+      type: Array,
+      default: () => []
+    },
+    widgetParamsConfig: {
+      type: Array,
+      default: () => []
+    },
+    widgetIndex: {
+      type: Number,
+      default: -1
+    }
   },
   data() {
     return {

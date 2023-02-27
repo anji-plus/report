@@ -6,7 +6,7 @@
  !-->
 <template>
   <div>
-    <component :is="type" :value="value" :ispreview="true" />
+    <component :is="type" :value="value" :ispreview="true" :widget-index="index" />
   </div>
 </template>
 
@@ -90,6 +90,10 @@ export default {
       type: [Object],
       default: () => {},
     },
+    index: {
+      type: Number,
+      default: 0
+    }, // 当前组件，在工作区变量widgetInWorkbench中的索引
   },
   data() {
     return {};

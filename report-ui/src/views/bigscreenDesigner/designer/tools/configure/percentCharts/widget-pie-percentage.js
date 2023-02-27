@@ -169,6 +169,18 @@ export const widgetPiePercentage = {
               value: '#173164'
             },
           ]
+        },
+        {
+          name: '组件联动',
+          list: [
+            {
+              type: 'componentLinkage',
+              label: '',
+              name: 'componentLinkage',
+              required: false,
+              value: []
+            }
+          ]
         }
       ],
     ],
