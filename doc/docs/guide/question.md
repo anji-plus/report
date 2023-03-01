@@ -94,11 +94,11 @@
   failed** <br>
   解析：flyway在执行某个版本里面包含的sql时报错了 <br>
 
-- 可能原因：<br>
+  可能原因：<br>
   1、mysql版本问题，在不同版本的mysql中，部分语法可能存在异同 <br>
   2、mysql配置问题 <br>
 
-  解决方案：
+  解决方案：<br>
   一、禁用flyway，手动执行已有的各版本sql文件 <br>
   1、在bootstrap.yml配置文件中找到flyway配置项，如图示 <br>
   ![img6.png](../picture/qusetion/img_6.png) <br>

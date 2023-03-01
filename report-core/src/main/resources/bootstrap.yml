@@ -44,6 +44,7 @@ spring:
     connectionErrorRetryAttempts: 3 # 连接出错后再尝试连接三次
     breakAfterAcquireFailure: true # 数据库服务宕机自动重连机制
     timeBetweenConnectErrorMillis: 300000 # 连接出错后重试时间间隔
+    validationQuery: select 1 # 用来检测连接是否有效的sql
   flyway:
     enabled: true    #是否开启flyway，默认true.
     baseline-on-migrate: true
@@ -52,15 +53,15 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     placeholder-replacement: false
-    init-sqls:
-      - CREATE DATABASE IF NOT EXISTS `aj_report` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    #init-sqls:
+      #- CREATE DATABASE IF NOT EXISTS `aj_report` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
   gaea:
     subscribes:
       oss: #文件存储 都配置的情况下优先级minio->amazonS3->nfs
         enabled: true
         ##允许上传的文件后缀
         file-type-while-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg|.aaa
-        # 用于文件上传成功后，生成文件的下载公网完整URL，http://serverip:9095/file/download
+        # 用于文件上传成功后，生成文件的下载公网完整URL，http://serverip:9095/file/download，注意填写IP必须填写后端服务所在的机器IP
         downloadPath: http://10.108.26.197:9095/file/download
         nfs:
           #上传对应本地全路径，目录必须是真实存在的，注意 Win是 \ 且有盘符，linux是 / 无盘符

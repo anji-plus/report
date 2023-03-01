@@ -51,7 +51,7 @@ report-core --> src --> main --> resources --> bootstrap.yml <br>
 
 ### OSS配置
 
-OSS底层已支持minio、amazonS3、dfs，都配置的情况下优先级minio->amazonS3->nfs <br>
+OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->amazonS3->nfs <br>
 ![file.png](../picture/quickly/img.png) <br>
 
 ### maven打包
