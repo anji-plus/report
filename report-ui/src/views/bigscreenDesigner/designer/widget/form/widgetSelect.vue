@@ -10,7 +10,7 @@
   />
 </template>
 <script>
-import {eventBus} from "@/utils/eventBus";
+import { eventBus } from "@/utils/eventBus";
 
 export default {
   name: "WidgetSelect",
@@ -24,17 +24,20 @@ export default {
       optionsStyle: {},
       optionsData: {},
       optionsSetup: {},
-      options:{}
+      options: {},
     };
   },
   computed: {
     styleObj() {
+      console.log(this.optionsSetup);
       return {
         position: this.ispreview ? "absolute" : "static",
         width: this.optionsStyle.width + "px",
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
+        background: this.optionsSetup.select_fontSize,
+        color: this.optionsSetup.select_color,
       };
     },
     eventChange() {
@@ -47,7 +50,7 @@ export default {
         this.optionsSetup = val.setup;
         this.optionsData = val.data;
         this.optionsStyle = val.position;
-        this.setOptions()
+        this.setOptions();
       },
       deep: true,
     },
@@ -56,7 +59,7 @@ export default {
     this.optionsSetup = this.value.setup;
     this.optionsData = this.value.data;
     this.optionsStyle = this.value.position;
-    this.setOptions()
+    this.setOptions();
   },
   methods: {
     change(event) {
@@ -67,13 +70,13 @@ export default {
       eventBus.$emit("eventParams", params);
     },
     setOptions() {
-        const optionsData = this.optionsData;
-        return optionsData.dataType == "staticData"
-          ? this.staticData(optionsData.staticData)
-          : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
+      const optionsData = this.optionsData;
+      return optionsData.dataType == "staticData"
+        ? this.staticData(optionsData.staticData)
+        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticData(data) {
-      this.options = data
+      this.options = data;
     },
     //动态数据字典解析
     dynamicDataFn(val, refreshTime) {
@@ -108,6 +111,11 @@ export default {
 
     .el-input__inner {
       height: 100%;
+      background: inherit;
+      color: inherit;
+      &::placeholder {
+        color: inherit;
+      }
     }
   }
 }

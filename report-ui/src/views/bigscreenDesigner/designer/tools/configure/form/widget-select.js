@@ -3,7 +3,7 @@
  * @Author: qianlishi qianlishi@anji-plus.com
  * @Date: 2023-01-09 13:02:59
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-01-12 16:44:50
+ * @LastEditTime: 2023-03-06 15:33:39
  */
 
 export const widgetSelect = {
@@ -33,7 +33,7 @@ export const widgetSelect = {
       {
         type: 'vue-color',
         label: '字体颜色',
-        name: 'color',
+        name: 'select_color',
         required: false,
         placeholder: '',
         value: '#FAD400',
@@ -41,7 +41,7 @@ export const widgetSelect = {
       {
         type: 'vue-color',
         label: '字体背景',
-        name: 'background',
+        name: 'select_fontSize',
         required: false,
         placeholder: '',
         value: 'rgba(115,170,229,.5)',
