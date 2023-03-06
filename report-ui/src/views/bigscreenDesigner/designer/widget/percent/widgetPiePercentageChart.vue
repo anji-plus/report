@@ -1,10 +1,11 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import { targetWidgetLinkageLogic } from '@/views/bigscreenDesigner/designer/linkageLogic'
 import { eventBusParams } from "@/utils/screen";
 let per = 60;
 export default {
@@ -13,6 +14,10 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
+    widgetIndex: {
+      type: Number,
+      default: 0
+    }, // 当前组件，在工作区变量widgetInWorkbench中的索引
   },
   data() {
     return {
@@ -325,6 +330,9 @@ export default {
         background: this.optionsSetup.background,
       };
     },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage
+    }
   },
   watch: {
     value: {
@@ -358,6 +366,7 @@ export default {
               this.angle = this.angle + 3
               myChart.setOption(options,true)
             }, 1000);*/
+    targetWidgetLinkageLogic(this) // 联动-目标组件逻辑
   },
   methods: {
     //轴point设置
@@ -437,8 +446,21 @@ export default {
       line["lineStyle"] = lineStyle;
     },
     // 数据解析
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      optionsData.dynamicData = optionsData.dynamicData || {} // 兼容 dynamicData undefined
+
+      const myDynamicData = optionsData.dynamicData
+      clearInterval(this.flagInter) // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (e && optionsData.dataType !== 'staticData' && Object.keys(myDynamicData.contextData).length) {
+        const keyArr = Object.keys(myDynamicData.contextData)
+        paramsConfig.forEach(conf => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey]
+          }
+        })
+      }
+
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);

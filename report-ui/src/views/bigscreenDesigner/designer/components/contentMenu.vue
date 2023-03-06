@@ -3,6 +3,12 @@
     <div class="contentmenu__item" @click="deleteLayer">
       <i class="iconfont iconguanbi"></i> 删除图层
     </div>
+    <div class="contentmenu__item" @click="lockLayer">
+      <i class="iconfont iconfuzhi1"></i> 锁定图层
+    </div>
+    <div class="contentmenu__item" @click="noLockLayer">
+      <i class="iconfont iconfuzhi1"></i> 解除锁定
+    </div>
     <div class="contentmenu__item" @click="copyLayer">
       <i class="iconfont iconfuzhi1"></i> 复制图层
     </div>
@@ -24,7 +30,7 @@
 export default {
   props: {
     styleObj: Object,
-    visible: Boolean
+    visible: Boolean,
   },
   data() {
     return {};
@@ -36,7 +42,7 @@ export default {
       } else {
         document.body.removeEventListener("click", this.closeMenu);
       }
-    }
+    },
   },
   methods: {
     closeMenu() {
@@ -46,21 +52,27 @@ export default {
       this.$confirm("是否删除所选图层?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       })
         .then(() => {
           this.$emit("deletelayer");
           this.$message({
             type: "success",
-            message: "删除成功!"
+            message: "删除成功!",
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消删除"
+            message: "已取消删除",
           });
         });
+    },
+    lockLayer() {
+      this.$emit("lockLayer");
+    },
+    noLockLayer() {
+      this.$emit("noLockLayer");
     },
     copyLayer() {
       this.$emit("copylayer");
@@ -76,8 +88,8 @@ export default {
     },
     movedownLayer() {
       this.$emit("movedownLayer");
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
