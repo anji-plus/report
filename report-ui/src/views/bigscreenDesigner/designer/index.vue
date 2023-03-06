@@ -1,10 +1,3 @@
-<!--
- * @Descripttion: 大屏设计器
- * @Author: lide1202@hotmail.com
- * @Date: 2021-3-13 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24
- !-->
 <template>
   <div class="layout">
     <div
@@ -80,7 +73,7 @@
       :style="{ width: middleWidth + 'px', height: middleHeight + 'px' }"
     >
       <div class="top-button">
-        <span class="btn"  @click="saveData">
+        <span class="btn" @click="saveData">
           <el-tooltip
             class="item"
             effect="dark"
@@ -90,7 +83,7 @@
             <i class="iconfont iconsave"></i>
           </el-tooltip>
         </span>
-        <span class="btn"  @click="viewScreen">
+        <span class="btn" @click="viewScreen">
           <el-tooltip
             class="item"
             effect="dark"
@@ -101,7 +94,7 @@
           </el-tooltip>
         </span>
 
-        <span class="btn"  @click="handleUndo">
+        <span class="btn" @click="handleUndo">
           <el-tooltip
             class="item"
             effect="dark"
@@ -112,7 +105,7 @@
           </el-tooltip>
         </span>
 
-        <span class="btn"  @click="handleRedo">
+        <span class="btn" @click="handleRedo">
           <el-tooltip
             class="item"
             effect="dark"
@@ -125,8 +118,8 @@
 
         <span
           :class="{
-            'btn': true,
-            'btn-disable': currentSizeRangeIndex === 0
+            btn: true,
+            'btn-disable': currentSizeRangeIndex === 0,
           }"
           @click="setSize(0)"
         >
@@ -138,7 +131,7 @@
             placement="bottom"
           >
             <!-- <svg-icon style="font-size:16px;" icon-class="jianhao" class-name="icon" /> -->
-            <i class="el-icon-minus" style="font-size:16px;" />
+            <i class="el-icon-minus" style="font-size: 16px" />
           </el-tooltip>
         </span>
         <!--
@@ -146,9 +139,9 @@
           :style="currentSizeRangeIndex === defaultSize.index ? 'cursor: no-drop;' : ''" -->
         <span
           :class="{
-            'btn': true,
+            btn: true,
             'scale-num': true,
-            'btn-disable': currentSizeRangeIndex === defaultSize.index
+            'btn-disable': currentSizeRangeIndex === defaultSize.index,
           }"
           @click="setSize(2)"
         >
@@ -159,15 +152,13 @@
             content="默认比例"
             placement="bottom"
           >
-            <span>
-              {{ parseInt(scaleNum) }}%
-            </span>
+            <span> {{ parseInt(scaleNum) }}% </span>
           </el-tooltip>
         </span>
         <span
           :class="{
-            'btn': true,
-            'btn-disable': currentSizeRangeIndex === 8
+            btn: true,
+            'btn-disable': currentSizeRangeIndex === 8,
           }"
           @click="setSize(1)"
         >
@@ -179,7 +170,7 @@
             placement="bottom"
           >
             <!-- <svg-icon style="font-size:16px;" icon-class="jiahao" class-name="icon" /> -->
-            <i class="el-icon-plus" style="font-size:16px;" />
+            <i class="el-icon-plus" style="font-size: 16px" />
           </el-tooltip>
         </span>
 
@@ -237,18 +228,15 @@
         </span>
       </div>
       <!-- 中间操作内容  主体 -->
-        <!-- :style="{
+      <!-- :style="{
           width: bigscreenWidthInWorkbench + 'px',
           height: bigscreenHeightInWorkbench + 'px',
         }" -->
-      <div
-        class="workbench-container"
-        @mousedown="handleMouseDown"
-      >
+      <div class="workbench-container" @mousedown="handleMouseDown">
         <div
           :style="{
-            width: ((+bigscreenWidth + 18) * bigscreenScaleInWorkbench) + 'px',
-            height: ((+bigscreenHeight + 18) * bigscreenScaleInWorkbench) + 'px'
+            width: (+bigscreenWidth + 18) * bigscreenScaleInWorkbench + 'px',
+            height: (+bigscreenHeight + 18) * bigscreenScaleInWorkbench + 'px',
           }"
           class="vue-ruler-tool-wrap"
         >
@@ -264,9 +252,12 @@
             :visible.sync="dashboard.presetLineVisible"
             :style="{
               width: +bigscreenWidth + 18 + 'px',
-              height: +bigscreenHeight + 18 +'px',
-              transform: currentSizeRangeIndex === defaultSize.index ? workbenchTransform : `scale(${sizeRange[currentSizeRangeIndex]/100})`,
-              transformOrigin: '0 0'
+              height: +bigscreenHeight + 18 + 'px',
+              transform:
+                currentSizeRangeIndex === defaultSize.index
+                  ? workbenchTransform
+                  : `scale(${sizeRange[currentSizeRangeIndex] / 100})`,
+              transformOrigin: '0 0',
             }"
           >
             <div
@@ -356,6 +347,8 @@
       :visible.sync="visibleContentMenu"
       :style-obj="styleObj"
       @deletelayer="deletelayer"
+      @lockLayer="lockLayer"
+      @noLockLayer="noLockLayer"
       @copylayer="copylayer"
       @istopLayer="istopLayer"
       @setlowLayer="setlowLayer"
@@ -465,7 +458,7 @@ export default {
       sizeRange: [20, 40, 60, 80, 100, 150, 200, 300, 400], // 缩放百分比
       currentSizeRangeIndex: -1, // 当前是哪个缩放比分比,
       currentWidgetTotal: 0,
-       widgetParamsConfig: [], // 各组件动态数据集的参数配置情况
+      widgetParamsConfig: [], // 各组件动态数据集的参数配置情况
     };
   },
   computed: {
@@ -507,19 +500,19 @@ export default {
     defaultSize() {
       const obj = {
         index: -1,
-        size: '50'
-      }
+        size: "50",
+      };
       this.sizeRange.some((item, index) => {
-        if (item <= (100 * this.bigscreenScaleInWorkbench)) {
-          obj.index = index
-          obj.size = 100 * this.bigscreenScaleInWorkbench // item
+        if (item <= 100 * this.bigscreenScaleInWorkbench) {
+          obj.index = index;
+          obj.size = 100 * this.bigscreenScaleInWorkbench; // item
         }
-      })
+      });
       if (obj.index === -1) {
-        obj.index = 0
-        obj.size = this.sizeRange[0]
+        obj.index = 0;
+        obj.size = this.sizeRange[0];
       }
-      return obj
+      return obj;
     },
     // 大屏在设计模式的大小
     bigscreenWidthInWorkbench() {
@@ -535,7 +528,7 @@ export default {
     widgets: {
       handler(val) {
         this.handlerLayerWidget(val);
-        this.handlerdynamicDataParamsConfig(val)
+        this.handlerdynamicDataParamsConfig(val);
         //以下部分是记录历史
         this.$nextTick(() => {
           this.revoke.push(this.widgets);
@@ -546,18 +539,18 @@ export default {
     defaultSize: {
       handler(val) {
         if (val !== -1) {
-          this.currentSizeRangeIndex = val.index
-          this.scaleNum = val.size
+          this.currentSizeRangeIndex = val.index;
+          this.scaleNum = val.size;
         }
       },
-      immediate: true
+      immediate: true,
     },
     bigscreenWidth() {
-      this.initVueRulerTool()
+      this.initVueRulerTool();
     },
     bigscreenHeight() {
-      this.initVueRulerTool()
-    }
+      this.initVueRulerTool();
+    },
   },
   created() {
     /* 以下是记录历史的 */
@@ -571,8 +564,8 @@ export default {
       this.grade = false;
     });
     this.$nextTick(() => {
-      this.initVueRulerTool() // 初始化 修正插件样式
-    })
+      this.initVueRulerTool(); // 初始化 修正插件样式
+    });
   },
   methods: {
     /**
@@ -580,41 +573,51 @@ export default {
      * sizeRange: [20, 40, 60, 72, 100, 150, 200, 300, 400]
      */
     setSize(num) {
-      if (num === 0) { // 缩小
-        if (this.currentSizeRangeIndex === 0) return
-        this.currentSizeRangeIndex -= 1
-      } else if (num === 1) { // 放大
-        if (this.currentSizeRangeIndex === 8) return
-        this.currentSizeRangeIndex += 1
-      } else if (num === 2) { // 正常比例
-        this.currentSizeRangeIndex = this.defaultSize.index
+      if (num === 0) {
+        // 缩小
+        if (this.currentSizeRangeIndex === 0) return;
+        this.currentSizeRangeIndex -= 1;
+      } else if (num === 1) {
+        // 放大
+        if (this.currentSizeRangeIndex === 8) return;
+        this.currentSizeRangeIndex += 1;
+      } else if (num === 2) {
+        // 正常比例
+        this.currentSizeRangeIndex = this.defaultSize.index;
       }
-      this.scaleNum = this.currentSizeRangeIndex === this.defaultSize.index ? this.defaultSize.size : this.sizeRange[this.currentSizeRangeIndex]
+      this.scaleNum =
+        this.currentSizeRangeIndex === this.defaultSize.index
+          ? this.defaultSize.size
+          : this.sizeRange[this.currentSizeRangeIndex];
     },
     // 初始化 修正插件样式
     initVueRulerTool() {
-      const vueRulerToolDom = this.$refs['vue-ruler-tool'].$el // 操作面板 第三方插件工具
-      const contentDom = vueRulerToolDom.querySelector('.vue-ruler-content')
-      const vueRulerX = vueRulerToolDom.querySelector('.vue-ruler-h') // 横向标尺
-      const vueRulerY = vueRulerToolDom.querySelector('.vue-ruler-v') // 纵向标尺
+      const vueRulerToolDom = this.$refs["vue-ruler-tool"].$el; // 操作面板 第三方插件工具
+      const contentDom = vueRulerToolDom.querySelector(".vue-ruler-content");
+      const vueRulerX = vueRulerToolDom.querySelector(".vue-ruler-h"); // 横向标尺
+      const vueRulerY = vueRulerToolDom.querySelector(".vue-ruler-v"); // 纵向标尺
       // vueRulerToolDom.style.cssText += ';width:' + (this.bigscreenWidth + 18) + 'px !important;height:' + (this.bigscreenHeight + 18) + 'px !important;'
-      contentDom.style.width = '100%'
-      contentDom.style.height = '100%'
+      contentDom.style.width = "100%";
+      contentDom.style.height = "100%";
 
-      let xHtmlContent = '' // '<span class="n" style="left: 2px;">0</span>'
-      let yHtmlContent = '' // '<span class="n" style="top: 2px;">0</span>'
-      let currentNum = 0
+      let xHtmlContent = ""; // '<span class="n" style="left: 2px;">0</span>'
+      let yHtmlContent = ""; // '<span class="n" style="top: 2px;">0</span>'
+      let currentNum = 0;
       while (currentNum < +this.bigscreenWidth) {
-        xHtmlContent += `<span class="n" style="left: ${currentNum + 2}px;">${currentNum}</span>`
-        currentNum += 50
+        xHtmlContent += `<span class="n" style="left: ${
+          currentNum + 2
+        }px;">${currentNum}</span>`;
+        currentNum += 50;
       }
-      currentNum = 0
+      currentNum = 0;
       while (currentNum < +this.bigscreenHeight) {
-        yHtmlContent += `<span class="n" style="top: ${currentNum + 2}px;">${currentNum}</span>`
-        currentNum += 50
+        yHtmlContent += `<span class="n" style="top: ${
+          currentNum + 2
+        }px;">${currentNum}</span>`;
+        currentNum += 50;
       }
-      vueRulerX.innerHTML = xHtmlContent
-      vueRulerY.innerHTML = yHtmlContent
+      vueRulerX.innerHTML = xHtmlContent;
+      vueRulerY.innerHTML = yHtmlContent;
     },
     /**
      * @description: 恢复
@@ -644,12 +647,12 @@ export default {
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
         const obj = {};
-        const myItem = getToolByCode(val[i].type)
+        const myItem = getToolByCode(val[i].type);
         obj.icon = myItem.icon;
-        obj.code = myItem.code // 组件类型code
-        obj.widgetId = val[i].value.widgetId || '' // 唯一id
+        obj.code = myItem.code; // 组件类型code
+        obj.widgetId = val[i].value.widgetId || ""; // 唯一id
         if (val[i].value.paramsKeys) {
-          obj.paramsKeys = val[i].value.paramsKeys
+          obj.paramsKeys = val[i].value.paramsKeys;
         }
         const options = val[i].options["setup"];
         options.forEach((el) => {
@@ -663,9 +666,9 @@ export default {
     },
     // 返回每个组件的动态数据集参数配置情况
     handlerdynamicDataParamsConfig(val) {
-      this.widgetParamsConfig = val.map(item => {
-        return item.value.data
-      })
+      this.widgetParamsConfig = val.map((item) => {
+        return item.value.data;
+      });
     },
     async initEchartData() {
       const reportCode = this.$route.query.reportCode;
@@ -690,7 +693,8 @@ export default {
       }
       this.setOptionsOnClickScreen();
       return {
-        backgroundColor: (data && data.backgroundColor) || (!data ? '#1e1e1e' : ''),
+        backgroundColor:
+          (data && data.backgroundColor) || (!data ? "#1e1e1e" : ""),
         backgroundImage: (data && data.backgroundImage) || "",
         height: (data && data.height) || "1080",
         title: (data && data.title) || "",
@@ -708,19 +712,21 @@ export default {
           data: widgets[i].value.data,
           position: widgets[i].value.position,
         };
-        const tool = this.deepClone(getToolByCode(widgets[i].type))
+        const tool = this.deepClone(getToolByCode(widgets[i].type));
         if (!tool) {
-          const message = '暂未提供该组件或该组件下线了，组件code: ' + widgets[i].type
-          console.error(message)
-          if (process.env.NODE_ENV === 'development') { // 40@remarks 看生产要不要提示
-            this.$message.error(message)
+          const message =
+            "暂未提供该组件或该组件下线了，组件code: " + widgets[i].type;
+          console.error(message);
+          if (process.env.NODE_ENV === "development") {
+            // 40@remarks 看生产要不要提示
+            this.$message.error(message);
           }
-          continue // 找不到就跳过，避免整个报表都加载不出来
+          continue; // 找不到就跳过，避免整个报表都加载不出来
         }
         const option = tool.options;
         const options = this.handleOptionsData(widgets[i].value, option);
         obj.options = options;
-        obj.value.widgetId = obj.value.setup.widgetId
+        obj.value.widgetId = obj.value.setup.widgetId;
         widgetsData.push(obj);
       }
       return widgetsData;
@@ -780,9 +786,9 @@ export default {
         },
         widgets: this.widgets,
       };
-      screenData.widgets.forEach(widget => {
-        widget.value.setup.widgetId = widget.value.widgetId
-      })
+      screenData.widgets.forEach((widget) => {
+        widget.value.setup.widgetId = widget.value.widgetId;
+      });
       const { code, data } = await insertDashboard(screenData);
       if (code == "200") {
         this.$message.success("保存成功！");
@@ -861,24 +867,30 @@ export default {
     },
     dragStart(widgetCode) {
       this.dragWidgetCode = widgetCode;
-      this.currentWidgetTotal = this.widgets.length // 当前操作面板上有多少各组件
+      this.currentWidgetTotal = this.widgets.length; // 当前操作面板上有多少各组件
     },
     dragEnd() {
-      this.dragWidgetCode = "";/**
+      this.dragWidgetCode = "";
+      /**
        * 40@remarks 新增组件到操作面板后，右边的配置有更新，但是当前选中的组件没更新，导致配置错乱的bug;
        * 由于拖动组件拖到非操作面板上是不会添加组件，还需判断是否添加组件到操作面板上;
        */
-      this.$nextTick(()=>{
-        if (this.widgets.length === this.currentWidgetTotal + 1) { // 确实新增了一个组件到操作面板上
-          console.log(`新添加 '${this.widgets[this.currentWidgetTotal].value.setup.layerName}' 组件到操作面板`)
-          const uuid = Number(Math.random().toString().substr(2)).toString(36)
-          this.widgets[this.currentWidgetTotal].value.widgetId = uuid
-          this.layerWidget[this.currentWidgetTotal].widgetId = uuid
-          const index = this.widgets.length - 1
-          this.layerClick(index) // 选中当前新增的组件
-          this.grade = false // 去除网格线
+      this.$nextTick(() => {
+        if (this.widgets.length === this.currentWidgetTotal + 1) {
+          // 确实新增了一个组件到操作面板上
+          console.log(
+            `新添加 '${
+              this.widgets[this.currentWidgetTotal].value.setup.layerName
+            }' 组件到操作面板`
+          );
+          const uuid = Number(Math.random().toString().substr(2)).toString(36);
+          this.widgets[this.currentWidgetTotal].value.widgetId = uuid;
+          this.layerWidget[this.currentWidgetTotal].widgetId = uuid;
+          const index = this.widgets.length - 1;
+          this.layerClick(index); // 选中当前新增的组件
+          this.grade = false; // 去除网格线
         }
-      })
+      });
     },
     dragOver(evt) {
       evt.preventDefault();
@@ -900,12 +912,12 @@ export default {
       const targetScale =
         this.currentSizeRangeIndex === this.defaultSize.index
           ? this.bigscreenScaleInWorkbench
-          : this.sizeRange[this.currentSizeRangeIndex] / 100
+          : this.sizeRange[this.currentSizeRangeIndex] / 100;
       // 计算在缩放模式下的x y
       // const x = widgetLeftInWorkbench / this.bigscreenScaleInWorkbench
       // const y = widgetTopInWorkbench / this.bigscreenScaleInWorkbench
-      const x = widgetLeftInWorkbench / targetScale
-      const y = widgetTopInWorkbench / targetScale
+      const x = widgetLeftInWorkbench / targetScale;
+      const y = widgetTopInWorkbench / targetScale;
 
       // 复制一个组件
       let tool = getToolByCode(widgetType);
@@ -1122,16 +1134,28 @@ export default {
     deletelayer() {
       this.widgets.splice(this.rightClickIndex, 1);
     },
+    // 锁定
+    lockLayer() {
+      const obj = this.widgets[this.rightClickIndex];
+      this.$set(obj.value.position, "disabled", true);
+    },
+    //  解除锁定
+    noLockLayer() {
+      const obj = this.widgets[this.rightClickIndex];
+      this.$set(obj.value.position, "disabled", false);
+    },
     // 复制
     copylayer() {
       const obj = this.deepClone(this.widgets[this.rightClickIndex]);
-      obj.value.position.top += 40 // 复制的元素向右下角偏移一点
-      obj.value.position.left += 40
-      obj.value.widgetId = Number(Math.random().toString().substr(2)).toString(36)
+      obj.value.position.top += 40; // 复制的元素向右下角偏移一点
+      obj.value.position.left += 40;
+      obj.value.widgetId = Number(Math.random().toString().substr(2)).toString(
+        36
+      );
       this.widgets.splice(this.widgets.length, 0, obj);
       this.$nextTick(() => {
-        this.layerClick(this.widgets.length - 1) // 复制后定位到最新的组件
-      })
+        this.layerClick(this.widgets.length - 1); // 复制后定位到最新的组件
+      });
     },
     // 置顶
     istopLayer() {
@@ -1328,7 +1352,7 @@ export default {
         &.btn-disable {
           cursor: no-drop;
           &:hover {
-            background: #20262C
+            background: #20262c;
           }
         }
       }
@@ -1433,7 +1457,6 @@ export default {
       &::-webkit-scrollbar-track-piece {
         /*修改滚动条的背景和圆角*/
         background: #29405c;
-        -webkit-border-radius: 7px;
       }
 
       &::-webkit-scrollbar-track {
@@ -1453,13 +1476,13 @@ export default {
       /*修改垂直滚动条的样式*/
       &::-webkit-scrollbar-thumb:vertical {
         background-color: #00113a;
-        -webkit-border-radius: 7px;
+        // -webkit-border-radius: 7px;
       }
 
       /*修改水平滚动条的样式*/
       &::-webkit-scrollbar-thumb:horizontal {
         background-color: #00113a;
-        -webkit-border-radius: 7px;
+        // -webkit-border-radius: 7px;
       }
     }
   }
@@ -1661,22 +1684,6 @@ li {
 
 ::-webkit-scrollbar {
   width: 0;
-}
-
-/* 滚动槽 */
-
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.3);
-}
-
-/* 滚动条滑块 */
-
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
-}
-
-::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(255, 0, 0, 0.4);
+  height: 10px;
 }
 </style>

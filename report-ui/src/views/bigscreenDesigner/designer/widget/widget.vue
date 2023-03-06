@@ -1,14 +1,9 @@
-<!--
- * @Author: lide1202@hotmail.com
- * @Date: 2021-3-13 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24
- !-->
 <template>
   <avue-draggable
     :step="step"
     :width="widgetsWidth"
     :height="widgetsHeight"
+    :disabled="widgetDisabled"
     :left="widgetsLeft"
     :top="widgetsTop"
     ref="draggable"
@@ -17,7 +12,7 @@
     @blur="handleBlur"
   >
     <!-- :z-index="-1" -->
-    <component :is="type":widget-index="index" :value="value" />
+    <component :is="type" :widget-index="index" :value="value" />
   </avue-draggable>
 </template>
 
@@ -89,7 +84,7 @@ export default {
     widgetRadar,
     widgetBarLineStackChart,
     widgetSelect,
-    widgetInput
+    widgetInput,
   },
   model: {
     prop: "value",
@@ -135,6 +130,9 @@ export default {
     },
     widgetsZIndex() {
       return this.value.position.zIndex || 1;
+    },
+    widgetDisabled() {
+      return this.value.position.disabled || false;
     },
   },
   mounted() {},

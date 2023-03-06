@@ -2,12 +2,13 @@
   <el-input
     ref="input"
     :style="styleObj"
-    v-model="inputValue" placeholder="请输入内容"
+    v-model="inputValue"
+    placeholder="请输入内容"
     @[eventChange]="change"
   />
 </template>
 <script>
-import {eventBus} from "@/utils/eventBus";
+import { eventBus } from "@/utils/eventBus";
 
 export default {
   name: "WidgetInput",
@@ -21,7 +22,7 @@ export default {
       optionsStyle: {},
       optionsData: {},
       optionsSetup: {},
-      options:{}
+      options: {},
     };
   },
   computed: {
@@ -44,7 +45,6 @@ export default {
         this.optionsSetup = val.setup;
         this.optionsData = val.data;
         this.optionsStyle = val.position;
-        this.setOptions()
       },
       deep: true,
     },
@@ -53,7 +53,6 @@ export default {
     this.optionsSetup = this.value.setup;
     this.optionsData = this.value.data;
     this.optionsStyle = this.value.position;
-    this.setOptions()
   },
   methods: {
     change(event) {
