@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import widgetHref from "./widgetHref.vue";
-import widgetText from "./widgetText.vue";
-import WidgetMarquee from "./widgetMarquee.vue";
-import widgetTime from "./widgetTime.vue";
-import widgetImage from "./widgetImage.vue";
-import widgetSlider from "./widgetSlider.vue";
-import widgetVideo from "./widgetVideo.vue";
-import WidgetIframe from "./widgetIframe.vue";
+import widgetHref from "./texts/widgetHref.vue";
+import widgetText from "./texts/widgetText.vue";
+import WidgetMarquee from "./texts/widgetMarquee.vue";
+import widgetTime from "./texts/widgetTime.vue";
+import widgetImage from "./texts/widgetImage.vue";
+import widgetSlider from "./texts/widgetSlider.vue";
+import widgetVideo from "./texts/widgetVideo.vue";
+import WidgetIframe from "./texts/widgetIframe.vue";
 import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
 import widgetLinechart from "./line/widgetLinechart.vue";
@@ -33,7 +33,7 @@ import WidgetPiechart from "./pie/widgetPiechart.vue";
 import WidgetFunnel from "./funnel/widgetFunnel.vue";
 import WidgetGauge from "./percent/widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRose";
-import widgetTable from "./widgetTable.vue";
+import widgetTable from "./texts/widgetTable.vue";
 import widgetLineMap from "./map/widgetLineMap.vue";
 import widgetPiePercentageChart from "./percent/widgetPiePercentageChart";
 import widgetAirBubbleMap from "./map/widgetAirBubbleMap";
@@ -49,6 +49,7 @@ import widgetRadar from "./radar/widgetRadar";
 import widgetBarLineStackChart from "./barline/widgetBarLineStackChart";
 import widgetSelect from "./form/widgetSelect";
 import widgetInput from "./form/widgetInput.vue";
+import widgetFormTime from "./form/widgetFormTime.vue";
 
 export default {
   name: "Widget",
@@ -85,6 +86,7 @@ export default {
     widgetBarLineStackChart,
     widgetSelect,
     widgetInput,
+    widgetFormTime,
   },
   model: {
     prop: "value",

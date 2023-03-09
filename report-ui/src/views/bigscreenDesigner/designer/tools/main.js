@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:46:46
- * @LastEditors: chengsl
- * @LastEditTime: 2023-02-23 15:23:20
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-03-06 16:03:17
  */
 
 import { widgetText } from "./configure/texts/widget-text"
@@ -39,7 +39,8 @@ import { widgetHeatmap } from "./configure/heatmap/widget-heatmap";
 import { widgetRadar } from "./configure/radarCharts/widget-radar";
 import { widgetBarLineStack } from "./configure/barlineCharts/widget-bar-line-stack";
 import { widgetSelect } from "./configure/form/widget-select";
-import {widgetInput} from "./configure/form/widget-input";
+import { widgetInput } from "./configure/form/widget-input";
+import { widgetFormTime } from "./configure/form/widget-form-time";
 
 export const widgetTool = [
   // type=html类型的组件
@@ -75,5 +76,6 @@ export const widgetTool = [
   widgetRadar,
   widgetBarLineStack,
   widgetSelect,
-  widgetInput
+  widgetInput,
+  widgetFormTime
 ]

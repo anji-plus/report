@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 06:43:07
- * @LastEditors: chengsl
- * @LastEditTime: 2023-02-24 10:29:26
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-03-06 16:00:09
  */
 import { widgetTool } from "./main"
 const screenConfig = {

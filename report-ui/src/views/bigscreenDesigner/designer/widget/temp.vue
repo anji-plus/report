@@ -1,24 +1,23 @@
-<!--
- * @Author: lide1202@hotmail.com
- * @Date: 2021-3-13 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24
- !-->
 <template>
   <div>
-    <component :is="type" :value="value" :ispreview="true" :widget-index="index" />
+    <component
+      :is="type"
+      :value="value"
+      :ispreview="true"
+      :widget-index="index"
+    />
   </div>
 </template>
 
 <script>
-import widgetHref from "./widgetHref.vue";
-import widgetText from "./widgetText.vue";
-import WidgetMarquee from "./widgetMarquee.vue";
-import widgetTime from "./widgetTime.vue";
-import widgetImage from "./widgetImage.vue";
-import widgetSlider from "./widgetSlider.vue";
-import widgetVideo from "./widgetVideo.vue";
-import WidgetIframe from "./widgetIframe.vue";
+import widgetHref from "./texts/widgetHref.vue";
+import widgetText from "./texts/widgetText.vue";
+import WidgetMarquee from "./texts/widgetMarquee.vue";
+import widgetTime from "./texts/widgetTime.vue";
+import widgetImage from "./texts/widgetImage.vue";
+import widgetSlider from "./texts/widgetSlider.vue";
+import widgetVideo from "./texts/widgetVideo.vue";
+import WidgetIframe from "./texts/widgetIframe.vue";
 import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetLinechart from "./line/widgetLinechart.vue";
 import widgetBarlinechart from "./barline/widgetBarlinechart";
@@ -27,7 +26,7 @@ import WidgetPiechart from "./pie/widgetPiechart.vue";
 import WidgetFunnel from "./funnel/widgetFunnel.vue";
 import WidgetGauge from "./percent/widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRose";
-import widgetTable from "./widgetTable.vue";
+import widgetTable from "./texts/widgetTable.vue";
 import widgetLineMap from "./map/widgetLineMap.vue";
 import widgetPiePercentageChart from "./percent/widgetPiePercentageChart";
 import widgetAirBubbleMap from "./map/widgetAirBubbleMap";
@@ -43,6 +42,7 @@ import widgetRadar from "./radar/widgetRadar";
 import widgetBarLineStackChart from "./barline/widgetBarLineStackChart";
 import widgetSelect from "./form/widgetSelect";
 import widgetInput from "./form/widgetInput.vue";
+import widgetFormTime from "./form/widgetFormTime.vue";
 
 export default {
   name: "WidgetTemp",
@@ -78,7 +78,8 @@ export default {
     widgetRadar,
     widgetBarLineStackChart,
     widgetSelect,
-    widgetInput
+    widgetInput,
+    widgetFormTime,
   },
   model: {
     prop: "value",
@@ -92,7 +93,7 @@ export default {
     },
     index: {
       type: Number,
-      default: 0
+      default: 0,
     }, // 当前组件，在工作区变量widgetInWorkbench中的索引
   },
   data() {
