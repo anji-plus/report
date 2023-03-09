@@ -11,7 +11,7 @@ export const widgetSelect = {
   type: 'form',
   tabName: '表单',
   label: '下拉框',
-  icon: 'iconchaolianjie',
+  icon: 'iconxialakuang1',
   options: {
     setup: [
       {

@@ -22,7 +22,6 @@ export default {
       optionsStyle: {},
       optionsData: {},
       optionsSetup: {},
-      options: {},
     };
   },
   computed: {
@@ -33,6 +32,8 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
+        background: this.optionsSetup.select_fontSize,
+        color: this.optionsSetup.select_color,
       };
     },
     eventChange() {
@@ -74,6 +75,11 @@ export default {
 
     .el-input__inner {
       height: 100%;
+      background: inherit;
+      color: inherit;
+      &::placeholder {
+        color: inherit;
+      }
     }
   }
 }

@@ -7,7 +7,7 @@ export const widgetFormTime = {
   type: 'form',
   tabName: '表单',
   label: '时间筛选器',
-  icon: 'iconchaolianjie',
+  icon: 'iconshijianshaixuan',
   options: {
     setup: [
       {

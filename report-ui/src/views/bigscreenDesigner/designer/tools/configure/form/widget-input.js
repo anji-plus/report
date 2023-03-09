@@ -3,7 +3,7 @@ export const widgetInput = {
   type: 'form',
   tabName: '表单',
   label: '输入框',
-  icon: 'iconchaolianjie',
+  icon: 'icondanhangshurukuang',
   options: {
     setup: [
       {
@@ -25,7 +25,7 @@ export const widgetInput = {
       {
         type: 'vue-color',
         label: '字体颜色',
-        name: 'color',
+        name: 'select_color',
         required: false,
         placeholder: '',
         value: '#FAD400',
@@ -33,7 +33,7 @@ export const widgetInput = {
       {
         type: 'vue-color',
         label: '字体背景',
-        name: 'background',
+        name: 'select_fontSize',
         required: false,
         placeholder: '',
         value: 'rgba(115,170,229,.5)',
