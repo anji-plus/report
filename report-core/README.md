@@ -75,11 +75,29 @@ public class GaeaAutoConfiguration {
 
 #### 3.bootstrap.yml加上对应的redis配置
 注意yml格式
-```
-#  redis:
-#    host: 127.0.0.1
-#    port: 6379
-#    password: root
-#    database: 1
+```yaml
+spring:
+  redis:
+    host: 10.108.x.x
+    port: 6379
+    password: ****
+    database: 1
+    timeout: 10000
+    pool:
+      max-active: 8
+      max-idle: 8
+      max-wait: -1
+      min-idle: 0
 
+```
+哨兵模式
+```yaml
+spring:
+  redis:
+    sentinel:
+      master: master01
+      nodes: 10.108.xx.xx:26379,10.108.xx.xx:26379,10.108.xx.xx:26379
+    database: 1
+    password: *******
+    timeout: 10000
 ```
