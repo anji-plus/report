@@ -3,23 +3,25 @@
 ### 采用redis缓存
 
 #### 1.pom.xml文件改动
-- 1、增加redis依赖
-```
+- 1、增加redis依赖,删除exclusions即可
+```xml
 <dependency>
     <groupId>com.anji-plus</groupId>
     <artifactId>spring-boot-gaea</artifactId>
     <version>2.0.5.RELEASE</version>
+    <!--删除下方内容-->
     <exclusions>
         <exclusion>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </exclusion>
     </exclusions>
+    <!--删除-->
 </dependency>
 ```
 
 - 2、 删除ehcache相关依赖
-```
+```xml
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
@@ -34,7 +36,7 @@
 
 - 2、删除相关bean
 文件地址：com.anjiplus.template.gaea.business.config.BusinessAutoConfiguration.java
-```
+```java
     @Bean
     public CacheHelper gaeaCacheHelper(){
         return new ReportCacheHelper();
