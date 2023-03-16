@@ -1,5 +1,236 @@
+import { Revoke } from "@/utils/revoke";
+import { getToken } from "@/utils/auth";
+import { insertDashboard, detailDashboard, importDashboard, exportDashboard, } from "@/api/bigscreen";
 const mixin = {
+  data() {
+    return {
+      uploadUrl: process.env.BASE_API + "/reportDashboard/import/" + this.$route.query.reportCode,
+      rightClickIndex: -1,
+    }
+  },
+  computed: {
+    step() {
+      return Number(100 / (this.bigscreenScaleInWorkbench * 100));
+    },
+    headers() {
+      return {
+        Authorization: getToken(),
+      };
+    },
+    // 初始的缩放百分比 和 下标
+    defaultSize() {
+      const obj = {
+        index: -1,
+        size: "50",
+      };
+      this.sizeRange.some((item, index) => {
+        if (item <= 100 * this.bigscreenScaleInWorkbench) {
+          obj.index = index;
+          obj.size = 100 * this.bigscreenScaleInWorkbench; // item
+        }
+      });
+      if (obj.index === -1) {
+        obj.index = 0;
+        obj.size = this.sizeRange[0];
+      }
+      return obj;
+    },
+  },
+  watch: {
+    defaultSize: {
+      handler(val) {
+        if (val !== -1) {
+          this.currentSizeRangeIndex = val.index;
+          this.scaleNum = val.size;
+        }
+      },
+      immediate: true,
+    },
+    bigscreenWidth() {
+      this.initVueRulerTool();
+    },
+    bigscreenHeight() {
+      this.initVueRulerTool();
+    },
+  },
+  created() {
+    this.revoke = new Revoke();
+    this.initEchartData();
+  },
   methods: {
+    /**
+  * @param num: 0缩小 1放大 2默认比例
+  * sizeRange: [20, 40, 60, 72, 100, 150, 200, 300, 400]
+  */
+    setSize(num) {
+      if (num === 0) {
+        // 缩小
+        if (this.currentSizeRangeIndex === 0) return;
+        this.currentSizeRangeIndex -= 1;
+      } else if (num === 1) {
+        // 放大
+        if (this.currentSizeRangeIndex === 8) return;
+        this.currentSizeRangeIndex += 1;
+      } else if (num === 2) {
+        // 正常比例
+        this.currentSizeRangeIndex = this.defaultSize.index;
+      }
+      this.scaleNum =
+        this.currentSizeRangeIndex === this.defaultSize.index
+          ? this.defaultSize.size
+          : this.sizeRange[this.currentSizeRangeIndex];
+    },
+    // 初始化 修正插件样式
+    initVueRulerTool() {
+      const vueRulerToolDom = this.$refs["vue-ruler-tool"].$el; // 操作面板 第三方插件工具
+      const contentDom = vueRulerToolDom.querySelector(".vue-ruler-content");
+      const vueRulerX = vueRulerToolDom.querySelector(".vue-ruler-h"); // 横向标尺
+      const vueRulerY = vueRulerToolDom.querySelector(".vue-ruler-v"); // 纵向标尺
+      // vueRulerToolDom.style.cssText += ';width:' + (this.bigscreenWidth + 18) + 'px !important;height:' + (this.bigscreenHeight + 18) + 'px !important;'
+      contentDom.style.width = "100%";
+      contentDom.style.height = "100%";
+
+      let xHtmlContent = ""; // '<span class="n" style="left: 2px;">0</span>'
+      let yHtmlContent = ""; // '<span class="n" style="top: 2px;">0</span>'
+      let currentNum = 0;
+      while (currentNum < +this.bigscreenWidth) {
+        xHtmlContent += `<span class="n" style="left: ${currentNum + 2
+          }px;">${currentNum}</span>`;
+        currentNum += 50;
+      }
+      currentNum = 0;
+      while (currentNum < +this.bigscreenHeight) {
+        yHtmlContent += `<span class="n" style="top: ${currentNum + 2
+          }px;">${currentNum}</span>`;
+        currentNum += 50;
+      }
+      vueRulerX.innerHTML = xHtmlContent;
+      vueRulerY.innerHTML = yHtmlContent;
+    },
+    async initEchartData() {
+      const reportCode = this.$route.query.reportCode;
+      const { code, data } = await detailDashboard(reportCode);
+      if (code != 200) return;
+      const processData = this.handleInitEchartsData(data);
+      const screenData = this.handleBigScreen(data.dashboard);
+      this.widgets = processData;
+      this.dashboard = screenData;
+      this.bigscreenWidth = this.dashboard.width;
+      this.bigscreenHeight = this.dashboard.height;
+    },
+    // 保存数据
+    async saveData() {
+      if (!this.widgets || this.widgets.length == 0) {
+        return this.$message.error("请添加组件");
+      }
+      const screenData = {
+        reportCode: this.$route.query.reportCode,
+        dashboard: {
+          title: this.dashboard.title,
+          width: this.dashboard.width,
+          height: this.dashboard.height,
+          backgroundColor: this.dashboard.backgroundColor,
+          backgroundImage: this.dashboard.backgroundImage,
+        },
+        widgets: this.widgets,
+      };
+      screenData.widgets.forEach((widget) => {
+        widget.value.setup.widgetId = widget.value.widgetId;
+      });
+      const { code, data } = await insertDashboard(screenData);
+      if (code == "200") {
+        this.$message.success("保存成功！");
+      }
+    },
+    viewScreen() {
+      let routeUrl = this.$router.resolve({
+        path: "/bigscreen/viewer",
+        query: { reportCode: this.$route.query.reportCode },
+      });
+      window.open(routeUrl.href, "_blank");
+    },
+    async exportDashboard(val) {
+      const fileName = this.$route.query.reportCode + ".zip";
+
+      const param = {
+        reportCode: this.$route.query.reportCode,
+        showDataSet: val,
+      };
+      exportDashboard(param).then((res) => {
+        const that = this;
+        const type = res.type;
+        if (type == "application/json") {
+          let reader = new FileReader();
+          reader.readAsText(res, "utf-8");
+          reader.onload = function () {
+            const data = JSON.parse(reader.result);
+            that.$message.error(data.message);
+          };
+          return;
+        }
+        const blob = new Blob([res], { type: "application/octet-stream" });
+        if (window.navigator.msSaveOrOpenBlob) {
+          //msSaveOrOpenBlob方法返回bool值
+          navigator.msSaveBlob(blob, fileName); //本地保存
+        } else {
+          const link = document.createElement("a"); //a标签下载
+          link.href = window.URL.createObjectURL(blob);
+          link.download = fileName;
+          link.click();
+          window.URL.revokeObjectURL(link.href);
+        }
+      });
+    },
+    handleUndo() {
+      const record = this.revoke.undo();
+      if (!record) {
+        return false;
+      }
+      this.widgets = record;
+    },
+    handleRedo() {
+      const record = this.revoke.redo();
+      if (!record) {
+        return false;
+      }
+      this.widgets = record;
+    },
+    handleUpload(response, file, fileList) {
+      this.$refs.upload.clearFiles();
+      this.initEchartData();
+      if (response.code == "200") {
+        this.$message({
+          message: "导入成功！",
+          type: "success",
+        });
+      } else {
+        this.$message({
+          message: response.message,
+          type: "error",
+        });
+      }
+    },
+    handleError(err) {
+      this.$message({
+        message: "上传失败！",
+        type: "error",
+      });
+    },
+    // 右键
+    rightClick(event, index) {
+      this.rightClickIndex = index;
+      const left = event.clientX;
+      const top = event.clientY;
+      if (left || top) {
+        this.styleObj = {
+          left: left + "px",
+          top: top + "px",
+          display: "block",
+        };
+      }
+      this.visibleContentMenu = true;
+      return false;
+    },
     // 数组 元素互换位置
     swapArr(arr, oldIndex, newIndex) {
       arr[oldIndex] = arr.splice(newIndex, 1, arr[oldIndex])[0];

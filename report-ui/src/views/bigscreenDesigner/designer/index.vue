@@ -130,13 +130,9 @@
             content="缩小"
             placement="bottom"
           >
-            <!-- <svg-icon style="font-size:16px;" icon-class="jianhao" class-name="icon" /> -->
             <i class="el-icon-minus" style="font-size: 16px" />
           </el-tooltip>
         </span>
-        <!--
-          class="btn scale-num"
-          :style="currentSizeRangeIndex === defaultSize.index ? 'cursor: no-drop;' : ''" -->
         <span
           :class="{
             btn: true,
@@ -169,7 +165,6 @@
             content="放大"
             placement="bottom"
           >
-            <!-- <svg-icon style="font-size:16px;" icon-class="jiahao" class-name="icon" /> -->
             <i class="el-icon-plus" style="font-size: 16px" />
           </el-tooltip>
         </span>
@@ -228,10 +223,6 @@
         </span>
       </div>
       <!-- 中间操作内容  主体 -->
-      <!-- :style="{
-          width: bigscreenWidthInWorkbench + 'px',
-          height: bigscreenHeightInWorkbench + 'px',
-        }" -->
       <div class="workbench-container" @mousedown="handleMouseDown">
         <div
           :style="{
@@ -359,12 +350,6 @@
 </template>
 
 <script>
-import {
-  insertDashboard,
-  detailDashboard,
-  importDashboard,
-  exportDashboard,
-} from "@/api/bigscreen";
 import { widgetTools, getToolByCode } from "./tools/index";
 import mixin from "@/utils/screenMixins";
 import widget from "./widget/widget.vue";
@@ -372,8 +357,6 @@ import dynamicForm from "./components/dynamicForm.vue";
 import draggable from "vuedraggable";
 import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
 import contentMenu from "./components/contentMenu";
-import { getToken } from "@/utils/auth";
-import { Revoke } from "@/utils/revoke"; //处理历史记录 2022-02-22
 
 export default {
   name: "Login",
@@ -387,10 +370,6 @@ export default {
   mixins: [mixin],
   data() {
     return {
-      uploadUrl:
-        process.env.BASE_API +
-        "/reportDashboard/import/" +
-        this.$route.query.reportCode,
       grade: false,
       layerWidget: [],
       widgetTools: widgetTools, // 左侧工具栏的组件图标，将js变量加入到当前作用域
@@ -403,19 +382,7 @@ export default {
       bigscreenWidth: 1920, // 大屏设计的大小
       bigscreenHeight: 1080,
       revoke: null, //处理历史记录 2022-02-22
-
-      // 工作台大屏画布，保存到表gaea_report_dashboard中
-      dashboard: {
-        id: null,
-        title: "", // 大屏页面标题
-        width: 1920, // 大屏设计宽度
-        height: 1080, // 大屏设计高度
-        backgroundColor: "#1E1E1E", // 大屏背景色
-        backgroundImage: "", // 大屏背景图片
-        refreshSeconds: null, // 大屏刷新时间间隔
-        presetLine: [], // 辅助线
-        presetLineVisible: true, // 辅助线是否显示
-      },
+      dashboard: {},
       // 大屏的标记
       screenCode: "",
       dragWidgetCode: "", //从工具栏拖拽的组件code
@@ -439,7 +406,6 @@ export default {
           options: [],
         },
       ], // 工作区中拖放的组件
-
       // 当前激活组件
       widgetIndex: 0,
       // 当前激活组件右侧配置属性
@@ -454,7 +420,7 @@ export default {
         top: 0,
       },
       visibleContentMenu: false,
-      rightClickIndex: -1,
+
       activeName: "first",
       scaleNum: 0, // 当前缩放百分比的值
       sizeRange: [20, 40, 60, 80, 100, 150, 200, 300, 400], // 缩放百分比
@@ -464,14 +430,6 @@ export default {
     };
   },
   computed: {
-    step() {
-      return Number(100 / (this.bigscreenScaleInWorkbench * 100));
-    },
-    headers() {
-      return {
-        Authorization: getToken(), // 直接从本地获取token就行
-      };
-    },
     // 左侧折叠切换时，动态计算中间区的宽度
     middleWidth() {
       let widthLeftAndRight = 0;
@@ -498,24 +456,6 @@ export default {
     workbenchTransform() {
       return `scale(${this.bigscreenScaleInWorkbench}, ${this.bigscreenScaleInWorkbench})`;
     },
-    // 初始的缩放百分比 和 下标
-    defaultSize() {
-      const obj = {
-        index: -1,
-        size: "50",
-      };
-      this.sizeRange.some((item, index) => {
-        if (item <= 100 * this.bigscreenScaleInWorkbench) {
-          obj.index = index;
-          obj.size = 100 * this.bigscreenScaleInWorkbench; // item
-        }
-      });
-      if (obj.index === -1) {
-        obj.index = 0;
-        obj.size = this.sizeRange[0];
-      }
-      return obj;
-    },
     // 大屏在设计模式的大小
     bigscreenWidthInWorkbench() {
       return this.getPXUnderScale(this.bigscreenWidth) + this.widthPaddingTools;
@@ -538,29 +478,8 @@ export default {
       },
       deep: true,
     },
-    defaultSize: {
-      handler(val) {
-        if (val !== -1) {
-          this.currentSizeRangeIndex = val.index;
-          this.scaleNum = val.size;
-        }
-      },
-      immediate: true,
-    },
-    bigscreenWidth() {
-      this.initVueRulerTool();
-    },
-    bigscreenHeight() {
-      this.initVueRulerTool();
-    },
-  },
-  created() {
-    /* 以下是记录历史的 */
-    this.revoke = new Revoke();
   },
   mounted() {
-    // 如果是新的设计工作台
-    this.initEchartData();
     this.widgets = [];
     window.addEventListener("mouseup", () => {
       this.grade = false;
@@ -570,81 +489,6 @@ export default {
     });
   },
   methods: {
-    /**
-     * @param num: 0缩小 1放大 2默认比例
-     * sizeRange: [20, 40, 60, 72, 100, 150, 200, 300, 400]
-     */
-    setSize(num) {
-      if (num === 0) {
-        // 缩小
-        if (this.currentSizeRangeIndex === 0) return;
-        this.currentSizeRangeIndex -= 1;
-      } else if (num === 1) {
-        // 放大
-        if (this.currentSizeRangeIndex === 8) return;
-        this.currentSizeRangeIndex += 1;
-      } else if (num === 2) {
-        // 正常比例
-        this.currentSizeRangeIndex = this.defaultSize.index;
-      }
-      this.scaleNum =
-        this.currentSizeRangeIndex === this.defaultSize.index
-          ? this.defaultSize.size
-          : this.sizeRange[this.currentSizeRangeIndex];
-    },
-    // 初始化 修正插件样式
-    initVueRulerTool() {
-      const vueRulerToolDom = this.$refs["vue-ruler-tool"].$el; // 操作面板 第三方插件工具
-      const contentDom = vueRulerToolDom.querySelector(".vue-ruler-content");
-      const vueRulerX = vueRulerToolDom.querySelector(".vue-ruler-h"); // 横向标尺
-      const vueRulerY = vueRulerToolDom.querySelector(".vue-ruler-v"); // 纵向标尺
-      // vueRulerToolDom.style.cssText += ';width:' + (this.bigscreenWidth + 18) + 'px !important;height:' + (this.bigscreenHeight + 18) + 'px !important;'
-      contentDom.style.width = "100%";
-      contentDom.style.height = "100%";
-
-      let xHtmlContent = ""; // '<span class="n" style="left: 2px;">0</span>'
-      let yHtmlContent = ""; // '<span class="n" style="top: 2px;">0</span>'
-      let currentNum = 0;
-      while (currentNum < +this.bigscreenWidth) {
-        xHtmlContent += `<span class="n" style="left: ${
-          currentNum + 2
-        }px;">${currentNum}</span>`;
-        currentNum += 50;
-      }
-      currentNum = 0;
-      while (currentNum < +this.bigscreenHeight) {
-        yHtmlContent += `<span class="n" style="top: ${
-          currentNum + 2
-        }px;">${currentNum}</span>`;
-        currentNum += 50;
-      }
-      vueRulerX.innerHTML = xHtmlContent;
-      vueRulerY.innerHTML = yHtmlContent;
-    },
-    /**
-     * @description: 恢复
-     * @param {*}
-     * @return {*}
-     */
-    handleUndo() {
-      const record = this.revoke.undo();
-      if (!record) {
-        return false;
-      }
-      this.widgets = record;
-    },
-    /**
-     * @description: 重做
-     * @param {*}
-     * @return {*}
-     */
-    handleRedo() {
-      const record = this.revoke.redo();
-      if (!record) {
-        return false;
-      }
-      this.widgets = record;
-    },
     handlerLayerWidget(val) {
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
@@ -671,17 +515,6 @@ export default {
       this.widgetParamsConfig = val.map((item) => {
         return item.value.data;
       });
-    },
-    async initEchartData() {
-      const reportCode = this.$route.query.reportCode;
-      const { code, data } = await detailDashboard(reportCode);
-      if (code != 200) return;
-      const processData = this.handleInitEchartsData(data);
-      const screenData = this.handleBigScreen(data.dashboard);
-      this.widgets = processData;
-      this.dashboard = screenData;
-      this.bigscreenWidth = this.dashboard.width;
-      this.bigscreenHeight = this.dashboard.height;
     },
     handleBigScreen(data) {
       const optionScreen = getToolByCode("screen").options;
@@ -770,97 +603,6 @@ export default {
         }
       }
       return option;
-    },
-    // 保存数据
-    async saveData() {
-      if (!this.widgets || this.widgets.length == 0) {
-        this.$message.error("请添加组件");
-        return;
-      }
-      const screenData = {
-        reportCode: this.$route.query.reportCode,
-        dashboard: {
-          title: this.dashboard.title,
-          width: this.dashboard.width,
-          height: this.dashboard.height,
-          backgroundColor: this.dashboard.backgroundColor,
-          backgroundImage: this.dashboard.backgroundImage,
-        },
-        widgets: this.widgets,
-      };
-      screenData.widgets.forEach((widget) => {
-        widget.value.setup.widgetId = widget.value.widgetId;
-      });
-      const { code, data } = await insertDashboard(screenData);
-      if (code == "200") {
-        this.$message.success("保存成功！");
-      }
-    },
-    // 预览
-    viewScreen() {
-      let routeUrl = this.$router.resolve({
-        path: "/bigscreen/viewer",
-        query: { reportCode: this.$route.query.reportCode },
-      });
-      window.open(routeUrl.href, "_blank");
-    },
-    //  导出
-    async exportDashboard(val) {
-      const fileName = this.$route.query.reportCode + ".zip";
-
-      const param = {
-        reportCode: this.$route.query.reportCode,
-        showDataSet: val,
-      };
-      exportDashboard(param).then((res) => {
-        const that = this;
-        const type = res.type;
-        if (type == "application/json") {
-          let reader = new FileReader();
-          reader.readAsText(res, "utf-8");
-          reader.onload = function () {
-            const data = JSON.parse(reader.result);
-            that.$message.error(data.message);
-          };
-          return;
-        }
-
-        const blob = new Blob([res], { type: "application/octet-stream" });
-        if (window.navigator.msSaveOrOpenBlob) {
-          //msSaveOrOpenBlob方法返回bool值
-          navigator.msSaveBlob(blob, fileName); //本地保存
-        } else {
-          const link = document.createElement("a"); //a标签下载
-          link.href = window.URL.createObjectURL(blob);
-          link.download = fileName;
-          link.click();
-          window.URL.revokeObjectURL(link.href);
-        }
-      });
-    },
-    // 上传成功的回调
-    handleUpload(response, file, fileList) {
-      //清除el-upload组件中的文件
-      this.$refs.upload.clearFiles();
-      //刷新大屏页面
-      this.initEchartData();
-      if (response.code == "200") {
-        this.$message({
-          message: "导入成功！",
-          type: "success",
-        });
-      } else {
-        this.$message({
-          message: response.message,
-          type: "error",
-        });
-      }
-    },
-    handleError(err) {
-      this.$message({
-        message: "上传失败！",
-        type: "error",
-      });
     },
 
     // 在缩放模式下的大小
@@ -952,7 +694,6 @@ export default {
       // 激活新组件的配置属性
       this.setOptionsOnClickWidget(this.widgets.length - 1);
     },
-
     // 对组件默认值处理
     handleDefaultValue(widgetJson) {
       for (const key in widgetJson) {
@@ -1005,7 +746,6 @@ export default {
       this.activeName = "first";
       this.widgetOptions = getToolByCode("screen")["options"];
     },
-
     // 如果是点击某个组件，获取该组件的配置项
     setOptionsOnClickWidget(obj) {
       this.screenCode = "";
@@ -1054,7 +794,7 @@ export default {
       console.log("val", val);
       console.log(this.widgetOptions);
       if (this.screenCode == "screen") {
-        let newSetup = new Array();
+        let newSetup = [];
         this.dashboard = this.deepClone(val);
         console.log("asd", this.dashboard);
         console.log(this.widgetOptions);
@@ -1084,20 +824,6 @@ export default {
           }
         }
       }
-    },
-    rightClick(event, index) {
-      this.rightClickIndex = index;
-      const left = event.clientX;
-      const top = event.clientY;
-      if (left || top) {
-        this.styleObj = {
-          left: left + "px",
-          top: top + "px",
-          display: "block",
-        };
-      }
-      this.visibleContentMenu = true;
-      return false;
     },
     setDefaultValue(options, val) {
       for (let i = 0; i < options.length; i++) {
