@@ -570,11 +570,11 @@ export default {
       for (const key in data.setup) {
         for (let i = 0; i < option.setup.length; i++) {
           let item = option.setup[i];
-          if (Object.prototype.toString.call(item) == "[object Object]") {
+          if (this.isObjectFn(item)) {
             if (key == option.setup[i].name) {
               option.setup[i].value = data.setup[key];
             }
-          } else if (Object.prototype.toString.call(item) == "[object Array]") {
+          } else if (this.isArrayFn(item)) {
             for (let j = 0; j < item.length; j++) {
               const list = item[j].list;
               list.forEach((el) => {
@@ -696,17 +696,16 @@ export default {
     },
     // 对组件默认值处理
     handleDefaultValue(widgetJson) {
+      console.log(widgetJson);
       for (const key in widgetJson) {
         if (key == "options") {
           // collapse、data、position、setup
           // setup 处理
           for (let i = 0; i < widgetJson.options.setup.length; i++) {
             const item = widgetJson.options.setup[i];
-            if (Object.prototype.toString.call(item) == "[object Object]") {
+            if (this.isObjectFn(item)) {
               widgetJson.value.setup[item.name] = item.value;
-            } else if (
-              Object.prototype.toString.call(item) == "[object Array]"
-            ) {
+            } else if (this.isArrayFn(item)) {
               for (let j = 0; j < item.length; j++) {
                 const list = item[j].list;
                 list.forEach((el) => {
@@ -827,15 +826,13 @@ export default {
     },
     setDefaultValue(options, val) {
       for (let i = 0; i < options.length; i++) {
-        if (Object.prototype.toString.call(options[i]) == "[object Object]") {
+        if (this.isObjectFn(options[i])) {
           for (const k in val) {
             if (options[i].name == k) {
               options[i].value = val[k];
             }
           }
-        } else if (
-          Object.prototype.toString.call(options[i]) == "[object Array]"
-        ) {
+        } else if (this.isArrayFn(options[i])) {
           for (let j = 0; j < options[i].length; j++) {
             const list = options[i][j].list;
             for (let z = 0; z < list.length; z++) {
