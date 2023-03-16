@@ -41,6 +41,7 @@ import { widgetBarLineStack } from "./configure/barlineCharts/widget-bar-line-st
 import { widgetSelect } from "./configure/form/widget-select";
 import { widgetInput } from "./configure/form/widget-input";
 import { widgetFormTime } from "./configure/form/widget-form-time";
+import {widgetScale} from "./configure/scaleCharts/widget-scale";
 
 export const widgetTool = [
   // type=html类型的组件
@@ -71,10 +72,11 @@ export const widgetTool = [
   widgetLineCompare,
   widgetDecoratePie,
   widgetMoreBarLine,
-  // widgetWordCloud,
+  widgetWordCloud,
   widgetHeatmap,
   widgetRadar,
   widgetBarLineStack,
+  widgetScale,
   widgetSelect,
   widgetInput,
   widgetFormTime

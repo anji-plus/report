@@ -31,7 +31,6 @@ export default {
   },
   computed: {
     styleObj() {
-      console.log(this.optionsSetup);
       return {
         position: this.ispreview ? "absolute" : "static",
         width: this.optionsStyle.width + "px",
