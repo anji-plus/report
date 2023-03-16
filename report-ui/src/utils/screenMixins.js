@@ -1,10 +1,12 @@
 import { Revoke } from "@/utils/revoke";
 import { getToken } from "@/utils/auth";
-import { insertDashboard, detailDashboard, importDashboard, exportDashboard, } from "@/api/bigscreen";
+import { getToolByCode } from "@/views/bigscreenDesigner/designer/tools/index";
+import { insertDashboard, detailDashboard, exportDashboard, } from "@/api/bigscreen";
 const mixin = {
   data() {
     return {
-      uploadUrl: process.env.BASE_API + "/reportDashboard/import/" + this.$route.query.reportCode,
+      reportCode: this.$route.query.reportCode,
+      uploadUrl: process.env.BASE_API + "/reportDashboard/import/" + this.reportCode,
       rightClickIndex: -1,
     }
   },
@@ -26,7 +28,7 @@ const mixin = {
       this.sizeRange.some((item, index) => {
         if (item <= 100 * this.bigscreenScaleInWorkbench) {
           obj.index = index;
-          obj.size = 100 * this.bigscreenScaleInWorkbench; // item
+          obj.size = 100 * this.bigscreenScaleInWorkbench;
         }
       });
       if (obj.index === -1) {
@@ -55,7 +57,7 @@ const mixin = {
   },
   created() {
     this.revoke = new Revoke();
-    this.initEchartData();
+    this.getData();
   },
   methods: {
     /**
@@ -63,22 +65,14 @@ const mixin = {
   * sizeRange: [20, 40, 60, 72, 100, 150, 200, 300, 400]
   */
     setSize(num) {
-      if (num === 0) {
-        // 缩小
-        if (this.currentSizeRangeIndex === 0) return;
-        this.currentSizeRangeIndex -= 1;
-      } else if (num === 1) {
-        // 放大
-        if (this.currentSizeRangeIndex === 8) return;
-        this.currentSizeRangeIndex += 1;
-      } else if (num === 2) {
-        // 正常比例
-        this.currentSizeRangeIndex = this.defaultSize.index;
+      switch (num) {
+        case 0: this.currentSizeRangeIndex === 0 ? '' : this.currentSizeRangeIndex -= 1;
+          break;
+        case 1: this.currentSizeRangeIndex === 8 ? '' : this.currentSizeRangeIndex += 1;
+          break;
+        case 2: this.currentSizeRangeIndex = this.defaultSize.index;
       }
-      this.scaleNum =
-        this.currentSizeRangeIndex === this.defaultSize.index
-          ? this.defaultSize.size
-          : this.sizeRange[this.currentSizeRangeIndex];
+      this.scaleNum = this.currentSizeRangeIndex === this.defaultSize.index ? this.defaultSize.size : this.sizeRange[this.currentSizeRangeIndex];
     },
     // 初始化 修正插件样式
     initVueRulerTool() {
@@ -86,52 +80,106 @@ const mixin = {
       const contentDom = vueRulerToolDom.querySelector(".vue-ruler-content");
       const vueRulerX = vueRulerToolDom.querySelector(".vue-ruler-h"); // 横向标尺
       const vueRulerY = vueRulerToolDom.querySelector(".vue-ruler-v"); // 纵向标尺
-      // vueRulerToolDom.style.cssText += ';width:' + (this.bigscreenWidth + 18) + 'px !important;height:' + (this.bigscreenHeight + 18) + 'px !important;'
       contentDom.style.width = "100%";
       contentDom.style.height = "100%";
 
-      let xHtmlContent = ""; // '<span class="n" style="left: 2px;">0</span>'
-      let yHtmlContent = ""; // '<span class="n" style="top: 2px;">0</span>'
+      let xHtmlContent = "";
+      let yHtmlContent = "";
       let currentNum = 0;
       while (currentNum < +this.bigscreenWidth) {
-        xHtmlContent += `<span class="n" style="left: ${currentNum + 2
-          }px;">${currentNum}</span>`;
+        xHtmlContent += `<span class="n" style="left: ${currentNum + 2}px;">${currentNum}</span>`;
         currentNum += 50;
       }
       currentNum = 0;
       while (currentNum < +this.bigscreenHeight) {
-        yHtmlContent += `<span class="n" style="top: ${currentNum + 2
-          }px;">${currentNum}</span>`;
+        yHtmlContent += `<span class="n" style="top: ${currentNum + 2}px;">${currentNum}</span>`;
         currentNum += 50;
       }
       vueRulerX.innerHTML = xHtmlContent;
       vueRulerY.innerHTML = yHtmlContent;
     },
-    async initEchartData() {
-      const reportCode = this.$route.query.reportCode;
-      const { code, data } = await detailDashboard(reportCode);
+    // 初始化接口数据
+    async getData() {
+      const { code, data } = await detailDashboard(this.reportCode);
       if (code != 200) return;
-      const processData = this.handleInitEchartsData(data);
-      const screenData = this.handleBigScreen(data.dashboard);
-      this.widgets = processData;
-      this.dashboard = screenData;
+      this.widgets = this.initWidgetsData(data);
+      this.dashboard = this.initScreenData(data.dashboard);
       this.bigscreenWidth = this.dashboard.width;
       this.bigscreenHeight = this.dashboard.height;
+    },
+    // 组件数据
+    initWidgetsData(data) {
+      const widgets = data.dashboard ? data.dashboard.widgets : [];
+      const widgetsData = [];
+      for (let i = 0; i < widgets.length; i++) {
+        const widget = widgets[i]
+        const { setup, data, position } = { ...widget.value }
+        const obj = {
+          type: widget.type,
+          value: { setup, data, position }
+        };
+        const tool = this.deepClone(getToolByCode(widget.type));
+        if (!tool) {
+          const message = "暂未提供该组件或该组件下线了，组件code: " + widget.type;
+          if (process.env.NODE_ENV === "development") {
+            this.$message.error(message);
+          }
+          continue; // 找不到就跳过，避免整个报表都加载不出来
+        }
+        obj.options = this.setDefaultWidgetConfigValue(widget.value, tool.options);
+        obj.value.widgetId = obj.value.setup.widgetId;
+        widgetsData.push(obj);
+      }
+      return widgetsData;
+    },
+    // 重写默认数据
+    setDefaultWidgetConfigValue(data, option) {
+      this.setConfigValue(data.setup, option.setup)
+      this.setConfigValue(data.position, option.position)
+      this.setConfigValue(data.data, option.data)
+      return option;
+    },
+    setConfigValue(objValue, setup) {
+      Object.keys(objValue).forEach(key => {
+        setup.forEach(item => {
+          if (this.isObjectFn(item) && key == item.name) {
+            item.value = objValue[key]
+          }
+          if (this.isArrayFn(item)) {
+            item.forEach(itemChild => {
+              itemChild.list.forEach(el => {
+                if (key == el.name) {
+                  el.value = objValue[key]
+                }
+              })
+            })
+          }
+        })
+      })
+    },
+    // 大屏数据
+    initScreenData(data) {
+      const optionScreen = getToolByCode("screen").options;
+      this.setConfigValue(data, optionScreen.setup)
+      this.setOptionsOnClickScreen();
+      return {
+        backgroundColor:
+          (data && data.backgroundColor) || (!data ? "#1e1e1e" : ""),
+        backgroundImage: (data && data.backgroundImage) || "",
+        height: (data && data.height) || "1080",
+        title: (data && data.title) || "",
+        width: (data && data.width) || "1920",
+      };
     },
     // 保存数据
     async saveData() {
       if (!this.widgets || this.widgets.length == 0) {
         return this.$message.error("请添加组件");
       }
+      const { title, width, height, backgroundColor, backgroundImage } = { ...this.dashboard }
       const screenData = {
-        reportCode: this.$route.query.reportCode,
-        dashboard: {
-          title: this.dashboard.title,
-          width: this.dashboard.width,
-          height: this.dashboard.height,
-          backgroundColor: this.dashboard.backgroundColor,
-          backgroundImage: this.dashboard.backgroundImage,
-        },
+        reportCode: this.reportCode,
+        dashboard: { title, width, height, backgroundColor, backgroundImage },
         widgets: this.widgets,
       };
       screenData.widgets.forEach((widget) => {
@@ -142,18 +190,19 @@ const mixin = {
         this.$message.success("保存成功！");
       }
     },
+    // 预览
     viewScreen() {
       let routeUrl = this.$router.resolve({
         path: "/bigscreen/viewer",
-        query: { reportCode: this.$route.query.reportCode },
+        query: { reportCode: this.reportCode },
       });
       window.open(routeUrl.href, "_blank");
     },
     async exportDashboard(val) {
-      const fileName = this.$route.query.reportCode + ".zip";
+      const fileName = this.reportCode + ".zip";
 
       const param = {
-        reportCode: this.$route.query.reportCode,
+        reportCode: this.reportCode,
         showDataSet: val,
       };
       exportDashboard(param).then((res) => {

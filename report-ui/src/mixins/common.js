@@ -291,7 +291,7 @@ export default {
       }
     },
     isObjectFn(value) {
-      return Object.prototype.toString.call(value) === "[object Array]";
+      return Object.prototype.toString.call(value) === "[object Object]";
     },
     urlEncode(val) {
       return encodeURIComponent(val)
