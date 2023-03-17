@@ -7,6 +7,7 @@ const mixin = {
     return {
       reportCode: this.$route.query.reportCode,
       uploadUrl: process.env.BASE_API + "/reportDashboard/import/" + this.reportCode,
+      revoke: null, //处理历史记录
       rightClickIndex: -1,
     }
   },
@@ -186,9 +187,7 @@ const mixin = {
         widget.value.setup.widgetId = widget.value.widgetId;
       });
       const { code, data } = await insertDashboard(screenData);
-      if (code == "200") {
-        this.$message.success("保存成功！");
-      }
+      if (code == "200") return this.$message.success("保存成功！");
     },
     // 预览
     viewScreen() {
@@ -232,38 +231,19 @@ const mixin = {
     },
     handleUndo() {
       const record = this.revoke.undo();
-      if (!record) {
-        return false;
-      }
+      if (!record) return false;
       this.widgets = record;
     },
     handleRedo() {
       const record = this.revoke.redo();
-      if (!record) {
-        return false;
-      }
+      if (!record) return false;
       this.widgets = record;
     },
     handleUpload(response, file, fileList) {
       this.$refs.upload.clearFiles();
-      this.initEchartData();
-      if (response.code == "200") {
-        this.$message({
-          message: "导入成功！",
-          type: "success",
-        });
-      } else {
-        this.$message({
-          message: response.message,
-          type: "error",
-        });
-      }
-    },
-    handleError(err) {
-      this.$message({
-        message: "上传失败！",
-        type: "error",
-      });
+      this.getData();
+      if (response.code == "200") return this.$message.success('导入成功！')
+      this.$message.error(response.message)
     },
     // 右键
     rightClick(event, index) {
@@ -294,7 +274,7 @@ const mixin = {
       const obj = this.widgets[this.rightClickIndex];
       this.$set(obj.value.position, "disabled", true);
     },
-    //  解除锁定
+    // 解除锁定
     noLockLayer() {
       const obj = this.widgets[this.rightClickIndex];
       this.$set(obj.value.position, "disabled", false);
@@ -348,7 +328,7 @@ const mixin = {
       } else {
         this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
       }
-    },
+    }
   }
 }
 

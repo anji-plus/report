@@ -183,7 +183,6 @@
               :headers="headers"
               accept=".zip"
               :on-success="handleUpload"
-              :on-error="handleError"
               :show-file-list="false"
               :limit="1"
             >
@@ -283,7 +282,7 @@
                 @onActivated="setOptionsOnClickWidget"
                 @contextmenu.prevent.native="rightClick($event, index)"
                 @mousedown.prevent.native="widgetsClick(index)"
-                @mouseup.prevent.native="widgetsMouseup"
+                @mouseup.prevent.native="grade = false"
               />
             </div>
           </vue-ruler-tool>
@@ -381,31 +380,14 @@ export default {
 
       bigscreenWidth: 1920, // 大屏设计的大小
       bigscreenHeight: 1080,
-      revoke: null, //处理历史记录 2022-02-22
+
       dashboard: {},
+
       // 大屏的标记
       screenCode: "",
       dragWidgetCode: "", //从工具栏拖拽的组件code
       // 大屏画布中的组件
-      widgets: [
-        {
-          // type和value最终存到数据库中去，保存到gaea_report_dashboard_widget中
-          type: "widget-text",
-          value: {
-            setup: {},
-            data: {},
-            position: {
-              width: 100,
-              height: 100,
-              left: 0,
-              top: 0,
-              zIndex: 0,
-            },
-          },
-          // options属性是从工具栏中拿到的tools中拿到
-          options: [],
-        },
-      ], // 工作区中拖放的组件
+      widgets: [], // 工作区中拖放的组件
       // 当前激活组件
       widgetIndex: 0,
       // 当前激活组件右侧配置属性
@@ -469,7 +451,7 @@ export default {
   watch: {
     widgets: {
       handler(val) {
-        this.handlerLayerWidget(val);
+        this.getLayerData(val);
         this.handlerdynamicDataParamsConfig(val);
         //以下部分是记录历史
         this.$nextTick(() => {
@@ -489,7 +471,8 @@ export default {
     });
   },
   methods: {
-    handlerLayerWidget(val) {
+    // 获取图层数据
+    getLayerData(val) {
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
         const obj = {};
@@ -516,7 +499,6 @@ export default {
         return item.value.data;
       });
     },
-
     // 在缩放模式下的大小
     getPXUnderScale(px) {
       return this.bigscreenScaleInWorkbench * px;
@@ -569,9 +551,6 @@ export default {
         this.currentSizeRangeIndex === this.defaultSize.index
           ? this.bigscreenScaleInWorkbench
           : this.sizeRange[this.currentSizeRangeIndex] / 100;
-      // 计算在缩放模式下的x y
-      // const x = widgetLeftInWorkbench / this.bigscreenScaleInWorkbench
-      // const y = widgetTopInWorkbench / this.bigscreenScaleInWorkbench
       const x = widgetLeftInWorkbench / targetScale;
       const y = widgetTopInWorkbench / targetScale;
 
@@ -593,9 +572,8 @@ export default {
         options: tool.options,
       };
       // 处理默认值
-      const widgetJsonValue = this.handleDefaultValue(widgetJson);
+      const widgetJsonValue = this.getWidgetConfigValue(widgetJson);
 
-      //2022年02月22日 修复：可以拖拽放到鼠标的位置
       widgetJsonValue.value.position.left =
         x - widgetJsonValue.value.position.width / 2;
       widgetJsonValue.value.position.top =
@@ -606,45 +584,32 @@ export default {
       // 激活新组件的配置属性
       this.setOptionsOnClickWidget(this.widgets.length - 1);
     },
-    // 对组件默认值处理
-    handleDefaultValue(widgetJson) {
-      console.log(widgetJson);
-      for (const key in widgetJson) {
-        if (key == "options") {
-          // collapse、data、position、setup
-          // setup 处理
-          for (let i = 0; i < widgetJson.options.setup.length; i++) {
-            const item = widgetJson.options.setup[i];
-            if (this.isObjectFn(item)) {
-              widgetJson.value.setup[item.name] = item.value;
-            } else if (this.isArrayFn(item)) {
-              for (let j = 0; j < item.length; j++) {
-                const list = item[j].list;
-                list.forEach((el) => {
-                  widgetJson.value.setup[el.name] = el.value;
-                });
-              }
-            }
-          }
-          // position
-          for (let i = 0; i < widgetJson.options.position.length; i++) {
-            const item = widgetJson.options.position[i];
-            if (item.value) {
-              widgetJson.value.position[item.name] = item.value;
-            }
-          }
-          // data 处理
-          if (widgetJson.options.data && widgetJson.options.data.length > 0) {
-            for (let i = 0; i < widgetJson.options.data.length; i++) {
-              const item = widgetJson.options.data[i];
-              if (item.value) {
-                widgetJson.value.data[item.name] = item.value;
-              }
-            }
-          }
-        }
-      }
+    getWidgetConfigValue(widgetJson) {
+      this.setWidgetConfigValue(
+        widgetJson.options.setup,
+        widgetJson.value.setup
+      );
+      this.setWidgetConfigValue(
+        widgetJson.options.position,
+        widgetJson.value.position
+      );
+      this.setWidgetConfigValue(widgetJson.options.data, widgetJson.value.data);
+
       return widgetJson;
+    },
+    setWidgetConfigValue(config, configValue) {
+      config.forEach((item) => {
+        if (this.isObjectFn(item)) {
+          configValue[item.name] = item.value;
+        }
+        if (this.isArrayFn(item)) {
+          item.forEach((itemChild) => {
+            itemChild.forEach((ev) => {
+              configValue[ev.name] = ev.value;
+            });
+          });
+        }
+      });
     },
     layerClick(index) {
       this.widgetIndex = index;
@@ -689,9 +654,6 @@ export default {
       }
       this.setOptionsOnClickWidget(index);
       this.grade = true;
-    },
-    widgetsMouseup(e) {
-      this.grade = false;
     },
     handleMouseDown() {
       const draggableArr = this.$refs.widgets;
