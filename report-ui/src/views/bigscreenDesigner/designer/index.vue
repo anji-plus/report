@@ -604,7 +604,7 @@ export default {
         }
         if (this.isArrayFn(item)) {
           item.forEach((itemChild) => {
-            itemChild.forEach((ev) => {
+            itemChild.list.forEach((ev) => {
               configValue[ev.name] = ev.value;
             });
           });
