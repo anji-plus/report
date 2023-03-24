@@ -25,13 +25,6 @@ export const widgetIframe = {
       },
       {
         type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-iframe' + Date.now()
-      },
-      {
-        type: 'el-input-text',
         label: '地址',
         name: 'iframeAdress',
         required: false,

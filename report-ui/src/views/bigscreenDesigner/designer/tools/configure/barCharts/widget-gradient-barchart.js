@@ -24,13 +24,6 @@ export const widgetGradientBarchart = {
         value: '柱形图-渐变色',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-gradient-color-barchart' + Date.now()
-      },
-      {
         type: 'el-switch',
         label: '竖展示',
         name: 'verticalShow',

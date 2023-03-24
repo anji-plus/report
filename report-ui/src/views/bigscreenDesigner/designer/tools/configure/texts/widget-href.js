@@ -25,13 +25,6 @@ export const widgetHref = {
       },
       {
         type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-href' + Date.now()
-      },
-      {
-        type: 'el-input-text',
         label: '文本内容',
         name: 'text',
         required: false,

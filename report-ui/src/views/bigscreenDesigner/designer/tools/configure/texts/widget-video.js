@@ -25,13 +25,6 @@ export const widgetVideo = {
       },
       {
         type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-video' + Date.now()
-      },
-      {
-        type: 'el-input-text',
         label: '地址',
         name: 'videoAdress',
         required: false,

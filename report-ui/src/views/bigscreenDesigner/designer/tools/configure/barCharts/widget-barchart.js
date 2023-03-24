@@ -24,13 +24,6 @@ export const widgetBarchart = {
         value: '柱状图',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-barchart' + Date.now()
-      },
-      {
         type: 'el-switch',
         label: '竖展示',
         name: 'verticalShow',

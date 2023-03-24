@@ -24,13 +24,6 @@ export const widgetLineStack = {
         value: '折线堆叠图',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widgetLineStackChart' + Date.now()
-      },
-      {
         type: 'el-switch',
         label: '竖展示',
         name: 'verticalShow',

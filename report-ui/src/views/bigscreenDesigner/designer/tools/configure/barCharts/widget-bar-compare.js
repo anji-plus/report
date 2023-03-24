@@ -24,13 +24,6 @@ export const widgetBarCompare = {
         value: '柱状对比图',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widgetBarCompareChart' + Date.now()
-      },
-      {
         type: 'vue-color',
         label: '背景颜色',
         name: 'background',

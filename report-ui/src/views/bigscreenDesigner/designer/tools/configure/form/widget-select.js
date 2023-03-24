@@ -48,16 +48,6 @@ export const widgetSelect = {
       },
       {
         type: 'el-select',
-        label: '关联图表',
-        name: 'assChart',
-        required: false,
-        placeholder: '',
-        multiple: true,
-        selectOptions: [],
-        value: '',
-      },
-      {
-        type: 'el-select',
         label: '触发事件',
         name: 'event',
         required: false,

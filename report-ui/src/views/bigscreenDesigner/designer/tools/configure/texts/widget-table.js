@@ -23,13 +23,6 @@ export const widgetTable = {
         value: '表格',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-table' + Date.now()
-      },
-      {
         type: 'el-select',
         label: '字体位置',
         name: 'textAlign',

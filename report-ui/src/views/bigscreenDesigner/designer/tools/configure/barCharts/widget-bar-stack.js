@@ -24,13 +24,6 @@ export const widgetBarStack = {
         value: '柱状堆叠图',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widgetBarStackChart' + Date.now()
-      },
-      {
         type: 'el-switch',
         label: '竖展示',
         name: 'verticalShow',

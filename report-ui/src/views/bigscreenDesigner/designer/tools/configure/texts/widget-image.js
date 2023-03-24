@@ -24,13 +24,6 @@ export const widgetImage = {
         value: '图片',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-image' + Date.now()
-      },
-      {
         type: 'el-switch',
         label: '开启旋转',
         name: 'startRotate',

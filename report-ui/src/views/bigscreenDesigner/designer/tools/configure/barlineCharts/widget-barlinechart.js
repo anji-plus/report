@@ -24,13 +24,6 @@ export const widgetBarlinechart = {
         value: '柱线图',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-barlinechart' + Date.now()
-      },
-      {
         type: 'vue-color',
         label: '背景颜色',
         name: 'background',

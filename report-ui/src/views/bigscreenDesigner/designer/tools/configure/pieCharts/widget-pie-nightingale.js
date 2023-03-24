@@ -24,13 +24,6 @@ export const widgetPieNightingale = {
         value: '南丁格尔玫瑰图',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'WidgetPieNightingaleRoseArea' + Date.now()
-      },
-      {
         type: 'vue-color',
         label: '背景颜色',
         name: 'background',

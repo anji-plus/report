@@ -24,13 +24,6 @@ export const widgetTime = {
         value: '当前时间',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-time' + Date.now()
-      },
-      {
         type: 'el-select',
         label: '时间格式',
         name: 'timeFormat',

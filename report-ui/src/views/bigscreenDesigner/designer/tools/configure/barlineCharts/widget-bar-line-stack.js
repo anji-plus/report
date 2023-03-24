@@ -20,13 +20,6 @@ export const widgetBarLineStack = {
         value: '柱线堆叠图',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widgetBarLineStackChart' + Date.now()
-      },
-      {
         type: 'vue-color',
         label: '背景颜色',
         name: 'background',

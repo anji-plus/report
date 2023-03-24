@@ -17,13 +17,6 @@ export const widgetScale = {
         value: '刻度尺',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-scale' + Date.now()
-      },
-      {
         type: 'el-switch',
         label: '竖展示',
         name: 'verticalShow',

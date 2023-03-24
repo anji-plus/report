@@ -25,13 +25,6 @@ export const widgetText = {
       },
       {
         type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-text' + Date.now()
-      },
-      {
-        type: 'el-input-text',
         label: '文本内容',
         name: 'text',
         required: false,

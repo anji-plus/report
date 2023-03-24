@@ -24,13 +24,6 @@ export const widgetAirbubbleMap = {
         value: '中国地图-气泡图',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widgetAirBubbleMap' + Date.now()
-      },
-      {
         type: 'vue-color',
         label: '背景颜色',
         name: 'background',

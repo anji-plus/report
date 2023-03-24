@@ -24,13 +24,6 @@ export const widgetDecoratePie = {
         value: '静态装饰饼图',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widgetDecoratePieChart' + Date.now()
-      },
-      {
         type: 'vue-color',
         label: '背景颜色',
         name: 'background',

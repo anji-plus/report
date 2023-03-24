@@ -40,24 +40,14 @@ export const widgetInput = {
       },
       {
         type: 'el-select',
-        label: '关联图表',
-        name: 'assChart',
-        required: false,
-        placeholder: '',
-        multiple: true,
-        selectOptions: [],
-        value: '',
-      },
-      {
-        type: 'el-select',
         label: '触发事件',
         name: 'event',
         required: false,
         placeholder: '',
         selectOptions: [
-          {code: 'change', name: 'change'},
-          {code: 'blur', name: 'blur'},
-          {code: 'focus', name: 'focus'},
+          { code: 'change', name: 'change' },
+          { code: 'blur', name: 'blur' },
+          { code: 'focus', name: 'focus' },
         ],
         value: 'change',
       }

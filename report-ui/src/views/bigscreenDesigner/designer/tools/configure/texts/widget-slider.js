@@ -23,13 +23,6 @@ export const widgetSliders = {
         placeholder: '',
       },
       {
-        type: 'el-input-text',
-        label: '图层唯一标识',
-        name: 'uuid',
-        disabled: true,
-        value: 'widget-slider' + Date.now()
-      },
-      {
         type: 'el-switch',
         label: '隐藏图层',
         name: 'hideLayer',
