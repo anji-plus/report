@@ -1,9 +1,9 @@
 
-export const widgetScale = {
-  code: 'widget-scale',
+export const widgetScaleVertical = {
+  code: 'widget-scale-vertical',
   type: 'scaleCharts',
   tabName: '刻度尺',
-  label: '刻度尺',
+  label: '竖刻度尺',
   icon: 'iconicon_tubiao_bingtu',
   options: {
     // 配置
@@ -14,15 +14,7 @@ export const widgetScale = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '刻度尺',
-      },
-      {
-        type: 'el-switch',
-        label: '竖展示',
-        name: 'verticalShow',
-        required: false,
-        placeholder: '',
-        value: false,
+        value: '竖刻度尺',
       },
       {
         type: 'vue-color',
@@ -165,6 +157,14 @@ export const widgetScale = {
           name: '刻度设定',
           list: [
             {
+              type: 'el-switch',
+              label: '刻度显示',
+              name: 'isShowScale',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
               type: 'el-input-number',
               label: '最大刻度',
               name: 'maxScale',
@@ -288,6 +288,14 @@ export const widgetScale = {
               required: false,
               placeholder: '',
               value: true,
+            },
+            {
+              type: 'el-input-number',
+              label: '位置',
+              name: 'fontDistance',
+              required: false,
+              placeholder: '',
+              value: 0,
             },
             {
               type: 'el-input-number',
@@ -456,7 +464,7 @@ export const widgetScale = {
         chartType: 'widget-scale',
         relactiveDomValue: 'dynamicData',
         dictKey: 'TEXT_PROPERTIES',
-        value: '',
+        value: null,
       },
     ],
     // 坐标

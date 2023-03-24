@@ -43,7 +43,8 @@ import widgetBarLineStackChart from "./barline/widgetBarLineStackChart";
 import widgetSelect from "./form/widgetSelect";
 import widgetInput from "./form/widgetInput.vue";
 import widgetFormTime from "./form/widgetFormTime.vue";
-import widgetScale from "./scale/widgetScale.vue";
+import widgetScaleVertical from "./scale/widgetScaleVertical.vue";
+import widgetScaleHorizontal from "./scale/widgetScaleHorizontal.vue";
 
 export default {
   name: "WidgetTemp",
@@ -78,7 +79,8 @@ export default {
     widgetHeatmap,
     widgetRadar,
     widgetBarLineStackChart,
-    widgetScale,
+    widgetScaleVertical,
+    widgetScaleHorizontal,
     widgetSelect,
     widgetInput,
     widgetFormTime,

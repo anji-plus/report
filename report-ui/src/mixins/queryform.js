@@ -122,7 +122,8 @@ export default {
         return this.barOrLineChartFn(params.chartProperties, data);
       } else if (
         chartType == "widget-piechart" ||
-        chartType == "widget-funnel"
+        chartType == "widget-funnel" ||
+        chartType == "widget-scale"
       ) {
         return this.piechartFn(params.chartProperties, data);
       } else if (chartType == "widget-text") {

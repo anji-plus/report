@@ -6,6 +6,7 @@
 
 <script>
 import echarts from "echarts";
+import {eventBusParams} from "@/utils/screen";
 
 let scale = [];
 let max;
@@ -13,7 +14,7 @@ let min;
 let Gradient = [];
 
 export default {
-  name: "widgetScale",
+  name: "widgetScaleHorizontal",
   components: {},
   props: {
     value: Object,
@@ -23,39 +24,6 @@ export default {
     return {
       options: {
         yAxis: [
-          {
-            // 对底部高度有影响
-            show: true,
-            data: [],
-            min: 0,
-            max: max,
-            axisLine: {
-              show: false
-            }
-          },
-          {
-            show: false,
-            min: 0,
-            max: max,
-          },
-          {
-            type: 'category',
-            position: 'left',
-            offset: -5,
-            axisLabel: {
-              fontSize: 10,
-              color: 'white'
-            },
-            axisLine: {
-              show: false
-            },
-            axisTick: {
-              show: false
-            },
-          }
-        ],
-        xAxis: [
-          // 宽度
           {
             show: false,
             min: -10,
@@ -83,17 +51,52 @@ export default {
                 color: 'rgba(56, 128, 138,1)',
               }
             }
-          }
+          },
+        ],
+        xAxis: [
+          {
+            type: "value",
+            show: false,
+            min: 0,
+            max: max,
+            data: []
+          }, {
+            type: "value",
+            show: false,
+            min: 0,
+            max: max,
+            data: []
+          }, {
+            type: "value",
+            show: false,
+            min: 0,
+            max: max,
+            data: []
+          },
+          {
+            show: false,
+            data: [],
+            min: 0,
+            max: max,
+            axisLine: {
+              show: false
+            },
+          },
+          {
+            show: false,
+            min: 0,
+            max: max,
+          },
         ],
         series: [
           {
             name: "值",
             type: "bar",
+            yAxisIndex : 0,
             barWidth: 35,
-            xAxisIndex: 0,
             itemStyle: {
               normal: {
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, Gradient),
+                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, Gradient),
                 barBorderRadius: 50,
               }
             },
@@ -103,7 +106,7 @@ export default {
                 label: {
                   normal: {
                     show: true,
-                    position: "top",
+                    position: "bottom",
                     backgroundColor: {},
                     width: 10,
                     height: 50,
@@ -123,7 +126,7 @@ export default {
           {
             name: '白框',
             type: 'bar',
-            xAxisIndex: 1,
+            yAxisIndex : 1,
             barGap: '-100%',
             data: [max - 1],
             barWidth: 35,
@@ -138,7 +141,7 @@ export default {
           {
             name: '外框',
             type: 'bar',
-            xAxisIndex: 2,
+            yAxisIndex: 2,
             barGap: '-100%',
             data: [max],
             barWidth: 45,
@@ -153,12 +156,12 @@ export default {
           {
             name: '刻度',
             type: 'bar',
-            yAxisIndex: 0,
+            yAxisIndex: 3,
             xAxisIndex: 3,
             label: {
               normal: {
                 show: true,
-                position: 'left',
+                position: 'top',
                 distance: 10,
                 color: 'rgba(56, 128, 138,1)',
                 fontSize: 16,
@@ -222,19 +225,25 @@ export default {
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    eventBusParams(
+      this.optionsSetup,
+      this.optionsData,
+      (dynamicData, optionsSetup) => {
+        this.getEchartData(dynamicData, optionsSetup);
+      }
+    );
   },
   methods: {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionsMaxScale();
-      this.setOptionsYAxis();
+      this.setOptionsXAxis();
       this.setOptionsScale();
       this.setOptionsOutBar();
       this.setOptionsMargin();
       this.setOptionsData();
       this.setOptionsInBar();
-
     },
     // 标题设置
     setOptionsTitle() {
@@ -281,16 +290,24 @@ export default {
       }
       return scale;
     },
-    setOptionsYAxis() {
-      this.options.yAxis[0].max = max;
-      this.options.yAxis[1].max = max;
+    setOptionsXAxis() {
+      this.options.xAxis[0].max = max;
+      this.options.xAxis[1].max = max;
+      this.options.xAxis[2].max = max;
+      this.options.xAxis[3].max = max;
+      this.options.xAxis[4].max = max;
     },
     // 刻度设定
     setOptionsScale() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series[3];
-      //刻度
-      series.data = scale;
+      // 刻度
+      // 显示
+      if (optionsSetup.isShowScale) {
+        series.data = scale;
+      }else {
+        series.data = 0;
+      }
       series.barWidth = optionsSetup.scaleBarWidth;
       series.itemStyle = {
         normal: {
@@ -301,7 +318,7 @@ export default {
       series.label = {
         normal: {
           show: true,
-          position: 'left',
+          position: 'bottom',
           distance: 10,
           fontSize: optionsSetup.scaleFontSize,
           color: optionsSetup.scaleDataColor,
@@ -347,7 +364,7 @@ export default {
       series0.barWidth = optionsSetup.inBarWidth;
       series0.itemStyle = {
         normal: {
-          color: new echarts.graphic.LinearGradient(0, 1, 0, 0, Gradient),
+          color: new echarts.graphic.LinearGradient(0, 0, 1, 0, Gradient),
           barBorderRadius: optionsSetup.inBarRadius,
         }
       };
@@ -453,14 +470,14 @@ export default {
       const gradient = this.setOptionsColor(num, optionsSetup.maxScale);
       Gradient = gradient;
       // 数值设定
-      const series = this.options.series;
+      const series = this.options.series[0];
       const data = {
         value: this.setShowValue(num, optionsSetup.maxScale),
         label: {
           normal: {
             show: optionsSetup.isShow,
-            position: "top",
-            backgroundColor: {},
+            position: "right",
+            distance: optionsSetup.fontDistance,
             width: 10,
             height: 50,
             formatter: '{back| ' + num + ' }',
@@ -470,14 +487,13 @@ export default {
                 lineHeight: 50,
                 fontSize: optionsSetup.fontSize,
                 fontWeight: optionsSetup.fontWeight,
-                fontFamily: 'digifacewide',
                 color: gradient[gradient.length - 1].color,
               },
             }
           }
         }
       }
-      series[0].data[0] = data;
+      series.data[0] = data;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -497,11 +513,36 @@ export default {
       });
     },
     renderingFn(val) {
-      for (const key in this.options.series) {
-        if (this.options.series[key].type == "pie") {
-          this.options.series[key].data = val;
+      const optionsSetup = this.optionsSetup;
+      const num = val[0].value;
+      // 渐变色
+      const gradient = this.setOptionsColor(num, optionsSetup.maxScale);
+      Gradient = gradient;
+      // 数值设定
+      const series = this.options.series;
+      const data = {
+        value: this.setShowValue(num, optionsSetup.maxScale),
+        label: {
+          normal: {
+            show: optionsSetup.isShow,
+            position: "right",
+            distance: optionsSetup.fontDistance,
+            width: 10,
+            height: 50,
+            formatter: '{back| ' + num + ' }',
+            rich: {
+              back: {
+                align: 'center',
+                lineHeight: 50,
+                fontSize: optionsSetup.fontSize,
+                fontWeight: optionsSetup.fontWeight,
+                color: gradient[gradient.length - 1].color,
+              },
+            }
+          }
         }
       }
+      series[0].data[0] = data;
     },
   },
 };
