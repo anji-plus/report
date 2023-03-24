@@ -3,7 +3,7 @@
  * @Author: qianlishi qianlishi@anji-plus.com
  * @Date: 2023-01-09 13:02:59
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-03-06 15:33:39
+ * @LastEditTime: 2023-03-24 10:27:23
  */
 
 export const widgetSelect = {
@@ -58,7 +58,19 @@ export const widgetSelect = {
           { code: 'focus', name: 'focus' },
         ],
         value: 'change',
-      }
+      },
+      [{
+        name: '组件联动',
+        list: [
+          {
+            type: 'componentLinkage',
+            label: '',
+            name: 'componentLinkage',
+            required: false,
+            value: []
+          }
+        ]
+      }]
     ],
     data: [
       {

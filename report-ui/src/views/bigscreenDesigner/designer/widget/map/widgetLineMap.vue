@@ -4,7 +4,6 @@
   </div>
 </template>
 <script>
-import { eventBusParams } from "@/utils/screen";
 import "echarts/map/js/china.js";
 import echarts from "echarts";
 import { conversionCity } from "@/utils/china";
@@ -323,14 +322,6 @@ export default {
   },
   mounted() {
     this.editorOptions();
-    eventBusParams(
-      this.optionsSetup,
-      this.optionsData,
-      (dynamicData, optionsSetup) => {
-        console.log("dynamicData", dynamicData);
-        this.getEchartData(dynamicData, optionsSetup);
-      }
-    );
   },
   methods: {
     convertData(data) {

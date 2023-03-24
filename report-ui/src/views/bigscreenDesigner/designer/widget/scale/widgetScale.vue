@@ -6,7 +6,6 @@
 
 <script>
 import echarts from "echarts";
-import {eventBusParams} from "@/utils/screen";
 
 let scale = [];
 let max;
@@ -223,13 +222,6 @@ export default {
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
-    eventBusParams(
-      this.optionsSetup,
-      this.optionsData,
-      (dynamicData, optionsSetup) => {
-        this.getEchartData(dynamicData, optionsSetup);
-      }
-    );
   },
   methods: {
     // 修改图标options属性

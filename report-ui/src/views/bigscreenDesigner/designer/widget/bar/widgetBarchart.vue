@@ -6,7 +6,6 @@
 
 <script>
 import { originWidgetLinkageLogic, targetWidgetLinkageLogic } from '@/views/bigscreenDesigner/designer/linkageLogic'
-import { eventBusParams } from "@/utils/screen";
 export default {
   name: "WidgetBarchart",
   components: {},
@@ -100,14 +99,6 @@ export default {
     targetWidgetLinkageLogic(this) // 联动-目标组件逻辑
     originWidgetLinkageLogic(this) // 联动-源组件逻辑
 
-    eventBusParams(
-      this.optionsSetup,
-      this.optionsData,
-      (dynamicData, optionsSetup) => {
-        console.log("dynamicData", dynamicData);
-        this.getEchartData(dynamicData, optionsSetup);
-      }
-    );
   },
   methods: {
     // 修改图标options属性

@@ -6,7 +6,6 @@
 <script>
 import vue from "vue";
 import VueSuperSlide from "vue-superslide";
-import { eventBusParams } from "@/utils/screen";
 vue.use(VueSuperSlide);
 export default {
   props: {
@@ -58,14 +57,6 @@ export default {
     this.optionsPosition = this.value.position;
     this.optionsData = this.value.data;
     this.editorOptions();
-    eventBusParams(
-      this.optionsSetup,
-      this.optionsData,
-      (dynamicData, optionsSetup) => {
-        console.log("dynamicData", dynamicData);
-        this.getEchartData(dynamicData, optionsSetup);
-      }
-    );
   },
   methods: {
     editorOptions() {

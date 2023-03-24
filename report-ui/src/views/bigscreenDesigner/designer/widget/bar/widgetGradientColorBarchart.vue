@@ -6,7 +6,6 @@
 
 <script>
 import echarts from "echarts";
-import { eventBusParams } from "@/utils/screen";
 export default {
   name: "WidgetGradientColorBarchart", //渐变色，参考https://www.makeapie.com/editor.html?c=x0oZWoncE
   components: {},
@@ -163,14 +162,6 @@ export default {
     this.optionsCollapse = this.value.setup;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
-    eventBusParams(
-      this.optionsSetup,
-      this.optionsData,
-      (dynamicData, optionsSetup) => {
-        console.log("dynamicData", dynamicData);
-        this.getEchartData(dynamicData, optionsSetup);
-      }
-    );
   },
   methods: {
     // 修改图标options属性
