@@ -237,7 +237,7 @@ export const widgetPiechart = {
             {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'tipFontSize',
+              name: 'tipsFontSize',
               required: false,
               placeholder: '',
               value: 16
