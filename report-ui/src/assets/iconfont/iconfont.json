@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "23626707",
+      "name": "进度条",
+      "font_class": "jindutiao",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
       "icon_id": "1766474",
       "name": "符号-单行输入框",
       "font_class": "danhangshurukuang",

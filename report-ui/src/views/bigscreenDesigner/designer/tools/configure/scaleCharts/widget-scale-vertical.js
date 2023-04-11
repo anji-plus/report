@@ -4,7 +4,7 @@ export const widgetScaleVertical = {
   type: 'scaleCharts',
   tabName: '刻度尺',
   label: '竖刻度尺',
-  icon: 'iconicon_tubiao_bingtu',
+  icon: 'iconjindutiao',
   options: {
     // 配置
     setup: [
