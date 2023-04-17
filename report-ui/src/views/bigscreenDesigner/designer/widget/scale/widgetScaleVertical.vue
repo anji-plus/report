@@ -10,10 +10,10 @@ import echarts from "echarts";
 let scale = [];
 let max;
 let min;
-let Gradient = [];
 
+// 竖刻度尺
 export default {
-  name: "widgetScale",
+  name: "widgetScaleVertical",
   components: {},
   props: {
     value: Object,
@@ -93,7 +93,7 @@ export default {
             xAxisIndex: 0,
             itemStyle: {
               normal: {
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, Gradient),
+                color: "#0C2F6F",
                 barBorderRadius: 50,
               }
             },
@@ -234,7 +234,6 @@ export default {
       this.setOptionsMargin();
       this.setOptionsData();
       this.setOptionsInBar();
-
     },
     // 标题设置
     setOptionsTitle() {
@@ -339,29 +338,21 @@ export default {
     // 内框设置
     setOptionsInBar() {
       const optionsSetup = this.optionsSetup;
-      const series1 = this.options.series[1];
-      series1.barWidth = optionsSetup.inBarWidth;
-      series1.itemStyle = {
+      const series = this.options.series[1];
+      series.barWidth = optionsSetup.inBarWidth;
+      series.itemStyle = {
         normal: {
           color: optionsSetup.inBarColor,
           barBorderRadius: optionsSetup.inBarRadius,
         }
       };
-      series1.data = [max - 1];
-      const series0 = this.options.series[0];
-      series0.barWidth = optionsSetup.inBarWidth;
-      series0.itemStyle = {
-        normal: {
-          color: new echarts.graphic.LinearGradient(0, 1, 0, 0, Gradient),
-          barBorderRadius: optionsSetup.inBarRadius,
-        }
-      };
+      series.data = [max - 1];
     },
     // 渐变色设置
-    setOptionsColor(inputValue, max) {
+    setOptionsColor(inputValue, inputMax) {
       const optionsSetup = this.optionsSetup;
       let gradient = [];
-      if (inputValue > (max * 0.7)) {
+      if (inputValue > (inputMax * 0.7)) {
         gradient.push(
           {
             offset: 0,
@@ -379,7 +370,7 @@ export default {
             offset: 1,
             color: optionsSetup.bar100Color,
           })
-      } else if (inputValue > (max * 0.3)) {
+      } else if (inputValue > (inputMax * 0.3)) {
         gradient.push(
           {
             offset: 0,
@@ -406,10 +397,10 @@ export default {
       }
       return gradient;
     },
-    setShowValue(inputValue, max) {
+    setShowValue(inputValue, inputMax) {
       let showValue = inputValue;
-      if (inputValue > max) {
-        showValue = max
+      if (inputValue > inputMax) {
+        showValue = inputMax
       } else {
         if (inputValue < 0) {
           showValue = 0
@@ -456,7 +447,6 @@ export default {
       const num = val[0]["num"];
       // 渐变色
       const gradient = this.setOptionsColor(num, optionsSetup.maxScale);
-      Gradient = gradient;
       // 数值设定
       const series = this.options.series[0];
       const data = {
@@ -481,6 +471,13 @@ export default {
           }
         }
       }
+      series.barWidth = optionsSetup.inBarWidth;
+      series.itemStyle = {
+        normal: {
+          color: new echarts.graphic.LinearGradient(0, 1, 0, 0, gradient),
+          barBorderRadius: optionsSetup.inBarRadius,
+        }
+      };
       series.data[0] = data;
     },
     dynamicDataFn(val, refreshTime) {
@@ -505,9 +502,8 @@ export default {
       const num = val[0].value;
       // 渐变色
       const gradient = this.setOptionsColor(num, optionsSetup.maxScale);
-      Gradient = gradient;
       // 数值设定
-      const series = this.options.series;
+      const series = this.options.series[0];
       const data = {
         value: this.setShowValue(num, optionsSetup.maxScale),
         label: {
@@ -530,7 +526,14 @@ export default {
           }
         }
       }
-      series[0].data[0] = data;
+      series.barWidth = optionsSetup.inBarWidth;
+      series.itemStyle = {
+        normal: {
+          color: new echarts.graphic.LinearGradient(0, 1, 0, 0, gradient),
+          barBorderRadius: optionsSetup.inBarRadius,
+        }
+      };
+      series.data[0] = data;
     },
   },
 };
