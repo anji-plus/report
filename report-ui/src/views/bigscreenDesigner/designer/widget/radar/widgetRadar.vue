@@ -61,7 +61,6 @@ export default {
   methods: {
     editorOptions() {
       this.setOptionsTitle();
-      this.setOptionIndicator();
       this.setOptionsRadar();
       this.setOptionsLegend();
       this.setOptionsTooltip();
@@ -89,12 +88,6 @@ export default {
         fontStyle: optionsSetup.subTextFontStyle,
       };
       this.options.title = title;
-    },
-    // 雷达设置相关
-    setOptionIndicator() {
-      const optionsSetup = this.optionsSetup;
-      const indicator = optionsSetup.dynamicAddRadar;
-      this.options.radar.indicator = indicator;
     },
     // 雷达设置
     setOptionsRadar() {
@@ -203,8 +196,9 @@ export default {
         arrColor.push(customColor[i].color);
       }
       this.options.color = arrColor;
-
+      // 雷达设置相关
       const indicator = optionsSetup.dynamicAddRadar;
+      this.options.radar.indicator = indicator;
       // 雷达图key值
       const radarKeys = [];
       for (const i in indicator) {
@@ -284,8 +278,9 @@ export default {
         arrColor.push(customColor[i].color);
       }
       this.options.color = arrColor;
-
+      // 雷达设置相关
       const indicator = optionsSetup.dynamicAddRadar;
+      this.options.radar.indicator = indicator;
       // 雷达图key值
       const radarKeys = [];
       for (const i in indicator) {
@@ -338,6 +333,7 @@ export default {
       };
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
+      console.log(this.options.series)
     },
   },
 };
