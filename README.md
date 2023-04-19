@@ -217,7 +217,7 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 
 ## 更多支持
 
-联系方式: <br>
+联系方式 <br>
 
 <img src="https://foruda.gitee.com/images/1681893479845506596/859934b5_1950629.png" width = "300" height = "300" align=left/>
 
