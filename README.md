@@ -215,6 +215,11 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请过段时间再发送。 <br>
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "300" height = "300" align=left/>
 
+## 更多支持
+
+<img src="https://foruda.gitee.com/images/1681893479845506596/859934b5_1950629.png" width = "300" height = "300" align=left/>
+
+
 ## 加入我们
 
 - 提交PR是最快的加入方式:<br>
