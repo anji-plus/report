@@ -367,7 +367,7 @@ export const widgetPiechart = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',
