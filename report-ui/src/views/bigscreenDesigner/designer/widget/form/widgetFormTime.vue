@@ -14,11 +14,20 @@
   />
 </template>
 <script>
+import {
+  originWidgetLinkageLogic,
+  targetWidgetLinkageLogic,
+} from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 export default {
-  name: "WidgetSelect",
+  name: "WidgetFormTime",
   props: {
     value: Object,
     ispreview: Boolean,
+    widgetIndex: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
@@ -43,6 +52,9 @@ export default {
     eventChange() {
       return this.optionsSetup.event || "change";
     },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -60,18 +72,18 @@ export default {
     this.optionsData = this.value.data;
     this.optionsStyle = this.value.position;
     this.setOptions();
+
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
     change(event) {
       console.log(event);
-      const optionsSetup = this.optionsSetup;
-      const params = {};
-      params[optionsSetup.field] = event;
-      params["assChart"] = optionsSetup.assChart;
-      console.log(event);
-      // console.log(params)
-      const optionsData = this.optionsData;
-      console.log(optionsData);
+      const formTimeData = {}
+      formTimeData['startTime'] = event[0]  //startTime
+      formTimeData['endTime'] = event[1] //endTime
+      originWidgetLinkageLogic(this, true, {
+        currentData: formTimeData,
+      }); // 联动-源组件逻辑
     },
     setOptions() {
       const optionsData = this.optionsData;

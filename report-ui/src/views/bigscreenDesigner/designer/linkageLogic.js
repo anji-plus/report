@@ -13,6 +13,16 @@ export const lickageParamsConfig = [
   //   paramsKey: [] // 40@remarks 动态：[...row, index]
   // },
   {
+    name: '下拉框',
+    code: 'widget-select',
+    paramsKey: ['label','value']
+  },
+  {
+    name: '时间筛选器',
+    code: 'widget-form-time',
+    paramsKey: ['startTime','endTime']
+  },
+  {
     name: '柱图',
     code: 'widget-barchart',
     paramsKey: ['name', 'value']
