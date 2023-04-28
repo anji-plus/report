@@ -5,7 +5,10 @@
 </template>
 
 <script>
-import { originWidgetLinkageLogic, targetWidgetLinkageLogic } from '@/views/bigscreenDesigner/designer/linkageLogic'
+import {
+  originWidgetLinkageLogic,
+  targetWidgetLinkageLogic,
+} from "@/views/bigscreenDesigner/designer/linkageLogic";
 export default {
   name: "WidgetBarchart",
   components: {},
@@ -14,7 +17,7 @@ export default {
     ispreview: Boolean,
     widgetIndex: {
       type: Number,
-      default: 0
+      default: 0,
     }, // 当前组件，在工作区变量widgetInWorkbench中的索引
   },
   data() {
@@ -75,8 +78,8 @@ export default {
       };
     },
     allComponentLinkage() {
-      return this.$store.state.designer.allComponentLinkage
-    }
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -96,9 +99,8 @@ export default {
     this.optionsCollapse = this.value.setup;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
-    targetWidgetLinkageLogic(this) // 联动-目标组件逻辑
-    originWidgetLinkageLogic(this) // 联动-源组件逻辑
-
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
+    originWidgetLinkageLogic(this); // 联动-源组件逻辑
   },
   methods: {
     // 修改图标options属性
@@ -307,16 +309,20 @@ export default {
       const optionsSetup = this.optionsSetup;
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       // 联动接收者逻辑开始
-      optionsData.dynamicData = optionsData.dynamicData || {} // 兼容 dynamicData undefined
-      const myDynamicData = optionsData.dynamicData
-      clearInterval(this.flagInter) // 不管咋，先干掉上一次的定时任务，避免多跑
-      if (e && optionsData.dataType !== 'staticData' && Object.keys(myDynamicData.contextData).length) {
-        const keyArr = Object.keys(myDynamicData.contextData)
-        paramsConfig.forEach(conf => {
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
           if (keyArr.includes(conf.targetKey)) {
-            myDynamicData.contextData[conf.targetKey] = e[conf.originKey]
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
           }
-        })
+        });
       }
       // 联动接收者逻辑结束
       optionsData.dataType == "staticData"

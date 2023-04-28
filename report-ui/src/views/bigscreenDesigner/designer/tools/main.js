@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:46:46
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-03-06 16:03:17
+ * @LastEditTime: 2023-04-19 09:22:37
  */
 
 import { widgetText } from "./configure/texts/widget-text"
@@ -39,10 +39,10 @@ import { widgetHeatmap } from "./configure/heatmap/widget-heatmap";
 import { widgetRadar } from "./configure/radarCharts/widget-radar";
 import { widgetBarLineStack } from "./configure/barlineCharts/widget-bar-line-stack";
 import { widgetSelect } from "./configure/form/widget-select";
-import { widgetInput } from "./configure/form/widget-input";
+// import { widgetInput } from "./configure/form/widget-input";
 import { widgetFormTime } from "./configure/form/widget-form-time";
-import {widgetScaleVertical} from "./configure/scaleCharts/widget-scale-vertical";
-import {widgetScaleHorizontal} from "./configure/scaleCharts/widget-scale-horizontal"
+import { widgetScaleVertical } from "./configure/scaleCharts/widget-scale-vertical";
+import { widgetScaleHorizontal } from "./configure/scaleCharts/widget-scale-horizontal"
 
 export const widgetTool = [
   // type=html类型的组件
@@ -80,6 +80,6 @@ export const widgetTool = [
   widgetScaleVertical,
   widgetScaleHorizontal,
   widgetSelect,
-  widgetInput,
+  // widgetInput,
   widgetFormTime
 ]

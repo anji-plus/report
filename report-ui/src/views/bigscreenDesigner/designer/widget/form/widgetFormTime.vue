@@ -2,19 +2,18 @@
  * @Author: qianlishi qianlishi@anji-plus.com
  * @Date: 2023-03-06 15:38:10
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-03-06 16:11:21
+ * @LastEditTime: 2023-04-20 13:54:57
 -->
 <template>
   <el-date-picker
     :style="styleObj"
     v-model="timeValue"
+    value-format="yyyy-MM-dd HH:mm:ss"
     type="daterange"
     @[eventChange]="change"
   />
 </template>
 <script>
-import { eventBus } from "@/utils/eventBus";
-
 export default {
   name: "WidgetSelect",
   props: {
@@ -64,11 +63,15 @@ export default {
   },
   methods: {
     change(event) {
+      console.log(event);
       const optionsSetup = this.optionsSetup;
       const params = {};
       params[optionsSetup.field] = event;
       params["assChart"] = optionsSetup.assChart;
-      eventBus.$emit("eventParams", params);
+      console.log(event);
+      // console.log(params)
+      const optionsData = this.optionsData;
+      console.log(optionsData);
     },
     setOptions() {
       const optionsData = this.optionsData;

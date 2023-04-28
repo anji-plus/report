@@ -6,17 +6,23 @@
     :localOptions="options"
     label="label"
     option="value"
-    @[eventChange]="change"
+    @[eventChange]="(val, item) => change(val, item)"
   />
 </template>
 <script>
-import { eventBus } from "@/utils/eventBus";
-
+import {
+  originWidgetLinkageLogic,
+  targetWidgetLinkageLogic,
+} from "@/views/bigscreenDesigner/designer/linkageLogic";
 export default {
   name: "WidgetSelect",
   props: {
     value: Object,
     ispreview: Boolean,
+    widgetIndex: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
@@ -43,6 +49,9 @@ export default {
     eventChange() {
       return this.optionsSetup.event || "change";
     },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -60,14 +69,15 @@ export default {
     this.optionsData = this.value.data;
     this.optionsStyle = this.value.position;
     this.setOptions();
+
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
-    change(event) {
-      const optionsSetup = this.optionsSetup;
-      const params = {};
-      params[optionsSetup.field] = event;
-      params["assChart"] = optionsSetup.assChart;
-      eventBus.$emit("eventParams", params);
+    change(event, item) {
+      console.log(item);
+      originWidgetLinkageLogic(this, true, {
+        currentData: item,
+      }); // 联动-源组件逻辑
     },
     setOptions() {
       const optionsData = this.optionsData;

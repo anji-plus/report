@@ -19,14 +19,6 @@ export const widgetFormTime = {
         value: '时间筛选器',
       },
       {
-        type: 'el-input-text',
-        label: '字段属性值',
-        name: 'field',
-        required: false,
-        placeholder: '请输入',
-        value: '',
-      },
-      {
         type: 'vue-color',
         label: '字体颜色',
         name: 'select_color',
@@ -54,7 +46,19 @@ export const widgetFormTime = {
           { code: 'focus', name: 'focus' },
         ],
         value: 'change',
-      }
+      },
+      [{
+        name: '组件联动',
+        list: [
+          {
+            type: 'componentLinkage',
+            label: '',
+            name: 'componentLinkage',
+            required: false,
+            value: []
+          }
+        ]
+      }]
     ],
     data: [
       {

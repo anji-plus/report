@@ -1,8 +1,8 @@
 /*
  * @Author: chengsl
  * @Date: 2023-02-24 09:40:13
- * @LastEditors: chengsl
- * @LastEditTime: 2023-02-24 13:12:24
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-03-24 14:01:08
  * @Description: 各联动组件的参数配置 参数paramsKey的值具体封装时再改
  */
 import { eventBus as bus } from "@/utils/eventBus";
@@ -30,11 +30,11 @@ export const lickageParamsConfig = [
   },
 ]
 
-export const getOneConfigByCode = function(code) {
+export const getOneConfigByCode = function (code) {
   return lickageParamsConfig.find(item => { return item.code === code })
 }
 
-export const getOneConfigByName = function(name) {
+export const getOneConfigByName = function (name) {
   return lickageParamsConfig.find(item => { return item.name === name })
 }
 
@@ -47,20 +47,22 @@ export const getOneConfigByName = function(name) {
  * 1、v-chart 需添加 ref="myVChart" 以获取实例
  * 2、 发消息发过去的对象 待封装配置动态兼容
  */
-export const originWidgetLinkageLogic = function(self, isActiveClick = false, buttonConfig = {}) {
+export const originWidgetLinkageLogic = function (self, isActiveClick = false, buttonConfig = {}) {
   // if (self.allComponentLinkage && self.allComponentLinkage.length && self.allComponentLinkage[self.widgetIndex].index !== -1 && self.allComponentLinkage[self.widgetIndex].linkageArr.length) {
   if (self.optionsSetup.componentLinkage && self.optionsSetup.componentLinkage.length) {
     if (isActiveClick) { // 主动触发
       self.allComponentLinkage[self.widgetIndex].linkageArr.forEach(item => {
+        console.log(item)
         console.log(`bus_${item.originId}_${item.targetId}`, ' -联动逻辑点击-发送消息', buttonConfig)
         bus.$emit(`bus_${item.originId}_${item.targetId}`, buttonConfig.currentData)
       })
     } else { // chart 组件
-      self.$refs.myVChart.chart.on('click', function(params) {
+      self.$refs.myVChart.chart.on('click', function (params) {
         self.allComponentLinkage[self.widgetIndex].linkageArr.forEach(item => {
           console.log(`bus_${item.originId}_${item.targetId}`, ' -联动逻辑点击-发送消息', params)
           let message = {}
           const widgetConfigTemp = getOneConfigByCode(self.value.widgetCode)
+          console.log('widgetConfigTemp', widgetConfigTemp)
           if (widgetConfigTemp && widgetConfigTemp.paramsKey.length) { // 动态加载各组件的参数来封装
             widgetConfigTemp.paramsKey.forEach(key => {
               message[key] = params[key]
@@ -99,7 +101,7 @@ export const originWidgetLinkageLogic = function(self, isActiveClick = false, bu
  * @param self 组件实例对象 this
  * @returns
  */
-export const targetWidgetLinkageLogic = function(self) {
+export const targetWidgetLinkageLogic = function (self) {
   const busEvents = []
   // 有无有关联的组件
   if (!self.allComponentLinkage || !self.allComponentLinkage.length) return
