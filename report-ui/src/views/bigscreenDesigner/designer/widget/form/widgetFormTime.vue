@@ -9,7 +9,8 @@
     :style="styleObj"
     v-model="timeValue"
     value-format="yyyy-MM-dd HH:mm:ss"
-    type="daterange"
+    :picker-options="datetimeRangePickerOptions"
+    type="datetimerange"
     @[eventChange]="change"
   />
 </template>
@@ -18,7 +19,7 @@ import {
   originWidgetLinkageLogic,
   targetWidgetLinkageLogic,
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
-
+import miment from 'miment'
 export default {
   name: "WidgetFormTime",
   props: {
@@ -35,6 +36,51 @@ export default {
       optionsStyle: {},
       optionsData: {},
       optionsSetup: {},
+      //日期时间快捷选项
+      datetimeRangePickerOptions:{
+        shortcuts: [{
+          text: '今天',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date(new Date(new Date().getTime()).setHours(0, 0, 0, 0));
+            picker.$emit('pick', [start, end]);
+          }
+        },{
+          text: '昨天',
+          onClick(picker) {
+            const start=new Date(new Date(new Date().getTime()-24*60*60*1000).setHours(0, 0, 0, 0));
+            const end=new Date(new Date(new Date().getTime()-24*60*60*1000).setHours(23, 59, 59, 999));
+            picker.$emit('pick', [start, end]);
+          }
+        },{
+          text: '最近一周',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(miment().add(-1, 'ww').stamp());
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近一个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(miment().add(-1, 'MM').stamp());
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近三个月',
+          onClick(picker) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(miment().add(-3, 'MM').stamp());
+            picker.$emit('pick', [start, end]);
+          }
+        }],
+        // disabledDate(time){
+        //   return time.getTime() > Date.now()
+        // }
+      }
     };
   },
   computed: {
