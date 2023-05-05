@@ -85,7 +85,7 @@ public class AccessUserController extends GaeaBaseController<AccessUserParam, Ac
      */
     @Permission( code = "resetPassword", name = "重置密码")
     @PostMapping({"/resetPassword"})
-    public ResponseBean resetPassword(@RequestBody @Validated GaeaUserDto dto) {
+    public ResponseBean resetPassword(@RequestBody GaeaUserDto dto) {
         Boolean data = accessUserService.resetPassword(dto);
         return responseSuccessWithData(data);
     }

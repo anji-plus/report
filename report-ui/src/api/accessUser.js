@@ -55,5 +55,11 @@ export function saveRoleTree (data) {
   })
 }
 
-
-export default { accessUserList, accessUserAdd, accessUserDeleteBatch, accessUserUpdate, accessUserDetail, getRoleTree, saveRoleTree }
+export function resetPassword (data) {
+  return request({
+    url: 'accessUser/resetPassword',
+    method: 'post',
+    data
+  })
+}
+export default { accessUserList, accessUserAdd, accessUserDeleteBatch, accessUserUpdate, accessUserDetail, getRoleTree, saveRoleTree, resetPassword }

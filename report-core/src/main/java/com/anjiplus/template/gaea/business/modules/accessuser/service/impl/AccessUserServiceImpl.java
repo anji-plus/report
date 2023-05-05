@@ -134,7 +134,21 @@ public class AccessUserServiceImpl implements AccessUserService {
 
     @Override
     public Boolean resetPassword(GaeaUserDto gaeaUserDto) {
-        return false;
+        String loginName = gaeaUserDto.getLoginName();
+        if (GaeaConstant.SUPER_USER_NAME.equalsIgnoreCase(loginName)) {
+            throw BusinessExceptionBuilder.build("admin不允许重置密码");
+        }
+        // 1.判断用户是否存在
+        LambdaQueryWrapper<AccessUser> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(AccessUser::getLoginName, loginName);
+        AccessUser accessUser = accessUserMapper.selectOne(wrapper);
+        if (accessUser == null) {
+            throw BusinessExceptionBuilder.build("用户不存在");
+        }
+        //默认密码
+        accessUser.setPassword(MD5Util.encrypt(MD5Util.encrypt(defaultPassword.concat("gaea"))));
+        accessUserMapper.updateById(accessUser);
+        return true;
     }
 
     @Override
