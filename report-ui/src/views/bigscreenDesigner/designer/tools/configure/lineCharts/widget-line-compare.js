@@ -238,7 +238,7 @@ export const widgetLineCompare = {
             },
             {
               type: 'el-input-text',
-              label: '图例名称',
+              label: '名称( | 分隔)',
               name: 'legendName',
               required: false,
               placeholder: '多值以' | '隔开',
