@@ -52,6 +52,7 @@ import widgetInput from "./form/widgetInput.vue";
 import widgetFormTime from "./form/widgetFormTime.vue";
 import widgetScaleVertical from "./scale/widgetScaleVertical.vue";
 import widgetScaleHorizontal from "./scale/widgetScaleHorizontal.vue";
+import widgetBarDoubleYaxisChart from "./bar/widgetBarDoubleYaxisChart.vue";
 
 export default {
   name: "Widget",
@@ -89,8 +90,9 @@ export default {
     widgetScaleVertical,
     widgetScaleHorizontal,
     widgetSelect,
-    widgetInput,
+    //widgetInput,
     widgetFormTime,
+    widgetBarDoubleYaxisChart,
   },
   model: {
     prop: "value",
