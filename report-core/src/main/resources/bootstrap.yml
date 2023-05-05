@@ -99,7 +99,7 @@ logging:
 # 本应用自定义参数
 customer:
   # 跳过token验证和权限验证的url清单
-  skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html, /favicon.ico, /reportShare/detailByCode
+  skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html, /favicon.ico, /reportShare/detailByCode, /v2/api-docs
   file:
     #导入导出临时文件夹 默认.代表当前目录，拼接/tmp_zip/目录
     tmpPath: .
