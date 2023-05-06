@@ -508,7 +508,6 @@ export default {
       this.currentWidgetTotal = this.widgets.length; // 当前操作面板上有多少各组件
     },
     dragEnd() {
-      this.dragWidgetCode = "";
       /**
        * 40@remarks 新增组件到操作面板后，右边的配置有更新，但是当前选中的组件没更新，导致配置错乱的bug;
        * 由于拖动组件拖到非操作面板上是不会添加组件，还需判断是否添加组件到操作面板上;
@@ -524,6 +523,7 @@ export default {
           const uuid = Number(Math.random().toString().substr(2)).toString(36);
           this.widgets[this.currentWidgetTotal].value.widgetId = uuid;
           this.layerWidget[this.currentWidgetTotal].widgetId = uuid;
+          this.widgets[this.currentWidgetTotal].value.widgetCode = this.dragWidgetCode;
           const index = this.widgets.length - 1;
           this.layerClick(index); // 选中当前新增的组件
           this.grade = false; // 去除网格线

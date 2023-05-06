@@ -59,6 +59,7 @@ export default {
       };
       data.dashboard.widgets.forEach((item, index) => {
         item.value.widgetId = item.value.setup.widgetId
+        item.value.widgetCode = item.value.setup.widgetCode
         if (item.value.setup.componentLinkage && item.value.setup.componentLinkage.length) {
           this.$store.commit('SET_ALL_COMPONENT_LINKAGE', {
             index,

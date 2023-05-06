@@ -185,6 +185,7 @@ const mixin = {
       };
       screenData.widgets.forEach((widget) => {
         widget.value.setup.widgetId = widget.value.widgetId;
+        widget.value.setup.widgetCode = widget.type
       });
       const { code, data } = await insertDashboard(screenData);
       if (code == "200") return this.$message.success("保存成功！");

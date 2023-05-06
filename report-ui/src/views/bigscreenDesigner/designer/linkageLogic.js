@@ -27,6 +27,11 @@ export const lickageParamsConfig = [
     code: 'widget-barchart',
     paramsKey: ['name', 'value']
   },
+  {
+    name: '柱图-渐变色',
+    code: 'widget-gradient-color-barchart',
+    paramsKey: ['name', 'value']
+  },
   // ……
   {
     name: '折线图',
@@ -70,6 +75,7 @@ export const originWidgetLinkageLogic = function (self, isActiveClick = false, b
       self.$refs.myVChart.chart.on('click', function (params) {
         self.allComponentLinkage[self.widgetIndex].linkageArr.forEach(item => {
           console.log(`bus_${item.originId}_${item.targetId}`, ' -联动逻辑点击-发送消息', params)
+          console.log(self.value)
           let message = {}
           const widgetConfigTemp = getOneConfigByCode(self.value.widgetCode)
           console.log('widgetConfigTemp', widgetConfigTemp)
