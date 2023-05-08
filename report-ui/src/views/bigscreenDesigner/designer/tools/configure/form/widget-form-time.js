@@ -34,7 +34,7 @@ export const widgetFormTime = {
         placeholder: '',
         value: 'rgba(115,170,229,.5)',
       },
-      {
+/*      {
         type: 'el-select',
         label: '触发事件',
         name: 'event',
@@ -46,7 +46,7 @@ export const widgetFormTime = {
           { code: 'focus', name: 'focus' },
         ],
         value: 'change',
-      },
+      },*/
       [{
         name: '组件联动',
         list: [

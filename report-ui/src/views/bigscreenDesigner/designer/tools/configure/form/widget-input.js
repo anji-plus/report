@@ -30,7 +30,7 @@ export const widgetInput = {
         placeholder: '',
         value: 'rgba(115,170,229,.5)',
       },
-      {
+/*      {
         type: 'el-select',
         label: '触发事件',
         name: 'event',
@@ -42,7 +42,7 @@ export const widgetInput = {
           { code: 'focus', name: 'focus' },
         ],
         value: 'change',
-      }
+      }*/
     ],
     position: [
       {

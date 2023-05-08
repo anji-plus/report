@@ -46,9 +46,9 @@ export default {
         color: this.optionsSetup.select_color,
       };
     },
-    eventChange() {
+/*    eventChange() {
       return this.optionsSetup.event || "change";
-    },
+    },*/
     allComponentLinkage() {
       return this.$store.state.designer.allComponentLinkage;
     },

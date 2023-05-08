@@ -36,9 +36,9 @@ export default {
         color: this.optionsSetup.select_color,
       };
     },
-    eventChange() {
+/*    eventChange() {
       return this.optionsSetup.event || "change";
-    },
+    },*/
   },
   watch: {
     value: {
