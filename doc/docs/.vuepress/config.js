@@ -50,7 +50,7 @@ module.exports = {
                     title: '用户权限',
                     collapsable: false,
                     children: [
-                        {title: '权限管理', path: '/guide/authmanager'},
+                        {title: '权限管理', path: '/guide/authManager'},
                     ]
                 },
                 {
@@ -59,12 +59,13 @@ module.exports = {
                     children: [
                         {title: '数据源', path: '/guide/datasource'},
                         {title: '数据集', path: '/guide/dataset'},
-                        {title: '报表管理', path: '/guide/reportmanager'},
+                        {title: '报表管理', path: '/guide/reportManager'},
                         {title: '大屏报表', path: '/guide/dashboard'},
                         {title: '表格报表', path: '/guide/excel'},
-                        {title: '导入导出', path: '/guide/importexport'},
-                        {title: '图表配置项', path: '/guide/chartsconfig'},
+                        {title: '导入导出', path: '/guide/importExport'},
+                        {title: '图表配置项', path: '/guide/chartsConfig'},
                         {title: '图表组件', path: '/guide/charts'},
+                        {title: '图表联动', path: '/guide/chartsLinkage'},
                     ]
                 },
                 {
