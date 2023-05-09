@@ -25,7 +25,7 @@ export const widgetInput = {
       {
         type: 'vue-color',
         label: '字体背景',
-        name: 'select_fontSize',
+        name: 'select_background',
         required: false,
         placeholder: '',
         value: 'rgba(115,170,229,.5)',

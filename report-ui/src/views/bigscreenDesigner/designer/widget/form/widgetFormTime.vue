@@ -91,13 +91,12 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.select_fontSize,
-        color: this.optionsSetup.select_color,
+        background: this.optionsSetup.select_background,
       };
     },
-/*    eventChange() {
-      return this.optionsSetup.event || "change";
-    },*/
+    eventChange() {
+      return "change";
+    },
     allComponentLinkage() {
       return this.$store.state.designer.allComponentLinkage;
     },
@@ -108,7 +107,6 @@ export default {
         this.optionsSetup = val.setup;
         this.optionsData = val.data;
         this.optionsStyle = val.position;
-        this.setOptions();
       },
       deep: true,
     },
@@ -117,49 +115,17 @@ export default {
     this.optionsSetup = this.value.setup;
     this.optionsData = this.value.data;
     this.optionsStyle = this.value.position;
-    this.setOptions();
 
     targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
     change(event) {
-      console.log(event);
       const formTimeData = {}
       formTimeData['startTime'] = event[0]  //startTime
       formTimeData['endTime'] = event[1] //endTime
       originWidgetLinkageLogic(this, true, {
         currentData: formTimeData,
       }); // 联动-源组件逻辑
-    },
-    setOptions() {
-      const optionsData = this.optionsData;
-      return optionsData.dataType == "staticData"
-        ? this.staticData(optionsData.staticData)
-        : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
-    },
-    staticData(data) {
-      this.options = data;
-    },
-    //动态数据字典解析
-    dynamicDataFn(val, refreshTime) {
-      if (!val) return;
-      if (this.ispreview) {
-        this.getEchartData(val);
-        this.flagInter = setInterval(() => {
-          this.getEchartData(val);
-        }, refreshTime);
-      } else {
-        this.getEchartData(val);
-      }
-    },
-    getEchartData(val) {
-      const data = this.queryEchartsData(val);
-      data.then((res) => {
-        this.renderingFn(res);
-      });
-    },
-    renderingFn(val) {
-      this.options = val;
     },
   },
 };

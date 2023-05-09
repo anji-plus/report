@@ -33,7 +33,7 @@ export const widgetSelect = {
       {
         type: 'vue-color',
         label: '字体背景',
-        name: 'select_fontSize',
+        name: 'select_background',
         required: false,
         placeholder: '',
         value: 'rgba(115,170,229,.5)',
@@ -144,7 +144,7 @@ export const widgetSelect = {
         name: 'width',
         required: false,
         placeholder: '该容器在1920px大屏中的宽度',
-        value: 100,
+        value: 200,
       },
       {
         type: 'el-input-number',
