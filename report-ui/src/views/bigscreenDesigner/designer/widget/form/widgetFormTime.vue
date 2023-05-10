@@ -41,8 +41,8 @@ export default {
         shortcuts: [{
           text: '今天',
           onClick(picker) {
-            const end = new Date();
             const start = new Date(new Date(new Date().getTime()).setHours(0, 0, 0, 0));
+            const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));;
             picker.$emit('pick', [start, end]);
           }
         },{
