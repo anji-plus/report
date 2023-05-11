@@ -342,7 +342,7 @@
 
 ### 下拉框
 
-组件联动的使用方式请看图表联动里面的详细描述。
+下拉框组件联动的使用方式请看图表联动里面的详细描述。<br>
 ![img38](../picture/charts/img_38.png) <br>
 
 #### 数据格式
@@ -354,7 +354,9 @@
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 ### 时间筛选器
+
 默认支持的时间格式是"yyyy-MM-dd HH:mm:ss"，其他日期格式暂不支持，需要自己把自己数据集中时间字段格式化成同种格式。<br>
+时间筛选器组件联动的使用方式请看图表联动里面的详细描述。<br>
 ![img40](../picture/charts/img_40.png) <br>
 ![img41](../picture/charts/img_41.png) <br>
 
