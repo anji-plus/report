@@ -42,7 +42,7 @@ export default {
           text: '今天',
           onClick(picker) {
             const start = new Date(new Date(new Date().getTime()).setHours(0, 0, 0, 0));
-            const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));;
+            const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));
             picker.$emit('pick', [start, end]);
           }
         },{
@@ -55,25 +55,28 @@ export default {
         },{
           text: '最近一周',
           onClick(picker) {
-            const end = new Date();
-            const start = new Date();
-            start.setTime(miment().add(-1, 'ww').stamp());
+            const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));
+            const start = new Date(new Date(new Date().getTime()+24*60*60*1000));
+            start.setTime(miment().add(-6, 'DD').stamp());
+            new Date(start.setHours(0,0,0,0));
             picker.$emit('pick', [start, end]);
           }
         }, {
           text: '最近一个月',
           onClick(picker) {
-            const end = new Date();
+            const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));
             const start = new Date();
             start.setTime(miment().add(-1, 'MM').stamp());
+            new Date(start.setHours(0,0,0,0));
             picker.$emit('pick', [start, end]);
           }
         }, {
           text: '最近三个月',
           onClick(picker) {
-            const end = new Date();
+            const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));
             const start = new Date();
             start.setTime(miment().add(-3, 'MM').stamp());
+            new Date(start.setHours(0,0,0,0));
             picker.$emit('pick', [start, end]);
           }
         }],
