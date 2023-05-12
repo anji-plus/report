@@ -37,20 +37,35 @@
 - 示例 <br>
   示例中的数据集相关的sql写在 aj_report_init.sql文件中，请自行查看。<br>
   1、先准备两个数据集 <br>
+  按城市名称过滤筛选的数据集，可用于柱图、折线图等二字段图表。<br>
   ![img5](../picture/chartsLinkage/img_5.png) <br>
-  ![img4](../picture/chartsLinkage/img_4.png) <br>
 
-  2、给下拉框配置动态数据，并设置好“提交值”、“显示值”字段 <br>
-  ![img6](../picture/chartsLinkage/img_6.png) <br>
+```
+SELECT DATE_FORMAT(create_time,'%Y-%m-%d') create_time,sum(nums) sum_nums  FROM aj_report_city where city_name ='${city_name}' group by create_time ;
+```
 
-  3、联动配置-参数配置 <br>
-  下拉框数据集绑定的是“提交值”，也就是label，这里也就是将label的值传递给柱状图数据集的查询参数city_name。<br>
-  当然在给下拉框绑定数据集的时候，因为只绑定了“提交值”这一个字段，因此这个字段的值同时作为“label、value”，参数配置的时候，选择value绑定city_name也是有结果。<br>
-  ![img7](../picture/chartsLinkage/img_7.png) <br>
+获得城市名称对应的数据集，用于下拉框筛选。<br>
+![img4](../picture/chartsLinkage/img_4.png) <br>
 
-  4、使用 <br>
-  注意内容看上面说明。<br>
-  ![img8](../picture/chartsLinkage/img_8.png) <br>
+```
+SELECT DISTINCT(city_code)city_code ,city_name  FROM aj_report_city group by city_code,city_name;
+```
+
+<br>
+
+2、给下拉框配置动态数据，并设置好“提交值”、“显示值”字段 <br>
+![img6](../picture/chartsLinkage/img_6.png) <br>
+
+3、联动配置-参数配置 <br>
+下拉框数据集绑定的是“提交值”，也就是label，这里也就是将label的值传递给柱状图数据集的查询参数city_name。<br>
+当然在给下拉框绑定数据集的时候，因为只绑定了“提交值”这一个字段，因此这个字段的值同时作为“label、value”，参数配置的时候，选择value绑定city_name也是有结果。<br>
+![img7](../picture/chartsLinkage/img_7.png) <br>
+
+4、使用 <br>
+注意内容看上面说明。<br>
+![img8](../picture/chartsLinkage/img_8.png) <br>
+
+<br>
 
 ### 时间筛选器
 
@@ -68,11 +83,106 @@
   4、如果数据集的查询参数只有开始时间/结束时间其一，那么在用时间筛选器绑定的时候注意只绑定一个。<br>
   5、使用后的情况和下拉框使用后情况一致。<br>
 
-- 数据集示例 <br>
-  查近7天。 <br>
-  startTime：DATE_FORMAT(DATE_SUB(NOW(),INTERVAL 7 DAY),'%Y-%m-%d') <br>
-  endTime：now() <br>
-  ![img10](../picture/chartsLinkage/img_10.png) <br>
+<br>
+
+- 数据集示例-查近7天数据并进行联动 <br>
+
+![img10](../picture/chartsLinkage/img_10.png) <br>
+
+```
+SELECT city_name,sum(nums) sum_nums  FROM aj_report_city where create_time>='${startTime}' and create_time < '${endTime}' group by city_name
+```
+
+startTime、endTime的示例值不用带上时分秒
+
+```js
+// startTime
+function verification(data) {
+    //自定义脚本内容
+    //可返回true/false单纯校验键入的data正确性
+    //可返回文本，实时替换,比如当前时间等
+    //return "2099-01-01 00:00:00";
+    //设置日期，当前日期的前七天\
+    data = data.sampleItem;
+    //示例值不能为空，因此这里判断示例值，保证示例值和时间筛选器返回值不一样就行，
+    if (data.length == 10) {
+        // 获取7天前日期
+        return getDay(-7);
+    }
+    return data;
+}
+
+// 时间处理公用方法
+function getDay(day) {
+    var today = new Date();
+    var targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
+    today.setTime(targetday_milliseconds); //注意，这行是关键代码
+    var tYear = today.getFullYear();
+    var tMonth = today.getMonth();
+    var tDate = today.getDate();
+    tMonth = doHandleMonth(tMonth + 1);
+    tDate = doHandleMonth(tDate);
+    return tYear + "-" + tMonth + "-" + tDate + " 00:00:00";
+}
+
+function doHandleMonth(month) {
+    var m = month;
+    if (month.toString().length == 1) {
+        m = "0" + month;
+    }
+    return m;
+}
+```
+
+```js
+// endTime
+function verification(data) {
+    //自定义脚本内容
+    //可返回true/false单纯校验键入的data正确性
+    //可返回文本，实时替换,比如当前时间等
+    //return "2099-01-01 00:00:00";
+    //设置日期，当前日期的前七天
+    data = data.sampleItem;
+    if (data.length == 10) {
+        return getDay(1);
+    }
+    return data;
+}
+
+function getDay(day) {
+    var today = new Date();
+    var targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
+    today.setTime(targetday_milliseconds); //注意，这行是关键代码
+    var tYear = today.getFullYear();
+    var tMonth = today.getMonth();
+    var tDate = today.getDate();
+    tMonth = doHandleMonth(tMonth + 1);
+    tDate = doHandleMonth(tDate);
+    return tYear + "-" + tMonth + "-" + tDate + " 00:00:00";
+}
+
+function doHandleMonth(month) {
+    var m = month;
+    if (month.toString().length == 1) {
+        m = "0" + month;
+    }
+    return m;
+}
+```
+
+
 
 ## 图表联动
 
+- 简介 <br>
+  图表联动是将联动图表的某些值覆盖到被联动的图表中，因此能否联动成功的关键在于，联动图表的数据格式是否满足被联动的图表。比如柱状图联动折线图，这俩图的数据格式是一模一样的，能联动成功，但是用柱状图去联动柱状堆叠图，数据格式不一致，那无法成功。<br>
+
+- 联动参数说明 <br>
+  图表联动的界面和表单联动界面都是一样的，不同的在于参数配置名称的不同。在二维的图表中，比如name在柱状图中代表柱图动态数据集的X轴字段，value则代表数值，在饼图中name对应饼图动态数据集的name，value同样对应数值。<br>
+  ![img11](../picture/chartsLinkage/img_11.png) <br>
+
+- **注意事项！！！** <br>
+  1、用于被联动的动态数据集比如上面的示例数据集，查询参数在sql里面需要用 '' 或者 ""，因为时间筛选器格式传递的数据中间有空格的。当然，如果不绑定时间筛选器那么sql里面直接使用数据库时间函数就行，例如DATE_FORMAT。<br>
+  2、联动与被联动的图表必须有相同的数据格式。理论上多维向低维填充数据是没问题的，但实际操作时带来的问题会很多，因此当前版本高维图表都不支持图表组件联动。<br>
+  3、被联动的图表的动态数据集必须得有查询参数。说的简单一点就是联动始终都是数据集参数的传递，图表只是数据的载体表象。<br>
+  4、使用后的情况和表单组件使用后情况一致。<br>
