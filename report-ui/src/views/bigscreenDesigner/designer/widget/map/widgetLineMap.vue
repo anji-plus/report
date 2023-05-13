@@ -1,9 +1,11 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 <script>
+import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 import "echarts/map/js/china.js";
 import echarts from "echarts";
 import { conversionCity } from "@/utils/china";
@@ -131,6 +133,7 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
+    flagInter: null,
   },
   data() {
     return {
@@ -303,6 +306,9 @@ export default {
         background: this.optionsSetup.background,
       };
     },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -322,6 +328,7 @@ export default {
   },
   mounted() {
     this.editorOptions();
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
     convertData(data) {
@@ -476,8 +483,25 @@ export default {
       this.options.geo["itemStyle"] = itemStyle;
     },
     //数据解析
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      // 联动接收者逻辑开始
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+      // 联动接收者逻辑结束
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
