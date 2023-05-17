@@ -225,7 +225,7 @@ public class DataSetServiceImpl implements DataSetService {
         OriginalDataDto originalDataDto = new OriginalDataDto();
         String setCode = dto.getSetCode();
         if (StringUtils.isBlank(setCode)) {
-            throw BusinessExceptionBuilder.build("未选择数据集");
+            return new OriginalDataDto(new ArrayList<>());
         }
         //1.获取数据集、参数替换、数据转换
         DataSetDto dataSetDto = detailSet(setCode);
