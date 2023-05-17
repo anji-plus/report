@@ -338,6 +338,18 @@ export const widgetPieNightingale = {
             },
           ],
         },
+        {
+          name: '组件联动',
+          list: [
+            {
+              type: 'componentLinkage',
+              label: '',
+              name: 'componentLinkage',
+              required: false,
+              value: []
+            }
+          ]
+        }
       ],
     ],
     // 数据

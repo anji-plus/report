@@ -20,21 +20,13 @@ export const widgetFormTime = {
       },
       {
         type: 'vue-color',
-        label: '字体颜色',
-        name: 'select_color',
-        required: false,
-        placeholder: '',
-        value: '#FAD400',
-      },
-      {
-        type: 'vue-color',
-        label: '字体背景',
-        name: 'select_fontSize',
+        label: '背景',
+        name: 'select_background',
         required: false,
         placeholder: '',
         value: 'rgba(115,170,229,.5)',
       },
-      {
+/*      {
         type: 'el-select',
         label: '触发事件',
         name: 'event',
@@ -46,7 +38,7 @@ export const widgetFormTime = {
           { code: 'focus', name: 'focus' },
         ],
         value: 'change',
-      },
+      },*/
       [{
         name: '组件联动',
         list: [
@@ -60,57 +52,7 @@ export const widgetFormTime = {
         ]
       }]
     ],
-    data: [
-      {
-        type: 'el-radio-group',
-        label: '数据类型',
-        name: 'dataType',
-        require: false,
-        placeholder: '',
-        selectValue: true,
-        selectOptions: [
-          {
-            code: 'staticData',
-            name: '静态数据',
-          },
-          {
-            code: 'dynamicData',
-            name: '动态数据',
-          },
-        ],
-        value: 'staticData',
-      },
-      {
-        type: 'el-input-number',
-        label: '刷新时间(毫秒)',
-        name: 'refreshTime',
-        relactiveDom: 'dataType',
-        relactiveDomValue: 'dynamicData',
-        value: 600000
-      },
-      {
-        type: 'el-button',
-        label: '静态数据',
-        name: 'staticData',
-        required: false,
-        placeholder: '',
-        relactiveDom: 'dataType',
-        relactiveDomValue: 'staticData',
-        value: [],
-      },
-      {
-        type: 'dycustComponents',
-        label: '',
-        name: 'dynamicData',
-        required: false,
-        placeholder: '',
-        relactiveDom: 'dataType',
-        relactiveDomValue: 'dynamicData',
-        chartType: 'widget-select',
-        dictKey: 'SELECT_PROPERTIES',
-        value: '',
-      },
-    ],
+    data: [],
     position: [
       {
         type: 'el-input-number',
@@ -134,7 +76,7 @@ export const widgetFormTime = {
         name: 'width',
         required: false,
         placeholder: '该容器在1920px大屏中的宽度',
-        value: 200,
+        value: 400,
       },
       {
         type: 'el-input-number',

@@ -25,12 +25,12 @@ export const widgetInput = {
       {
         type: 'vue-color',
         label: '字体背景',
-        name: 'select_fontSize',
+        name: 'select_background',
         required: false,
         placeholder: '',
         value: 'rgba(115,170,229,.5)',
       },
-      {
+/*      {
         type: 'el-select',
         label: '触发事件',
         name: 'event',
@@ -42,7 +42,7 @@ export const widgetInput = {
           { code: 'focus', name: 'focus' },
         ],
         value: 'change',
-      }
+      }*/
     ],
     position: [
       {

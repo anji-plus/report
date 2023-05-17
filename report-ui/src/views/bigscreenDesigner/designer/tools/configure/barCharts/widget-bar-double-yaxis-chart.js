@@ -861,7 +861,7 @@ export const widgetBarDoubleYaxis = {
         placeholder: '',
         relactiveDom: 'dataType',
         chartType: 'widget-barlinechart',
-        dictKey: 'BAR_LINE_PROPERTIES',
+        dictKey: 'BAR_PROPERTIES',
         relactiveDomValue: 'dynamicData',
       },
     ],

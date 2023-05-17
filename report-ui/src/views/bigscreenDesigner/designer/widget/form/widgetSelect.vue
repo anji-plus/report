@@ -42,12 +42,12 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.select_fontSize,
+        background: this.optionsSetup.select_background,
         color: this.optionsSetup.select_color,
       };
     },
     eventChange() {
-      return this.optionsSetup.event || "change";
+      return "change";
     },
     allComponentLinkage() {
       return this.$store.state.designer.allComponentLinkage;

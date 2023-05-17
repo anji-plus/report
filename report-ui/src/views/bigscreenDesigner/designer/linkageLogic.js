@@ -43,6 +43,16 @@ export const lickageParamsConfig = [
     code: 'widgetPiePercentageChart',
     paramsKey: ['value']
   },
+  {
+    name: '饼图',
+    code: 'widget-piechart',
+    paramsKey: ['name', 'value']
+  },
+  {
+    name: '南丁格尔玫瑰图',
+    code: 'WidgetPieNightingaleRoseArea',
+    paramsKey: ['name', 'value']
+  },
 ]
 
 export const getOneConfigByCode = function (code) {
