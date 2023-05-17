@@ -152,6 +152,19 @@ public class DataSetServiceImpl implements DataSetService {
         //1.新增数据集
         DataSet dataSet = new DataSet();
         BeanUtils.copyProperties(dto, dataSet);
+        if (StringUtils.isNotBlank(dataSet.getCaseResult())) {
+            try {
+                JSONArray objects = JSONObject.parseArray(dataSet.getCaseResult());
+                if (objects.size() > 1) {
+                    Object o = objects.get(0);
+                    objects = new JSONArray();
+                    objects.add(o);
+                    dataSet.setCaseResult(objects.toJSONString());
+                }
+            } catch (Exception e) {
+                log.info("结果集只保留一行数据失败...{}", e.getMessage());
+            }
+        }
         insert(dataSet);
         //2.更新查询参数
         dataSetParamBatch(dataSetParamDtoList, dto.getSetCode());
@@ -174,6 +187,19 @@ public class DataSetServiceImpl implements DataSetService {
         //1.更新数据集
         DataSet dataSet = new DataSet();
         BeanUtils.copyProperties(dto, dataSet);
+        if (StringUtils.isNotBlank(dataSet.getCaseResult())) {
+            try {
+                JSONArray objects = JSONObject.parseArray(dataSet.getCaseResult());
+                if (objects.size() > 1) {
+                    Object o = objects.get(0);
+                    objects = new JSONArray();
+                    objects.add(o);
+                    dataSet.setCaseResult(objects.toJSONString());
+                }
+            } catch (Exception e) {
+                log.info("结果集只保留一行数据失败...{}", e.getMessage());
+            }
+        }
         update(dataSet);
 
         //2.更新查询参数
@@ -328,10 +354,6 @@ public class DataSetServiceImpl implements DataSetService {
         List<JSONObject> data = dataSourceService.execute(dataSourceDto);
         //5.数据转换
         List<JSONObject> transform = dataSetTransformService.transform(dto.getDataSetTransformDtoList(), data);
-        //测试结果只保留list(0)
-        if (!CollectionUtils.isEmpty(transform) && transform.size() > 1) {
-            transform = Collections.singletonList(transform.get(0));
-        }
         originalDataDto.setData(transform);
         return originalDataDto;
     }
