@@ -44,6 +44,7 @@ module.exports = {
                         {title: '发行版部署', path: '/guide/quicklyDistribution'},
                         {title: '源码部署', path: '/guide/quicklySource'},
                         {title: '前后端分离', path: '/guide/quicklySeparate'},
+                        {title: '快速使用', path: '/guide/quicklyUse'},
                     ]
                 },
                 {

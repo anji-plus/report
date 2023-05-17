@@ -13,10 +13,3 @@
 左侧为工具栏和图层，上方为功能栏，右侧为配置栏，中间为画布。<br>
 ![img_2.png](../picture/dashboard/img_2.png) <br>
 
-## 工具栏
-
-![img24](../picture/dashboard/img_24.png) <br>
-
-## 图层
-
-![img25](../picture/dashboard/img_25.png) <br>

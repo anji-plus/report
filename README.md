@@ -26,9 +26,6 @@
 
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
 
-**[更多社区大屏](https://ajreport.beliefteam.cn/report-doc/guide/bigScreenCase.html)** <br>
-**[社区大屏下载链接](https://ajreport.beliefteam.cn/download/)** <br>
-
 ## 数据流程图
 
 ![An image](https://images.gitee.com/uploads/images/2021/0630/160451_31bb9052_1728982.png)
@@ -96,7 +93,13 @@
 
 **[运行环境参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDevelop.html)** <br>
 **注意版本兼容性** <br>
-源码 doc -> docs -> guide 目录下即所有文档 <br>
+源码 doc -> docs -> guide 目录下即所有文档。<br>
+启动文档（在线文档图片多，打开很慢可以本地启动文档，方便查看） <br>
+
+```
+cd .\doc\
+npm run docs:dev
+```
 
 ### 发行版部署
 
@@ -147,12 +150,17 @@ http://serverip:9095
 
 ```
 
+### 前后端分离部署
+
 **[前后端分离部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySeparate.html)** <br>
 
-## 操作手册
+## 快速入门
 
-新建数据源（重置mysql数据源） --> 新建数据集（编写sql） --> 新建大屏（设计大屏） <br>
-**[在线文档](https://ajreport.beliefteam.cn/report-doc/guide/datasource.html)**
+**[快速入门](https://ajreport.beliefteam.cn/report-doc/guide/quicklyUse.html)** <br>
+
+**[更多社区大屏](https://ajreport.beliefteam.cn/report-doc/guide/bigScreenCase.html)** <br>
+
+**[社区大屏下载链接](https://ajreport.beliefteam.cn/download/)** <br>
 
 ## SQL初始化
 
@@ -197,14 +205,15 @@ aj_report（存放系统基础数据）数据库 <br>
 
 ## 商业授权
 
-AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.0.html)，允许商业使用，但务必保留类作者、Copyright信息。 <br>
+AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.0.html)
+，允许商业使用，但务必保留类作者、Copyright信息。 <br>
 个人和企业，在直接使用、二次开发后商业使用，需要遵守：
 
-- 包含AJ-Report LICENSE文件（授权使用者免费使用AJ-Report专利和知识产权）
+- 包含Apache LICENSE文件（授权使用者免费使用AJ-Report专利和知识产权）
 - 如果修改了代码，需要在被修改的文件中说明
 - 在修改和有源代码衍生的代码中，需要带有原来代码中的协议，商标
-- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report
-  LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report
+- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有Apache
+  LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对Apache
   LICENSE构成更改。
 
 ## 技术支持

@@ -49,12 +49,9 @@
 
 #### 高级规则
 
-是用是针对当前行的参数示例值做一个校验。<br>
-返回 true/false，代表校验字段是否符合要求的成功与失败。<br>
-返回 String，代表通过一段 js 脚本生成你所需要的参数。<br>
-返回其他类型报错！！！<br>
+自定义JS，这里的JS是java的scriptengine执行的，支持ES5的写法。
 
-```
+```js
 //返回yyyyy-MM-dd类型的当前时间
 function verification(data){
 	//自定义脚本内容
@@ -80,11 +77,10 @@ function verification(data){
 
 #### js脚本
 
-**注**：这里的JS是java的scriptengine执行的，很多ES6的语法不支持。 <br>
 ![img4](../picture/dateset/img_4.png) <br>
 入参是data，返回值也必须是data，中间是JS的处理过程，注意入参返回都是``List<JSONObject>``
 
-```
+```js
 // 根据sql查询出的结果进行数据清洗
 function dataTransform(data){
 	//自定义脚本内容
@@ -124,4 +120,4 @@ function dataTransform(data){
 
 ### 数据预览
 
-针对此次数据集，进行数据预览，尽量不要使用 select * from table，可能数据量过大，超过数据库字段长度限制，保存不了。<br>
+针对此次数据集，进行数据预览，尽量不要使用 select * from table <br>
