@@ -15,7 +15,7 @@ module.exports = {
             {text: 'GitHub', link: 'https://github.com/anji-plus/report'},
             {text: 'Gitee', link: 'https://gitee.com/anji-plus/report'},
             {text: '谁在使用', link: '/guide/briefUsing'},
-            {text: '更多案例', link: '/guide/bigScreenCase'},
+            {text: '更多大屏', link: '/guide/bigScreenCase'},
         ],
         sidebar: {
             '/guide/': [
@@ -26,7 +26,7 @@ module.exports = {
                         {title: '简介', path: '/guide/'},
                         {title: '谁在使用', path: '/guide/briefUsing'},
                         {title: '技术支持', path: '/guide/briefSupport'},
-                        {title: '更多案例', path: '/guide/bigScreenCase'},
+                        {title: '更多大屏', path: '/guide/bigScreenCase'},
                     ]
                 },
                 {

@@ -1,13 +1,13 @@
-## 案例一
+## 社区提供
 
-由社区 **[~无痕~@tengzhouboy](https://gitee.com/tengzhouboy)** 提供 <br>
+### **[~无痕~@tengzhouboy](https://gitee.com/tengzhouboy)** 提供 <br>
+
 [AJ-Report分享链接](https://ajreport.beliefteam.cn/index.html#/aj/mtwbjPot) <br>
 
 ![img.png](../picture/bigScreenCase/img.png) <br>
 
-## 案例二
+### **[心瘾丶 @yi_shan_liu](https://gitee.com/yi_shan_liu)** 提供 <br>
 
-由社区 **[心瘾丶 @yi_shan_liu](https://gitee.com/yi_shan_liu)** 提供<br>
 [AJ-Report分享链接](https://ajreport.beliefteam.cn/index.html#/aj/hkBJgLW0) <br>
 
 ![img1](../picture/bigScreenCase/img1.png) <br>
@@ -21,11 +21,12 @@
 [AJ-Report分享链接](https://ajreport.beliefteam.cn/index.html#/aj/D0cpO4re) <br>
 ![img4](../picture/bigScreenCase/img4.png) <br>
 
-## 案例下载
+## 大屏下载
 
 **注：在线体验环境因为服务器配置问题，点击导出反应较慢，因此推荐直接下载你想要的大屏zip包即可** <br>
 
 - 通过[下载链接](https://ajreport.beliefteam.cn/download/)下载 <br>
+
   1、下载对应大屏的zip包 <br>
   ![img1](../picture/bigScreenCase/img_1.png) <br>
   ![img2](../picture/bigScreenCase/img_2.png) <br>

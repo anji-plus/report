@@ -6,13 +6,11 @@ sh build.sh
 
 unzip aj-report-xxxx.zip
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接、上传文件的路径以及地址
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
 sh bin/start.sh
 
 访问：http://serverip:9095
 admin 123456
-
-修改："数据源->mysql数据源"用户名密码
 ```
 
 ## 编译环境
@@ -24,7 +22,15 @@ admin 123456
 - [Apache Maven] 3.5 <br>
 - [Node.js] v14.16.0 <br>
 - [Jdk] 1.8 <br>
-  **注**：已知**Jdk11**存在兼容性问题，请不要使用openJdk，环境问题请看 **常见问题** 大类 <br>
+
+## 版本问题
+
+已知以下版本存在兼容性问题，请不要使用
+
+- Node.js V16及以上
+- openJdk
+- Jdk 1.7及以下/11及以上（jdk11部分版本有问题）
+- Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
 
 ## 克隆源码
 
@@ -78,10 +84,4 @@ aj-report-XXX --> bin --> start.bat <br>
 http://serverip:9095 <br>
 默认密码：admin 123456 <br>
 
-## 重置mysql连接
-
-登陆进来后请修改mysql数据源 <br>
-数据源 --> mysql数据源 --> 编辑 --> 修改用户名密码（改成你自己系统mysql的用户名密码） <br>
-![img](../picture/quickly/img_14.png) <br>
-![img_6.png](../picture/quickly/img_6.png) <br>
 

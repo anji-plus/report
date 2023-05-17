@@ -1,7 +1,8 @@
 ## 简介
 
 &emsp; &emsp; AJ-Report是全开源的一个BI平台，酷炫大屏展示，能随时随地掌控业务动态，让每个决策都有数据支撑。<br>
-&emsp; &emsp; 多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，目前已支持25种大屏组件/图表，不会开发，照着设计稿也可以制作大屏。<br>
+&emsp; &emsp;
+多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，目前已支持30+种大屏组件/图表，不会开发，照着设计稿也可以制作大屏。<br>
 &emsp; &emsp; 三步轻松完成大屏设计：配置数据源---->写SQL配置数据集---->拖拽配置大屏---->保存发布。欢迎体验。
 
 ## 在线体验
@@ -20,11 +21,13 @@
 
 #### &emsp; 组件介绍
 
-&emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。 内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
+&emsp;&emsp; 大屏设计（AJ-Report）是一个可视化拖拽编辑的，直观，酷炫，具有科技感的图表工具全开源项目。
+内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
 
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
-![视频](https://ajreport.beliefteam.cn/report-doc/static/Rhea.mp4) <br>
-**[更多社区大屏案例](https://ajreport.beliefteam.cn/report-doc/guide/bigScreenCase.html)** <br>
+
+**[更多社区大屏](https://ajreport.beliefteam.cn/report-doc/guide/bigScreenCase.html)** <br>
+**[社区大屏下载链接](https://ajreport.beliefteam.cn/download/)** <br>
 
 ## 数据流程图
 
@@ -96,12 +99,15 @@
 源码 doc -> docs -> guide 目录下即所有文档 <br>
 
 ### 发行版部署
-**[发行版部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDistribution.html)** <br>
+
+**[发行版部署详细文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDistribution.html)** <br>
+
+简易步骤
 
 ```
 下载最新发行版，解压
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接等信息
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
@@ -109,17 +115,19 @@ bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启�
 http://serverip:9095
 用户名密码：admin/123456
 
-登陆后修改"数据源->mysql数据源"用户名密码
 ```
 
 ### 源码编译部署
-**[源码编译部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySource.html)** <br>
+
+**[源码编译部署详细文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySource.html)** <br>
 
 在Linux上先准备好maven、node.js、jdk
 
 - [Apache Maven] 3.5 <br>
 - [Node.js] v14.16.0 <br>
 - [Jdk] 1.8
+
+简易步骤
 
 ```
 git clone https://gitee.com/anji-plus/report.git
@@ -129,7 +137,7 @@ sh build.sh
 
 unzip aj-report-xxxx.zip
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接等信息
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
@@ -137,7 +145,6 @@ bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启�
 http://serverip:9095
 用户名密码：admin/123456
 
-登陆后修改"数据源->mysql数据源"用户名密码
 ```
 
 **[前后端分离部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySeparate.html)** <br>
@@ -150,13 +157,13 @@ http://serverip:9095
 ## SQL初始化
 
 sql文件的目录在：report-core --> src --> main --> resources -- > db.migration <br>
-
-系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件。 <br>
-执行完将会创建 aj_report（存放系统基础数据） 和 aj_report_init（存放示例数据） 俩个库。 <br>
+系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件，执行完将会创建
+aj_report（存放系统基础数据）数据库 <br>
 
 ## 谁在使用
 
-希望你们的logo出现在此，[请点此Issue进行登记](https://gitee.com/anji-plus/report/issues/I3ZXT4) ，我们将优先进行技术支持 <br>
+感谢关注并使用AJ-Report的朋友，如果贵公司、组织、学校等正在使用AJ-Report，希望可以按照此[Issue](https://gitee.com/anji-plus/report/issues/I3ZXT4)
+登记并提供贵公司、组织、学校的logo，我们将把贵方的logo放在项目首页进行展示并优先进行技术支持 <br>
 
 <a href='http://www.anji-plus.com/'> <img src="https://ajreport.beliefteam.cn/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/> </a>
 <a href='https://www.yunstech.cn/'><img src="https://www.yunstech.cn/images/logo.png" width = "130" height = "50" /> </a>
@@ -170,14 +177,8 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 <a href='http://www.yourongyun.cn/'><img src="https://ajreport.beliefteam.cn/file/download/90e15ed9-5594-4c14-b318-72aeb6816fb9" width = "130" height = "50" /> </a> </br>
 <a href='https://www.wenkai.net/'><img src="https://ajreport.beliefteam.cn/file/download/ec788c55-bffd-4809-ae3c-0ce2cbd1a9d0" width = "130" height = "50" /> </a>
 <a href='http://www.sungcor.com/'><img src="https://ajreport.beliefteam.cn/file/download/0514a4a6-787b-4e25-be94-03ff94309553" width = "130" height = "50" /> </a>
-
-## 未来计划
-
-- 大屏宽高动态可视化
-- nodeV16适配
-- 增加省市区地图等图
-- 增加基础边框样式
-- Excel报表功能增加与bug修复
+<a href='http://www.jtit.com.cn/'><img src="https://ajreport.beliefteam.cn/file/download/1dc47a36-a515-4775-af44-262225b3662b" width = "130" height = "50" /> </a>
+<img src="https://foruda.gitee.com/images/1674127216326288249/5a251727_10057706.png" width = "130" height = "50" /> <br>
 
 ## 已知问题
 
@@ -189,31 +190,57 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 
 - Node.js V16及以上
 - openJdk
-- Jdk 1.7及以下/11及以上
+- Jdk 1.7及以下/11及以上（jdk11部分版本有问题）
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
 
 **[常见问题](https://ajreport.beliefteam.cn/report-doc/guide/question.html)**
 
 ## 商业授权
 
-AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.0.html) <br>
+AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.0.html)，允许商业使用，但务必保留类作者、Copyright信息。 <br>
 个人和企业，在直接使用、二次开发后商业使用，需要遵守：
 
 - 包含AJ-Report LICENSE文件（授权使用者免费使用AJ-Report专利和知识产权）
 - 如果修改了代码，需要在被修改的文件中说明
 - 在修改和有源代码衍生的代码中，需要带有原来代码中的协议，商标
-- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report
+- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report
+  LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report
   LICENSE构成更改。
-
-如果您需要商业化增值服务，请加下面的微信沟通，并直接说明来意。
 
 ## 技术支持
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
-个人企业微信：加微信进群备注 AJ-Report 或者 Report <br>
-如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请发送多次。如果加了之后一言不发，不好意思，我直接忽略，我也不知道你要干嘛。 <br>
-<img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "200" height = "200" align=left/>
 
+个人企业微信：加微信进群备注 **AJ-Report** 或者 **Report**，**一定要加备注 ！！！**<br>
+如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请过段时间再发送。 <br>
+<img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "300" height = "300" align=left/>
+
+## 更多支持
+
+联系方式 <br>
+
+<img src="https://foruda.gitee.com/images/1681893479845506596/859934b5_1950629.png" width = "300" height = "300" align=left/>
+
+## 加入我们
+
+- 提交PR是最快的加入方式:<br>
+  · PR可以包含新功能、现有功能的改进。<br>
+  . PR请提交到dev分支 <br>
+- 提供文档原文或者文档链接:<br>
+  . 文档原文的话，请放在doc/docs/guide/community目录下，可直接提交pr <br>
+  . 文档链接的话，文档需要完全的公开，不掺杂收费等相关内容，审核通过会放在首页 <br>
+- 提供大屏模板:<br>
+  . 可将自己设计好的大屏进行导出(不包含数据集)，将导出产生的压缩包提供给我们（加个人企微） <br>
+  . 提供的大屏将会在AJ-Report在线演示环境进行展示和供其他人下载 <br>
 
 #### 开源不易，劳烦各位star ☺
 
+## 感谢JetBrains 的支持
+
+#### JetBrains:[https://www.jetbrains.com/?from=AJ-Report](https://www.jetbrains.com/?from=AJ-Report"链接")
+
+<br>
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/anji-plus/report.svg)](https://starchart.cc/anji-plus/report)
