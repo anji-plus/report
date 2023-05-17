@@ -33,11 +33,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -330,6 +328,10 @@ public class DataSetServiceImpl implements DataSetService {
         List<JSONObject> data = dataSourceService.execute(dataSourceDto);
         //5.数据转换
         List<JSONObject> transform = dataSetTransformService.transform(dto.getDataSetTransformDtoList(), data);
+        //测试结果只保留list(0)
+        if (!CollectionUtils.isEmpty(transform) && transform.size() > 1) {
+            transform = Collections.singletonList(transform.get(0));
+        }
         originalDataDto.setData(transform);
         return originalDataDto;
     }
