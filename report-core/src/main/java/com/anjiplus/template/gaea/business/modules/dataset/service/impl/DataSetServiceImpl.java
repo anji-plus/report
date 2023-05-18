@@ -216,6 +216,7 @@ public class DataSetServiceImpl implements DataSetService {
      * @param id
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteSet(Long id) {
         DataSet dataSet = selectOne(id);
         String setCode = dataSet.getSetCode();
