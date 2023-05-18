@@ -1,9 +1,9 @@
 package com.anjiplus.template.gaea.business.modules.datasource.service.impl;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.anjiplus.template.gaea.business.config.DruidProperties;
+import com.anjiplus.template.gaea.business.config.HikariPoolProperties;
 import com.anjiplus.template.gaea.business.modules.datasource.controller.dto.DataSourceDto;
 import com.anjiplus.template.gaea.business.modules.datasource.service.JdbcService;
+import com.zaxxer.hikari.pool.HikariPool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,22 +21,22 @@ import java.util.concurrent.ConcurrentHashMap;
 public class JdbcServiceImpl implements JdbcService {
 
     @Autowired
-    private DruidProperties druidProperties;
+    private HikariPoolProperties hikariPoolProperties;
 
     /**
      * 所有数据源的连接池存在map里
      */
-    private Map<Long, DruidDataSource> map = new ConcurrentHashMap<>();
+    private Map<Long, HikariPool> map = new ConcurrentHashMap<>();
     private Object lock = new Object();
 
-    public DruidDataSource getJdbcConnectionPool(DataSourceDto dataSource) {
+    public HikariPool getJdbcConnectionPool(DataSourceDto dataSource) {
         if (map.containsKey(dataSource.getId())) {
             return map.get(dataSource.getId());
         } else {
             try {
                 synchronized (lock) {
                     if (!map.containsKey(dataSource.getId())) {
-                        DruidDataSource pool = druidProperties.dataSource(dataSource.getJdbcUrl(),
+                        HikariPool pool = hikariPoolProperties.dataSource(dataSource.getJdbcUrl(),
                                 dataSource.getUsername(), dataSource.getPassword(), dataSource.getDriverName());
                         map.put(dataSource.getId(), pool);
                         log.info("创建连接池成功：{}", dataSource.getJdbcUrl());
@@ -57,7 +57,7 @@ public class JdbcServiceImpl implements JdbcService {
     @Override
     public void removeJdbcConnectionPool(Long id) {
         try {
-            DruidDataSource pool = map.get(id);
+            HikariPool pool = map.get(id);
             if (pool != null) {
                 log.info("remove pool success, datasourceId:{}", id);
                 map.remove(id);
@@ -77,7 +77,7 @@ public class JdbcServiceImpl implements JdbcService {
      */
     @Override
     public Connection getPooledConnection(DataSourceDto dataSource) throws SQLException{
-        DruidDataSource pool = getJdbcConnectionPool(dataSource);
+        HikariPool pool = getJdbcConnectionPool(dataSource);
         return pool.getConnection();
     }
 
@@ -91,7 +91,7 @@ public class JdbcServiceImpl implements JdbcService {
      */
     @Override
     public Connection getUnPooledConnection(DataSourceDto dataSource) throws SQLException {
-        DruidDataSource druidDataSource = druidProperties.dataSource(dataSource.getJdbcUrl(),
+        HikariPool druidDataSource = hikariPoolProperties.dataSource(dataSource.getJdbcUrl(),
                 dataSource.getUsername(), dataSource.getPassword(), dataSource.getDriverName());
         return druidDataSource.getConnection();
     }

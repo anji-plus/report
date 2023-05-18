@@ -1,10 +1,18 @@
 ```
  第一步，下载zip包，解压
- 第二步，conf->bootstrap.yml，修改mysql连接等信息
+ 第二步，conf->bootstrap.yml，修改数据库连接、上传下载地址等信息
  第三步，启动bin目录下start.sh
  第四步，访问 http://localhost:9095  admin 123456
- 第五步，修改"数据源->mysql数据源"用户名密码
 ```
+
+## 版本问题
+
+已知以下版本存在兼容性问题，请不要使用
+
+- Node.js V16及以上
+- openJdk
+- Jdk 1.7及以下/11及以上（jdk11部分版本有问题）
+- Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
 
 ## 下载发行版
 
@@ -24,7 +32,7 @@
 
 ## OSS配置
 
-OSS底层已支持minio、amazonS3、dfs，都配置的情况下优先级minio->amazonS3->nfs <br>
+OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->amazonS3->nfs <br>
 ![file.png](../picture/quickly/img.png) <br>
 
 ## 启动
@@ -39,18 +47,12 @@ aj-report-XXX --> bin --> start.bat <br>
 
 如果start.bat启动有问题的话，可以尝试以下方法解决。<br>
 修改第4行的JAVA_HOME，改成你自己的JAVA_HOME，并去掉**rem**注释，双击启动<br>
-![java.png](../picture/quickly/img_7.png) 
+![java.png](../picture/quickly/img_7.png)
 
 ## 访问
 
 http://localhost:9095 <br>
-默认密码：admin 123456 <br>
+默认密码：admin 123456 <br> 
 
-## 重置mysql连接
-
-登陆进来后请修改mysql数据源 <br>
-数据源 --> mysql数据源 --> 编辑 --> 修改用户名密码（改成你自己系统mysql的用户名密码） <br>
-![img](../picture/quickly/img_14.png) <br>
-![img_6.png](../picture/quickly/img_6.png) <br>
 
 

@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "23626707",
+      "name": "进度条",
+      "font_class": "jindutiao",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "1766474",
+      "name": "符号-单行输入框",
+      "font_class": "danhangshurukuang",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "8560318",
+      "name": "下拉框",
+      "font_class": "xialakuang1",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "15388197",
+      "name": "时间筛选",
+      "font_class": "shijianshaixuan",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
       "icon_id": "9013588",
       "name": "雷达图2",
       "font_class": "leidatu",
@@ -144,13 +172,6 @@
       "font_class": "fuzhi1",
       "unicode": "e626",
       "unicode_decimal": 58918
-    },
-    {
-      "icon_id": "22378736",
-      "name": "中国地图",
-      "font_class": "zhongguoditu",
-      "unicode": "e738",
-      "unicode_decimal": 59192
     },
     {
       "icon_id": "21338828",

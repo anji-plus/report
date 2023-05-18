@@ -1,35 +1,30 @@
-<!--
- * @Author: lide1202@hotmail.com
- * @Date: 2021-3-13 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24
- !-->
 <template>
   <avue-draggable
     :step="step"
     :width="widgetsWidth"
     :height="widgetsHeight"
+    :disabled="widgetDisabled"
     :left="widgetsLeft"
     :top="widgetsTop"
     ref="draggable"
     :index="index"
-    :z-index="-1"
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <component :is="type" :value="value" />
+    <!-- :z-index="-1" -->
+    <component :is="type" :widget-index="index" :value="value" />
   </avue-draggable>
 </template>
 
 <script>
-import widgetHref from "./widgetHref.vue";
-import widgetText from "./widgetText.vue";
-import WidgetMarquee from "./widgetMarquee.vue";
-import widgetTime from "./widgetTime.vue";
-import widgetImage from "./widgetImage.vue";
-import widgetSlider from "./widgetSlider.vue";
-import widgetVideo from "./widgetVideo.vue";
-import WidgetIframe from "./widgetIframe.vue";
+import widgetHref from "./texts/widgetHref.vue";
+import widgetText from "./texts/widgetText.vue";
+import WidgetMarquee from "./texts/widgetMarquee.vue";
+import widgetTime from "./texts/widgetTime.vue";
+import widgetImage from "./texts/widgetImage.vue";
+import widgetSlider from "./texts/widgetSlider.vue";
+import widgetVideo from "./texts/widgetVideo.vue";
+import WidgetIframe from "./texts/widgetIframe.vue";
 import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
 import widgetLinechart from "./line/widgetLinechart.vue";
@@ -38,7 +33,7 @@ import WidgetPiechart from "./pie/widgetPiechart.vue";
 import WidgetFunnel from "./funnel/widgetFunnel.vue";
 import WidgetGauge from "./percent/widgetGauge.vue";
 import WidgetPieNightingaleRoseArea from "./pie/widgetPieNightingaleRose";
-import widgetTable from "./widgetTable.vue";
+import widgetTable from "./texts/widgetTable.vue";
 import widgetLineMap from "./map/widgetLineMap.vue";
 import widgetPiePercentageChart from "./percent/widgetPiePercentageChart";
 import widgetAirBubbleMap from "./map/widgetAirBubbleMap";
@@ -52,6 +47,12 @@ import widgetWordCloud from "./wordcloud/widgetWordCloud";
 import widgetHeatmap from "./heatmap/widgetHeatmap";
 import widgetRadar from "./radar/widgetRadar";
 import widgetBarLineStackChart from "./barline/widgetBarLineStackChart";
+import widgetSelect from "./form/widgetSelect";
+import widgetInput from "./form/widgetInput.vue";
+import widgetFormTime from "./form/widgetFormTime.vue";
+import widgetScaleVertical from "./scale/widgetScaleVertical.vue";
+import widgetScaleHorizontal from "./scale/widgetScaleHorizontal.vue";
+import widgetBarDoubleYaxisChart from "./bar/widgetBarDoubleYaxisChart.vue";
 
 export default {
   name: "Widget",
@@ -85,11 +86,17 @@ export default {
     widgetWordCloud,
     widgetHeatmap,
     widgetRadar,
-    widgetBarLineStackChart
+    widgetBarLineStackChart,
+    widgetScaleVertical,
+    widgetScaleHorizontal,
+    widgetSelect,
+    //widgetInput,
+    widgetFormTime,
+    widgetBarDoubleYaxisChart,
   },
   model: {
     prop: "value",
-    event: "input"
+    event: "input",
   },
   props: {
     /*
@@ -101,9 +108,9 @@ export default {
     bigscreen: Object,
     value: {
       type: [Object],
-      default: () => {}
+      default: () => {},
     },
-    step: Number
+    step: Number,
   },
   data() {
     return {
@@ -111,9 +118,9 @@ export default {
         setup: {},
         data: {},
         position: {},
-/*        leftMargin: null,
+        /*        leftMargin: null,
         topMargin: null*/
-      }
+      },
     };
   },
   computed: {
@@ -124,14 +131,17 @@ export default {
       return this.value.position.height;
     },
     widgetsLeft() {
-      return this.value.position.left// >= this.leftMargin ? this.leftMargin : this.value.position.left;
+      return this.value.position.left; // >= this.leftMargin ? this.leftMargin : this.value.position.left;
     },
     widgetsTop() {
-      return this.value.position.top// >= this.topMargin ? this.topMargin : this.value.position.top;
+      return this.value.position.top; // >= this.topMargin ? this.topMargin : this.value.position.top;
     },
     widgetsZIndex() {
       return this.value.position.zIndex || 1;
-    }
+    },
+    widgetDisabled() {
+      return this.value.position.disabled || false;
+    },
   },
   mounted() {},
   methods: {
@@ -146,23 +156,42 @@ export default {
       // 计算workbench的X轴边界值
       // 组件距离左侧宽度 + 组件宽度 > 大屏总宽度时，右侧边界值 = (大屏宽度 - 组件宽度)；左侧边界值 = 0
       const { bigscreenWidth, bigscreenHeight } = this.bigscreen;
-      const xBoundaryValue = (left + width) > bigscreenWidth ? bigscreenWidth - width : left < 0 ? 0 : left;
+      const xBoundaryValue =
+        left + width > bigscreenWidth
+          ? bigscreenWidth - width
+          : left < 0
+          ? 0
+          : left;
       // 初始化X轴边界值
       this.leftMargin = left;
       // 计算Y轴边界值
-      const yBoundaryValue = (top + height) > bigscreenHeight ? bigscreenHeight - height : top < 0 ? 0 : top;
+      const yBoundaryValue =
+        top + height > bigscreenHeight
+          ? bigscreenHeight - height
+          : top < 0
+          ? 0
+          : top;
       // 初始化Y轴边界值
       this.topMargin = top;
       // 若位置超出边界值则重新设置位置
-      if (this.leftMargin != xBoundaryValue || this.topMargin != yBoundaryValue) {
+      if (
+        this.leftMargin != xBoundaryValue ||
+        this.topMargin != yBoundaryValue
+      ) {
         this.$nextTick(() => {
           this.leftMargin = xBoundaryValue;
           this.topMargin = yBoundaryValue;
-          this.$emit("onActivated", { index, left: xBoundaryValue, top: yBoundaryValue, width, height });
-        })
+          this.$emit("onActivated", {
+            index,
+            left: xBoundaryValue,
+            top: yBoundaryValue,
+            width,
+            height,
+          });
+        });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

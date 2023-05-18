@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:39:35
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:09:58
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-01-10 14:08:40
  */
 export const widgetBarCompare = {
   code: 'widgetBarCompareChart',
@@ -194,7 +194,7 @@ export const widgetBarCompare = {
             },
             {
               type: 'el-input-text',
-              label: '图例名称',
+              label: '名称( | 分隔)',
               name: 'legendName',
               required: false,
               placeholder: '多值以' | '隔开',
@@ -705,7 +705,7 @@ export const widgetBarCompare = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',

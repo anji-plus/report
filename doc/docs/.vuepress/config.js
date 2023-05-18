@@ -15,7 +15,7 @@ module.exports = {
             {text: 'GitHub', link: 'https://github.com/anji-plus/report'},
             {text: 'Gitee', link: 'https://gitee.com/anji-plus/report'},
             {text: '谁在使用', link: '/guide/briefUsing'},
-            {text: '更多案例', link: '/guide/bigScreenCase'},
+            {text: '更多大屏', link: '/guide/bigScreenCase'},
         ],
         sidebar: {
             '/guide/': [
@@ -26,7 +26,14 @@ module.exports = {
                         {title: '简介', path: '/guide/'},
                         {title: '谁在使用', path: '/guide/briefUsing'},
                         {title: '技术支持', path: '/guide/briefSupport'},
-                        {title: '更多案例', path: '/guide/bigScreenCase'},
+                        {title: '更多大屏', path: '/guide/bigScreenCase'},
+                    ]
+                },
+                {
+                    title: 'Releases',
+                    collapsable: false,
+                    children: [
+                        {title: 'V1.0.0', path: '/guide/releases/1.0.0'},
                     ]
                 },
                 {
@@ -37,13 +44,14 @@ module.exports = {
                         {title: '发行版部署', path: '/guide/quicklyDistribution'},
                         {title: '源码部署', path: '/guide/quicklySource'},
                         {title: '前后端分离', path: '/guide/quicklySeparate'},
+                        {title: '快速使用', path: '/guide/quicklyUse'},
                     ]
                 },
                 {
                     title: '用户权限',
                     collapsable: false,
                     children: [
-                        {title: '权限管理', path: '/guide/authmanager'},
+                        {title: '权限管理', path: '/guide/authManager'},
                     ]
                 },
                 {
@@ -52,11 +60,14 @@ module.exports = {
                     children: [
                         {title: '数据源', path: '/guide/datasource'},
                         {title: '数据集', path: '/guide/dataset'},
-                        {title: '报表管理', path: '/guide/reportmanager'},
+                        {title: '报表管理', path: '/guide/reportManager'},
                         {title: '大屏报表', path: '/guide/dashboard'},
                         {title: '表格报表', path: '/guide/excel'},
-                        {title: '导入导出', path: '/guide/importexport'},
+                        {title: '导入导出', path: '/guide/importExport'},
+                        {title: '报表分享', path: '/guide/reportShare'},
+                        {title: '图表配置项', path: '/guide/chartsConfig'},
                         {title: '图表组件', path: '/guide/charts'},
+                        {title: '图表联动', path: '/guide/chartsLinkage'},
                     ]
                 },
                 {

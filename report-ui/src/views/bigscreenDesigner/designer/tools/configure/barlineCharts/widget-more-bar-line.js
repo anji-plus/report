@@ -4,7 +4,7 @@
  * @Author: foming
  * @Date:
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:39:52
+ * @LastEditTime: 2023-01-10 14:10:08
  */
 export const widgetMoreBarLine = {
   code: 'widgetMoreBarLineChart',
@@ -79,8 +79,8 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'circle', name: '实心点'},
-                {code: 'emptyCircle', name: '空心点'},
+                { code: 'circle', name: '实心点' },
+                { code: 'emptyCircle', name: '空心点' },
               ],
               value: 'circle'
             },
@@ -160,10 +160,10 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -174,9 +174,9 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
             },
@@ -187,9 +187,9 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
               ],
               value: 'center'
             },
@@ -224,10 +224,10 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -238,9 +238,9 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
             },
@@ -259,7 +259,7 @@ export const widgetMoreBarLine = {
             },
             {
               type: 'el-input-text',
-              label: '图例名称',
+              label: '名称( | 分隔)',
               name: 'legendName',
               required: false,
               placeholder: '多值以' | '隔开',
@@ -296,9 +296,9 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
               ],
               value: 'center'
             },
@@ -309,8 +309,8 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'top', name: '顶部'},
-                {code: 'bottom', name: '底部'},
+                { code: 'top', name: '顶部' },
+                { code: 'bottom', name: '底部' },
               ],
               value: 'top'
             },
@@ -321,8 +321,8 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'vertical', name: '竖排'},
-                {code: 'horizontal', name: '横排'},
+                { code: 'vertical', name: '竖排' },
+                { code: 'horizontal', name: '横排' },
               ],
               value: 'horizontal'
             },
@@ -736,10 +736,10 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -787,10 +787,10 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -859,7 +859,7 @@ export const widgetMoreBarLine = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
+              value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
             },
           ],
         },
@@ -892,7 +892,7 @@ export const widgetMoreBarLine = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',
@@ -903,14 +903,14 @@ export const widgetMoreBarLine = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {"date": "2014", "unsales": 400, "manus": 300, "sales": 4.2,},
-          {"date": "2015", "unsales": 400, "manus": 500, "sales": 3.6,},
-          {"date": "2016", "unsales": 300, "manus": 500, "sales": 5.8,},
-          {"date": "2017", "unsales": 300, "manus": 500, "sales": 3.4,},
-          {"date": "2018", "unsales": 400, "manus": 400, "sales": 2.5,},
-          {"date": "2019", "unsales": 400, "manus": 500, "sales": 5.8,},
-          {"date": "2020", "unsales": 300, "manus": 400, "sales": 7.6,},
-          {"date": "2021", "unsales": 300, "manus": 600, "sales": 3.4,},
+          { "date": "2014", "unsales": 400, "manus": 300, "sales": 4.2, },
+          { "date": "2015", "unsales": 400, "manus": 500, "sales": 3.6, },
+          { "date": "2016", "unsales": 300, "manus": 500, "sales": 5.8, },
+          { "date": "2017", "unsales": 300, "manus": 500, "sales": 3.4, },
+          { "date": "2018", "unsales": 400, "manus": 400, "sales": 2.5, },
+          { "date": "2019", "unsales": 400, "manus": 500, "sales": 5.8, },
+          { "date": "2020", "unsales": 300, "manus": 400, "sales": 7.6, },
+          { "date": "2021", "unsales": 300, "manus": 600, "sales": 3.4, },
         ]
       },
       {

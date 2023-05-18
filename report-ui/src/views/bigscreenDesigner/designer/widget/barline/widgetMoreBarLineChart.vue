@@ -1,79 +1,88 @@
 <template>
-  <div :style='styleObj'>
-    <v-chart :options='options' autoresize/>
+  <div :style="styleObj">
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
 
-import echarts from 'echarts';
-
+import echarts from "echarts";
 export default {
-  name: 'widgetMoreBarLineChart',
+  name: "widgetMoreBarLineChart",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
+    flagInter: null,
   },
   data() {
     return {
       options: {
         tooltip: {
-          trigger: 'item',
+          trigger: "item",
           axisPointer: {
-            type: 'shadow'
-          }
+            type: "shadow",
+          },
         },
         grid: {
-          left: '2%',
-          right: '4%',
-          bottom: '14%',
-          top: '16%',
-          containLabel: true
+          left: "2%",
+          right: "4%",
+          bottom: "14%",
+          top: "16%",
+          containLabel: true,
         },
         legend: {},
         xAxis: {
-          type: 'category',
-          data: ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'],
+          type: "category",
+          data: [
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+          ],
           axisLine: {
             lineStyle: {
-              color: '#cdd5e2'
-
-            }
+              color: "#cdd5e2",
+            },
           },
           axisLabel: {
             textStyle: {
-              color: '#666666'
-            }
+              color: "#666666",
+            },
           },
         },
         yAxis: [
           {
-            type: 'value',
+            type: "value",
             axisLine: {
               show: true,
               lineStyle: {
-                color: '#cdd5e2'
-              }
+                color: "#cdd5e2",
+              },
             },
             splitLine: {
               show: false,
             },
             axisLabel: {
               textStyle: {
-                color: '#666666'
-              }
+                color: "#666666",
+              },
             },
           },
           {
-            type: 'value',
+            type: "value",
             nameTextStyle: {
-              color: '#666666'
+              color: "#666666",
             },
             axisLine: {
               lineStyle: {
-                color: '#cdd5e2'
-              }
+                color: "#cdd5e2",
+              },
             },
             splitLine: {
               show: false,
@@ -81,53 +90,58 @@ export default {
             axisLabel: {
               show: true,
               textStyle: {
-                color: '#666666'
-              }
-            }
-          }
+                color: "#666666",
+              },
+            },
+          },
         ],
         series: [
           {
-            name: '调解成功',
-            type: 'bar',
+            name: "调解成功",
+            type: "bar",
             itemStyle: {
               normal: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                  offset: 0,
-                  color: '#29acff'
-                }, {
-                  offset: 1,
-                  color: '#4bdfff'
-                }]),
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: "#29acff",
+                  },
+                  {
+                    offset: 1,
+                    color: "#4bdfff",
+                  },
+                ]),
                 barBorderRadius: 6,
               },
             },
-            data: []
+            data: [],
           },
           {
-            name: '调解失败',
-            type: 'bar',
+            name: "调解失败",
+            type: "bar",
             itemStyle: {
               normal: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                  offset: 0,
-                  color: '#3d93f2'
-                }, {
-                  offset: 1,
-                  color: '#5dc1fd'
-                }]),
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: "#3d93f2",
+                  },
+                  {
+                    offset: 1,
+                    color: "#5dc1fd",
+                  },
+                ]),
                 barBorderRadius: 6,
-              }
-
+              },
             },
-            data: []
+            data: [],
           },
           {
-            name: '调解成功率',
-            type: 'line',
+            name: "调解成功率",
+            type: "line",
             yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
             smooth: false, //平滑曲线显示
-            symbol: 'circle', //标记的图形为实心圆
+            symbol: "circle", //标记的图形为实心圆
             symbolSize: 8, //标记的大小
             /*itemStyle: {
               normal: {
@@ -137,25 +151,28 @@ export default {
               },
             },*/
             lineStyle: {
-              color: '#ffa43a'
+              color: "#ffa43a",
             },
-            data: []
-          }
-        ]
-      }
-    }
+            data: [],
+          },
+        ],
+      },
+    };
   },
   computed: {
     styleObj() {
       return {
-        position: this.ispreview ? 'absolute' : 'static',
-        width: this.optionsStyle.width + 'px',
-        height: this.optionsStyle.height + 'px',
-        left: this.optionsStyle.left + 'px',
-        top: this.optionsStyle.top + 'px',
-        background: this.optionsSetup.background
+        position: this.ispreview ? "absolute" : "static",
+        width: this.optionsStyle.width + "px",
+        height: this.optionsStyle.height + "px",
+        left: this.optionsStyle.left + "px",
+        top: this.optionsStyle.top + "px",
+        background: this.optionsSetup.background,
       };
-    }
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -166,8 +183,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   created() {
     this.optionsStyle = this.value.position;
@@ -175,6 +192,7 @@ export default {
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
     // 修改图标options属性
@@ -220,7 +238,7 @@ export default {
         name: optionsSetup.nameX,
         nameTextStyle: {
           color: optionsSetup.nameColorX,
-          fontSize: optionsSetup.nameFontSizeX
+          fontSize: optionsSetup.nameFontSizeX,
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -233,23 +251,23 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX
-          }
+            fontSize: optionsSetup.fontSizeX,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorX,
             width: optionsSetup.lineWidthX,
-          }
+          },
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineX,
           lineStyle: {
             color: optionsSetup.splitLineColorX,
             width: optionsSetup.splitLineWidthX,
-          }
-        }
+          },
+        },
       };
       this.options.xAxis = xAxis;
     },
@@ -268,7 +286,7 @@ export default {
           // 别名
           nameTextStyle: {
             color: optionsSetup.nameColorYLeft,
-            fontSize: optionsSetup.nameFontSizeYLeft
+            fontSize: optionsSetup.nameFontSizeYLeft,
           },
           axisLabel: {
             show: true,
@@ -277,26 +295,27 @@ export default {
             textStyle: {
               // 坐标文字颜色
               color: optionsSetup.colorYLeft,
-              fontSize: optionsSetup.fontSizeYLeft
-            }
+              fontSize: optionsSetup.fontSizeYLeft,
+            },
           },
-          axisTick: { // 刻度
+          axisTick: {
+            // 刻度
             show: optionsSetup.tickLineYLeft,
           },
           axisLine: {
             show: optionsSetup.lineYLeft,
             lineStyle: {
               width: optionsSetup.lineWidthYLeft,
-              color: optionsSetup.lineColorYLeft
-            }
+              color: optionsSetup.lineColorYLeft,
+            },
           },
           splitLine: {
             show: optionsSetup.isShowSplitLineYLeft,
             lineStyle: {
               color: optionsSetup.splitLineColorYLeft,
               width: optionsSetup.splitLineFontWidthYLeft,
-            }
-          }
+            },
+          },
         },
         {
           type: "value",
@@ -309,7 +328,7 @@ export default {
           // 别名
           nameTextStyle: {
             color: optionsSetup.nameColorYRight,
-            fontSize: optionsSetup.nameFontSizeYRight
+            fontSize: optionsSetup.nameFontSizeYRight,
           },
           axisLabel: {
             show: true,
@@ -318,10 +337,11 @@ export default {
             textStyle: {
               // 坐标文字颜色
               color: optionsSetup.colorYRight,
-              fontSize: optionsSetup.fontSizeYRight
-            }
+              fontSize: optionsSetup.fontSizeYRight,
+            },
           },
-          axisTick: { // 刻度
+          axisTick: {
+            // 刻度
             show: optionsSetup.tickLineYRight,
           },
           axisLine: {
@@ -329,16 +349,16 @@ export default {
             lineStyle: {
               width: optionsSetup.lineWidthYRight,
               color: optionsSetup.lineColorYRight,
-            }
+            },
           },
           splitLine: {
             show: optionsSetup.isShowSplitLineYRight,
             lineStyle: {
               color: optionsSetup.splitLineColorYRight,
               width: optionsSetup.splitLineFontWidthYRight,
-            }
-          }
-        }
+            },
+          },
+        },
       ];
       this.options.yAxis = yAxis;
     },
@@ -346,12 +366,12 @@ export default {
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
-        trigger: 'item',
+        trigger: "item",
         show: true,
         textStyle: {
           color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize
-        }
+          fontSize: optionsSetup.tipsFontSize,
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -363,7 +383,7 @@ export default {
         right: optionsSetup.marginRight,
         bottom: optionsSetup.marginBottom,
         top: optionsSetup.marginTop,
-        containLabel: true
+        containLabel: true,
       };
       this.options.grid = grid;
     },
@@ -373,12 +393,11 @@ export default {
       legend.show = optionsSetup.isShowLegend;
       legend.left = optionsSetup.lateralPosition;
       legend.top = optionsSetup.longitudinalPosition;
-      legend.bottom =
-        optionsSetup.longitudinalPosition;
+      legend.bottom = optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
         color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize
+        fontSize: optionsSetup.legendFontSize,
       };
       legend.itemWidth = optionsSetup.legendWidth;
     },
@@ -388,23 +407,40 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == '') {
+      if (null == legendName || legendName == "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
-        this.options.legend['data'] = name;
+        this.options.legend["data"] = name;
       } else {
-        const arr = legendName.split('|');
+        const arr = legendName.split("|");
         for (let i = 0; i < arr.length; i++) {
           series[i].name = arr[i];
         }
-        this.options.legend['data'] = arr
+        this.options.legend["data"] = arr;
       }
     },
     // 数据处理
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
-      optionsData.dataType == 'staticData'
+      // 联动接收者逻辑开始
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+      // 联动接收者逻辑结束
+      optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
@@ -428,30 +464,30 @@ export default {
         line[i] = val[i].sales;
       }
       const legendName = [];
-      legendName.push('调解成功');
-      legendName.push('调解失败');
-      legendName.push('调解成功率');
+      legendName.push("调解成功");
+      legendName.push("调解失败");
+      legendName.push("调解成功率");
       // x轴
       this.options.xAxis.data = axis;
       // series
       for (const i in series) {
-        if (series[i].type == 'bar') {
+        if (series[i].type == "bar") {
           series[i].name = legendName[i];
-          series[i].type = 'bar';
+          series[i].type = "bar";
           series[i].label = {
             show: optionsSetup.isShowBar,
-            position: 'top',
+            position: "top",
             distance: optionsSetup.distanceBar,
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
-            fontWeight: optionsSetup.fontWeightBar
+            fontWeight: optionsSetup.fontWeightBar,
           };
           series[i].barWidth = optionsSetup.maxWidth;
-          series[i].itemStyle.normal['barBorderRadius'] = optionsSetup.radius;
-          series[i].itemStyle.normal['color'] = arrColor[i];
-        } else if (series[i].type == 'line') {
+          series[i].itemStyle.normal["barBorderRadius"] = optionsSetup.radius;
+          series[i].itemStyle.normal["color"] = arrColor[i];
+        } else if (series[i].type == "line") {
           series[i].name = legendName[i];
-          series[i].type = 'line';
+          series[i].type = "line";
           series[i].yAxisIndex = 1;
           series[i].symbol = optionsSetup.symbol;
           series[i].showSymbol = optionsSetup.markPoint;
@@ -459,36 +495,36 @@ export default {
           series[i].smooth = optionsSetup.smoothCurve;
           if (optionsSetup.area) {
             series[i].areaStyle = {
-              opacity: optionsSetup.areaThickness / 100
+              opacity: optionsSetup.areaThickness / 100,
             };
           } else {
             series[i].areaStyle = {
-              opacity: 0
+              opacity: 0,
             };
           }
           series[i].itemStyle = {
             normal: {
               color: arrColor[i],
-            }
+            },
           };
           series[i].lineStyle = {
             color: arrColor[i],
-            width: optionsSetup.lineWidth
+            width: optionsSetup.lineWidth,
           };
           series[i].label = {
             show: optionsSetup.isShowLine,
-            position: 'top',
+            position: "top",
             distance: optionsSetup.distanceLine,
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
-            fontWeight: optionsSetup.fontWeightLine
+            fontWeight: optionsSetup.fontWeightLine,
           };
         }
       }
       series[0].data = bar1;
       series[1].data = bar2;
       series[2].data = line;
-      this.options.legend['data'] = legendName;
+      this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
     dynamicDataFn(val, refreshTime) {
@@ -504,7 +540,7 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(res);
       });
     },
@@ -522,27 +558,27 @@ export default {
       for (const i in val.series) {
         legendName.push(val.series[i].name);
         const obj = {};
-        if (val.series[i].type == 'bar') {
+        if (val.series[i].type == "bar") {
           obj.name = val.series[i].name;
           obj.type = val.series[i].type;
           obj.label = {
             show: optionsSetup.isShowBar,
-            position: 'top',
+            position: "top",
             distance: optionsSetup.distanceBar,
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
-            fontWeight: optionsSetup.fontWeightBar
+            fontWeight: optionsSetup.fontWeightBar,
           };
           obj.barWidth = optionsSetup.maxWidth;
           obj.itemStyle = {
             normal: {
               color: arrColor[i],
               barBorderRadius: optionsSetup.radius,
-            }
+            },
           };
           obj.data = val.series[i].data;
           series.push(obj);
-        } else if (val.series[i].type == 'line') {
+        } else if (val.series[i].type == "line") {
           obj.name = val.series[i].name;
           obj.type = val.series[i].type;
           obj.yAxisIndex = 1;
@@ -552,41 +588,40 @@ export default {
           obj.smooth = optionsSetup.smoothCurve;
           if (optionsSetup.area) {
             obj.areaStyle = {
-              opacity: optionsSetup.areaThickness / 100
+              opacity: optionsSetup.areaThickness / 100,
             };
           } else {
             obj.areaStyle = {
-              opacity: 0
-            }
+              opacity: 0,
+            };
           }
           obj.itemStyle = {
             normal: {
               color: arrColor[i],
-            }
+            },
           };
           obj.lineStyle = {
             color: arrColor[i],
-            width: optionsSetup.lineWidth
+            width: optionsSetup.lineWidth,
           };
           obj.label = {
             show: optionsSetup.isShowLine,
-            position: 'top',
+            position: "top",
             distance: optionsSetup.distanceLine,
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
-            fontWeight: optionsSetup.fontWeightLine
+            fontWeight: optionsSetup.fontWeightLine,
           };
           obj.data = val.series[i].data;
           series.push(obj);
         }
       }
       this.options.series = series;
-      this.options.legend['data'] = legendName;
+      this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
-  }
+  },
 };
-
 </script>
 
 <style scoped lang='scss'>

@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:38:17
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:16:28
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-01-10 14:05:48
  */
 export const widgetLineStack = {
   code: 'widgetLineStackChart',
@@ -66,8 +66,8 @@ export const widgetLineStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'circle', name: '实心点'},
-                {code: 'emptyCircle', name: '空心点'},
+                { code: 'circle', name: '实心点' },
+                { code: 'emptyCircle', name: '空心点' },
               ],
               value: 'circle'
             },
@@ -246,7 +246,7 @@ export const widgetLineStack = {
             },
             {
               type: 'el-input-text',
-              label: '图例名称',
+              label: '名称( | 分隔)',
               name: 'legendName',
               required: false,
               placeholder: '多值以' | '隔开',
@@ -696,7 +696,7 @@ export const widgetLineStack = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',

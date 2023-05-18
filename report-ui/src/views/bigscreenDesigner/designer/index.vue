@@ -1,10 +1,3 @@
-<!--
- * @Descripttion: 大屏设计器
- * @Author: lide1202@hotmail.com
- * @Date: 2021-3-13 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24
- !-->
 <template>
   <div class="layout">
     <div
@@ -80,46 +73,99 @@
       :style="{ width: middleWidth + 'px', height: middleHeight + 'px' }"
     >
       <div class="top-button">
-        <span class="btn">
+        <span class="btn" @click="saveData">
           <el-tooltip
             class="item"
             effect="dark"
             content="保存"
             placement="bottom"
           >
-            <i class="iconfont iconsave" @click="saveData"></i>
+            <i class="iconfont iconsave"></i>
           </el-tooltip>
         </span>
-        <span class="btn">
+        <span class="btn" @click="viewScreen">
           <el-tooltip
             class="item"
             effect="dark"
             content="预览"
             placement="bottom"
           >
-            <i class="iconfont iconyulan" @click="viewScreen"></i>
+            <i class="iconfont iconyulan"></i>
           </el-tooltip>
         </span>
 
-        <span class="btn">
+        <span class="btn" @click="handleUndo">
           <el-tooltip
             class="item"
             effect="dark"
             content="撤销"
             placement="bottom"
           >
-            <i class="iconfont iconundo" @click="handleUndo"></i>
+            <i class="iconfont iconundo"></i>
           </el-tooltip>
         </span>
 
-        <span class="btn">
+        <span class="btn" @click="handleRedo">
           <el-tooltip
             class="item"
             effect="dark"
             content="恢复"
             placement="bottom"
           >
-            <i class="iconfont iconhuifubeifen" @click="handleRedo"></i>
+            <i class="iconfont iconhuifubeifen"></i>
+          </el-tooltip>
+        </span>
+
+        <span
+          :class="{
+            btn: true,
+            'btn-disable': currentSizeRangeIndex === 0,
+          }"
+          @click="setSize(0)"
+        >
+          <el-tooltip
+            class="item"
+            :disabled="currentSizeRangeIndex === 0"
+            effect="dark"
+            content="缩小"
+            placement="bottom"
+          >
+            <i class="el-icon-minus" style="font-size: 16px" />
+          </el-tooltip>
+        </span>
+        <span
+          :class="{
+            btn: true,
+            'scale-num': true,
+            'btn-disable': currentSizeRangeIndex === defaultSize.index,
+          }"
+          @click="setSize(2)"
+        >
+          <el-tooltip
+            class="item"
+            :disabled="currentSizeRangeIndex === defaultSize.index"
+            effect="dark"
+            content="默认比例"
+            placement="bottom"
+          >
+            <span> {{ parseInt(scaleNum) }}% </span>
+          </el-tooltip>
+        </span>
+        <span
+          :class="{
+            btn: true,
+            'btn-disable': currentSizeRangeIndex === 8,
+          }"
+          @click="setSize(1)"
+        >
+          <el-tooltip
+            class="item"
+            :disabled="currentSizeRangeIndex === 8"
+            effect="dark"
+            content="放大"
+            placement="bottom"
+          >
+            <i class="el-icon-plus" style="font-size: 16px" />
           </el-tooltip>
         </span>
 
@@ -137,7 +183,6 @@
               :headers="headers"
               accept=".zip"
               :on-success="handleUpload"
-              :on-error="handleError"
               :show-file-list="false"
               :limit="1"
             >
@@ -176,60 +221,72 @@
           </ul>
         </span>
       </div>
-      <div
-        class="workbench-container"
-        :style="{
-          width: bigscreenWidthInWorkbench + 'px',
-          height: bigscreenHeightInWorkbench + 'px',
-        }"
-        @mousedown="handleMouseDown"
-      >
-        <vue-ruler-tool
-          v-model="dashboard.presetLine"
-          class="vueRuler"
-          :step-length="50"
-          :parent="true"
-          :position="'relative'"
-          :is-scale-revise="true"
-          :visible.sync="dashboard.presetLineVisible"
+      <!-- 中间操作内容  主体 -->
+      <div class="workbench-container" @mousedown="handleMouseDown">
+        <div
+          :style="{
+            width: (+bigscreenWidth + 18) * bigscreenScaleInWorkbench + 'px',
+            height: (+bigscreenHeight + 18) * bigscreenScaleInWorkbench + 'px',
+          }"
+          class="vue-ruler-tool-wrap"
         >
-          <div
-            id="workbench"
-            class="workbench"
+          <!-- 大屏设计页面的标尺插件 -->
+          <vue-ruler-tool
+            ref="vue-ruler-tool"
+            v-model="dashboard.presetLine"
+            class="vueRuler"
+            :step-length="50"
+            :parent="true"
+            :position="'relative'"
+            :is-scale-revise="true"
+            :visible.sync="dashboard.presetLineVisible"
             :style="{
-              transform: workbenchTransform,
-              width: bigscreenWidth + 'px',
-              height: bigscreenHeight + 'px',
-              'background-color': dashboard.backgroundColor,
-              'background-image': 'url(' + dashboard.backgroundImage + ')',
-              'background-position': '0% 0%',
-              'background-size': '100% 100%',
-              'background-repeat': 'initial',
-              'background-attachment': 'initial',
-              'background-origin': 'initial',
-              'background-clip': 'initial',
+              width: +bigscreenWidth + 18 + 'px',
+              height: +bigscreenHeight + 18 + 'px',
+              transform:
+                currentSizeRangeIndex === defaultSize.index
+                  ? workbenchTransform
+                  : `scale(${sizeRange[currentSizeRangeIndex] / 100})`,
+              transformOrigin: '0 0',
             }"
-            @click.self="setOptionsOnClickScreen"
-            @drop="widgetOnDragged($event)"
-            @dragover="dragOver($event)"
           >
-            <div v-if="grade" class="bg-grid"></div>
-            <widget
-              ref="widgets"
-              v-for="(widget, index) in widgets"
-              :key="index"
-              v-model="widget.value"
-              :index="index"
-              :step="step"
-              :type="widget.type"
-              :bigscreen="{ bigscreenWidth, bigscreenHeight }"
-              @onActivated="setOptionsOnClickWidget"
-              @contextmenu.prevent.native="rightClick($event, index)"
-              @mousedown.prevent.native="widgetsClick(index)"
-              @mouseup.prevent.native="widgetsMouseup"
-            />
-          </div>
-        </vue-ruler-tool>
+            <div
+              id="workbench"
+              class="workbench"
+              :style="{
+                width: bigscreenWidth + 'px',
+                height: bigscreenHeight + 'px',
+                'background-color': dashboard.backgroundColor,
+                'background-image': 'url(' + dashboard.backgroundImage + ')',
+                'background-position': '0% 0%',
+                'background-size': '100% 100%',
+                'background-repeat': 'initial',
+                'background-attachment': 'initial',
+                'background-origin': 'initial',
+                'background-clip': 'initial',
+              }"
+              @click.self="setOptionsOnClickScreen"
+              @drop="widgetOnDragged($event)"
+              @dragover="dragOver($event)"
+            >
+              <div v-if="grade" class="bg-grid"></div>
+              <widget
+                ref="widgets"
+                v-for="(widget, index) in widgets"
+                :key="index"
+                v-model="widget.value"
+                :index="index"
+                :step="step"
+                :type="widget.type"
+                :bigscreen="{ bigscreenWidth, bigscreenHeight }"
+                @onActivated="setOptionsOnClickWidget"
+                @contextmenu.prevent.native="rightClick($event, index)"
+                @mousedown.prevent.native="widgetsClick(index)"
+                @mouseup.prevent.native="grade = false"
+              />
+            </div>
+          </vue-ruler-tool>
+        </div>
       </div>
     </div>
 
@@ -245,6 +302,9 @@
           <dynamicForm
             ref="formData"
             :options="widgetOptions.setup"
+            :layer-widget="layerWidget"
+            :widget-index="widgetIndex"
+            :widget-params-config="widgetParamsConfig"
             @onChanged="(val) => widgetValueChanged('setup', val)"
           />
         </el-tab-pane>
@@ -277,6 +337,8 @@
       :visible.sync="visibleContentMenu"
       :style-obj="styleObj"
       @deletelayer="deletelayer"
+      @lockLayer="lockLayer"
+      @noLockLayer="noLockLayer"
       @copylayer="copylayer"
       @istopLayer="istopLayer"
       @setlowLayer="setlowLayer"
@@ -287,20 +349,13 @@
 </template>
 
 <script>
-import {
-  insertDashboard,
-  detailDashboard,
-  importDashboard,
-  exportDashboard,
-} from "@/api/bigscreen";
 import { widgetTools, getToolByCode } from "./tools/index";
+import mixin from "@/utils/screenMixins";
 import widget from "./widget/widget.vue";
 import dynamicForm from "./components/dynamicForm.vue";
 import draggable from "vuedraggable";
 import VueRulerTool from "vue-ruler-tool"; // 大屏设计页面的标尺插件
 import contentMenu from "./components/contentMenu";
-import { getToken } from "@/utils/auth";
-import { Revoke } from "@/utils/revoke"; //处理历史记录 2022-02-22
 
 export default {
   name: "Login",
@@ -311,12 +366,9 @@ export default {
     dynamicForm,
     contentMenu,
   },
+  mixins: [mixin],
   data() {
     return {
-      uploadUrl:
-        process.env.BASE_API +
-        "/reportDashboard/import/" +
-        this.$route.query.reportCode,
       grade: false,
       layerWidget: [],
       widgetTools: widgetTools, // 左侧工具栏的组件图标，将js变量加入到当前作用域
@@ -328,44 +380,14 @@ export default {
 
       bigscreenWidth: 1920, // 大屏设计的大小
       bigscreenHeight: 1080,
-      revoke: null, //处理历史记录 2022-02-22
 
-      // 工作台大屏画布，保存到表gaea_report_dashboard中
-      dashboard: {
-        id: null,
-        title: "", // 大屏页面标题
-        width: 1920, // 大屏设计宽度
-        height: 1080, // 大屏设计高度
-        backgroundColor: "", // 大屏背景色
-        backgroundImage: "", // 大屏背景图片
-        refreshSeconds: null, // 大屏刷新时间间隔
-        presetLine: [], // 辅助线
-        presetLineVisible: true, // 辅助线是否显示
-      },
+      dashboard: {},
+
       // 大屏的标记
       screenCode: "",
       dragWidgetCode: "", //从工具栏拖拽的组件code
       // 大屏画布中的组件
-      widgets: [
-        {
-          // type和value最终存到数据库中去，保存到gaea_report_dashboard_widget中
-          type: "widget-text",
-          value: {
-            setup: {},
-            data: {},
-            position: {
-              width: 100,
-              height: 100,
-              left: 0,
-              top: 0,
-              zIndex: 0,
-            },
-          },
-          // options属性是从工具栏中拿到的tools中拿到
-          options: [],
-        },
-      ], // 工作区中拖放的组件
-
+      widgets: [], // 工作区中拖放的组件
       // 当前激活组件
       widgetIndex: 0,
       // 当前激活组件右侧配置属性
@@ -380,19 +402,16 @@ export default {
         top: 0,
       },
       visibleContentMenu: false,
-      rightClickIndex: -1,
+
       activeName: "first",
+      scaleNum: 0, // 当前缩放百分比的值
+      sizeRange: [20, 40, 60, 80, 100, 150, 200, 300, 400], // 缩放百分比
+      currentSizeRangeIndex: -1, // 当前是哪个缩放比分比,
+      currentWidgetTotal: 0,
+      widgetParamsConfig: [], // 各组件动态数据集的参数配置情况
     };
   },
   computed: {
-    step() {
-      return Number(100 / (this.bigscreenScaleInWorkbench * 100));
-    },
-    headers() {
-      return {
-        Authorization: getToken(), // 直接从本地获取token就行
-      };
-    },
     // 左侧折叠切换时，动态计算中间区的宽度
     middleWidth() {
       let widthLeftAndRight = 0;
@@ -432,7 +451,8 @@ export default {
   watch: {
     widgets: {
       handler(val) {
-        this.handlerLayerWidget(val);
+        this.getLayerData(val);
+        this.handlerdynamicDataParamsConfig(val);
         //以下部分是记录历史
         this.$nextTick(() => {
           this.revoke.push(this.widgets);
@@ -441,48 +461,28 @@ export default {
       deep: true,
     },
   },
-  created() {
-    /* 以下是记录历史的 */
-    this.revoke = new Revoke();
-  },
   mounted() {
-    // 如果是新的设计工作台
-    this.initEchartData();
     this.widgets = [];
     window.addEventListener("mouseup", () => {
       this.grade = false;
     });
+    this.$nextTick(() => {
+      this.initVueRulerTool(); // 初始化 修正插件样式
+    });
   },
   methods: {
-    /**
-     * @description: 恢复
-     * @param {*}
-     * @return {*}
-     */
-    handleUndo() {
-      const record = this.revoke.undo();
-      if (!record) {
-        return false;
-      }
-      this.widgets = record;
-    },
-    /**
-     * @description: 重做
-     * @param {*}
-     * @return {*}
-     */
-    handleRedo() {
-      const record = this.revoke.redo();
-      if (!record) {
-        return false;
-      }
-      this.widgets = record;
-    },
-    handlerLayerWidget(val) {
+    // 获取图层数据
+    getLayerData(val) {
       const layerWidgetArr = [];
       for (let i = 0; i < val.length; i++) {
         const obj = {};
-        obj.icon = getToolByCode(val[i].type).icon;
+        const myItem = getToolByCode(val[i].type);
+        obj.icon = myItem.icon;
+        obj.code = myItem.code; // 组件类型code
+        obj.widgetId = val[i].value.widgetId || ""; // 唯一id
+        if (val[i].value.paramsKeys) {
+          obj.paramsKeys = val[i].value.paramsKeys;
+        }
         const options = val[i].options["setup"];
         options.forEach((el) => {
           if (el.name == "layerName") {
@@ -493,191 +493,42 @@ export default {
       }
       this.layerWidget = layerWidgetArr;
     },
-    async initEchartData() {
-      const reportCode = this.$route.query.reportCode;
-      const { code, data } = await detailDashboard(reportCode);
-      if (code != 200) return;
-      const processData = this.handleInitEchartsData(data);
-      const screenData = this.handleBigScreen(data.dashboard);
-      this.widgets = processData;
-      this.dashboard = screenData;
-      this.bigscreenWidth = this.dashboard.width;
-      this.bigscreenHeight = this.dashboard.height;
-    },
-    handleBigScreen(data) {
-      const optionScreen = getToolByCode("screen").options;
-      const setup = optionScreen.setup;
-      for (const key in data) {
-        for (let i = 0; i < setup.length; i++) {
-          if (key == setup[i].name) {
-            setup[i].value = data[key];
-          }
-        }
-      }
-      this.setOptionsOnClickScreen();
-      return {
-        backgroundColor: (data && data.backgroundColor) || "",
-        backgroundImage: (data && data.backgroundImage) || "",
-        height: (data && data.height) || "1080",
-        title: (data && data.title) || "",
-        width: (data && data.width) || "1920",
-      };
-    },
-    handleInitEchartsData(data) {
-      const widgets = data.dashboard ? data.dashboard.widgets : [];
-      const widgetsData = [];
-      for (let i = 0; i < widgets.length; i++) {
-        let obj = {};
-        obj.type = widgets[i].type;
-        obj.value = {
-          setup: widgets[i].value.setup,
-          data: widgets[i].value.data,
-          position: widgets[i].value.position,
-        };
-        const tool = this.deepClone(getToolByCode(widgets[i].type));
-        const option = tool.options;
-        const options = this.handleOptionsData(widgets[i].value, option);
-        obj.options = options;
-        widgetsData.push(obj);
-      }
-      return widgetsData;
-    },
-    handleOptionsData(data, option) {
-      for (const key in data.setup) {
-        for (let i = 0; i < option.setup.length; i++) {
-          let item = option.setup[i];
-          if (Object.prototype.toString.call(item) == "[object Object]") {
-            if (key == option.setup[i].name) {
-              option.setup[i].value = data.setup[key];
-            }
-          } else if (Object.prototype.toString.call(item) == "[object Array]") {
-            for (let j = 0; j < item.length; j++) {
-              const list = item[j].list;
-              list.forEach((el) => {
-                if (key == el.name) {
-                  el.value = data.setup[key];
-                }
-              });
-            }
-          }
-        }
-      }
-      // position
-      for (const key in data.position) {
-        for (let i = 0; i < option.position.length; i++) {
-          if (key == option.position[i].name) {
-            option.position[i].value = data.position[key];
-          }
-        }
-      }
-      // data
-      for (const key in data.data) {
-        for (let i = 0; i < option.data.length; i++) {
-          if (key == option.data[i].name) {
-            option.data[i].value = data.data[key];
-          }
-        }
-      }
-      return option;
-    },
-    // 保存数据
-    async saveData() {
-      if (!this.widgets || this.widgets.length == 0) {
-        this.$message.error("请添加组件");
-        return;
-      }
-      const screenData = {
-        reportCode: this.$route.query.reportCode,
-        dashboard: {
-          title: this.dashboard.title,
-          width: this.dashboard.width,
-          height: this.dashboard.height,
-          backgroundColor: this.dashboard.backgroundColor,
-          backgroundImage: this.dashboard.backgroundImage,
-        },
-        widgets: this.widgets,
-      };
-      const { code, data } = await insertDashboard(screenData);
-      if (code == "200") {
-        this.$message.success("保存成功！");
-      }
-    },
-    // 预览
-    viewScreen() {
-      let routeUrl = this.$router.resolve({
-        path: "/bigscreen/viewer",
-        query: { reportCode: this.$route.query.reportCode },
-      });
-      window.open(routeUrl.href, "_blank");
-    },
-    //  导出
-    async exportDashboard(val) {
-      const fileName = this.$route.query.reportCode + ".zip";
-
-      const param = {
-        reportCode: this.$route.query.reportCode,
-        showDataSet: val,
-      };
-      exportDashboard(param).then((res) => {
-        const that = this;
-        const type = res.type;
-        if (type == "application/json") {
-          let reader = new FileReader();
-          reader.readAsText(res, "utf-8");
-          reader.onload = function () {
-            const data = JSON.parse(reader.result);
-            that.$message.error(data.message);
-          };
-          return;
-        }
-
-        const blob = new Blob([res], { type: "application/octet-stream" });
-        if (window.navigator.msSaveOrOpenBlob) {
-          //msSaveOrOpenBlob方法返回bool值
-          navigator.msSaveBlob(blob, fileName); //本地保存
-        } else {
-          const link = document.createElement("a"); //a标签下载
-          link.href = window.URL.createObjectURL(blob);
-          link.download = fileName;
-          link.click();
-          window.URL.revokeObjectURL(link.href);
-        }
+    // 返回每个组件的动态数据集参数配置情况
+    handlerdynamicDataParamsConfig(val) {
+      this.widgetParamsConfig = val.map((item) => {
+        return item.value.data;
       });
     },
-    // 上传成功的回调
-    handleUpload(response, file, fileList) {
-      //清除el-upload组件中的文件
-      this.$refs.upload.clearFiles();
-      //刷新大屏页面
-      this.initEchartData();
-      if (response.code == "200") {
-        this.$message({
-          message: "导入成功！",
-          type: "success",
-        });
-      } else {
-        this.$message({
-          message: response.message,
-          type: "error",
-        });
-      }
-    },
-    handleError(err) {
-      this.$message({
-        message: "上传失败！",
-        type: "error",
-      });
-    },
-
     // 在缩放模式下的大小
     getPXUnderScale(px) {
       return this.bigscreenScaleInWorkbench * px;
     },
     dragStart(widgetCode) {
       this.dragWidgetCode = widgetCode;
+      this.currentWidgetTotal = this.widgets.length; // 当前操作面板上有多少各组件
     },
     dragEnd() {
-      this.dragWidgetCode = "";
+      /**
+       * 40@remarks 新增组件到操作面板后，右边的配置有更新，但是当前选中的组件没更新，导致配置错乱的bug;
+       * 由于拖动组件拖到非操作面板上是不会添加组件，还需判断是否添加组件到操作面板上;
+       */
+      this.$nextTick(() => {
+        if (this.widgets.length === this.currentWidgetTotal + 1) {
+          // 确实新增了一个组件到操作面板上
+          console.log(
+            `新添加 '${
+              this.widgets[this.currentWidgetTotal].value.setup.layerName
+            }' 组件到操作面板`
+          );
+          const uuid = Number(Math.random().toString().substr(2)).toString(36);
+          this.widgets[this.currentWidgetTotal].value.widgetId = uuid;
+          this.layerWidget[this.currentWidgetTotal].widgetId = uuid;
+          this.widgets[this.currentWidgetTotal].value.widgetCode = this.dragWidgetCode;
+          const index = this.widgets.length - 1;
+          this.layerClick(index); // 选中当前新增的组件
+          this.grade = false; // 去除网格线
+        }
+      });
     },
     dragOver(evt) {
       evt.preventDefault();
@@ -696,9 +547,12 @@ export default {
       let widgetTopInWorkbench = eventY - workbenchPosition.top;
       let widgetLeftInWorkbench = eventX - workbenchPosition.left;
 
-      // 计算在缩放模式下的x y
-      let x = widgetLeftInWorkbench / this.bigscreenScaleInWorkbench;
-      let y = widgetTopInWorkbench / this.bigscreenScaleInWorkbench;
+      const targetScale =
+        this.currentSizeRangeIndex === this.defaultSize.index
+          ? this.bigscreenScaleInWorkbench
+          : this.sizeRange[this.currentSizeRangeIndex] / 100;
+      const x = widgetLeftInWorkbench / targetScale;
+      const y = widgetTopInWorkbench / targetScale;
 
       // 复制一个组件
       let tool = getToolByCode(widgetType);
@@ -718,9 +572,8 @@ export default {
         options: tool.options,
       };
       // 处理默认值
-      const widgetJsonValue = this.handleDefaultValue(widgetJson);
+      const widgetJsonValue = this.getWidgetConfigValue(widgetJson);
 
-      //2022年02月22日 修复：可以拖拽放到鼠标的位置
       widgetJsonValue.value.position.left =
         x - widgetJsonValue.value.position.width / 2;
       widgetJsonValue.value.position.top =
@@ -731,47 +584,32 @@ export default {
       // 激活新组件的配置属性
       this.setOptionsOnClickWidget(this.widgets.length - 1);
     },
+    getWidgetConfigValue(widgetJson) {
+      this.setWidgetConfigValue(
+        widgetJson.options.setup,
+        widgetJson.value.setup
+      );
+      this.setWidgetConfigValue(
+        widgetJson.options.position,
+        widgetJson.value.position
+      );
+      this.setWidgetConfigValue(widgetJson.options.data, widgetJson.value.data);
 
-    // 对组件默认值处理
-    handleDefaultValue(widgetJson) {
-      for (const key in widgetJson) {
-        if (key == "options") {
-          // collapse、data、position、setup
-          // setup 处理
-          for (let i = 0; i < widgetJson.options.setup.length; i++) {
-            const item = widgetJson.options.setup[i];
-            if (Object.prototype.toString.call(item) == "[object Object]") {
-              widgetJson.value.setup[item.name] = item.value;
-            } else if (
-              Object.prototype.toString.call(item) == "[object Array]"
-            ) {
-              for (let j = 0; j < item.length; j++) {
-                const list = item[j].list;
-                list.forEach((el) => {
-                  widgetJson.value.setup[el.name] = el.value;
-                });
-              }
-            }
-          }
-          // position
-          for (let i = 0; i < widgetJson.options.position.length; i++) {
-            const item = widgetJson.options.position[i];
-            if (item.value) {
-              widgetJson.value.position[item.name] = item.value;
-            }
-          }
-          // data 处理
-          if (widgetJson.options.data && widgetJson.options.data.length > 0) {
-            for (let i = 0; i < widgetJson.options.data.length; i++) {
-              const item = widgetJson.options.data[i];
-              if (item.value) {
-                widgetJson.value.data[item.name] = item.value;
-              }
-            }
-          }
-        }
-      }
       return widgetJson;
+    },
+    setWidgetConfigValue(config, configValue) {
+      config.forEach((item) => {
+        if (this.isObjectFn(item)) {
+          configValue[item.name] = item.value;
+        }
+        if (this.isArrayFn(item)) {
+          item.forEach((itemChild) => {
+            itemChild.list.forEach((ev) => {
+              configValue[ev.name] = ev.value;
+            });
+          });
+        }
+      });
     },
     layerClick(index) {
       this.widgetIndex = index;
@@ -784,7 +622,6 @@ export default {
       this.activeName = "first";
       this.widgetOptions = getToolByCode("screen")["options"];
     },
-
     // 如果是点击某个组件，获取该组件的配置项
     setOptionsOnClickWidget(obj) {
       this.screenCode = "";
@@ -818,9 +655,6 @@ export default {
       this.setOptionsOnClickWidget(index);
       this.grade = true;
     },
-    widgetsMouseup(e) {
-      this.grade = false;
-    },
     handleMouseDown() {
       const draggableArr = this.$refs.widgets;
       for (let i = 0; i < draggableArr.length; i++) {
@@ -833,7 +667,7 @@ export default {
       console.log("val", val);
       console.log(this.widgetOptions);
       if (this.screenCode == "screen") {
-        let newSetup = new Array();
+        let newSetup = [];
         this.dashboard = this.deepClone(val);
         console.log("asd", this.dashboard);
         console.log(this.widgetOptions);
@@ -848,7 +682,7 @@ export default {
             el.value = this.bigscreenWidth;
           } else if (el.name == "height") {
             el.value = this.bigscreenHeight;
-          } else if (this.dashboard.hasOwn(el.name)) {
+          } else if (this.dashboard.hasOwnProperty(el.name)) {
             el["value"] = this.dashboard[el.name];
           }
           newSetup.push(el);
@@ -864,31 +698,15 @@ export default {
         }
       }
     },
-    rightClick(event, index) {
-      this.rightClickIndex = index;
-      const left = event.clientX;
-      const top = event.clientY;
-      if (left || top) {
-        this.styleObj = {
-          left: left + "px",
-          top: top + "px",
-          display: "block",
-        };
-      }
-      this.visibleContentMenu = true;
-      return false;
-    },
     setDefaultValue(options, val) {
       for (let i = 0; i < options.length; i++) {
-        if (Object.prototype.toString.call(options[i]) == "[object Object]") {
+        if (this.isObjectFn(options[i])) {
           for (const k in val) {
             if (options[i].name == k) {
               options[i].value = val[k];
             }
           }
-        } else if (
-          Object.prototype.toString.call(options[i]) == "[object Array]"
-        ) {
+        } else if (this.isArrayFn(options[i])) {
           for (let j = 0; j < options[i].length; j++) {
             const list = options[i][j].list;
             for (let z = 0; z < list.length; z++) {
@@ -906,547 +724,10 @@ export default {
       evt.preventDefault();
       this.widgets = this.swapArr(this.widgets, evt.oldIndex, evt.newIndex);
     },
-    // 数组 元素互换位置
-    swapArr(arr, oldIndex, newIndex) {
-      arr[oldIndex] = arr.splice(newIndex, 1, arr[oldIndex])[0];
-      return arr;
-    },
-    // 删除
-    deletelayer() {
-      this.widgets.splice(this.rightClickIndex, 1);
-    },
-    // 复制
-    copylayer() {
-      const obj = this.deepClone(this.widgets[this.rightClickIndex]);
-      this.widgets.splice(this.widgets.length, 0, obj);
-    },
-    // 置顶
-    istopLayer() {
-      if (this.rightClickIndex + 1 < this.widgets.length) {
-        const temp = this.widgets.splice(this.rightClickIndex, 1)[0];
-        this.widgets.push(temp);
-      }
-    },
-    // 置底
-    setlowLayer() {
-      if (this.rightClickIndex != 0) {
-        this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
-      }
-    },
-    // 上移一层
-    moveupLayer() {
-      if (this.rightClickIndex != 0) {
-        this.widgets[this.rightClickIndex] = this.widgets.splice(
-          this.rightClickIndex - 1,
-          1,
-          this.widgets[this.rightClickIndex]
-        )[0];
-      } else {
-        this.widgets.push(this.widgets.shift());
-      }
-    },
-    // 下移一层
-    movedownLayer() {
-      if (this.rightClickIndex != this.widgets.length - 1) {
-        this.widgets[this.rightClickIndex] = this.widgets.splice(
-          this.rightClickIndex + 1,
-          1,
-          this.widgets[this.rightClickIndex]
-        )[0];
-      } else {
-        this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
-      }
-    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.mr10 {
-  margin-right: 10px;
-}
-
-.ml20 {
-  margin-left: 20px;
-}
-
-.border-right {
-  border-right: 1px solid #273b4d;
-}
-
-.border-left {
-  border-left: 1px solid #273b4d;
-}
-
-.el-icon-arrow-down {
-  font-size: 10px;
-}
-
-.is-active {
-  background: #31455d !important;
-  color: #bfcbd9 !important;
-}
-
-.layout {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  overflow: hidden;
-
-  .layout-left {
-    display: inline-block;
-    height: 100%;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    border: 0px;
-    background-color: #263445;
-
-    //工具栏一个元素
-    .tools-item {
-      display: flex;
-      position: relative;
-      width: 100%;
-      height: 48px;
-      align-items: center;
-      -webkit-box-align: center;
-      padding: 0 6px;
-      cursor: pointer;
-      font-size: 12px;
-      margin-bottom: 1px;
-
-      .tools-item-icon {
-        color: #409eff;
-        margin-right: 10px;
-        width: 53px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        display: block;
-        border: 1px solid #3a4659;
-        background: #282a30;
-      }
-      .tools-item-text {
-      }
-    }
-  }
-
-  .layout-left-fold {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-
-    font-size: 12px;
-    overflow: hidden;
-    background-color: #242a30;
-    cursor: pointer;
-    padding-top: 26%;
-
-    i {
-      font-size: 18px;
-      width: 18px;
-      height: 23px;
-      margin-left: 0px;
-      color: #bfcbd9;
-    }
-  }
-
-  .layout-middle {
-    // display: flex;
-    position: relative;
-    //width: calc(100% - 445px);
-    height: 100%;
-    background-color: rgb(36, 42, 48);
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    border: 1px solid rgb(36, 42, 48);
-    align-items: center;
-    vertical-align: middle;
-    text-align: center;
-
-    .top-button {
-      display: flex;
-      flex-direction: row;
-      height: 40px;
-      line-height: 40px;
-      margin-left: 9px;
-
-      .btn {
-        color: #788994;
-        width: 55px;
-        text-align: center;
-        display: block;
-        cursor: pointer;
-
-        .el-icon-arrow-down {
-          transform: rotate(0deg);
-          -ms-transform: rotate(0deg); /* IE 9 */
-          -moz-transform: rotate(0deg); /* Firefox */
-          -webkit-transform: rotate(0deg); /* Safari 和 Chrome */
-          -o-transform: rotate(0deg); /* Opera */
-          transition: all 0.4s ease-in-out;
-        }
-
-        &:hover {
-          background: rgb(25, 29, 34);
-
-          .el-icon-arrow-down {
-            transform: rotate(180deg);
-            -ms-transform: rotate(180deg); /* IE 9 */
-            -moz-transform: rotate(180deg); /* Firefox */
-            -webkit-transform: rotate(180deg); /* Safari 和 Chrome */
-            -o-transform: rotate(180deg); /* Opera */
-            transition: all 0.4s ease-in-out;
-          }
-        }
-      }
-    }
-
-    .workbench-container {
-      position: relative;
-      -webkit-transform-origin: 0 0;
-      transform-origin: 0 0;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-
-      .vueRuler {
-        width: 100%;
-        padding: 18px 0px 0px 18px;
-      }
-
-      .workbench {
-        background-color: #1e1e1e;
-        position: relative;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        -webkit-transform-origin: 0 0;
-        transform-origin: 0 0;
-        margin: 0;
-        padding: 0;
-      }
-
-      .bg-grid {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: 30px 30px, 30px 30px;
-        background-image: linear-gradient(
-            hsla(0, 0%, 100%, 0.1) 1px,
-            transparent 0
-          ),
-          linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) 1px, transparent 0);
-        // z-index: 2;
-      }
-    }
-
-    .bottom-text {
-      width: 100%;
-      color: #a0a0a0;
-      font-size: 16px;
-      position: absolute;
-      bottom: 20px;
-    }
-  }
-
-  .layout-right {
-    display: inline-block;
-    height: 100%;
-  }
-
-  /deep/ .el-tabs--border-card {
-    border: 0;
-
-    .el-tabs__header {
-      .el-tabs__nav {
-        .el-tabs__item {
-          background-color: #242f3b;
-          border: 0px;
-        }
-
-        .el-tabs__item.is-active {
-          background-color: #31455d;
-        }
-      }
-    }
-
-    .el-tabs__content {
-      background-color: #242a30;
-      height: calc(100vh - 39px);
-      overflow-x: hidden;
-      overflow-y: auto;
-
-      .el-tab-pane {
-        color: #bfcbd9;
-      }
-
-      &::-webkit-scrollbar {
-        width: 5px;
-        height: 14px;
-      }
-
-      &::-webkit-scrollbar-track,
-      &::-webkit-scrollbar-thumb {
-        border-radius: 1px;
-        border: 0 solid transparent;
-      }
-
-      &::-webkit-scrollbar-track-piece {
-        /*修改滚动条的背景和圆角*/
-        background: #29405c;
-        -webkit-border-radius: 7px;
-      }
-
-      &::-webkit-scrollbar-track {
-        box-shadow: 1px 1px 5px rgba(116, 148, 170, 0.5) inset;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        min-height: 20px;
-        background-clip: content-box;
-        box-shadow: 0 0 0 5px rgba(116, 148, 170, 0.5) inset;
-      }
-
-      &::-webkit-scrollbar-corner {
-        background: transparent;
-      }
-
-      /*修改垂直滚动条的样式*/
-      &::-webkit-scrollbar-thumb:vertical {
-        background-color: #00113a;
-        -webkit-border-radius: 7px;
-      }
-
-      /*修改水平滚动条的样式*/
-      &::-webkit-scrollbar-thumb:horizontal {
-        background-color: #00113a;
-        -webkit-border-radius: 7px;
-      }
-    }
-  }
-}
-
-ul,
-li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav {
-  width: 40px;
-  padding: 0;
-  list-style: none;
-  /* overflow: hidden; */
-}
-
-.nav {
-  zoom: 1;
-}
-
-.nav:before,
-.nav:after {
-  content: "";
-  display: table;
-}
-
-.nav:after {
-  clear: both;
-}
-
-.nav > li {
-  width: 55px;
-  text-align: left;
-  position: relative;
-}
-
-.nav > li a {
-  float: left;
-  padding: 12px 30px;
-  color: #999;
-  font: bold 12px;
-  text-decoration: none;
-}
-
-.nav > li:hover {
-  color: #788994;
-}
-
-.nav > li ul {
-  visibility: hidden;
-  position: absolute;
-  z-index: 1000;
-  list-style: none;
-  left: 0;
-  padding: 0;
-  background-color: rgb(36, 42, 48);
-  opacity: 0;
-  _margin: 0;
-  width: 120px;
-  transition: all 0.2s ease-in-out;
-}
-
-.nav > li:hover > ul {
-  opacity: 1;
-  visibility: visible;
-  margin: 0;
-
-  li:hover {
-    background-color: rgb(25, 29, 34);
-  }
-}
-
-.nav ul li {
-  float: left;
-  display: block;
-  border: 0;
-  width: 100%;
-  font-size: 12px;
-}
-
-.nav ul a {
-  padding: 10px;
-  width: 100%;
-  display: block;
-  float: none;
-  height: 120px;
-  border: 1px solid #30445c;
-  background-color: rgb(25, 29, 34);
-  transition: all 0.2s ease-in-out;
-}
-
-.nav ul a:hover {
-  border: 1px solid #3c5e88;
-}
-
-.nav ul li:first-child > a:hover:before {
-  border-bottom-color: #04acec;
-}
-
-.nav ul ul {
-  top: 0;
-  left: 120px;
-  width: 400px;
-  height: 300px;
-  overflow: auto;
-  padding: 10px;
-  _margin: 0;
-}
-
-.nav ul ul li {
-  width: 120px;
-  height: 120px;
-  margin-right: 3px;
-  display: block;
-  float: left;
-}
-
-.nav .item {
-  padding: 5px;
-}
-
-/deep/ .vue-ruler-h {
-  opacity: 0.3;
-}
-
-/deep/ .vue-ruler-v {
-  opacity: 0.3;
-}
-.layout-left {
-  width: 200px;
-  background: #242a30;
-  overflow-x: hidden;
-  overflow-y: auto;
-  .chart-type {
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    .type-left {
-      width: 100%;
-      height: calc(100vh - 80px);
-      text-align: center;
-      /deep/.el-tabs__header {
-        width: 30%;
-        margin-right: 0;
-        .el-tabs__nav-wrap {
-          &::after {
-            background: transparent;
-          }
-          .el-tabs__item {
-            text-align: center;
-            width: 100% !important;
-            color: #fff;
-            padding: 0;
-            font-size: 12px !important;
-          }
-        }
-      }
-      /deep/.el-tabs__content {
-        width: 70%;
-      }
-    }
-  }
-  //工具栏一个元素
-  .tools-item {
-    display: flex;
-    position: relative;
-    width: 100%;
-    height: 48px;
-    align-items: center;
-    -webkit-box-align: center;
-    padding: 0 6px;
-    cursor: pointer;
-    font-size: 12px;
-    margin-bottom: 1px;
-
-    .tools-item-icon {
-      color: #409eff;
-      margin-right: 10px;
-      width: 53px;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-      display: block;
-      border: 1px solid #3a4659;
-      background: #282a30;
-    }
-    .tools-item-text {
-      font-size: 12px !important;
-    }
-  }
-  /deep/.el-tabs__content {
-    padding: 0;
-  }
-}
-/* 设置滚动条的样式 */
-
-::-webkit-scrollbar {
-  width: 0;
-}
-
-/* 滚动槽 */
-
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.3);
-}
-
-/* 滚动条滑块 */
-
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
-}
-
-::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(255, 0, 0, 0.4);
-}
+@import "@/assets/styles/screen.scss";
 </style>

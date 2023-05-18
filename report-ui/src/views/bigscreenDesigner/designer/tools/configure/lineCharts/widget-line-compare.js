@@ -4,7 +4,7 @@
  * @Author: foming
  * @Date: 2021-08-29 07:39:35
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:40:44
+ * @LastEditTime: 2023-01-10 14:05:37
  */
 export const widgetLineCompare = {
   code: 'widgetLineCompareChart',
@@ -58,8 +58,8 @@ export const widgetLineCompare = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'circle', name: '实心点'},
-                {code: 'emptyCircle', name: '空心点'},
+                { code: 'circle', name: '实心点' },
+                { code: 'emptyCircle', name: '空心点' },
               ],
               value: 'circle'
             },
@@ -238,7 +238,7 @@ export const widgetLineCompare = {
             },
             {
               type: 'el-input-text',
-              label: '图例名称',
+              label: '名称( | 分隔)',
               name: 'legendName',
               required: false,
               placeholder: '多值以' | '隔开',
@@ -321,7 +321,7 @@ export const widgetLineCompare = {
             {
               type: 'el-input-text',
               label: '坐标名',
-              name: 'xName',
+              name: 'nameX',
               required: false,
               placeholder: '',
               value: ''
@@ -414,14 +414,15 @@ export const widgetLineCompare = {
             {
               type: 'el-input-text',
               label: '坐标名',
-              name: 'textNameYTop',
+              name: 'textNameY',
               require: false,
               placeholder: '',
               value: ''
-            }, {
+            },
+            {
               type: 'vue-color',
               label: '坐标名颜色',
-              name: 'nameColorYTop',
+              name: 'nameColorY',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -429,7 +430,7 @@ export const widgetLineCompare = {
             {
               type: 'el-input-number',
               label: '坐标名字号',
-              name: 'nameFontSizeYTop',
+              name: 'nameFontSizeY',
               required: false,
               placeholder: '',
               value: 14,
@@ -530,14 +531,15 @@ export const widgetLineCompare = {
             {
               type: 'el-input-text',
               label: '坐标名',
-              name: 'textNameYBottom',
+              name: 'textNameY',
               require: false,
               placeholder: '',
               value: ''
-            }, {
+            },
+            {
               type: 'vue-color',
               label: '坐标名颜色',
-              name: 'nameColorYBottom',
+              name: 'nameColorY',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -545,7 +547,7 @@ export const widgetLineCompare = {
             {
               type: 'el-input-number',
               label: '坐标名字号',
-              name: 'nameFontSizeYBottom',
+              name: 'nameFontSizeY',
               required: false,
               placeholder: '',
               value: 14,
@@ -786,7 +788,7 @@ export const widgetLineCompare = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',

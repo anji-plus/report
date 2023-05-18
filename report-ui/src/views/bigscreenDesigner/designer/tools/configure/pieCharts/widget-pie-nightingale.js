@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:32:40
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:41:37
+ * @LastEditTime: 2023-01-11 13:15:38
  */
 export const widgetPieNightingale = {
   code: 'WidgetPieNightingaleRoseArea',
@@ -277,7 +277,7 @@ export const widgetPieNightingale = {
               name: 'legendFontSize',
               required: false,
               placeholder: '',
-              value: 16,
+              value: 12,
             },
             {
               type: 'el-input-number',
@@ -338,6 +338,18 @@ export const widgetPieNightingale = {
             },
           ],
         },
+        {
+          name: '组件联动',
+          list: [
+            {
+              type: 'componentLinkage',
+              label: '',
+              name: 'componentLinkage',
+              required: false,
+              value: []
+            }
+          ]
+        }
       ],
     ],
     // 数据
@@ -367,7 +379,7 @@ export const widgetPieNightingale = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',

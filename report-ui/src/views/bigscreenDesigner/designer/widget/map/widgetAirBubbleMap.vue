@@ -1,9 +1,11 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 <script>
+import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 import echarts from "echarts";
 import "../../../../../../node_modules/echarts/map/js/china.js";
 //https://www.makeapie.com/editor.html?c=x2yaz6dfRw
@@ -41,159 +43,159 @@ let geoCoordMap = {
   广西壮族自治区: [108.479, 23.1152],
   海南省: [110.3893, 19.8516],
   上海市: [121.4648, 31.2891],
-  香港: [114.173355,22.320048],
-  澳门: [113.54909,22.198951]
+  香港: [114.173355, 22.320048],
+  澳门: [113.54909, 22.198951],
 };
 let data = [
   {
     name: "南海诸岛",
-    value: 1
+    value: 1,
   },
   {
     name: "北京",
-    value: 524
+    value: 524,
   },
   {
     name: "天津",
-    value: 14
+    value: 14,
   },
   {
     name: "上海",
-    value: 150
+    value: 150,
   },
   {
     name: "重庆",
-    value: 75
+    value: 75,
   },
   {
     name: "河北",
-    value: 13
+    value: 13,
   },
   {
     name: "河南",
-    value: 83
+    value: 83,
   },
   {
     name: "云南",
-    value: 11
+    value: 11,
   },
   {
     name: "辽宁",
-    value: 19
+    value: 19,
   },
   {
     name: "黑龙江",
-    value: 15
+    value: 15,
   },
   {
     name: "湖南",
-    value: 69
+    value: 69,
   },
   {
     name: "安徽",
-    value: 260
+    value: 260,
   },
   {
     name: "山东",
-    value: 39
+    value: 39,
   },
   {
     name: "新疆",
-    value: 4
+    value: 4,
   },
   {
     name: "江苏",
-    value: 31
+    value: 31,
   },
   {
     name: "浙江",
-    value: 104
+    value: 104,
   },
   {
     name: "江西",
-    value: 36
+    value: 36,
   },
   {
     name: "湖北",
-    value: 1052
+    value: 1052,
   },
   {
     name: "广西",
-    value: 33
+    value: 33,
   },
   {
     name: "甘肃",
-    value: 347
+    value: 347,
   },
   {
     name: "山西",
-    value: 8
+    value: 8,
   },
   {
     name: "内蒙古",
-    value: 157
+    value: 157,
   },
   {
     name: "陕西",
-    value: 22
+    value: 22,
   },
   {
     name: "吉林",
-    value: 4
+    value: 4,
   },
   {
     name: "福建",
-    value: 36
+    value: 36,
   },
   {
     name: "贵州",
-    value: 39
+    value: 39,
   },
   {
     name: "广东",
-    value: 996
+    value: 996,
   },
   {
     name: "青海",
-    value: 27
+    value: 27,
   },
   {
     name: "西藏",
-    value: 31
+    value: 31,
   },
   {
     name: "四川",
-    value: 46
+    value: 46,
   },
   {
     name: "宁夏",
-    value: 16
+    value: 16,
   },
   {
     name: "海南",
-    value: 22
+    value: 22,
   },
   {
     name: "台湾",
-    value: 6
+    value: 6,
   },
   {
     name: "香港",
-    value: 2
+    value: 2,
   },
   {
     name: "澳门",
-    value: 9
-  }
+    value: 9,
+  },
 ];
-let convertData = function(data) {
+let convertData = function (data) {
   let res = [];
   for (let i = 0; i < data.length; i++) {
     let geoCoord = geoCoordMap[data[i].name];
     if (geoCoord) {
       res.push({
         name: data[i].name,
-        value: geoCoord.concat(data[i].value)
+        value: geoCoord.concat(data[i].value),
       });
     }
   }
@@ -203,26 +205,27 @@ let max = 6000,
   min = 10;
 let maxSize4Pin = 100,
   minSize4Pin = 20;
-
+import { eventBusParams } from "@/utils/screen";
 export default {
   name: "widgetAirBubbleMap",
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
+    flagInter: null,
   },
   data() {
     return {
       options: {
         //backgroundColor: '#0F1C3C',
         tooltip: {
-          trigger: 'item',
+          trigger: "item",
           formatter: function (params) {
-            if (params.value.length >1 ) {
+            if (params.value.length > 1) {
               return params.data.name + "" + params.data.value[2];
             } else {
               return params.name;
             }
-          }
+          },
         },
         geo: {
           map: "china",
@@ -230,8 +233,8 @@ export default {
           roam: false,
           label: {
             emphasis: {
-              show: false
-            }
+              show: false,
+            },
           },
           layoutSize: "80%",
           itemStyle: {
@@ -244,21 +247,21 @@ export default {
                 [
                   {
                     offset: 0,
-                    color: "#00F6FF"
+                    color: "#00F6FF",
                   },
                   {
                     offset: 1,
-                    color: "#53D9FF"
-                  }
+                    color: "#53D9FF",
+                  },
                 ],
                 false
               ),
               borderWidth: 3,
               shadowColor: "rgba(10,76,139,1)",
               shadowOffsetY: 0,
-              shadowBlur: 60
-            }
-          }
+              shadowBlur: 60,
+            },
+          },
         },
         series: [
           {
@@ -271,11 +274,11 @@ export default {
                 position: "right",
                 show: true,
                 color: "#53D9FF",
-                fontSize: 20
+                fontSize: 20,
               },
               emphasis: {
-                show: true
-              }
+                show: true,
+              },
             },
             itemStyle: {
               normal: {
@@ -288,16 +291,16 @@ export default {
                   colorStops: [
                     {
                       offset: 0,
-                      color: "#073684" // 0% 处的颜色
+                      color: "#073684", // 0% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "#061E3D" // 100% 处的颜色
-                    }
-                  ]
+                      color: "#061E3D", // 100% 处的颜色
+                    },
+                  ],
                 },
                 borderColor: "#215495",
-                borderWidth: 1
+                borderWidth: 1,
               },
               //鼠标放置颜色加深
               emphasis: {
@@ -309,23 +312,23 @@ export default {
                   colorStops: [
                     {
                       offset: 0,
-                      color: "#073684" // 0% 处的颜色
+                      color: "#073684", // 0% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "#2B91B7" // 100% 处的颜色
-                    }
-                  ]
-                }
-              }
+                      color: "#2B91B7", // 100% 处的颜色
+                    },
+                  ],
+                },
+              },
             },
-            data: data
+            data: data,
           },
           {
             type: "effectScatter",
             coordinateSystem: "geo",
             rippleEffect: {
-              brushType: "stroke"
+              brushType: "stroke",
             },
             showEffectOn: "render",
             itemStyle: {
@@ -339,20 +342,20 @@ export default {
                   colorStops: [
                     {
                       offset: 0,
-                      color: "rgba(5,80,151,0.2)"
+                      color: "rgba(5,80,151,0.2)",
                     },
                     {
                       offset: 0.8,
-                      color: "rgba(5,80,151,0.8)"
+                      color: "rgba(5,80,151,0.8)",
                     },
                     {
                       offset: 1,
-                      color: "rgba(0,108,255,0.7)"
-                    }
+                      color: "rgba(0,108,255,0.7)",
+                    },
                   ],
-                  global: false
-                }
-              }
+                  global: false,
+                },
+              },
             },
             label: {
               normal: {
@@ -360,19 +363,19 @@ export default {
                 color: "#fff",
                 fontWeight: "bold",
                 position: "inside",
-                formatter: function(para) {
+                formatter: function (para) {
                   return "{cnNum|" + para.data.value[2] + "}";
                 },
                 rich: {
                   cnNum: {
                     fontSize: 13,
-                    color: "#D4EEFF"
-                  }
-                }
-              }
+                    color: "#D4EEFF",
+                  },
+                },
+              },
             },
             symbol: "circle",
-            symbolSize: function(val) {
+            symbolSize: function (val) {
               if (val[2] == 0) {
                 return 0;
               }
@@ -384,14 +387,14 @@ export default {
               );
             },
             data: convertData(data),
-            zlevel: 1
-          }
-        ]
+            zlevel: 1,
+          },
+        ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
-      optionsSetup: {}
+      optionsSetup: {},
     };
   },
   computed: {
@@ -402,9 +405,12 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -415,8 +421,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.optionsStyle = this.value.position;
@@ -424,6 +430,15 @@ export default {
     this.optionsCollapse = this.value.setup;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    eventBusParams(
+      this.optionsSetup,
+      this.optionsData,
+      (dynamicData, optionsSetup) => {
+        console.log("dynamicData", dynamicData);
+        this.getEchartData(dynamicData, optionsSetup);
+      }
+    );
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
     // 修改图标options属性
@@ -465,7 +480,7 @@ export default {
         show: optionsSetup.isShowMap,
         color: optionsSetup.fontTextColor,
         fontSize: optionsSetup.fontTextSize,
-        fontWeight: optionsSetup.fontTextWeight
+        fontWeight: optionsSetup.fontTextWeight,
       };
       label["normal"] = normal;
     },
@@ -482,16 +497,16 @@ export default {
           colorStops: [
             {
               offset: 0,
-              color: optionsSetup.font0PreColor // 0% 处的颜色
+              color: optionsSetup.font0PreColor, // 0% 处的颜色
             },
             {
               offset: 1,
-              color: optionsSetup.font100PreColor // 100% 处的颜色
-            }
-          ]
+              color: optionsSetup.font100PreColor, // 100% 处的颜色
+            },
+          ],
         },
         borderColor: "#215495",
-        borderWidth: 1
+        borderWidth: 1,
       };
       //鼠标放置颜色加深
       const emphasis = {
@@ -503,14 +518,14 @@ export default {
           colorStops: [
             {
               offset: 0,
-              color: "#073684" // 0% 处的颜色
+              color: "#073684", // 0% 处的颜色
             },
             {
               offset: 1,
-              color: optionsSetup.fontHighlightColor // 100% 处的颜色
-            }
-          ]
-        }
+              color: optionsSetup.fontHighlightColor, // 100% 处的颜色
+            },
+          ],
+        },
       };
       itemStyle["normal"] = normal;
       itemStyle["emphasis"] = emphasis;
@@ -520,8 +535,25 @@ export default {
       minSize4Pin = this.optionsSetup.fontminSize4Pin;
     },
     //数据解析
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      // 联动接收者逻辑开始
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+      // 联动接收者逻辑结束
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
@@ -535,16 +567,16 @@ export default {
         color: "#fff",
         fontWeight: "bold",
         position: "inside",
-        formatter: function(para) {
+        formatter: function (para) {
           return "{cnNum|" + para.data.value[2] + "}";
         },
         rich: {
           cnNum: {
             fontSize: optionsSetup.fontDataSize,
             color: optionsSetup.fontDataColor,
-            fontWeight: optionsSetup.fontDataWeight
-          }
-        }
+            fontWeight: optionsSetup.fontDataWeight,
+          },
+        },
       };
       const data = convertData(val);
       this.options.series[1]["data"] = data;
@@ -563,7 +595,7 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(res);
       });
     },
@@ -576,22 +608,22 @@ export default {
         color: "#fff",
         fontWeight: "bold",
         position: "inside",
-        formatter: function(para) {
+        formatter: function (para) {
           return "{cnNum|" + para.data.value[2] + "}";
         },
         rich: {
           cnNum: {
             fontSize: optionsSetup.fontDataSize,
             color: optionsSetup.fontDataColor,
-            fontWeight: optionsSetup.fontDataWeight
-          }
-        }
+            fontWeight: optionsSetup.fontDataWeight,
+          },
+        },
       };
       const data = convertData(val);
       this.options.series[1]["data"] = data;
       label["normal"] = normal;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

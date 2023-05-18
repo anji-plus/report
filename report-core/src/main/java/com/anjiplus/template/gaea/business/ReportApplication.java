@@ -4,7 +4,7 @@ import com.anji.plus.gaea.annotation.enabled.EnabledGaeaConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScans;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * 业务模板
@@ -21,6 +21,7 @@ import org.springframework.context.annotation.ComponentScans;
         "com.anjiplus.template.gaea.business.modules.*.**.dao",
         "com.anji.plus.gaea.*.module.*.dao"
 })
+@EnableSwagger2
 public class ReportApplication {
     public static void main( String[] args ) {
         SpringApplication.run(ReportApplication.class);

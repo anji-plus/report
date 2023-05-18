@@ -2,7 +2,7 @@
 
 &emsp; &emsp; AJ-Report是全开源的一个BI平台，酷炫大屏展示，能随时随地掌控业务动态，让每个决策都有数据支撑。<br>
 &emsp; &emsp;
-多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，目前已支持25种大屏组件/图表，不会开发，照着设计稿也可以制作大屏。<br>
+多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，目前已支持30+种大屏组件/图表，不会开发，照着设计稿也可以制作大屏。<br>
 &emsp; &emsp; 三步轻松完成大屏设计：配置数据源---->写SQL配置数据集---->拖拽配置大屏---->保存发布。欢迎体验。
 
 ## 在线体验
@@ -25,9 +25,6 @@
 内置的基础功能包括数据源，数据集，报表管理，项目部分截图如下。<br>
 
 ![操作](https://images.gitee.com/uploads/images/2021/0703/094742_c0243f70_1728982.gif "2021-07-03_09-43-50.gif")
-
-**[更多社区大屏案例](https://ajreport.beliefteam.cn/report-doc/guide/bigScreenCase.html)** <br>
-**[社区大屏下载链接](https://ajreport.beliefteam.cn/download/)** <br>
 
 ## 数据流程图
 
@@ -96,16 +93,24 @@
 
 **[运行环境参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDevelop.html)** <br>
 **注意版本兼容性** <br>
-源码 doc -> docs -> guide 目录下即所有文档 <br>
+源码 doc -> docs -> guide 目录下即所有文档。<br>
+启动文档（在线文档图片多，打开很慢可以本地启动文档，方便查看） <br>
+
+```
+cd .\doc\
+npm run docs:dev
+```
 
 ### 发行版部署
 
-**[发行版部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDistribution.html)** <br>
+**[发行版部署详细文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklyDistribution.html)** <br>
+
+简易步骤
 
 ```
 下载最新发行版，解压
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接等信息
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
@@ -113,18 +118,19 @@ bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启�
 http://serverip:9095
 用户名密码：admin/123456
 
-登陆后修改"数据源->mysql数据源"用户名密码
 ```
 
 ### 源码编译部署
 
-**[源码编译部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySource.html)** <br>
+**[源码编译部署详细文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySource.html)** <br>
 
 在Linux上先准备好maven、node.js、jdk
 
 - [Apache Maven] 3.5 <br>
 - [Node.js] v14.16.0 <br>
 - [Jdk] 1.8
+
+简易步骤
 
 ```
 git clone https://gitee.com/anji-plus/report.git
@@ -134,7 +140,7 @@ sh build.sh
 
 unzip aj-report-xxxx.zip
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接等信息
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
@@ -142,22 +148,25 @@ bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启�
 http://serverip:9095
 用户名密码：admin/123456
 
-登陆后修改"数据源->mysql数据源"用户名密码
 ```
+
+### 前后端分离部署
 
 **[前后端分离部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySeparate.html)** <br>
 
-## 操作手册
+## 快速入门
 
-新建数据源（重置mysql数据源） --> 新建数据集（编写sql） --> 新建大屏（设计大屏） <br>
-**[在线文档](https://ajreport.beliefteam.cn/report-doc/guide/datasource.html)**
+**[快速入门](https://ajreport.beliefteam.cn/report-doc/guide/quicklyUse.html)** <br>
+
+**[更多社区大屏](https://ajreport.beliefteam.cn/report-doc/guide/bigScreenCase.html)** <br>
+
+**[社区大屏下载链接](https://ajreport.beliefteam.cn/download/)** <br>
 
 ## SQL初始化
 
 sql文件的目录在：report-core --> src --> main --> resources -- > db.migration <br>
-
-系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件。 <br>
-执行完将会创建 aj_report（存放系统基础数据） 和 aj_report_init（存放示例数据） 俩个库。 <br>
+系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件，执行完将会创建
+aj_report（存放系统基础数据）数据库 <br>
 
 ## 谁在使用
 
@@ -196,20 +205,20 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 
 ## 商业授权
 
-AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.0.html) <br>
+AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.0.html)
+，允许商业使用，但务必保留类作者、Copyright信息。 <br>
 个人和企业，在直接使用、二次开发后商业使用，需要遵守：
 
-- 包含AJ-Report LICENSE文件（授权使用者免费使用AJ-Report专利和知识产权）
+- 包含Apache LICENSE文件
 - 如果修改了代码，需要在被修改的文件中说明
 - 在修改和有源代码衍生的代码中，需要带有原来代码中的协议，商标
-- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有AJ-Report
-  LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对AJ-Report
+- 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有Apache
+  LICENSE。你可以在Notice中增加自己的许可，但不可以表现为对Apache
   LICENSE构成更改。
 
 ## 技术支持
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
-
 
 个人企业微信：加微信进群备注 **AJ-Report** 或者 **Report**，**一定要加备注 ！！！**<br>
 如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请过段时间再发送。 <br>
@@ -220,7 +229,6 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 联系方式 <br>
 
 <img src="https://foruda.gitee.com/images/1681893479845506596/859934b5_1950629.png" width = "300" height = "300" align=left/>
-
 
 ## 加入我们
 

@@ -1,18 +1,21 @@
-**前后端分离：** <br>
-**请对自己有动手能力的小伙伴进行尝试** <br>
-**请根据自己的实际情况对下面的步骤和内容进行调整** <br>
+**前后端分离部署**
+
+- 需要有一定的动手能力和排错能力
+- 需要对nginx有一定了解
+- 同一台机器部署前后端真心不需要分离部署
+- **请根据自己的实际情况对下面的步骤和内容进行调整**
 
 ```
 linux：
 git clone https://gitee.com/anji-plus/report.git
-后端：report-code ：
-修改bootstrap.yml
+后端：report-code
+修改bootstrap.yml 修改数据库连接、上传下载地址等信息
 maven package
 java -jar
 
-前端：report-ui ：
+前端：report-ui
 修改前端config连接
-BASE_API: '"./"'，改成自己后端的api
+BASE_API: '"./"'，改成自己后端服务所在机器的ip地址
 npm install
 npm run build
 
@@ -27,7 +30,14 @@ npm run build
 - [Node.js] v14.16.0 <br>
 - [Jdk] 1.8 <br>
 
-**注**：已知 **Jdk11** (部分小版本)存在兼容性问题，请不要使用openJdk，环境问题请看 **常见问题** 大类 <br>
+### 版本问题
+
+已知以下版本存在兼容性问题，请不要使用
+
+- Node.js V16及以上
+- openJdk
+- Jdk 1.7及以下/11及以上（jdk11部分版本有问题）
+- Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
 
 ### 克隆源码
 
@@ -51,7 +61,7 @@ report-core --> src --> main --> resources --> bootstrap.yml <br>
 
 ### OSS配置
 
-OSS底层已支持minio、amazonS3、dfs，都配置的情况下优先级minio->amazonS3->nfs <br>
+OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->amazonS3->nfs <br>
 ![file.png](../picture/quickly/img.png) <br>
 
 ### maven打包
@@ -72,9 +82,9 @@ OSS底层已支持minio、amazonS3、dfs，都配置的情况下优先级minio->
 将上步生成的jar包上传至linux，使用java -jar命令启动 <br>
 **注**：请确保你的linux有jdk1.8 <br>
 
-## 前端build
+## 前端编译
 
-### 前端编译
+### install
 
 进入前端目录：report-ui <br>
 ![img11](../picture/quickly/img_11.png) <br>
@@ -83,9 +93,9 @@ OSS底层已支持minio、amazonS3、dfs，都配置的情况下优先级minio->
 ### 修改config
 
 目录地址：report-ui --> config --> prod.env.js <br>
-将BASE_API地址，改成你后端的api地址 <br>
+将BASE_API地址，改成自己后端服务所在机器的ip地址 <br>
 
-### 打包
+### build
 
 执行 npm run build <br>
 

@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:28:20
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:19:19
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-01-11 13:15:48
  */
 export const widgetPiechart = {
   code: 'widget-piechart',
@@ -237,7 +237,7 @@ export const widgetPiechart = {
             {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'tipFontSize',
+              name: 'tipsFontSize',
               required: false,
               placeholder: '',
               value: 16
@@ -272,12 +272,12 @@ export const widgetPiechart = {
               value: '#fff',
             },
             {
-              type: 'el-input-text',
+              type: 'el-input-number',
               label: '字体字号',
               name: 'legendFontSize',
               required: false,
               placeholder: '',
-              value: 16,
+              value: 12,
             },
             {
               type: 'el-input-number',
@@ -338,6 +338,18 @@ export const widgetPiechart = {
             },
           ],
         },
+        {
+          name: '组件联动',
+          list: [
+            {
+              type: 'componentLinkage',
+              label: '',
+              name: 'componentLinkage',
+              required: false,
+              value: []
+            }
+          ]
+        }
       ],
     ],
     // 数据
@@ -367,7 +379,7 @@ export const widgetPiechart = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',

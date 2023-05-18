@@ -1,17 +1,22 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import { targetWidgetLinkageLogic } from "@/views/bigscreenDesigner/designer/linkageLogic";
 let per = 60;
 export default {
   name: "widgetPiePercentageChart", //百分比图参考：https://www.makeapie.com/editor.html?c=xFkzKG-bpl
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
+    widgetIndex: {
+      type: Number,
+      default: 0,
+    }, // 当前组件，在工作区变量widgetInWorkbench中的索引
   },
   data() {
     return {
@@ -25,14 +30,14 @@ export default {
             rich: {
               nums: {
                 fontSize: 60,
-                color: "#29EEF3"
+                color: "#29EEF3",
               },
               percent: {
                 fontSize: 30,
-                color: "#29EEF3"
-              }
-            }
-          }
+                color: "#29EEF3",
+              },
+            },
+          },
         },
         legend: {
           type: "plain",
@@ -43,27 +48,27 @@ export default {
           data: [
             {
               name: "1",
-              icon: "circle"
+              icon: "circle",
             },
             {
               name: "2",
-              icon: "circle"
+              icon: "circle",
             },
             {
               name: "3",
-              icon: "circle"
+              icon: "circle",
             },
             {
               name: "4",
-              icon: "circle"
-            }
+              icon: "circle",
+            },
           ],
           textStyle: {
             color: "white",
             fontSize: 16,
-            padding: [10, 1, 10, 0]
+            padding: [10, 1, 10, 0],
           },
-          selectedMode: false
+          selectedMode: false,
         },
         series: [
           {
@@ -78,17 +83,17 @@ export default {
                   cy: api.getHeight() / 2,
                   r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.6,
                   startAngle: ((0 + this.angle) * Math.PI) / 180,
-                  endAngle: ((90 + this.angle) * Math.PI) / 180
+                  endAngle: ((90 + this.angle) * Math.PI) / 180,
                 },
                 style: {
                   stroke: "#0CD3DB",
                   fill: "transparent",
-                  lineWidth: 1.5
+                  lineWidth: 1.5,
                 },
-                silent: true
+                silent: true,
               };
             },
-            data: [0]
+            data: [0],
           },
           {
             //name: '环2',
@@ -102,17 +107,17 @@ export default {
                   cy: api.getHeight() / 2,
                   r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.6,
                   startAngle: ((180 + this.angle) * Math.PI) / 180,
-                  endAngle: ((270 + this.angle) * Math.PI) / 180
+                  endAngle: ((270 + this.angle) * Math.PI) / 180,
                 },
                 style: {
                   stroke: "#0CD3DB",
                   fill: "transparent",
-                  lineWidth: 1.5
+                  lineWidth: 1.5,
                 },
-                silent: true
+                silent: true,
               };
             },
-            data: [0]
+            data: [0],
           },
           {
             //name: '环3',
@@ -126,17 +131,17 @@ export default {
                   cy: api.getHeight() / 2,
                   r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.65,
                   startAngle: ((270 + -this.angle) * Math.PI) / 180,
-                  endAngle: ((40 + -this.angle) * Math.PI) / 180
+                  endAngle: ((40 + -this.angle) * Math.PI) / 180,
                 },
                 style: {
                   stroke: "#0CD3DB",
                   fill: "transparent",
-                  lineWidth: 1.5
+                  lineWidth: 1.5,
                 },
-                silent: true
+                silent: true,
               };
             },
-            data: [0]
+            data: [0],
           },
           {
             //name: '环4',
@@ -150,17 +155,17 @@ export default {
                   cy: api.getHeight() / 2,
                   r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.65,
                   startAngle: ((90 + -this.angle) * Math.PI) / 180,
-                  endAngle: ((220 + -this.angle) * Math.PI) / 180
+                  endAngle: ((220 + -this.angle) * Math.PI) / 180,
                 },
                 style: {
                   stroke: "#0CD3DB",
                   fill: "transparent",
-                  lineWidth: 1.5
+                  lineWidth: 1.5,
                 },
-                silent: true
+                silent: true,
               };
             },
-            data: [0]
+            data: [0],
           },
           {
             //name: '绿点1',
@@ -176,16 +181,16 @@ export default {
                 shape: {
                   cx: point.x,
                   cy: point.y,
-                  r: 4
+                  r: 4,
                 },
                 style: {
                   stroke: "#0CD3DB", //粉
-                  fill: "#0CD3DB"
+                  fill: "#0CD3DB",
                 },
-                silent: true
+                silent: true,
               };
             },
-            data: [0]
+            data: [0],
           },
           {
             //name: '绿点2',
@@ -201,16 +206,16 @@ export default {
                 shape: {
                   cx: point.x,
                   cy: point.y,
-                  r: 4
+                  r: 4,
                 },
                 style: {
                   stroke: "#0CD3DB", //绿
-                  fill: "#0CD3DB"
+                  fill: "#0CD3DB",
                 },
-                silent: true
+                silent: true,
               };
             },
-            data: [0]
+            data: [0],
           },
           {
             //name: '圆环',
@@ -223,8 +228,8 @@ export default {
             zlevel: 0,
             label: {
               normal: {
-                position: "center"
-              }
+                position: "center",
+              },
             },
             data: [
               {
@@ -237,33 +242,33 @@ export default {
                       colorStops: [
                         {
                           offset: 0,
-                          color: "#4FADFD" // 0% 处的颜色
+                          color: "#4FADFD", // 0% 处的颜色
                         },
                         {
                           offset: 1,
-                          color: "#28E8FA" // 100% 处的颜色
-                        }
-                      ]
-                    }
-                  }
-                }
+                          color: "#28E8FA", // 100% 处的颜色
+                        },
+                      ],
+                    },
+                  },
+                },
               },
               {
                 value: 100 - per,
                 name: "",
                 label: {
                   normal: {
-                    show: false
-                  }
+                    show: false,
+                  },
                 },
                 //剩余圆环颜色
                 itemStyle: {
                   normal: {
-                    color: "#173164"
-                  }
-                }
-              }
-            ]
+                    color: "#173164",
+                  },
+                },
+              },
+            ],
           },
           {
             name: "percent",
@@ -275,42 +280,42 @@ export default {
             splitNumber: 8,
             hoverAnimation: true,
             axisTick: {
-              show: false
+              show: false,
             },
             splitLine: {
               length: 15,
               lineStyle: {
                 width: 5,
-                color: "#061740"
-              }
+                color: "#061740",
+              },
             },
             axisLabel: {
-              show: false
+              show: false,
             },
             pointer: {
-              show: false
+              show: false,
             },
             axisLine: {
               lineStyle: {
-                opacity: 0
-              }
+                opacity: 0,
+              },
             },
             detail: {
-              show: false
+              show: false,
             },
             data: [
               {
                 value: 0,
-                name: ""
-              }
-            ]
-          }
-        ]
+                name: "",
+              },
+            ],
+          },
+        ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
-      optionsSetup: {}
+      optionsSetup: {},
     };
   },
   computed: {
@@ -321,9 +326,12 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -334,8 +342,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   created() {
     this.optionsStyle = this.value.position;
@@ -349,6 +357,7 @@ export default {
               this.angle = this.angle + 3
               myChart.setOption(options,true)
             }, 1000);*/
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
     //轴point设置
@@ -357,7 +366,7 @@ export default {
       let y1 = y0 + r * Math.sin((x * Math.PI) / 180);
       return {
         x: x1,
-        y: y1
+        y: y1,
       };
     },
     editorOptions() {
@@ -376,13 +385,13 @@ export default {
         nums: {
           fontSize: optionsSetup.textNumFontSize,
           color: optionsSetup.textNumColor,
-          fontWeight: optionsSetup.textNumFontWeight
+          fontWeight: optionsSetup.textNumFontWeight,
         },
         percent: {
           fontSize: optionsSetup.textPerFontSize,
           color: optionsSetup.textPerColor,
-          fontWeight: optionsSetup.textPerFontWeight
-        }
+          fontWeight: optionsSetup.textPerFontWeight,
+        },
       };
       title.textStyle["rich"] = rich;
       this.options.title = title;
@@ -397,21 +406,21 @@ export default {
           colorStops: [
             {
               offset: 0,
-              color: optionsSetup.color0Start // 0% 处的颜色
+              color: optionsSetup.color0Start, // 0% 处的颜色
             },
             {
               offset: 1,
-              color: optionsSetup.color100End // 100% 处的颜色
-            }
-          ]
-        }
+              color: optionsSetup.color100End, // 100% 处的颜色
+            },
+          ],
+        },
       };
       itemStyle["normal"] = normal;
     },
     setOptionSurplusColor() {
       const itemStyle = this.options.series[6]["data"][1]["itemStyle"];
       const normal = {
-        color: this.optionsSetup.colorsurplus
+        color: this.optionsSetup.colorsurplus,
       };
       itemStyle["normal"] = normal;
     },
@@ -423,13 +432,30 @@ export default {
       line.length = optionsSetup.lineLength;
       const lineStyle = {
         width: optionsSetup.lineWidth,
-        color: optionsSetup.lineColor
+        color: optionsSetup.lineColor,
       };
       line["lineStyle"] = lineStyle;
     },
     // 数据解析
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
@@ -454,13 +480,13 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.options.title.text = "{nums|" + res[0].value + "}{percent|%}";
         this.options.series[6]["data"][0]["value"] = res[0].value;
         this.options.series[6]["data"][1]["value"] = 100 - res[0].value;
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

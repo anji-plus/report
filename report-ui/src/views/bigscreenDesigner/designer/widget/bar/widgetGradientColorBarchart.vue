@@ -1,18 +1,25 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart ref="myVChart"  :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import {
+  originWidgetLinkageLogic,
+  targetWidgetLinkageLogic,
+} from "@/views/bigscreenDesigner/designer/linkageLogic";
 import echarts from "echarts";
-
 export default {
   name: "WidgetGradientColorBarchart", //渐变色，参考https://www.makeapie.com/editor.html?c=x0oZWoncE
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
+    widgetIndex: {
+      type: Number,
+      default: 0,
+    }, // 当前组件，在工作区变量widgetInWorkbench中的索引
   },
   data() {
     return {
@@ -23,63 +30,63 @@ export default {
           y: "4%",
           textStyle: {
             color: "#fff",
-            fontSize: "22"
+            fontSize: "22",
           },
           subtextStyle: {
             color: "#90979c",
-            fontSize: "16"
-          }
+            fontSize: "16",
+          },
         },
         tooltip: {
           trigger: "axis",
           axisPointer: {
-            type: "shadow"
-          }
+            type: "shadow",
+          },
         },
         grid: {
           top: "15%",
           right: "3%",
           left: "5%",
-          bottom: "12%"
+          bottom: "12%",
         },
         legend: {
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         xAxis: {
           type: "category",
           data: [],
           axisLine: {
             lineStyle: {
-              color: "rgba(255,255,255,0.12)"
-            }
+              color: "rgba(255,255,255,0.12)",
+            },
           },
           axisLabel: {
             margin: 10,
             color: "#e2e9ff",
             textStyle: {
-              fontSize: 14
-            }
-          }
+              fontSize: 14,
+            },
+          },
         },
         yAxis: {
           name: "",
           axisLabel: {
             formatter: "{value}",
-            color: "#e2e9ff"
+            color: "#e2e9ff",
           },
           axisLine: {
             show: false,
             lineStyle: {
-              color: "rgba(255,255,255,0)"
-            }
+              color: "rgba(255,255,255,0)",
+            },
           },
           splitLine: {
             lineStyle: {
-              color: "rgba(255,255,255,0.12)"
-            }
-          }
+              color: "rgba(255,255,255,0.12)",
+            },
+          },
         },
         series: [
           {
@@ -88,23 +95,27 @@ export default {
             barWidth: "20px",
             itemStyle: {
               normal: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1,
+                color: new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
                   [
                     {
                       offset: 0,
-                      color: "rgba(0,244,255,1)" // 0% 处的颜色
+                      color: "rgba(0,244,255,1)", // 0% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "rgba(0,77,167,1)" // 100% 处的颜色
-                    }
+                      color: "rgba(0,77,167,1)", // 100% 处的颜色
+                    },
                   ],
                   false
                 ),
                 shadowColor: "rgba(0,160,221,1)",
                 //模糊细数
-                shadowBlur: 4
-              }
+                shadowBlur: 4,
+              },
             },
             label: {
               normal: {
@@ -116,17 +127,18 @@ export default {
                   a: {
                     fontSize: 15,
                     color: "#fff",
-                    align: "center"
-                  }
-                }
-              }
-            }
-          }
-        ]
+                    align: "center",
+                  },
+                },
+              },
+            },
+          },
+        ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
-      optionsSetup: {}
+      optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {
@@ -137,9 +149,12 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -150,8 +165,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.optionsStyle = this.value.position;
@@ -159,6 +174,8 @@ export default {
     this.optionsCollapse = this.value.setup;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
+    originWidgetLinkageLogic(this); // 联动-源组件逻辑
   },
   methods: {
     // 修改图标options属性
@@ -167,6 +184,7 @@ export default {
       this.setOptionsX();
       this.setOptionsY();
       this.setOptionsTop();
+      this.setOptionsTooltip();
       this.setOptionsMargin();
       this.setOptionsColor();
       this.setOptionsData();
@@ -204,7 +222,7 @@ export default {
         name: optionsSetup.nameX,
         nameTextStyle: {
           color: optionsSetup.nameColorX,
-          fontSize: optionsSetup.nameFontSizeX
+          fontSize: optionsSetup.nameFontSizeX,
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -217,23 +235,23 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX
-          }
+            fontSize: optionsSetup.fontSizeX,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorX,
             width: optionsSetup.lineWidthX,
-          }
+          },
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineX,
           lineStyle: {
             color: optionsSetup.splitLineColorX,
             width: optionsSetup.splitLineWidthX,
-          }
-        }
+          },
+        },
       };
       this.options.xAxis = xAxis;
     },
@@ -251,7 +269,7 @@ export default {
         name: optionsSetup.textNameY,
         nameTextStyle: {
           color: optionsSetup.nameColorY,
-          fontSize: optionsSetup.nameFontSizeY
+          fontSize: optionsSetup.nameFontSizeY,
         },
         // 轴反转
         inverse: optionsSetup.reversalY,
@@ -262,23 +280,23 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorY,
-            fontSize: optionsSetup.fontSizeY
-          }
+            fontSize: optionsSetup.fontSizeY,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorY,
             width: optionsSetup.lineWidthY,
-          }
+          },
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineY,
           lineStyle: {
             color: optionsSetup.splitLineColorY,
             width: optionsSetup.splitLineWidthY,
-          }
-        }
+          },
+        },
       };
       this.options.yAxis = yAxis;
     },
@@ -294,8 +312,8 @@ export default {
             distance: optionsSetup.distance,
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.subTextColor,
-            fontWeight: optionsSetup.fontWeight
-          }
+            fontWeight: optionsSetup.fontWeight,
+          };
         } else {
           series[0].label = {
             show: optionsSetup.isShow,
@@ -303,8 +321,8 @@ export default {
             distance: optionsSetup.distance,
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.subTextColor,
-            fontWeight: optionsSetup.fontWeight
-          }
+            fontWeight: optionsSetup.fontWeight,
+          };
         }
         series[0].barWidth = optionsSetup.maxWidth;
       }
@@ -317,8 +335,8 @@ export default {
         show: true,
         textStyle: {
           color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize
-        }
+          fontSize: optionsSetup.tipsFontSize,
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -330,7 +348,7 @@ export default {
         right: optionsSetup.marginRight,
         bottom: optionsSetup.marginBottom,
         top: optionsSetup.marginTop,
-        containLabel: true
+        containLabel: true,
       };
       this.options.grid = grid;
     },
@@ -338,57 +356,66 @@ export default {
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
       const itemStyle = this.options.series[0]["itemStyle"];
-      let normal = {}
+      let normal = {};
       if (optionsSetup.verticalShow) {
         normal = {
-          color: new echarts.graphic.LinearGradient(1, 0, 0, 0,
-            [
-              {
-                offset: 0,
-                color: optionsSetup.bar0color // 0% 处的颜色
-              },
-              {
-                offset: 1,
-                color: optionsSetup.bar100color // 100% 处的颜色
-              }
-            ],
-          ),
+          color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+            {
+              offset: 0,
+              color: optionsSetup.bar0color, // 0% 处的颜色
+            },
+            {
+              offset: 1,
+              color: optionsSetup.bar100color, // 100% 处的颜色
+            },
+          ]),
           barBorderRadius: optionsSetup.radius, //圆角
           shadowColor: optionsSetup.shadowColor, // 阴影颜色
-          shadowBlur: optionsSetup.shadowBlur //模糊系数
-        }
+          shadowBlur: optionsSetup.shadowBlur, //模糊系数
+        };
       } else {
         normal = {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1,
-            [
-              {
-                offset: 0,
-                color: optionsSetup.bar0color // 0% 处的颜色
-              },
-              {
-                offset: 1,
-                color: optionsSetup.bar100color // 100% 处的颜色
-              }
-            ],
-          ),
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: optionsSetup.bar0color, // 0% 处的颜色
+            },
+            {
+              offset: 1,
+              color: optionsSetup.bar100color, // 100% 处的颜色
+            },
+          ]),
           barBorderRadius: optionsSetup.radius, //圆角
           shadowColor: optionsSetup.shadowColor, // 阴影颜色
-          shadowBlur: optionsSetup.shadowBlur //模糊系数
-        }
+          shadowBlur: optionsSetup.shadowBlur, //模糊系数
+        };
       }
       itemStyle["normal"] = normal;
     },
     // 数据解析
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsSetup = this.optionsSetup;
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      // 联动接收者逻辑开始
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+      // 联动接收者逻辑结束
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
-        : this.dynamicDataFn(
-          optionsData.dynamicData,
-          optionsData.refreshTime,
-          optionsSetup
-        );
+        : this.dynamicDataFn(optionsData.refreshTime);
     },
     // 静态数据
     staticDataFn(val) {
@@ -398,7 +425,7 @@ export default {
       let data = [];
       for (const i in val) {
         axis[i] = val[i].axis;
-        data[i] = val[i].data
+        data[i] = val[i].data;
       }
       // x轴
       if (optionsSetup.verticalShow) {
@@ -417,7 +444,10 @@ export default {
       }
     },
     // 动态数据
-    dynamicDataFn(val, refreshTime, optionsSetup) {
+    dynamicDataFn(refreshTime) {
+      const optionsSetup = this.optionsSetup;
+      const optionsData = this.optionsData;
+      const val = optionsData.dynamicData;
       if (!val) return;
       if (this.ispreview) {
         this.getEchartData(val, optionsSetup);
@@ -430,7 +460,7 @@ export default {
     },
     getEchartData(val, optionsSetup) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(optionsSetup, res);
       });
     },
@@ -455,8 +485,8 @@ export default {
           series[i].data = val.series[i].data;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

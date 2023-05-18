@@ -164,8 +164,8 @@ export const widgetRadar = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'line', name: '线型'},
-                {code: 'circle', name: '圆型'},
+                { code: 'line', name: '线型' },
+                { code: 'circle', name: '圆型' },
               ],
               value: 'line'
             },
@@ -261,10 +261,10 @@ export const widgetRadar = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -275,9 +275,9 @@ export const widgetRadar = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
             },
@@ -296,7 +296,7 @@ export const widgetRadar = {
             },
             {
               type: 'el-input-text',
-              label: '图例名称',
+              label: '名称( | 分隔)',
               name: 'legendName',
               required: false,
               placeholder: '多值以' | '隔开',
@@ -333,9 +333,9 @@ export const widgetRadar = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
               ],
               value: 'center'
             },
@@ -346,8 +346,8 @@ export const widgetRadar = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'top', name: '顶部'},
-                {code: 'bottom', name: '底部'},
+                { code: 'top', name: '顶部' },
+                { code: 'bottom', name: '底部' },
               ],
               value: 'top'
             },
@@ -358,8 +358,8 @@ export const widgetRadar = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'vertical', name: '竖排'},
-                {code: 'horizontal', name: '横排'},
+                { code: 'vertical', name: '竖排' },
+                { code: 'horizontal', name: '横排' },
               ],
               value: 'horizontal'
             },
@@ -399,10 +399,10 @@ export const widgetRadar = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -421,9 +421,9 @@ export const widgetRadar = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'solid', name: '实线'},
-                {code: 'dashed', name: '线型虚线'},
-                {code: 'dotted', name: '点型虚线'},
+                { code: 'solid', name: '实线' },
+                { code: 'dashed', name: '线型虚线' },
+                { code: 'dotted', name: '点型虚线' },
               ],
               value: 'solid'
             },
@@ -466,7 +466,7 @@ export const widgetRadar = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
+              value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
             },
           ],
         },
@@ -478,11 +478,11 @@ export const widgetRadar = {
         required: false,
         placeholder: '',
         value: [
-          {name: 'SA', key: 'Sales', max: 6500},
-          {name: 'Admin', key: 'Admin', max: 16000},
-          {name: 'Information', key: 'Information', max: 30000},
-          {name: 'Customer', key: 'Customer', max: 38000},
-          {name: 'Develop', key: 'Develop', max: 52000},
+          { name: 'SA', key: 'Sales', max: 6500 },
+          { name: 'Admin', key: 'Admin', max: 16000 },
+          { name: 'Information', key: 'Information', max: 30000 },
+          { name: 'Customer', key: 'Customer', max: 38000 },
+          { name: 'Develop', key: 'Develop', max: 52000 },
         ]
       }
     ],
@@ -512,7 +512,7 @@ export const widgetRadar = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',
@@ -523,8 +523,8 @@ export const widgetRadar = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {name: '2016', Sales: 4200, Admin: 3000, Information: 20000, Customer: 35000, Develop: 50000},
-          {name: '2017', Sales: 5000, Admin: 14000, Information: 28000, Customer: 26000, Develop: 42000},
+          { name: '2016', Sales: 4200, Admin: 3000, Information: 20000, Customer: 35000, Develop: 50000 },
+          { name: '2017', Sales: 5000, Admin: 14000, Information: 28000, Customer: 26000, Develop: 42000 },
         ],
       },
       {

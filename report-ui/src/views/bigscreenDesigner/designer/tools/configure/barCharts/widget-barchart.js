@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:21:45
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:08:29
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-01-10 14:09:03
  */
 export const widgetBarchart = {
   code: 'widget-barchart',
@@ -111,10 +111,10 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -125,9 +125,9 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
             },
@@ -138,9 +138,9 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
               ],
               value: 'center'
             },
@@ -175,10 +175,10 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -189,9 +189,9 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
             },
@@ -481,10 +481,10 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -553,10 +553,22 @@ export const widgetBarchart = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
+              value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
             },
           ],
         },
+        {
+          name: '组件联动',
+          list: [
+            {
+              type: 'componentLinkage',
+              label: '',
+              name: 'componentLinkage',
+              required: false,
+              value: []
+            }
+          ]
+        }
       ],
     ],
     // 数据
@@ -586,7 +598,7 @@ export const widgetBarchart = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',
@@ -597,11 +609,11 @@ export const widgetBarchart = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {"axis": "苹果", "data": 1000},
-          {"axis": "三星", "data": 2229},
-          {"axis": "小米", "data": 3879},
-          {"axis": "oppo", "data": 2379},
-          {"axis": "vivo", "data": 4079},
+          { "axis": "苹果", "data": 1000 },
+          { "axis": "三星", "data": 2229 },
+          { "axis": "小米", "data": 3879 },
+          { "axis": "oppo", "data": 2379 },
+          { "axis": "vivo", "data": 4079 },
         ],
       },
       {
@@ -652,5 +664,20 @@ export const widgetBarchart = {
         value: 200,
       },
     ],
+    // 事件
+    methods: [
+      // {
+      //   type: 'methods',
+      //   label: '前置钩子',
+      //   name: 'beforeMethods',
+      //   value: 'function beforeMethods(data){\n\t//自定义脚本内容1\n\treturn data;\n}',
+      // },
+      // {
+      //   type: 'methods',
+      //   label: '后置钩子',
+      //   name: 'afterMethods',
+      //   value: 'function afterMethods(data){\n\t//自定义脚本内容2\n\treturn data;\n}',
+      // },
+    ]
   }
 }

@@ -1,17 +1,19 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 <script>
+import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 import vue from "vue";
 import VueSuperSlide from "vue-superslide";
-
 vue.use(VueSuperSlide);
 export default {
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
+    flagInter: null,
   },
   data() {
     return {
@@ -20,13 +22,13 @@ export default {
         title: {},
         legend: {},
         radar: {
-          indicator: []
+          indicator: [],
         },
-        series: []
+        series: [],
       },
       optionsSetup: {},
       optionsPosition: {},
-      optionsData: {}
+      optionsData: {},
     };
   },
   computed: {
@@ -38,8 +40,11 @@ export default {
         height: allStyle.height + "px",
         left: allStyle.left + "px",
         top: allStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
     },
   },
   watch: {
@@ -50,19 +55,19 @@ export default {
         this.optionsData = val.data;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.optionsSetup = this.value.setup;
     this.optionsPosition = this.value.position;
     this.optionsData = this.value.data;
     this.editorOptions();
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
     editorOptions() {
       this.setOptionsTitle();
-      this.setOptionIndicator();
       this.setOptionsRadar();
       this.setOptionsLegend();
       this.setOptionsTooltip();
@@ -91,12 +96,6 @@ export default {
       };
       this.options.title = title;
     },
-    // 雷达设置相关
-    setOptionIndicator() {
-      const optionsSetup = this.optionsSetup;
-      const indicator = optionsSetup.dynamicAddRadar;
-      this.options.radar.indicator = indicator;
-    },
     // 雷达设置
     setOptionsRadar() {
       const optionsSetup = this.optionsSetup;
@@ -105,7 +104,7 @@ export default {
         lineStyle: {
           color: optionsSetup.axisLineColor,
           opacity: optionsSetup.axisLineOpacity / 100,
-        }
+        },
       };
       const axisName = {
         show: optionsSetup.axisNameShow,
@@ -113,14 +112,14 @@ export default {
         fontSize: optionsSetup.axisNameFontSize,
         fontStyle: optionsSetup.axisNamFontStyle,
         fontWeight: optionsSetup.axisNamFontWeight,
-      }
+      };
       const splitLine = {
         show: optionsSetup.splitLineShow,
         lineStyle: {
           color: optionsSetup.splitLineColor,
           opacity: optionsSetup.splitLineOpacity / 100,
-        }
-      }
+        },
+      };
       this.options.radar.axisLine = axisLine;
       // echarts5.X以上，name属性被替换为axisName
       this.options.radar.name = axisName;
@@ -142,7 +141,7 @@ export default {
           fontSize: optionsSetup.legendFontSize,
         },
         itemWidth: optionsSetup.legendWidth,
-      }
+      };
       this.options.legend = legend;
     },
     // 图例名称设置
@@ -151,17 +150,17 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == '') {
+      if (null == legendName || legendName == "") {
         for (let i = 0; i < name.length; i++) {
           series[0].data[i].name = name[i];
         }
-        this.options.legend['data'] = name;
+        this.options.legend["data"] = name;
       } else {
-        const arr = legendName.split('|');
+        const arr = legendName.split("|");
         for (let i = 0; i < arr.length; i++) {
           series[0].data[i].name = arr[i];
         }
-        this.options.legend['data'] = arr;
+        this.options.legend["data"] = arr;
       }
     },
     // tooltip 提示语设置，鼠标放置显示
@@ -173,16 +172,33 @@ export default {
         textStyle: {
           color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize,
-        }
+        },
       };
       this.options.tooltip = tooltip;
     },
     // 雷达大小设置
     setOptionsMargin() {
-      this.options.radar.radius = '70%';
+      this.options.radar.radius = "70%";
     },
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      // 联动接收者逻辑开始
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+      // 联动接收者逻辑结束
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
@@ -190,8 +206,8 @@ export default {
     //去重
     setUnique(arr) {
       let newArr = [];
-      arr.forEach(item => {
-        return newArr.includes(item) ? '' : newArr.push(item);
+      arr.forEach((item) => {
+        return newArr.includes(item) ? "" : newArr.push(item);
       });
       return newArr;
     },
@@ -204,8 +220,9 @@ export default {
         arrColor.push(customColor[i].color);
       }
       this.options.color = arrColor;
-
+      // 雷达设置相关
       const indicator = optionsSetup.dynamicAddRadar;
+      this.options.radar.indicator = indicator;
       // 雷达图key值
       const radarKeys = [];
       for (const i in indicator) {
@@ -247,16 +264,16 @@ export default {
         legendName.push(name[i]);
       }
       this.options.series[0] = {
-        type: 'radar',
+        type: "radar",
         data: data,
         symbolSize: optionsSetup.symbolSize,
         areaStyle: {
           normal: {
             opacity: optionsSetup.opacity / 100,
-          }
+          },
         },
       };
-      this.options.legend['data'] = legendName;
+      this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
     dynamicDataFn(data, refreshTime) {
@@ -272,7 +289,7 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(res);
       });
     },
@@ -285,8 +302,9 @@ export default {
         arrColor.push(customColor[i].color);
       }
       this.options.color = arrColor;
-
+      // 雷达设置相关
       const indicator = optionsSetup.dynamicAddRadar;
+      this.options.radar.indicator = indicator;
       // 雷达图key值
       const radarKeys = [];
       for (const i in indicator) {
@@ -328,19 +346,20 @@ export default {
         legendName.push(name[i]);
       }
       this.options.series[0] = {
-        type: 'radar',
+        type: "radar",
         data: data,
         symbolSize: optionsSetup.symbolSize,
         areaStyle: {
           normal: {
             opacity: optionsSetup.opacity / 100,
-          }
+          },
         },
       };
-      this.options.legend['data'] = legendName;
+      this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
-    }
-  }
+      console.log(this.options.series)
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

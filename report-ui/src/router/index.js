@@ -118,7 +118,7 @@ export const constantRouterMap = [
       title: '报表设计',
       icon: 'iconnavicon-ywcs',
       requireAuth: true,
-      permission: 'datasourceManage|resultsetManage|reportManage|bigScreenManage'
+      permission: 'datasourceManage|resultsetManage|reportManage|bigScreenManage|excelManage'
     },
     children: [
       {

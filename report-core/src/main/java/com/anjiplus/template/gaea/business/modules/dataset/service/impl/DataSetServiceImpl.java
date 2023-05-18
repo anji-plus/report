@@ -33,11 +33,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -154,6 +152,19 @@ public class DataSetServiceImpl implements DataSetService {
         //1.新增数据集
         DataSet dataSet = new DataSet();
         BeanUtils.copyProperties(dto, dataSet);
+        if (StringUtils.isNotBlank(dataSet.getCaseResult())) {
+            try {
+                JSONArray objects = JSONObject.parseArray(dataSet.getCaseResult());
+                if (objects.size() > 1) {
+                    Object o = objects.get(0);
+                    objects = new JSONArray();
+                    objects.add(o);
+                    dataSet.setCaseResult(objects.toJSONString());
+                }
+            } catch (Exception e) {
+                log.info("结果集只保留一行数据失败...{}", e.getMessage());
+            }
+        }
         insert(dataSet);
         //2.更新查询参数
         dataSetParamBatch(dataSetParamDtoList, dto.getSetCode());
@@ -176,6 +187,19 @@ public class DataSetServiceImpl implements DataSetService {
         //1.更新数据集
         DataSet dataSet = new DataSet();
         BeanUtils.copyProperties(dto, dataSet);
+        if (StringUtils.isNotBlank(dataSet.getCaseResult())) {
+            try {
+                JSONArray objects = JSONObject.parseArray(dataSet.getCaseResult());
+                if (objects.size() > 1) {
+                    Object o = objects.get(0);
+                    objects = new JSONArray();
+                    objects.add(o);
+                    dataSet.setCaseResult(objects.toJSONString());
+                }
+            } catch (Exception e) {
+                log.info("结果集只保留一行数据失败...{}", e.getMessage());
+            }
+        }
         update(dataSet);
 
         //2.更新查询参数
@@ -192,6 +216,7 @@ public class DataSetServiceImpl implements DataSetService {
      * @param id
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteSet(Long id) {
         DataSet dataSet = selectOne(id);
         String setCode = dataSet.getSetCode();
@@ -224,6 +249,9 @@ public class DataSetServiceImpl implements DataSetService {
 
         OriginalDataDto originalDataDto = new OriginalDataDto();
         String setCode = dto.getSetCode();
+        if (StringUtils.isBlank(setCode)) {
+            return new OriginalDataDto(new ArrayList<>());
+        }
         //1.获取数据集、参数替换、数据转换
         DataSetDto dataSetDto = detailSet(setCode);
         String dynSentence = dataSetDto.getDynSentence();

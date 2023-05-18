@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:10:22
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:42:46
+ * @LastEditTime: 2023-01-11 13:19:06
  */
 export const widgetVideo = {
   code: 'widget-video',

@@ -1,6 +1,6 @@
 <!--
  * @Descripttion: 用户权限--用户管理
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
@@ -23,7 +23,8 @@ import {
   accessUserAdd,
   accessUserDeleteBatch,
   accessUserUpdate,
-  accessUserDetail
+  accessUserDetail,
+  resetPassword,
 } from "@/api/accessUser";
 import UserRole from "@/views/accessUser/components/UserRole";
 export default {
@@ -105,6 +106,11 @@ export default {
             label: "分配权限",
             permission: "userManage:grantRole",
             click: this.handleOpenDialogSetRoleForUser
+          },
+          {
+            label: "重置密码",
+            permission: "userManage:resetPassword",
+            click: this.resetPassword
           },
           {
             label: "删除",
@@ -298,6 +304,25 @@ export default {
     handleOpenDialogSetRoleForUser(props) {
       this.loginName = props.loginName;
       this.dialogVisibleSetRoleForUser = true;
+    },
+    resetPassword(props){
+      this.$confirm('重置密码, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const {code} = await resetPassword({'loginName':props.loginName});
+        if (code != "200") return;
+        this.$message({
+          type: 'success',
+          message: '重置成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消重置'
+        });
+      });
     }
   }
 };

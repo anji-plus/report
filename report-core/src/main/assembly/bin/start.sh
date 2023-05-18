@@ -20,7 +20,7 @@ if [ -n "$PIDS" ]; then
     exit 1
 fi
 
-JAVA_OPTS=" -server -Xmx2g -Xms2g -Xmn256m -XX:PermSize=128m -Xss256k "
+JAVA_OPTS=" -server -Xms1g -Xmx2g -Xmn256m -XX:PermSize=128m -Xss256k "
 nohup java $JAVA_OPTS -Xbootclasspath/a:$LIB_JARS -jar -Dspring.config.location=$CONF_DIR/bootstrap.yml $LIB_DIR/aj-report-*.jar >/dev/null 2>&1 &
 
-echo "AJ-Report 正在后台执行，请查看aj-report.log日志(tail -F ../logs/aj-report.log)，确定软件运行情况"
+echo "AJ-Report 正在后台执行，请查看aj-report.log日志(${DEPLOY_DIR}/logs/aj-report.log)，确定软件运行情况"

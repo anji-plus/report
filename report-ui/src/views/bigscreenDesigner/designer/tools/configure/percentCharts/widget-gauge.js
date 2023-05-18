@@ -3,8 +3,8 @@
  * @version:
  * @Author: qianlishi
  * @Date: 2021-08-29 07:30:25
- * @LastEditors: qianlishi
- * @LastEditTime: 2021-09-28 14:13:17
+ * @LastEditors: qianlishi qianlishi@anji-plus.com
+ * @LastEditTime: 2023-01-10 14:06:52
  */
 export const widgetGauge = {
   code: 'widget-gauge',
@@ -315,7 +315,7 @@ export const widgetGauge = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',

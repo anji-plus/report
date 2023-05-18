@@ -68,62 +68,62 @@ export default {
     url: null,
     allowCreate: {
       type: Boolean,
-      default: false
+      default: false,
     },
     method: {
       type: String,
-      default: "get"
+      default: "get",
     },
     queryParam: {
       type: Object,
       default: () => {
         return {};
-      }
+      },
     },
     value: null,
     placeholder: null,
     label: {
       type: String,
-      default: "text"
+      default: "text",
     },
     option: {
       type: String,
-      default: "id"
+      default: "id",
     },
     multiple: null,
     localOptions: null,
     disabled: null,
     clearable: {
       type: Boolean,
-      default: true
+      default: true,
     },
     collapseTags: {
       type: Boolean,
-      default: false
+      default: false,
     },
     mergeLabel: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 禁用的下拉选项
     disabledOptions: {
       type: String,
       default: () => {
         return "";
-      }
+      },
     },
     // 使用远程搜索
     remoteFilter: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       options: null,
       selectValue: null,
       // 如果是分页的，
-      totalPage: 0
+      totalPage: 0,
     };
   },
   computed: {
@@ -146,7 +146,7 @@ export default {
         return `/meta/gaeaDict/select/${this.dictCode}`;
       }
       return null;
-    }
+    },
   },
   watch: {
     dictCode(val) {
@@ -181,13 +181,13 @@ export default {
           }
         }
       },
-      immediate: true
+      immediate: true,
     },
     url() {
       setTimeout(() => {
         this.queryData();
       }, 500);
-    }
+    },
   },
   created() {
     if (this.multiple != null) {
@@ -225,7 +225,7 @@ export default {
       this.$emit("input", value);
 
       // 根据当前值，找出对应的选项
-      let optionItem = this.options.find(item => item[this.option] == value);
+      let optionItem = this.options.find((item) => item[this.option] == value);
       this.$emit("change", value, optionItem);
     },
     // 根据用户配置的label，生成对应的标签
@@ -257,7 +257,7 @@ export default {
         options.push({
           id: dictItem.id.toString(),
           text: dictItem.text,
-          extend: dictItem.extend
+          extend: dictItem.extend,
         });
       }
       return options;
@@ -291,8 +291,8 @@ export default {
       request({
         url: this.requestUrl,
         headers: { noPrompt: true },
-        params: param
-      }).then(response => {
+        params: param,
+      }).then((response) => {
         this.setOptions(response.data);
       });
     },
@@ -305,8 +305,8 @@ export default {
         url: this.requestUrl,
         method: "post",
         headers: { noPrompt: true },
-        data: param
-      }).then(response => {
+        data: param,
+      }).then((response) => {
         this.setOptions(response.data);
       });
     },
@@ -343,8 +343,8 @@ export default {
           this.queryDataByGet(keyword);
         }
       }, 200);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

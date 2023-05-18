@@ -6,13 +6,11 @@ sh build.sh
 
 unzip aj-report-xxxx.zip
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接、上传文件的路径以及地址
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
 sh bin/start.sh
 
 访问：http://serverip:9095
 admin 123456
-
-修改："数据源->mysql数据源"用户名密码
 ```
 
 ## 编译环境
@@ -24,7 +22,15 @@ admin 123456
 - [Apache Maven] 3.5 <br>
 - [Node.js] v14.16.0 <br>
 - [Jdk] 1.8 <br>
-  **注**：已知**Jdk11**存在兼容性问题，请不要使用openJdk，环境问题请看 **常见问题** 大类 <br>
+
+## 版本问题
+
+已知以下版本存在兼容性问题，请不要使用
+
+- Node.js V16及以上
+- openJdk
+- Jdk 1.7及以下/11及以上（jdk11部分版本有问题）
+- Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
 
 ## 克隆源码
 
@@ -38,9 +44,10 @@ git clone https://gitee.com/anji-plus/report.git <br>
 ![img_4.png](../picture/quickly/img_4.png) <br>
 编译完成后是放在当前目录下的build文件夹中：aj-report-xxxx.zip <br>
 
-**注：** 如果Win10部署的话，如图用git执行sh build.sh就行了。Linux就直接去report目录下执行sh build.sh就行。 <br>
+**注：** 如果Win10编译的话，如图用git执行sh build.sh就行了。Linux就直接去report目录下执行sh build.sh就行。 <br>
 **特别注意：**
-如果是Win10编译，那么几个启动脚本的格式则是win的格式，放linux上执行会报错的，反之放linux编译在win10启动也会报错，需要转格式。 <br>
+在Win10上用git执行build.sh编译，几个启动脚本的文本格式都是Unix，在win10上启动需要将start.bat转格式，转格式的方法有很多，实在搞不定的话可以下载发行版，用发行版里面的启动脚本替换掉你编译后的脚本。 <br>
+同样的在linux下编译然后在win10启动也需要转格式。<br>
 
 ## 修改mysql连接
 
@@ -55,7 +62,7 @@ git clone https://gitee.com/anji-plus/report.git <br>
 
 ## OSS配置
 
-OSS底层已支持minio、amazonS3、dfs，都配置的情况下优先级minio->amazonS3->nfs <br>
+OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->amazonS3->nfs <br>
 ![file.png](../picture/quickly/img.png) <br>
 
 ## 启动
@@ -77,10 +84,4 @@ aj-report-XXX --> bin --> start.bat <br>
 http://serverip:9095 <br>
 默认密码：admin 123456 <br>
 
-## 重置mysql连接
-
-登陆进来后请修改mysql数据源 <br>
-数据源 --> mysql数据源 --> 编辑 --> 修改用户名密码（改成你自己系统mysql的用户名密码） <br>
-![img](../picture/quickly/img_14.png) <br>
-![img_6.png](../picture/quickly/img_6.png) <br>
 

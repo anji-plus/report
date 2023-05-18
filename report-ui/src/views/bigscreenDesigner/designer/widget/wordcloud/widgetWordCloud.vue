@@ -1,56 +1,59 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 <script>
 import wordCloud from "../../../../../../static/wordCloud/echarts-wordcloud.min.js";
-
 export default {
   name: "widgetWordCloud",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
       options: {
         tooltip: {
-          show: true
+          show: true,
         },
         series: [
           {
-            type: 'wordCloud',
-            size: ['9%', '99%'],
+            type: "wordCloud",
+            size: ["9%", "99%"],
             sizeRange: [6, 30],
             textRotation: [0, 45, 90, -45],
             rotationRange: [-45, 90],
-            shape: 'circle',
+            shape: "circle",
             textPadding: 0,
             autoSize: {
               enable: true,
-              minSize: 6
+              minSize: 6,
             },
             textStyle: {
               normal: {
                 color: function () {
-                  return 'rgb(' + [
-                    Math.round(Math.random() * 160),
-                    Math.round(Math.random() * 160),
-                    Math.round(Math.random() * 160)
-                  ].join(',') + ')';
-                }
+                  return (
+                    "rgb(" +
+                    [
+                      Math.round(Math.random() * 160),
+                      Math.round(Math.random() * 160),
+                      Math.round(Math.random() * 160),
+                    ].join(",") +
+                    ")"
+                  );
+                },
               },
             },
-            data: []
-          }
-        ]
+            data: [],
+          },
+        ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsSetup: {},
-      flagInter: null
+      flagInter: null,
     };
   },
   computed: {
@@ -61,9 +64,9 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
   },
   watch: {
     value: {
@@ -74,8 +77,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.optionsStyle = this.value.position;
@@ -118,12 +121,18 @@ export default {
     // 词云字体范围
     setOptionsSizeRange() {
       const optionsSetup = this.optionsSetup;
-      this.options.series[0].sizeRange = [optionsSetup.minRangeSize, optionsSetup.maxRangeSize];
+      this.options.series[0].sizeRange = [
+        optionsSetup.minRangeSize,
+        optionsSetup.maxRangeSize,
+      ];
     },
     // 文字角度
     setOptionsRotationRange() {
       const optionsSetup = this.optionsSetup;
-      this.options.series[0].rotationRange = [optionsSetup.minRotationRange, optionsSetup.maxRotationRange];
+      this.options.series[0].rotationRange = [
+        optionsSetup.minRotationRange,
+        optionsSetup.maxRotationRange,
+      ];
     },
     // tooltip 设置
     setOptionsTooltip() {
@@ -133,8 +142,8 @@ export default {
         show: true,
         textStyle: {
           color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize
-        }
+          fontSize: optionsSetup.tipsFontSize,
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -164,7 +173,7 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(res);
       });
     },
@@ -172,8 +181,8 @@ export default {
       for (const key in this.options.series) {
         this.options.series[key].data = val;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="scss">

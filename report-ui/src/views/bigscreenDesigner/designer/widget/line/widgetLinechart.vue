@@ -1,16 +1,24 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import {
+  originWidgetLinkageLogic,
+  targetWidgetLinkageLogic,
+} from "@/views/bigscreenDesigner/designer/linkageLogic";
 export default {
   name: "WidgetLinechart",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
+    widgetIndex: {
+      type: Number,
+      default: 0,
+    }, // 当前组件，在工作区变量widgetInWorkbench中的索引
   },
   data() {
     return {
@@ -20,17 +28,17 @@ export default {
         title: {
           text: "",
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b} : {c}%"
+          formatter: "{a} <br/>{b} : {c}%",
         },
         legend: {
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         xAxis: {
           type: "category",
@@ -38,30 +46,30 @@ export default {
           axisLabel: {
             show: true,
             textStyle: {
-              color: "#fff"
-            }
-          }
+              color: "#fff",
+            },
+          },
         },
         yAxis: {
           type: "value",
           axisLabel: {
             show: true,
             textStyle: {
-              color: "#fff"
-            }
-          }
+              color: "#fff",
+            },
+          },
         },
         series: [
           {
             data: [],
-            type: "line"
-          }
-        ]
+            type: "line",
+          },
+        ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
-      optionsSetup: {}
+      optionsSetup: {},
     };
   },
   computed: {
@@ -72,9 +80,12 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -85,15 +96,17 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
-  created() {
+  mounted() {
     this.optionsStyle = this.value.position;
     this.optionsData = this.value.data;
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
+    originWidgetLinkageLogic(this); // 联动-源组件逻辑
   },
   methods: {
     // 修改图标options属性
@@ -140,7 +153,7 @@ export default {
         name: optionsSetup.nameX,
         nameTextStyle: {
           color: optionsSetup.nameColorX,
-          fontSize: optionsSetup.nameFontSizeX
+          fontSize: optionsSetup.nameFontSizeX,
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -153,23 +166,23 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX
-          }
+            fontSize: optionsSetup.fontSizeX,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorX,
             width: optionsSetup.lineWidthX,
-          }
+          },
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineX,
           lineStyle: {
             color: optionsSetup.splitLineColorX,
             width: optionsSetup.splitLineWidthX,
-          }
-        }
+          },
+        },
       };
       this.options.xAxis = xAxis;
     },
@@ -187,7 +200,7 @@ export default {
         name: optionsSetup.textNameY,
         nameTextStyle: {
           color: optionsSetup.nameColorY,
-          fontSize: optionsSetup.nameFontSizeY
+          fontSize: optionsSetup.nameFontSizeY,
         },
         // 轴反转
         inverse: optionsSetup.reversalY,
@@ -198,23 +211,23 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorY,
-            fontSize: optionsSetup.fontSizeY
-          }
+            fontSize: optionsSetup.fontSizeY,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorY,
             width: optionsSetup.lineWidthY,
-          }
+          },
         },
         splitLine: {
           show: optionsSetup.isShowSplitLineY,
           lineStyle: {
             color: optionsSetup.splitLineColorY,
             width: optionsSetup.splitLineWidthY,
-          }
-        }
+          },
+        },
       };
       this.options.yAxis = yAxis;
     },
@@ -230,15 +243,15 @@ export default {
           series[key].smooth = optionsSetup.smoothCurve;
           if (optionsSetup.area) {
             series[key].areaStyle = {
-              opacity: optionsSetup.areaThickness / 100
+              opacity: optionsSetup.areaThickness / 100,
             };
           } else {
             series[key].areaStyle = {
-              opacity: 0
+              opacity: 0,
             };
           }
           series[key].lineStyle = {
-            width: optionsSetup.lineWidth
+            width: optionsSetup.lineWidth,
           };
           series[key].label = {
             show: optionsSetup.isShow,
@@ -246,7 +259,7 @@ export default {
             distance: 10,
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.subTextColor,
-            fontWeight: optionsSetup.fontWeight
+            fontWeight: optionsSetup.fontWeight,
           };
         }
       }
@@ -260,8 +273,8 @@ export default {
         show: true,
         textStyle: {
           color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize
-        }
+          fontSize: optionsSetup.tipsFontSize,
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -273,7 +286,7 @@ export default {
         right: optionsSetup.marginRight,
         bottom: optionsSetup.marginBottom,
         top: optionsSetup.marginTop,
-        containLabel: true
+        containLabel: true,
       };
       this.options.grid = grid;
     },
@@ -290,8 +303,27 @@ export default {
       this.options = Object.assign({}, this.options);
     },
     // 处理数据
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
+      console.log("ces", e);
+      console.log("ces", paramsConfig);
+
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+      console.log(myDynamicData);
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
@@ -302,7 +334,7 @@ export default {
       let data = [];
       for (const i in val) {
         axis[i] = val[i].axis;
-        data[i] = val[i].data
+        data[i] = val[i].data;
       }
       // x轴
       this.options.xAxis.data = axis;
@@ -326,7 +358,7 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(res);
       });
     },
@@ -340,8 +372,8 @@ export default {
           series[i].data = val.series[i].data;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

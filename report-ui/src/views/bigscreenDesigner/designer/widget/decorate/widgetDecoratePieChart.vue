@@ -1,17 +1,16 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 
 <script>
-
 export default {
   name: "widgetRotatePieChart",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
@@ -19,112 +18,112 @@ export default {
         title: {},
         series: [
           {
-            name: '最外环',
-            type: 'pie',
+            name: "最外环",
+            type: "pie",
             silent: true,
-            radius: ['98%', '97%'],
+            radius: ["98%", "97%"],
             label: {
               normal: {
-                show: false
+                show: false,
               },
             },
             labelLine: {
               normal: {
-                show: false
-              }
+                show: false,
+              },
             },
             itemStyle: {
               normal: {
                 show: false,
               },
             },
-            data: [0]
+            data: [0],
           },
           {
-            name: '外四环',
-            type: 'pie',
+            name: "外四环",
+            type: "pie",
             zlevel: 2,
             silent: true,
-            radius: ['90%', '91%'],
+            radius: ["90%", "91%"],
             startAngle: 50,
             hoverAnimation: false,
             label: {
               normal: {
-                show: false
+                show: false,
               },
             },
             labelLine: {
               normal: {
-                show: false
-              }
+                show: false,
+              },
             },
-            data: [0]
+            data: [0],
           },
           {
-            name: '里四环',
-            type: 'pie',
+            name: "里四环",
+            type: "pie",
             zlevel: 3,
             silent: true,
-            radius: ['88%', '87%'],
+            radius: ["88%", "87%"],
             label: {
               normal: {
-                show: false
+                show: false,
               },
             },
             labelLine: {
               normal: {
-                show: false
-              }
+                show: false,
+              },
             },
-            data: [0]
+            data: [0],
           },
           {
-            name: '虚线环',
-            type: 'pie',
+            name: "虚线环",
+            type: "pie",
             zlevel: 4,
             silent: true,
-            radius: ['84%', '83%'],
+            radius: ["84%", "83%"],
             label: {
               normal: {
-                show: false
+                show: false,
               },
             },
             labelLine: {
               normal: {
-                show: false
-              }
+                show: false,
+              },
             },
-            data: [0]
+            data: [0],
           },
           {
-            name: '三分环',
-            type: 'pie',
+            name: "三分环",
+            type: "pie",
             zlevel: 5,
             silent: true,
-            radius: ['80%', '78%'],
+            radius: ["80%", "78%"],
             color: ["#fc8d89", "#46d3f3", "rgba(203,203,203,.2)"],
             startAngle: 50,
             avoidLabelOverlap: false,
             hoverAnimation: false,
             label: {
               normal: {
-                show: false
+                show: false,
               },
             },
-            data: [50, 20, 40]
+            data: [50, 20, 40],
           },
           {
             name: "外指标环",
-            type: 'gauge',
+            type: "gauge",
             splitNumber: 30,
             min: 0,
             max: 100,
-            radius: '73%', //图表尺寸
-            center: ['50%', '50%'],
+            radius: "73%", //图表尺寸
+            center: ["50%", "50%"],
             startAngle: 90,
             endAngle: -269.9999,
             axisLabel: {
-              show: false
+              show: false,
             },
             pointer: {
               show: 0,
@@ -134,17 +133,17 @@ export default {
             },
           },
           {
-            name: '里指标环',
-            type: 'gauge',
+            name: "里指标环",
+            type: "gauge",
             splitNumber: 30,
             min: 0,
             max: 100,
-            radius: '68%',
-            center: ['50%', '50%'],
+            radius: "68%",
+            center: ["50%", "50%"],
             startAngle: 90,
             endAngle: -269.9999,
             axisLabel: {
-              show: false
+              show: false,
             },
             pointer: {
               show: 0,
@@ -154,64 +153,61 @@ export default {
             },
           },
           {
-            name: '环外环',
-            type: 'pie',
+            name: "环外环",
+            type: "pie",
             zlevel: 20,
             silent: true,
-            radius: ['60%', '59%'],
+            radius: ["60%", "59%"],
             hoverAnimation: false,
             label: {
               normal: {
-                show: false
+                show: false,
               },
             },
             labelLine: {
               normal: {
-                show: false
-              }
+                show: false,
+              },
             },
           },
           {
-            name: '中间环形图',
-            type: 'pie',
-            radius: ['40%', '55%'],
+            name: "中间环形图",
+            type: "pie",
+            radius: ["40%", "55%"],
             avoidLabelOverlap: false,
             hoverAnimation: false,
             itemStyle: {
               normal: {
-                color: '#80ADD2',
-                borderColor: '#3D4268',
-              }
+                color: "#80ADD2",
+                borderColor: "#3D4268",
+              },
             },
             label: {
               normal: {
                 show: false,
-                position: 'center',
-
+                position: "center",
               },
               emphasis: {
                 show: true,
                 textStyle: {
-                  fontSize: '30',
-                  fontWeight: 'bold'
-                }
-              }
+                  fontSize: "30",
+                  fontWeight: "bold",
+                },
+              },
             },
             labelLine: {
               normal: {
-                show: false
-              }
+                show: false,
+              },
             },
-            data: [
-              25, 25, 25, 25, 25, 25
-            ]
+            data: [25, 25, 25, 25, 25, 25],
           },
-        ]
+        ],
       },
       optionsStyle: {}, // 样式
       optionsCollapse: {}, // 图标属性
-      optionsSetup: {}
-    }
+      optionsSetup: {},
+    };
   },
   computed: {
     styleObj() {
@@ -221,9 +217,9 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
   },
   watch: {
     value: {
@@ -234,8 +230,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.optionsStyle = this.value.position;
@@ -257,20 +253,20 @@ export default {
     },
     // 颜色设置
     setColor(color) {
-      const nullColor = 'rgba(0,0,0,0)'
+      const nullColor = "rgba(0,0,0,0)";
       if (color == "") {
-        color = nullColor
+        color = nullColor;
       }
-      return color
+      return color;
     },
     // 最外外环1
     setOptionsLastRing() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series[0];
       if (optionsSetup.isLastRingShow) {
-        series.data = [0]
+        series.data = [0];
       } else {
-        series.data = ''
+        series.data = "";
       }
       const normal = {
         color: {
@@ -286,7 +282,7 @@ export default {
           ],
         },
       };
-      series.itemStyle['normal'] = normal;
+      series.itemStyle["normal"] = normal;
     },
     setRingPie2() {
       const optionsSetup = this.optionsSetup;
@@ -300,23 +296,23 @@ export default {
               normal: {
                 color: this.setColor(optionsSetup.eightColor),
                 borderWidth: 0,
-                borderColor: 'rgba(0,0,0,0)'
-              }
-            }
-          })
+                borderColor: "rgba(0,0,0,0)",
+              },
+            },
+          });
         } else {
           dataArr.push({
             name: (i + 1).toString(),
             value: 20,
             itemStyle: {
               normal: {
-                color: 'rgba(0,0,0,0)'
-              }
-            }
-          })
+                color: "rgba(0,0,0,0)",
+              },
+            },
+          });
         }
       }
-      return dataArr
+      return dataArr;
     },
     // 八分环
     setOptionsEightRing() {
@@ -327,7 +323,7 @@ export default {
     setRingPie3() {
       const optionsSetup = this.optionsSetup;
       let dataArr = [];
-      for (let i = 0; i < (optionsSetup.dottedNum * 2); i++) {
+      for (let i = 0; i < optionsSetup.dottedNum * 2; i++) {
         if (i % 2 === 0) {
           dataArr.push({
             name: (i + 1).toString(),
@@ -336,34 +332,38 @@ export default {
               normal: {
                 color: this.setColor(optionsSetup.dottedColor),
                 borderWidth: 0,
-                borderColor: 'rgba(0,0,0,0)'
-              }
-            }
-          })
+                borderColor: "rgba(0,0,0,0)",
+              },
+            },
+          });
         } else {
           dataArr.push({
             name: (i + 1).toString(),
             value: 20,
             itemStyle: {
               normal: {
-                color: 'rgba(0,0,0,0)',
-              }
-            }
-          })
+                color: "rgba(0,0,0,0)",
+              },
+            },
+          });
         }
       }
-      return dataArr
+      return dataArr;
     },
     // 虚线环
     setOptionsDottedRing() {
       const series = this.options.series;
-      series[3].data = this.setRingPie3()
+      series[3].data = this.setRingPie3();
     },
     // 三分环
     setOptionsThreeRing() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series[4];
-      series.color = [this.setColor(optionsSetup.three1Color), this.setColor(optionsSetup.three2Color), this.setColor(optionsSetup.three3Color)]
+      series.color = [
+        this.setColor(optionsSetup.three1Color),
+        this.setColor(optionsSetup.three2Color),
+        this.setColor(optionsSetup.three3Color),
+      ];
     },
     // 外指标环
     setOptionsOutRing() {
@@ -374,32 +374,30 @@ export default {
         lineStyle: {
           width: optionsSetup.outRingWidth,
           shadowBlur: 0,
-          color: [
-            [1, this.setColor(optionsSetup.outRingColor)]
-          ]
-        }
+          color: [[1, this.setColor(optionsSetup.outRingColor)]],
+        },
       };
       const axisTick = {
         show: optionsSetup.isOutTickShow,
         lineStyle: {
           color: this.setColor(optionsSetup.outTickColor),
-          width: optionsSetup.outTickWidth
+          width: optionsSetup.outTickWidth,
         },
         length: optionsSetup.outTickLength,
-        splitNumber: optionsSetup.outTickWidth
+        splitNumber: optionsSetup.outTickWidth,
       };
-      series[5].splitNumber = optionsSetup.outSplitNum
+      series[5].splitNumber = optionsSetup.outSplitNum;
       const splitLine = {
         show: optionsSetup.isOutSplitShow,
         length: optionsSetup.outSplitLength,
         lineStyle: {
           color: this.setColor(optionsSetup.outSplitColor),
           width: optionsSetup.outSplitWidth,
-        }
+        },
       };
-      series[5].axisLine = axisLine
-      series[5].axisTick = axisTick
-      series[5].splitLine = splitLine
+      series[5].axisLine = axisLine;
+      series[5].axisTick = axisTick;
+      series[5].splitLine = splitLine;
     },
     // 里指标环
     setOptionsInRing() {
@@ -410,9 +408,7 @@ export default {
         lineStyle: {
           width: optionsSetup.inRingWidth,
           shadowBlur: 0,
-          color: [
-            [1, this.setColor(optionsSetup.inRingColor)],
-          ],
+          color: [[1, this.setColor(optionsSetup.inRingColor)]],
         },
       };
       const axisTick = {
@@ -424,61 +420,61 @@ export default {
         length: optionsSetup.inTickLength,
         splitNumber: optionsSetup.inTickNum,
       };
-      series[6].splitNumber = optionsSetup.inSplitNum
+      series[6].splitNumber = optionsSetup.inSplitNum;
       const splitLine = {
         show: optionsSetup.isInSplitShow,
         length: optionsSetup.inSplitLength,
         lineStyle: {
           color: this.setColor(optionsSetup.inSplitColor),
-          width: optionsSetup.inSplitWidth
-        }
+          width: optionsSetup.inSplitWidth,
+        },
       };
-      series[6].axisLine = axisLine
-      series[6].axisTick = axisTick
-      series[6].splitLine = splitLine
+      series[6].axisLine = axisLine;
+      series[6].axisTick = axisTick;
+      series[6].splitLine = splitLine;
     },
     // 环外环设置
     setOptionsRingOnRing() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series[7];
       if (optionsSetup.isRingOnRingShow) {
-        series.data = [0]
+        series.data = [0];
       } else {
-        series.data = ''
+        series.data = "";
       }
       const itemStyle = {
         normal: {
           color: this.setColor(optionsSetup.ringOnRingColor),
-        }
-      }
-      series.itemStyle = itemStyle
+        },
+      };
+      series.itemStyle = itemStyle;
     },
     // 中饼图设置
     setOptionsPie() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series[8];
-      let width = optionsSetup.pieWidth
-      const pieWidth = width + "%"
-      series.radius = [pieWidth, '55%']
+      let width = optionsSetup.pieWidth;
+      const pieWidth = width + "%";
+      series.radius = [pieWidth, "55%"];
 
-      let pieBlocks = optionsSetup.pieBlocks
+      let pieBlocks = optionsSetup.pieBlocks;
       if (pieBlocks == "six") {
-        series.data = [25, 25, 25, 25, 25, 25]
+        series.data = [25, 25, 25, 25, 25, 25];
       } else if (pieBlocks == "five") {
-        series.data = [30, 30, 30, 30, 30]
+        series.data = [30, 30, 30, 30, 30];
       } else {
-        series.data = [40, 40, 40, 40]
+        series.data = [40, 40, 40, 40];
       }
       const itemStyle = {
         normal: {
           color: this.setColor(optionsSetup.pieColor),
           borderColor: this.setColor(optionsSetup.pieBorderColor),
-        }
-      }
-      series.itemStyle = itemStyle
-    }
-  }
-}
+        },
+      };
+      series.itemStyle = itemStyle;
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">

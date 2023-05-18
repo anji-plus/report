@@ -12,6 +12,7 @@
         v-for="(widget, index) in widgets"
         :key="index"
         v-model="widget.value"
+        :index="index"
         :type="widget.type"
       />
     </div>
@@ -56,6 +57,17 @@ export default {
         transform: `scale(${ratioEquipment}, ${ratioEquipment})`,
         "transform-origin": "0 0"
       };
+      data.dashboard.widgets.forEach((item, index) => {
+        item.value.widgetId = item.value.setup.widgetId
+        item.value.widgetCode = item.value.setup.widgetCode
+        if (item.value.setup.componentLinkage && item.value.setup.componentLinkage.length) {
+          this.$store.commit('SET_ALL_COMPONENT_LINKAGE', {
+            index,
+            widgetId: item.value.widgetId,
+            linkageArr: item.value.setup.componentLinkage
+          })
+        }
+      })
       this.widgets = data.dashboard.widgets;
     }
   }

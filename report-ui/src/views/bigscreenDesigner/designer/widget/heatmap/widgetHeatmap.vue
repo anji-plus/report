@@ -1,16 +1,19 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 export default {
   name: "widgetHeatmap",
   components: {},
   props: {
     value: Object,
     ispreview: Boolean,
+    flagInter: null,
   },
   data() {
     return {
@@ -116,6 +119,9 @@ export default {
         background: this.optionsSetup.background,
       };
     },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -135,6 +141,7 @@ export default {
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
     // 修改图标options属性
@@ -180,7 +187,7 @@ export default {
         name: optionsSetup.nameX,
         nameTextStyle: {
           color: optionsSetup.nameColorX,
-          fontSize: optionsSetup.nameFontSizeX
+          fontSize: optionsSetup.nameFontSizeX,
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
@@ -193,15 +200,15 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX
-          }
+            fontSize: optionsSetup.fontSizeX,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorX,
             width: optionsSetup.lineWidthX,
-          }
+          },
         },
       };
       this.options.xAxis = xAxis;
@@ -220,7 +227,7 @@ export default {
         name: optionsSetup.textNameY,
         nameTextStyle: {
           color: optionsSetup.nameColorY,
-          fontSize: optionsSetup.nameFontSizeY
+          fontSize: optionsSetup.nameFontSizeY,
         },
         // 轴反转
         inverse: optionsSetup.reversalY,
@@ -231,15 +238,15 @@ export default {
           textStyle: {
             // 坐标文字颜色
             color: optionsSetup.colorY,
-            fontSize: optionsSetup.fontSizeY
-          }
+            fontSize: optionsSetup.fontSizeY,
+          },
         },
         axisLine: {
           show: true,
           lineStyle: {
             color: optionsSetup.lineColorY,
             width: optionsSetup.lineWidthY,
-          }
+          },
         },
       };
       this.options.yAxis = yAxis;
@@ -252,9 +259,9 @@ export default {
         textStyle: {
           fontSize: optionsSetup.fontSize,
           color: optionsSetup.subTextColor,
-          fontWeight: optionsSetup.fontWeight
-        }
-      }
+          fontWeight: optionsSetup.fontWeight,
+        },
+      };
       this.options.series[0].label = lable;
     },
     // 边距设置
@@ -265,7 +272,7 @@ export default {
         right: optionsSetup.marginRight,
         bottom: optionsSetup.marginBottom,
         top: optionsSetup.marginTop,
-        containLabel: true
+        containLabel: true,
       };
       this.options.grid = grid;
     },
@@ -279,7 +286,7 @@ export default {
         textStyle: {
           color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize,
-        }
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -291,8 +298,8 @@ export default {
       visualMap.min = optionsSetup.dataMin;
       visualMap.max = optionsSetup.dataMax;
       visualMap.textStyle = {
-        fontSize : optionsSetup.legendFontSize,
-        color : optionsSetup.legendColor
+        fontSize: optionsSetup.legendFontSize,
+        color: optionsSetup.legendColor,
       };
       visualMap.inRange.color = optionsSetup.legendColorList.map((x) => {
         return x.color;
@@ -303,8 +310,25 @@ export default {
       visualMap.orient = optionsSetup.layoutFront;
       visualMap.itemWidth = optionsSetup.legendWidth;
     },
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      // 联动接收者逻辑开始
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+      // 联动接收者逻辑结束
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
@@ -312,8 +336,8 @@ export default {
     //去重
     setUnique(arr) {
       let newArr = [];
-      arr.forEach(item => {
-        return newArr.includes(item) ? '' : newArr.push(item);
+      arr.forEach((item) => {
+        return newArr.includes(item) ? "" : newArr.push(item);
       });
       return newArr;
     },
@@ -324,7 +348,7 @@ export default {
       for (const i in val) {
         xAxisList[i] = val[i].axis;
         yAxisList[i] = val[i].yaxis;
-        data[i] = [val[i].axis,val[i].yaxis,val[i].num]
+        data[i] = [val[i].axis, val[i].yaxis, val[i].num];
       }
       xAxisList = this.setUnique(xAxisList);
       yAxisList = this.setUnique(yAxisList);

@@ -1,40 +1,40 @@
 import Cookies from 'js-cookie'
 import { getStorageItem } from '@/utils/storage'
 export default {
-  data () {
+  data() {
     return {
     }
   },
   computed: {
     // 网页高度
-    bodyWidth () {
+    bodyWidth() {
       return document.body.clientWidth
     },
     // 网页宽度
-    bodyHeight () {
+    bodyHeight() {
       return document.body.clientHeight
     },
   },
-  created () {
+  created() {
   },
-  mounted () {
+  mounted() {
   },
-  destroyed () {
+  destroyed() {
   },
   methods: {
-    setCookies (key, val, option) {
+    setCookies(key, val, option) {
       if (option == null) {
         option = { expires: 15 }
       }
       Cookies.set(key, val, option)
     },
-    goBack () {
+    goBack() {
       this.$router.go(-1)
     },
-    refresh () {
+    refresh() {
       this.$router.go(0)
     },
-    parseString (object) {
+    parseString(object) {
       if (typeof object === 'undefined' || object == null) {
         return ''
       }
@@ -49,7 +49,7 @@ export default {
       }
       return ''
     },
-    isBlank (val) {
+    isBlank(val) {
       if (typeof val === 'undefined') {
         return true
       }
@@ -59,7 +59,7 @@ export default {
       return false
     },
     // 封装定制删除数组中的值
-    contains (a, obj) {
+    contains(a, obj) {
       let i = a.length
       while (i--) {
         if (a[i] === obj) {
@@ -82,13 +82,13 @@ export default {
     /**
      *
      */
-    resetForm (data) {
+    resetForm(data) {
       let formKeys = Object.keys(data)
       for (let k of formKeys) {
         data[k] = null
       }
     },
-    sortArray (propertyName) {
+    sortArray(propertyName) {
       return function (object1, object2) {
         let value1 = object1[propertyName];
         let value2 = object2[propertyName];
@@ -103,7 +103,7 @@ export default {
       }
     },
     // 获取对象类型
-    getObjectType (obj) {
+    getObjectType(obj) {
       let toString = Object.prototype.toString
       let map = {
         '[object Boolean]': 'boolean',
@@ -122,23 +122,22 @@ export default {
       }
       return map[toString.call(obj)]
     },
-    isNumber (obj) {
+    isNumber(obj) {
       return this.getObjectType(obj) == 'number'
     },
-    isString (obj) {
+    isString(obj) {
       return this.getObjectType(obj) == 'string'
     },
-    isArray (obj) {
+    isArray(obj) {
       return this.getObjectType(obj) == 'array'
     },
-    hasOwn (obj, key) {
+    hasOwn(obj, key) {
       return Object.prototype.hasOwnProperty.call(obj, key)
     },
-
-    isNotBlank (val) {
+    isNotBlank(val) {
       return !this.isBlank(val)
     },
-    isBlank (val) {
+    isBlank(val) {
       if (this.isNull(val)) {
         return true
       }
@@ -153,10 +152,10 @@ export default {
       }
       return false
     },
-    isNotNull (val) {
+    isNotNull(val) {
       return !this.isNull(val)
     },
-    isNull (val) {
+    isNull(val) {
       // 特殊判断
       if (val && parseInt(val) === 0) return false
       const list = ['$parent']
@@ -182,7 +181,7 @@ export default {
     },
 
     // 对象深拷贝
-    deepClone (data) {
+    deepClone(data) {
       let type = this.getObjectType(data)
       let obj
       if (type === 'array') {
@@ -218,7 +217,7 @@ export default {
     },
 
     // 合并json
-    mergeObject () {
+    mergeObject() {
       let target = arguments[0] || {}
       let deep = false
       let arr = Array.prototype.slice.call(arguments)
@@ -261,7 +260,7 @@ export default {
     },
 
     // 获取dom在屏幕中的top和left
-    getDomTopLeftById (id) {
+    getDomTopLeftById(id) {
       let dom = document.getElementById(id)
       let top = 0
       let left = 0
@@ -271,7 +270,7 @@ export default {
       }
       return { top: top, left: left }
     },
-    objToOne (obj) {
+    objToOne(obj) {
       console.log(obj)
       let tmpData = {}
       for (let index in obj) {
@@ -291,13 +290,16 @@ export default {
         return Object.prototype.toString.call(value) === "[object Array]";
       }
     },
-    urlEncode (val) {
+    isObjectFn(value) {
+      return Object.prototype.toString.call(value) === "[object Object]";
+    },
+    urlEncode(val) {
       return encodeURIComponent(val)
     },
-    urlDecode (val) {
+    urlDecode(val) {
       return decodeURIComponent(val)
     },
-    urlEncodeObject (obj, ingoreFields) {
+    urlEncodeObject(obj, ingoreFields) {
       if (toString.call(obj) != '[object Object]') {
         return obj
       }
@@ -316,7 +318,7 @@ export default {
     },
 
     // 根据数据字典，查询指定字典dict指定值code的，返回整个dictItem{id, text, extend}
-    getDictItemByCode (dict, code) {
+    getDictItemByCode(dict, code) {
       let dicts = getStorageItem('AJReportDict')
       if (!dicts.hasOwnProperty(dict)) {
         return null
@@ -334,7 +336,7 @@ export default {
       return null
     },
     // 根据数据字典，查询指定字典dict指定值code的dictItem.text
-    getDictLabelByCode (dict, code) {
+    getDictLabelByCode(dict, code) {
       let dictItem = this.getDictItemByCode(dict, code)
       if (dictItem != null) {
         return dictItem['text']
@@ -343,7 +345,7 @@ export default {
       }
     },
     // 根据数据字典，查询指定字典dict指定值code的dictItem.extend
-    getDictExtendByCode (dict, code) {
+    getDictExtendByCode(dict, code) {
       let dictItem = this.getDictItemByCode(dict, code)
       if (dictItem == null) {
         return null

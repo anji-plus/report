@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 07:26:48
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:39:29
+ * @LastEditTime: 2023-01-10 14:04:14
  */
 export const widgetBarlinechart = {
   code: 'widget-barlinechart',
@@ -87,8 +87,8 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'circle', name: '实心点'},
-                {code: 'emptyCircle', name: '空心点'},
+                { code: 'circle', name: '实心点' },
+                { code: 'emptyCircle', name: '空心点' },
               ],
               value: 'circle'
             },
@@ -168,10 +168,10 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -182,9 +182,9 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
             },
@@ -195,9 +195,9 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
               ],
               value: 'center'
             },
@@ -232,10 +232,10 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -246,9 +246,9 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
             },
@@ -267,7 +267,7 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-text',
-              label: '图例名称',
+              label: '名称( | 分隔)',
               name: 'legendName',
               required: false,
               placeholder: '',
@@ -304,9 +304,9 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
               ],
               value: 'center'
             },
@@ -317,8 +317,8 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'top', name: '顶部'},
-                {code: 'bottom', name: '底部'},
+                { code: 'top', name: '顶部' },
+                { code: 'bottom', name: '底部' },
               ],
               value: 'top'
             },
@@ -329,8 +329,8 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'vertical', name: '竖排'},
-                {code: 'horizontal', name: '横排'},
+                { code: 'vertical', name: '竖排' },
+                { code: 'horizontal', name: '横排' },
               ],
               value: 'horizontal'
             },
@@ -744,10 +744,10 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -795,10 +795,10 @@ export const widgetBarlinechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
             },
@@ -867,7 +867,7 @@ export const widgetBarlinechart = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
+              value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
             },
           ],
         },
@@ -900,7 +900,7 @@ export const widgetBarlinechart = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 5000
+        value: 600000
       },
       {
         type: 'el-button',
@@ -911,18 +911,18 @@ export const widgetBarlinechart = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          {"axis": "1月", "bar": 2.6, "line": 2},
-          {"axis": "2月", "bar": 5.9, "line": 2.2},
-          {"axis": "3月", "bar": 9, "line": 3.3},
-          {"axis": "4月", "bar": 26.4, "line": 4.5},
-          {"axis": "5月", "bar": 28.7, "line": 6.3},
-          {"axis": "6月", "bar": 70.7, "line": 10.2},
-          {"axis": "7月", "bar": 175.6, "line": 20.3},
-          {"axis": "8月", "bar": 182.2, "line": 23.4},
-          {"axis": "9月", "bar": 48.7, "line": 23},
-          {"axis": "10月", "bar": 18.8, "line": 16.5},
-          {"axis": "11月", "bar": 6, "line": 12},
-          {"axis": "12月", "bar": 2.3, "line": 6.2},
+          { "axis": "1月", "bar": 2.6, "line": 2 },
+          { "axis": "2月", "bar": 5.9, "line": 2.2 },
+          { "axis": "3月", "bar": 9, "line": 3.3 },
+          { "axis": "4月", "bar": 26.4, "line": 4.5 },
+          { "axis": "5月", "bar": 28.7, "line": 6.3 },
+          { "axis": "6月", "bar": 70.7, "line": 10.2 },
+          { "axis": "7月", "bar": 175.6, "line": 20.3 },
+          { "axis": "8月", "bar": 182.2, "line": 23.4 },
+          { "axis": "9月", "bar": 48.7, "line": 23 },
+          { "axis": "10月", "bar": 18.8, "line": 16.5 },
+          { "axis": "11月", "bar": 6, "line": 12 },
+          { "axis": "12月", "bar": 2.3, "line": 6.2 },
         ]
       },
       {

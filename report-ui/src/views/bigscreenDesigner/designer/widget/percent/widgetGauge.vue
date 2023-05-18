@@ -1,25 +1,24 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :options="options" autoresize />
   </div>
 </template>
 
 <script>
 import echarts from "echarts";
-
 export default {
   name: "WidgetGauge",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
       options: {
         series: [
           {
-            type: 'gauge',
+            type: "gauge",
             z: 100,
             axisLine: {
               lineStyle: {
@@ -30,15 +29,15 @@ export default {
                     new echarts.graphic.LinearGradient(0, 1, 1, 0, [
                       {
                         offset: 0,
-                        color: 'rgba(0, 237, 3,0.1)',
+                        color: "rgba(0, 237, 3,0.1)",
                       },
                       {
                         offset: 0.5,
-                        color: 'rgba(0, 237, 3,0.6)',
+                        color: "rgba(0, 237, 3,0.6)",
                       },
                       {
                         offset: 1,
-                        color: 'rgba(0, 237, 3,1)',
+                        color: "rgba(0, 237, 3,1)",
                       },
                     ]),
                   ],
@@ -47,15 +46,15 @@ export default {
                     new echarts.graphic.LinearGradient(0, 1, 1, 0, [
                       {
                         offset: 0,
-                        color: 'rgba(255, 184, 0,0.1)',
+                        color: "rgba(255, 184, 0,0.1)",
                       },
                       {
                         offset: 0.5,
-                        color: 'rgba(255, 184, 0,0.6)',
+                        color: "rgba(255, 184, 0,0.6)",
                       },
                       {
                         offset: 1,
-                        color: 'rgba(255, 184, 0,1)',
+                        color: "rgba(255, 184, 0,1)",
                       },
                     ]),
                   ],
@@ -64,15 +63,15 @@ export default {
                     new echarts.graphic.LinearGradient(0, 1, 1, 0, [
                       {
                         offset: 0,
-                        color: 'rgba(175, 36, 74,0.1)',
+                        color: "rgba(175, 36, 74,0.1)",
                       },
                       {
                         offset: 0.5,
-                        color: 'rgba(255, 36, 74,0.6)',
+                        color: "rgba(255, 36, 74,0.6)",
                       },
                       {
                         offset: 1,
-                        color: 'rgba(255, 36, 74,1)',
+                        color: "rgba(255, 36, 74,1)",
                       },
                     ]),
                   ],
@@ -81,7 +80,7 @@ export default {
             },
             pointer: {
               itemStyle: {
-                color: 'auto',
+                color: "auto",
               },
             },
             axisTick: {
@@ -89,7 +88,7 @@ export default {
               distance: 0,
               length: 10,
               lineStyle: {
-                color: 'auto',
+                color: "auto",
                 width: 2,
               },
             },
@@ -98,20 +97,20 @@ export default {
               distance: 0,
               length: 14,
               lineStyle: {
-                color: 'auto',
+                color: "auto",
                 width: 4,
               },
             },
             axisLabel: {
               show: true,
-              color: 'white',
+              color: "white",
               distance: 2,
               fontSize: 10,
             },
             detail: {
               valueAnimation: true,
-              formatter: '{value} %',
-              color: 'white',
+              formatter: "{value} %",
+              color: "white",
               fontSize: 18,
             },
             data: [
@@ -125,7 +124,7 @@ export default {
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
-      optionsSetup: {}
+      optionsSetup: {},
     };
   },
   computed: {
@@ -136,9 +135,9 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
   },
   watch: {
     value: {
@@ -149,8 +148,8 @@ export default {
         this.optionsSetup = val.setup; // 样式
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   created() {
     this.optionsStyle = this.value.position;
@@ -161,13 +160,13 @@ export default {
   },
   methods: {
     editorOptions() {
-      this.setOptions()
-      this.setOptionsData()
+      this.setOptions();
+      this.setOptionsData();
     },
     setOptions() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      if (series[0].type == 'gauge') {
+      if (series[0].type == "gauge") {
         const axisLine = {
           show: optionsSetup.ringShow,
           lineStyle: {
@@ -226,28 +225,28 @@ export default {
               ],
             ],
           },
-        }
+        };
         const axisTick = {
           show: optionsSetup.tickShow,
           distance: optionsSetup.tickDistance,
           length: optionsSetup.tickLength,
           lineStyle: {
-            color: 'auto',
+            color: "auto",
             width: optionsSetup.tickWidth,
           },
-        }
+        };
         const splitLine = {
           show: optionsSetup.splitShow,
           distance: optionsSetup.splitDistance,
           length: optionsSetup.splitLength,
           lineStyle: {
-            color: 'auto',
+            color: "auto",
             width: optionsSetup.splitWidth,
           },
-        }
-        series[0].axisLine = axisLine
-        series[0].axisTick = axisTick
-        series[0].splitLine = splitLine
+        };
+        series[0].axisLine = axisLine;
+        series[0].axisTick = axisTick;
+        series[0].splitLine = splitLine;
       }
     },
     setOptionsData() {
@@ -259,21 +258,21 @@ export default {
     staticDataFn(val) {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      const num = val[0]['num'];
+      const num = val[0]["num"];
       const data = [
         {
-          value: num
-        }
-      ]
+          value: num,
+        },
+      ];
       const detail = {
         valueAnimation: true,
-        formatter: '{value} %',
+        formatter: "{value} %",
         color: optionsSetup.labelColor,
         fontSize: optionsSetup.labelFontSize,
         fontWeight: optionsSetup.labelFontWeight,
-      }
-      series[0].data = data
-      series[0].detail = detail
+      };
+      series[0].data = data;
+      series[0].detail = detail;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -288,7 +287,7 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(res);
       });
     },
@@ -297,20 +296,20 @@ export default {
       const series = this.options.series;
       const data = [
         {
-          value: val[0].value
-        }
-      ]
+          value: val[0].value,
+        },
+      ];
       const detail = {
         valueAnimation: true,
-        formatter: '{value} %',
+        formatter: "{value} %",
         color: optionsSetup.labelColor,
         fontSize: optionsSetup.labelFontSize,
         fontWeight: optionsSetup.labelFontWeight,
-      }
-      series[0].data = data
-      series[0].detail = detail
-    }
-  }
+      };
+      series[0].data = data;
+      series[0].detail = detail;
+    },
+  },
 };
 </script>
 

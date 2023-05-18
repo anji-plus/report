@@ -22,6 +22,14 @@ spring:
     url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: appuser@anji
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 300000  # 连接超时时间 - 默认值：30秒。
+      validation-timeout: 5000  # 连接被测试活动的最长时间 - 默认值：5秒。
+      idle-timeout: 60000  # 连接池中允许闲置的最长时间 - 默认值：10分钟
+      max-lifetime: 1800000  # 一个连接生命时长（毫秒），超时而没被使用则被释放 - 默认值：30分钟
+      maximum-pool-size: 10  #连接池中允许的最大连接数，包括闲置和使用中的连接 - 默认值：10
+      minimum-idle: 5  # 连接池中允许的最小空闲连接数 - 默认值：10。
 
   #如果要使用redis，请参考report-core目录下的README.md文件中写的进行调整
 #  redis:
@@ -29,21 +37,6 @@ spring:
 #    port: 6379
 #    password: root
 #    database: 1
-
-  #数据源连接池配置
-  druid:
-    initial-size: 10 # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
-    min-idle: 10 # 最小连接池数量
-    maxActive: 200 # 最大连接池数量
-    maxWait: 3000 # 获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置
-    timeBetweenEvictionRunsMillis: 60000 # 关闭空闲连接的检测时间间隔.Destroy线程会检测连接的间隔时间，如果连接空闲时间大于等于minEvictableIdleTimeMillis则关闭物理连接。
-    minEvictableIdleTimeMillis: 300000 # 连接的最小生存时间.连接保持空闲而不被驱逐的最小时间
-    testWhileIdle: true # 申请连接时检测空闲时间，根据空闲时间再检测连接是否有效.建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRun
-    poolPreparedStatements: true # 开启PSCache
-    maxPoolPreparedStatementPerConnectionSize: 20 #设置PSCache值
-    connectionErrorRetryAttempts: 3 # 连接出错后再尝试连接三次
-    breakAfterAcquireFailure: true # 数据库服务宕机自动重连机制
-    timeBetweenConnectErrorMillis: 300000 # 连接出错后重试时间间隔
   flyway:
     enabled: true    #是否开启flyway，默认true.
     baseline-on-migrate: true
@@ -60,7 +53,7 @@ spring:
         enabled: true
         ##允许上传的文件后缀
         file-type-while-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg|.aaa
-        # 用于文件上传成功后，生成文件的下载公网完整URL
+        # 用于文件上传成功后，生成文件的下载公网完整URL，http://serverip:9095/file/download，注意填写IP必须填写后端服务所在的机器IP
         downloadPath: http://10.108.26.197:9095/file/download
         nfs:
           #上传对应本地全路径，目录必须是真实存在的，注意 Win是 \ 且有盘符，linux是 / 无盘符
@@ -98,7 +91,7 @@ logging:
 # 本应用自定义参数
 customer:
   # 跳过token验证和权限验证的url清单
-  skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html, /favicon.ico, /reportShare/detailByCode
+  skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html, /favicon.ico, /reportShare/detailByCode, /v2/api-docs
   file:
     #导入导出临时文件夹 默认.代表当前目录，拼接/tmp_zip/目录
     tmpPath: .

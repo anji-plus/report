@@ -1,16 +1,20 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import {
+  originWidgetLinkageLogic,
+  targetWidgetLinkageLogic,
+} from "@/views/bigscreenDesigner/designer/linkageLogic";
 export default {
   name: "WidgetPiechart",
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
@@ -19,15 +23,15 @@ export default {
           text: "",
           left: "center",
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         legend: {
           orient: "vertical",
           left: "left",
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         series: [
           {
@@ -38,16 +42,17 @@ export default {
               itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
-              }
-            }
-          }
-        ]
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+              },
+            },
+          },
+        ],
       },
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
-      optionsSetup: {}
+      optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {
@@ -58,9 +63,12 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -71,8 +79,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   created() {
     this.optionsStyle = this.value.position;
@@ -80,6 +88,8 @@ export default {
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
+    originWidgetLinkageLogic(this); // 联动-源组件逻辑
   },
   methods: {
     // 修改图标options属性
@@ -137,17 +147,17 @@ export default {
             padding: [-30, 15, -20, 15],
             color: optionsSetup.subTextColor,
             fontSize: optionsSetup.fontSize,
-            fontWeight: optionsSetup.fontWeight
-          }
+            fontWeight: optionsSetup.fontWeight,
+          },
         },
         fontSize: optionsSetup.fontSize,
 
-        fontWeight: optionsSetup.optionsSetup
+        fontWeight: optionsSetup.optionsSetup,
       };
       for (const key in series) {
         if (series[key].type == "pie") {
           series[key].label = label;
-          series[key].labelLine = {show: optionsSetup.isShow};
+          series[key].labelLine = { show: optionsSetup.isShow };
         }
       }
     },
@@ -158,9 +168,9 @@ export default {
         trigger: "item",
         show: true,
         textStyle: {
-          color: optionsSetup.lineColor,
-          fontSize: optionsSetup.tipFontSize
-        }
+          color: optionsSetup.tipsColor,
+          fontSize: optionsSetup.tipsFontSize,
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -177,7 +187,7 @@ export default {
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
         color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize
+        fontSize: optionsSetup.legendFontSize,
       };
       legend.itemWidth = optionsSetup.legendWidth;
     },
@@ -193,8 +203,25 @@ export default {
       this.options.color = arrColor;
       this.options = Object.assign({}, this.options);
     },
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      // 联动接收者逻辑开始
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+      // 联动接收者逻辑结束
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
@@ -220,7 +247,7 @@ export default {
     },
     getEchartData(val) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(res);
       });
     },
@@ -230,8 +257,8 @@ export default {
           this.options.series[key].data = val;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

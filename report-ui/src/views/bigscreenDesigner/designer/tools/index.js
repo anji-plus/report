@@ -4,7 +4,7 @@
  * @Author: qianlishi
  * @Date: 2021-08-29 06:43:07
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:35:42
+ * @LastEditTime: 2023-03-06 16:00:09
  */
 import { widgetTool } from "./main"
 const screenConfig = {
@@ -52,7 +52,7 @@ const screenConfig = {
         name: 'backgroundColor',
         required: false,
         placeholder: '',
-        value: 'rgba(45, 86, 126, 1)',
+        value: '#1E1E1E',
       },
       {
         type: 'custom-upload',
@@ -72,6 +72,7 @@ export const converArr = (data) => {
   let tempArr = [], newArr = []
   for (let i = 0; i < data.length; i++) {
     const item = data[i]
+    item.widgetId = ''
     if (tempArr.indexOf(item.type) === -1) {
       newArr.push({
         name: item.tabName,

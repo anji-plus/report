@@ -1,171 +1,183 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart ref="myVChart" :options="options" autoresize />
   </div>
 </template>
 
 <script>
+import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 export default {
   name: "WidgetBarCompareChart",
   //参考 https://www.makeapie.com/editor.html?c=xrJwcCF3NZ
   components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
+    flagInter: null,
   },
   data() {
     return {
       options: {
         title: {
           //text: '柱状对比图',
-          x: 'center',
+          x: "center",
           textStyle: {
-            color: '#ffffff',
+            color: "#ffffff",
           },
         },
         //边距
         grid: [
-          {//左
-            show: false,//边框线
-            left: '4%',
+          {
+            //左
+            show: false, //边框线
+            left: "4%",
             top: 60,
             bottom: 10,
             containLabel: true,
-            width: '40%'
+            width: "40%",
           },
-          {//中间字体位置
+          {
+            //中间字体位置
             show: false,
-            left: '50.5%',
+            left: "50.5%",
             top: 60,
             bottom: 25,
-            width: '0%'
+            width: "0%",
           },
-          {//右
+          {
+            //右
             show: false,
-            right: '4%',
+            right: "4%",
             top: 60,
             bottom: 10,
             containLabel: true,
-            width: '40%'
+            width: "40%",
           },
         ],
         //图例
         legend: {
           textStyle: {
-            color: '#fff',
-            textAlign: 'center'
+            color: "#fff",
+            textAlign: "center",
           },
           //itemGap:80,
           //itemWidth: 0
         },
         xAxis: [
-          {// 左
+          {
+            // 左
             splitNumber: 2,
             show: true,
-            type: 'value',
+            type: "value",
             inverse: true,
-            axisLine: {//底分割线
+            axisLine: {
+              //底分割线
               show: false,
             },
             axisTick: {
               show: false,
             },
-            position: 'bottom',
-            axisLabel: { // x轴
+            position: "bottom",
+            axisLabel: {
+              // x轴
               show: true,
               textStyle: {
-                color: '#ffffff',
-                fontSize: 12
-              }
+                color: "#ffffff",
+                fontSize: 12,
+              },
             },
-            splitLine: { // 竖分割线
+            splitLine: {
+              // 竖分割线
               show: true,
               lineStyle: {
-                color: '#57617f',
+                color: "#57617f",
                 width: 1,
-                type: 'solid'
-              }
-            }
+                type: "solid",
+              },
+            },
           },
           {
             gridIndex: 1,
             show: false,
           },
-          {// 右
+          {
+            // 右
             gridIndex: 2,
             show: true,
-            type: 'value',
+            type: "value",
             axisLine: {
               show: false,
             },
             axisTick: {
               show: false,
             },
-            position: 'bottom',
+            position: "bottom",
             axisLabel: {
               show: true,
               textStyle: {
-                color: '#ffffff',
+                color: "#ffffff",
                 fontSize: 12,
               },
             },
             splitLine: {
               show: true,
               lineStyle: {
-                color: '#57617f',
+                color: "#57617f",
                 width: 1,
-                type: 'solid',
+                type: "solid",
               },
             },
           },
         ],
         yAxis: [
           {
-            type: 'category',
+            type: "category",
             inverse: true,
-            position: 'right',
+            position: "right",
             axisLine: {
               show: false,
             },
             axisTick: {
-              show: false
+              show: false,
             },
             axisLabel: {
               show: false,
             },
             data: [],
           },
-          {//处理轴数据
+          {
+            //处理轴数据
             gridIndex: 1,
-            type: 'category',
+            type: "category",
             inverse: true,
-            position: 'left',
+            position: "left",
             axisLine: {
-              show: false
+              show: false,
             },
             axisTick: {
-              show: false
+              show: false,
             },
             axisLabel: {
               show: true,
               textStyle: {
-                align: 'center',
-                color: '#ffffff',
+                align: "center",
+                color: "#ffffff",
                 fontSize: 14,
-              }
+              },
             },
             data: [],
           },
           {
             gridIndex: 2,
-            type: 'category',
+            type: "category",
             inverse: true,
-            position: 'left',
+            position: "left",
             axisLine: {
-              show: false
+              show: false,
             },
             axisTick: {
-              show: false
+              show: false,
             },
             axisLabel: {
               show: false,
@@ -174,19 +186,18 @@ export default {
         ],
         series: [
           {
-            name: '',
-            type: 'bar',
+            name: "",
+            type: "bar",
             barGap: 20,
             barWidth: 15,
             label: {
               normal: {
                 show: true,
-                color: 'red',
-                position: 'insideLeft',
+                color: "red",
+                position: "insideLeft",
                 textStyle: {
-                  color: '#ffffff',
-                }
-
+                  color: "#ffffff",
+                },
               },
               emphasis: {
                 show: false,
@@ -194,7 +205,7 @@ export default {
             },
             itemStyle: {
               normal: {
-                color: '#36c5e7',
+                color: "#36c5e7",
                 barBorderRadius: [8, 0, 0, 8],
               },
               emphasis: {
@@ -204,8 +215,8 @@ export default {
             data: [],
           },
           {
-            name: '',
-            type: 'bar',
+            name: "",
+            type: "bar",
             barGap: 20,
             barWidth: 15,
             xAxisIndex: 2,
@@ -213,16 +224,16 @@ export default {
             label: {
               normal: {
                 show: true,
-                color: 'red',
-                position: 'insideRight',
+                color: "red",
+                position: "insideRight",
                 textStyle: {
-                  color: '#ffffff',
-                }
+                  color: "#ffffff",
+                },
               },
             },
             itemStyle: {
               normal: {
-                color: '#e68b55',
+                color: "#e68b55",
                 barBorderRadius: [0, 8, 8, 0],
               },
               emphasis: {
@@ -231,12 +242,12 @@ export default {
             },
             data: [],
           },
-        ]
+        ],
       },
       optionsStyle: {},
       optionsData: {},
       optionsSetup: {},
-      flagInter: null
+      flagInter: null,
     };
   },
   computed: {
@@ -247,9 +258,12 @@ export default {
         height: this.optionsStyle.height + "px",
         left: this.optionsStyle.left + "px",
         top: this.optionsStyle.top + "px",
-        background: this.optionsSetup.background
+        background: this.optionsSetup.background,
       };
-    }
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
@@ -260,8 +274,8 @@ export default {
         this.optionsSetup = val.setup;
         this.editorOptions();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.optionsStyle = this.value.position;
@@ -269,6 +283,7 @@ export default {
     this.optionsCollapse = this.value.setup;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
     // 修改图标options属性
@@ -311,8 +326,8 @@ export default {
       const optionsSetup = this.optionsSetup;
       const xAxisLeft = {
         splitNumber: optionsSetup.splitNumberLeft,
-        type: 'value',
-        show : optionsSetup.hideXLeft,
+        type: "value",
+        show: optionsSetup.hideXLeft,
         inverse: true,
         //X轴线
         axisLine: {
@@ -325,22 +340,24 @@ export default {
           show: optionsSetup.tickLineLeft,
         },
         position: optionsSetup.positionXLeft,
-        axisLabel: { // x轴
+        axisLabel: {
+          // x轴
           show: true,
           textStyle: {
             color: optionsSetup.colorXLeft,
-            fontSize: optionsSetup.fontSizeXLeft
-          }
+            fontSize: optionsSetup.fontSizeXLeft,
+          },
         },
-        splitLine: { // 分割线
+        splitLine: {
+          // 分割线
           show: optionsSetup.isShowSplitLineLeft,
           lineStyle: {
             color: optionsSetup.splitLineColorLeft,
             width: optionsSetup.splitLineFontWidthLeft,
-            type: 'solid'
-          }
-        }
-      }
+            type: "solid",
+          },
+        },
+      };
       this.options.xAxis[0] = xAxisLeft;
     },
     // 右X轴设置
@@ -349,9 +366,10 @@ export default {
       const xAxisRight = {
         gridIndex: 2,
         splitNumber: optionsSetup.splitNumberRight,
-        show : optionsSetup.hideXRight,
-        type: 'value',
-        axisLine: {//X轴线
+        show: optionsSetup.hideXRight,
+        type: "value",
+        axisLine: {
+          //X轴线
           show: optionsSetup.lineXRight,
           lineStyle: {
             color: optionsSetup.lineColorXRight,
@@ -361,22 +379,24 @@ export default {
           show: optionsSetup.tickLineRight,
         },
         position: optionsSetup.positionXRight,
-        axisLabel: { // x轴
+        axisLabel: {
+          // x轴
           show: true,
           textStyle: {
             color: optionsSetup.colorXRight,
-            fontSize: optionsSetup.fontSizeXRight
-          }
+            fontSize: optionsSetup.fontSizeXRight,
+          },
         },
-        splitLine: { // 分割线
+        splitLine: {
+          // 分割线
           show: optionsSetup.isShowSplitLineRight,
           lineStyle: {
             color: optionsSetup.splitLineColorRight,
             width: optionsSetup.splitLineFontWidthRight,
-            type: 'solid'
-          }
-        }
-      }
+            type: "solid",
+          },
+        },
+      };
       this.options.xAxis[2] = xAxisRight;
     },
     // Y轴设置
@@ -385,11 +405,11 @@ export default {
       const axisLine = {
         show: optionsSetup.lineY,
         lineStyle: {
-          color: optionsSetup.lineColorY
-        }
+          color: optionsSetup.lineColorY,
+        },
       };
       const axisTick = {
-        show: optionsSetup.tickLineY
+        show: optionsSetup.tickLineY,
       };
       const axisLabel = {
         show: optionsSetup.hideY,
@@ -397,11 +417,11 @@ export default {
           align: optionsSetup.textAlignY,
           color: optionsSetup.colorY,
           fontSize: optionsSetup.fontSizeY,
-        }
+        },
       };
-      this.options.yAxis[1]['axisLine'] = axisLine;
-      this.options.yAxis[1]['axisTick'] = axisTick;
-      this.options.yAxis[1]['axisLabel'] = axisLabel;
+      this.options.yAxis[1]["axisLine"] = axisLine;
+      this.options.yAxis[1]["axisTick"] = axisTick;
+      this.options.yAxis[1]["axisLabel"] = axisLabel;
     },
     // 数值设定、柱体设置
     setOptionsTop() {
@@ -409,36 +429,36 @@ export default {
       const series = this.options.series;
       for (const key in series) {
         if (series[key].type == "bar") {
-          series[0].label = {
+          (series[0].label = {
             normal: {
               show: optionsSetup.isShow,
-              position: 'insideLeft',
+              position: "insideLeft",
               textStyle: {
                 fontSize: optionsSetup.fontSize,
                 color: optionsSetup.subTextColor,
-                fontWeight: optionsSetup.fontWeight
-              }
+                fontWeight: optionsSetup.fontWeight,
+              },
             },
             emphasis: {
               show: false,
             },
-          },
-            series[1].label = {
+          }),
+            (series[1].label = {
               normal: {
                 show: optionsSetup.isShow,
-                color: 'red',
-                position: 'insideRight',
+                color: "red",
+                position: "insideRight",
                 textStyle: {
                   fontSize: optionsSetup.fontSize,
                   color: optionsSetup.subTextColor,
-                  fontWeight: optionsSetup.fontWeight
-                }
+                  fontWeight: optionsSetup.fontWeight,
+                },
               },
               emphasis: {
                 show: false,
               },
-            },
-            series[key].barWidth = optionsSetup.maxWidth;
+            }),
+            (series[key].barWidth = optionsSetup.maxWidth);
         }
       }
       this.options.series = series;
@@ -451,8 +471,8 @@ export default {
         show: true,
         textStyle: {
           color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize
-        }
+          fontSize: optionsSetup.tipsFontSize,
+        },
       };
       this.options.tooltip = tooltip;
     },
@@ -460,7 +480,8 @@ export default {
     setOptionsGrid() {
       const optionsSetup = this.optionsSetup;
       const grid = [
-        {//左
+        {
+          //左
           show: optionsSetup.frameLineLeft,
           borderColor: optionsSetup.borderColorLeft,
           borderWidth: optionsSetup.borderWidthLeft,
@@ -468,16 +489,18 @@ export default {
           top: optionsSetup.marginTop,
           bottom: optionsSetup.marginBottom,
           containLabel: true,
-          width: '40%'
+          width: "40%",
         },
-        {//中间字体位置
+        {
+          //中间字体位置
           show: false,
           left: "51%",
           top: optionsSetup.marginTop,
           bottom: optionsSetup.marginBottom + 15,
-          width: '0%'
+          width: "0%",
         },
-        {//右
+        {
+          //右
           show: optionsSetup.frameLineRight,
           borderColor: optionsSetup.borderColorRight,
           borderWidth: optionsSetup.borderWidthRight,
@@ -485,9 +508,9 @@ export default {
           top: optionsSetup.marginTop,
           bottom: optionsSetup.marginBottom,
           containLabel: true,
-          width: '40%'
+          width: "40%",
         },
-      ]
+      ];
       this.options.grid = grid;
     },
     // 图例操作
@@ -497,32 +520,31 @@ export default {
       legend.show = optionsSetup.isShowLegend;
       legend.left = optionsSetup.lateralPosition;
       legend.top = optionsSetup.longitudinalPosition;
-      legend.bottom =
-        optionsSetup.longitudinalPosition;
+      legend.bottom = optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
         color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize
+        fontSize: optionsSetup.legendFontSize,
       };
       legend.itemWidth = optionsSetup.legendWidth;
     },
     // 图例名称设置
-    setOptionsLegendName(name){
+    setOptionsLegendName(name) {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == '') {
+      if (null == legendName || legendName == "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
-        this.options.legend['data'] = name;
-      }else {
-        const arr = legendName.split('|');
+        this.options.legend["data"] = name;
+      } else {
+        const arr = legendName.split("|");
         for (let i = 0; i < arr.length; i++) {
           series[i].name = arr[i];
         }
-        this.options.legend['data'] = arr
+        this.options.legend["data"] = arr;
       }
     },
     // 颜色修改、圆角修改
@@ -533,41 +555,58 @@ export default {
       const itemStyleLeft = {
         normal: {
           color: customColor[0].color,
-          barBorderRadius: [optionsSetup.radius, 0, 0, optionsSetup.radius]
+          barBorderRadius: [optionsSetup.radius, 0, 0, optionsSetup.radius],
         },
         emphasis: {
           show: false,
         },
-      }
+      };
       const itemStyleRight = {
         normal: {
           color: customColor[1].color,
-          barBorderRadius: [0, optionsSetup.radius, optionsSetup.radius, 0]
+          barBorderRadius: [0, optionsSetup.radius, optionsSetup.radius, 0],
         },
         emphasis: {
           show: false,
         },
-      }
+      };
       this.options.series[0].itemStyle = itemStyleLeft;
       this.options.series[1].itemStyle = itemStyleRight;
     },
     // 数据解析
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsSetup = this.optionsSetup;
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      // 联动接收者逻辑开始
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+      // 联动接收者逻辑结束
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(
-        optionsData.dynamicData,
-        optionsData.refreshTime,
-        optionsSetup
-        );
+            optionsData.dynamicData,
+            optionsData.refreshTime,
+            optionsSetup
+          );
     },
     //去重
     setUnique(arr) {
       let newArr = [];
-      arr.forEach(item => {
-        return newArr.includes(item) ? '' : newArr.push(item);
+      arr.forEach((item) => {
+        return newArr.includes(item) ? "" : newArr.push(item);
       });
       return newArr;
     },
@@ -598,15 +637,15 @@ export default {
         arrayList.push({
           name: yAxisList[i],
           data: data,
-        })
+        });
         legendName.push(yAxisList[i]);
       }
-      this.options.series[0]['name'] = arrayList[0].name;
-      this.options.series[0]['data'] = arrayList[0].data;
-      this.options.series[1]['name'] = arrayList[1].name;
-      this.options.series[1]['data'] = arrayList[1].data;
-      this.options.yAxis[1]['data'] = xAxisList;
-      this.options.legend['data'] = legendName;
+      this.options.series[0]["name"] = arrayList[0].name;
+      this.options.series[0]["data"] = arrayList[0].data;
+      this.options.series[1]["name"] = arrayList[1].name;
+      this.options.series[1]["data"] = arrayList[1].data;
+      this.options.yAxis[1]["data"] = xAxisList;
+      this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
     // 动态数据
@@ -623,25 +662,25 @@ export default {
     },
     getEchartData(val, optionsSetup) {
       const data = this.queryEchartsData(val);
-      data.then(res => {
+      data.then((res) => {
         this.renderingFn(optionsSetup, res);
       });
     },
     renderingFn(optionsSetup, val) {
       const legendName = [];
-      this.options.yAxis[1]['data'] = val.xAxis;
-      if (val.series[0].type == "bar"){
-        this.options.series[0]['name'] = val.series[0].name;
-        this.options.series[0]['data'] = val.series[0].data;
-        this.options.series[1]['name'] = val.series[1].name;
-        this.options.series[1]['data'] = val.series[1].data;
+      this.options.yAxis[1]["data"] = val.xAxis;
+      if (val.series[0].type == "bar") {
+        this.options.series[0]["name"] = val.series[0].name;
+        this.options.series[0]["data"] = val.series[0].data;
+        this.options.series[1]["name"] = val.series[1].name;
+        this.options.series[1]["data"] = val.series[1].data;
         legendName.push(val.series[0].name);
         legendName.push(val.series[1].name);
       }
-      this.options.legend['data'] = legendName;
+      this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -651,5 +690,4 @@ export default {
   height: 100%;
   overflow: hidden;
 }
-
 </style>

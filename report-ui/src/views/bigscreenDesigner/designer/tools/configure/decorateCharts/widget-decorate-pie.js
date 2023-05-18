@@ -4,7 +4,7 @@
  * @Author: foming
  * @Date:
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2022-11-07 15:40:07
+ * @LastEditTime: 2023-01-10 14:04:50
  */
 export const widgetDecoratePie = {
   code: 'widgetDecoratePieChart',

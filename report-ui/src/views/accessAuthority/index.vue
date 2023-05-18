@@ -1,6 +1,6 @@
 <!--
  * @Descripttion: 用户权限--权限管理
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
@@ -46,11 +46,11 @@ export default {
             label: "启用状态",
             field: "enableFlag"
           },
-          {
-            inputType: "input",
-            label: "菜单代码",
-            field: "target"
-          },
+          // {
+          //   inputType: "input",
+          //   label: "菜单代码",
+          //   field: "target"
+          // },
           {
             inputType: "input",
             label: "菜单名称",

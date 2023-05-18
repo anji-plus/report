@@ -71,14 +71,14 @@
                   class="view"
                   type="text"
                   @click="viewDesign(item)"
-                  v-permission="'bigScreenManage:view'"
+                  v-permission="'excelManage:view'"
                 />
                 <el-button
                   icon="el-icon-edit"
                   class="edit"
                   type="text"
                   @click="openDesign(item)"
-                  v-permission="'bigScreenManage:design'"
+                  v-permission="'excelManage:update'"
                 />
               </div>
             </footer>
