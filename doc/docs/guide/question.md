@@ -58,7 +58,7 @@
 
 - 提示：“*** report-ui/dist/* *** No such file or directory” <br>
   前端编译失败。<br>
-  大部分原因是Node.js版本过高（高于V14），导致前端编译失败(npm install失败)，可参考***前端npm install失败*进行解决。 <br>
+  大部分原因是Node.js版本过高（高于V14），导致前端编译失败(npm install失败)，可参考上面**前端npm install失败**进行解决。 <br>
   另一部分是Nodejs在编译执行初始化时会去下载一些依赖，如果依赖下载不下来，也会导致失败。<br>
 
 <br>

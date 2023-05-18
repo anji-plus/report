@@ -1,4 +1,4 @@
-## 介绍
+## 简介
 
 根据选中的数据源＋查询 sql 或请求体完成数据的查询。<br>
 ![img5](../picture/dateset/img_5.png) <br>

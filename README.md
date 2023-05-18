@@ -209,7 +209,7 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 ，允许商业使用，但务必保留类作者、Copyright信息。 <br>
 个人和企业，在直接使用、二次开发后商业使用，需要遵守：
 
-- 包含Apache LICENSE文件（授权使用者免费使用AJ-Report专利和知识产权）
+- 包含Apache LICENSE文件
 - 如果修改了代码，需要在被修改的文件中说明
 - 在修改和有源代码衍生的代码中，需要带有原来代码中的协议，商标
 - 在二次开发后商业发布的产品中，使用了多个开源软件，则必须包含一个Notice文件，在Notice文件中需要带有Apache
