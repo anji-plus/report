@@ -920,14 +920,14 @@ INSERT INTO `aj_report_init`.`aj_report_wifiamount` VALUES ('2021-06-23', 150, 1
 -- Table structure for aj_report_city
 -- ----------------------------
 DROP TABLE IF EXISTS `aj_report_init`.`aj_report_city`;
-CREATE TABLE `aj_report_init`.`aj_report_city`  (
-  `id`          NOT NULL AUTO_INCREMENT,
-  `city_code`   varchar(255) null comment '城市code',
-  `city_name`   varchar(255) null comment '城市名',
-  `nums`        int          null comment '数量',
-  `create_time` datetime     null comment '日期'
+CREATE TABLE `aj_report_init`.`aj_report_city` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `city_code` varchar(255) DEFAULT NULL COMMENT '城市code',
+  `city_name` varchar(255) DEFAULT NULL COMMENT '城市名',
+  `nums` int(11) DEFAULT NULL COMMENT '数量',
+  `create_time` datetime DEFAULT NULL COMMENT '日期',
   PRIMARY KEY (`id`) USING BTREE
-)ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 -- ----------------------------
 -- Records of aj_report_city
 -- ----------------------------
