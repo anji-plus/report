@@ -6,7 +6,7 @@ const mixin = {
   data() {
     return {
       reportCode: this.$route.query.reportCode,
-      uploadUrl: process.env.BASE_API + "/reportDashboard/import/" + this.reportCode,
+      uploadUrl: process.env.BASE_API + "/reportDashboard/import/" + this.$route.query.reportCode,
       revoke: null, //处理历史记录
       rightClickIndex: -1,
     }
