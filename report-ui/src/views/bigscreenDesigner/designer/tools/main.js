@@ -44,10 +44,14 @@ import { widgetFormTime } from "./configure/form/widget-form-time";
 import { widgetScaleVertical } from "./configure/scaleCharts/widget-scale-vertical";
 import { widgetScaleHorizontal } from "./configure/scaleCharts/widget-scale-horizontal"
 import {widgetBarDoubleYaxis} from "./configure/barCharts/widget-bar-double-yaxis-chart";
+import {widgetBorder} from "./configure/styleWidget/widget-border";
+import {widgetDecoration} from "./configure/styleWidget/widget-decoration";
 
 export const widgetTool = [
   // type=html类型的组件
   widgetText,
+  widgetBorder,
+  widgetDecoration,
   widgetMarquee,
   widgetHref,
   widgetTime,

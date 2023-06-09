@@ -53,12 +53,16 @@ import widgetFormTime from "./form/widgetFormTime.vue";
 import widgetScaleVertical from "./scale/widgetScaleVertical.vue";
 import widgetScaleHorizontal from "./scale/widgetScaleHorizontal.vue";
 import widgetBarDoubleYaxisChart from "./bar/widgetBarDoubleYaxisChart.vue";
+import widgetBorder from "./styleWidget/widgetBorder.vue";
+import widgetDecoration from "./styleWidget/widgetDecoration.vue";
 
 export default {
   name: "Widget",
   components: {
     widgetHref,
     widgetText,
+    widgetBorder,
+    widgetDecoration,
     WidgetMarquee,
     widgetTime,
     widgetImage,
