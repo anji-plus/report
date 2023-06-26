@@ -15,6 +15,7 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
+    flagInter: null,
     widgetIndex: {
       type: Number,
       default: 0,

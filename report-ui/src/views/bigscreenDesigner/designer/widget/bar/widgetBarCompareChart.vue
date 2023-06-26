@@ -247,7 +247,6 @@ export default {
       optionsStyle: {},
       optionsData: {},
       optionsSetup: {},
-      flagInter: null,
     };
   },
   computed: {

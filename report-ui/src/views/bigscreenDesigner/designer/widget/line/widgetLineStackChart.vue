@@ -59,7 +59,6 @@ export default {
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsSetup: {},
-      flagInter: null,
     };
   },
   computed: {

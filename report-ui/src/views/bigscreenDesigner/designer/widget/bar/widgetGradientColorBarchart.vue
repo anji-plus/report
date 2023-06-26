@@ -16,6 +16,7 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
+    flagInter: null,
     widgetIndex: {
       type: Number,
       default: 0,
@@ -138,7 +139,6 @@ export default {
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsSetup: {},
-      flagInter: null,
     };
   },
   computed: {
