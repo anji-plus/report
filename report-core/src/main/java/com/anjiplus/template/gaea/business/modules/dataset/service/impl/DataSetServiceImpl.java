@@ -198,7 +198,7 @@ public class DataSetServiceImpl implements DataSetService {
                     Object o = objects.get(0);
                     objects = new JSONArray();
                     objects.add(o);
-                    dataSet.setCaseResult(objects.toJSONString());
+                    dataSet.setCaseResult(JSON.toJSONString(objects, SerializerFeature.WriteMapNullValue));
                 }
             } catch (Exception e) {
                 log.info("结果集只保留一行数据失败...{}", e.getMessage());
