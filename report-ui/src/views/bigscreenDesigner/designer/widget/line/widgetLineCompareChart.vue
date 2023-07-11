@@ -495,7 +495,7 @@ export default {
           position: "top",
           distance: 10,
           show: optionsSetup.isShow,
-          color: optionsSetup.subTextColor,
+          color: optionsSetup.dataColor,
           fontSize: optionsSetup.fontSize,
           fontWeight: optionsSetup.fontWeight,
         };
@@ -503,7 +503,7 @@ export default {
           position: "bottom",
           distance: 10,
           show: optionsSetup.isShow,
-          color: optionsSetup.subTextColor,
+          color: optionsSetup.dataColor,
           fontSize: optionsSetup.fontSize,
           fontWeight: optionsSetup.fontWeight,
         };
