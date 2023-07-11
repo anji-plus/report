@@ -1,11 +1,12 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart :options="options" autoresize/>
   </div>
 </template>
 
 <script>
 import echarts from "echarts";
+
 export default {
   name: "WidgetGauge",
   components: {},
@@ -244,9 +245,27 @@ export default {
             width: optionsSetup.splitWidth,
           },
         };
+        const axisLabel = {
+          show: optionsSetup.labelShow,
+          color: optionsSetup.labelColor,
+          distance: optionsSetup.labelDistance,
+          fontSize: optionsSetup.labelFontSize,
+          fontWeight: optionsSetup.labelFontWeight,
+          fontStyle: optionsSetup.labelFontStyle,
+        };
+        const detail = {
+          valueAnimation: true,
+          formatter: "{value} %",
+          color: optionsSetup.detailColor,
+          fontSize: optionsSetup.detailFontSize,
+          fontWeight: optionsSetup.detailFontWeight,
+          fontStyle: optionsSetup.detailFontStyle,
+        };
         series[0].axisLine = axisLine;
         series[0].axisTick = axisTick;
         series[0].splitLine = splitLine;
+        series[0].axisLabel = axisLabel;
+        series[0].detail = detail;
       }
     },
     setOptionsData() {
@@ -256,7 +275,6 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       const num = val[0]["num"];
       const data = [
@@ -264,15 +282,7 @@ export default {
           value: num,
         },
       ];
-      const detail = {
-        valueAnimation: true,
-        formatter: "{value} %",
-        color: optionsSetup.labelColor,
-        fontSize: optionsSetup.labelFontSize,
-        fontWeight: optionsSetup.labelFontWeight,
-      };
       series[0].data = data;
-      series[0].detail = detail;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -292,22 +302,13 @@ export default {
       });
     },
     renderingFn(val) {
-      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       const data = [
         {
           value: val[0].value,
         },
       ];
-      const detail = {
-        valueAnimation: true,
-        formatter: "{value} %",
-        color: optionsSetup.labelColor,
-        fontSize: optionsSetup.labelFontSize,
-        fontWeight: optionsSetup.labelFontWeight,
-      };
       series[0].data = data;
-      series[0].detail = detail;
     },
   },
 };
