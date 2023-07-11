@@ -311,7 +311,7 @@ export default {
             position: "right",
             distance: optionsSetup.distance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.subTextColor,
+            color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
           };
         } else {
@@ -320,7 +320,7 @@ export default {
             position: "top",
             distance: optionsSetup.distance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.subTextColor,
+            color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
           };
         }

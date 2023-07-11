@@ -469,7 +469,7 @@ export const widgetBarchart = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'subTextColor',
+              name: 'dataColor',
               required: false,
               placeholder: '',
               value: '#fff'
