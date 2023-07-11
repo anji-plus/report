@@ -40,7 +40,8 @@ export default {
         height: this.transStyle.height + "px",
         left: this.transStyle.left + "px",
         top: this.transStyle.top + "px",
-        right: this.transStyle.right + "px"
+        right: this.transStyle.right + "px",
+        whiteSpace: this.transStyle.whiteSpace ? "pre-line": "normal"
       };
     }
   },
