@@ -145,7 +145,7 @@ export default {
         rich: {
           a: {
             padding: [-30, 15, -20, 15],
-            color: optionsSetup.subTextColor,
+            color: optionsSetup.dataColor,
             fontSize: optionsSetup.fontSize,
             fontWeight: optionsSetup.fontWeight,
           },
