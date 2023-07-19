@@ -108,16 +108,17 @@ export default {
       this.createSheet();
     },
     async download(val) {
-      if (val == "gaea_template_pdf") {
-        this.$message("暂不支持pdf");
-        return;
-      }
+      // if (val == "gaea_template_pdf") {
+      //   this.$message("暂不支持pdf");
+      //   return;
+      // }
       const result = {};
       result["reportCode"] = this.reportCode;
       result["setParam"] = JSON.stringify(this.params.setParam);
       if (val != "") {
         result["exportType"] = val;
       }
+      this.getCellStyleData(result);
       const { code, message } = await exportExcel(result);
       if (code != 200) return;
       this.$message.success(message);
@@ -192,7 +193,22 @@ export default {
       $(function() {
         luckysheet.create(options);
       });
-    }
+    },
+    getCellStyleData(result) {
+      const sheetData = luckysheet.getluckysheetfile(); // 获取整个表格的数据
+      const rowDatas = {};
+
+      for (let sheetIndex in sheetData) {
+        const sheet = sheetData[sheetIndex];
+        if (sheet && sheet.data) {
+          for (let rowIndex in sheet.data) {
+            const row = sheet.data[rowIndex];
+            rowDatas[rowIndex]=row;
+          }
+        }
+      }
+      result["rowDatas"] = JSON.stringify(rowDatas);;
+    },
   }
 };
 </script>
