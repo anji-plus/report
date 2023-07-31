@@ -41,7 +41,7 @@ import widgetBarStackChart from "./bar/widgetBarStackChart";
 import widgetLineStackChart from "./line/widgetLineStackChart";
 import widgetBarCompareChart from "./bar/widgetBarCompareChart";
 import widgetLineCompareChart from "./line/widgetLineCompareChart";
-import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
+import widgetDecoratePieChart from "./styleWidget/widgetDecoratePieChart.vue";
 import widgetMoreBarLineChart from "./barline/widgetMoreBarLineChart";
 import widgetWordCloud from "./wordcloud/widgetWordCloud";
 import widgetHeatmap from "./heatmap/widgetHeatmap";

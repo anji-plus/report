@@ -21,7 +21,7 @@ export const widgetDecoration =  {
           name: 'layerName',
           required: false,
           placeholder: '',
-          value: '装饰一',
+          value: '装饰',
         },
         {
           type: 'el-select',

@@ -21,7 +21,7 @@ export const widgetBorder =  {
           name: 'layerName',
           required: false,
           placeholder: '',
-          value: '边框一',
+          value: '边框',
         },
         {
           type: 'el-select',

@@ -32,7 +32,7 @@ import { widgetBarStack } from "./configure/barCharts/widget-bar-stack"
 import { widgetLineStack } from "./configure/lineCharts/widget-line-stack"
 import { widgetBarCompare } from "./configure/barCharts/widget-bar-compare"
 import { widgetLineCompare } from "./configure/lineCharts/widget-line-compare"
-import { widgetDecoratePie } from "./configure/decorateCharts/widget-decorate-pie";
+import { widgetDecoratePie } from "./configure/styleWidget/widget-decorate-pie";
 import { widgetMoreBarLine } from "./configure/barlineCharts/widget-more-bar-line";
 import { widgetWordCloud } from "./configure/wordcloudCharts/widget-word-cloud";
 import { widgetHeatmap } from "./configure/heatmap/widget-heatmap";

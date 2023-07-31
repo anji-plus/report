@@ -73,7 +73,7 @@ export const widgetTime = {
         name: 'background',
         required: false,
         placeholder: '',
-        value: 'rgba(115,170,229,.5)'
+        value: ''
       },
       {
         type: 'el-select',
