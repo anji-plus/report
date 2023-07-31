@@ -108,10 +108,10 @@ export default {
       this.createSheet();
     },
     async download(val) {
-      if (val == "gaea_template_pdf") {
-        this.$message("暂不支持pdf");
-        return;
-      }
+      // if (val == "gaea_template_pdf") {
+      //   this.$message("暂不支持pdf");
+      //   return;
+      // }
       const result = {};
       result["reportCode"] = this.reportCode;
       result["setParam"] = JSON.stringify(this.params.setParam);

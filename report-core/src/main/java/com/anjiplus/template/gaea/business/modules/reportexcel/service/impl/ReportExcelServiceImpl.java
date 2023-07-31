@@ -25,21 +25,31 @@ import com.anjiplus.template.gaea.business.modules.reportexcel.service.ReportExc
 import com.anjiplus.template.gaea.business.modules.reportexcel.util.CellType;
 import com.anjiplus.template.gaea.business.modules.reportexcel.util.XlsUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
+import com.lowagie.text.DocumentException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
 import java.util.Map;
 
@@ -139,40 +149,130 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         String reportCode = reportExcelDto.getReportCode();
         String exportType = reportExcelDto.getExportType();
         logger.error("导出...");
-        if (exportType.equals(ExportTypeEnum.GAEA_TEMPLATE_EXCEL.getCodeValue())) {
-            ReportExcelDto report = detailByReportCode(reportCode);
-            reportExcelDto.setJsonStr(report.getJsonStr());
-            String jsonStr = analysisReportData(reportExcelDto);
-            List<JSONObject> lists=(List<JSONObject> ) JSON.parse(jsonStr);
-            OutputStream out = null;
-            File file = null;
-            try {
-                String fileName = report.getReportCode();
-                File dir = new File(dictPath + ZIP_PATH);
-                if (!dir.exists()){
-                    dir.mkdirs();
-                }
-                String filePath = dir.getAbsolutePath() + File.separator + fileName + ".xlsx";
-                file = new File(filePath);
-                out = Files.newOutputStream(Paths.get(filePath));
-                XlsUtil.exportXlsFile(out, true, lists);
-                gaeaFileService.upload(file);
-
-            } catch (IOException e) {
-                logger.error("导出失败", e);
-            }finally {
-                try {
-                    out.close();
-                    file.delete();
-                } catch (IOException e) {
-                    throw BusinessExceptionBuilder.build(ResponseCode.FILE_OPERATION_FAILED, e.getMessage());
-                }
-
-            }
-        }
+        exportExcelCore(reportCode,exportType,reportExcelDto);
         return true;
     }
+    /**
+     * 抽取导出Excel核心逻辑
+     */
+    public void exportExcelCore(String reportCode,String exportType,ReportExcelDto reportExcelDto)
+    {
+        ReportExcelDto report = detailByReportCode(reportCode);
+        reportExcelDto.setJsonStr(report.getJsonStr());
+        String jsonStr = analysisReportData(reportExcelDto);
+        List<JSONObject> lists=(List<JSONObject> ) JSON.parse(jsonStr);
+        OutputStream out = null;
+        File file = null;
+        File pdfFile = null;
+        try {
+            String fileName = report.getReportCode();
+            File dir = new File(dictPath + ZIP_PATH);
+            if (!dir.exists()){
+                dir.mkdirs();
+            }
+            String filePath = dir.getAbsolutePath() + File.separator + fileName + ".xlsx";
+            file = new File(filePath);
+            out = Files.newOutputStream(Paths.get(filePath));
+            XlsUtil.exportXlsFile(out, true, lists);
+            if (exportType.equals(ExportTypeEnum.GAEA_TEMPLATE_EXCEL.getCodeValue())) {
+                gaeaFileService.upload(file);
+            }
+            else if(exportType.equals(ExportTypeEnum.GAEA_TEMPLATE_PDF.getCodeValue()))
+            {
+                // 将Excel文件转换为PDF
+                String pdfFileName = fileName + ".pdf";
+                String pdfFilePath = dir.getAbsolutePath() + File.separator + pdfFileName;
+                pdfFile = convertExcelToPdf(filePath, pdfFilePath);
+                gaeaFileService.upload(pdfFile);
+            }
 
+        } catch (IOException e) {
+            logger.error("导出失败", e);
+        }finally {
+            try {
+                out.close();
+                file.delete();
+                if(!Objects.isNull(pdfFile))
+                {
+                    pdfFile.delete();
+                }
+            } catch (IOException e) {
+                throw BusinessExceptionBuilder.build(ResponseCode.FILE_OPERATION_FAILED, e.getMessage());
+            }
+
+        }
+    }
+    // 将Excel文件转换为PDF
+    public File convertExcelToPdf(String excelFilePath, String pdfFilePath) {
+        try {
+            // 读取Excel文件
+            Workbook workbook = new XSSFWorkbook(excelFilePath);
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // 创建PDF文档
+            Document document = new Document(PageSize.A4);
+            PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
+            document.open();
+
+            // 创建PDF表格
+            PdfPTable table = new PdfPTable(sheet.getRow(0).getLastCellNum());
+            table.setWidthPercentage(100);
+
+            // 设置中文字体
+            BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+            Font font = new Font(baseFont, 10, Font.NORMAL);
+
+            // 设置表头
+            Row headerRow = sheet.getRow(0);
+            for (int i = 0; i < headerRow.getLastCellNum(); i++) {
+                Cell headerCell = headerRow.getCell(i);
+                PdfPCell tableCell = new PdfPCell();
+                tableCell.setPhrase(new Phrase(getStringValue(headerCell), font));
+                table.addCell(tableCell);
+            }
+
+            // 遍历Excel表格的行和列
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+                if (row == null) {
+                    // 如果行为空，创建一个空的行并添加到PDF表格中
+                    row = sheet.createRow(i);
+                }
+                for (int j = 0; j < headerRow.getLastCellNum(); j++) {
+                    Cell cell = row.getCell(j, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+                    if (cell.getCellType() == org.apache.poi.ss.usermodel.CellType.BLANK) {
+                        cell.setCellValue(" ");
+                    }
+                    PdfPCell tableCell = new PdfPCell();
+                    tableCell.setPhrase(new Phrase(getStringValue(cell), font));
+                    table.addCell(tableCell);
+                }
+            }
+
+            // 将表格添加到PDF文档中
+            document.add(table);
+
+            document.close();
+            workbook.close();
+
+            System.out.println("Excel转换为PDF成功！");
+
+            return new File(pdfFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (com.itextpdf.text.DocumentException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private String getStringValue(Cell cell) {
+        if (cell == null)
+            return "";
+        else
+            return cell.toString();
+    }
     /**
      * 解析报表数据，动态插入列表数据和对象数据
      */
