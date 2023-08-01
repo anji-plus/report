@@ -19,7 +19,6 @@ import com.anjiplus.template.gaea.business.modules.file.service.GaeaFileService;
 import com.anjiplus.template.gaea.business.modules.report.dao.ReportMapper;
 import com.anjiplus.template.gaea.business.modules.report.dao.entity.Report;
 import com.anjiplus.template.gaea.business.modules.reportexcel.controller.dto.ReportExcelDto;
-import com.anjiplus.template.gaea.business.modules.reportexcel.controller.dto.ReportExcelStyleDto;
 import com.anjiplus.template.gaea.business.modules.reportexcel.dao.ReportExcelMapper;
 import com.anjiplus.template.gaea.business.modules.reportexcel.dao.entity.ReportExcel;
 import com.anjiplus.template.gaea.business.modules.reportexcel.service.ReportExcelService;
@@ -27,16 +26,17 @@ import com.anjiplus.template.gaea.business.modules.reportexcel.util.CellType;
 import com.anjiplus.template.gaea.business.modules.reportexcel.util.XlsUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.itextpdf.text.*;
-import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.lowagie.text.DocumentException;
-import io.swagger.models.auth.In;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +52,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * TODO
@@ -147,26 +146,17 @@ public class ReportExcelServiceImpl implements ReportExcelService {
 
     @Override
     public Boolean exportExcel(ReportExcelDto reportExcelDto) {
+        String reportCode = reportExcelDto.getReportCode();
+        String exportType = reportExcelDto.getExportType();
         logger.error("导出...");
-        exportExcelCore(reportExcelDto);
+        exportExcelCore(reportCode,exportType,reportExcelDto);
         return true;
     }
     /**
      * 抽取导出Excel核心逻辑
      */
-    public void exportExcelCore(ReportExcelDto reportExcelDto)
+    public void exportExcelCore(String reportCode,String exportType,ReportExcelDto reportExcelDto)
     {
-        String reportCode = reportExcelDto.getReportCode();
-        String exportType = reportExcelDto.getExportType();
-        List<List<ReportExcelStyleDto>> reportExcelStyleList = new ArrayList<>();
-        JSONObject rowData= JSON.parseObject(reportExcelDto.getRowDatas());
-        // 将JSONObject对象转换为列表
-        List<Integer> dataNumList = rowData.keySet().stream().map(Integer::parseInt).sorted().collect(Collectors.toList());
-        for (Integer i : dataNumList) {
-            JSONArray jsonArray = rowData.getJSONArray(i.toString());
-            List<ReportExcelStyleDto> reportExcelStyleDtos = jsonArray.toJavaList(ReportExcelStyleDto.class);
-            reportExcelStyleList.add(reportExcelStyleDtos);
-        }
         ReportExcelDto report = detailByReportCode(reportCode);
         reportExcelDto.setJsonStr(report.getJsonStr());
         String jsonStr = analysisReportData(reportExcelDto);
@@ -192,7 +182,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 // 将Excel文件转换为PDF
                 String pdfFileName = fileName + ".pdf";
                 String pdfFilePath = dir.getAbsolutePath() + File.separator + pdfFileName;
-                pdfFile = convertExcelToPdf(filePath, pdfFilePath,reportExcelStyleList);
+                pdfFile = convertExcelToPdf(filePath, pdfFilePath);
                 gaeaFileService.upload(pdfFile);
             }
 
@@ -213,7 +203,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         }
     }
     // 将Excel文件转换为PDF
-    public File convertExcelToPdf(String excelFilePath, String pdfFilePath, List<List<ReportExcelStyleDto>> reportExcelStyleList) {
+    public File convertExcelToPdf(String excelFilePath, String pdfFilePath) {
         try {
             // 读取Excel文件
             Workbook workbook = new XSSFWorkbook(excelFilePath);
@@ -236,15 +226,8 @@ public class ReportExcelServiceImpl implements ReportExcelService {
             Row headerRow = sheet.getRow(0);
             for (int i = 0; i < headerRow.getLastCellNum(); i++) {
                 Cell headerCell = headerRow.getCell(i);
-
-                // 获取单元格样式
                 PdfPCell tableCell = new PdfPCell();
                 tableCell.setPhrase(new Phrase(getStringValue(headerCell), font));
-                ReportExcelStyleDto reportExcelStyleDto = reportExcelStyleList.get(0).get(i);
-                if(!Objects.isNull(reportExcelStyleDto))
-                {
-                    processCellStyle(reportExcelStyleDto,tableCell);
-                }
                 table.addCell(tableCell);
             }
 
@@ -262,11 +245,6 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                     }
                     PdfPCell tableCell = new PdfPCell();
                     tableCell.setPhrase(new Phrase(getStringValue(cell), font));
-                    ReportExcelStyleDto reportExcelStyleDto = reportExcelStyleList.get(i).get(j);
-                    if(!Objects.isNull(reportExcelStyleDto))
-                    {
-                        processCellStyle(reportExcelStyleDto,tableCell);
-                    }
                     table.addCell(tableCell);
                 }
             }
@@ -287,64 +265,6 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         }
 
         return null;
-    }
-
-    /**
-     * 处理导出pdf文件样式
-     * @param tableCell
-     */
-    public void processCellStyle(ReportExcelStyleDto reportExcelStyleDto,PdfPCell tableCell)
-    {
-        //处理单元格背景颜色
-        String bg = reportExcelStyleDto.getBg();
-        java.awt.Color color = null;
-        if(!Objects.isNull(bg))
-        {
-            color = java.awt.Color.decode(bg);
-            tableCell.setBackgroundColor(new BaseColor(color.getRed(), color.getGreen(), color.getBlue()));
-        }
-        //处理字体
-        String fc = reportExcelStyleDto.getFc();
-        Integer fs = reportExcelStyleDto.getFs();
-        String ff = reportExcelStyleDto.getFf();
-        Boolean bl = reportExcelStyleDto.isBl();
-        Boolean it = reportExcelStyleDto.isIt();
-        Font font = new Font();
-        // 设置字体颜色
-        if(!Objects.isNull(fc))
-        {
-            color = java.awt.Color.decode(fc);
-            font.setColor(new BaseColor(color.getRed(), color.getGreen(), color.getBlue()));
-        }
-        // 设置字体
-        if(!Objects.isNull(ff) && !Objects.equals("0",ff))
-        {
-            font.setFamily(ff.toString());
-        }
-        // 设置字体大小
-        if(!Objects.isNull(fs) && !Objects.equals(0,fs))
-        {
-            font.setSize(fs);
-        }
-        // 设置字体加粗
-        if(Objects.equals(Boolean.TRUE,bl))
-        {
-            font.setStyle(Font.BOLD);
-        }
-        // 设置字体斜体
-        if(Objects.equals(Boolean.TRUE,it))
-        {
-            font.setStyle(Font.ITALIC);
-        }
-        // 设置字体加粗且斜体
-        if(Objects.equals(Boolean.TRUE,bl) && Objects.equals(Boolean.TRUE,it))
-        {
-            font.setStyle(Font.BOLDITALIC);
-        }
-        Phrase phrase = tableCell.getPhrase();
-        tableCell.setPhrase(new Paragraph(phrase.getContent(), font));
-        //处理字体
-        tableCell.setBorderColor(BaseColor.BLACK);
     }
 
     private String getStringValue(Cell cell) {
