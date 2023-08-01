@@ -345,6 +345,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         tableCell.setPhrase(new Paragraph(phrase.getContent(), font));
         //处理字体
         tableCell.setBorderColor(BaseColor.BLACK);
+
     }
 
     private String getStringValue(Cell cell) {
