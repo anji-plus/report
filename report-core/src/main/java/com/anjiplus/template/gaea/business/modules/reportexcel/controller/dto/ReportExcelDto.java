@@ -5,6 +5,7 @@ import com.anji.plus.gaea.curd.dto.GaeaBaseDTO;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -57,5 +58,10 @@ public class ReportExcelDto extends GaeaBaseDTO implements Serializable {
      * 导出类型
      */
     private String exportType;
+
+    /**
+     * 报表总体数据
+     */
+    private String rowDatas;
 
 }
