@@ -243,7 +243,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 ReportExcelStyleDto reportExcelStyleDto = reportExcelStyleList.get(0).get(i);
                 if(!Objects.isNull(reportExcelStyleDto))
                 {
-                    processCellStyle(reportExcelStyleDto,tableCell);
+                    processCellStyle(reportExcelStyleDto,tableCell,font);
                 }
                 table.addCell(tableCell);
             }
@@ -265,7 +265,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                     ReportExcelStyleDto reportExcelStyleDto = reportExcelStyleList.get(i).get(j);
                     if(!Objects.isNull(reportExcelStyleDto))
                     {
-                        processCellStyle(reportExcelStyleDto,tableCell);
+                        processCellStyle(reportExcelStyleDto,tableCell,font);
                     }
                     table.addCell(tableCell);
                 }
@@ -293,27 +293,31 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      * 处理导出pdf文件样式
      * @param tableCell
      */
-    public void processCellStyle(ReportExcelStyleDto reportExcelStyleDto,PdfPCell tableCell)
+    public void processCellStyle(ReportExcelStyleDto reportExcelStyleDto,PdfPCell tableCell,Font font)
     {
-        //处理单元格背景颜色
+        // 处理单元格背景颜色
         String bg = reportExcelStyleDto.getBg();
         java.awt.Color color = null;
         if(!Objects.isNull(bg))
         {
-            color = java.awt.Color.decode(bg);
+            color = parseRGB(bg);
             tableCell.setBackgroundColor(new BaseColor(color.getRed(), color.getGreen(), color.getBlue()));
         }
-        //处理字体
+        // 处理字体
         String fc = reportExcelStyleDto.getFc();
         Integer fs = reportExcelStyleDto.getFs();
         String ff = reportExcelStyleDto.getFf();
         Boolean bl = reportExcelStyleDto.isBl();
         Boolean it = reportExcelStyleDto.isIt();
-        Font font = new Font();
+        Boolean cl = reportExcelStyleDto.isCl();
+        Integer ht = reportExcelStyleDto.getHt();
+        Integer vt = reportExcelStyleDto.getVt();
+
+
         // 设置字体颜色
         if(!Objects.isNull(fc))
         {
-            color = java.awt.Color.decode(fc);
+            color = parseRGB(fc);
             font.setColor(new BaseColor(color.getRed(), color.getGreen(), color.getBlue()));
         }
         // 设置字体
@@ -341,12 +345,81 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         {
             font.setStyle(Font.BOLDITALIC);
         }
+        // 是否删除线
+        if(Objects.equals(Boolean.TRUE,cl))
+        {
+            // 如果是粗体且斜体
+            if (font.getStyle() == Font.BOLDITALIC)
+            {
+                font.setStyle(Font.BOLDITALIC | Font.STRIKETHRU);
+            }
+            // 如果是粗体
+            else if(font.getStyle() == Font.BOLD)
+            {
+                font.setStyle(Font.BOLD | Font.STRIKETHRU);
+            }
+            // 如果是斜体
+            else if(font.getStyle() == Font.ITALIC)
+            {
+                font.setStyle(Font.ITALIC | Font.STRIKETHRU);
+            }
+            else
+            {
+                font.setStyle(Font.STRIKETHRU);
+            }
+        }
+        // 水平对齐
+        if(!Objects.isNull(ht))
+        {
+            if(Objects.equals(ht,0))
+            {
+                tableCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            }
+            else if(Objects.equals(ht,1))
+            {
+                tableCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            }
+            else if(Objects.equals(ht,2))
+            {
+                tableCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            }
+        }
+        // 垂直对齐
+        if(!Objects.isNull(vt))
+        {
+            if(Objects.equals(ht,0))
+            {
+                tableCell.setVerticalAlignment(com.itextpdf.text.Element.ALIGN_MIDDLE);
+            }
+            else if(Objects.equals(ht,1))
+            {
+                tableCell.setVerticalAlignment(Element.ALIGN_TOP);
+            }
+            else if(Objects.equals(ht,2))
+            {
+                tableCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
+            }
+        }
         Phrase phrase = tableCell.getPhrase();
         tableCell.setPhrase(new Paragraph(phrase.getContent(), font));
         //处理字体
         tableCell.setBorderColor(BaseColor.BLACK);
 
     }
+
+        public static java.awt.Color parseRGB(String rgb) {
+            try {
+                String[] components = rgb.substring(rgb.indexOf("(") + 1, rgb.indexOf(")")).split(",");
+                int red = Integer.parseInt(components[0].trim());
+                int green = Integer.parseInt(components[1].trim());
+                int blue = Integer.parseInt(components[2].trim());
+
+                return new java.awt.Color(red, green, blue);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null; // 解析失败，返回null
+            }
+        }
 
     private String getStringValue(Cell cell) {
         if (cell == null)
