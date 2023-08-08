@@ -51,25 +51,53 @@
 
 自定义JS，这里的JS是java的scriptengine执行的，支持ES5的写法。
 
+- 示例一 <br>
+  返回yyyyy-MM-dd类型的当前时间
+
 ```js
-//返回yyyyy-MM-dd类型的当前时间
-function verification(data){
-	//自定义脚本内容
-	//获取当前时间
-	var date = new Date();
-	var year = date.getFullYear();
-	var month = date.getMonth() + 1;
-	var day = date.getDate();
-	if (month < 10) {
-		month = "0" + month;
-	}
-	if (day < 10) {
-		day = "0" + day;
-	}
-	var nowDate = year + "-" + month + "-" + day;
-	return nowDate;
+// 返回yyyyy-MM-dd类型的当前时间
+function verification(data) {
+    //自定义脚本内容
+    //获取当前时间
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    if (month < 10) {
+        month = "0" + month;
+    }
+    if (day < 10) {
+        day = "0" + day;
+    }
+    var nowDate = year + "-" + month + "-" + day;
+    return nowDate;
 }
 ```
+
+- 示例二 <br>
+  不传参则查询全部
+
+```sql
+// sql可以这么写
+SELECT DATE_FORMAT(create_time, '%Y-%m-%d') create_time, sum(nums) sum_nums
+FROM aj_report_city ${city_name}
+group by create_time;
+```
+
+```js
+// 不传参则查询全部
+function verification(data) {
+    // 获取示例值
+    data = data.sampleItem;
+    if (data == null || data == '') {
+        return ''
+    }
+    data = 'where city_name = "' + data + '" '
+    return data;
+}
+```
+
+**注：** 当前V1.0.0版本示例值是不可为空的，所以实际使用可能会麻烦点
 
 ### 数据转换
 
@@ -82,26 +110,26 @@ function verification(data){
 
 ```js
 // 根据sql查询出的结果进行数据清洗
-function dataTransform(data){
-	//自定义脚本内容
-	
-	//1.遍历测试预览中的java.util.ArrayList<java.lang.Object>
-	for(j = 0, len = data.length; j < len; j++){
-		//获取一行数据
-		var row = data[j]
-		//比如对brand字段进行拆分,例如A-100，B-50
-		var brand = row['brand']
-		var split = brand.split('-')
-		//新增两个字段
-		var model = split[0]
-		var series = split[1]
+function dataTransform(data) {
+    //自定义脚本内容
 
-		//对原始对象赋值
-		data[j]['model'] = model
-		data[j]['series'] = series
+    //1.遍历测试预览中的java.util.ArrayList<java.lang.Object>
+    for (j = 0, len = data.length; j < len; j++) {
+        //获取一行数据
+        var row = data[j]
+        //比如对brand字段进行拆分,例如A-100，B-50
+        var brand = row['brand']
+        var split = brand.split('-')
+        //新增两个字段
+        var model = split[0]
+        var series = split[1]
 
-	}
-	return data;
+        //对原始对象赋值
+        data[j]['model'] = model
+        data[j]['series'] = series
+
+    }
+    return data;
 }
 ```
 
