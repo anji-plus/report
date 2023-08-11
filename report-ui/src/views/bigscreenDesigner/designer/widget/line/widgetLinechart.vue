@@ -15,7 +15,6 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
     widgetIndex: {
       type: Number,
       default: 0,
@@ -71,6 +70,7 @@ export default {
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
       optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {

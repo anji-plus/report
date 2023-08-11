@@ -13,7 +13,6 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
   },
   data() {
     return {
@@ -59,6 +58,7 @@ export default {
       optionsStyle: {}, // 样式
       optionsData: {}, // 数据
       optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {

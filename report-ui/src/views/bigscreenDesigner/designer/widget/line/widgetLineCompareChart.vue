@@ -14,7 +14,6 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
   },
   data() {
     return {
@@ -248,6 +247,7 @@ export default {
       optionsStyle: {},
       optionsData: {},
       optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {
