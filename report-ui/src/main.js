@@ -22,7 +22,9 @@ import 'echarts/lib/component/tooltip'
 //import 'echarts-liquidfill'
 // import 'echarts-gl'
 Vue.component('v-chart', ECharts)
-
+// 全局引入datav
+import dataV from '@jiaminghi/data-view'
+Vue.use(dataV)
 // anji component
 import anjiCrud from '@/components/AnjiPlus/anji-crud/anji-crud'
 import anjiSelect from '@/components/AnjiPlus/anji-select'

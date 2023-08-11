@@ -24,7 +24,7 @@ export const widgetText = {
         value: '文本框',
       },
       {
-        type: 'el-input-text',
+        type: 'el-input-textarea',
         label: '文本内容',
         name: 'text',
         required: false,
@@ -90,6 +90,14 @@ export const widgetText = {
         ],
         value: 'center'
       },
+      {
+        type: 'el-switch',
+        label: '识别换行符',
+        name: 'whiteSpace',
+        required: false,
+        placeholder: '',
+        value: true,
+      }
     ],
     // 数据
     data: [

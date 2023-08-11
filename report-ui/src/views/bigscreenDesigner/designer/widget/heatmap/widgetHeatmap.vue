@@ -13,7 +13,6 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
   },
   data() {
     return {
@@ -106,6 +105,7 @@ export default {
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
       optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {
@@ -258,7 +258,7 @@ export default {
         show: optionsSetup.isShow,
         textStyle: {
           fontSize: optionsSetup.fontSize,
-          color: optionsSetup.subTextColor,
+          color: optionsSetup.dataColor,
           fontWeight: optionsSetup.fontWeight,
         },
       };

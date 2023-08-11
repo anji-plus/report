@@ -1,8 +1,11 @@
 
 package com.anjiplus.template.gaea.business.modules.dataset.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.anji.plus.gaea.constant.Enabled;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
@@ -27,6 +30,7 @@ import com.anjiplus.template.gaea.business.util.JdbcConstants;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -39,10 +43,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
-* @desc DataSet 数据集服务实现
-* @author Raod
-* @date 2021-03-18 12:11:31.150755900
-**/
+ * @author Raod
+ * @desc DataSet 数据集服务实现
+ * @date 2021-03-18 12:11:31.150755900
+ **/
 @Service
 //@RequiredArgsConstructor
 @Slf4j
@@ -62,7 +66,7 @@ public class DataSetServiceImpl implements DataSetService {
 
     @Override
     public GaeaBaseMapper<DataSet> getMapper() {
-      return dataSetMapper;
+        return dataSetMapper;
     }
 
     /**
@@ -113,9 +117,9 @@ public class DataSetServiceImpl implements DataSetService {
 
         List<DataSetTransform> dataSetTransformList = dataSetTransformService.list(
                 new QueryWrapper<DataSetTransform>()
-                    .lambda()
-                    .eq(DataSetTransform::getSetCode, setCode)
-                    .orderByAsc(DataSetTransform::getOrderNum)
+                        .lambda()
+                        .eq(DataSetTransform::getSetCode, setCode)
+                        .orderByAsc(DataSetTransform::getOrderNum)
         );
         List<DataSetTransformDto> dataSetTransformDtoList = new ArrayList<>();
         dataSetTransformList.forEach(dataSetTransform -> {
@@ -131,7 +135,7 @@ public class DataSetServiceImpl implements DataSetService {
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                 dto.setSetParamList(jsonObject.keySet());
             } catch (Exception e) {
-                log.error("error",e);
+                log.error("error", e);
             }
         }
         return dto;
@@ -159,7 +163,7 @@ public class DataSetServiceImpl implements DataSetService {
                     Object o = objects.get(0);
                     objects = new JSONArray();
                     objects.add(o);
-                    dataSet.setCaseResult(objects.toJSONString());
+                    dataSet.setCaseResult(JSON.toJSONString(objects, SerializerFeature.WriteMapNullValue));
                 }
             } catch (Exception e) {
                 log.info("结果集只保留一行数据失败...{}", e.getMessage());
@@ -180,7 +184,7 @@ public class DataSetServiceImpl implements DataSetService {
      * @param dto
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void updateSet(DataSetDto dto) {
         List<DataSetParamDto> dataSetParamDtoList = dto.getDataSetParamDtoList();
         List<DataSetTransformDto> dataSetTransformDtoList = dto.getDataSetTransformDtoList();
@@ -194,7 +198,7 @@ public class DataSetServiceImpl implements DataSetService {
                     Object o = objects.get(0);
                     objects = new JSONArray();
                     objects.add(o);
-                    dataSet.setCaseResult(objects.toJSONString());
+                    dataSet.setCaseResult(JSON.toJSONString(objects, SerializerFeature.WriteMapNullValue));
                 }
             } catch (Exception e) {
                 log.info("结果集只保留一行数据失败...{}", e.getMessage());
@@ -266,12 +270,12 @@ public class DataSetServiceImpl implements DataSetService {
             String body = JSONObject.parseObject(dynSentence).getString("body");
             if (StringUtils.isNotBlank(body)) {
                 dynSentence = body;
-            }else {
+            } else {
                 dynSentence = "{}";
             }
 
-        }else {
-            dataSource  = dataSourceService.selectOne("source_code", dataSetDto.getSourceCode());
+        } else {
+            dataSource = dataSourceService.selectOne("source_code", dataSetDto.getSourceCode());
         }
 
         //3.参数替换
@@ -322,12 +326,12 @@ public class DataSetServiceImpl implements DataSetService {
             String body = JSONObject.parseObject(dynSentence).getString("body");
             if (StringUtils.isNotBlank(body)) {
                 dynSentence = body;
-            }else {
+            } else {
                 dynSentence = "{}";
             }
 
-        }else {
-          dataSource  = dataSourceService.selectOne("source_code", sourceCode);
+        } else {
+            dataSource = dataSourceService.selectOne("source_code", sourceCode);
         }
 
         //3.参数替换
@@ -374,7 +378,7 @@ public class DataSetServiceImpl implements DataSetService {
         return dataSetMapper.selectList(wrapper);
     }
 
-    public void dataSetParamBatch(List<DataSetParamDto> dataSetParamDtoList,String setCode){
+    public void dataSetParamBatch(List<DataSetParamDto> dataSetParamDtoList, String setCode) {
         dataSetParamService.delete(
                 new QueryWrapper<DataSetParam>()
                         .lambda()
@@ -396,7 +400,7 @@ public class DataSetServiceImpl implements DataSetService {
 
     }
 
-    public void dataSetTransformBatch(List<DataSetTransformDto> dataSetTransformDtoList,String setCode){
+    public void dataSetTransformBatch(List<DataSetTransformDto> dataSetTransformDtoList, String setCode) {
         dataSetTransformService.delete(
                 new QueryWrapper<DataSetTransform>()
                         .lambda()
@@ -420,10 +424,11 @@ public class DataSetServiceImpl implements DataSetService {
 
     /**
      * dataSetParamDtoList转map
+     *
      * @param dataSetParamDtoList
      * @return
      */
-    public Map<String, Object> setContextData(List<DataSetParamDto> dataSetParamDtoList){
+    public Map<String, Object> setContextData(List<DataSetParamDto> dataSetParamDtoList) {
         Map<String, Object> map = new HashMap<>();
         if (null != dataSetParamDtoList && dataSetParamDtoList.size() > 0) {
             dataSetParamDtoList.forEach(dataSetParamDto -> map.put(dataSetParamDto.getParamName(), dataSetParamDto.getSampleItem()));

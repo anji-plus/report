@@ -8,8 +8,8 @@
  */
 export const widgetDecoratePie = {
   code: 'widgetDecoratePieChart',
-  type: 'decorate',
-  tabName: '装饰图',
+  type: 'border',
+  tabName: '样式组件',
   label: '装饰饼图',
   icon: 'iconicon_tubiao_bingtu',
   options: {
@@ -407,6 +407,7 @@ export const widgetDecoratePie = {
         },
       ],
     ],
+    data: [],
     // 坐标
     position: [
       {

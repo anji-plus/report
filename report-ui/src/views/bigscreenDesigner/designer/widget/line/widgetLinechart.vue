@@ -70,6 +70,7 @@ export default {
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
       optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {
@@ -258,7 +259,7 @@ export default {
             position: "top",
             distance: 10,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.subTextColor,
+            color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
           };
         }

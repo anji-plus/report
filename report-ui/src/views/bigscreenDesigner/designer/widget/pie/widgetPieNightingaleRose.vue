@@ -16,7 +16,6 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
   },
   data() {
     return {
@@ -48,6 +47,7 @@ export default {
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
       optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {
@@ -135,7 +135,7 @@ export default {
         rich: {
           a: {
             padding: [-30, 15, -20, 15],
-            color: optionsSetup.subTextColor,
+            color: optionsSetup.dataColor,
             fontSize: optionsSetup.fontSize,
             fontWeight: optionsSetup.fontWeight,
           },
@@ -181,11 +181,11 @@ export default {
       const optionsSetup = this.optionsSetup;
       const legend = this.options.legend;
       legend.show = optionsSetup.isShowLegend;
-      legend.left = optionsSetup.lateralPosition == "left" ? 0 : "auto";
-      legend.right = optionsSetup.lateralPosition == "right" ? 0 : "auto";
-      legend.top = optionsSetup.longitudinalPosition == "top" ? 0 : "auto";
+      legend.left = optionsSetup.lateralPosition;
+      legend.right = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition;
       legend.bottom =
-        optionsSetup.longitudinalPosition == "bottom" ? 0 : "auto";
+        optionsSetup.longitudinalPosition;
       legend.orient = optionsSetup.layoutFront;
       legend.textStyle = {
         color: optionsSetup.legendColor,

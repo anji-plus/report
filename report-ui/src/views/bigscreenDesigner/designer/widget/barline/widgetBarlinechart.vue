@@ -98,6 +98,7 @@ export default {
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
       optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {

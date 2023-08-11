@@ -13,7 +13,6 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
   },
   data() {
     return {
@@ -98,6 +97,7 @@ export default {
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
       optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {
@@ -141,7 +141,6 @@ export default {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
-      //this.setOptionsLine();
       this.setOptionsBar();
       this.setOptionsTooltip();
       this.setOptionsData();
@@ -306,41 +305,6 @@ export default {
       ];
       this.options.yAxis = yAxis;
     },
-    // 折线设置 数值设置
-    setOptionsLine() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "line") {
-          series[key].symbol = optionsSetup.symbol;
-          series[key].showSymbol = optionsSetup.markPoint;
-          series[key].symbolSize = optionsSetup.pointSize;
-          series[key].smooth = optionsSetup.smoothCurve;
-          if (optionsSetup.area) {
-            series[key].areaStyle = {
-              opacity: optionsSetup.areaThickness / 100,
-            };
-          } else {
-            series[key].areaStyle = {
-              opacity: 0,
-            };
-          }
-          series[key].lineStyle = {
-            width: optionsSetup.lineWidth,
-          };
-          series[key].itemStyle.borderRadius = optionsSetup.radius;
-          series[key].label = {
-            show: optionsSetup.isShowLine,
-            position: "top",
-            distance: optionsSetup.distanceLine,
-            fontSize: optionsSetup.fontSizeLine,
-            color: optionsSetup.subTextColorLine,
-            fontWeight: optionsSetup.fontWeightLine,
-          };
-        }
-      }
-      this.options.series = series;
-    },
     // 柱体设置 数值设置
     setOptionsBar() {
       const optionsSetup = this.optionsSetup;
@@ -348,12 +312,12 @@ export default {
       for (const key in series) {
         if (series[key].type == "bar") {
           series[key].label = {
-            show: optionsSetup.isShowBar,
+            show: optionsSetup.isShow,
             position: "top",
-            distance: optionsSetup.distanceBar,
-            fontSize: optionsSetup.fontSizeBar,
-            color: optionsSetup.subTextColorBar,
-            fontWeight: optionsSetup.fontWeightBar,
+            distance: optionsSetup.distance,
+            fontSize: optionsSetup.fontSize,
+            color: optionsSetup.dataColor,
+            fontWeight: optionsSetup.fontWeight,
           };
           series[key].barWidth = optionsSetup.maxWidth;
           series[key].barMinHeight = optionsSetup.minHeight;

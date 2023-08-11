@@ -166,6 +166,18 @@
             <version>3.0.9</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.xhtmlrenderer</groupId>
+            <artifactId>core-renderer</artifactId>
+            <version>R8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.itextpdf.tool</groupId>
+            <artifactId>xmlworker</artifactId>
+            <version>5.5.13</version>
+        </dependency>
+
     </dependencies>
 
     <developers>

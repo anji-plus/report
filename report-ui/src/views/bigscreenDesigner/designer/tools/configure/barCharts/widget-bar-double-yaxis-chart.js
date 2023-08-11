@@ -631,12 +631,12 @@ export const widgetBarDoubleYaxis = {
           ],
         },
         {
-          name: '折线数值设定',
+          name: '数值设定',
           list: [
             {
               type: 'el-switch',
               label: '显示',
-              name: 'isShowLine',
+              name: 'isShow',
               required: false,
               placeholder: '',
               value: false
@@ -644,7 +644,7 @@ export const widgetBarDoubleYaxis = {
             {
               type: 'el-input-number',
               label: '距离',
-              name: 'distanceLine',
+              name: 'distance',
               required: false,
               placeholder: '',
               value: 5
@@ -652,7 +652,7 @@ export const widgetBarDoubleYaxis = {
             {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'fontSizeLine',
+              name: 'fontSize',
               required: false,
               placeholder: '',
               value: 14
@@ -660,7 +660,7 @@ export const widgetBarDoubleYaxis = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'subTextColorLine',
+              name: 'dataColor',
               required: false,
               placeholder: '',
               value: '#fff'
@@ -668,58 +668,7 @@ export const widgetBarDoubleYaxis = {
             {
               type: 'el-select',
               label: '字体粗细',
-              name: 'fontWeightLine',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
-              ],
-              value: 'normal'
-            },
-          ],
-        },
-        {
-          name: '柱体数值设定',
-          list: [
-            {
-              type: 'el-switch',
-              label: '显示',
-              name: 'isShowBar',
-              required: false,
-              placeholder: '',
-              value: false
-            },
-            {
-              type: 'el-input-number',
-              label: '距离',
-              name: 'distanceBar',
-              required: false,
-              placeholder: '',
-              value: 5
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'fontSizeBar',
-              required: false,
-              placeholder: '',
-              value: 14
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'subTextColorBar',
-              required: false,
-              placeholder: '',
-              value: '#fff'
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'fontWeightBar',
+              name: 'fontWeight',
               required: false,
               placeholder: '',
               selectOptions: [

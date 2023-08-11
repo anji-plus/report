@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -14,7 +14,6 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
   },
   data() {
     return {
@@ -435,7 +434,7 @@ export default {
               position: "insideLeft",
               textStyle: {
                 fontSize: optionsSetup.fontSize,
-                color: optionsSetup.subTextColor,
+                color: optionsSetup.dataColor,
                 fontWeight: optionsSetup.fontWeight,
               },
             },
@@ -450,7 +449,7 @@ export default {
                 position: "insideRight",
                 textStyle: {
                   fontSize: optionsSetup.fontSize,
-                  color: optionsSetup.subTextColor,
+                  color: optionsSetup.dataColor,
                   fontWeight: optionsSetup.fontWeight,
                 },
               },
@@ -597,10 +596,10 @@ export default {
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(
-            optionsData.dynamicData,
-            optionsData.refreshTime,
-            optionsSetup
-          );
+          optionsData.dynamicData,
+          optionsData.refreshTime,
+          optionsSetup
+        );
     },
     //去重
     setUnique(arr) {

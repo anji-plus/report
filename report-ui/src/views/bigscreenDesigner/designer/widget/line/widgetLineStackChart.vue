@@ -13,7 +13,6 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
   },
   data() {
     return {
@@ -393,13 +392,13 @@ export default {
             color: arrColor[i],
           },
           areaStyle: this.getOptionArea(),
-          //标题部分
+          //数值设定
           label: {
             show: optionsSetup.isShow,
             position: "top",
             distance: 10,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.subTextColor,
+            color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
           },
         });
@@ -481,13 +480,13 @@ export default {
               color: arrColor[i],
             },
             areaStyle: this.getOptionArea(),
-            // 标题部分
+            // 数值设定
             label: {
               show: optionsSetup.isShow,
               position: "top",
               distance: 10,
               fontSize: optionsSetup.fontSize,
-              color: optionsSetup.subTextColor,
+              color: optionsSetup.dataColor,
               fontWeight: optionsSetup.fontWeight,
             },
           });

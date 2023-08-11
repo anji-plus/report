@@ -234,41 +234,20 @@ export const widgetGauge = {
               value: 0,
             },
             {
+              type: 'vue-color',
+              label: '颜色',
+              name: 'labelColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
               type: 'el-input-number',
               label: '字号',
               name: 'labelFontSize',
               require: false,
               placeholder: '',
               value: 10,
-            },
-            {
-              type: 'vue-color',
-              label: '颜色',
-              name: 'labelColor',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-          ]
-        },
-        {
-          name: "数值",
-          list: [
-            {
-              type: 'vue-color',
-              label: '颜色',
-              name: 'labelColor',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '字号',
-              name: 'labelFontSize',
-              require: false,
-              placeholder: '',
-              value: 14,
             },
             {
               type: 'el-select',
@@ -281,6 +260,67 @@ export const widgetGauge = {
                 { code: 'bold', name: '粗体' },
                 { code: 'bolder', name: '特粗体' },
                 { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'labelFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+          ]
+        },
+        {
+          name: "数值",
+          list: [
+            {
+              type: 'vue-color',
+              label: '颜色',
+              name: 'detailColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '字号',
+              name: 'detailFontSize',
+              require: false,
+              placeholder: '',
+              value: 14,
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'detailFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'detailFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
             },

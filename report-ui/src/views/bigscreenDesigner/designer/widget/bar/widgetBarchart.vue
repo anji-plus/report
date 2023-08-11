@@ -237,7 +237,7 @@ export default {
             distance: optionsSetup.distance,
             textStyle: {
               fontSize: optionsSetup.fontSize,
-              color: optionsSetup.subTextColor,
+              color: optionsSetup.dataColor,
               fontWeight: optionsSetup.fontWeight,
             },
           };
@@ -247,7 +247,7 @@ export default {
             position: "top",
             distance: optionsSetup.distance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.subTextColor,
+            color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
           };
         }

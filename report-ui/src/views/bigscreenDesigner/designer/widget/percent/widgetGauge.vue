@@ -1,11 +1,13 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
 <script>
 import echarts from "echarts";
+import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 export default {
   name: "WidgetGauge",
   components: {},
@@ -125,6 +127,7 @@ export default {
       optionsData: {}, // 数据
       optionsCollapse: {}, // 图标属性
       optionsSetup: {},
+      flagInter: null,
     };
   },
   computed: {
@@ -137,6 +140,9 @@ export default {
         top: this.optionsStyle.top + "px",
         background: this.optionsSetup.background,
       };
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
     },
   },
   watch: {
@@ -157,6 +163,9 @@ export default {
     this.optionsCollapse = this.value.collapse;
     this.optionsSetup = this.value.setup;
     this.editorOptions();
+  },
+  mounted() {
+    targetWidgetLinkageLogic(this);
   },
   methods: {
     editorOptions() {
@@ -244,19 +253,53 @@ export default {
             width: optionsSetup.splitWidth,
           },
         };
+        const axisLabel = {
+          show: optionsSetup.labelShow,
+          color: optionsSetup.labelColor,
+          distance: optionsSetup.labelDistance,
+          fontSize: optionsSetup.labelFontSize,
+          fontWeight: optionsSetup.labelFontWeight,
+          fontStyle: optionsSetup.labelFontStyle,
+        };
+        const detail = {
+          valueAnimation: true,
+          formatter: "{value} %",
+          color: optionsSetup.detailColor,
+          fontSize: optionsSetup.detailFontSize,
+          fontWeight: optionsSetup.detailFontWeight,
+          fontStyle: optionsSetup.detailFontStyle,
+        };
         series[0].axisLine = axisLine;
         series[0].axisTick = axisTick;
         series[0].splitLine = splitLine;
+        series[0].axisLabel = axisLabel;
+        series[0].detail = detail;
       }
     },
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       const num = val[0]["num"];
       const data = [
@@ -264,15 +307,7 @@ export default {
           value: num,
         },
       ];
-      const detail = {
-        valueAnimation: true,
-        formatter: "{value} %",
-        color: optionsSetup.labelColor,
-        fontSize: optionsSetup.labelFontSize,
-        fontWeight: optionsSetup.labelFontWeight,
-      };
       series[0].data = data;
-      series[0].detail = detail;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -292,22 +327,13 @@ export default {
       });
     },
     renderingFn(val) {
-      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       const data = [
         {
           value: val[0].value,
         },
       ];
-      const detail = {
-        valueAnimation: true,
-        formatter: "{value} %",
-        color: optionsSetup.labelColor,
-        fontSize: optionsSetup.labelFontSize,
-        fontWeight: optionsSetup.labelFontWeight,
-      };
       series[0].data = data;
-      series[0].detail = detail;
     },
   },
 };

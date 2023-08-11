@@ -40,12 +40,15 @@
 <script>
 import vue from "vue";
 import VueSuperSlide from "vue-superslide";
+import { targetWidgetLinkageLogic } from "@/views/bigscreenDesigner/designer/linkageLogic";
 
 vue.use(VueSuperSlide);
 export default {
+  name: 'widgetTable',
+  components: {},
   props: {
     value: Object,
-    ispreview: Boolean
+    ispreview: Boolean,
   },
   data() {
     return {
@@ -64,7 +67,8 @@ export default {
       list: [],
       optionsSetUp: {},
       optionsPosition: {},
-      optionsData: {}
+      optionsData: {},
+      flagInter: null,
     };
   },
   computed: {
@@ -79,6 +83,9 @@ export default {
         top: allStyle.top + "px",
         background: this.optionsSetUp.tableBgColor
       };
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
     },
     headerTableStlye() {
       const headStyle = this.optionsSetUp;
@@ -122,12 +129,13 @@ export default {
     this.optionsPosition = this.value.position;
     this.optionsData = this.value.data;
     this.initData();
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
     initData() {
       this.handlerRollFn();
       this.handlerHead();
-      this.handlerData();
+      this.setOptionsData();
       this.visConfig();
     },
     visConfig() {
@@ -148,8 +156,25 @@ export default {
       const head = this.optionsSetUp.dynamicAddTable;
       this.header = head;
     },
-    handlerData() {
+    setOptionsData(e, paramsConfig) {
       const tableData = this.optionsData;
+      tableData.dynamicData = tableData.dynamicData || {}; // 兼容 dynamicData undefined
+
+      const myDynamicData = tableData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        tableData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+
       tableData.dataType == "staticData"
         ? this.handlerStaticData(tableData.staticData)
         : this.handlerDynamicData(tableData.dynamicData, tableData.refreshTime);

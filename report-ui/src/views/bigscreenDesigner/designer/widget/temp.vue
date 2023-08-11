@@ -34,7 +34,7 @@ import widgetBarStackChart from "./bar/widgetBarStackChart";
 import widgetLineStackChart from "./line/widgetLineStackChart";
 import widgetBarCompareChart from "./bar/widgetBarCompareChart";
 import widgetLineCompareChart from "./line/widgetLineCompareChart";
-import widgetDecoratePieChart from "./decorate/widgetDecoratePieChart";
+import widgetDecoratePieChart from "./styleWidget/widgetDecoratePieChart.vue";
 import widgetMoreBarLineChart from "./barline/widgetMoreBarLineChart";
 import widgetWordCloud from "./wordcloud/widgetWordCloud";
 import widgetHeatmap from "./heatmap/widgetHeatmap";
@@ -46,12 +46,16 @@ import widgetFormTime from "./form/widgetFormTime.vue";
 import widgetScaleVertical from "./scale/widgetScaleVertical.vue";
 import widgetScaleHorizontal from "./scale/widgetScaleHorizontal.vue";
 import widgetBarDoubleYaxisChart from "./bar/widgetBarDoubleYaxisChart.vue";
+import widgetBorder from "./styleWidget/widgetBorder.vue";
+import widgetDecoration from "./styleWidget/widgetDecoration.vue";
 
 export default {
   name: "WidgetTemp",
   components: {
     widgetHref,
     widgetText,
+    widgetBorder,
+    widgetDecoration,
     WidgetMarquee,
     widgetTime,
     widgetImage,

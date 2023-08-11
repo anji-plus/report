@@ -13,7 +13,6 @@ export default {
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
   },
   data() {
     return {
@@ -368,7 +367,7 @@ export default {
             position: "top",
             distance: 10,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.subTextColor,
+            color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
           },
           //颜色，圆角属性
@@ -449,7 +448,7 @@ export default {
               position: "top",
               distance: 10,
               fontSize: optionsSetup.fontSize,
-              color: optionsSetup.subTextColor,
+              color: optionsSetup.dataColor,
               fontWeight: optionsSetup.fontWeight,
             },
             //颜色，圆角属性

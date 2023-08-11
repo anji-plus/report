@@ -65,7 +65,7 @@
       :style="{ width: widthLeftForToolsHideButton + 'px' }"
       @click="toolIsShow = !toolIsShow"
     >
-      <i class="el-icon-arrow-right" />
+      <i class="el-icon-arrow-right"/>
     </div>
 
     <div
@@ -130,7 +130,7 @@
             content="缩小"
             placement="bottom"
           >
-            <i class="el-icon-minus" style="font-size: 16px" />
+            <i class="el-icon-minus" style="font-size: 16px"/>
           </el-tooltip>
         </span>
         <span
@@ -165,7 +165,7 @@
             content="放大"
             placement="bottom"
           >
-            <i class="el-icon-plus" style="font-size: 16px" />
+            <i class="el-icon-plus" style="font-size: 16px"/>
           </el-tooltip>
         </span>
 
@@ -349,7 +349,7 @@
 </template>
 
 <script>
-import { widgetTools, getToolByCode } from "./tools/index";
+import {widgetTools, getToolByCode} from "./tools/index";
 import mixin from "@/utils/screenMixins";
 import widget from "./widget/widget.vue";
 import dynamicForm from "./components/dynamicForm.vue";
@@ -598,18 +598,21 @@ export default {
       return widgetJson;
     },
     setWidgetConfigValue(config, configValue) {
-      config.forEach((item) => {
-        if (this.isObjectFn(item)) {
-          configValue[item.name] = item.value;
-        }
-        if (this.isArrayFn(item)) {
-          item.forEach((itemChild) => {
-            itemChild.list.forEach((ev) => {
-              configValue[ev.name] = ev.value;
+      // 循环遍历前非空判断
+      if (config) {
+        config.forEach((item) => {
+          if (this.isObjectFn(item)) {
+            configValue[item.name] = item.value;
+          }
+          if (this.isArrayFn(item)) {
+            item.forEach((itemChild) => {
+              itemChild.list.forEach((ev) => {
+                configValue[ev.name] = ev.value;
+              });
             });
-          });
-        }
-      });
+          }
+        });
+      }
     },
     layerClick(index) {
       this.widgetIndex = index;
