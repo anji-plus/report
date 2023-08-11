@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 export default {
   name: "WidgetMarquee",
   components: {},
@@ -16,7 +18,8 @@ export default {
   },
   data() {
     return {
-      options: {}
+      options: {},
+      flagInter: null,
     };
   },
   computed: {
@@ -42,6 +45,9 @@ export default {
         styleColor: this.transStyle.marqueeQuit
       };
     },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
     isBehavior() {
       return this.styleColor.marqueeSet ? "start()" : "stop()";
     }
@@ -51,6 +57,7 @@ export default {
       handler(val) {
         this.options = val;
         this.optionsData = val.data;
+        targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
         this.setOptionsData();
       },
       deep: true
@@ -63,8 +70,25 @@ export default {
   },
   methods: {
     // 数据解析
-    setOptionsData() {
+    setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
+      // 联动接收者逻辑开始
+      optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
+      const myDynamicData = optionsData.dynamicData;
+      clearInterval(this.flagInter); // 不管咋，先干掉上一次的定时任务，避免多跑
+      if (
+        e &&
+        optionsData.dataType !== "staticData" &&
+        Object.keys(myDynamicData.contextData).length
+      ) {
+        const keyArr = Object.keys(myDynamicData.contextData);
+        paramsConfig.forEach((conf) => {
+          if (keyArr.includes(conf.targetKey)) {
+            myDynamicData.contextData[conf.targetKey] = e[conf.originKey];
+          }
+        });
+      }
+      // 联动接收者逻辑结束
       if (optionsData.dataType == "dynamicData") {
         this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
       } else {};
