@@ -39,6 +39,14 @@ export const widgetDecorateFlowLine =  {
           ],
           value: 'left'
         },
+        {
+          type: 'el-input-number',
+          label: '旋转角度',
+          name: 'rotationAngle',
+          required: false,
+          placeholder: '',
+          value: '0'
+        },
       ],
       // 数据
       data: [],

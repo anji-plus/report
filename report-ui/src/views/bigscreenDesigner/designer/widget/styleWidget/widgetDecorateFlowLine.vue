@@ -18,7 +18,8 @@ export default ({
       optionsSetup: {},
       direction: 'left', // 控制流光的方向，可选值: 'left' 和 'right'
       background: 'red', // 控制底色的值
-      containerWidth: '400px'
+      containerWidth: '400px',
+      rotationAngle: 0, // 旋转的角度
     }
   },
   props: {
@@ -66,7 +67,8 @@ export default ({
         height: '4px',
         position: 'relative',
         overflow: 'hidden',
-        flexDirection: this.direction === 'left' ? 'row-reverse' : 'row' // 根据流光方向设置进度条的方向
+        flexDirection: this.direction === 'left' ? 'row-reverse' : 'row', // 根据流光方向设置进度条的方向
+        transform: `rotate(${this.rotationAngle}deg)` // 添加旋转角度
       }
     },
     flowingLightStyle() {
@@ -85,6 +87,7 @@ export default ({
       const optionsStyle = this.optionsStyle;
       this.background = optionsSetup.background;
       this.direction = optionsSetup.flowDirection;
+      this.rotationAngle = optionsSetup.rotationAngle;
       this.containerWidth = optionsStyle.width;
     },
   }
@@ -96,7 +99,7 @@ export default ({
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #282c34;
+  background: transparent;
 }
 
 .progress-bar {
