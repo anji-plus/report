@@ -46,6 +46,7 @@ import widgetFormTime from "./form/widgetFormTime.vue";
 import widgetScaleVertical from "./scale/widgetScaleVertical.vue";
 import widgetScaleHorizontal from "./scale/widgetScaleHorizontal.vue";
 import widgetBarDoubleYaxisChart from "./bar/widgetBarDoubleYaxisChart.vue";
+import widgetDecorateFlowLine from "./styleWidget/widgetDecorateFlowLine.vue";
 import widgetBorder from "./styleWidget/widgetBorder.vue";
 import widgetDecoration from "./styleWidget/widgetDecoration.vue";
 
@@ -55,6 +56,7 @@ export default {
     widgetHref,
     widgetText,
     widgetBorder,
+    widgetDecorateFlowLine,
     widgetDecoration,
     WidgetMarquee,
     widgetTime,
