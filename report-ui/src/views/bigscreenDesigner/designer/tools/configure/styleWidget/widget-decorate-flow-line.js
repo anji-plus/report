@@ -28,6 +28,14 @@ export const widgetDecorateFlowLine =  {
           value: ''
         },
         {
+          type: 'vue-color',
+          label: '流光颜色',
+          name: 'lightColor',
+          required: false,
+          placeholder: '',
+          value: '#fff'
+        },
+        {
           type: 'el-select',
           label: '流动方向',
           name: 'flowDirection',
@@ -38,6 +46,32 @@ export const widgetDecorateFlowLine =  {
             { code: 'right', name: '自右向左' },
           ],
           value: 'left'
+        },
+        {
+          type: 'el-select',
+          label: '流动速度',
+          name: 'flowingLightSpeed',
+          required: false,
+          placeholder: '',
+          selectOptions: [
+            { code: 'low', name: '低' },
+            { code: 'medium', name: '中' },
+            { code: 'high', name: '高' },
+          ],
+          value: 'medium'
+        },
+        {
+          type: 'el-select',
+          label: '旋转中心',
+          name: 'flowingLightRotationCenter',
+          required: false,
+          placeholder: '',
+          selectOptions: [
+            { code: 'left', name: '左' },
+            { code: 'center', name: '中' },
+            { code: 'right', name: '右' },
+          ],
+          value: 'center'
         },
         {
           type: 'el-input-number',
@@ -82,7 +116,7 @@ export const widgetDecorateFlowLine =  {
           name: 'height',
           required: false,
           placeholder: '该容器在1080px大屏中的高度',
-          value: 300,
+          value: 4,
         },
       ],
     }

@@ -19,7 +19,11 @@ export default ({
       direction: 'left', // 控制流光的方向，可选值: 'left' 和 'right'
       background: 'red', // 控制底色的值
       containerWidth: '400px',
+      containerHeight: '4px',
       rotationAngle: 0, // 旋转的角度
+      flowingLightColor: null,
+      flowingLightSpeed: 'medium',
+      flowingLightRotationCenter: 'center',
     }
   },
   props: {
@@ -64,20 +68,30 @@ export default ({
       return {
         background: this.background,
         width: '100%',
-        height: '4px',
+        height: this.containerHeight + "px",
         position: 'relative',
         overflow: 'hidden',
         flexDirection: this.direction === 'left' ? 'row-reverse' : 'row', // 根据流光方向设置进度条的方向
-        transform: `rotate(${this.rotationAngle}deg)` // 添加旋转角度
+        transform: `rotate(${this.rotationAngle}deg)`, // 添加旋转角度
+        transformOrigin: this.flowingLightRotationCenter, // 设置旋转中心
       }
     },
     flowingLightStyle() {
+      let duration = 0; // 初始化动画持续时间
+
+      if (this.flowingLightSpeed === 'low') {
+        duration = 8; // 低速持续时间
+      } else if (this.flowingLightSpeed === 'medium') {
+        duration = 4; // 中速持续时间
+      } else if (this.flowingLightSpeed === 'high') {
+        duration = 2; // 高速持续时间
+      }
       return {
         height: '4px',
         width: '80px',
-        background: 'linear-gradient(to right, transparent, #fff)',
+        background: 'linear-gradient(to right, transparent,' + this.flowingLightColor + ')',
         position: 'absolute',
-        animation: this.direction === 'left' ? 'right_to_left 4s 0s infinite' : 'left_to_right 4s 0s infinite' // 根据流光方向设置动画
+        animation: this.direction === 'right' ? `right_to_left ${duration}s 0s infinite` : `left_to_right ${duration}s 0s infinite` // 根据流光方向设置动画
       }
     },
   },
@@ -89,13 +103,16 @@ export default ({
       this.direction = optionsSetup.flowDirection;
       this.rotationAngle = optionsSetup.rotationAngle;
       this.containerWidth = optionsStyle.width;
+      this.containerHeight = optionsStyle.height;
+      this.flowingLightColor = optionsSetup.lightColor;
+      this.flowingLightSpeed = optionsSetup.flowingLightSpeed;
+      this.flowingLightRotationCenter = optionsSetup.flowingLightRotationCenter;
     },
   }
 })
 </script>
 <style>
 .container {
-  height: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
