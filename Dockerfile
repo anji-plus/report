@@ -1,4 +1,4 @@
-FROM anapsix/alpine-java:8_server-jre_unlimited
+FROM eclipse-temurin:8-jre
 
 RUN mkdir -p /AJ-Report
 
