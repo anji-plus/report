@@ -95,12 +95,54 @@ export default {
     },
     // 查询echarts 数据
     queryEchartsData(params) {
+      const queryParams = this.toEchartsDataQueryParams(params)
       return new Promise(async (resolve) => {
-        const { code, data } = await getData(params);
+        const { code, data } = await getData(queryParams);
         if (code != 200) return
         const analysisData = this.analysisChartsData(params, data);
         resolve(analysisData)
       })
+    },
+    /**
+     * 将url参数解析到图表参数中
+     * 1. tenantCode=aaa 
+     * 2. [setCode].tenantCode=aaa
+     * 判断是否有点(.) 
+     *  a. 没有 -> 把所有的参数全部给插入contextData
+     *  b. 有 ->   点前缀的值去匹配相同的值再把对应的值插入contextData
+     * 
+     * **/ 
+    toEchartsDataQueryParams(params) {
+      const queryParams = this.deepClone(params)
+      const query = this.$route.query
+      if(!this.isIncludePoints(query)) {
+        queryParams.contextData = { ...queryParams.contextData, ...query }
+      } else {
+        Object.keys(query).forEach(item => {
+          if(item.indexOf('.') > -1) {
+            const obj = {}
+            const key1 = item.split('.')[0]
+            const key2 = item.split('.')[1]
+            obj[key2] = query[item]
+            if (queryParams.setCode == key1) {
+              const newObj = { ...queryParams.contextData, ...obj }
+              queryParams.contextData = newObj
+            }
+          }
+        })
+      }
+    
+      return queryParams
+    },
+    // 判断对象是否包含点
+    isIncludePoints(query) {
+      let isPoints = false
+      Object.keys(query).forEach(item => {
+        if(item.indexOf('.') > -1) {
+          isPoints = true
+        }
+      })
+      return isPoints
     },
     // 解析不同图标的数据
     analysisChartsData(params, data) {
