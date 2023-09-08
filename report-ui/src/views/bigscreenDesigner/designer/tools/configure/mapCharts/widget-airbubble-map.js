@@ -291,6 +291,27 @@ export const widgetAirbubbleMap = {
             },
           ],
         },
+        {
+          name: '提示语设置',
+          list: [
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'tipsFontSize',
+              required: false,
+              placeholder: '',
+              value: 16
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'tipsColor',
+              required: false,
+              placeholder: '',
+              value: '#00FEFF'
+            },
+          ],
+        },
       ],
     ],
     data: [

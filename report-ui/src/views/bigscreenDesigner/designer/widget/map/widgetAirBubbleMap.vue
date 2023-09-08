@@ -448,7 +448,8 @@ export default {
       //this.setOptionDataValue();
       this.setOptionsData();
       this.setOptionAirSize();
-      this.setOptionMapBlocak();
+      this.setOptionsTooltip();
+      this.setOptionMapBlock();
     },
     // 标题设置
     setOptionsTitle() {
@@ -484,7 +485,7 @@ export default {
       };
       label["normal"] = normal;
     },
-    setOptionMapBlocak() {
+    setOptionMapBlock() {
       const optionsSetup = this.optionsSetup;
       const itemStyle = this.options.series[0]["itemStyle"];
       const normal = {
@@ -533,6 +534,26 @@ export default {
     setOptionAirSize() {
       maxSize4Pin = this.optionsSetup.fontmaxSize4Pin;
       minSize4Pin = this.optionsSetup.fontminSize4Pin;
+    },
+    // tooltip 设置
+    setOptionsTooltip() {
+      const optionsSetup = this.optionsSetup;
+      const tooltip = {
+        trigger: "item",
+        show: true,
+        textStyle: {
+          color: optionsSetup.tipsColor,
+          fontSize: optionsSetup.tipsFontSize,
+        },
+        formatter: function (params) {
+          if (params.value.length > 1) {
+            return params.data.name + "" + params.data.value[2];
+          } else {
+            return params.name;
+          }
+        },
+      };
+      this.options.tooltip = tooltip;
     },
     //数据解析
     setOptionsData(e, paramsConfig) {
