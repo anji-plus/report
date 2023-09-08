@@ -56,6 +56,7 @@ import widgetBarDoubleYaxisChart from "./bar/widgetBarDoubleYaxisChart.vue";
 import widgetBorder from "./styleWidget/widgetBorder.vue";
 import widgetDecorateFlowLine from "./styleWidget/widgetDecorateFlowLine.vue";
 import widgetDecoration from "./styleWidget/widgetDecoration.vue";
+import widgetBarMap from "./map/widgetBarMap.vue";
 
 export default {
   name: "Widget",
@@ -99,6 +100,7 @@ export default {
     //widgetInput,
     widgetFormTime,
     widgetBarDoubleYaxisChart,
+    widgetBarMap
   },
   model: {
     prop: "value",
