@@ -11,137 +11,6 @@ import {conversionProvince} from "@/utils/china";
 import echarts from "echarts";
 
 let geoCoordMap = conversionProvince;
-let data = [
-  {
-    name: "北京市",
-    value: 70,
-  },
-  {
-    name: "天津市",
-    value: 20,
-  },
-  {
-    name: "上海市",
-    value: 150,
-  },
-  {
-    name: "重庆市",
-    value: 75,
-  },
-  {
-    name: "河北省",
-    value: 40,
-  },
-  {
-    name: "河南省",
-    value: 83,
-  },
-  {
-    name: "云南省",
-    value: 50,
-  },
-  {
-    name: "辽宁省",
-    value: 49,
-  },
-  {
-    name: "黑龙江省",
-    value: 25,
-  },
-  {
-    name: "湖南省",
-    value: 69,
-  },
-  {
-    name: "安徽省",
-    value: 36,
-  },
-  {
-    name: "山东省",
-    value: 39,
-  },
-  {
-    name: "新疆维吾尔自治区",
-    value: 42,
-  },
-  {
-    name: "江苏省",
-    value: 42,
-  },
-  {
-    name: "浙江省",
-    value: 56,
-  },
-  {
-    name: "江西省",
-    value: 23,
-  },
-  {
-    name: "湖北省",
-    value: 98,
-  },
-  {
-    name: "广西壮族自治区",
-    value: 33,
-  },
-  {
-    name: "宁夏回族自治区",
-    value: 47,
-  },
-  {
-    name: "山西省",
-    value: 18,
-  },
-  {
-    name: "内蒙古自治区",
-    value: 57,
-  },
-  {
-    name: "陕西省",
-    value: 22,
-  },
-  {
-    name: "吉林省",
-    value: 44,
-  },
-  {
-    name: "福建省",
-    value: 36,
-  },
-  {
-    name: "贵州省",
-    value: 39,
-  },
-  {
-    name: "广东省",
-    value: 96,
-  },
-  {
-    name: "青海省",
-    value: 27,
-  },
-  {
-    name: "西藏自治区",
-    value: 31,
-  },
-  {
-    name: "四川省",
-    value: 46,
-  }
-];
-let convertData = function (data) {
-  let res = [];
-  for (let i = 0; i < data.length; i++) {
-    let geoCoord = geoCoordMap[data[i].name];
-    if (geoCoord) {
-      res.push({
-        name: data[i].name,
-        value: geoCoord.concat(data[i].value),
-      });
-    }
-  }
-  return res;
-};
 
 export default {
   name: "widgetBarMap",
@@ -280,7 +149,7 @@ export default {
                 },
               },
             },
-            data: data
+            data: []
           },
           // 柱状体的主干
           {
@@ -297,7 +166,7 @@ export default {
               curveness: 0 // 尾迹线条曲直度
             },
             silent: true,
-            data: this.lineData(data)
+            data: []
           },
           // 柱状体的顶部
           {
@@ -329,7 +198,7 @@ export default {
               opacity: 1
             },
             silent: true,
-            data: this.scatterData(data)
+            data: []
           },
           // 柱状体的底部
           {
@@ -357,7 +226,7 @@ export default {
               opacity: 1
             },
             silent: true,
-            data: this.scatterData2(data)
+            data: []
           },
           // 底部外框
           {
@@ -398,7 +267,7 @@ export default {
               opacity: 1
             },
             silent: true,
-            data: convertData(data)
+            data: []
           }
         ]
       },
@@ -536,87 +405,27 @@ export default {
       this.options.series[0]['label'] = label;
       this.options.series[0]['itemStyle'] = itemStyle;
     },
-    // 柱形设置
-    setOptionsBarTrunk() {
-      const optionsSetup = this.optionsSetup;
-      const lineStyle = {
-        width: optionsSetup.barWidth,
-        color: optionsSetup.barColor,
-        opacity: 1, // 尾迹线条透明度
-        curveness: 0 // 尾迹线条曲直度
-      }
-      this.options.series[1]['lineStyle'] = lineStyle;
-    },
-    setOptionsBarTop() {
-      const optionsSetup = this.optionsSetup;
-      // this.options.series[2]['symbolSize'] = [optionsSetup.barWidth, 10];
-    },
-    setOptionsBarBottom() {
-      const optionsSetup = this.optionsSetup;
-      /*      const label = {
-              // 这儿是处理的
-              show: optionsSetup.isShowFontText,
-              formatter: '{b}',
-              position: 'bottom',
-              fontSize: optionsSetup.fontTextSize,
-              color: optionsSetup.fontTextColor,
-              fontWeight: optionsSetup.fontTextWeight,
-              fontStyle: optionsSetup.fontTextStyle,
-              distance: 10,
-            };
-            this.options.series[3]['label'] = label;*/
-      //this.options.series[3]['symbolSize'] = [optionsSetup.barWidth, 10];
-    },
-    setOptionsBarBottomOut() {
-      const optionsSetup = this.optionsSetup;
-      // this.options.series[4]['symbolSize'] = [optionsSetup.barBottomOutSymbolSize, 10];
-      const itemStyle = {
-        color: {
-          type: 'radial',
-          x: 0.5,
-          y: 0.5,
-          r: 0.5,
-          colorStops: [
-            {
-              offset: 0, color: 'rgba(22,255,255, 0)' // 0% 处的颜色
-            },
-            {
-              offset: .75, color: 'rgba(22,255,255, 0)' // 100% 处的颜色
-            },
-            {
-              offset: .751, color: optionsSetup.barBottomOutColor // 100% 处的颜色
-            },
-            {
-              offset: 1, color: optionsSetup.barBottomOutColor // 100% 处的颜色
-            }
-          ],
-          global: false // 缺省为 false
-        },
-        opacity: 1
-      };
-      this.options.series[4]['itemStyle'] = itemStyle;
-    },
     // 计算柱图的高度比例
-    lineMaxHeight(val, heightRate) {
+    calMaxHeight(val, heightRate) {
       const maxValue = Math.max.apply(null, val.map(item => item.value))
       return heightRate / maxValue;
     },
     // 柱体的主干
-    lineData(val, heightRate) {
+    calScatterTrunk(val, heightRate) {
       return val.map((item) => {
         return {
-          coords: [geoCoordMap[item.name], [geoCoordMap[item.name][0], geoCoordMap[item.name][1] + item.value * this.lineMaxHeight(val, heightRate)]]
+          coords: [geoCoordMap[item.name], [geoCoordMap[item.name][0], geoCoordMap[item.name][1] + item.value * this.calMaxHeight(val, heightRate)]]
         }
       })
     },
     // 柱体顶部
-    scatterData(val, heightRate) {
+    calScatterTop(val, heightRate) {
       return val.map((item) => {
-        return [geoCoordMap[item.name][0], geoCoordMap[item.name][1] + item.value * this.lineMaxHeight(val, heightRate), item.value]
+        return [geoCoordMap[item.name][0], geoCoordMap[item.name][1] + item.value * this.calMaxHeight(val, heightRate), item.value]
       })
     },
     // 柱体的底部
-    scatterData2(val) {
+    calScatterBottom(val) {
       return val.map((item) => {
         return {
           name: item.name,
@@ -644,6 +453,152 @@ export default {
         },
       };
       this.options.tooltip = tooltip;
+    },
+    // 柱体主干
+    getOptionsBarTrunk(optionsSetup, arrColor, allData, heightRate) {
+      const barTrunk = {
+        type: 'lines',
+        zlevel: 1,
+        effect: {
+          show: false,
+          symbolSize: 5 // 图标大小
+        },
+        lineStyle: {
+          width: optionsSetup.barWidth, // 尾迹线条宽度
+          color: (params) => {
+            return arrColor[params.dataIndex];
+          },
+          opacity: 1, // 尾迹线条透明度
+          curveness: 0 // 尾迹线条曲直度
+        },
+        silent: true,
+        data: this.calScatterTrunk(allData, heightRate),
+      };
+      return barTrunk;
+    },
+    // 柱体顶
+    getOptionsBarTop(optionsSetup, arrColor, allData, heightRate) {
+      const barTop = {
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        //geoIndex: 0,
+        zlevel: 1,
+        rippleEffect: {
+          brushType: "stroke",
+        },
+        label: {
+          show: optionsSetup.isShowFontData,
+          formatter: function (params) {
+            return "{cnNum|" + params.data[2] + "}";
+          },
+          rich: {
+            cnNum: {
+              // 数值字号
+              fontSize: optionsSetup.fontDataSize,
+              color: (params) => {
+                return arrColor[params.dataIndex];
+              },
+              fontWeight: optionsSetup.fontDataWeight,
+              fontStyle: optionsSetup.fontDataStyle,
+            },
+          },
+          position: "top"
+        },
+        symbol: 'circle',
+        symbolSize: [optionsSetup.barWidth, 10],
+        itemStyle: {
+          color: (params) => {
+            return arrColor[params.dataIndex];
+          },
+          opacity: 1
+        },
+        silent: true,
+        data: this.calScatterTop(allData, heightRate)
+      }
+      return barTop;
+    },
+    // 柱底
+    getOptionsBarBottom(optionsSetup, arrColor, allData) {
+      const batBottom = {
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        rippleEffect: {
+          brushType: "stroke",
+        },
+        //geoIndex: 0,
+        zlevel: 1,
+        label: {
+          // 这儿是处理的
+          show: optionsSetup.isShowFontText,
+          formatter: '{b}',
+          position: 'bottom',
+          fontSize: optionsSetup.fontTextSize,
+          color: (params) => {
+            return arrColor[params.dataIndex];
+          },
+          fontWeight: optionsSetup.fontTextWeight,
+          fontStyle: optionsSetup.fontTextStyle,
+          distance: 10,
+        },
+        symbol: 'circle',
+        symbolSize: [optionsSetup.barWidth, 10],
+        itemStyle: {
+          color: (params) => {
+            return arrColor[params.dataIndex];
+          },
+          opacity: 1,
+        },
+        silent: true,
+        data: this.calScatterBottom(allData),
+      }
+      return batBottom;
+    },
+    // 柱底外圆
+    getOptionsBarBottomOut(optionsSetup, arrColor, allData) {
+      const barBottomOut = {
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        //geoIndex: 0,
+        rippleEffect: {
+          brushType: "stroke",
+        },
+        zlevel: 1,
+        label: {
+          show: false
+        },
+        symbol: 'circle',
+        symbolSize: [optionsSetup.barBottomOutSymbolSize, 10],
+        // 渐变色
+        itemStyle: {
+          color: (params) => {
+            return {
+              type: 'radial',
+              x: 0.5,
+              y: 0.5,
+              r: 0.5,
+              colorStops: [
+                {
+                  offset: 0, color: 'rgba(22,255,255, 0)' // 0% 处的颜色
+                },
+                {
+                  offset: .75, color: 'rgba(22,255,255, 0)' // 100% 处的颜色
+                },
+                {
+                  offset: .751, color: arrColor[params.dataIndex] // 100% 处的颜色
+                },
+                {
+                  offset: 1, color: arrColor[params.dataIndex] // 100% 处的颜色
+                }
+              ],
+              global: false // 缺省为 false
+            }
+          },
+          opacity: 1,
+        },
+        silent: true,
+        data: this.calScatterBottom(allData),
+      }
+      return barBottomOut;
     },
     //数据解析
     setOptionsData(e, paramsConfig) {
@@ -699,98 +654,11 @@ export default {
       for (const i in val) {
         arrColor.push(customColor[i % customColor.length].color)
       }
-      const itemStyle = {
-        color: (params) => {
-          //console.log(params)
-          return arrColor[params.dataIndex];
-        },
-        opacity: 1,
-      };
-      const lineStyle = {
-        width: optionsSetup.barWidth,
-        color: (params) => {
-          //console.log(params)
-          return arrColor[params.dataIndex];
-        },
-        opacity: 1, // 尾迹线条透明度
-        curveness: 0 // 尾迹线条曲直度
-      }
 
-      const labelTop = {
-        show: optionsSetup.isShowFontData,
-        formatter: function (params) {
-          return "{cnNum|" + params.data[2] + "}";
-        },
-        rich: {
-          cnNum: {
-            // 数值字号
-            fontSize: optionsSetup.fontDataSize,
-            color: (params) => {
-              return arrColor[params.dataIndex];
-            },
-            fontWeight: optionsSetup.fontDataWeight,
-            fontStyle: optionsSetup.fontDataStyle,
-          },
-        },
-        position: "top"
-      };
-      const labelBottom = {
-        // 这儿是处理的
-        show: optionsSetup.isShowFontText,
-        formatter: '{b}',
-        position: 'bottom',
-        fontSize: optionsSetup.fontTextSize,
-        color: (params) => {
-          return arrColor[params.dataIndex];
-        },
-        fontWeight: optionsSetup.fontTextWeight,
-        fontStyle: optionsSetup.fontTextStyle,
-        distance: 10,
-      };
-      // 渐变
-      const itemStyle4 = {
-        color: (params) => {
-          return {
-            type: 'radial',
-            x: 0.5,
-            y: 0.5,
-            r: 0.5,
-            colorStops: [
-              {
-                offset: 0, color: 'rgba(22,255,255, 0)' // 0% 处的颜色
-              },
-              {
-                offset: .75, color: 'rgba(22,255,255, 0)' // 100% 处的颜色
-              },
-              {
-                offset: .751, color: arrColor[params.dataIndex] // 100% 处的颜色
-              },
-              {
-                offset: 1, color: arrColor[params.dataIndex] // 100% 处的颜色
-              }
-            ],
-            global: false // 缺省为 false
-          }
-        },
-        opacity: 1,
-      }
-      this.options.series[1]['lineStyle'] = lineStyle;
-      this.options.series[1].data = this.lineData(allData, heightRate);
-
-      this.options.series[2]['symbolSize'] = [optionsSetup.barWidth, 10];
-      this.options.series[2]['itemStyle'] = itemStyle;
-      this.options.series[2]['label'] = labelTop;
-      this.options.series[2].data = this.scatterData(allData, heightRate);
-
-      this.options.series[3]['symbolSize'] = [optionsSetup.barWidth, 10];
-      this.options.series[3]['itemStyle'] = itemStyle;
-      this.options.series[3]['label'] = labelBottom;
-      this.options.series[3].data = convertData(allData);
-
-      this.options.series[4]['symbolSize'] = [optionsSetup.barBottomOutSymbolSize, 10];
-      this.options.series[4]['itemStyle'] = itemStyle4;
-      console.log(this.options)
-      this.options.series[4].data = convertData(allData);
+      this.options.series[1] = this.getOptionsBarTrunk(optionsSetup, arrColor, allData, heightRate);
+      this.options.series[2] = this.getOptionsBarTop(optionsSetup, arrColor, allData, heightRate);
+      this.options.series[3] = this.getOptionsBarBottom(optionsSetup, arrColor, allData);
+      this.options.series[4] = this.getOptionsBarBottomOut(optionsSetup, arrColor, allData);
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
