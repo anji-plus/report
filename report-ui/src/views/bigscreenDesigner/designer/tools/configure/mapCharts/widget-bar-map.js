@@ -237,14 +237,6 @@ export const widgetBarMap = {
               placeholder: '',
               value: 20,
             },
-            /*{
-              type: 'vue-color',
-              label: '柱体颜色',
-              name: 'barColor',
-              required: false,
-              placeholder: '',
-              value: 'rgba(22,255,255, 1)'
-            },*/
             {
               type: 'el-input-number',
               label: '柱底外圆大小',
@@ -253,14 +245,6 @@ export const widgetBarMap = {
               placeholder: '',
               value: 30,
             },
-/*            {
-              type: 'vue-color',
-              label: '柱底外圆颜色',
-              name: 'barBottomOutColor',
-              required: false,
-              placeholder: '',
-              value: 'rgba(22,255,255, 1)'
-            },*/
           ],
         },
         {
@@ -282,14 +266,6 @@ export const widgetBarMap = {
               placeholder: '',
               value: 15,
             },
-           /* {
-              type: 'vue-color',
-              label: '文字颜色',
-              name: 'fontTextColor',
-              required: false,
-              placeholder: '',
-              value: '#D4EEFF'
-            },*/
             {
               type: 'el-select',
               label: '文字粗细',
@@ -333,14 +309,6 @@ export const widgetBarMap = {
               placeholder: '',
               value: 15,
             },
-            /*{
-              type: 'vue-color',
-              label: '数值颜色',
-              name: 'fontDataColor',
-              required: false,
-              placeholder: '',
-              value: '#D4EEFF'
-            },*/
             {
               type: 'el-select',
               label: '数值粗细',
@@ -466,8 +434,8 @@ export const widgetBarMap = {
         required: false,
         placeholder: '',
         relactiveDom: 'dataType',
-        chartType: 'widget-piechart',
-        dictKey: 'MAP_PROPERTIES',
+        chartType: 'widget-mapv2chart',
+        dictKey: 'MAP_V2_PROPERTIES',
         relactiveDomValue: 'dynamicData',
         value: '',
       },

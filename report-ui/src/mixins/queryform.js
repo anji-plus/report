@@ -1,5 +1,6 @@
 import miment from 'miment'
-import { getData } from '@/api/bigscreen'
+import {getData} from '@/api/bigscreen'
+
 export default {
   data() {
     return {
@@ -105,13 +106,13 @@ export default {
     },
     /**
      * 将url参数解析到图表参数中
-     * 1. tenantCode=aaa 
+     * 1. tenantCode=aaa
      * 2. [setCode].tenantCode=aaa
-     * 判断是否有点(.) 
+     * 判断是否有点(.)
      *  a. 没有 -> 把所有的参数全部给插入contextData
      *  b. 有 ->   点前缀的值去匹配相同的值再把对应的值插入contextData
-     * 
-     * **/ 
+     *
+     * **/
     toEchartsDataQueryParams(params) {
       const queryParams = this.deepClone(params)
       const query = this.$route.query
@@ -131,7 +132,7 @@ export default {
           }
         })
       }
-    
+
       return queryParams
     },
     // 判断对象是否包含点
@@ -180,6 +181,8 @@ export default {
         return this.radarChartFn(params.chartProperties, data)
       } else if (chartType == "widget-select") {
         return this.selectChartFn(params.chartProperties, data)
+      } else if (chartType == "widget-mapv2chart") {
+        return this.mapLLChartFn(params.chartProperties, data)
       } else {
         return data
       }
@@ -339,7 +342,7 @@ export default {
       return analysisData;
     },
     // 下拉框
-    selectChartFn(chartProperties, data){
+    selectChartFn(chartProperties, data) {
       let valueField;
       let labelField;
       for (const key in chartProperties) {
@@ -361,6 +364,27 @@ export default {
         const obj = {};
         obj["value"] = data[i][valueField];
         obj["label"] = data[i][labelField];
+        analysisData.push(obj);
+      }
+      return analysisData;
+    },
+    // 地图带经纬度数据解析
+    mapLLChartFn(chartProperties, data) {
+      const analysisData = [];
+      for (let i = 0; i < data.length; i++) {
+        const obj = {};
+        for (const key in chartProperties) {
+          const value = chartProperties[key];
+          if (value === "name") {
+            obj["name"] = data[i][key];
+          } else if (value === "longitude") {
+            obj["longitude"] = Number(data[i][key]);
+          } else if (value === "latitude") {
+            obj["latitude"] = Number(data[i][key]);
+          } else {
+            obj["value"] = data[i][key];
+          }
+        }
         analysisData.push(obj);
       }
       return analysisData;

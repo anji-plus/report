@@ -50,7 +50,7 @@ export default {
             layoutSize: "80%",
             label: {
               emphasis: {
-                show: true,
+                show: false,
                 color: "white",
               },
             },
@@ -86,7 +86,7 @@ export default {
             aspectScale: 0.75,
             type: 'map',
             map: 'china',
-            roam: true,
+            //roam: true,
             effect: {
               show: false,
               period: 6,
@@ -318,8 +318,8 @@ export default {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
-      this.setOptionsMap();
       this.setOptionsTooltip();
+      this.setOptionsMap();
       this.setOptionsData();
     },
     // 标题设置
@@ -344,6 +344,27 @@ export default {
       };
       this.options.title = title;
     },
+    // tooltip 设置
+    setOptionsTooltip() {
+      const optionsSetup = this.optionsSetup;
+      const tooltip = {
+        trigger: "item",
+        show: true,
+        enterable: true,
+        textStyle: {
+          color: optionsSetup.tipsColor,
+          fontSize: optionsSetup.tipsFontSize,
+        },
+        formatter: function (params) {
+          if (params.seriesType == 'scatter') {
+            return params.data.name + "" + params.data.value[2];
+          } else {
+            return params.name;
+          }
+        },
+      };
+      this.options.tooltip = tooltip;
+    },
     // 地图设置
     setOptionsMap() {
       const optionsSetup = this.optionsSetup;
@@ -357,7 +378,7 @@ export default {
           fontSize: optionsSetup.fontSizeMap,
         },
         emphasis: {
-          show: true,
+          show: false,
         },
       }
       const itemStyle = {
@@ -410,7 +431,7 @@ export default {
       const maxValue = Math.max.apply(null, val.map(item => item.value))
       return heightRate / maxValue;
     },
-    // 柱体的主干
+    // 计算柱体的主干
     calScatterTrunk(val, heightRate) {
       return val.map((item) => {
         return {
@@ -418,13 +439,13 @@ export default {
         }
       })
     },
-    // 柱体顶部
+    // 计算柱体顶部
     calScatterTop(val, heightRate) {
       return val.map((item) => {
         return [geoCoordMap[item.name][0], geoCoordMap[item.name][1] + item.value * this.calMaxHeight(val, heightRate), item.value]
       })
     },
-    // 柱体的底部
+    // 计算柱体的底部
     calScatterBottom(val) {
       return val.map((item) => {
         return {
@@ -432,27 +453,6 @@ export default {
           value: geoCoordMap[item.name]
         }
       })
-    },
-    // tooltip 设置
-    setOptionsTooltip() {
-      const optionsSetup = this.optionsSetup;
-      const tooltip = {
-        trigger: "item",
-        show: true,
-        enterable: true,
-        textStyle: {
-          color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize,
-        },
-        formatter: function (params) {
-          if (params.seriesType == 'scatter') {
-            return params.data.name + "" + params.data.value[2];
-          } else {
-            return params.name;
-          }
-        },
-      };
-      this.options.tooltip = tooltip;
     },
     // 柱体主干
     getOptionsBarTrunk(optionsSetup, arrColor, allData, heightRate) {
@@ -635,7 +635,6 @@ export default {
         longitude[i] = val[i].longitude;
         value[i] = val[i].value;
       }
-      // console.log(Object.keys(val[0]))
       let allData = [];
       for (const i in name) {
         geoCoordMap[name[i]] = [latitude[i], longitude[i]]
@@ -678,28 +677,45 @@ export default {
       });
     },
     renderingFn(val) {
-      this.options.series[0]["data"] = val;
+      let name = [];
+      let latitude = [];
+      let longitude = [];
+      let value = [];
+      for (const i in val) {
+        name[i] = val[i].name;
+        latitude[i] = val[i].latitude;
+        longitude[i] = val[i].longitude;
+        value[i] = val[i].value;
+      }
+      for (const i in val) {
+        name[i] = val[i].name;
+        latitude[i] = val[i].latitude;
+        longitude[i] = val[i].longitude;
+        value[i] = val[i].value;
+      }
+      let allData = [];
+      for (const i in name) {
+        geoCoordMap[name[i]] = [latitude[i], longitude[i]]
+        const obj = {
+          name: name[i],
+          value: value[i]
+        }
+        allData.push(obj)
+      }
       const optionsSetup = this.optionsSetup;
-      const label = this.options.series[1]["label"];
-      const normal = {
-        show: true,
-        color: "#fff",
-        fontWeight: "bold",
-        position: "inside",
-        formatter: function (para) {
-          return "{cnNum|" + para.data.value[2] + "}";
-        },
-        rich: {
-          cnNum: {
-            fontSize: optionsSetup.fontDataSize,
-            color: optionsSetup.fontDataColor,
-            fontWeight: optionsSetup.fontDataWeight,
-          },
-        },
-      };
-      const data = convertData(val);
-      this.options.series[1]["data"] = data;
-      label["normal"] = normal;
+      const heightRate = optionsSetup.heightRate;
+      // 颜色设置
+      const customColor = optionsSetup.customColor;
+      if (!customColor) return;
+      const arrColor = [];
+      for (const i in val) {
+        arrColor.push(customColor[i % customColor.length].color)
+      }
+
+      this.$set(this.options.series,1,this.getOptionsBarTrunk(optionsSetup, arrColor, allData, heightRate))
+      this.$set(this.options.series,2,this.getOptionsBarTop(optionsSetup, arrColor, allData, heightRate))
+      this.$set(this.options.series,3,this.getOptionsBarBottom(optionsSetup, arrColor, allData))
+      this.$set(this.options.series,4,this.getOptionsBarBottomOut(optionsSetup, arrColor, allData))
     },
   },
 };
