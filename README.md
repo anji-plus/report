@@ -178,7 +178,7 @@ aj_report（存放系统基础数据）数据库 <br>
 <a href='http://www.fgkb.net/'><img src="https://ajreport.beliefteam.cn/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
 <a href='http://www.turingoal.com/'><img src="https://ajreport.beliefteam.cn/file/download/cda7bf68-376b-45dc-9a55-c52b21e4a8c8" width = "130" height = "50" /> </a>
 <a href='https://www.gykjweb.com/'><img src="https://ajreport.beliefteam.cn/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a> 
-<img src="https://ajreport.beliefteam.cn/file/download/7fb4731c-a697-4049-b386-396a6c1f9270" width = "130" height = "130" /> <br>
+<img src="https://ajreport.beliefteam.cn/file/download/7fb4731c-a697-4049-b386-396a6c1f9270" width = "130" height = "130" />
 <img src="https://foruda.gitee.com/images/1694349610486939594/f2cd89ab_7349845.png" width = "130" height = "130" /> <br>
 <a href='http://www.plian.net/'><img src="https://ajreport.beliefteam.cn/file/download/7838f2c2-fdce-4ca7-8373-14d13dcda5cc" width = "130" height = "50" /> </a>
 <a href='https://www.zjjcl.cn/'><img src="https://ajreport.beliefteam.cn/file/download/8df07663-60c9-4e32-a0f2-0ea7d5c46ff9" width = "130" height = "50" /> </a>
@@ -227,7 +227,7 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 <img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "300" height = "300" align=left/>
 
 AJ-Report技术交流五群，新群可直接加<br>
-<img src="https://images.gitee.com/uploads/images/2021/1101/130421_caa25124_7492051.jpeg" width = "200" height = "200" align=left/> <br>
+<img src="https://images.gitee.com/uploads/images/2021/1101/130421_caa25124_7492051.jpeg" width = "300" height = "300" align=left/> <br>
 
 ## 更多支持
 
