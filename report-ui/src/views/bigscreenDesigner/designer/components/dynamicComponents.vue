@@ -58,7 +58,7 @@ export default {
   props: {
     chartType: String,
     dictKey: String,
-    formData: Object
+    formData: Object | String
   },
   data() {
     return {
