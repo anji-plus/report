@@ -29,6 +29,7 @@ export default ({
         this.optionsSetup = val.setup;
       },
       deep: true,
+      immediate: true
     },
   },
   computed: {
