@@ -12,6 +12,7 @@ import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.anjiplus.template.gaea.business.modules.file.dao.GaeaFileMapper;
 import com.anjiplus.template.gaea.business.modules.file.entity.GaeaFile;
 import com.anjiplus.template.gaea.business.modules.file.service.GaeaFileService;
+import com.anjiplus.template.gaea.business.util.ResponseUtil2;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
@@ -159,7 +160,7 @@ public class GaeaFileServiceImpl implements GaeaFileService {
             byte[] fileBytes = gaeaOSSTemplate.downloadFile(fileObjectName);
 
             // 根据文件后缀来判断，是显示图片\视频\音频，还是下载文件
-            return ResponseUtil.writeBody(originalFilename, fileBytes, isIEBrowser);
+            return ResponseUtil2.writeBody(originalFilename, fileBytes, isIEBrowser);
         } catch (Exception e) {
             log.error("file download error", e);
             throw BusinessExceptionBuilder.build(ResponseCode.FILE_OPERATION_FAILED, e.getMessage());
