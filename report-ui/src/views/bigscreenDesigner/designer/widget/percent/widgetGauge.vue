@@ -111,7 +111,11 @@ export default {
             },
             detail: {
               valueAnimation: true,
-              formatter: "{value} %",
+              formatter: function(value) {
+                const max = series[0].max; // 获取最大值
+                const formattedValue = (value / max * 100).toFixed(0); // 计算格式化后的数值
+                return formattedValue + ' %'; // 拼接百分号
+              },
               color: "white",
               fontSize: 18,
             },
@@ -263,7 +267,11 @@ export default {
         };
         const detail = {
           valueAnimation: true,
-          formatter: "{value} %",
+          formatter: function(value) {
+            const max = series[0].max; // 获取最大值
+            const formattedValue = (value / max * 100).toFixed(0); // 计算格式化后的数值
+            return formattedValue + ' %'; // 拼接百分号
+          },
           color: optionsSetup.detailColor,
           fontSize: optionsSetup.detailFontSize,
           fontWeight: optionsSetup.detailFontWeight,
@@ -274,6 +282,7 @@ export default {
         series[0].splitLine = splitLine;
         series[0].axisLabel = axisLabel;
         series[0].detail = detail;
+        series[0].max = optionsSetup.maxValue;
       }
     },
     setOptionsData(e, paramsConfig) {
