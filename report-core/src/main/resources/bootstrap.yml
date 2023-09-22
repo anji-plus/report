@@ -52,7 +52,7 @@ spring:
       oss: #文件存储 都配置的情况下优先级minio->amazonS3->nfs
         enabled: true
         ##允许上传的文件后缀
-        file-type-while-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg|.aaa
+        file-type-while-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg|.aaa|.svg
         # 用于文件上传成功后，生成文件的下载公网完整URL，http://serverip:9095/file/download，注意填写IP必须填写后端服务所在的机器IP
         downloadPath: http://10.108.26.197:9095/file/download
         nfs:
