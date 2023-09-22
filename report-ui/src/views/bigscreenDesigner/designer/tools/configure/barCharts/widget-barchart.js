@@ -67,6 +67,18 @@ export const widgetBarchart = {
               placeholder: '',
               value: 0,
             },
+            {
+              type: 'el-select',
+              label: '堆叠样式',
+              name: 'stackStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'leftRight', name: '左右堆叠' },
+                { code: 'upDown', name: '上下堆叠' },
+              ],
+              value: 'leftRight'
+            },
           ],
         },
         {
@@ -194,6 +206,88 @@ export const widgetBarchart = {
                 { code: 'oblique', name: 'oblique斜体' },
               ],
               value: 'normal'
+            },
+          ],
+        },
+        {
+          name: '图例操作',
+          list: [
+            {
+              type: 'el-switch',
+              label: '图例显示',
+              name: 'isShowLegend',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '名称( | 分隔)',
+              name: 'legendName',
+              required: false,
+              placeholder: '多值以' | '隔开',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'legendColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'legendFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例宽度',
+              name: 'legendWidth',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '横向位置',
+              name: 'lateralPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-select',
+              label: '纵向位置',
+              name: 'longitudinalPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'top', name: '顶部' },
+                { code: 'bottom', name: '底部' },
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-select',
+              label: '布局前置',
+              name: 'layoutFront',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'vertical', name: '竖排' },
+                { code: 'horizontal', name: '横排' },
+              ],
+              value: 'horizontal'
             },
           ],
         },
@@ -548,6 +642,18 @@ export const widgetBarchart = {
         {
           name: '自定义配色',
           list: [
+            {
+              type: 'el-select',
+              label: '配色样式',
+              name: 'colorStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'same', name: '同色' },
+                { code: 'unsame', name: '异色' },
+              ],
+              value: 'same'
+            },
             {
               type: 'customColor',
               label: '',
