@@ -424,6 +424,15 @@ export default {
         this.options.legend["data"] = arr;
       }
     },
+    //获取堆叠样式
+    getStackStyle() {
+      const optionsSetup = this.optionsSetup;
+      let style = "";
+      if (optionsSetup.stackStyle == "upDown") {
+        style = "total";
+      }
+      return style;
+    },
     // 数据处理
     setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
@@ -478,6 +487,7 @@ export default {
         if (series[i].type == "bar") {
           series[i].name = legendName[i];
           series[i].type = "bar";
+          series[i].stack = this.getStackStyle();
           series[i].label = {
             show: optionsSetup.isShowBar,
             position: "top",
@@ -565,6 +575,7 @@ export default {
         if (val.series[i].type == "bar") {
           obj.name = val.series[i].name;
           obj.type = val.series[i].type;
+          obj.stack = this.getStackStyle();
           obj.label = {
             show: optionsSetup.isShowBar,
             position: "top",

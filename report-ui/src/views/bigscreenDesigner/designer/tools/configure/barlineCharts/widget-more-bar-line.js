@@ -51,6 +51,18 @@ export const widgetMoreBarLine = {
               placeholder: '',
               value: 5,
             },
+            {
+              type: 'el-select',
+              label: '堆叠样式',
+              name: 'stackStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'leftRight', name: '左右堆叠' },
+                { code: 'upDown', name: '上下堆叠' },
+              ],
+              value: 'leftRight'
+            },
           ],
         },
         {
