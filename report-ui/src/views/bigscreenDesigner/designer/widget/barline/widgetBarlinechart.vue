@@ -337,6 +337,7 @@ export default {
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
             fontWeight: optionsSetup.fontWeightLine,
+            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}'
           };
         }
       }
@@ -355,6 +356,7 @@ export default {
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
             fontWeight: optionsSetup.fontWeightBar,
+            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}'
           };
           series[key].barWidth = optionsSetup.maxWidth;
           series[key].barMinHeight = optionsSetup.minHeight;

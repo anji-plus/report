@@ -371,6 +371,7 @@ export default {
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
           };
           // 获取颜色样式
           if (optionsSetup.colorStyle == 'same') {
@@ -454,6 +455,7 @@ export default {
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
           };
           // 获取颜色样式
           if (optionsSetup.colorStyle == 'same') {
