@@ -427,6 +427,14 @@ export const widgetGradientBarchart = {
               value: true
             },
             {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSign',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
               type: 'el-input-number',
               label: '距离',
               name: 'distance',
@@ -538,7 +546,7 @@ export const widgetGradientBarchart = {
               name: 'bar100color',
               required: false,
               placeholder: '',
-              value: 'rgba(0,77,167,1)'
+              value: 'rgba(255, 69, 0, 1)'
             },
             {
               type: 'vue-color',

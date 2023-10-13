@@ -537,6 +537,14 @@ export const widgetBarStack = {
               value: false
             },
             {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSign',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
               name: 'fontSize',
@@ -550,7 +558,7 @@ export const widgetBarStack = {
               name: 'dataColor',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: ''
             },
             {
               type: 'el-select',

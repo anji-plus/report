@@ -369,6 +369,7 @@ export default {
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
           },
           //颜色，圆角属性
           itemStyle: {
@@ -450,6 +451,7 @@ export default {
               fontSize: optionsSetup.fontSize,
               color: optionsSetup.dataColor,
               fontWeight: optionsSetup.fontWeight,
+              formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
             },
             //颜色，圆角属性
             itemStyle: {

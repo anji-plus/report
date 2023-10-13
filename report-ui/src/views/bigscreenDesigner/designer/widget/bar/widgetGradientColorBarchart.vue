@@ -314,6 +314,7 @@ export default {
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
           };
         } else {
           series[0].label = {
@@ -323,6 +324,7 @@ export default {
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
           };
         }
         series[0].barWidth = optionsSetup.maxWidth;
@@ -360,7 +362,7 @@ export default {
       let normal = {};
       if (optionsSetup.verticalShow) {
         normal = {
-          color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+          color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
             {
               offset: 0,
               color: optionsSetup.bar0color, // 0% 处的颜色
@@ -376,7 +378,7 @@ export default {
         };
       } else {
         normal = {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
             {
               offset: 0,
               color: optionsSetup.bar0color, // 0% 处的颜色
@@ -395,7 +397,6 @@ export default {
     },
     // 数据解析
     setOptionsData(e, paramsConfig) {
-      const optionsSetup = this.optionsSetup;
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       // 联动接收者逻辑开始
       optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined

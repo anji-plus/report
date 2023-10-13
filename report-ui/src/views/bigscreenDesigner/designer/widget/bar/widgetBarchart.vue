@@ -392,10 +392,10 @@ export default {
             };
           }
           series[i].data = data;
-          this.options.legend["data"] = legendName;
-          this.setOptionsLegendName(legendName);
         }
       }
+      this.options.legend["data"] = legendName;
+      this.setOptionsLegendName(legendName);
     },
     // 动态数据
     dynamicDataFn(refreshTime) {

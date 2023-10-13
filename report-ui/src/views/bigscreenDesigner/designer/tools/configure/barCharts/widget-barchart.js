@@ -574,7 +574,7 @@ export const widgetBarchart = {
               name: 'dataColor',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: ''
             },
             {
               type: 'el-select',
