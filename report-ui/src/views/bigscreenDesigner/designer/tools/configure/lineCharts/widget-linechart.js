@@ -561,6 +561,14 @@ export const widgetLinechart = {
               value: false
             },
             {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSign',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
               name: 'fontSize',

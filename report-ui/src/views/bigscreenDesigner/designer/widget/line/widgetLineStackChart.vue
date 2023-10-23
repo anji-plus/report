@@ -400,6 +400,7 @@ export default {
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
           },
         });
         legendName.push(yAxisList[i]);
@@ -488,6 +489,7 @@ export default {
               fontSize: optionsSetup.fontSize,
               color: optionsSetup.dataColor,
               fontWeight: optionsSetup.fontWeight,
+              formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
             },
           });
         }
