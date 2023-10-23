@@ -458,6 +458,7 @@ export default {
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
             fontWeight: optionsSetup.fontWeightBar,
+            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}'
           },
           //颜色，圆角属性
           itemStyle: {
@@ -501,6 +502,7 @@ export default {
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
             fontWeight: optionsSetup.fontWeightLine,
+            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}'
           },
         });
       }
@@ -563,6 +565,7 @@ export default {
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
             fontWeight: optionsSetup.fontWeightBar,
+            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}'
           },
           //颜色，圆角属性
           itemStyle: {
@@ -605,6 +608,7 @@ export default {
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
             fontWeight: optionsSetup.fontWeightLine,
+            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}'
           },
         });
       }

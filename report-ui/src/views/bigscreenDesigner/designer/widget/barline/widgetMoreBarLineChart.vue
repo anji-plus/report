@@ -495,6 +495,7 @@ export default {
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
             fontWeight: optionsSetup.fontWeightBar,
+            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}'
           };
           series[i].barWidth = optionsSetup.maxWidth;
           series[i].itemStyle.normal["barBorderRadius"] = optionsSetup.radius;
@@ -532,6 +533,7 @@ export default {
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
             fontWeight: optionsSetup.fontWeightLine,
+            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}'
           };
         }
       }
@@ -583,6 +585,7 @@ export default {
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
             fontWeight: optionsSetup.fontWeightBar,
+            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}'
           };
           obj.barWidth = optionsSetup.maxWidth;
           obj.itemStyle = {
@@ -626,6 +629,7 @@ export default {
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
             fontWeight: optionsSetup.fontWeightLine,
+            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}'
           };
           obj.data = val.series[i].data;
           series.push(obj);

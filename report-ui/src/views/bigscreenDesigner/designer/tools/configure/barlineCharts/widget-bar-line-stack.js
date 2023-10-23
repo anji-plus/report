@@ -698,6 +698,14 @@ export const widgetBarLineStack = {
               value: false
             },
             {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSignBar',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
               type: 'el-input-number',
               label: '距离',
               name: 'distanceBar',
@@ -744,6 +752,14 @@ export const widgetBarLineStack = {
               type: 'el-switch',
               label: '显示',
               name: 'isShowLine',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSignLine',
               required: false,
               placeholder: '',
               value: false
