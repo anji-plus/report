@@ -122,7 +122,11 @@ export default {
       this.$emit("change", params);
     },
     selectParams(val, key) {
-      this.chartProperties[key] = val;
+      if (!val) {
+        delete this.chartProperties[key]
+      } else {
+        this.chartProperties[key] = val;
+      }
     },
     getDictKey() {
       return this.dictKey == null ? "CHART_PROPERTIES" : this.dictKey;
