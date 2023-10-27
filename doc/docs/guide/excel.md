@@ -12,7 +12,7 @@ Excel报表基于Luckysheet开发，[Luckysheet](https://gitee.com/mengshukeji/L
 ![img](../picture/excel/img.png) <br>
 
 进入大屏设计方法2： <br>
-从大屏报表模块选择需要设计的大屏，按图示进入大屏设计界面。 <br>
+从表格报表模块选择需要设计的大屏，按图示进入大屏设计界面。 <br>
 ![img2](../picture/excel/img_1.png) <br>
 
 ## 设计界面
