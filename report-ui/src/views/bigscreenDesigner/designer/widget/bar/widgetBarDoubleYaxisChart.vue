@@ -219,6 +219,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = [
         {
+          max: optionsSetup.maxYLeft !== "" ? optionsSetup.maxYLeft : null,
           type: "value",
           // 均分
           splitNumber: optionsSetup.splitNumberLeft,
@@ -261,6 +262,7 @@ export default {
           },
         },
         {
+          max: optionsSetup.maxYRight !== "" ? optionsSetup.maxYRight : null,
           type: "value",
           // 均分
           splitNumber: optionsSetup.splitNumberRight,
@@ -322,6 +324,17 @@ export default {
           series[key].barWidth = optionsSetup.maxWidth;
           series[key].barMinHeight = optionsSetup.minHeight;
           series[key].itemStyle.barBorderRadius = optionsSetup.radius;
+          //柱体背景属性
+          series[key].showBackground = optionsSetup.isShowBackground;
+          series[key].backgroundStyle = {
+            color: optionsSetup.backgroundStyleColor,
+            borderColor: optionsSetup.backgroundStyleBorderColor,
+            borderWidth: optionsSetup.backgroundStyleBorderWidth,
+            borderType: optionsSetup.backgroundStyleBorderType,
+            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+            shadowColor: optionsSetup.backgroundStyleShadowColor,
+            opacity: optionsSetup.backgroundStyleOpacity / 100,
+          };
         }
       }
       this.options.series = series;

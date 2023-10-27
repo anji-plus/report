@@ -184,6 +184,7 @@ export default {
     setOptionsY() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
+        max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -391,6 +392,17 @@ export default {
               },
             };
           }
+          //柱体背景属性
+          series[i].showBackground = optionsSetup.isShowBackground;
+          series[i].backgroundStyle = {
+            color: optionsSetup.backgroundStyleColor,
+            borderColor: optionsSetup.backgroundStyleBorderColor,
+            borderWidth: optionsSetup.backgroundStyleBorderWidth,
+            borderType: optionsSetup.backgroundStyleBorderType,
+            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+            shadowColor: optionsSetup.backgroundStyleShadowColor,
+            opacity: optionsSetup.backgroundStyleOpacity / 100,
+          };
           series[i].data = data;
         }
       }
@@ -474,6 +486,17 @@ export default {
                 barBorderRadius: optionsSetup.radius,
               },
             };
+          }
+          //柱体背景属性
+          obj.showBackground = optionsSetup.isShowBackground;
+          obj.backgroundStyle = {
+            color: optionsSetup.backgroundStyleColor,
+            borderColor: optionsSetup.backgroundStyleBorderColor,
+            borderWidth: optionsSetup.backgroundStyleBorderWidth,
+            borderType: optionsSetup.backgroundStyleBorderType,
+            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+            shadowColor: optionsSetup.backgroundStyleShadowColor,
+            opacity: optionsSetup.backgroundStyleOpacity / 100,
           }
           obj.data = val.series[i].data;
           series.push(obj);

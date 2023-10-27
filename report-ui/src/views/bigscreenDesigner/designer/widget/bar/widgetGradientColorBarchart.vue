@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart"  :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -10,6 +10,7 @@ import {
   targetWidgetLinkageLogic,
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
 import echarts from "echarts";
+
 export default {
   name: "WidgetGradientColorBarchart", //渐变色，参考https://www.makeapie.com/editor.html?c=x0oZWoncE
   components: {},
@@ -260,6 +261,7 @@ export default {
     setOptionsY() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
+        max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -328,6 +330,17 @@ export default {
           };
         }
         series[0].barWidth = optionsSetup.maxWidth;
+        //柱体背景属性
+        series[0].showBackground = optionsSetup.isShowBackground;
+        series[0].backgroundStyle = {
+          color: optionsSetup.backgroundStyleColor,
+          borderColor: optionsSetup.backgroundStyleBorderColor,
+          borderWidth: optionsSetup.backgroundStyleBorderWidth,
+          borderType: optionsSetup.backgroundStyleBorderType,
+          shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+          shadowColor: optionsSetup.backgroundStyleShadowColor,
+          opacity: optionsSetup.backgroundStyleOpacity / 100,
+        };
       }
     },
     // tooltip 提示语设置

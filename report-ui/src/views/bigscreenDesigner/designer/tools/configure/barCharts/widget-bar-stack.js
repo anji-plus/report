@@ -486,7 +486,7 @@ export const widgetBarStack = {
               name: 'maxY',
               required: false,
               placeholder: '',
-              value: '100',
+              value: '',
             },
             {
               type: 'el-input-text',

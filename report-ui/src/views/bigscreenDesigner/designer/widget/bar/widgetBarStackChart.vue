@@ -173,20 +173,11 @@ export default {
       };
       this.options.xAxis = xAxis;
     },
-    //判断有无yAxis max，无返回null
-    getOptionsYMax() {
-      const optionsSetup = this.optionsSetup;
-      let max = null;
-      if (optionsSetup.maxY !== "") {
-        max = optionsSetup.maxY
-      }
-      return max
-    },
     // Y轴设置
     setOptionsY() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
-        max: this.getOptionsYMax(),
+        max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -402,7 +393,6 @@ export default {
         });
         legendName.push(yAxisList[i]);
       }
-      console.log(series)
       this.options.series = series;
       if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];
