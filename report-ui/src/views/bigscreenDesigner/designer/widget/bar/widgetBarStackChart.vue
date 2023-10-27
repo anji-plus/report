@@ -312,10 +312,10 @@ export default {
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(
-            optionsData.dynamicData,
-            optionsData.refreshTime,
-            optionsSetup
-          );
+          optionsData.dynamicData,
+          optionsData.refreshTime,
+          optionsSetup
+        );
     },
     //去重
     setUnique(arr) {
@@ -367,7 +367,6 @@ export default {
         }
         series.push({
           name: yAxisList[i],
-          showBackground: optionsSetup.isShowBackground,
           type: "bar",
           data: data,
           barGap: "0%",
@@ -389,9 +388,21 @@ export default {
               barBorderRadius: optionsSetup.radius,
             },
           },
+          //柱体背景属性
+          showBackground: optionsSetup.isShowBackground,
+          backgroundStyle: {
+            color: optionsSetup.backgroundStyleColor,
+            borderColor: optionsSetup.backgroundStyleBorderColor,
+            borderWidth: optionsSetup.backgroundStyleBorderWidth,
+            borderType: optionsSetup.backgroundStyleBorderType,
+            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+            shadowColor: optionsSetup.backgroundStyleShadowColor,
+            opacity: optionsSetup.backgroundStyleOpacity / 100,
+          }
         });
         legendName.push(yAxisList[i]);
       }
+      console.log(series)
       this.options.series = series;
       if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];
@@ -471,6 +482,17 @@ export default {
                 barBorderRadius: optionsSetup.radius,
               },
             },
+            //柱体背景属性
+            showBackground: optionsSetup.isShowBackground,
+            backgroundStyle: {
+              color: optionsSetup.backgroundStyleColor,
+              borderColor: optionsSetup.backgroundStyleBorderColor,
+              borderWidth: optionsSetup.backgroundStyleBorderWidth,
+              borderType: optionsSetup.backgroundStyleBorderType,
+              shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+              shadowColor: optionsSetup.backgroundStyleShadowColor,
+              opacity: optionsSetup.backgroundStyleOpacity / 100,
+            }
           });
         }
         legendName.push(val.series[i].name);
