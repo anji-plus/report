@@ -413,6 +413,22 @@ export const widgetBarStack = {
             },
             {
               type: 'el-input-text',
+              label: '最大值',
+              name: 'maxY',
+              required: false,
+              placeholder: '',
+              value: '100',
+            },
+            {
+              type: 'el-switch',
+              label: '阴影显示',
+              name: 'isShowBackground',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-text',
               label: '坐标名',
               name: 'textNameY',
               require: false,

@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -173,10 +173,20 @@ export default {
       };
       this.options.xAxis = xAxis;
     },
+    //判断有无yAxis max，无返回null
+    getOptionsYMax() {
+      const optionsSetup = this.optionsSetup;
+      let max = null;
+      if (optionsSetup.maxY !== "") {
+        max = optionsSetup.maxY
+      }
+      return max
+    },
     // Y轴设置
     setOptionsY() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
+        max: this.getOptionsYMax(),
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -357,6 +367,7 @@ export default {
         }
         series.push({
           name: yAxisList[i],
+          showBackground: optionsSetup.isShowBackground,
           type: "bar",
           data: data,
           barGap: "0%",
