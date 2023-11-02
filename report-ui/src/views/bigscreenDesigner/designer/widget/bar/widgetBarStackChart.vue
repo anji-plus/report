@@ -500,10 +500,7 @@ export default {
         legendName.push(val.series[i].name);
       }
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
-      let xAxisDataLength = 1;
-      if (val.length !== 0) {
-        xAxisDataLength = val.xAxis.length;
-      }
+      const xAxisDataLength = val.length !== 0 ? val.xAxis.length : 1;
       const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
       const axisLabel = {
         show: true,
