@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -471,7 +471,7 @@ export default {
       legendName.push("line");
       const optionsSetup = this.optionsSetup;
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
-      const wordNum = parseInt((this.optionsStyle.width / axis.length) / optionsSetup.fontSizeX);
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / axis.length) / optionsSetup.fontSizeX);
       const axisLabel = {
         show: true,
         interval: optionsSetup.textInterval,
@@ -488,7 +488,7 @@ export default {
           let str = ''
           for (let i = 0, s; s = strs[i++];) {
             str += s;
-            if (!(i % wordNum)) str += '\n';
+            if (!(i % rowsNum)) str += '\n';
           }
           return str
         }
@@ -530,10 +530,10 @@ export default {
       const optionsSetup = this.optionsSetup;
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
       let xAxisDataLength = 1;
-      if (val.length !== 0){
+      if (val.length !== 0) {
         xAxisDataLength = val.xAxis.length;
       }
-      const wordNum = parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
       const axisLabel = {
         show: true,
         interval: optionsSetup.textInterval,
@@ -550,7 +550,7 @@ export default {
           let str = ''
           for (let i = 0, s; s = strs[i++];) {
             str += s;
-            if (!(i % wordNum)) str += '\n';
+            if (!(i % rowsNum)) str += '\n';
           }
           return str
         }

@@ -367,6 +367,14 @@ export const widgetLineStack = {
               value: 14,
             },
             {
+              type: 'el-input-text',
+              label: '数值行数',
+              name: 'textRowsNum',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
               type: 'el-input-number',
               label: '数值间隔',
               name: 'textInterval',
