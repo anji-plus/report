@@ -47,6 +47,18 @@ export const widgetBarLineStack = {
               placeholder: '',
               value: 5,
             },
+            {
+              type: 'el-select',
+              label: '堆叠样式',
+              name: 'stackStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'leftRight', name: '左右堆叠' },
+                { code: 'upDown', name: '上下堆叠' },
+              ],
+              value: 'leftRight'
+            },
           ],
         },
         {
@@ -358,6 +370,14 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               value: 14,
+            },
+            {
+              type: 'el-input-text',
+              label: '数值行数',
+              name: 'textRowsNum',
+              required: false,
+              placeholder: '',
+              value: '',
             },
             {
               type: 'el-input-number',
@@ -686,6 +706,14 @@ export const widgetBarLineStack = {
               value: false
             },
             {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSignBar',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
               type: 'el-input-number',
               label: '距离',
               name: 'distanceBar',
@@ -732,6 +760,14 @@ export const widgetBarLineStack = {
               type: 'el-switch',
               label: '显示',
               name: 'isShowLine',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSignLine',
               required: false,
               placeholder: '',
               value: false

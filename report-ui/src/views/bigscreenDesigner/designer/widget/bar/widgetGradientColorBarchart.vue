@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart"  :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -10,13 +10,13 @@ import {
   targetWidgetLinkageLogic,
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
 import echarts from "echarts";
+
 export default {
   name: "WidgetGradientColorBarchart", //渐变色，参考https://www.makeapie.com/editor.html?c=x0oZWoncE
   components: {},
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
     widgetIndex: {
       type: Number,
       default: 0,
@@ -227,18 +227,6 @@ export default {
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
-        axisLabel: {
-          show: true,
-          // 文字间隔
-          interval: optionsSetup.textInterval,
-          // 文字角度
-          rotate: optionsSetup.textAngleX,
-          textStyle: {
-            // 坐标文字颜色
-            color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX,
-          },
-        },
         axisLine: {
           show: true,
           lineStyle: {
@@ -260,6 +248,7 @@ export default {
     setOptionsY() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
+        max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -314,6 +303,7 @@ export default {
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
           };
         } else {
           series[0].label = {
@@ -323,9 +313,21 @@ export default {
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
           };
         }
         series[0].barWidth = optionsSetup.maxWidth;
+        //柱体背景属性
+        series[0].showBackground = optionsSetup.isShowBackground;
+        series[0].backgroundStyle = {
+          color: optionsSetup.backgroundStyleColor,
+          borderColor: optionsSetup.backgroundStyleBorderColor,
+          borderWidth: optionsSetup.backgroundStyleBorderWidth,
+          borderType: optionsSetup.backgroundStyleBorderType,
+          shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+          shadowColor: optionsSetup.backgroundStyleShadowColor,
+          opacity: optionsSetup.backgroundStyleOpacity / 100,
+        };
       }
     },
     // tooltip 提示语设置
@@ -360,7 +362,7 @@ export default {
       let normal = {};
       if (optionsSetup.verticalShow) {
         normal = {
-          color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+          color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
             {
               offset: 0,
               color: optionsSetup.bar0color, // 0% 处的颜色
@@ -376,7 +378,7 @@ export default {
         };
       } else {
         normal = {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
             {
               offset: 0,
               color: optionsSetup.bar0color, // 0% 处的颜色
@@ -395,7 +397,6 @@ export default {
     },
     // 数据解析
     setOptionsData(e, paramsConfig) {
-      const optionsSetup = this.optionsSetup;
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       // 联动接收者逻辑开始
       optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
@@ -443,6 +444,30 @@ export default {
       if (series[0].type == "bar") {
         series[0].data = data;
       }
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / axis.length) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % rowsNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
     },
     // 动态数据
     dynamicDataFn(refreshTime) {
@@ -478,14 +503,35 @@ export default {
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
       }
-
-      // series
       const series = this.options.series;
-      for (const i in series) {
-        if (series[i].type == "bar") {
-          series[i].data = val.series[i].data;
+      if (series[0].type == "bar") {
+        series[0].data = val.series[0].data;
+      }
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      const xAxisDataLength = val.length !== 0 ? val.xAxis.length : 1;
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % rowsNum)) str += '\n';
+          }
+          return str
         }
       }
+      this.options.xAxis.axisLabel = axisLabel;
     },
   },
 };

@@ -388,6 +388,14 @@ export const widgetBarlinechart = {
               value: 14,
             },
             {
+              type: 'el-input-text',
+              label: '数值行数',
+              name: 'textRowsNum',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
               type: 'el-input-number',
               label: '数值间隔',
               name: 'textInterval',
@@ -703,63 +711,20 @@ export const widgetBarlinechart = {
           ],
         },
         {
-          name: '折线数值设定',
-          list: [
-            {
-              type: 'el-switch',
-              label: '显示',
-              name: 'isShowLine',
-              required: false,
-              placeholder: '',
-              value: false
-            },
-            {
-              type: 'el-input-number',
-              label: '距离',
-              name: 'distanceLine',
-              required: false,
-              placeholder: '',
-              value: 5
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'fontSizeLine',
-              required: false,
-              placeholder: '',
-              value: 14
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'subTextColorLine',
-              required: false,
-              placeholder: '',
-              value: '#fff'
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'fontWeightLine',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
-              ],
-              value: 'normal'
-            },
-          ],
-        },
-        {
           name: '柱体数值设定',
           list: [
             {
               type: 'el-switch',
               label: '显示',
               name: 'isShowBar',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSignBar',
               required: false,
               placeholder: '',
               value: false
@@ -792,6 +757,65 @@ export const widgetBarlinechart = {
               type: 'el-select',
               label: '字体粗细',
               name: 'fontWeightBar',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+          ],
+        },
+        {
+          name: '折线数值设定',
+          list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowLine',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSignLine',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-input-number',
+              label: '距离',
+              name: 'distanceLine',
+              required: false,
+              placeholder: '',
+              value: 5
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'fontSizeLine',
+              required: false,
+              placeholder: '',
+              value: 14
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'subTextColorLine',
+              required: false,
+              placeholder: '',
+              value: '#fff'
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'fontWeightLine',
               required: false,
               placeholder: '',
               selectOptions: [

@@ -1,7 +1,7 @@
 <template>
   <iframe
     :style="styleColor"
-    :src="styleColor.iframeAdress"
+    :src="this.toGetUrl(styleColor.iframeAdress)"
     width="100%"
     height="100%"
   />
@@ -47,7 +47,24 @@ export default {
   mounted() {
     this.options = this.value;
   },
-  methods: {}
+  methods: {
+    toGetUrl(url) {
+      if (url.indexOf('{') < 0 && url.indexOf('}' < 0)) {
+        return url
+      }
+      const reg = /{[a-zA-Z0-9]*\}/g
+      const list = url.match(reg)
+      console.log(list)
+      let result = url
+      const query = this.$route.query
+      for (let i = 0; i < list.length; i++) {
+        const sub = list[i]
+        const key = sub.replace('{', '').replace('}', '')
+        result = result.replace(sub, query[key])
+      }
+      return result
+    }
+  }
 };
 </script>
 

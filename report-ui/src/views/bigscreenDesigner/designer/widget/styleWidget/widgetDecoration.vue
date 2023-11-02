@@ -1,5 +1,5 @@
 <template>
-  <div :style="styleObj">
+  <div>
     <component :is="value.setup.showtype" :value="value" :style="styleObj"/>
   </div>
 </template>
@@ -29,6 +29,7 @@ export default ({
         this.optionsSetup = val.setup;
       },
       deep: true,
+      immediate: true
     },
   },
   computed: {

@@ -54,7 +54,9 @@ import widgetScaleVertical from "./scale/widgetScaleVertical.vue";
 import widgetScaleHorizontal from "./scale/widgetScaleHorizontal.vue";
 import widgetBarDoubleYaxisChart from "./bar/widgetBarDoubleYaxisChart.vue";
 import widgetBorder from "./styleWidget/widgetBorder.vue";
+import widgetDecorateFlowLine from "./styleWidget/widgetDecorateFlowLine.vue";
 import widgetDecoration from "./styleWidget/widgetDecoration.vue";
+import widgetBarMap from "./map/widgetBarMap.vue";
 
 export default {
   name: "Widget",
@@ -62,6 +64,7 @@ export default {
     widgetHref,
     widgetText,
     widgetBorder,
+    widgetDecorateFlowLine,
     widgetDecoration,
     WidgetMarquee,
     widgetTime,
@@ -97,6 +100,7 @@ export default {
     //widgetInput,
     widgetFormTime,
     widgetBarDoubleYaxisChart,
+    widgetBarMap
   },
   model: {
     prop: "value",

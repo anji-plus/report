@@ -6,9 +6,6 @@
 
 ### 文本框
 
-![img_3.png](../picture/dashboard/img_3.png) <br>
-![img_4.png](../picture/dashboard/img_4.png) <br>
-![img_5.png](../picture/dashboard/img_5.png) <br>
 ![img_6.png](../picture/dashboard/img_6.png) <br>
 
 #### 数据格式
@@ -59,6 +56,10 @@
 ### 边框
 
 ![img42](../picture/charts/img_42.png) <br>
+
+### 流光直线
+
+![img44](../picture/charts/img_44.png) <br>
 
 ### 装饰
 
@@ -278,6 +279,16 @@
 可参考静态数据，目前气泡地图仅能显示“省”级别，注意动态数据的名称要和地图底层数据名称保持一致，即完整的省名，可以看静态数据，如果和你提供的动态数据名称有差异，请参考源码自行修改。 <br>
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
+
+### 柱形地图
+
+底层解析增加了经纬度，字典值为“地址名称”、“经度坐标”、“维度坐标”、“数值” ，相对于气泡地图可在地图上显示非省会坐标。<br>
+![img45](../picture/charts/img_45.png) 
+
+#### 数据格式
+
+可参考静态数据，目前也是全国总览。
+![img46](../picture/charts/img_46.png) <br>
 
 ## 词云图
 

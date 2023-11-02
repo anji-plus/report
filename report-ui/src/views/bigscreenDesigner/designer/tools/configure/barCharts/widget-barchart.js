@@ -67,6 +67,87 @@ export const widgetBarchart = {
               placeholder: '',
               value: 0,
             },
+            {
+              type: 'el-select',
+              label: '堆叠样式',
+              name: 'stackStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'leftRight', name: '左右堆叠' },
+                { code: 'upDown', name: '上下堆叠' },
+              ],
+              value: 'leftRight'
+            },
+            {
+              type: 'el-switch',
+              label: '背景显示',
+              name: 'isShowBackground',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'vue-color',
+              label: '背景颜色',
+              name: 'backgroundStyleColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(180, 180, 180, 0.2)',
+            },
+            {
+              type: 'vue-color',
+              label: '描边颜色',
+              name: 'backgroundStyleBorderColor',
+              required: false,
+              placeholder: '',
+              value: '#000',
+            },
+            {
+              type: 'el-input-number',
+              label: '描边宽度',
+              name: 'backgroundStyleBorderWidth',
+              required: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-select',
+              label: '描边类型',
+              name: 'backgroundStyleBorderType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'solid', name: '实线' },
+                { code: 'dashed', name: '虚线' },
+                { code: 'dotted', name: '斑点' },
+              ],
+              value: 'dashed'
+            },
+            {
+              type: 'el-input-number',
+              label: '阴影模糊',
+              name: 'backgroundStyleShadowBlur',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'vue-color',
+              label: '阴影颜色',
+              name: 'backgroundStyleShadowColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(0, 0, 0, 0.5)',
+            },
+            {
+              type: 'el-slider',
+              label: '透明度',
+              name: 'backgroundStyleOpacity',
+              require: false,
+              placeholder: '',
+              value: 100,
+            },
           ],
         },
         {
@@ -198,6 +279,88 @@ export const widgetBarchart = {
           ],
         },
         {
+          name: '图例操作',
+          list: [
+            {
+              type: 'el-switch',
+              label: '图例显示',
+              name: 'isShowLegend',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '名称( | 分隔)',
+              name: 'legendName',
+              required: false,
+              placeholder: '多值以' | '隔开',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'legendColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'legendFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例宽度',
+              name: 'legendWidth',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '横向位置',
+              name: 'lateralPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-select',
+              label: '纵向位置',
+              name: 'longitudinalPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'top', name: '顶部' },
+                { code: 'bottom', name: '底部' },
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-select',
+              label: '布局前置',
+              name: 'layoutFront',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'vertical', name: '竖排' },
+                { code: 'horizontal', name: '横排' },
+              ],
+              value: 'horizontal'
+            },
+          ],
+        },
+        {
           name: 'X轴设置',
           list: [
             {
@@ -247,6 +410,14 @@ export const widgetBarchart = {
               required: false,
               placeholder: '',
               value: 14,
+            },
+            {
+              type: 'el-input-text',
+              label: '数值行数',
+              name: 'textRowsNum',
+              required: false,
+              placeholder: '',
+              value: '',
             },
             {
               type: 'el-input-number',
@@ -324,6 +495,14 @@ export const widgetBarchart = {
               require: false,
               placeholder: '',
               value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '最大值',
+              name: 'maxY',
+              required: false,
+              placeholder: '',
+              value: '',
             },
             {
               type: 'el-input-text',
@@ -451,6 +630,14 @@ export const widgetBarchart = {
               value: true
             },
             {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSign',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
               type: 'el-input-number',
               label: '距离',
               name: 'distance',
@@ -472,7 +659,7 @@ export const widgetBarchart = {
               name: 'dataColor',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: ''
             },
             {
               type: 'el-select',
@@ -548,6 +735,18 @@ export const widgetBarchart = {
         {
           name: '自定义配色',
           list: [
+            {
+              type: 'el-select',
+              label: '配色样式',
+              name: 'colorStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'same', name: '同色' },
+                { code: 'unsame', name: '异色' },
+              ],
+              value: 'same'
+            },
             {
               type: 'customColor',
               label: '',

@@ -9,7 +9,7 @@ spring:
       oss: #文件存储
         enabled: true
         ##允许上传的文件后缀
-        file-type-while-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg
+        file-type-while-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg|.aaa|.svg
         # 用于文件上传成功后，生成文件的下载公网完整URL
         downloadPath: http://127.0.0.1:9095/file/download
         nfs:

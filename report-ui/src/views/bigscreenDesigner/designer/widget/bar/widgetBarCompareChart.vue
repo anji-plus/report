@@ -324,6 +324,7 @@ export default {
     setOptionsXLeft() {
       const optionsSetup = this.optionsSetup;
       const xAxisLeft = {
+        max: optionsSetup.maxXLeft !== "" ? optionsSetup.maxXLeft : null,
         splitNumber: optionsSetup.splitNumberLeft,
         type: "value",
         show: optionsSetup.hideXLeft,
@@ -363,6 +364,7 @@ export default {
     setOptionsXRight() {
       const optionsSetup = this.optionsSetup;
       const xAxisRight = {
+        max: optionsSetup.maxXRight !== "" ? optionsSetup.maxXRight : null,
         gridIndex: 2,
         splitNumber: optionsSetup.splitNumberRight,
         show: optionsSetup.hideXRight,
@@ -426,39 +428,48 @@ export default {
     setOptionsTop() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
+      series[0].label = {
+        normal: {
+          show: optionsSetup.isShow,
+          position: "insideLeft",
+          textStyle: {
+            fontSize: optionsSetup.fontSize,
+            color: optionsSetup.dataColor,
+            fontWeight: optionsSetup.fontWeight,
+          },
+        },
+        emphasis: {
+          show: false,
+        },
+      };
+      series[1].label = {
+        normal: {
+          show: optionsSetup.isShow,
+          color: "red",
+          position: "insideRight",
+          textStyle: {
+            fontSize: optionsSetup.fontSize,
+            color: optionsSetup.dataColor,
+            fontWeight: optionsSetup.fontWeight,
+          },
+        },
+        emphasis: {
+          show: false,
+        },
+      };
       for (const key in series) {
-        if (series[key].type == "bar") {
-          (series[0].label = {
-            normal: {
-              show: optionsSetup.isShow,
-              position: "insideLeft",
-              textStyle: {
-                fontSize: optionsSetup.fontSize,
-                color: optionsSetup.dataColor,
-                fontWeight: optionsSetup.fontWeight,
-              },
-            },
-            emphasis: {
-              show: false,
-            },
-          }),
-            (series[1].label = {
-              normal: {
-                show: optionsSetup.isShow,
-                color: "red",
-                position: "insideRight",
-                textStyle: {
-                  fontSize: optionsSetup.fontSize,
-                  color: optionsSetup.dataColor,
-                  fontWeight: optionsSetup.fontWeight,
-                },
-              },
-              emphasis: {
-                show: false,
-              },
-            }),
-            (series[key].barWidth = optionsSetup.maxWidth);
-        }
+        series[key].barWidth = optionsSetup.maxWidth;
+        //柱体背景属性
+        series[key].showBackground = optionsSetup.isShowBackground;
+        series[key].backgroundStyle = {
+          color: optionsSetup.backgroundStyleColor,
+          borderColor: optionsSetup.backgroundStyleBorderColor,
+          borderWidth: optionsSetup.backgroundStyleBorderWidth,
+          borderType: optionsSetup.backgroundStyleBorderType,
+          shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+          shadowColor: optionsSetup.backgroundStyleShadowColor,
+          opacity: optionsSetup.backgroundStyleOpacity / 100,
+        };
       }
       this.options.series = series;
     },

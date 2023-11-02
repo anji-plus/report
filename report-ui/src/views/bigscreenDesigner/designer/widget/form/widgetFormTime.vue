@@ -20,6 +20,7 @@ import {
   targetWidgetLinkageLogic,
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
 import miment from 'miment'
+
 export default {
   name: "WidgetFormTime",
   props: {
@@ -37,7 +38,7 @@ export default {
       optionsData: {},
       optionsSetup: {},
       //日期时间快捷选项
-      datetimeRangePickerOptions:{
+      datetimeRangePickerOptions: {
         shortcuts: [{
           text: '今天',
           onClick(picker) {
@@ -45,20 +46,20 @@ export default {
             const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));
             picker.$emit('pick', [start, end]);
           }
-        },{
+        }, {
           text: '昨天',
           onClick(picker) {
-            const start=new Date(new Date(new Date().getTime()-24*60*60*1000).setHours(0, 0, 0, 0));
-            const end=new Date(new Date(new Date().getTime()-24*60*60*1000).setHours(23, 59, 59, 999));
+            const start = new Date(new Date(new Date().getTime() - 24 * 60 * 60 * 1000).setHours(0, 0, 0, 0));
+            const end = new Date(new Date(new Date().getTime() - 24 * 60 * 60 * 1000).setHours(23, 59, 59, 999));
             picker.$emit('pick', [start, end]);
           }
-        },{
+        }, {
           text: '最近一周',
           onClick(picker) {
             const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));
-            const start = new Date(new Date(new Date().getTime()+24*60*60*1000));
+            const start = new Date(new Date(new Date().getTime() + 24 * 60 * 60 * 1000));
             start.setTime(miment().add(-6, 'DD').stamp());
-            new Date(start.setHours(0,0,0,0));
+            new Date(start.setHours(0, 0, 0, 0));
             picker.$emit('pick', [start, end]);
           }
         }, {
@@ -67,7 +68,7 @@ export default {
             const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));
             const start = new Date();
             start.setTime(miment().add(-1, 'MM').stamp());
-            new Date(start.setHours(0,0,0,0));
+            new Date(start.setHours(0, 0, 0, 0));
             picker.$emit('pick', [start, end]);
           }
         }, {
@@ -76,7 +77,25 @@ export default {
             const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));
             const start = new Date();
             start.setTime(miment().add(-3, 'MM').stamp());
-            new Date(start.setHours(0,0,0,0));
+            new Date(start.setHours(0, 0, 0, 0));
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近半年',
+          onClick(picker) {
+            const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));
+            const start = new Date();
+            start.setTime(miment().add(-6, 'MM').stamp());
+            new Date(start.setHours(0, 0, 0, 0));
+            picker.$emit('pick', [start, end]);
+          }
+        }, {
+          text: '最近一年',
+          onClick(picker) {
+            const end = new Date(new Date(new Date().getTime()).setHours(23, 59, 59, 999));
+            const start = new Date();
+            start.setTime(miment().add(-1, 'YY').stamp());
+            new Date(start.setHours(0, 0, 0, 0));
             picker.$emit('pick', [start, end]);
           }
         }],
@@ -144,6 +163,7 @@ export default {
       height: 100%;
       background: inherit;
       color: inherit;
+
       &::placeholder {
         color: inherit;
       }

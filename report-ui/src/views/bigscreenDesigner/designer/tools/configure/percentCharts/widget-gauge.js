@@ -31,6 +31,14 @@ export const widgetGauge = {
         placeholder: '',
         value: ''
       },
+      {
+        type: 'el-input-number',
+        label: '最大值',
+        name: 'maxValue',
+        require: false,
+        placeholder: '',
+        value: 100,
+      },
       [
         {
           name: "圆环设置",

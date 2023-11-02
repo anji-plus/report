@@ -43,7 +43,7 @@ export default {
   methods: {
     async handleOpen() {
       const url = window.location.href;
-      const shareCode = url.substring(url.lastIndexOf("/") + 1);
+      const shareCode = url.split('?')[0].substring(url.lastIndexOf("/") + 1);
       const { code, data } = await reportShareDetailByCode(shareCode);
       if (code != "200") return;
       this.reportCode = data.reportCode;
@@ -66,12 +66,19 @@ export default {
     },
     pushAj() {
       setShareToken(this.shareToken);
+      const url = window.location.href;
+      const urlParamsObj = this.toUrlParamsMap(url.split('?')[1])
+      const queryParams = { ...urlParamsObj, reportCode: this.reportCode }
       this.$router.push({
         path: "/bigscreen/viewer",
-        query: {
-          reportCode: this.reportCode
-        }
+        query: queryParams
       });
+    },
+    toUrlParamsMap(params) {
+      if(!params) return {}
+      const urlObj = {}
+      params.split("&").map(item => urlObj[item.split("=")[0]] = item.split("=")[1])
+      return urlObj
     },
     handleClose(done) {
       this.$confirm("确认关闭？")

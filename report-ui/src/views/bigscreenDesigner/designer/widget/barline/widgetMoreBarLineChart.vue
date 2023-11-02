@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -8,13 +8,13 @@
 import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
 
 import echarts from "echarts";
+
 export default {
   name: "widgetMoreBarLineChart",
   components: {},
   props: {
     value: Object,
     ispreview: Boolean,
-    flagInter: null,
   },
   data() {
     return {
@@ -246,18 +246,6 @@ export default {
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
-        axisLabel: {
-          show: true,
-          // 文字间隔
-          interval: optionsSetup.textInterval,
-          // 文字角度
-          rotate: optionsSetup.textAngleX,
-          textStyle: {
-            // 坐标文字颜色
-            color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX,
-          },
-        },
         axisLine: {
           show: true,
           lineStyle: {
@@ -424,6 +412,15 @@ export default {
         this.options.legend["data"] = arr;
       }
     },
+    //获取堆叠样式
+    getStackStyle() {
+      const optionsSetup = this.optionsSetup;
+      let style = "";
+      if (optionsSetup.stackStyle == "upDown") {
+        style = "total";
+      }
+      return style;
+    },
     // 数据处理
     setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
@@ -478,6 +475,7 @@ export default {
         if (series[i].type == "bar") {
           series[i].name = legendName[i];
           series[i].type = "bar";
+          series[i].stack = this.getStackStyle();
           series[i].label = {
             show: optionsSetup.isShowBar,
             position: "top",
@@ -485,6 +483,7 @@ export default {
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
             fontWeight: optionsSetup.fontWeightBar,
+            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}'
           };
           series[i].barWidth = optionsSetup.maxWidth;
           series[i].itemStyle.normal["barBorderRadius"] = optionsSetup.radius;
@@ -522,12 +521,37 @@ export default {
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
             fontWeight: optionsSetup.fontWeightLine,
+            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}'
           };
         }
       }
       series[0].data = bar1;
       series[1].data = bar2;
       series[2].data = line;
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / axis.length) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % rowsNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
@@ -565,6 +589,7 @@ export default {
         if (val.series[i].type == "bar") {
           obj.name = val.series[i].name;
           obj.type = val.series[i].type;
+          obj.stack = this.getStackStyle();
           obj.label = {
             show: optionsSetup.isShowBar,
             position: "top",
@@ -572,6 +597,7 @@ export default {
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
             fontWeight: optionsSetup.fontWeightBar,
+            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}'
           };
           obj.barWidth = optionsSetup.maxWidth;
           obj.itemStyle = {
@@ -615,11 +641,37 @@ export default {
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
             fontWeight: optionsSetup.fontWeightLine,
+            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}'
           };
           obj.data = val.series[i].data;
           series.push(obj);
         }
       }
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      const xAxisDataLength = val.length !== 0 ? val.xAxis.length : 1;
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % rowsNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
       this.options.series = series;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);

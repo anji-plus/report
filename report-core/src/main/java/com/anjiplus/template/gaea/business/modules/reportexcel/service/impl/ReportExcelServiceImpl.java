@@ -27,16 +27,15 @@ import com.anjiplus.template.gaea.business.modules.reportexcel.util.CellType;
 import com.anjiplus.template.gaea.business.modules.reportexcel.util.XlsUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.itextpdf.text.*;
-import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.tool.xml.XMLWorkerHelper;
-import com.lowagie.text.DocumentException;
-import io.swagger.models.auth.In;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,14 +43,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -422,10 +422,11 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         }
 
     private String getStringValue(Cell cell) {
-        if (cell == null)
+        if (cell == null) {
             return "";
-        else
+        } else {
             return cell.toString();
+        }
     }
     /**
      * 解析报表数据，动态插入列表数据和对象数据
@@ -436,9 +437,11 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         String setParam = reportExcelDto.getSetParam();
         List<JSONObject> dbObjectList = (List<JSONObject>) JSON.parse(jsonStr);
 
-        if (dbObjectList != null && dbObjectList.size() > 0) {
+        if (dbObjectList != null && !dbObjectList.isEmpty()) {
+            //数据集数据缓存
+            Map<String, OriginalDataDto> setMap = new HashMap<>();
             for (int x = 0; x < dbObjectList.size(); x++) {
-                analysisSheetCellData(dbObjectList.get(x), setParam);
+                analysisSheetCellData(dbObjectList.get(x), setParam, setMap);
             }
         }
         //fastjson $ref 循环引用
@@ -511,7 +514,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      *
      * @param dbObject
      */
-    private void analysisSheetCellData(JSONObject dbObject, String setParam) {
+    private void analysisSheetCellData(JSONObject dbObject, String setParam, Map<String, OriginalDataDto> setMap) {
         //清空data值
         dbObject.remove("data");
         //celldata是一个一维数组
@@ -525,7 +528,9 @@ public class ReportExcelServiceImpl implements ReportExcelService {
             dbObject.getJSONArray("celldata").clear();
             //获取配置项中的合并属性
             JSONObject merge = dbObject.getJSONObject("config").getJSONObject("merge");
-            if(merge != null) merge.clear();
+            if(merge != null) {
+                merge.clear();
+            }
             //定义存储每一列动态扩展的行数
             Map<Integer,Integer> colAddCntMap = new HashMap<>();
             // 遍历已存在的单元格，查看是否存在动态参数
@@ -534,7 +539,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 JSONObject cellObj = celldata.get(i);
                 //fastjson深拷贝问题
                 String cellStr = cellObj.toJSONString();
-                analysisCellData(cellObj,setParam,colAddCntMap,cellStr,merge, dbObject,cellDataMap);
+                analysisCellData(cellObj,setParam,colAddCntMap,cellStr,merge, dbObject,cellDataMap, setMap);
             }
         }
     }
@@ -544,7 +549,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      * @param cellObject
      */
     public void analysisCellData(JSONObject cellObject,String setParam,Map<Integer,Integer> colAddCntMap,String cellStr,
-                                 JSONObject merge,JSONObject dbObject,Map<String,JSONObject> cellDataMap){
+                                 JSONObject merge,JSONObject dbObject,Map<String,JSONObject> cellDataMap, Map<String, OriginalDataDto> setMap){
         //获取行号
         Integer cellR = cellObject.getInteger("r");
         //获取列数
@@ -562,11 +567,11 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 //处理动态单元格
                 String v = cellObject.getJSONObject("v").getString("v");
                 DataSetDto dataSet = getDataSet(v, setParam);
-                handleDynamicCellObject(dataSet,v,cellStr,cnt,cellR,cellC,merge,dbObject,colAddCntMap);
+                handleDynamicCellObject(dataSet,v,cellStr,cnt,cellR,cellC,merge,dbObject,colAddCntMap, setMap);
                 break;
             default:
                 //处理静态单元格
-                handleStaticCellObject(cellStr,dbObject,cnt,cellR,cellC,cellDataMap,setParam,merge,colAddCntMap,cellType);
+                handleStaticCellObject(cellStr,dbObject,cnt,cellR,cellC,cellDataMap,setParam,merge,colAddCntMap,cellType, setMap);
                 break;
         }
     }
@@ -584,9 +589,15 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      * @param colAddCntMap
      */
     public void handleDynamicCellObject(DataSetDto dataSet,String v,String cellStr,int cnt,int r,int c,
-                                        JSONObject merge,JSONObject dbObject,Map<Integer,Integer> colAddCntMap){
+                                        JSONObject merge,JSONObject dbObject,Map<Integer,Integer> colAddCntMap, Map<String, OriginalDataDto> setMap){
         //获取动态数据
-        OriginalDataDto originalDataDto = dataSetService.getData(dataSet);
+        OriginalDataDto originalDataDto;
+        if (dataSet != null && setMap.containsKey(dataSet.getSetCode())) {
+            originalDataDto = setMap.get(dataSet.getSetCode());
+        }else {
+            originalDataDto = dataSetService.getData(dataSet);
+            setMap.put(dataSet.getSetCode(), originalDataDto);
+        }
         List<JSONObject> cellDynamicData = originalDataDto.getData();
 
         if(cellDynamicData != null){
@@ -643,7 +654,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      */
     public void handleStaticCellObject(String cellStr,JSONObject dbObject,int cnt,int r,int c,
                                        Map<String,JSONObject> cellDataMap,String setParam,
-                                       JSONObject merge,Map<Integer,Integer> colAddCntMap,CellType cellType){
+                                       JSONObject merge,Map<Integer,Integer> colAddCntMap,CellType cellType,Map<String, OriginalDataDto> setMap){
         //转字符串，解决深拷贝问题
         JSONObject addCellData = JSONObject.parseObject(cellStr);
         int rows = 0;
@@ -655,7 +666,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 break;
             case STATIC_AUTO:
                 //获取静态单元格右侧动态单元格的总行数
-                rows = getRightDynamicCellRows(addCellData,cellDataMap,setParam,rows,cellType);
+                rows = getRightDynamicCellRows(addCellData,cellDataMap,setParam,rows,cellType, setMap);
                 initCellPosition(addCellData,cnt,merge);
                 if(rows > 1){
                     //需要把这个静态扩展单元格 改变为 静态合并扩展单元格，就是增加合并属性 mc 以及merge配置
@@ -673,7 +684,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 break;
             case STATIC_MERGE_AUTO:
                 //获取静态单元格右侧动态单元格的总行数
-                rows = getRightDynamicCellRows(addCellData,cellDataMap,setParam,rows,cellType);
+                rows = getRightDynamicCellRows(addCellData, cellDataMap, setParam, rows, cellType, setMap);
                 initCellPosition(addCellData,cnt,merge);
                 if(rows > 0){
                     //需要修改单元格mc中的rs
@@ -724,7 +735,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      * @param cellType
      * @return
      */
-    public int getRightDynamicCellRows(JSONObject addCellData,Map<String,JSONObject> cellDataMap,String setParam,int sumRows,CellType cellType){
+    public int getRightDynamicCellRows(JSONObject addCellData,Map<String,JSONObject> cellDataMap,String setParam,int sumRows,CellType cellType,Map<String, OriginalDataDto> setMap){
         //1、获取此单元格右侧关联的所有单元格
         List<JSONObject> rightCellList = getRightDynamicCell(addCellData,cellDataMap,cellType);
         //2、循环获取每个单元格的扩展行数
@@ -735,7 +746,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 case STATIC_AUTO:
                 case STATIC_MERGE_AUTO:
                     //递归查找
-                    sumRows = getRightDynamicCellRows(rightCell,cellDataMap,setParam,sumRows,rightCellType);
+                    sumRows = getRightDynamicCellRows(rightCell,cellDataMap,setParam,sumRows,rightCellType, setMap);
                     break;
                 case BLACK:
                 case STATIC:
@@ -745,7 +756,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                     sumRows += rightCell.getJSONObject("v").getJSONObject("mc").getInteger("rs");
                     break;
                 default:
-                    List<JSONObject> cellDynamicData = getDynamicDataList(rightCell.getJSONObject("v").getString("v"),setParam);
+                    List<JSONObject> cellDynamicData = getDynamicDataList(rightCell.getJSONObject("v").getString("v"),setParam, setMap);
                     if(cellDynamicData != null && cellDynamicData.size() > 1){
                         int size = cellDynamicData.size();
                         sumRows += size;
@@ -880,13 +891,18 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      * @param setParam
      * @return
      */
-    private List<JSONObject> getDynamicDataList(String v, String setParam){
+    private List<JSONObject> getDynamicDataList(String v, String setParam, Map<String, OriginalDataDto> setMap){
         if(StringUtils.isNotBlank(v)){
             DataSetDto dataSet = getDataSet(v,setParam);
             if(dataSet != null){
-                OriginalDataDto originalDataDto = dataSetService.getData(dataSet);
-                List<JSONObject> cellDynamicData = originalDataDto.getData();
-                return cellDynamicData;
+                OriginalDataDto originalDataDto;
+                if (setMap.containsKey(dataSet.getSetCode())) {
+                    originalDataDto = setMap.get(dataSet.getSetCode());
+                }else {
+                    originalDataDto = dataSetService.getData(dataSet);
+                    setMap.put(dataSet.getSetCode(), originalDataDto);
+                }
+                return originalDataDto.getData();
             }else{
                 return null;
             }
@@ -907,7 +923,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
             // 查询条件
             if (setParamJson.containsKey(dto.getSetCode())) {
                 JSONObject paramCondition = setParamJson.getJSONObject(dto.getSetCode());
-                paramCondition.forEach(map::put);
+                map.putAll(paramCondition);
             }
             dto.setContextData(map);
         }

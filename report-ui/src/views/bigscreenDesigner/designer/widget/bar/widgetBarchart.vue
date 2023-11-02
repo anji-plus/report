@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -9,6 +9,7 @@ import {
   originWidgetLinkageLogic,
   targetWidgetLinkageLogic,
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 export default {
   name: "WidgetBarchart",
   components: {},
@@ -108,10 +109,9 @@ export default {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
-      this.setOptionsTop();
+      this.setOptionsLegend();
       this.setOptionsTooltip();
       this.setOptionsMargin();
-      this.setOptionsColor();
       this.setOptionsData();
     },
     // 标题修改
@@ -151,18 +151,6 @@ export default {
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
-        axisLabel: {
-          show: true,
-          // 文字间隔
-          interval: optionsSetup.textInterval,
-          // 文字角度
-          rotate: optionsSetup.textAngleX,
-          textStyle: {
-            // 坐标文字颜色
-            color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX,
-          },
-        },
         axisLine: {
           show: true,
           lineStyle: {
@@ -184,6 +172,7 @@ export default {
     setOptionsY() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
+        max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -225,36 +214,6 @@ export default {
       };
       this.options.yAxis = yAxis;
     },
-    // 数值设定 or 柱体设置
-    setOptionsTop() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      if (series[0].type == "bar") {
-        if (optionsSetup.verticalShow) {
-          series[0].label = {
-            show: optionsSetup.isShow,
-            position: "right",
-            distance: optionsSetup.distance,
-            textStyle: {
-              fontSize: optionsSetup.fontSize,
-              color: optionsSetup.dataColor,
-              fontWeight: optionsSetup.fontWeight,
-            },
-          };
-        } else {
-          series[0].label = {
-            show: optionsSetup.isShow,
-            position: "top",
-            distance: optionsSetup.distance,
-            fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
-            fontWeight: optionsSetup.fontWeight,
-          };
-        }
-      }
-      series[0].barWidth = optionsSetup.maxWidth;
-      series[0].barMinHeight = optionsSetup.minHeight;
-    },
     // tooltip 设置
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
@@ -280,33 +239,62 @@ export default {
       };
       this.options.grid = grid;
     },
-    // 图例颜色修改
-    setOptionsColor() {
+    // 图例
+    setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
-      const customColor = optionsSetup.customColor;
-      if (!customColor) return;
-      const arrColor = [];
-      for (let i = 0; i < customColor.length; i++) {
-        arrColor.push(customColor[i].color);
-      }
-      const itemStyle = {
-        normal: {
-          color: (params) => {
-            return arrColor[params.dataIndex];
-          },
-          barBorderRadius: optionsSetup.radius,
-        },
+      const legend = this.options.legend;
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition;
+      legend.bottom = optionsSetup.longitudinalPosition;
+      legend.orient = optionsSetup.layoutFront;
+      legend.textStyle = {
+        color: optionsSetup.legendColor,
+        fontSize: optionsSetup.legendFontSize,
       };
-      for (const key in this.options.series) {
-        if (this.options.series[key].type == "bar") {
-          this.options.series[key].itemStyle = itemStyle;
+      legend.itemWidth = optionsSetup.legendWidth;
+    },
+    // 图例名称设置
+    setOptionsLegendName(name) {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      const legendName = optionsSetup.legendName;
+      // 图例没有手动写则显示原值，写了则显示新值
+      if (null == legendName || legendName == "") {
+        for (let i = 0; i < name.length; i++) {
+          series[i].name = name[i];
         }
+        this.options.legend["data"] = name;
+      } else {
+        const arr = legendName.split("|");
+        for (let i = 0; i < arr.length; i++) {
+          series[i].name = arr[i];
+        }
+        this.options.legend["data"] = arr;
       }
-      this.options = Object.assign({}, this.options);
+    },
+    //获取堆叠样式
+    getStackStyle() {
+      const optionsSetup = this.optionsSetup;
+      let style = "";
+      if (optionsSetup.stackStyle == "upDown") {
+        style = "total";
+      }
+      return style;
+    },
+    // 获得位置
+    getOptionsPosition() {
+      const optionsSetup = this.optionsSetup;
+      let position = "";
+      if (optionsSetup.verticalShow) {
+        position = "right";
+      } else {
+        position = "top";
+      }
+      return position;
     },
     // 数据解析
     setOptionsData(e, paramsConfig) {
-      const optionsSetup = this.optionsSetup;
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       // 联动接收者逻辑开始
       optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
@@ -332,6 +320,12 @@ export default {
     // 静态数据
     staticDataFn(val) {
       const optionsSetup = this.optionsSetup;
+      //颜色
+      const customColor = optionsSetup.customColor;
+      const arrColor = [];
+      for (let i = 0; i < customColor.length; i++) {
+        arrColor.push(customColor[i].color);
+      }
       const series = this.options.series;
       let axis = [];
       let data = [];
@@ -339,6 +333,8 @@ export default {
         axis[i] = val[i].axis;
         data[i] = val[i].data;
       }
+      const legendName = [];
+      legendName.push("bar");
       // x轴
       if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];
@@ -351,9 +347,79 @@ export default {
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
       }
-      if (series[0].type == "bar") {
-        series[0].data = data;
+      for (const i in series) {
+        if (series[i].type == "bar") {
+          series[i].type = "bar";
+          series[i].barGap = "0%";
+          series[i].barWidth = optionsSetup.maxWidth;
+          series[i].barMinHeight = optionsSetup.minHeight;
+          series[i].label = {
+            show: optionsSetup.isShow,
+            position: this.getOptionsPosition(),
+            distance: optionsSetup.distance,
+            fontSize: optionsSetup.fontSize,
+            color: optionsSetup.dataColor,
+            fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
+          };
+          // 获取颜色样式
+          if (optionsSetup.colorStyle == 'same') {
+            series[i].itemStyle = {
+              normal: {
+                color: arrColor[i],
+                barBorderRadius: optionsSetup.radius,
+              },
+            };
+          } else {
+            series[i].itemStyle = {
+              normal: {
+                color: (params) => {
+                  return arrColor[params.dataIndex];
+                },
+                barBorderRadius: optionsSetup.radius,
+              },
+            };
+          }
+          //柱体背景属性
+          series[i].showBackground = optionsSetup.isShowBackground;
+          series[i].backgroundStyle = {
+            color: optionsSetup.backgroundStyleColor,
+            borderColor: optionsSetup.backgroundStyleBorderColor,
+            borderWidth: optionsSetup.backgroundStyleBorderWidth,
+            borderType: optionsSetup.backgroundStyleBorderType,
+            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+            shadowColor: optionsSetup.backgroundStyleShadowColor,
+            opacity: optionsSetup.backgroundStyleOpacity / 100,
+          };
+          series[i].data = data;
+        }
       }
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / axis.length) / optionsSetup.fontSizeX)
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % rowsNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
+      this.options.legend["data"] = legendName;
+      this.setOptionsLegendName(legendName);
     },
     // 动态数据
     dynamicDataFn(refreshTime) {
@@ -377,6 +443,14 @@ export default {
       });
     },
     renderingFn(optionsSetup, val) {
+      //颜色
+      const customColor = optionsSetup.customColor;
+      const arrColor = [];
+      for (let i = 0; i < customColor.length; i++) {
+        arrColor.push(customColor[i].color);
+      }
+      const series = [];
+      const legendName = [];
       // x轴
       if (optionsSetup.verticalShow) {
         this.options.xAxis.data = [];
@@ -389,13 +463,85 @@ export default {
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
       }
-      // series
-      const series = this.options.series;
-      for (const i in series) {
-        if (series[i].type == "bar") {
-          series[i].data = val.series[i].data;
+      for (const i in val.series) {
+        legendName.push(val.series[i].name);
+        const obj = {};
+        if (val.series[i].type == "bar") {
+          obj.type = "bar";
+          obj.barGap = "0%";
+          obj.stack = this.getStackStyle();
+          obj.barWidth = optionsSetup.maxWidth;
+          obj.barMinHeight = optionsSetup.minHeight;
+          obj.label = {
+            show: optionsSetup.isShow,
+            position: this.getOptionsPosition(),
+            distance: optionsSetup.distance,
+            fontSize: optionsSetup.fontSize,
+            color: optionsSetup.dataColor,
+            fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
+          };
+          // 获取颜色样式
+          if (optionsSetup.colorStyle == 'same') {
+            obj.itemStyle = {
+              normal: {
+                color: arrColor[i],
+                barBorderRadius: optionsSetup.radius,
+              },
+            };
+          } else {
+            obj.itemStyle = {
+              normal: {
+                color: (params) => {
+                  return arrColor[params.dataIndex];
+                },
+                barBorderRadius: optionsSetup.radius,
+              },
+            };
+          }
+          //柱体背景属性
+          obj.showBackground = optionsSetup.isShowBackground;
+          obj.backgroundStyle = {
+            color: optionsSetup.backgroundStyleColor,
+            borderColor: optionsSetup.backgroundStyleBorderColor,
+            borderWidth: optionsSetup.backgroundStyleBorderWidth,
+            borderType: optionsSetup.backgroundStyleBorderType,
+            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+            shadowColor: optionsSetup.backgroundStyleShadowColor,
+            opacity: optionsSetup.backgroundStyleOpacity / 100,
+          }
+          obj.data = val.series[i].data;
+          series.push(obj);
         }
       }
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      const xAxisDataLength = val.length !== 0 ? val.xAxis.length : 1;
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % rowsNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
+      this.options.series = series;
+      this.options.legend["data"] = legendName;
+      this.setOptionsLegendName(legendName);
     },
   },
 };

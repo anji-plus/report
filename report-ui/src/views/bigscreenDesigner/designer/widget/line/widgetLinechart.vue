@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -9,6 +9,7 @@ import {
   originWidgetLinkageLogic,
   targetWidgetLinkageLogic,
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 export default {
   name: "WidgetLinechart",
   components: {},
@@ -115,11 +116,10 @@ export default {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
-      this.setOptionsTop();
+      this.setOptionsLegend();
       this.setOptionsTooltip();
       this.setOptionsData();
       this.setOptionsMargin();
-      this.setOptionsColor();
     },
     // 标题修改
     setOptionsTitle() {
@@ -158,18 +158,6 @@ export default {
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
-        axisLabel: {
-          show: true,
-          // 文字间隔
-          interval: optionsSetup.textInterval,
-          // 文字角度
-          rotate: optionsSetup.textAngleX,
-          textStyle: {
-            // 坐标文字颜色
-            color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX,
-          },
-        },
         axisLine: {
           show: true,
           lineStyle: {
@@ -232,40 +220,6 @@ export default {
       };
       this.options.yAxis = yAxis;
     },
-    // 折线设置
-    setOptionsTop() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "line") {
-          series[key].symbol = optionsSetup.symbol;
-          series[key].showSymbol = optionsSetup.markPoint;
-          series[key].symbolSize = optionsSetup.pointSize;
-          series[key].smooth = optionsSetup.smoothCurve;
-          if (optionsSetup.area) {
-            series[key].areaStyle = {
-              opacity: optionsSetup.areaThickness / 100,
-            };
-          } else {
-            series[key].areaStyle = {
-              opacity: 0,
-            };
-          }
-          series[key].lineStyle = {
-            width: optionsSetup.lineWidth,
-          };
-          series[key].label = {
-            show: optionsSetup.isShow,
-            position: "top",
-            distance: 10,
-            fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
-            fontWeight: optionsSetup.fontWeight,
-          };
-        }
-      }
-      this.options.series = series;
-    },
     // tooltip 设置
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
@@ -291,23 +245,42 @@ export default {
       };
       this.options.grid = grid;
     },
-    // 图例颜色修改
-    setOptionsColor() {
+    // 图例
+    setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
-      const customColor = optionsSetup.customColor;
-      if (!customColor) return;
-      const arrColor = [];
-      for (let i = 0; i < customColor.length; i++) {
-        arrColor.push(customColor[i].color);
+      const legend = this.options.legend;
+      legend.show = optionsSetup.isShowLegend;
+      legend.left = optionsSetup.lateralPosition;
+      legend.top = optionsSetup.longitudinalPosition;
+      legend.bottom = optionsSetup.longitudinalPosition;
+      legend.orient = optionsSetup.layoutFront;
+      legend.textStyle = {
+        color: optionsSetup.legendColor,
+        fontSize: optionsSetup.legendFontSize,
+      };
+      legend.itemWidth = optionsSetup.legendWidth;
+    },
+    // 图例名称设置
+    setOptionsLegendName(name) {
+      const optionsSetup = this.optionsSetup;
+      const series = this.options.series;
+      const legendName = optionsSetup.legendName;
+      // 图例没有手动写则显示原值，写了则显示新值
+      if (null == legendName || legendName == "") {
+        for (let i = 0; i < name.length; i++) {
+          series[i].name = name[i];
+        }
+        this.options.legend["data"] = name;
+      } else {
+        const arr = legendName.split("|");
+        for (let i = 0; i < arr.length; i++) {
+          series[i].name = arr[i];
+        }
+        this.options.legend["data"] = arr;
       }
-      this.options.color = arrColor;
-      this.options = Object.assign({}, this.options);
     },
     // 处理数据
     setOptionsData(e, paramsConfig) {
-      console.log("ces", e);
-      console.log("ces", paramsConfig);
-
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
       optionsData.dynamicData = optionsData.dynamicData || {}; // 兼容 dynamicData undefined
       const myDynamicData = optionsData.dynamicData;
@@ -324,12 +297,18 @@ export default {
           }
         });
       }
-      console.log(myDynamicData);
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
+      const optionsSetup = this.optionsSetup;
+      //颜色
+      const customColor = optionsSetup.customColor;
+      const arrColor = [];
+      for (let i = 0; i < customColor.length; i++) {
+        arrColor.push(customColor[i].color);
+      }
       const series = this.options.series;
       let axis = [];
       let data = [];
@@ -337,14 +316,73 @@ export default {
         axis[i] = val[i].axis;
         data[i] = val[i].data;
       }
+      const legendName = [];
+      legendName.push("line");
       // x轴
       this.options.xAxis.data = axis;
       // series
       for (const i in series) {
         if (series[i].type == "line") {
+          series[i].symbol = optionsSetup.symbol;
+          series[i].showSymbol = optionsSetup.markPoint;
+          series[i].symbolSize = optionsSetup.pointSize;
+          series[i].smooth = optionsSetup.smoothCurve;
+          if (optionsSetup.area) {
+            series[i].areaStyle = {
+              opacity: optionsSetup.areaThickness / 100,
+            };
+          } else {
+            series[i].areaStyle = {
+              opacity: 0,
+            };
+          }
+          series[i].itemStyle = {
+            normal: {
+              color: arrColor[i],
+            },
+          };
+          series[i].lineStyle = {
+            color: arrColor[i],
+            width: optionsSetup.lineWidth,
+          };
+          series[i].label = {
+            show: optionsSetup.isShow,
+            position: "top",
+            distance: 10,
+            fontSize: optionsSetup.fontSize,
+            color: optionsSetup.dataColor,
+            fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
+          };
           series[i].data = data;
         }
       }
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / axis.length) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % rowsNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
+      this.options.legend["data"] = legendName;
+      this.setOptionsLegendName(legendName);
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -364,15 +402,85 @@ export default {
       });
     },
     renderingFn(val) {
+      const optionsSetup = this.optionsSetup;
+      //颜色
+      const customColor = optionsSetup.customColor;
+      const arrColor = [];
+      for (let i = 0; i < customColor.length; i++) {
+        arrColor.push(customColor[i].color);
+      }
       // x轴
       this.options.xAxis.data = val.xAxis;
-      // series
-      const series = this.options.series;
-      for (const i in series) {
-        if (series[i].type == "line") {
-          series[i].data = val.series[i].data;
+      const series = [];
+      const legendName = [];
+      for (const i in val.series) {
+        legendName.push(val.series[i].name);
+        const obj = {};
+        if (val.series[i].type == 'line') {
+          obj.type = 'line';
+          obj.symbol = optionsSetup.symbol;
+          obj.showSymbol = optionsSetup.markPoint;
+          obj.symbolSize = optionsSetup.pointSize;
+          obj.smooth = optionsSetup.smoothCurve;
+          if (optionsSetup.area) {
+            obj.areaStyle = {
+              opacity: optionsSetup.areaThickness / 100,
+            };
+          } else {
+            obj.areaStyle = {
+              opacity: 0,
+            };
+          }
+          obj.itemStyle = {
+            normal: {
+              color: arrColor[i],
+            },
+          };
+          obj.lineStyle = {
+            color: arrColor[i],
+            width: optionsSetup.lineWidth,
+          };
+          obj.label = {
+            show: optionsSetup.isShow,
+            position: "top",
+            distance: 10,
+            fontSize: optionsSetup.fontSize,
+            color: optionsSetup.dataColor,
+            fontWeight: optionsSetup.fontWeight,
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
+          };
+          obj.data = val.series[i].data;
+          series.push(obj);
         }
       }
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      const xAxisDataLength = val.length !== 0 ? val.xAxis.length : 1;
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % rowsNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
+      this.options.series = series;
+      this.options.legend["data"] = legendName;
+      this.setOptionsLegendName(legendName);
     },
   },
 };

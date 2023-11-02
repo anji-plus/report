@@ -367,6 +367,14 @@ export const widgetLineStack = {
               value: 14,
             },
             {
+              type: 'el-input-text',
+              label: '数值行数',
+              name: 'textRowsNum',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
               type: 'el-input-number',
               label: '数值间隔',
               name: 'textInterval',
@@ -564,6 +572,14 @@ export const widgetLineStack = {
               type: 'el-switch',
               label: '显示',
               name: 'isShow',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSign',
               required: false,
               placeholder: '',
               value: false

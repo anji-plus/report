@@ -71,6 +71,75 @@ export const widgetBarStack = {
               placeholder: '',
               value: 5,
             },
+            {
+              type: 'el-switch',
+              label: '背景显示',
+              name: 'isShowBackground',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'vue-color',
+              label: '背景颜色',
+              name: 'backgroundStyleColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(180, 180, 180, 0.2)',
+            },
+            {
+              type: 'vue-color',
+              label: '描边颜色',
+              name: 'backgroundStyleBorderColor',
+              required: false,
+              placeholder: '',
+              value: '#000',
+            },
+            {
+              type: 'el-input-number',
+              label: '描边宽度',
+              name: 'backgroundStyleBorderWidth',
+              required: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-select',
+              label: '描边类型',
+              name: 'backgroundStyleBorderType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'solid', name: '实线' },
+                { code: 'dashed', name: '虚线' },
+                { code: 'dotted', name: '斑点' },
+              ],
+              value: 'dashed'
+            },
+            {
+              type: 'el-input-number',
+              label: '阴影模糊',
+              name: 'backgroundStyleShadowBlur',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'vue-color',
+              label: '阴影颜色',
+              name: 'backgroundStyleShadowColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(0, 0, 0, 0.5)',
+            },
+            {
+              type: 'el-slider',
+              label: '透明度',
+              name: 'backgroundStyleOpacity',
+              require: false,
+              placeholder: '',
+              value: 100,
+            },
           ],
         },
         {
@@ -335,6 +404,14 @@ export const widgetBarStack = {
               value: 14,
             },
             {
+              type: 'el-input-text',
+              label: '数值行数',
+              name: 'textRowsNum',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
               type: 'el-input-number',
               label: '数值间隔',
               name: 'textInterval',
@@ -410,6 +487,14 @@ export const widgetBarStack = {
               require: false,
               placeholder: '',
               value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '最大值',
+              name: 'maxY',
+              required: false,
+              placeholder: '',
+              value: '',
             },
             {
               type: 'el-input-text',
@@ -537,6 +622,14 @@ export const widgetBarStack = {
               value: false
             },
             {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSign',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
               name: 'fontSize',
@@ -550,7 +643,7 @@ export const widgetBarStack = {
               name: 'dataColor',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: ''
             },
             {
               type: 'el-select',

@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 <script>
@@ -8,6 +8,7 @@ import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linka
 
 import vue from "vue";
 import VueSuperSlide from "vue-superslide";
+
 vue.use(VueSuperSlide);
 export default {
   props: {
@@ -345,7 +346,7 @@ export default {
         });
         legendName.push(name[i]);
       }
-      this.options.series[0] = {
+      const series0 = {
         type: "radar",
         data: data,
         symbolSize: optionsSetup.symbolSize,
@@ -354,10 +355,10 @@ export default {
             opacity: optionsSetup.opacity / 100,
           },
         },
-      };
+      }
+      this.$set(this.options.series, 0, series0);
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
-      console.log(this.options.series)
     },
   },
 };
