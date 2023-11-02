@@ -515,7 +515,11 @@ export default {
         }
       }
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
-      const wordNum = parseInt((this.optionsStyle.width / val.xAxis.length) / optionsSetup.fontSizeX);
+      let xAxisDataLength = 1;
+      if (val.length !== 0){
+        xAxisDataLength = val.xAxis.length;
+      }
+      const wordNum = parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
       const axisLabel = {
         show: true,
         interval: optionsSetup.textInterval,

@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -185,18 +185,6 @@ export default {
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
-        axisLabel: {
-          show: true,
-          // 文字间隔
-          interval: optionsSetup.textInterval,
-          // 文字角度
-          rotate: optionsSetup.textAngleX,
-          textStyle: {
-            // 坐标文字颜色
-            color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX,
-          },
-        },
         axisLine: {
           show: true,
           lineStyle: {
@@ -434,6 +422,7 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
+      const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       let axis = [];
       let bar1 = [];
@@ -452,6 +441,30 @@ export default {
       const legendName = [];
       legendName.push("bar1");
       legendName.push("bar2");
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      const wordNum = parseInt((this.optionsStyle.width / axis.length) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % wordNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
@@ -473,18 +486,47 @@ export default {
       });
     },
     renderingFn(val) {
+      const optionsSetup = this.optionsSetup;
       this.options.xAxis.data = val.xAxis;
       // series
       const series = this.options.series;
       const legendName = [];
       let k = 0;
-      for (const i in val.series){
+      for (const i in val.series) {
         if (val.series[i].type == "bar") {
           series[k]['data'] = val.series[i].data;
           k++
           legendName.push(val.series[i].name);
         }
       }
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      let xAxisDataLength = 1;
+      if (val.length !== 0){
+        xAxisDataLength = val.xAxis.length;
+      }
+      const wordNum = parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % wordNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },

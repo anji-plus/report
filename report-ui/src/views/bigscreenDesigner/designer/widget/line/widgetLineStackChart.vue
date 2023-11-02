@@ -144,18 +144,6 @@ export default {
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
-        axisLabel: {
-          show: true,
-          // 文字间隔
-          interval: optionsSetup.textInterval,
-          // 文字角度
-          rotate: optionsSetup.textAngleX,
-          textStyle: {
-            // 坐标文字颜色
-            color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX,
-          },
-        },
         axisLine: {
           show: true,
           lineStyle: {
@@ -417,6 +405,30 @@ export default {
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
       }
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      const wordNum = parseInt((this.optionsStyle.width / xAxisList.length) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % wordNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
@@ -495,6 +507,34 @@ export default {
         }
         legendName.push(val.series[i].name);
       }
+      // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
+      let xAxisDataLength = 1;
+      if (val.length !== 0){
+        xAxisDataLength = val.xAxis.length;
+      }
+      const wordNum = parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
+      const axisLabel = {
+        show: true,
+        interval: optionsSetup.textInterval,
+        // 文字角度
+        rotate: optionsSetup.textAngleX,
+        textStyle: {
+          // 坐标文字颜色
+          color: optionsSetup.colorX,
+          fontSize: optionsSetup.fontSizeX,
+        },
+        // 自动换行
+        formatter: function (value, index) {
+          const strs = value.split('');
+          let str = ''
+          for (let i = 0, s; s = strs[i++];) {
+            str += s;
+            if (!(i % wordNum)) str += '\n';
+          }
+          return str
+        }
+      }
+      this.options.xAxis.axisLabel = axisLabel;
       this.options.series = series;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
