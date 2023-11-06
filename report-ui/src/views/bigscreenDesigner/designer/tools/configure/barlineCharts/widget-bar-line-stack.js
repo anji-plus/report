@@ -372,6 +372,14 @@ export const widgetBarLineStack = {
               value: 14,
             },
             {
+              type: 'el-switch',
+              label: '数值自动换行',
+              name: 'textRowsBreakAuto',
+              required: false,
+              placeholder: '',
+              value: false,
+            },
+            {
               type: 'el-input-text',
               label: '数值行数',
               name: 'textRowsNum',

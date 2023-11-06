@@ -185,6 +185,17 @@ export default {
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
+        axisLabel: {
+          show: true,
+          interval: optionsSetup.textInterval,
+          // 文字角度
+          rotate: optionsSetup.textAngleX,
+          textStyle: {
+            // 坐标文字颜色
+            color: optionsSetup.colorX,
+            fontSize: optionsSetup.fontSizeX,
+          },
+        },
         axisLine: {
           show: true,
           lineStyle: {
@@ -464,7 +475,9 @@ export default {
           return str
         }
       }
-      this.options.xAxis.axisLabel = axisLabel;
+      if (optionsSetup.textRowsBreakAuto) {
+        this.options.xAxis.axisLabel = axisLabel;
+      }
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
@@ -523,7 +536,9 @@ export default {
           return str
         }
       }
-      this.options.xAxis.axisLabel = axisLabel;
+      if (optionsSetup.textRowsBreakAuto) {
+        this.options.xAxis.axisLabel = axisLabel;
+      }
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
