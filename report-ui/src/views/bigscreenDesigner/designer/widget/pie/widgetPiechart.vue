@@ -151,7 +151,6 @@ export default {
           },
         },
         fontSize: optionsSetup.fontSize,
-
         fontWeight: optionsSetup.optionsSetup,
       };
       for (const key in series) {
@@ -166,7 +165,6 @@ export default {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
-        show: true,
         textStyle: {
           color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize,

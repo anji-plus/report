@@ -372,6 +372,14 @@ export const widgetBarLineStack = {
               value: 14,
             },
             {
+              type: 'el-switch',
+              label: '数值自动换行',
+              name: 'textRowsBreakAuto',
+              required: false,
+              placeholder: '',
+              value: false,
+            },
+            {
               type: 'el-input-text',
               label: '数值行数',
               name: 'textRowsNum',
@@ -815,6 +823,40 @@ export const widgetBarLineStack = {
         {
           name: '提示语设置',
           list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowTooltip',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-select',
+              label: '触发类型',
+              name: 'tooltipTrigger',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'item', name: '数据项' },
+                { code: 'axis', name: '坐标轴' },
+              ],
+              value: 'axis'
+            },
+            {
+              type: 'el-select',
+              label: '指示器类型',
+              name: 'tooltipAxisPointerType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'none', name: '无' },
+                { code: 'line', name: '直线' },
+                { code: 'shadow', name: '阴影' },
+                { code: 'cross', name: '十字准星' },
+              ],
+              value: 'shadow'
+            },
             {
               type: 'el-input-number',
               label: '字体字号',

@@ -227,6 +227,17 @@ export default {
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
+        axisLabel: {
+          show: true,
+          interval: optionsSetup.textInterval,
+          // 文字角度
+          rotate: optionsSetup.textAngleX,
+          textStyle: {
+            // 坐标文字颜色
+            color: optionsSetup.colorX,
+            fontSize: optionsSetup.fontSizeX,
+          },
+        },
         axisLine: {
           show: true,
           lineStyle: {
@@ -429,21 +440,6 @@ export default {
         axis[i] = val[i].axis;
         data[i] = val[i].data;
       }
-      // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = axis;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = axis;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-      }
-      if (series[0].type == "bar") {
-        series[0].data = data;
-      }
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
       const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / axis.length) / optionsSetup.fontSizeX);
       const axisLabel = {
@@ -467,7 +463,24 @@ export default {
           return str
         }
       }
-      this.options.xAxis.axisLabel = axisLabel;
+      // x轴
+      if (optionsSetup.verticalShow) {
+        this.options.xAxis.data = [];
+        this.options.yAxis.data = axis;
+        this.options.xAxis.type = "value";
+        this.options.yAxis.type = "category";
+      } else {
+        this.options.xAxis.data = axis;
+        this.options.yAxis.data = [];
+        this.options.xAxis.type = "category";
+        this.options.yAxis.type = "value";
+        if (optionsSetup.textRowsBreakAuto) {
+          this.options.xAxis.axisLabel = axisLabel;
+        }
+      }
+      if (series[0].type == "bar") {
+        series[0].data = data;
+      }
     },
     // 动态数据
     dynamicDataFn(refreshTime) {
@@ -491,22 +504,6 @@ export default {
       });
     },
     renderingFn(optionsSetup, val) {
-      // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = val.xAxis;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = val.xAxis;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-      }
-      const series = this.options.series;
-      if (series[0].type == "bar") {
-        series[0].data = val.series[0].data;
-      }
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
       const xAxisDataLength = val.length !== 0 ? val.xAxis.length : 1;
       const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
@@ -531,7 +528,25 @@ export default {
           return str
         }
       }
-      this.options.xAxis.axisLabel = axisLabel;
+      // x轴
+      if (optionsSetup.verticalShow) {
+        this.options.xAxis.data = [];
+        this.options.yAxis.data = val.xAxis;
+        this.options.xAxis.type = "value";
+        this.options.yAxis.type = "category";
+      } else {
+        this.options.xAxis.data = val.xAxis;
+        this.options.yAxis.data = [];
+        this.options.xAxis.type = "category";
+        this.options.yAxis.type = "value";
+        if (optionsSetup.textRowsBreakAuto) {
+          this.options.xAxis.axisLabel = axisLabel;
+        }
+      }
+      const series = this.options.series;
+      if (series[0].type == "bar") {
+        series[0].data = val.series[0].data;
+      }
     },
   },
 };

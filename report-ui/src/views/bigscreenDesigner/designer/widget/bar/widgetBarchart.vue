@@ -151,6 +151,17 @@ export default {
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
+        axisLabel: {
+          show: true,
+          interval: optionsSetup.textInterval,
+          // 文字角度
+          rotate: optionsSetup.textAngleX,
+          textStyle: {
+            // 坐标文字颜色
+            color: optionsSetup.colorX,
+            fontSize: optionsSetup.fontSizeX,
+          },
+        },
         axisLine: {
           show: true,
           lineStyle: {
@@ -335,18 +346,6 @@ export default {
       }
       const legendName = [];
       legendName.push("bar");
-      // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = axis;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = axis;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-      }
       for (const i in series) {
         if (series[i].type == "bar") {
           series[i].type = "bar";
@@ -416,8 +415,22 @@ export default {
           }
           return str
         }
+      };
+      // x轴
+      if (optionsSetup.verticalShow) {
+        this.options.xAxis.data = [];
+        this.options.yAxis.data = axis;
+        this.options.xAxis.type = "value";
+        this.options.yAxis.type = "category";
+      } else {
+        this.options.xAxis.data = axis;
+        this.options.yAxis.data = [];
+        this.options.xAxis.type = "category";
+        this.options.yAxis.type = "value";
+        if (optionsSetup.textRowsBreakAuto) {
+          this.options.xAxis.axisLabel = axisLabel;
+        }
       }
-      this.options.xAxis.axisLabel = axisLabel;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },
@@ -451,18 +464,6 @@ export default {
       }
       const series = [];
       const legendName = [];
-      // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = val.xAxis;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = val.xAxis;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-      }
       for (const i in val.series) {
         legendName.push(val.series[i].name);
         const obj = {};
@@ -537,8 +538,22 @@ export default {
           }
           return str
         }
+      };
+      // x轴
+      if (optionsSetup.verticalShow) {
+        this.options.xAxis.data = [];
+        this.options.yAxis.data = val.xAxis;
+        this.options.xAxis.type = "value";
+        this.options.yAxis.type = "category";
+      } else {
+        this.options.xAxis.data = val.xAxis;
+        this.options.yAxis.data = [];
+        this.options.xAxis.type = "category";
+        this.options.yAxis.type = "value";
+        if (optionsSetup.textRowsBreakAuto) {
+          this.options.xAxis.axisLabel = axisLabel;
+        }
       }
-      this.options.xAxis.axisLabel = axisLabel;
       this.options.series = series;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
