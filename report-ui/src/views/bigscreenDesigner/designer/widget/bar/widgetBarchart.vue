@@ -151,7 +151,7 @@ export default {
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
-        axisLabel : {
+        axisLabel: {
           show: true,
           interval: optionsSetup.textInterval,
           // 文字角度
@@ -427,7 +427,9 @@ export default {
         this.options.yAxis.data = [];
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
-        this.options.xAxis.axisLabel = axisLabel;
+        if (optionsSetup.textRowsBreakAuto) {
+          this.options.xAxis.axisLabel = axisLabel;
+        }
       }
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
@@ -548,7 +550,9 @@ export default {
         this.options.yAxis.data = [];
         this.options.xAxis.type = "category";
         this.options.yAxis.type = "value";
-        this.options.xAxis.axisLabel = axisLabel;
+        if (optionsSetup.textRowsBreakAuto) {
+          this.options.xAxis.axisLabel = axisLabel;
+        }
       }
       this.options.series = series;
       this.options.legend["data"] = legendName;
