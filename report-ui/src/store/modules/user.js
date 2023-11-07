@@ -51,7 +51,7 @@ const user = {
           commit('SET_TOKEN', '')
           commit('SET_ACCESSUSER', {})
           delToken()
-          delShareToken()
+//          delShareToken()
           delAccessUser()
           resolve()
         }).catch(error => {
@@ -66,7 +66,7 @@ const user = {
         commit('SET_TOKEN', '')
         commit('SET_ACCESSUSER', {})
         delToken()
-        delShareToken()
+//        delShareToken()
         delAccessUser()
         resolve()
       })
