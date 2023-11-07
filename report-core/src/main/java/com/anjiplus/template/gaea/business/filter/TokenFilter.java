@@ -105,27 +105,14 @@ public class TokenFilter implements Filter {
         String token = request.getHeader("Authorization");
         //针对大屏分享，优先处理
         String shareToken = request.getHeader("Share-Token");
-        if (StringUtils.isNotBlank(shareToken) && StringUtils.isBlank(token)) {
-            //需要处理
-            //  /reportDashboard/getData
-            //  /reportDashboard/{reportCode}
-            //  /reportExcel/preview
-            List<String> reportCodeList = JwtUtil.getReportCodeList(shareToken);
-            if (!uri.endsWith("/reportDashboard/getData") && !uri.endsWith("/reportExcel/preview") && reportCodeList.stream().noneMatch(uri::contains)) {
-                ResponseBean responseBean = ResponseBean.builder().code("50014")
-                        .message("分享链接已过期").build();
-                response.getWriter().print(JSONObject.toJSONString(responseBean));
-                return;
-            }
-            filterChain.doFilter(request, response);
+
+        if (StringUtils.isBlank(token) && StringUtils.isBlank(shareToken)) {
+            error(response);
             return;
         }
 
+        if (StringUtils.isNotBlank(shareToken) && StringUtils.isBlank(token)) {
 
-
-        if (StringUtils.isBlank(token)) {
-            error(response);
-            return;
         }
 
         // 判断token是否过期
@@ -133,6 +120,22 @@ public class TokenFilter implements Filter {
         String tokenKey = String.format(BusinessConstant.GAEA_SECURITY_LOGIN_TOKEN, loginName);
         String userKey = String.format(BusinessConstant.GAEA_SECURITY_LOGIN_USER, loginName);
         if (!cacheHelper.exist(tokenKey)) {
+            //代表token过期
+            if (StringUtils.isNotBlank(shareToken)) {
+                //需要处理
+                //  /reportDashboard/getData
+                //  /reportDashboard/{reportCode}
+                //  /reportExcel/preview
+                List<String> reportCodeList = JwtUtil.getReportCodeList(shareToken);
+                if (!uri.endsWith("/reportDashboard/getData") && !uri.endsWith("/reportExcel/preview") && reportCodeList.stream().noneMatch(uri::contains)) {
+                    ResponseBean responseBean = ResponseBean.builder().code("50014")
+                            .message("分享链接已过期").build();
+                    response.getWriter().print(JSONObject.toJSONString(responseBean));
+                    return;
+                }
+                filterChain.doFilter(request, response);
+                return;
+            }
             error(response);
             return;
         }
