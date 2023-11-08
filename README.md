@@ -191,6 +191,7 @@ aj_report（存放系统基础数据）数据库 <br>
 <img src="https://foruda.gitee.com/images/1674127216326288249/5a251727_10057706.png" width = "130" height = "50" /> <br>
 <img src="https://foruda.gitee.com/images/1691410310696414681/4d929a1f_9924966.png" width = "130" height = "50" /> <br>
 <img src="https://foruda.gitee.com/images/1696254998043055555/67afe17a_4817562.png" width = "130" height = "130" /> <br>
+<img src="https://foruda.gitee.com/images/1699350359035432620/d6f9fe27_12173106.jpeg" width = "130" height = "50" /> <br>
 
 ## 已知问题
 
