@@ -111,12 +111,13 @@ public class TokenFilter implements Filter {
             return;
         }
 
-        if (StringUtils.isNotBlank(shareToken) && StringUtils.isBlank(token)) {
-
-        }
-
         // 判断token是否过期
-        String loginName = jwtBean.getUsername(token);
+        String loginName;
+        try {
+            loginName = jwtBean.getUsername(token);
+        } catch (Exception e) {
+            loginName = "";
+        }
         String tokenKey = String.format(BusinessConstant.GAEA_SECURITY_LOGIN_TOKEN, loginName);
         String userKey = String.format(BusinessConstant.GAEA_SECURITY_LOGIN_USER, loginName);
         if (!cacheHelper.exist(tokenKey)) {
