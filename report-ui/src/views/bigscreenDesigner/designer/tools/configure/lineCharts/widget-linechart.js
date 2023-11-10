@@ -453,6 +453,14 @@ export const widgetLinechart = {
             },
             {
               type: 'el-input-text',
+              label: '最大值',
+              name: 'maxY',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
+              type: 'el-input-text',
               label: '坐标名',
               name: 'textNameY',
               require: false,
