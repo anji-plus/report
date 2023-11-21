@@ -646,12 +646,30 @@ export const widgetBarchart = {
               value: false
             },
             {
-              type: 'el-input-number',
-              label: '距离',
-              name: 'distance',
+              type: 'el-select',
+              label: '位置',
+              name: 'fontPosition',
               required: false,
               placeholder: '',
-              value: 5
+              selectOptions: [
+                { code: 'top', name: '上' },
+                { code: 'left', name: '左' },
+                { code: 'right', name: '右' },
+                { code: 'inside', name: '里' },
+                { code: 'insideTop', name: '里顶' },
+                { code: 'insideLeft', name: '里左' },
+                { code: 'insideRight', name: '里右' },
+                { code: 'insideBottom', name: '里底' },
+              ],
+              value: 'insideTop'
+            },
+            {
+              type: 'el-input-number',
+              label: '距离',
+              name: 'fontDistance',
+              required: false,
+              placeholder: '',
+              value: 0
             },
             {
               type: 'el-input-number',
@@ -688,6 +706,40 @@ export const widgetBarchart = {
         {
           name: '提示语设置',
           list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowTooltip',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-select',
+              label: '触发类型',
+              name: 'tooltipTrigger',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'item', name: '数据项' },
+                { code: 'axis', name: '坐标轴' },
+              ],
+              value: 'axis'
+            },
+            {
+              type: 'el-select',
+              label: '指示器类型',
+              name: 'tooltipAxisPointerType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'none', name: '无' },
+                { code: 'line', name: '直线' },
+                { code: 'shadow', name: '阴影' },
+                { code: 'cross', name: '十字准星' },
+              ],
+              value: 'shadow'
+            },
             {
               type: 'el-input-number',
               label: '字体字号',

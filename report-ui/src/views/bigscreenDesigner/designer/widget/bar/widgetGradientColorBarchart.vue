@@ -306,27 +306,15 @@ export default {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       if (series[0].type == "bar") {
-        if (optionsSetup.verticalShow) {
-          series[0].label = {
-            show: optionsSetup.isShow,
-            position: "right",
-            distance: optionsSetup.distance,
-            fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
-            fontWeight: optionsSetup.fontWeight,
-            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
-          };
-        } else {
-          series[0].label = {
-            show: optionsSetup.isShow,
-            position: "top",
-            distance: optionsSetup.distance,
-            fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
-            fontWeight: optionsSetup.fontWeight,
-            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
-          };
-        }
+        series[0].label = {
+          show: optionsSetup.isShow,
+          position: optionsSetup.fontPosition,
+          distance: optionsSetup.fontDistance,
+          fontSize: optionsSetup.fontSize,
+          color: optionsSetup.dataColor,
+          fontWeight: optionsSetup.fontWeight,
+          formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
+        };
         series[0].barWidth = optionsSetup.maxWidth;
         //柱体背景属性
         series[0].showBackground = optionsSetup.isShowBackground;
@@ -345,8 +333,11 @@ export default {
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
-        trigger: "item",
-        show: true,
+        show: optionsSetup.isShowTooltip,
+        trigger: optionsSetup.tooltipTrigger,
+        axisPointer: {
+          type: optionsSetup.tooltipAxisPointerType,
+        },
         textStyle: {
           color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize,

@@ -222,8 +222,11 @@ export default {
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
-        trigger: "item",
-        show: true,
+        show: optionsSetup.isShowTooltip,
+        trigger: optionsSetup.tooltipTrigger,
+        axisPointer: {
+          type: optionsSetup.tooltipAxisPointerType,
+        },
         textStyle: {
           color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize,
@@ -359,13 +362,13 @@ export default {
           name: yAxisList[i],
           type: "bar",
           data: data,
-          barGap: "0%",
+          barGap: optionsSetup.barGap + "%",
           stack: this.getStackStyle(),
           barWidth: optionsSetup.maxWidth,
           label: {
             show: optionsSetup.isShow,
-            position: "top",
-            distance: 10,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
@@ -466,13 +469,13 @@ export default {
             name: val.series[i].name,
             type: "bar",
             data: val.series[i].data,
-            barGap: "0%",
+            barGap: optionsSetup.barGap + "%",
             stack: this.getStackStyle(),
             barWidth: optionsSetup.maxWidth,
             label: {
               show: optionsSetup.isShow,
-              position: "top",
-              distance: 10,
+              position: optionsSetup.fontPosition,
+              distance: optionsSetup.fontDistance,
               fontSize: optionsSetup.fontSize,
               color: optionsSetup.dataColor,
               fontWeight: optionsSetup.fontWeight,

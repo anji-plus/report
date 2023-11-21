@@ -229,8 +229,11 @@ export default {
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
-        trigger: "item",
-        show: true,
+        show: optionsSetup.isShowTooltip,
+        trigger: optionsSetup.tooltipTrigger,
+        axisPointer:{
+          type: optionsSetup.tooltipAxisPointerType,
+        },
         textStyle: {
           color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize,
@@ -293,17 +296,6 @@ export default {
       }
       return style;
     },
-    // 获得位置
-    getOptionsPosition() {
-      const optionsSetup = this.optionsSetup;
-      let position = "";
-      if (optionsSetup.verticalShow) {
-        position = "right";
-      } else {
-        position = "top";
-      }
-      return position;
-    },
     // 数据解析
     setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
@@ -354,8 +346,8 @@ export default {
           series[i].barMinHeight = optionsSetup.minHeight;
           series[i].label = {
             show: optionsSetup.isShow,
-            position: this.getOptionsPosition(),
-            distance: optionsSetup.distance,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
@@ -475,8 +467,8 @@ export default {
           obj.barMinHeight = optionsSetup.minHeight;
           obj.label = {
             show: optionsSetup.isShow,
-            position: this.getOptionsPosition(),
-            distance: optionsSetup.distance,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
             color: optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
