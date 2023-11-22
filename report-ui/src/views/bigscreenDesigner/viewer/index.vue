@@ -69,6 +69,11 @@ export default {
         }
       })
       this.widgets = data.dashboard.widgets;
+
+      // 定时刷新
+      if(data.dashboard.refreshSeconds>0) {
+        setTimeout(function(){ window.location.reload(); }, data.dashboard.refreshSeconds*1000);
+      }
     }
   }
 };

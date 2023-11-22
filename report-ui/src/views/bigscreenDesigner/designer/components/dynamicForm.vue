@@ -105,6 +105,10 @@
               v-if="item.type == 'el-slider'"
               v-model="formData[item.name]"
               @change="(val) => changed(val, item.name)"
+              :step="item.options==null?1:item.options.step"
+              :min="item.options==null?1:item.options.min"
+              :max="item.options==null?100:item.options.max"
+              :show-stops="item.options==null?false:item.options.showStops"
             />
 
             <el-button

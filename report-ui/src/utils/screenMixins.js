@@ -177,10 +177,10 @@ const mixin = {
       if (!this.widgets || this.widgets.length == 0) {
         return this.$message.error("请添加组件");
       }
-      const { title, width, height, backgroundColor, backgroundImage } = { ...this.dashboard }
+      const { title, width, height, backgroundColor, backgroundImage, refreshSeconds } = { ...this.dashboard }
       const screenData = {
         reportCode: this.reportCode,
-        dashboard: { title, width, height, backgroundColor, backgroundImage },
+        dashboard: { title, width, height, backgroundColor, backgroundImage, refreshSeconds },
         widgets: this.widgets,
       };
       screenData.widgets.forEach((widget) => {
