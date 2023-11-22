@@ -5,7 +5,7 @@
       <div class="title">
         <div
           v-for="(item, index) in header"
-          :style="[headerTableStlye, tableFiledWidth(index), tableRowHeight()]"
+          :style="[headerTableStyle, tableFiledWidth(index), tableRowHeight()]"
           :key="index"
         >
           {{ item.name }}
@@ -58,7 +58,6 @@ export default {
         mainCell: ".bd ul",
         effect: "topLoop",
         autoPage: true,
-        //effect: "top",
         autoPlay: true,
         vis: 5,
         rowHeight: "50px"
@@ -73,7 +72,6 @@ export default {
   },
   computed: {
     styleObj() {
-      console.log(this.optionsSetUp);
       const allStyle = this.optionsPosition;
       return {
         position: this.ispreview ? "absolute" : "static",
@@ -87,11 +85,11 @@ export default {
     allComponentLinkage() {
       return this.$store.state.designer.allComponentLinkage;
     },
-    headerTableStlye() {
+    headerTableStyle() {
       const headStyle = this.optionsSetUp;
       return {
-        "text-align": headStyle.textAlign,
-        "font-size": headStyle.fontSize + "px",
+        "text-align": headStyle.textAlignHeader,
+        "font-size": headStyle.fontSizeHeader + "px",
         "border-style": headStyle.isLine ? "solid" : "none",
         "border-width": headStyle.borderWidth + "px",
         "border-color": headStyle.borderColor,
@@ -103,8 +101,8 @@ export default {
     bodyTableStyle() {
       const bodyStyle = this.optionsSetUp;
       return {
-        "text-align": bodyStyle.textAlign,
-        "font-size": bodyStyle.fontSize + "px",
+        "text-align": bodyStyle.textAlignBody,
+        "font-size": bodyStyle.fontSizeBody + "px",
         "border-style": bodyStyle.isLine ? "solid" : "none",
         "border-width": bodyStyle.borderWidth + "px",
         "border-color": bodyStyle.borderColor,
@@ -219,6 +217,9 @@ export default {
     },
     tableRowHeight() {
       let styleJson = {};
+      styleJson["overflow"] = "hidden";
+      styleJson["white-space"] = "nowrap";
+      styleJson["text-overflow"] = "ellipsis";
       if (this.optionsSetUp.rowHeight) {
         styleJson["height"] = this.optionsSetUp.rowHeight + "px";
         styleJson["line-height"] = this.optionsSetUp.rowHeight + "px";
