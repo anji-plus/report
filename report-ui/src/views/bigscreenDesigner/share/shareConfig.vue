@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 分享链接弹框
+ * @Author: Devli
+ * @Date: 2021-7-18 6:19:24
+ * @Last Modified by:   qianlishi
+ * @Last Modified time: 2021-12-13 11:04:24
+ !-->
+
 <template>
   <el-dialog
     class="tree_dialog"

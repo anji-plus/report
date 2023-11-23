@@ -1,8 +1,8 @@
 <!--
- * @Descripttion: 报表设计--大屏报表列表
- * @Author: lide1202@hotmail.com
- * @Date: 2021-3-13 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
+ * @Descripttion: 大屏报表卡片列表
+ * @Author: Devli
+ * @Date: 2021-3-19 10:23:24
+ * @Last Modified by:   qianlishi
  * @Last Modified time: 2021-3-13 11:04:24
  !-->
 <template>
@@ -97,7 +97,7 @@
         @current-change="handleCurrentChange"
       />
     </div>
-    <Share
+    <ShareConfig
       :visib="visibleForShareDialog"
       :reportCode="reportCodeForShareDialog"
       :reportName="reportNameForShareDialog"
@@ -108,11 +108,11 @@
 </template>
 
 <script>
-import Share from "./components/share";
+import ShareConfig from "./share/shareConfig";
 import { reportPageList } from "@/api/report";
 export default {
   name: "Login",
-  components: { Share },
+  components: { ShareConfig },
   data() {
     return {
       list: [],
