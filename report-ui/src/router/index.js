@@ -182,9 +182,9 @@ export const constantRouterMap = [
         }
       },
       {
-        path: 'reportshare',
-        name: 'reportshare',
-        component: () => import('@/views/reportShare/index'),
+        path: 'shareManage',
+        name: 'shareManage',
+        component: () => import('@/views/shareManage/index'),
         meta: {
           title: '报表分享',
           icon: 'iconfenxiang1',

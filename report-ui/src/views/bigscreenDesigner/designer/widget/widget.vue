@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 大屏报表设计器-动态组件
+ * @Author: Devli
+ * @Date: 2021-3-26 16:38:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2023-3-9 17:38:44
+-->
 <template>
   <avue-draggable
     :step="step"
