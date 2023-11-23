@@ -37,7 +37,7 @@ export const constantRouterMap = [
   },
   {
     path: '/el/**',
-    component: () => import('@/views/excelreport/el'),
+    component: () => import('@/views/excelreport/share/shareLink'),
     hidden: true
   },
   {
