@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 大屏报表设计器-动态组件
+ * @Author: qianming
+ * @Date: 2021-8-24 16:38:27
+ * @LastEditors: qianming
+ * @LastEditTime: 2023-11-21 17:38:44
+-->
 <template>
   <div :style="styleObj">
     <v-chart ref="myVChart" :options="options" autoresize/>
