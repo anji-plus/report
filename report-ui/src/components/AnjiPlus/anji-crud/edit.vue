@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 增删改查列表查询页-编辑组件
+ * @Author: Devli
+ * @Date: 2021-7-17 10:42:24
+ * @Last Modified by:   qianlishi
+ * @Last Modified time: 2021-12-13 11:20:24
+ !-->
 <template>
   <el-dialog
     :width="dialogWidth"

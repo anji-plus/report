@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 增删改查列表查询组件
+ * @Author: Devli
+ * @Date: 2021-7-17 10:42:24
+ * @Last Modified by:   qianlishi
+ * @Last Modified time: 2021-3-9 10:04:24
+ !-->
 <template>
   <div :class="[hasTreeFieldInQueryForm ? 'page-container' : 'app-container']">
     <div v-if="hasTreeFieldInQueryForm" class="left-container">
