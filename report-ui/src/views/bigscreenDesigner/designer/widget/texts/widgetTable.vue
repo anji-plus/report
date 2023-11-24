@@ -209,9 +209,6 @@ export default {
     },
     tableRowHeight() {
       let styleJson = {};
-      styleJson["overflow"] = "hidden";
-      styleJson["white-space"] = "nowrap";
-      styleJson["text-overflow"] = "ellipsis";
       if (this.optionsSetUp.rowHeight) {
         styleJson["height"] = this.optionsSetUp.rowHeight + "px";
         //styleJson["line-height"] = this.optionsSetUp.rowHeight + "px";
