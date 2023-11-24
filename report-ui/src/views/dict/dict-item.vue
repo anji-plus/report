@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 系统设置--字典项
+ * @version: 
+ * @Author: Raod
+ * @Date: 2021-12-11 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2022-3-9 15:00:36
+-->
 <template>
   <anji-crud ref="listPage" :option="crudOption" />
 </template>

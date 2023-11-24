@@ -1,10 +1,10 @@
 /*
- * @Descripttion: 主文件
+ * @Descripttion: 大屏设置项
  * @version:
- * @Author: qianlishi
- * @Date: 2021-08-29 06:43:07
- * @LastEditors: lide1202
- * @LastEditTime: 2023-11-22 15:00:35
+ * @Author: Devli
+ * @Date: 2021-3-23 13:01:07
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2023-3-9 15:00:35
  */
 import { widgetTool } from "./main"
 const screenConfig = {

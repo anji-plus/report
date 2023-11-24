@@ -3,24 +3,16 @@
     <superslide v-if="hackReset" :options="options" class="txtScroll-top">
       <!--表头-->
       <div class="title">
-        <div
-          v-for="(item, index) in header"
-          :style="[headerTableStyle, tableFiledWidth(index), tableRowHeight()]"
-          :key="index"
-        >
+        <div v-for="(item, index) in header" :key="index"
+          :style="[headerTableStyle, tableFiledWidth(index), tableRowHeight()]">
           {{ item.name }}
         </div>
       </div>
       <!--数据-->
       <div class="bd">
         <ul class="infoList">
-          <li
-            v-for="(item, index) in list"
-            :key="index"
-            :style="tableRowHeight()"
-          >
-            <div
-              v-for="(itemChild, idx) in header"
+          <li v-for="(item, index) in list" :key="index" :style="tableRowHeight()">
+            <div v-for="(itemChild, idx) in header"
               :key="idx"
               :style="[
                 bodyTableStyle,
@@ -106,7 +98,7 @@ export default {
         "border-style": bodyStyle.isLine ? "solid" : "none",
         "border-width": bodyStyle.borderWidth + "px",
         "border-color": bodyStyle.borderColor,
-        color: bodyStyle.bodyColor,
+        "color": bodyStyle.bodyColor,
         "background-color": bodyStyle.tableBgColor
       };
     }
@@ -222,10 +214,10 @@ export default {
       styleJson["text-overflow"] = "ellipsis";
       if (this.optionsSetUp.rowHeight) {
         styleJson["height"] = this.optionsSetUp.rowHeight + "px";
-        styleJson["line-height"] = this.optionsSetUp.rowHeight + "px";
+        //styleJson["line-height"] = this.optionsSetUp.rowHeight + "px";
       } else {
         styleJson["height"] = this.options.rowHeight;
-        styleJson["line-height"] = this.optionsSetUp.rowHeight + "px";
+        //styleJson["line-height"] = this.optionsSetUp.rowHeight + "px";
       }
       return styleJson;
     },
@@ -264,13 +256,17 @@ export default {
 
 .txtScroll-top .infoList li {
   height: 50px;
-  line-height: 50px;
+  //line-height: 50px;
   display: flex;
   flex-direction: row;
 }
 
 .txtScroll-top .infoList li > div {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 /*.txtScroll-top .infoList li:nth-child(n) {

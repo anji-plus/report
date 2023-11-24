@@ -15,7 +15,7 @@ Vue.directive('dragx', (el, binding, vnode) => {
   let cfg = Object.assign({}, defaultOpts, binding.value);
 
   // 获取目标元素 resize方向
-  function getDirection (e) {
+  function getDirection(e) {
     let el = e.currentTarget;
     let dir = '';
     let rect = el.getBoundingClientRect();
@@ -60,7 +60,7 @@ Vue.directive('dragx', (el, binding, vnode) => {
     }
     let dir = getDirection(e);
     let style = window.getComputedStyle(el);
-    function getStyleNumValue (key) {
+    function getStyleNumValue(key) {
       return parseInt(style.getPropertyValue(key), 10)
     }
     let rect = el.getBoundingClientRect();

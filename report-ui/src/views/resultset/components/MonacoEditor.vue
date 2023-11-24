@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: qianlishi
+ * @Date: 2021-8-6 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 18:48:24
+-->
 <template>
   <div ref="editor" class="main"></div>
 </template>

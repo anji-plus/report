@@ -1,8 +1,9 @@
 <!--
- * @Author: lide1202@hotmail.com
- * @Date: 2021-4-6 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24
+ * @Descripttion: 大屏设计器-右区动态表单
+ * @Author: Devli
+ * @Date: 2021-3-13 11:04:24
+ * @Last Modified by:   qianlishi
+ * @Last Modified time: 2022-3-14 14:04:24
  !-->
 <template>
   <div class="collapse-input-style">

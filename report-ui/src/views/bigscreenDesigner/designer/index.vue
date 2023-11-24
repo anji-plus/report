@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 大屏报表设计器-主体页面
+ * @Author: Devli
+ * @Date: 2021-3-19 10:23:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2023-03-17 17:38:44
+-->
 <template>
   <div class="layout">
     <div

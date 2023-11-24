@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 报表分享
+ * @Author: Raod
+ * @Date: 2022-7-30 11:10:24
+ * @Last Modified by:   qianlishi
+ * @Last Modified time: 2022-8-1 11:04:24
+ !-->
 <template>
   <anji-crud ref="listPage" :option="crudOption">
     <template v-slot:pageSection>

@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 大屏报表设计器-组件注册
+ * @Author: Devli
+ * @Date: 2021-3-19 10:23:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2023-2-7 17:38:44
+-->
 <template>
   <div>
     <component
