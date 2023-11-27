@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @desc 用户管理 controller
- * @author 木子李·De <lide1202@hotmail.com>
+ * @author Devli
  * @date 2019-02-17 08:50:11.902
  **/
 @RestController

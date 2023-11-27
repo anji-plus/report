@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  * @description 角色--菜单--按钮关联关系 entity
- * @author 木子李·De <lide1202@hotmail.com>
+ * @author Devli
  * @date 2019-02-17 08:50:14.136
  **/
 @TableName(keepGlobalPrefix=true, value="access_role_authority")

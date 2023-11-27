@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
 * @desc AccessUser 用户管理服务接口
-* @author 木子李·De <lide1202@hotmail.com>
+* @author Devli
 * @date 2019-02-17 08:50:11.902
 **/
 public interface AccessUserService extends GaeaBaseService<AccessUserParam, AccessUser> {
