@@ -671,6 +671,14 @@ export const widgetLineCompare = {
             },
             {
               type: 'el-input-number',
+              label: '距离',
+              name: 'fontDistance',
+              required: false,
+              placeholder: '',
+              value: 5
+            },
+            {
+              type: 'el-input-number',
               label: '字体字号',
               name: 'fontSize',
               required: false,

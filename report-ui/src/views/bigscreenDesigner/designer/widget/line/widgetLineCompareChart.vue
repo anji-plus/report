@@ -495,7 +495,7 @@ export default {
       if (series[0].type == "line") {
         series[0].label = {
           position: "top",
-          distance: 10,
+          distance: optionsSetup.fontDistance,
           show: optionsSetup.isShow,
           color: optionsSetup.dataColor,
           fontSize: optionsSetup.fontSize,
@@ -504,7 +504,7 @@ export default {
         };
         series[1].label = {
           position: "bottom",
-          distance: 10,
+          distance: optionsSetup.fontDistance,
           show: optionsSetup.isShow,
           color: optionsSetup.dataColor,
           fontSize: optionsSetup.fontSize,
