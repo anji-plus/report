@@ -500,6 +500,7 @@ export default {
           color: optionsSetup.dataColor,
           fontSize: optionsSetup.fontSize,
           fontWeight: optionsSetup.fontWeight,
+          formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
         };
         series[1].label = {
           position: "bottom",
@@ -508,6 +509,7 @@ export default {
           color: optionsSetup.dataColor,
           fontSize: optionsSetup.fontSize,
           fontWeight: optionsSetup.fontWeight,
+          formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
         };
       }
     },

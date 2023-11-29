@@ -49,7 +49,7 @@ export const widgetLineCompare = {
               name: 'pointSize',
               required: false,
               placeholder: '',
-              value: 10,
+              value: 5,
             },
             {
               type: 'el-select',
@@ -93,7 +93,7 @@ export const widgetLineCompare = {
               name: 'lineWidth',
               required: false,
               placeholder: '',
-              value: 10,
+              value: 5,
             },
           ],
         },
@@ -662,6 +662,14 @@ export const widgetLineCompare = {
               value: true
             },
             {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSign',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
               name: 'fontSize',
@@ -751,7 +759,7 @@ export const widgetLineCompare = {
               name: 'marginTop',
               required: false,
               placeholder: '',
-              value: 40,
+              value: 50,
             },
             {
               type: 'el-slider',
@@ -759,7 +767,7 @@ export const widgetLineCompare = {
               name: 'marginBottom',
               required: false,
               placeholder: '',
-              value: 40,
+              value: 50,
             },
           ],
         },
