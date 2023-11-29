@@ -650,21 +650,24 @@ export const widgetGradientBarchart = {
               required: false,
               placeholder: '',
               value: 10,
-            }, {
+            },
+            {
+              type: 'el-slider',
+              label: '右边距(像素)',
+              name: 'marginRight',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
               type: 'el-slider',
               label: '顶边距(像素)',
               name: 'marginTop',
               required: false,
               placeholder: '',
               value: 50,
-            }, {
-              type: 'el-slider',
-              label: '右边距(像素)',
-              name: 'marginRight',
-              required: false,
-              placeholder: '',
-              value: 40,
-            }, {
+            },
+            {
               type: 'el-slider',
               label: '底边距(像素)',
               name: 'marginBottom',

@@ -751,7 +751,7 @@ export const widgetLineCompare = {
               name: 'marginLeft',
               required: false,
               placeholder: '',
-              value: 20,
+              value: 10,
             },
             {
               type: 'el-slider',
@@ -759,7 +759,7 @@ export const widgetLineCompare = {
               name: 'marginRight',
               required: false,
               placeholder: '',
-              value: 50,
+              value: 10,
             },
             {
               type: 'el-slider',

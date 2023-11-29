@@ -1,4 +1,3 @@
-
 export const widgetBarDoubleYaxis = {
   code: 'widgetBarDoubleYaxisChart',
   type: 'barChart',
@@ -91,9 +90,9 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'solid', name: '实线' },
-                { code: 'dashed', name: '虚线' },
-                { code: 'dotted', name: '斑点' },
+                {code: 'solid', name: '实线'},
+                {code: 'dashed', name: '虚线'},
+                {code: 'dotted', name: '斑点'},
               ],
               value: 'dashed'
             },
@@ -165,10 +164,10 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -179,9 +178,9 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -192,9 +191,9 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
               ],
               value: 'center'
             },
@@ -229,10 +228,10 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -243,9 +242,9 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -301,9 +300,9 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
               ],
               value: 'center'
             },
@@ -314,8 +313,8 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'top', name: '顶部' },
-                { code: 'bottom', name: '底部' },
+                {code: 'top', name: '顶部'},
+                {code: 'bottom', name: '底部'},
               ],
               value: 'top'
             },
@@ -326,8 +325,8 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'vertical', name: '竖排' },
-                { code: 'horizontal', name: '横排' },
+                {code: 'vertical', name: '竖排'},
+                {code: 'horizontal', name: '横排'},
               ],
               value: 'horizontal'
             },
@@ -749,14 +748,14 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'top', name: '上' },
-                { code: 'left', name: '左' },
-                { code: 'right', name: '右' },
-                { code: 'inside', name: '里' },
-                { code: 'insideTop', name: '里顶' },
-                { code: 'insideLeft', name: '里左' },
-                { code: 'insideRight', name: '里右' },
-                { code: 'insideBottom', name: '里底' },
+                {code: 'top', name: '上'},
+                {code: 'left', name: '左'},
+                {code: 'right', name: '右'},
+                {code: 'inside', name: '里'},
+                {code: 'insideTop', name: '里顶'},
+                {code: 'insideLeft', name: '里左'},
+                {code: 'insideRight', name: '里右'},
+                {code: 'insideBottom', name: '里底'},
               ],
               value: 'insideTop'
             },
@@ -791,10 +790,10 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -818,8 +817,8 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'item', name: '数据项' },
-                { code: 'axis', name: '坐标轴' },
+                {code: 'item', name: '数据项'},
+                {code: 'axis', name: '坐标轴'},
               ],
               value: 'axis'
             },
@@ -830,10 +829,10 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'none', name: '无' },
-                { code: 'line', name: '直线' },
-                { code: 'shadow', name: '阴影' },
-                { code: 'cross', name: '十字准星' },
+                {code: 'none', name: '无'},
+                {code: 'line', name: '直线'},
+                {code: 'shadow', name: '阴影'},
+                {code: 'cross', name: '十字准星'},
               ],
               value: 'shadow'
             },
@@ -865,21 +864,24 @@ export const widgetBarDoubleYaxis = {
               required: false,
               placeholder: '',
               value: 10,
-            }, {
+            },
+            {
+              type: 'el-slider',
+              label: '右边距(像素)',
+              name: 'marginRight',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
               type: 'el-slider',
               label: '顶边距(像素)',
               name: 'marginTop',
               required: false,
               placeholder: '',
               value: 50,
-            }, {
-              type: 'el-slider',
-              label: '右边距(像素)',
-              name: 'marginRight',
-              required: false,
-              placeholder: '',
-              value: 40,
-            }, {
+            },
+            {
               type: 'el-slider',
               label: '底边距(像素)',
               name: 'marginBottom',
@@ -897,7 +899,7 @@ export const widgetBarDoubleYaxis = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
+              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
             },
           ],
         },
@@ -941,18 +943,18 @@ export const widgetBarDoubleYaxis = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          { "axis": "1月", "bar1": 2.6, "bar2": 2 },
-          { "axis": "2月", "bar1": 5.9, "bar2": 2.2 },
-          { "axis": "3月", "bar1": 9, "bar2": 3.3 },
-          { "axis": "4月", "bar1": 26.4, "bar2": 4.5 },
-          { "axis": "5月", "bar1": 28.7, "bar2": 6.3 },
-          { "axis": "6月", "bar1": 70.7, "bar2": 10.2 },
-          { "axis": "7月", "bar1": 175.6, "bar2": 20.3 },
-          { "axis": "8月", "bar1": 182.2, "bar2": 23.4 },
-          { "axis": "9月", "bar1": 48.7, "bar2": 23 },
-          { "axis": "10月", "bar1": 18.8, "bar2": 16.5 },
-          { "axis": "11月", "bar1": 6, "bar2": 12 },
-          { "axis": "12月", "bar1": 2.3, "bar2": 6.2 },
+          {"axis": "1月", "bar1": 2.6, "bar2": 2},
+          {"axis": "2月", "bar1": 5.9, "bar2": 2.2},
+          {"axis": "3月", "bar1": 9, "bar2": 3.3},
+          {"axis": "4月", "bar1": 26.4, "bar2": 4.5},
+          {"axis": "5月", "bar1": 28.7, "bar2": 6.3},
+          {"axis": "6月", "bar1": 70.7, "bar2": 10.2},
+          {"axis": "7月", "bar1": 175.6, "bar2": 20.3},
+          {"axis": "8月", "bar1": 182.2, "bar2": 23.4},
+          {"axis": "9月", "bar1": 48.7, "bar2": 23},
+          {"axis": "10月", "bar1": 18.8, "bar2": 16.5},
+          {"axis": "11月", "bar1": 6, "bar2": 12},
+          {"axis": "12月", "bar1": 2.3, "bar2": 6.2},
         ]
       },
       {
