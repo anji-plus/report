@@ -413,6 +413,14 @@ export const widgetLineCompare = {
             },
             {
               type: 'el-input-text',
+              label: '最大值',
+              name: 'maxYTop',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
+              type: 'el-input-text',
               label: '坐标名',
               name: 'textNameY',
               require: false,
@@ -527,6 +535,14 @@ export const widgetLineCompare = {
               required: false,
               placeholder: '',
               value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '最大值',
+              name: 'maxYBottom',
+              required: false,
+              placeholder: '',
+              value: '',
             },
             {
               type: 'el-input-text',

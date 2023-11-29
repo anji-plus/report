@@ -384,6 +384,7 @@ export default {
     setOptionsYTop() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
+        max: optionsSetup.maxYTop !== "" ? optionsSetup.maxYTop : null,
         gridIndex: 0,
         splitNumber: optionsSetup.splitNumberYTop,
         show: optionsSetup.isShowYTop,
@@ -428,6 +429,7 @@ export default {
     setOptionsYBottom() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
+        max: optionsSetup.maxYBottom !== "" ? optionsSetup.maxYBottom : null,
         gridIndex: 1,
         splitNumber: optionsSetup.splitNumberYBottom,
         show: optionsSetup.isShowYBottom,
