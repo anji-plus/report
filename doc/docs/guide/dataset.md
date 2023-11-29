@@ -154,7 +154,7 @@ function dataTransform(data) {
 
 写法就是就URL链接后面拼接参数，唯一要注意的就是**参数名**要和数据集配置的**查询参数名**一致，多个参数则用 & 号。
 
-例如：原始的大屏链接
+例如：原始的大屏链接 <br>
 https://xxx.xxx.xxx/index.html#/bigscreen/viewer?reportCode=testForm
-假设大屏里面部分数据集查询参数名是 startTime 
+假设大屏里面部分数据集查询参数名是 startTime <br>
 https://xxx.xxx.xxx/index.html#/bigscreen/viewer?reportCode=testForm&startTime=2023-05-05
