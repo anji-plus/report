@@ -509,6 +509,9 @@ export default {
             color: arrColor[i],
             width: optionsSetup.lineWidth,
           },
+          areaStyle: {
+            opacity: optionsSetup.area ? optionsSetup.areaThickness / 100 : 0,
+          },
           label: {
             show: optionsSetup.isShowLine,
             position: optionsSetup.fontPositionLine,
@@ -651,6 +654,9 @@ export default {
           lineStyle: {
             color: arrColor[i],
             width: optionsSetup.lineWidth,
+          },
+          areaStyle: {
+            opacity: optionsSetup.area ? optionsSetup.areaThickness / 100 : 0,
           },
           label: {
             show: optionsSetup.isShowLine,

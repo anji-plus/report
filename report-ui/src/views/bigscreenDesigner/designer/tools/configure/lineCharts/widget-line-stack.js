@@ -23,14 +23,14 @@ export const widgetLineStack = {
         placeholder: '',
         value: '折线堆叠图',
       },
-      {
+/*      {
         type: 'el-switch',
         label: '竖展示',
         name: 'verticalShow',
         required: false,
         placeholder: '',
         value: false,
-      },
+      },*/
       {
         type: 'vue-color',
         label: '背景颜色',
@@ -80,6 +80,14 @@ export const widgetLineStack = {
               value: true,
             },
             {
+              type: 'el-slider',
+              label: '线条宽度',
+              name: 'lineWidth',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
               type: 'el-switch',
               label: '面积堆积',
               name: 'area',
@@ -93,15 +101,7 @@ export const widgetLineStack = {
               name: 'areaThickness',
               required: false,
               placeholder: '',
-              value: 5,
-            },
-            {
-              type: 'el-slider',
-              label: '线条宽度',
-              name: 'lineWidth',
-              required: false,
-              placeholder: '',
-              value: 4,
+              value: 15,
             },
           ],
         },
