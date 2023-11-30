@@ -41,7 +41,7 @@ export const widgetMoreBarLine = {
               name: 'maxWidth',
               required: false,
               placeholder: '',
-              value: 10,
+              value: 15,
             },
             {
               type: 'el-slider',
@@ -50,6 +50,14 @@ export const widgetMoreBarLine = {
               require: false,
               placeholder: '',
               value: 5,
+            },
+            {
+              type: 'el-slider',
+              label: '间距',
+              name: 'barGap',
+              required: false,
+              placeholder: '',
+              value: 10,
             },
             {
               type: 'el-select',
@@ -62,6 +70,75 @@ export const widgetMoreBarLine = {
                 { code: 'upDown', name: '上下堆叠' },
               ],
               value: 'leftRight'
+            },
+            {
+              type: 'el-switch',
+              label: '背景显示',
+              name: 'isShowBackground',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'vue-color',
+              label: '背景颜色',
+              name: 'backgroundStyleColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(180, 180, 180, 0.2)',
+            },
+            {
+              type: 'vue-color',
+              label: '描边颜色',
+              name: 'backgroundStyleBorderColor',
+              required: false,
+              placeholder: '',
+              value: '#000',
+            },
+            {
+              type: 'el-input-number',
+              label: '描边宽度',
+              name: 'backgroundStyleBorderWidth',
+              required: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-select',
+              label: '描边类型',
+              name: 'backgroundStyleBorderType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'solid', name: '实线' },
+                { code: 'dashed', name: '虚线' },
+                { code: 'dotted', name: '斑点' },
+              ],
+              value: 'dashed'
+            },
+            {
+              type: 'el-input-number',
+              label: '阴影模糊',
+              name: 'backgroundStyleShadowBlur',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'vue-color',
+              label: '阴影颜色',
+              name: 'backgroundStyleShadowColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(0, 0, 0, 0.5)',
+            },
+            {
+              type: 'el-slider',
+              label: '透明度',
+              name: 'backgroundStyleOpacity',
+              require: false,
+              placeholder: '',
+              value: 100,
             },
           ],
         },
@@ -742,12 +819,30 @@ export const widgetMoreBarLine = {
               value: false
             },
             {
+              type: 'el-select',
+              label: '位置',
+              name: 'fontPositionBar',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'top', name: '上' },
+                { code: 'left', name: '左' },
+                { code: 'right', name: '右' },
+                { code: 'inside', name: '里' },
+                { code: 'insideTop', name: '里顶' },
+                { code: 'insideLeft', name: '里左' },
+                { code: 'insideRight', name: '里右' },
+                { code: 'insideBottom', name: '里底' },
+              ],
+              value: 'top'
+            },
+            {
               type: 'el-input-number',
               label: '距离',
               name: 'distanceBar',
               required: false,
               placeholder: '',
-              value: 5
+              value: 0
             },
             {
               type: 'el-input-number',
@@ -801,12 +896,30 @@ export const widgetMoreBarLine = {
               value: false
             },
             {
+              type: 'el-select',
+              label: '位置',
+              name: 'fontPositionLine',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'top', name: '上' },
+                { code: 'left', name: '左' },
+                { code: 'right', name: '右' },
+                { code: 'inside', name: '里' },
+                { code: 'insideTop', name: '里顶' },
+                { code: 'insideLeft', name: '里左' },
+                { code: 'insideRight', name: '里右' },
+                { code: 'insideBottom', name: '里底' },
+              ],
+              value: 'top'
+            },
+            {
               type: 'el-input-number',
               label: '距离',
               name: 'distanceLine',
               required: false,
               placeholder: '',
-              value: 5
+              value: 0
             },
             {
               type: 'el-input-number',
@@ -843,6 +956,40 @@ export const widgetMoreBarLine = {
         {
           name: '提示语设置',
           list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowTooltip',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-select',
+              label: '触发类型',
+              name: 'tooltipTrigger',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'item', name: '数据项' },
+                { code: 'axis', name: '坐标轴' },
+              ],
+              value: 'axis'
+            },
+            {
+              type: 'el-select',
+              label: '指示器类型',
+              name: 'tooltipAxisPointerType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'none', name: '无' },
+                { code: 'line', name: '直线' },
+                { code: 'shadow', name: '阴影' },
+                { code: 'cross', name: '十字准星' },
+              ],
+              value: 'shadow'
+            },
             {
               type: 'el-input-number',
               label: '字体字号',

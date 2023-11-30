@@ -369,8 +369,11 @@ export default {
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
-        trigger: "item",
-        show: true,
+        show: optionsSetup.isShowTooltip,
+        trigger: optionsSetup.tooltipTrigger,
+        axisPointer: {
+          type: optionsSetup.tooltipAxisPointerType,
+        },
         textStyle: {
           color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize,
@@ -486,15 +489,27 @@ export default {
         if (series[i].type == "bar") {
           series[i].name = legendName[i];
           series[i].type = "bar";
+          series[i].barGap = optionsSetup.barGap + "%";
           series[i].stack = this.getStackStyle();
           series[i].label = {
             show: optionsSetup.isShowBar,
-            position: "top",
+            position: optionsSetup.fontPositionBar,
             distance: optionsSetup.distanceBar,
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
             fontWeight: optionsSetup.fontWeightBar,
             formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}'
+          };
+          //柱体背景属性
+          series[i].showBackground = optionsSetup.isShowBackground;
+          series[i].backgroundStyle = {
+            color: optionsSetup.backgroundStyleColor,
+            borderColor: optionsSetup.backgroundStyleBorderColor,
+            borderWidth: optionsSetup.backgroundStyleBorderWidth,
+            borderType: optionsSetup.backgroundStyleBorderType,
+            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+            shadowColor: optionsSetup.backgroundStyleShadowColor,
+            opacity: optionsSetup.backgroundStyleOpacity / 100,
           };
           series[i].barWidth = optionsSetup.maxWidth;
           series[i].itemStyle.normal["barBorderRadius"] = optionsSetup.radius;
@@ -527,7 +542,7 @@ export default {
           };
           series[i].label = {
             show: optionsSetup.isShowLine,
-            position: "top",
+            position: optionsSetup.fontPositionLine,
             distance: optionsSetup.distanceLine,
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
@@ -602,10 +617,11 @@ export default {
         if (val.series[i].type == "bar") {
           obj.name = val.series[i].name;
           obj.type = val.series[i].type;
+          obj.barGap = optionsSetup.barGap + "%";
           obj.stack = this.getStackStyle();
           obj.label = {
             show: optionsSetup.isShowBar,
-            position: "top",
+            position: optionsSetup.fontPositionBar,
             distance: optionsSetup.distanceBar,
             fontSize: optionsSetup.fontSizeBar,
             color: optionsSetup.subTextColorBar,
@@ -618,6 +634,17 @@ export default {
               color: arrColor[i],
               barBorderRadius: optionsSetup.radius,
             },
+          };
+          //柱体背景属性
+          obj.showBackground = optionsSetup.isShowBackground;
+          obj.backgroundStyle = {
+            color: optionsSetup.backgroundStyleColor,
+            borderColor: optionsSetup.backgroundStyleBorderColor,
+            borderWidth: optionsSetup.backgroundStyleBorderWidth,
+            borderType: optionsSetup.backgroundStyleBorderType,
+            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+            shadowColor: optionsSetup.backgroundStyleShadowColor,
+            opacity: optionsSetup.backgroundStyleOpacity / 100,
           };
           obj.data = val.series[i].data;
           series.push(obj);
@@ -649,7 +676,7 @@ export default {
           };
           obj.label = {
             show: optionsSetup.isShowLine,
-            position: "top",
+            position: optionsSetup.fontPositionLine,
             distance: optionsSetup.distanceLine,
             fontSize: optionsSetup.fontSizeLine,
             color: optionsSetup.subTextColorLine,
