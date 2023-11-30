@@ -49,7 +49,7 @@ export const widgetBarchart = {
               name: 'maxWidth',
               required: false,
               placeholder: '',
-              value: 10,
+              value: 15,
             },
             {
               type: 'el-slider',
@@ -58,6 +58,14 @@ export const widgetBarchart = {
               require: false,
               placeholder: '',
               value: 5,
+            },
+            {
+              type: 'el-slider',
+              label: '间距',
+              name: 'barGap',
+              required: false,
+              placeholder: '',
+              value: 10,
             },
             {
               type: 'el-slider',

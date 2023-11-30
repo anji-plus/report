@@ -61,7 +61,7 @@ export const widgetBarStack = {
               name: 'maxWidth',
               required: false,
               placeholder: '',
-              value: 20,
+              value: 15,
             },
             {
               type: 'el-slider',
@@ -77,7 +77,7 @@ export const widgetBarStack = {
               name: 'barGap',
               required: false,
               placeholder: '',
-              value: 0,
+              value: 10,
             },
             {
               type: 'el-switch',

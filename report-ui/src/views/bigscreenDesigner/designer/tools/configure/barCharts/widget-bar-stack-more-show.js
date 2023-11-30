@@ -34,7 +34,7 @@ export const widgetBarStackMoreShow = {
               name: 'maxWidth',
               required: false,
               placeholder: '',
-              value: 25,
+              value: 15,
             },
             {
               type: 'el-slider',
@@ -43,6 +43,14 @@ export const widgetBarStackMoreShow = {
               require: false,
               placeholder: '',
               value: 5,
+            },
+            {
+              type: 'el-slider',
+              label: '间距',
+              name: 'barGap',
+              required: false,
+              placeholder: '',
+              value: 10,
             },
             {
               type: 'el-switch',

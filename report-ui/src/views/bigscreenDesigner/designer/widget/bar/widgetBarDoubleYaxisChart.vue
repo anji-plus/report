@@ -312,6 +312,7 @@ export default {
       const series = this.options.series;
       for (const key in series) {
         if (series[key].type == "bar") {
+          series[key].barGap = optionsSetup.barGap + "%";
           series[key].label = {
             show: optionsSetup.isShow,
             position: optionsSetup.fontPosition,

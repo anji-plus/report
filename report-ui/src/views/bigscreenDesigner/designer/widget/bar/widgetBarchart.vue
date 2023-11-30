@@ -348,7 +348,7 @@ export default {
       for (const i in series) {
         if (series[i].type == "bar") {
           series[i].type = "bar";
-          series[i].barGap = "0%";
+          series[i].barGap = optionsSetup.barGap + "%";
           series[i].barWidth = optionsSetup.maxWidth;
           series[i].barMinHeight = optionsSetup.minHeight;
           series[i].label = {
@@ -468,7 +468,7 @@ export default {
         const obj = {};
         if (val.series[i].type == "bar") {
           obj.type = "bar";
-          obj.barGap = "0%";
+          obj.barGap = optionsSetup.barGap + "%";
           obj.stack = this.getStackStyle();
           obj.barWidth = optionsSetup.maxWidth;
           obj.barMinHeight = optionsSetup.minHeight;
