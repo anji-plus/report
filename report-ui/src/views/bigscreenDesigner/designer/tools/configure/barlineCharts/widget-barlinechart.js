@@ -551,6 +551,14 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-text',
+              label: '最大值',
+              name: 'maxYLeft',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
+              type: 'el-input-text',
               label: '坐标名',
               name: 'textNameYLeft',
               require: false,
@@ -673,6 +681,14 @@ export const widgetBarlinechart = {
               require: false,
               placeholder: '',
               value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '最大值',
+              name: 'maxYRight',
+              required: false,
+              placeholder: '',
+              value: '',
             },
             {
               type: 'el-input-text',

@@ -212,6 +212,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = [
         {
+          max: optionsSetup.maxYLeft !== "" ? optionsSetup.maxYLeft : null,
           type: "value",
           // 均分
           splitNumber: optionsSetup.splitNumberLeft,
@@ -254,6 +255,7 @@ export default {
           },
         },
         {
+          max: optionsSetup.maxYRight !== "" ? optionsSetup.maxYRight : null,
           type: "value",
           // 均分
           splitNumber: optionsSetup.splitNumberRight,
