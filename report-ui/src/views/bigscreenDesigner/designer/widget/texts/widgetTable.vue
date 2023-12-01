@@ -85,6 +85,7 @@ export default {
         "border-style": headStyle.isLine ? "solid" : "none",
         "border-width": headStyle.borderWidth + "px",
         "border-color": headStyle.borderColor,
+        "line-height": headStyle.rowHeight + 'px',
         display: headStyle.isHeader ? "block" : "none",
         color: headStyle.headColor,
         "background-color": headStyle.headBackColor
