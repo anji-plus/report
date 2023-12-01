@@ -349,6 +349,7 @@ export default {
           type: "bar",
           data: item.list.map((item) => item.data),
           barGap: optionsSetup.barGap + "%",
+          barMinHeight: optionsSetup.minHeight,
           barWidth: optionsSetup.maxWidth,
           label: {
             show: optionsSetup.isShow,
@@ -450,6 +451,7 @@ export default {
           type: "bar",
           data: item.list.map((item) => item.data),
           barGap: optionsSetup.barGap + "%",
+          barMinHeight: optionsSetup.minHeight,
           barWidth: optionsSetup.maxWidth,
           label: {
             show: optionsSetup.isShow,

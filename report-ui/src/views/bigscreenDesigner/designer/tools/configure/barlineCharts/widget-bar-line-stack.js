@@ -33,7 +33,7 @@ export const widgetBarLineStack = {
           list: [
             {
               type: 'el-slider',
-              label: '宽度',
+              label: '最大宽度',
               name: 'maxWidth',
               required: false,
               placeholder: '',
@@ -54,6 +54,14 @@ export const widgetBarLineStack = {
               required: false,
               placeholder: '',
               value: 10,
+            },
+            {
+              type: 'el-slider',
+              label: '最小高度',
+              name: 'minHeight',
+              require: false,
+              placeholder: '',
+              value: 0,
             },
             {
               type: 'el-select',

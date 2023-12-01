@@ -53,6 +53,14 @@ export const widgetBarStackMoreShow = {
               value: 10,
             },
             {
+              type: 'el-slider',
+              label: '最小高度',
+              name: 'minHeight',
+              require: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
               type: 'el-switch',
               label: '背景显示',
               name: 'isShowBackground',

@@ -307,6 +307,7 @@ export default {
       const series = this.options.series;
       if (series[0].type == "bar") {
         series[0].barGap = optionsSetup.barGap + "%";
+        series[0].barMinHeight = optionsSetup.minHeight;
         series[0].label = {
           show: optionsSetup.isShow,
           position: optionsSetup.fontPosition,

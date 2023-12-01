@@ -492,6 +492,7 @@ export default {
           series[i].name = legendName[i];
           series[i].type = "bar";
           series[i].barGap = optionsSetup.barGap + "%";
+          series[i].barMinHeight = optionsSetup.minHeight;
           series[i].stack = this.getStackStyle();
           series[i].label = {
             show: optionsSetup.isShowBar,
@@ -620,6 +621,7 @@ export default {
           obj.name = val.series[i].name;
           obj.type = val.series[i].type;
           obj.barGap = optionsSetup.barGap + "%";
+          obj.barMinHeight = optionsSetup.minHeight;
           obj.stack = this.getStackStyle();
           obj.label = {
             show: optionsSetup.isShowBar,

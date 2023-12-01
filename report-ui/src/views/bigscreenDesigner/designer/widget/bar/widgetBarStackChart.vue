@@ -363,6 +363,7 @@ export default {
           type: "bar",
           data: data,
           barGap: optionsSetup.barGap + "%",
+          barMinHeight: optionsSetup.minHeight,
           stack: this.getStackStyle(),
           barWidth: optionsSetup.maxWidth,
           label: {
@@ -470,6 +471,7 @@ export default {
             type: "bar",
             data: val.series[i].data,
             barGap: optionsSetup.barGap + "%",
+            barMinHeight: optionsSetup.minHeight,
             stack: this.getStackStyle(),
             barWidth: optionsSetup.maxWidth,
             label: {
