@@ -106,9 +106,10 @@ export default {
         roseType: optionsSetup.nightingaleRoseType,
         radius: [optionsSetup.innerNumber + "%", optionsSetup.outerNumber + "%"],
         center: ["50%", "50%"],
-        itemStyle: {
+        // echarts v5.0.0开始支持
+/*        itemStyle: {
           borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
-        },
+        },*/
       };
       this.options.series[0] = series;
     },

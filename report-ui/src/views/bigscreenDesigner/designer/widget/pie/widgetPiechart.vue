@@ -110,14 +110,26 @@ export default {
       const series = {
         type: "pie",
         radius: [optionsSetup.innerNumber + "%", optionsSetup.outerNumber + "%"],
-        itemStyle: {
+        clockwise: optionsSetup.clockwise,
+        startAngle: optionsSetup.startAngle,
+        minAngle: optionsSetup.minAngle,
+        minShowLabelAngle: optionsSetup.minShowLabelAngle,
+        percentPrecision: optionsSetup.percentPrecision,
+        // echarts v5.0.0开始支持
+/*        itemStyle: {
           borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
         },
+        */
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
             shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+          label: {
+            show: true,
+            fontSize: 14,
+            fontWeight: 'bold'
           },
         },
       };
@@ -148,12 +160,12 @@ export default {
     // 数值设定
     setOptionsValue() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      const numberValue = optionsSetup.numberValue ? "{c}" : "";
-      const percentage = optionsSetup.percentage ? "({d})%" : "";
+      const numberValue = optionsSetup.numberValue ? "\n{c}" : "";
+      const percentage = optionsSetup.percentage ? "\n({d}%)" : "";
       const label = {
         show: optionsSetup.isShow,
-        formatter: `{a|{b}：${numberValue} ${percentage}}`,
+        position: optionsSetup.position,
+        formatter: `{b}:${numberValue}${percentage}`,
         rich: {
           a: {
             padding: [-30, 15, -20, 15],
@@ -165,12 +177,15 @@ export default {
         fontSize: optionsSetup.fontSize,
         fontWeight: optionsSetup.optionsSetup,
       };
-      for (const key in series) {
-        if (series[key].type == "pie") {
-          series[key].label = label;
-          series[key].labelLine = {show: optionsSetup.isShow};
-        }
+      // 引导线
+      const labelLine = {
+        show: optionsSetup.isShowLabelLine,
+        length: optionsSetup.labelLineLength,
+        length2: optionsSetup.labelLineLength2,
+        smooth: optionsSetup.labelLineSmooth,
       }
+      this.options.series[0].label = label;
+      this.options.series[0].labelLine = labelLine;
     },
     // 提示语设置 tooltip
     setOptionsTooltip() {

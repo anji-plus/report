@@ -41,7 +41,7 @@ export const widgetPiechart = {
               name: 'innerNumber',
               required: false,
               placeholder: '',
-              value: 0,
+              value: 30,
             },
             {
               type: 'el-slider',
@@ -50,6 +50,45 @@ export const widgetPiechart = {
               required: false,
               placeholder: '',
               value: 60,
+            },
+            {
+              type: 'el-switch',
+              label: '顺时针排布',
+              name: 'clockwise',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-select',
+              label: '起始角度',
+              name: 'startAngle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 0, name: '0度' },
+                { code: 30, name: '30度' },
+                { code: 90, name: '90度' },
+                { code: 180, name: '180度' },
+                { code: 360, name: '360度' }
+              ],
+              value: 90
+            },
+            {
+              type: 'el-slider',
+              label: '最小角度',
+              name: 'minAngle',
+              require: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-slider',
+              label: '不显示标签角度',
+              name: 'minShowLabelAngle',
+              require: false,
+              placeholder: '',
+              value: 0,
             },
 /*            {
               type: 'el-slider',
@@ -218,6 +257,27 @@ export const widgetPiechart = {
             },
             {
               type: 'el-input-number',
+              label: '小数点位数',
+              name: 'percentPrecision',
+              required: false,
+              placeholder: '',
+              value: 2,
+            },
+            {
+              type: 'el-select',
+              label: '文本位置',
+              name: 'position',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'outside', name: '扇区外侧' },
+                { code: 'inside', name: '扇区内侧' },
+                { code: 'center', name: '扇区中心' }
+              ],
+              value: 'outside'
+            },
+            {
+              type: 'el-input-number',
               label: '字体字号',
               name: 'fontSize',
               required: false,
@@ -245,6 +305,38 @@ export const widgetPiechart = {
                 { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
+            },
+            {
+              type: 'el-switch',
+              label: '引导线显示',
+              name: 'isShowLabelLine',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '平滑引导线',
+              name: 'labelLineSmooth',
+              required: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'el-input-number',
+              label: '第一段长度',
+              name: 'labelLineLength',
+              required: false,
+              placeholder: '',
+              value: 15,
+            },
+            {
+              type: 'el-input-number',
+              label: '第二段长度',
+              name: 'labelLineLength2',
+              required: false,
+              placeholder: '',
+              value: 15,
             },
           ],
         },
@@ -453,7 +545,7 @@ export const widgetPiechart = {
         name: 'height',
         required: false,
         placeholder: '该容器在1080px大屏中的高度',
-        value: 200,
+        value: 300,
       },
     ],
   }
