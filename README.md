@@ -236,7 +236,7 @@ AJ-Report技术交流六群，新群可直接加<br>
 <img src="https://ajreport.beliefteam.cn/file/download/856c9469-e306-406a-b2b9-e196050f3dd5" width = "300" height = "450" align=left/> <br>
 
 
-个人微信：个人微信，不闲聊，加群/咨询请备注 **AJ-Report**、**Report**、**大屏**，**一定要加备注 ！！！没有备注一律忽略！！！**<br>
+个人微信：个人微信，不闲聊，加群/咨询请备注 **AJ-Report**/**Report**/**大屏**，**一定要加备注 ！！！没有备注一律忽略！！！**<br>
 <img src="https://ajreport.beliefteam.cn/file/download/a3440fb7-e20c-42fa-b7af-805f5523c746" width = "300" height = "450" align=left/>
 
 
