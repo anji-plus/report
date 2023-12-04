@@ -233,11 +233,11 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
 AJ-Report技术交流六群，新群可直接加<br>
-<img src="https://ajreport.beliefteam.cn/file/download/856c9469-e306-406a-b2b9-e196050f3dd5" width = "300" height = "300" align=left/> <br>
+<img src="https://ajreport.beliefteam.cn/file/download/856c9469-e306-406a-b2b9-e196050f3dd5" width = "300" height = "500" align=left/> <br>
 
 
 个人微信：个人微信，不闲聊，加群/咨询请备注 **AJ-Report** 或者 **Report**，**一定要加备注 ！！！没有备注一律忽略！！！**<br>
-<img src="https://ajreport.beliefteam.cn/file/download/a3440fb7-e20c-42fa-b7af-805f5523c746" width = "300" height = "300" align=left/>
+<img src="https://ajreport.beliefteam.cn/file/download/a3440fb7-e20c-42fa-b7af-805f5523c746" width = "300" height = "500" align=left/>
 
 
 ## 更多支持
