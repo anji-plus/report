@@ -31,19 +31,36 @@ export const widgetPiechart = {
         placeholder: '',
         value: ''
       },
-      {
-        type: 'el-select',
-        label: '饼图样式',
-        name: 'piechartStyle',
-        required: false,
-        placeholder: '',
-        selectOptions: [
-          { code: 'shixin', name: '实心饼图' },
-          { code: 'kongxin', name: '空心饼图' },
-        ],
-        value: 'shixin'
-      },
       [
+        {
+          name: '饼图设置',
+          list : [
+            {
+              type: 'el-slider',
+              label: '内半径',
+              name: 'innerNumber',
+              required: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-slider',
+              label: '外半径',
+              name: 'outerNumber',
+              required: false,
+              placeholder: '',
+              value: 60,
+            },
+/*            {
+              type: 'el-slider',
+              label: '圆角属性',
+              name: 'borderRadius',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },*/
+          ]
+        },
         {
           name: '标题设置',
           list: [

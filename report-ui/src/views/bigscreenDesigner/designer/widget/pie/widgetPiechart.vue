@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -9,6 +9,7 @@ import {
   originWidgetLinkageLogic,
   targetWidgetLinkageLogic,
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 export default {
   name: "WidgetPiechart",
   components: {},
@@ -94,6 +95,7 @@ export default {
   methods: {
     // 修改图标options属性
     editorOptions() {
+      this.setOptionsPie();
       this.setOptionsTitle();
       this.setOptionsValue();
       this.setOptionsTooltip();
@@ -102,14 +104,24 @@ export default {
       this.setOptionsData();
       this.setOptionsPiechartStyle();
     },
-    // 饼图样式
-    setOptionsPiechartStyle() {
-      if (this.optionsSetup.piechartStyle == "shixin") {
-        this.options.series[0]["radius"] = "50%";
-      } else if (this.optionsSetup.piechartStyle == "kongxin") {
-        this.options.series[0]["radius"] = ["40%", "70%"];
-      } else {
-      }
+    // 饼图设置
+    setOptionsPie() {
+      const optionsSetup = this.optionsSetup;
+      const series = {
+        type: "pie",
+        radius: [optionsSetup.innerNumber + "%", optionsSetup.outerNumber + "%"],
+        itemStyle: {
+          borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      };
+      this.options.series[0] = series;
     },
     // 标题设置
     setOptionsTitle() {
@@ -156,7 +168,7 @@ export default {
       for (const key in series) {
         if (series[key].type == "pie") {
           series[key].label = label;
-          series[key].labelLine = { show: optionsSetup.isShow };
+          series[key].labelLine = {show: optionsSetup.isShow};
         }
       }
     },

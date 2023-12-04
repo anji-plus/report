@@ -31,19 +31,48 @@ export const widgetPieNightingale = {
         placeholder: '',
         value: ''
       },
-      {
-        type: 'el-select',
-        label: '饼图模式',
-        name: 'nightingleRosetype',
-        required: false,
-        placeholder: '',
-        selectOptions: [
-          { code: 'area', name: '面积模式' },
-          { code: 'radius', name: '半径模式' },
-        ],
-        value: 'area'
-      },
       [
+        {
+          name: '饼图设置',
+          list : [
+            {
+              type: 'el-select',
+              label: '饼图模式',
+              name: 'nightingaleRoseType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'area', name: '面积模式' },
+                { code: 'radius', name: '半径模式' },
+              ],
+              value: 'area'
+            },
+            {
+              type: 'el-slider',
+              label: '内半径',
+              name: 'innerNumber',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'el-slider',
+              label: '外半径',
+              name: 'outerNumber',
+              required: false,
+              placeholder: '',
+              value: 60,
+            },
+/*            {
+              type: 'el-slider',
+              label: '圆角属性',
+              name: 'borderRadius',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },*/
+          ]
+        },
         {
           name: '标题设置',
           list: [

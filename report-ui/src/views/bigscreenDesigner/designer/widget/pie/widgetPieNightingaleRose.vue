@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
         toolbox: {
           show: true,
           feature: {
-            mark: { show: true },
+            mark: {show: true},
           },
         },
         series: [
@@ -94,12 +94,23 @@ export default {
       this.setOptionsTooltip();
       this.setOptionsLegend();
       this.setOptionsColor();
+      this.setOptionsPie();
       this.setOptionsData();
-      this.setOptionsRosetype();
     },
-    // 饼图模式 面积模式"area" 半径模式"radius"
-    setOptionsRosetype() {
-      this.options.series[0]["roseType"] = this.optionsSetup.nightingleRosetype;
+    // 饼图设置
+    setOptionsPie() {
+      const optionsSetup = this.optionsSetup;
+      const series = {
+        type: "pie",
+        // 饼图模式 面积模式"area" 半径模式"radius"//name: "面积模式",
+        roseType: optionsSetup.nightingaleRoseType,
+        radius: [optionsSetup.innerNumber + "%", optionsSetup.outerNumber + "%"],
+        center: ["50%", "50%"],
+        itemStyle: {
+          borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
+        },
+      };
+      this.options.series[0] = series;
     },
     // 标题修改
     setOptionsTitle() {
@@ -147,7 +158,7 @@ export default {
       for (const key in series) {
         if (series[key].type == "pie") {
           series[key].label = label;
-          series[key].labelLine = { show: optionsSetup.isShow };
+          series[key].labelLine = {show: optionsSetup.isShow};
         }
       }
     },
