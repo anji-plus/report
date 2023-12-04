@@ -1,4 +1,3 @@
-# 企微可添加人数已满上限，目前正在申请扩充，现有问题可直接提Issue
 
 ## 简介
 
@@ -233,12 +232,13 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
-个人企业微信：加微信进群备注 **AJ-Report** 或者 **Report**，**一定要加备注 ！！！**<br>
-如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请过段时间再发送。 <br>
-<img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "300" height = "300" align=left/>
+AJ-Report技术交流六群，新群可直接加<br>
+<img src="https://ajreport.beliefteam.cn/file/download/856c9469-e306-406a-b2b9-e196050f3dd5" width = "300" height = "300" align=left/> <br>
 
-AJ-Report技术交流五群，新群可直接加<br>
-<img src="https://images.gitee.com/uploads/images/2021/1101/130421_caa25124_7492051.jpeg" width = "300" height = "300" align=left/> <br>
+
+个人微信：个人微信，不闲聊，加群/咨询请备注 **AJ-Report** 或者 **Report**，**一定要加备注 ！！！没有备注一律忽略！！！**<br>
+<img src="https://ajreport.beliefteam.cn/file/download/a3440fb7-e20c-42fa-b7af-805f5523c746" width = "300" height = "300" align=left/>
+
 
 ## 更多支持
 
