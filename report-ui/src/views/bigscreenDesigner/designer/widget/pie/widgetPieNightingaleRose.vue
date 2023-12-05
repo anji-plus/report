@@ -103,6 +103,10 @@ export default {
       const series = {
         type: "pie",
         center: ["50%", "50%"],
+        left: optionsSetup.left,
+        top: optionsSetup.top,
+        right: optionsSetup.right,
+        bottom: optionsSetup.bottom,
         // 饼图模式 面积模式"area" 半径模式"radius"//name: "面积模式",
         roseType: optionsSetup.nightingaleRoseType,
         radius: [optionsSetup.innerNumber + "%", optionsSetup.outerNumber + "%"],

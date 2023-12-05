@@ -676,6 +676,43 @@ export const widgetPieNightingale = {
           ],
         },
         {
+          name: '边距设置',
+          list: [
+            {
+              type: 'el-slider',
+              label: '左边距(像素)',
+              name: 'left',
+              required: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-slider',
+              label: '右边距(像素)',
+              name: 'right',
+              required: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-slider',
+              label: '顶边距(像素)',
+              name: 'top',
+              required: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-slider',
+              label: '底边距(像素)',
+              name: 'bottom',
+              required: false,
+              placeholder: '',
+              value: 0,
+            },
+          ],
+        },
+        {
           name: '自定义配色',
           list: [
             {

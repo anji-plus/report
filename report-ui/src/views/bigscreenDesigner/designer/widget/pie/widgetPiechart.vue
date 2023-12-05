@@ -109,6 +109,10 @@ export default {
       const series = {
         type: "pie",
         center: ["50%", "50%"],
+        left: optionsSetup.left,
+        top: optionsSetup.top,
+        right: optionsSetup.right,
+        bottom: optionsSetup.bottom,
         radius: [optionsSetup.innerNumber + "%", optionsSetup.outerNumber + "%"],
         clockwise: optionsSetup.clockwise,
         startAngle: optionsSetup.startAngle,
