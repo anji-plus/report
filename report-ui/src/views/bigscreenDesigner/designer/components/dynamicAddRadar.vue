@@ -9,10 +9,10 @@
     >新增</el-button
     >
     <el-table :data="formData" style="width: 100%">
-      <el-table-column prop="name" label="名称" width="100" />
-      <el-table-column prop="key" label="key值" width="100" />
-      <el-table-column prop="max" label="最大值" width="100" />
-      <el-table-column label="操作" width="100">
+      <el-table-column prop="name" label="名称" width="90" />
+      <el-table-column prop="key" label="key值" width="90" />
+      <el-table-column prop="max" label="最大值" width="70" />
+      <el-table-column label="操作" width="90">
         <template slot-scope="scope">
           <div class="button-group">
             <el-button

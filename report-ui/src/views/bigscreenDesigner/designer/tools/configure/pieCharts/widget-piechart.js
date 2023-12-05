@@ -605,9 +605,17 @@ export const widgetPiechart = {
           name: '提示语设置',
           list: [
             {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowTooltip',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'tipsFontSize',
+              name: 'tooltipFontSize',
               required: false,
               placeholder: '',
               value: 16
@@ -615,7 +623,7 @@ export const widgetPiechart = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'tipsColor',
+              name: 'tooltipColor',
               required: false,
               placeholder: '',
               value: '#00FEFF'
@@ -623,7 +631,7 @@ export const widgetPiechart = {
             {
               type: 'el-select',
               label: '字体粗细',
-              name: 'tipsFontWeight',
+              name: 'tooltipFontWeight',
               required: false,
               placeholder: '',
               selectOptions: [
@@ -637,7 +645,7 @@ export const widgetPiechart = {
             {
               type: 'el-select',
               label: '字体风格',
-              name: 'tipsFontStyle',
+              name: 'tooltipFontStyle',
               required: false,
               placeholder: '',
               selectOptions: [
@@ -650,7 +658,7 @@ export const widgetPiechart = {
             {
               type: 'el-select',
               label: '字体系列',
-              name: 'tipsFontFamily',
+              name: 'tooltipFontFamily',
               required: false,
               placeholder: '',
               selectOptions: [

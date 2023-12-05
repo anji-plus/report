@@ -209,12 +209,13 @@ export default {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
+        show: optionsSetup.isShowTooltip,
         textStyle: {
-          color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize,
-          fontWeight: optionsSetup.tipsFontWeight,
-          fontStyle: optionsSetup.tipsFontStyle,
-          fontFamily: optionsSetup.tipsFontFamily,
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
       };
       this.options.tooltip = tooltip;

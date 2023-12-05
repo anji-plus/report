@@ -169,10 +169,13 @@ export default {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
-        show: true,
+        show: optionsSetup.isShowTooltip,
         textStyle: {
-          color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize,
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
       };
       this.options.tooltip = tooltip;
@@ -249,14 +252,17 @@ export default {
           value: values,
           label: {
             show: optionsSetup.isShow,
-            position: "top",
-            distance: 10,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
+            color: optionsSetup.fontColor == '' ? null : optionsSetup.fontColor,
             fontWeight: optionsSetup.fontWeight,
+            fontStyle: optionsSetup.fontStyle,
+            fontFamily: optionsSetup.fontFamily,
           },
           lineStyle: {
             normal: {
+              width: optionsSetup.lineWidth,
               type: optionsSetup.lineType,
               color: arrColor[i],
             },
@@ -331,11 +337,13 @@ export default {
           value: values,
           label: {
             show: optionsSetup.isShow,
-            position: "top",
-            distance: 10,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
+            color: optionsSetup.fontColor == '' ? null : optionsSetup.fontColor,
             fontWeight: optionsSetup.fontWeight,
+            fontStyle: optionsSetup.fontStyle,
+            fontFamily: optionsSetup.fontFamily,
           },
           lineStyle: {
             normal: {

@@ -617,6 +617,14 @@ export const widgetPieNightingale = {
           name: '提示语设置',
           list: [
             {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowTooltip',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
               name: 'tipsFontSize',
