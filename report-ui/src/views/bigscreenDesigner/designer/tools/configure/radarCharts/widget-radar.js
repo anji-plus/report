@@ -295,14 +295,6 @@ export const widgetRadar = {
               value: true,
             },
             {
-              type: 'el-input-text',
-              label: '名称( | 分隔)',
-              name: 'legendName',
-              required: false,
-              placeholder: '多值以' | '隔开',
-              value: ''
-            },
-            {
               type: 'vue-color',
               label: '字体颜色',
               name: 'legendColor',
@@ -319,9 +311,58 @@ export const widgetRadar = {
               value: 12,
             },
             {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'legendFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'legendFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'legendFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'Microsoft YaHei', name: '微软雅黑' },
+                { code: 'serif', name: 'serif字体' },
+                { code: 'Arial', name: 'Arial字体' },
+                { code: 'Courier New', name: 'Courier New字体' },
+              ],
+              value: 'Microsoft YaHei'
+            },
+            {
               type: 'el-input-number',
               label: '图例宽度',
               name: 'legendWidth',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例高度',
+              name: 'legendHeight',
               required: false,
               placeholder: '',
               value: 12,

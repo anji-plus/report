@@ -33,6 +33,178 @@ export const widgetPieNightingale = {
       },
       [
         {
+          name: '标题设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '标题显示',
+              name: 'isShowTitle',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '标题名',
+              name: 'text',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'textColor',
+              required: false,
+              placeholder: '',
+              value: '#FFD700'
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'textFontSize',
+              required: false,
+              placeholder: '',
+              value: 20
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'textFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'textFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'textFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'Microsoft YaHei', name: '微软雅黑' },
+                { code: 'serif', name: 'serif字体' },
+                { code: 'Arial', name: 'Arial字体' },
+                { code: 'Courier New', name: 'Courier New字体' },
+              ],
+              value: 'Microsoft YaHei'
+            },
+            {
+              type: 'el-input-text',
+              label: '副标题名',
+              name: 'subtext',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'subtextColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(30, 144, 255, 1)'
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'subtextFontSize',
+              required: false,
+              placeholder: '',
+              value: 20
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'subtextFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'subtextFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'subtextFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'Microsoft YaHei', name: '微软雅黑' },
+                { code: 'serif', name: 'serif字体' },
+                { code: 'Arial', name: 'Arial字体' },
+                { code: 'Courier New', name: 'Courier New字体' },
+              ],
+              value: 'Microsoft YaHei'
+            },
+            {
+              type: 'el-select',
+              label: '左右位置',
+              name: 'titleLeft',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-slider',
+              label: '上下间距',
+              name: 'titleTop',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'el-input-number',
+              label: '主副标题间距',
+              name: 'titleItemGap',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+          ],
+        },
+        {
           name: '饼图设置',
           list : [
             {
@@ -111,208 +283,6 @@ export const widgetPieNightingale = {
               value: 10,
             },*/
           ]
-        },
-        {
-          name: '标题设置',
-          list: [
-            {
-              type: 'el-switch',
-              label: '标题显示',
-              name: 'isNoTitle',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-input-text',
-              label: '标题名',
-              name: 'titleText',
-              required: false,
-              placeholder: '',
-              value: '',
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'textColor',
-              required: false,
-              placeholder: '',
-              value: '#FFD700'
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'textFontSize',
-              required: false,
-              placeholder: '',
-              value: 20
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'textFontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-select',
-              label: '字体风格',
-              name: 'textFontStyle',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-select',
-              label: '字体位置',
-              name: 'textAlign',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
-              ],
-              value: 'center'
-            },
-            {
-              type: 'el-input-text',
-              label: '副标题名',
-              name: 'subText',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'subTextColor',
-              required: false,
-              placeholder: '',
-              value: 'rgba(30, 144, 255, 1)'
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'subTextFontSize',
-              required: false,
-              placeholder: '',
-              value: 20
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'subTextFontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-select',
-              label: '字体风格',
-              name: 'subTextFontStyle',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
-              ],
-              value: 'normal'
-            },
-          ],
-        },
-        {
-          name: '图例操作',
-          list: [
-            {
-              type: 'el-switch',
-              label: '图例',
-              name: 'isShowLegend',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'legendColor',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'legendFontSize',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'el-input-number',
-              label: '图例宽度',
-              name: 'legendWidth',
-              required: false,
-              placeholder: '',
-              value: 15,
-            },
-            {
-              type: 'el-select',
-              label: '横向位置',
-              name: 'lateralPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
-              ],
-              value: 'center'
-            },
-            {
-              type: 'el-select',
-              label: '纵向位置',
-              name: 'longitudinalPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'top', name: '顶部' },
-                { code: 'bottom', name: '底部' },
-              ],
-              value: 'top'
-            },
-            {
-              type: 'el-select',
-              label: '布局前置',
-              name: 'layoutFront',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'vertical', name: '竖排' },
-                { code: 'horizontal', name: '横排' },
-              ],
-              value: 'horizontal'
-            },
-          ],
         },
         {
           name: '扇区设置',
@@ -426,6 +396,129 @@ export const widgetPieNightingale = {
               required: false,
               placeholder: '',
               value: 'rgba(0, 0, 0, 0.5)'
+            },
+          ],
+        },
+        {
+          name: '图例操作',
+          list: [
+            {
+              type: 'el-switch',
+              label: '图例显示',
+              name: 'isShowLegend',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'legendColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'legendFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'legendFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'legendFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'legendFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'Microsoft YaHei', name: '微软雅黑' },
+                { code: 'serif', name: 'serif字体' },
+                { code: 'Arial', name: 'Arial字体' },
+                { code: 'Courier New', name: 'Courier New字体' },
+              ],
+              value: 'Microsoft YaHei'
+            },
+            {
+              type: 'el-input-number',
+              label: '图例宽度',
+              name: 'legendWidth',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例高度',
+              name: 'legendHeight',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '横向位置',
+              name: 'lateralPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-select',
+              label: '纵向位置',
+              name: 'longitudinalPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'top', name: '顶部' },
+                { code: 'bottom', name: '底部' },
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-select',
+              label: '布局前置',
+              name: 'layoutFront',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'vertical', name: '竖排' },
+                { code: 'horizontal', name: '横排' },
+              ],
+              value: 'horizontal'
             },
           ],
         },

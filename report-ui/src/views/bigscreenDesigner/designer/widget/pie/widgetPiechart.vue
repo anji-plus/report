@@ -95,13 +95,40 @@ export default {
   methods: {
     // 修改图标options属性
     editorOptions() {
-      this.setOptionsPie();
       this.setOptionsTitle();
+      this.setOptionsPie();
       this.setOptionsValue();
       this.setOptionsTooltip();
       this.setOptionsLegend();
       this.setOptionsColor();
       this.setOptionsData();
+    },
+    // 标题设置
+    setOptionsTitle() {
+      const optionsSetup = this.optionsSetup;
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
+      };
+      this.options.title = title;
     },
     // 饼图设置
     setOptionsPie() {
@@ -149,28 +176,6 @@ export default {
         },
       };
       this.options.series[0] = series;
-    },
-    // 标题设置
-    setOptionsTitle() {
-      const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
-      };
-      this.options.title = title;
     },
     // 数值设定
     setOptionsValue() {
@@ -226,16 +231,20 @@ export default {
       const legend = {
         show: optionsSetup.isShowLegend,
         left: optionsSetup.lateralPosition,
-        right: optionsSetup.lateralPosition,
+        //right: optionsSetup.lateralPosition,
         top: optionsSetup.longitudinalPosition,
-        bottom: optionsSetup.longitudinalPosition,
+        //bottom: optionsSetup.longitudinalPosition,
         orient: optionsSetup.layoutFront,
         textStyle: {
           color: optionsSetup.legendColor,
           fontSize: optionsSetup.legendFontSize,
+          fontWeight: optionsSetup.legendFontWeight,
+          fontStyle: optionsSetup.legendFontStyle,
+          fontFamily: optionsSetup.legendFontFamily,
         },
+        itemHeight: optionsSetup.legendHeight,
         itemWidth: optionsSetup.legendWidth,
-      }
+      };
       this.options.legend = legend;
     },
     // 图例颜色修改

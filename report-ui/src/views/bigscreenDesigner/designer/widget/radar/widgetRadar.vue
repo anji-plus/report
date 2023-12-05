@@ -78,22 +78,27 @@ export default {
     // 标题修改
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
     },
@@ -134,13 +139,18 @@ export default {
       const legend = {
         show: optionsSetup.isShowLegend,
         left: optionsSetup.lateralPosition,
+        //right: optionsSetup.lateralPosition,
         top: optionsSetup.longitudinalPosition,
-        bottom: optionsSetup.longitudinalPosition,
+        //bottom: optionsSetup.longitudinalPosition,
         orient: optionsSetup.layoutFront,
         textStyle: {
           color: optionsSetup.legendColor,
           fontSize: optionsSetup.legendFontSize,
+          fontWeight: optionsSetup.legendFontWeight,
+          fontStyle: optionsSetup.legendFontStyle,
+          fontFamily: optionsSetup.legendFontFamily,
         },
+        itemHeight: optionsSetup.legendHeight,
         itemWidth: optionsSetup.legendWidth,
       };
       this.options.legend = legend;
