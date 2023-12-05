@@ -102,13 +102,13 @@ export default {
       this.setOptionsLegend();
       this.setOptionsColor();
       this.setOptionsData();
-      this.setOptionsPiechartStyle();
     },
     // 饼图设置
     setOptionsPie() {
       const optionsSetup = this.optionsSetup;
       const series = {
         type: "pie",
+        center: ["50%", "50%"],
         radius: [optionsSetup.innerNumber + "%", optionsSetup.outerNumber + "%"],
         clockwise: optionsSetup.clockwise,
         startAngle: optionsSetup.startAngle,
@@ -218,19 +218,20 @@ export default {
     // 图例操作 legend
     setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
-      const legend = this.options.legend;
-      legend.show = optionsSetup.isShowLegend;
-      legend.left = optionsSetup.lateralPosition;
-      legend.right = optionsSetup.lateralPosition;
-      legend.top = optionsSetup.longitudinalPosition;
-      legend.bottom =
-        optionsSetup.longitudinalPosition;
-      legend.orient = optionsSetup.layoutFront;
-      legend.textStyle = {
-        color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize,
-      };
-      legend.itemWidth = optionsSetup.legendWidth;
+      const legend = {
+        show: optionsSetup.isShowLegend,
+        left: optionsSetup.lateralPosition,
+        right: optionsSetup.lateralPosition,
+        top: optionsSetup.longitudinalPosition,
+        bottom: optionsSetup.longitudinalPosition,
+        orient: optionsSetup.layoutFront,
+        textStyle: {
+          color: optionsSetup.legendColor,
+          fontSize: optionsSetup.legendFontSize,
+        },
+        itemWidth: optionsSetup.legendWidth,
+      }
+      this.options.legend = legend;
     },
     // 图例颜色修改
     setOptionsColor() {

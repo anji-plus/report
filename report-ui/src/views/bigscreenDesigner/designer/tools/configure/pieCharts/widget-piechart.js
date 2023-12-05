@@ -261,7 +261,7 @@ export const widgetPiechart = {
               name: 'legendWidth',
               required: false,
               placeholder: '',
-              value: 15,
+              value: 14,
             },
             {
               type: 'el-select',
