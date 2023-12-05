@@ -116,20 +116,31 @@ export default {
         minShowLabelAngle: optionsSetup.minShowLabelAngle,
         percentPrecision: optionsSetup.percentPrecision,
         // echarts v5.0.0开始支持
-/*        itemStyle: {
-          borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
-        },
-        */
+        /*        itemStyle: {
+                  borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
+                },
+                */
+        // 高亮的扇区
         emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
-          },
           label: {
-            show: true,
-            fontSize: 14,
-            fontWeight: 'bold'
+            show: optionsSetup.isShowEmphasisLabel,
+            color: optionsSetup.emphasisLabelFontColor == '' ? null : optionsSetup.EmphasisLabelFontColor,
+            fontSize: optionsSetup.emphasisLabelFontSize,
+            fontWeight: optionsSetup.emphasisLabelFontWeight,
+            fontStyle: optionsSetup.emphasisLabelFontStyle,
+            fontFamily: optionsSetup.emphasisLabelFontFamily,
+          },
+          // 视觉引导线
+          labelLine: {
+            show: false,
+          },
+          // 色块描边
+          itemStyle: {
+            borderColor: optionsSetup.borderColor == '' ? null : optionsSetup.borderColor,
+            borderWidth: optionsSetup.borderWidth,
+            borderType: optionsSetup.borderType,
+            shadowBlur: optionsSetup.shadowBlur,
+            shadowColor: optionsSetup.shadowColor,
           },
         },
       };
@@ -165,17 +176,14 @@ export default {
       const label = {
         show: optionsSetup.isShow,
         position: optionsSetup.position,
-        formatter: `{b}:${numberValue}${percentage}`,
-        rich: {
-          a: {
-            padding: [-30, 15, -20, 15],
-            color: optionsSetup.dataColor,
-            fontSize: optionsSetup.fontSize,
-            fontWeight: optionsSetup.fontWeight,
-          },
-        },
+        rotate: optionsSetup.rotate,
+        formatter: `{b}${numberValue}${percentage}`,
+        padding: optionsSetup.padding,
         fontSize: optionsSetup.fontSize,
-        fontWeight: optionsSetup.optionsSetup,
+        color: optionsSetup.fontColor == '' ? null : optionsSetup.fontColor,
+        fontWeight: optionsSetup.fontWeight,
+        fontStyle: optionsSetup.fontStyle,
+        fontFamily: optionsSetup.fontFamily,
       };
       // 引导线
       const labelLine = {
@@ -183,6 +191,11 @@ export default {
         length: optionsSetup.labelLineLength,
         length2: optionsSetup.labelLineLength2,
         smooth: optionsSetup.labelLineSmooth,
+        lineStyle: {
+          color: optionsSetup.lineStyleColor == '' ? null : optionsSetup.lineStyleColor,
+          width: optionsSetup.lineStyleWidth,
+          type: optionsSetup.lineStyleType,
+        }
       }
       this.options.series[0].label = label;
       this.options.series[0].labelLine = labelLine;
@@ -195,6 +208,9 @@ export default {
         textStyle: {
           color: optionsSetup.tipsColor,
           fontSize: optionsSetup.tipsFontSize,
+          fontWeight: optionsSetup.tipsFontWeight,
+          fontStyle: optionsSetup.tipsFontStyle,
+          fontFamily: optionsSetup.tipsFontFamily,
         },
       };
       this.options.tooltip = tooltip;

@@ -229,139 +229,6 @@ export const widgetPiechart = {
           ],
         },
         {
-          name: '数值设定',
-          list: [
-            {
-              type: 'el-switch',
-              label: '显示',
-              name: 'isShow',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-switch',
-              label: '数值',
-              name: 'numberValue',
-              require: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-switch',
-              label: '百分比',
-              name: 'percentage',
-              require: false,
-              placeholder: '',
-              value: false,
-            },
-            {
-              type: 'el-input-number',
-              label: '小数点位数',
-              name: 'percentPrecision',
-              required: false,
-              placeholder: '',
-              value: 2,
-            },
-            {
-              type: 'el-select',
-              label: '文本位置',
-              name: 'position',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'outside', name: '扇区外侧' },
-                { code: 'inside', name: '扇区内侧' },
-                { code: 'center', name: '扇区中心' }
-              ],
-              value: 'outside'
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'fontSize',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'dataColor',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'fontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-switch',
-              label: '引导线显示',
-              name: 'isShowLabelLine',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-switch',
-              label: '平滑引导线',
-              name: 'labelLineSmooth',
-              required: false,
-              placeholder: '',
-              value: false,
-            },
-            {
-              type: 'el-input-number',
-              label: '第一段长度',
-              name: 'labelLineLength',
-              required: false,
-              placeholder: '',
-              value: 15,
-            },
-            {
-              type: 'el-input-number',
-              label: '第二段长度',
-              name: 'labelLineLength2',
-              required: false,
-              placeholder: '',
-              value: 15,
-            },
-          ],
-        },
-        {
-          name: '提示语设置',
-          list: [
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'tipsFontSize',
-              required: false,
-              placeholder: '',
-              value: 16
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'tipsColor',
-              required: false,
-              placeholder: '',
-              value: '#00FEFF'
-            },
-          ],
-        },
-        {
           name: '图例操作',
           list: [
             {
@@ -432,6 +299,367 @@ export const widgetPiechart = {
                 { code: 'horizontal', name: '横排' },
               ],
               value: 'horizontal'
+            },
+          ],
+        },
+        {
+          name: '扇区设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '文字高亮',
+              name: 'isShowEmphasisLabel',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'emphasisLabelFontSize',
+              required: false,
+              placeholder: '',
+              value: 24,
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'emphasisLabelFontColor',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'emphasisLabelFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'bold'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'emphasisLabelFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'emphasisLabelFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'Microsoft YaHei', name: '微软雅黑' },
+                { code: 'serif', name: 'serif字体' },
+                { code: 'Arial', name: 'Arial字体' },
+                { code: 'Courier New', name: 'Courier New字体' },
+              ],
+              value: 'Microsoft YaHei'
+            },
+            {
+              type: 'vue-color',
+              label: '描边颜色',
+              name: 'borderColor',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'el-input-number',
+              label: '描边宽度',
+              name: 'borderWidth',
+              required: false,
+              placeholder: '',
+              value: 1
+            },
+            {
+              type: 'el-select',
+              label: '描边类型',
+              name: 'borderType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'solid', name: '实线' },
+                { code: 'dashed', name: '虚线' },
+                { code: 'dotted', name: '斑点' },
+              ],
+              value: 'solid'
+            },
+            {
+              type: 'el-input-number',
+              label: '阴影系数',
+              name: 'shadowBlur',
+              required: false,
+              placeholder: '',
+              value: 10
+            },
+            {
+              type: 'vue-color',
+              label: '阴影颜色',
+              name: 'shadowColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(0, 0, 0, 0.5)'
+            },
+          ],
+        },
+        {
+          name: '数值设定',
+          list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShow',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '数值显示',
+              name: 'numberValue',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '百分比显示',
+              name: 'percentage',
+              require: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'el-input-number',
+              label: '小数点位数',
+              name: 'percentPrecision',
+              required: false,
+              placeholder: '',
+              value: 2,
+            },
+            {
+              type: 'el-select',
+              label: '位置',
+              name: 'position',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'outside', name: '扇区外侧' },
+                { code: 'inside', name: '扇区内侧' },
+                { code: 'center', name: '扇区中心' }
+              ],
+              value: 'outside'
+            },
+            {
+              type: 'el-input-number',
+              label: '边距',
+              name: 'padding',
+              require: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-input-number',
+              label: '角度',
+              name: 'rotate',
+              require: false,
+              placeholder: '',
+              value: 0,
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'fontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'fontColor',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'fontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'fontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'fontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'Microsoft YaHei', name: '微软雅黑' },
+                { code: 'serif', name: 'serif字体' },
+                { code: 'Arial', name: 'Arial字体' },
+                { code: 'Courier New', name: 'Courier New字体' },
+              ],
+              value: 'Microsoft YaHei'
+            },
+            {
+              type: 'el-switch',
+              label: '引导线显示',
+              name: 'isShowLabelLine',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '平滑引导线',
+              name: 'labelLineSmooth',
+              required: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'el-input-number',
+              label: '第一段长度',
+              name: 'labelLineLength',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'el-input-number',
+              label: '第二段长度',
+              name: 'labelLineLength2',
+              required: false,
+              placeholder: '',
+              value: 15,
+            },
+            {
+              type: 'vue-color',
+              label: '线条颜色',
+              name: 'lineStyleColor',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'el-input-number',
+              label: '线条宽度',
+              name: 'lineStyleWidth',
+              required: false,
+              placeholder: '',
+              value: 1
+            },
+            {
+              type: 'el-select',
+              label: '线条类型',
+              name: 'lineStyleType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'solid', name: '实线' },
+                { code: 'dashed', name: '虚线' },
+                { code: 'dotted', name: '斑点' },
+              ],
+              value: 'solid'
+            },
+          ],
+        },
+        {
+          name: '提示语设置',
+          list: [
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'tipsFontSize',
+              required: false,
+              placeholder: '',
+              value: 16
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'tipsColor',
+              required: false,
+              placeholder: '',
+              value: '#00FEFF'
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'tipsFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'tipsFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'tipsFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'Microsoft YaHei', name: '微软雅黑' },
+                { code: 'serif', name: 'serif字体' },
+                { code: 'Arial', name: 'Arial字体' },
+                { code: 'Courier New', name: 'Courier New字体' },
+              ],
+              value: 'Microsoft YaHei'
             },
           ],
         },
