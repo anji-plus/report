@@ -1,11 +1,12 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
 <script>
-import { targetWidgetLinkageLogic } from "@/views/bigscreenDesigner/designer/linkageLogic";
+import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 let per = 60;
 export default {
   name: "widgetPiePercentageChart", //百分比图参考：https://www.makeapie.com/editor.html?c=xFkzKG-bpl
@@ -71,152 +72,6 @@ export default {
           selectedMode: false,
         },
         series: [
-          {
-            //name: '环1',
-            type: "custom",
-            coordinateSystem: "none",
-            renderItem: (params, api) => {
-              return {
-                type: "arc",
-                shape: {
-                  cx: api.getWidth() / 2,
-                  cy: api.getHeight() / 2,
-                  r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.6,
-                  startAngle: ((0 + this.angle) * Math.PI) / 180,
-                  endAngle: ((90 + this.angle) * Math.PI) / 180,
-                },
-                style: {
-                  stroke: "#0CD3DB",
-                  fill: "transparent",
-                  lineWidth: 1.5,
-                },
-                silent: true,
-              };
-            },
-            data: [0],
-          },
-          {
-            //name: '环2',
-            type: "custom",
-            coordinateSystem: "none",
-            renderItem: (params, api) => {
-              return {
-                type: "arc",
-                shape: {
-                  cx: api.getWidth() / 2,
-                  cy: api.getHeight() / 2,
-                  r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.6,
-                  startAngle: ((180 + this.angle) * Math.PI) / 180,
-                  endAngle: ((270 + this.angle) * Math.PI) / 180,
-                },
-                style: {
-                  stroke: "#0CD3DB",
-                  fill: "transparent",
-                  lineWidth: 1.5,
-                },
-                silent: true,
-              };
-            },
-            data: [0],
-          },
-          {
-            //name: '环3',
-            type: "custom",
-            coordinateSystem: "none",
-            renderItem: (params, api) => {
-              return {
-                type: "arc",
-                shape: {
-                  cx: api.getWidth() / 2,
-                  cy: api.getHeight() / 2,
-                  r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.65,
-                  startAngle: ((270 + -this.angle) * Math.PI) / 180,
-                  endAngle: ((40 + -this.angle) * Math.PI) / 180,
-                },
-                style: {
-                  stroke: "#0CD3DB",
-                  fill: "transparent",
-                  lineWidth: 1.5,
-                },
-                silent: true,
-              };
-            },
-            data: [0],
-          },
-          {
-            //name: '环4',
-            type: "custom",
-            coordinateSystem: "none",
-            renderItem: (params, api) => {
-              return {
-                type: "arc",
-                shape: {
-                  cx: api.getWidth() / 2,
-                  cy: api.getHeight() / 2,
-                  r: (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.65,
-                  startAngle: ((90 + -this.angle) * Math.PI) / 180,
-                  endAngle: ((220 + -this.angle) * Math.PI) / 180,
-                },
-                style: {
-                  stroke: "#0CD3DB",
-                  fill: "transparent",
-                  lineWidth: 1.5,
-                },
-                silent: true,
-              };
-            },
-            data: [0],
-          },
-          {
-            //name: '绿点1',
-            type: "custom",
-            coordinateSystem: "none",
-            renderItem: (params, api) => {
-              let x0 = api.getWidth() / 2;
-              let y0 = api.getHeight() / 2;
-              let r = (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.65;
-              let point = this.getCirlPoint(x0, y0, r, 90 + -this.angle);
-              return {
-                type: "circle",
-                shape: {
-                  cx: point.x,
-                  cy: point.y,
-                  r: 4,
-                },
-                style: {
-                  stroke: "#0CD3DB", //粉
-                  fill: "#0CD3DB",
-                },
-                silent: true,
-              };
-            },
-            data: [0],
-          },
-          {
-            //name: '绿点2',
-            type: "custom",
-            coordinateSystem: "none",
-            renderItem: (params, api) => {
-              let x0 = api.getWidth() / 2;
-              let y0 = api.getHeight() / 2;
-              let r = (Math.min(api.getWidth(), api.getHeight()) / 2) * 0.65;
-              let point = this.getCirlPoint(x0, y0, r, 270 + -this.angle);
-              return {
-                type: "circle",
-                shape: {
-                  cx: point.x,
-                  cy: point.y,
-                  r: 4,
-                },
-                style: {
-                  stroke: "#0CD3DB", //绿
-                  fill: "#0CD3DB",
-                },
-                silent: true,
-              };
-            },
-            data: [0],
-          },
           {
             //name: '圆环',
             type: "pie",
@@ -354,22 +209,9 @@ export default {
     this.editorOptions();
   },
   mounted() {
-    /*        setInterval(() => {
-              this.angle = this.angle + 3
-              myChart.setOption(options,true)
-            }, 1000);*/
     targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
   },
   methods: {
-    //轴point设置
-    getCirlPoint(x0, y0, r, x) {
-      let x1 = x0 + r * Math.cos((x * Math.PI) / 180);
-      let y1 = y0 + r * Math.sin((x * Math.PI) / 180);
-      return {
-        x: x1,
-        y: y1,
-      };
-    },
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionsColor();
@@ -384,14 +226,18 @@ export default {
       title.y = "center";
       const rich = {
         nums: {
-          fontSize: optionsSetup.textNumFontSize,
           color: optionsSetup.textNumColor,
+          fontSize: optionsSetup.textNumFontSize,
           fontWeight: optionsSetup.textNumFontWeight,
+          fontStyle: optionsSetup.textNumFontStyle,
+          fontFamily: optionsSetup.textNumFontFamily,
         },
         percent: {
-          fontSize: optionsSetup.textPerFontSize,
           color: optionsSetup.textPerColor,
+          fontSize: optionsSetup.textPerFontSize,
           fontWeight: optionsSetup.textPerFontWeight,
+          fontStyle: optionsSetup.textPerFontStyle,
+          fontFamily: optionsSetup.textPerFontFamily,
         },
       };
       title.textStyle["rich"] = rich;
@@ -400,7 +246,7 @@ export default {
     //圆环0-100%颜色
     setOptionsColor() {
       const optionsSetup = this.optionsSetup;
-      const itemStyle = this.options.series[6]["data"][0]["itemStyle"];
+      const itemStyle = this.options.series[0]["data"][0]["itemStyle"];
       const normal = {
         color: {
           // 完成的圆环的颜色
@@ -419,7 +265,7 @@ export default {
       itemStyle["normal"] = normal;
     },
     setOptionSurplusColor() {
-      const itemStyle = this.options.series[6]["data"][1]["itemStyle"];
+      const itemStyle = this.options.series[0]["data"][1]["itemStyle"];
       const normal = {
         color: this.optionsSetup.colorsurplus,
       };
@@ -427,8 +273,8 @@ export default {
     },
     setOptionLine() {
       const optionsSetup = this.optionsSetup;
-      const line = this.options.series[7]["splitLine"];
-      const num = this.options.series[7];
+      const line = this.options.series[1]["splitLine"];
+      const num = this.options.series[1];
       num.splitNumber = optionsSetup.lineNumber;
       line.length = optionsSetup.lineLength;
       const lineStyle = {
@@ -465,8 +311,8 @@ export default {
       const title = this.options.title;
       const num = val[0]["num"];
       title.text = "{nums|" + num + "}{percent|%}";
-      this.options.series[6]["data"][0]["value"] = num;
-      this.options.series[6]["data"][1]["value"] = 100 - num;
+      this.options.series[0]["data"][0]["value"] = num;
+      this.options.series[0]["data"][1]["value"] = 100 - num;
     },
     dynamicDataFn(val, refreshTime) {
       if (!val) return;
@@ -483,8 +329,8 @@ export default {
       const data = this.queryEchartsData(val);
       data.then((res) => {
         this.options.title.text = "{nums|" + res[0].value + "}{percent|%}";
-        this.options.series[6]["data"][0]["value"] = res[0].value;
-        this.options.series[6]["data"][1]["value"] = 100 - res[0].value;
+        this.options.series[0]["data"][0]["value"] = res[0].value;
+        this.options.series[0]["data"][1]["value"] = 100 - res[0].value;
       });
     },
   },
