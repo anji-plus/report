@@ -141,12 +141,15 @@ export default {
       const optionsSetup = this.optionsSetup;
       const normal = {
         show: optionsSetup.isShow,
-        position: "inside",
-        formatter: "{c}",
+        position: optionsSetup.fontPosition,
+        distance: optionsSetup.fontDistance,
+        formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}',
         textStyle: {
-          color: optionsSetup.color,
+          color: optionsSetup.fontColor,
           fontSize: optionsSetup.fontSize,
           fontWeight: optionsSetup.fontWeight,
+          fontStyle: optionsSetup.fontStyle,
+          fontFamily: optionsSetup.fontFamily,
         },
       };
       this.options.series[0].label["normal"] = normal;
@@ -154,22 +157,27 @@ export default {
     // 标题修改
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
     },
@@ -178,10 +186,13 @@ export default {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
-        show: true,
+        show: optionsSetup.isShowTooltip,
         textStyle: {
-          color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize,
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
       };
       this.options.tooltip = tooltip;
@@ -189,18 +200,24 @@ export default {
     // 图例操作 legend
     setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
-      const legend = this.options.legend;
-      legend.show = optionsSetup.isShowLegend;
-      legend.left = optionsSetup.lateralPosition;
-      legend.right = optionsSetup.lateralPosition;
-      legend.top = optionsSetup.longitudinalPosition;
-      legend.bottom = optionsSetup.longitudinalPosition;
-      legend.orient = optionsSetup.layoutFront;
-      legend.textStyle = {
-        color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize,
+      const legend = {
+        show: optionsSetup.isShowLegend,
+        left: optionsSetup.lateralPosition,
+        //right: optionsSetup.lateralPosition,
+        top: optionsSetup.longitudinalPosition,
+        //bottom: optionsSetup.longitudinalPosition,
+        orient: optionsSetup.layoutFront,
+        textStyle: {
+          color: optionsSetup.legendColor,
+          fontSize: optionsSetup.legendFontSize,
+          fontWeight: optionsSetup.legendFontWeight,
+          fontStyle: optionsSetup.legendFontStyle,
+          fontFamily: optionsSetup.legendFontFamily,
+        },
+        itemHeight: optionsSetup.legendHeight,
+        itemWidth: optionsSetup.legendWidth,
       };
-      legend.itemWidth = optionsSetup.legendWidth;
+      this.options.legend = legend;
     },
     // 图例颜色修改
     setOptionsColor() {

@@ -101,12 +101,12 @@ export const widgetPiechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'Microsoft YaHei', name: '微软雅黑' },
-                { code: 'serif', name: 'serif字体' },
-                { code: 'Arial', name: 'Arial字体' },
-                { code: 'Courier New', name: 'Courier New字体' },
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'Microsoft YaHei'
+              value: 'sans-serif'
             },
             {
               type: 'el-input-text',
@@ -166,12 +166,12 @@ export const widgetPiechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'Microsoft YaHei', name: '微软雅黑' },
-                { code: 'serif', name: 'serif字体' },
-                { code: 'Arial', name: 'Arial字体' },
-                { code: 'Courier New', name: 'Courier New字体' },
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'Microsoft YaHei'
+              value: 'sans-serif'
             },
             {
               type: 'el-select',
@@ -333,12 +333,12 @@ export const widgetPiechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'Microsoft YaHei', name: '微软雅黑' },
-                { code: 'serif', name: 'serif字体' },
-                { code: 'Arial', name: 'Arial字体' },
-                { code: 'Courier New', name: 'Courier New字体' },
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'Microsoft YaHei'
+              value: 'sans-serif'
             },
             {
               type: 'vue-color',
@@ -448,12 +448,12 @@ export const widgetPiechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'Microsoft YaHei', name: '微软雅黑' },
-                { code: 'serif', name: 'serif字体' },
-                { code: 'Arial', name: 'Arial字体' },
-                { code: 'Courier New', name: 'Courier New字体' },
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'Microsoft YaHei'
+              value: 'sans-serif'
             },
             {
               type: 'el-input-number',
@@ -624,12 +624,12 @@ export const widgetPiechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'Microsoft YaHei', name: '微软雅黑' },
-                { code: 'serif', name: 'serif字体' },
-                { code: 'Arial', name: 'Arial字体' },
-                { code: 'Courier New', name: 'Courier New字体' },
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'Microsoft YaHei'
+              value: 'sans-serif'
             },
             {
               type: 'el-switch',
@@ -755,12 +755,12 @@ export const widgetPiechart = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'Microsoft YaHei', name: '微软雅黑' },
-                { code: 'serif', name: 'serif字体' },
-                { code: 'Arial', name: 'Arial字体' },
-                { code: 'Courier New', name: 'Courier New字体' },
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'Microsoft YaHei'
+              value: 'sans-serif'
             },
           ],
         },
