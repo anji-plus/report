@@ -571,7 +571,7 @@ export const widgetBarDoubleYaxis = {
           list: [
             {
               type: 'el-switch',
-              label: '显示',
+              label: '左Y轴显示',
               name: 'isShowYLeft',
               require: false,
               placeholder: '',
@@ -843,7 +843,7 @@ export const widgetBarDoubleYaxis = {
           list: [
             {
               type: 'el-switch',
-              label: '显示',
+              label: '右Y轴显示',
               name: 'isShowYRight',
               require: false,
               placeholder: '',

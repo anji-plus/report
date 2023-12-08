@@ -583,7 +583,7 @@ export const widgetBarStackMoreShow = {
           list: [
             {
               type: 'el-switch',
-              label: '显示',
+              label: 'Y轴显示',
               name: 'isShowY',
               require: false,
               placeholder: '',
