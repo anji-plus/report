@@ -111,7 +111,7 @@ export default {
             },
             detail: {
               valueAnimation: true,
-              formatter: function(value) {
+              formatter: function (value) {
                 const max = series[0].max; // 获取最大值
                 const formattedValue = (value / max * 100).toFixed(0); // 计算格式化后的数值
                 return formattedValue + ' %'; // 拼接百分号
@@ -173,13 +173,42 @@ export default {
   },
   methods: {
     editorOptions() {
+      this.setOptionsTitle();
       this.setOptions();
       this.setOptionsData();
+    },
+    // 标题修改
+    setOptionsTitle() {
+      const optionsSetup = this.optionsSetup;
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
+      };
+      this.options.title = title;
     },
     setOptions() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       if (series[0].type == "gauge") {
+        // 轴线相关
         const axisLine = {
           show: optionsSetup.ringShow,
           lineStyle: {
@@ -239,24 +268,30 @@ export default {
             ],
           },
         };
+        // 刻度线
         const axisTick = {
           show: optionsSetup.tickShow,
-          distance: optionsSetup.tickDistance,
+          splitNumber: optionsSetup.tickSplitNumber,
+          //distance: optionsSetup.tickDistance, echartsV5.0.0开始支持
           length: optionsSetup.tickLength,
           lineStyle: {
             color: "auto",
             width: optionsSetup.tickWidth,
+            type: optionsSetup.tickType,
           },
         };
+        // 分隔线-指标线
         const splitLine = {
           show: optionsSetup.splitShow,
-          distance: optionsSetup.splitDistance,
+          // distance: optionsSetup.splitDistance,echartsV5.0.0开始支持
           length: optionsSetup.splitLength,
           lineStyle: {
             color: "auto",
             width: optionsSetup.splitWidth,
+            type: optionsSetup.splitType,
           },
         };
+        // 刻度标签
         const axisLabel = {
           show: optionsSetup.labelShow,
           color: optionsSetup.labelColor,
@@ -264,18 +299,26 @@ export default {
           fontSize: optionsSetup.labelFontSize,
           fontWeight: optionsSetup.labelFontWeight,
           fontStyle: optionsSetup.labelFontStyle,
+          fontFamily: optionsSetup.labelFontFamily,
         };
         const detail = {
-          valueAnimation: true,
-          formatter: function(value) {
+          show: optionsSetup.isShow,
+          //valueAnimation: true, echartsV5.0.0开始支持
+          formatter: function (value) {
             const max = series[0].max; // 获取最大值
             const formattedValue = (value / max * 100).toFixed(0); // 计算格式化后的数值
-            return formattedValue + ' %'; // 拼接百分号
+            // 拼接百分号
+            if (optionsSetup.percentage) {
+              return formattedValue + ' %';
+            } else {
+              return formattedValue;
+            }
           },
           color: optionsSetup.detailColor,
           fontSize: optionsSetup.detailFontSize,
           fontWeight: optionsSetup.detailFontWeight,
           fontStyle: optionsSetup.detailFontStyle,
+          fontFamily: optionsSetup.detailFontFamily,
         };
         series[0].axisLine = axisLine;
         series[0].axisTick = axisTick;
@@ -283,6 +326,9 @@ export default {
         series[0].axisLabel = axisLabel;
         series[0].detail = detail;
         series[0].max = optionsSetup.maxValue;
+        series[0].startAngle = optionsSetup.startAngle;
+        series[0].endAngle = optionsSetup.endAngle;
+        series[0].clockwise = optionsSetup.clockwise;
       }
     },
     setOptionsData(e, paramsConfig) {
