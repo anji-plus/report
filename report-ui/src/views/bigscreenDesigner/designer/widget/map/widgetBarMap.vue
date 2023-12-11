@@ -41,8 +41,6 @@ import "../../../../../../node_modules/echarts/map/js/province/xinjiang";
 import "../../../../../../node_modules/echarts/map/js/province/xizang";
 import "../../../../../../node_modules/echarts/map/js/province/yunnan";
 import "../../../../../../node_modules/echarts/map/js/province/zhejiang";
-
-
 import {conversionProvince} from "@/utils/china";
 import echarts from "echarts";
 
@@ -78,45 +76,43 @@ export default {
             }
           },
         },
-        geo: [
-          {
-            map: "china",
-            show: true,
-            roam: false,
-            layoutSize: "80%",
-            label: {
-              emphasis: {
-                show: false,
-                color: "white",
-              },
+        geo: {
+          map: "china",
+          show: true,
+          roam: false,
+          layoutSize: "80%",
+          label: {
+            emphasis: {
+              show: false,
+              color: "white",
             },
-            itemStyle: {
-              normal: {
-                borderColor: new echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  0,
-                  1,
-                  [
-                    {
-                      offset: 0,
-                      color: "#00F6FF",
-                    },
-                    {
-                      offset: 1,
-                      color: "#53D9FF",
-                    },
-                  ],
-                  false
-                ),
-                borderWidth: 1,
-                shadowColor: "rgba(10,76,139,1)",
-                shadowOffsetY: 0,
-                shadowBlur: 60,
-              },
+          },
+          itemStyle: {
+            normal: {
+              borderColor: new echarts.graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                  {
+                    offset: 0,
+                    color: "#00F6FF",
+                  },
+                  {
+                    offset: 1,
+                    color: "#53D9FF",
+                  },
+                ],
+                false
+              ),
+              borderWidth: 1,
+              shadowColor: "rgba(10,76,139,1)",
+              shadowOffsetY: 0,
+              shadowBlur: 60,
             },
-          }
-        ],
+          },
+        },
         series: [
           {
             aspectScale: 0.75,
@@ -409,9 +405,9 @@ export default {
       };
       this.options.tooltip = tooltip;
     },
-    setOptionsGeo(){
-      this.options.geo[0]['map'] = this.optionsSetup.mapName == ''? "china" : this.optionsSetup.mapName;
-      this.options.series[0]['map'] = this.optionsSetup.mapName == ''? "china" : this.optionsSetup.mapName;
+    setOptionsGeo() {
+      this.options.geo['map'] = this.optionsSetup.mapName == '' ? "china" : this.optionsSetup.mapName;
+      this.options.series[0]['map'] = this.optionsSetup.mapName == '' ? "china" : this.optionsSetup.mapName;
     },
     // 地图设置
     setOptionsMap() {

@@ -9,7 +9,7 @@
 export const widgetLineMap = {
   code: 'widgetLineMap',
   type: 'mapChart',
-  tabName: '中国地图',
+  tabName: '地图',
   label: '路线地图',
   icon: 'iconzhongguoditu',
   options: {
@@ -20,7 +20,7 @@ export const widgetLineMap = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '中国地图-路线图',
+        value: '路线图',
       },
       {
         type: 'vue-color',
@@ -30,6 +30,52 @@ export const widgetLineMap = {
         placeholder: '',
         value: ''
       },
+      {
+        type: 'el-select',
+        label: '地图名称',
+        name: 'mapName',
+        required: false,
+        placeholder: '',
+        selectOptions: [
+          { code: 'world', name: '世界' },
+          { code: 'china', name: '中国' },
+          { code: '安徽', name: '安徽' },
+          { code: '澳门', name: '澳门' },
+          { code: '北京', name: '北京' },
+          { code: '重庆', name: '重庆' },
+          { code: '福建', name: '福建' },
+          { code: '甘肃', name: '甘肃' },
+          { code: '广东', name: '广东' },
+          { code: '广西', name: '广西' },
+          { code: '贵州', name: '贵州' },
+          { code: '海南', name: '海南' },
+          { code: '河北', name: '河北' },
+          { code: '黑龙江', name: '黑龙江' },
+          { code: '河南', name: '河南' },
+          { code: '湖北', name: '湖北' },
+          { code: '湖南', name: '湖南' },
+          { code: '江苏', name: '江苏' },
+          { code: '江西', name: '江西' },
+          { code: '吉林', name: '吉林' },
+          { code: '辽宁', name: '辽宁' },
+          { code: '内蒙古', name: '内蒙古' },
+          { code: '宁夏', name: '宁夏' },
+          { code: '青海', name: '青海' },
+          { code: '山东', name: '山东' },
+          { code: '上海', name: '上海' },
+          { code: '山西', name: '山西' },
+          { code: '陕西', name: '陕西' },
+          { code: '四川', name: '四川' },
+          { code: '台湾', name: '台湾' },
+          { code: '天津', name: '天津' },
+          { code: '香港', name: '香港' },
+          { code: '新疆', name: '新疆' },
+          { code: '西藏', name: '西藏' },
+          { code: '云南', name: '云南' },
+          { code: '浙江', name: '浙江' },
+        ],
+        value: 'china'
+      },
       [
         {
           name: '标题设置',
@@ -37,7 +83,7 @@ export const widgetLineMap = {
             {
               type: 'el-switch',
               label: '标题显示',
-              name: 'isNoTitle',
+              name: 'isShowTitle',
               required: false,
               placeholder: '',
               value: true,
@@ -45,7 +91,7 @@ export const widgetLineMap = {
             {
               type: 'el-input-text',
               label: '标题名',
-              name: 'titleText',
+              name: 'text',
               required: false,
               placeholder: '',
               value: '',
@@ -73,10 +119,10 @@ export const widgetLineMap = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -87,29 +133,30 @@ export const widgetLineMap = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
             {
               type: 'el-select',
-              label: '字体位置',
-              name: 'textAlign',
+              label: '字体系列',
+              name: 'textFontFamily',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'center'
+              value: 'sans-serif'
             },
             {
               type: 'el-input-text',
               label: '副标题名',
-              name: 'subText',
+              name: 'subtext',
               required: false,
               placeholder: '',
               value: ''
@@ -117,7 +164,7 @@ export const widgetLineMap = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'subTextColor',
+              name: 'subtextColor',
               required: false,
               placeholder: '',
               value: 'rgba(30, 144, 255, 1)'
@@ -125,7 +172,7 @@ export const widgetLineMap = {
             {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'subTextFontSize',
+              name: 'subtextFontSize',
               required: false,
               placeholder: '',
               value: 20
@@ -133,122 +180,90 @@ export const widgetLineMap = {
             {
               type: 'el-select',
               label: '字体粗细',
-              name: 'subTextFontWeight',
+              name: 'subtextFontWeight',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
             {
               type: 'el-select',
               label: '字体风格',
-              name: 'subTextFontStyle',
+              name: 'subtextFontStyle',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
-            },
-          ],
-        },
-        {
-          name: '起点设置',
-          list: [
-            {
-              type: 'el-switch',
-              label: '起点显示',
-              name: 'isShowSource',
-              required: false,
-              placeholder: '',
-              value: true
-            },
-            {
-              type: 'el-input-number',
-              label: '点大小',
-              name: 'sourceSymbolSize',
-              required: false,
-              placeholder: '',
-              value: 10,
-            },
-            {
-              type: 'vue-color',
-              label: '点颜色',
-              name: 'sourcePointColor',
-              required: false,
-              placeholder: '',
-              value: '#46bee9'
-            },
-            {
-              type: 'el-input-number',
-              label: '文字字号',
-              name: 'sourceFontTextSize',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'vue-color',
-              label: '文字颜色',
-              name: 'sourceFontTextColor',
-              required: false,
-              placeholder: '',
-              value: '#46bee9'
             },
             {
               type: 'el-select',
-              label: '文字粗细',
-              name: 'sourceFontTextWeight',
+              label: '字体系列',
+              name: 'subtextFontFamily',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'normal'
+              value: 'sans-serif'
+            },
+            {
+              type: 'el-select',
+              label: '左右位置',
+              name: 'titleLeft',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-slider',
+              label: '上下间距',
+              name: 'titleTop',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'el-input-number',
+              label: '主副标题间距',
+              name: 'titleItemGap',
+              required: false,
+              placeholder: '',
+              value: 0
             },
           ],
         },
         {
-          name: '终点设置',
+          name: '地图设置',
           list: [
             {
               type: 'el-switch',
-              label: '终点显示',
-              name: 'isShowTarget',
+              label: '文字显示',
+              name: 'isShowMap',
               required: false,
               placeholder: '',
-              value: true
-            },
-            {
-              type: 'el-input-number',
-              label: '点大小',
-              name: 'targetSymbolSize',
-              required: false,
-              placeholder: '',
-              value: 10,
-            },
-            {
-              type: 'vue-color',
-              label: '点颜色',
-              name: 'targetPointColor',
-              required: false,
-              placeholder: '',
-              value: '#46bee9'
+              value: false
             },
             {
               type: 'el-input-number',
               label: '文字大小',
-              name: 'targetFontTextSize',
+              name: 'fontSize',
               required: false,
               placeholder: '',
               value: 12,
@@ -256,15 +271,15 @@ export const widgetLineMap = {
             {
               type: 'vue-color',
               label: '文字颜色',
-              name: 'targetFontTextColor',
+              name: 'fontColor',
               required: false,
               placeholder: '',
-              value: '#46bee9'
+              value: '#D4EEFF'
             },
             {
               type: 'el-select',
               label: '文字粗细',
-              name: 'targetFontTextWeight',
+              name: 'fontWeight',
               required: false,
               placeholder: '',
               selectOptions: [
@@ -275,10 +290,53 @@ export const widgetLineMap = {
               ],
               value: 'normal'
             },
-          ],
+            {
+              type: 'el-select',
+              label: '文字风格',
+              name: 'fontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '文字字体',
+              name: 'fontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+            {
+              type: 'el-input-number',
+              label: '边界线宽度',
+              name: 'borderWidth',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+            {
+              type: 'vue-color',
+              label: '边界线颜色',
+              name: 'borderColor',
+              required: false,
+              placeholder: '',
+              value: '#fff'
+            },
+          ]
         },
         {
-          name: '图标设置',
+          name: '路线设置',
           list: [
             {
               type: 'el-select',
@@ -316,11 +374,6 @@ export const widgetLineMap = {
               placeholder: '',
               value: '#46bee9'
             },
-          ],
-        },
-        {
-          name: '线设置',
-          list: [
             {
               type: 'vue-color',
               label: '线颜色',
@@ -340,28 +393,236 @@ export const widgetLineMap = {
           ],
         },
         {
-          name: '地图颜色',
+          name: '起点设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '起点显示',
+              name: 'isShowSource',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-select',
+              label: '位置',
+              name: 'sourceFontPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'top', name: '上'},
+                {code: 'left', name: '左'},
+                {code: 'right', name: '右'},
+                {code: 'inside', name: '里'},
+                {code: 'insideTop', name: '里顶'},
+                {code: 'insideLeft', name: '里左'},
+                {code: 'insideRight', name: '里右'},
+                {code: 'insideBottom', name: '里底'},
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-input-number',
+              label: '点大小',
+              name: 'sourceSymbolSize',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'vue-color',
+              label: '点颜色',
+              name: 'sourcePointColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
+            {
+              type: 'el-input-number',
+              label: '文字字号',
+              name: 'sourceFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'vue-color',
+              label: '文字颜色',
+              name: 'sourceFontColor',
+              required: false,
+              placeholder: '',
+              value: '#ff7f50'
+            },
+            {
+              type: 'el-select',
+              label: '文字粗细',
+              name: 'sourceFontTextWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '文字风格',
+              name: 'sourceFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '文字字体',
+              name: 'sourceFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+          ],
+        },
+        {
+          name: '终点设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '终点显示',
+              name: 'isShowTarget',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-select',
+              label: '位置',
+              name: 'targetFontPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'top', name: '上'},
+                {code: 'left', name: '左'},
+                {code: 'right', name: '右'},
+                {code: 'inside', name: '里'},
+                {code: 'insideTop', name: '里顶'},
+                {code: 'insideLeft', name: '里左'},
+                {code: 'insideRight', name: '里右'},
+                {code: 'insideBottom', name: '里底'},
+              ],
+              value: 'inside'
+            },
+            {
+              type: 'el-input-number',
+              label: '点大小',
+              name: 'targetSymbolSize',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'vue-color',
+              label: '点颜色',
+              name: 'targetPointColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
+            {
+              type: 'el-input-number',
+              label: '文字大小',
+              name: 'targetFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'vue-color',
+              label: '文字颜色',
+              name: 'targetFontColor',
+              required: false,
+              placeholder: '',
+              value: '#46bee9'
+            },
+            {
+              type: 'el-select',
+              label: '文字粗细',
+              name: 'targetFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '文字风格',
+              name: 'targetFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '文字字体',
+              name: 'targetFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+          ],
+        },
+        {
+          name: '地图块颜色',
           list: [
             {
               type: 'vue-color',
-              label: '地图块颜色',
-              name: 'blockColor',
+              label: '0%处颜色',
+              name: 'font0PreColor',
               required: false,
               placeholder: '',
               value: '#073684'
             },
             {
               type: 'vue-color',
-              label: '边界颜色',
-              name: 'borderColor',
+              label: '100%颜色',
+              name: 'font100PreColor',
               required: false,
               placeholder: '',
               value: '#061E3D'
             },
             {
               type: 'vue-color',
-              label: '高亮颜色',
-              name: 'highlightColor',
+              label: '高亮渐变色',
+              name: 'fontHighlightColor',
               required: false,
               placeholder: '',
               value: '#2B91B7'
