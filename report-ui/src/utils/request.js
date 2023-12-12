@@ -38,8 +38,9 @@ service.interceptors.response.use(
           type: 'warning'
         }
       ).then(() => {
-        sessionStorage.clear()
-        localStorage.clear()
+        // sessionStorage.clear()
+        // localStorage.clear()
+        localStorage.removeItem('AJReportToken')
         window.location.href = "/";
       })
     }
