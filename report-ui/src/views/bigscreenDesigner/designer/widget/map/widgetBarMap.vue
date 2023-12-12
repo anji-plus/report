@@ -7,6 +7,42 @@
 import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
 
 import "../../../../../../node_modules/echarts/map/js/china.js";
+import "../../../../../../node_modules/echarts/map/js/world.js";
+import "../../../../../../node_modules/echarts/map/js/province/anhui";
+import "../../../../../../node_modules/echarts/map/js/province/aomen";
+import "../../../../../../node_modules/echarts/map/js/province/beijing";
+import "../../../../../../node_modules/echarts/map/js/province/chongqing";
+import "../../../../../../node_modules/echarts/map/js/province/fujian";
+import "../../../../../../node_modules/echarts/map/js/province/gansu";
+import "../../../../../../node_modules/echarts/map/js/province/guangxi";
+import "../../../../../../node_modules/echarts/map/js/province/guizhou";
+import "../../../../../../node_modules/echarts/map/js/province/hainan";
+import "../../../../../../node_modules/echarts/map/js/province/hebei";
+import "../../../../../../node_modules/echarts/map/js/province/heilongjiang";
+import "../../../../../../node_modules/echarts/map/js/province/henan";
+import "../../../../../../node_modules/echarts/map/js/province/hubei";
+import "../../../../../../node_modules/echarts/map/js/province/hunan";
+import "../../../../../../node_modules/echarts/map/js/province/jiangsu";
+import "../../../../../../node_modules/echarts/map/js/province/jiangxi";
+import "../../../../../../node_modules/echarts/map/js/province/jilin";
+import "../../../../../../node_modules/echarts/map/js/province/liaoning";
+import "../../../../../../node_modules/echarts/map/js/province/neimenggu";
+import "../../../../../../node_modules/echarts/map/js/province/ningxia";
+import "../../../../../../node_modules/echarts/map/js/province/qinghai";
+import "../../../../../../node_modules/echarts/map/js/province/shandong";
+import "../../../../../../node_modules/echarts/map/js/province/shanghai";
+import "../../../../../../node_modules/echarts/map/js/province/shanxi";
+import "../../../../../../node_modules/echarts/map/js/province/shanxi1";
+import "../../../../../../node_modules/echarts/map/js/province/sichuan";
+import "../../../../../../node_modules/echarts/map/js/province/taiwan";
+import "../../../../../../node_modules/echarts/map/js/province/tianjin";
+import "../../../../../../node_modules/echarts/map/js/province/xianggang";
+import "../../../../../../node_modules/echarts/map/js/province/xinjiang";
+import "../../../../../../node_modules/echarts/map/js/province/xizang";
+import "../../../../../../node_modules/echarts/map/js/province/yunnan";
+import "../../../../../../node_modules/echarts/map/js/province/zhejiang";
+
+
 import {conversionProvince} from "@/utils/china";
 import echarts from "echarts";
 
@@ -73,7 +109,7 @@ export default {
                   ],
                   false
                 ),
-                borderWidth: 3,
+                borderWidth: 1,
                 shadowColor: "rgba(10,76,139,1)",
                 shadowOffsetY: 0,
                 shadowBlur: 60,
@@ -318,6 +354,7 @@ export default {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
+      this.setOptionsGeo();
       this.setOptionsTooltip();
       this.setOptionsMap();
       this.setOptionsData();
@@ -325,22 +362,27 @@ export default {
     // 标题设置
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
     },
@@ -349,11 +391,13 @@ export default {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
-        show: true,
-        enterable: true,
+        show: optionsSetup.isShowTooltip,
         textStyle: {
-          color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize,
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
         formatter: function (params) {
           if (params.seriesType == 'scatter') {
@@ -365,6 +409,10 @@ export default {
       };
       this.options.tooltip = tooltip;
     },
+    setOptionsGeo(){
+      this.options.geo[0]['map'] = this.optionsSetup.mapName == ''? "china" : this.optionsSetup.mapName;
+      this.options.series[0]['map'] = this.optionsSetup.mapName == ''? "china" : this.optionsSetup.mapName;
+    },
     // 地图设置
     setOptionsMap() {
       const optionsSetup = this.optionsSetup;
@@ -374,8 +422,11 @@ export default {
           position: "right",
           // 地图省市区显隐
           show: optionsSetup.isShowMap,
-          color: optionsSetup.colorMap,
-          fontSize: optionsSetup.fontSizeMap,
+          color: optionsSetup.fontColor,
+          fontSize: optionsSetup.fontSize,
+          fontWeight: optionsSetup.fontWeight,
+          fontStyle: optionsSetup.fontStyle,
+          fontFamily: optionsSetup.fontFamily,
         },
         emphasis: {
           show: false,
@@ -401,7 +452,7 @@ export default {
             ],
           },
           borderColor: optionsSetup.borderColor,
-          borderWidth: 1,
+          borderWidth: optionsSetup.borderWidth,
         },
         //鼠标放置颜色加深
         emphasis: {
@@ -500,6 +551,7 @@ export default {
               },
               fontWeight: optionsSetup.fontDataWeight,
               fontStyle: optionsSetup.fontDataStyle,
+              fontFamily: optionsSetup.fontDataFamily,
             },
           },
           position: "top"
@@ -538,6 +590,7 @@ export default {
           },
           fontWeight: optionsSetup.fontTextWeight,
           fontStyle: optionsSetup.fontTextStyle,
+          fontFamily: optionsSetup.fontTextFamily,
           distance: 10,
         },
         symbol: 'circle',
@@ -653,7 +706,6 @@ export default {
       for (const i in val) {
         arrColor.push(customColor[i % customColor.length].color)
       }
-
       this.options.series[1] = this.getOptionsBarTrunk(optionsSetup, arrColor, allData, heightRate);
       this.options.series[2] = this.getOptionsBarTop(optionsSetup, arrColor, allData, heightRate);
       this.options.series[3] = this.getOptionsBarBottom(optionsSetup, arrColor, allData);
@@ -711,11 +763,10 @@ export default {
       for (const i in val) {
         arrColor.push(customColor[i % customColor.length].color)
       }
-
-      this.$set(this.options.series,1,this.getOptionsBarTrunk(optionsSetup, arrColor, allData, heightRate))
-      this.$set(this.options.series,2,this.getOptionsBarTop(optionsSetup, arrColor, allData, heightRate))
-      this.$set(this.options.series,3,this.getOptionsBarBottom(optionsSetup, arrColor, allData))
-      this.$set(this.options.series,4,this.getOptionsBarBottomOut(optionsSetup, arrColor, allData))
+      this.$set(this.options.series, 1, this.getOptionsBarTrunk(optionsSetup, arrColor, allData, heightRate))
+      this.$set(this.options.series, 2, this.getOptionsBarTop(optionsSetup, arrColor, allData, heightRate))
+      this.$set(this.options.series, 3, this.getOptionsBarBottom(optionsSetup, arrColor, allData))
+      this.$set(this.options.series, 4, this.getOptionsBarBottomOut(optionsSetup, arrColor, allData))
     },
   },
 };
