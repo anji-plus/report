@@ -237,10 +237,10 @@ AJ-Report技术交流六群，新群可直接加，有问题都可以在群里�
 <img src="https://ajreport.beliefteam.cn/file/download/856c9469-e306-406a-b2b9-e196050f3dd5" width = "300" height = "450" align=left/> <br>
 
 
-个人微信：个人微信，不闲聊，加群、咨询请备注，备注格式不限最好是：“项目名 问题” ，项目名可以是**AJ-Report**、**Report**、**大屏**，只要能一眼分辨就行 <br>
+个人微信：个人微信，不闲聊，加群、咨询请备注，备注格式不限但最好是：“项目名 问题” ，项目名可以是**AJ-Report**、**Report**、**大屏**，只要能一眼分辨就行 <br>
 例1：大屏 加群 <br>
 例2：report 有个问题xxxx <br>
-**一定要加备注 ！！！没有备注一律忽略！！！** <br>
+有问题，不管是技术问题还是使用问题，都尽量在群里问，没啥特殊问题尽量别加个人微信。加个人微信记得**一定要加备注 ！！！**<br>
 
 <img src="https://ajreport.beliefteam.cn/file/download/a3440fb7-e20c-42fa-b7af-805f5523c746" width = "300" height = "450" align=left/>
 
