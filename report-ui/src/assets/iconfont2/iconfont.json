@@ -6,18 +6,11 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "1236837",
+      "icon_id": "7463933",
       "name": "地图",
-      "font_class": "03",
-      "unicode": "e60e",
-      "unicode_decimal": 58894
-    },
-    {
-      "icon_id": "2076231",
-      "name": "地图",
-      "font_class": "ditu",
-      "unicode": "e884",
-      "unicode_decimal": 59524
+      "font_class": "ditu1",
+      "unicode": "e627",
+      "unicode_decimal": 58919
     }
   ]
 }

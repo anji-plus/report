@@ -79,7 +79,7 @@ export default {
         geo: {
           map: "china",
           show: true,
-          roam: false,
+          roam: true,
           layoutSize: "80%",
           label: {
             emphasis: {
@@ -114,75 +114,6 @@ export default {
           },
         },
         series: [
-          {
-            aspectScale: 0.75,
-            type: 'map',
-            map: 'china',
-            //roam: true,
-            effect: {
-              show: false,
-              period: 6,
-              trailLength: 0.7,
-              color: "#fff",
-              symbolSize: 3,
-            },
-            label: {
-              normal: {
-                //调整数值
-                position: "right",
-                // 地图省市区显隐
-                show: false,
-                color: "#53D9FF",
-                fontSize: 20,
-              },
-              emphasis: {
-                show: true,
-              },
-            },
-            itemStyle: {
-              normal: {
-                //地图块颜色
-                areaColor: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "#073684", // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: "#061E3D", // 100% 处的颜色
-                    },
-                  ],
-                },
-                borderColor: "#215495",
-                borderWidth: 1,
-              },
-              //鼠标放置颜色加深
-              emphasis: {
-                areaColor: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "#073684", // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: "#2B91B7", // 100% 处的颜色
-                    },
-                  ],
-                },
-              },
-            },
-            data: []
-          },
           // 柱状体的主干
           {
             type: 'lines',
@@ -351,8 +282,6 @@ export default {
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionsGeo();
-      this.setOptionsTooltip();
-      this.setOptionsMap();
       this.setOptionsData();
     },
     // 标题设置
@@ -382,40 +311,15 @@ export default {
       };
       this.options.title = title;
     },
-    // tooltip 设置
-    setOptionsTooltip() {
-      const optionsSetup = this.optionsSetup;
-      const tooltip = {
-        trigger: "item",
-        show: optionsSetup.isShowTooltip,
-        textStyle: {
-          color: optionsSetup.tooltipColor,
-          fontSize: optionsSetup.tooltipFontSize,
-          fontWeight: optionsSetup.tooltipFontWeight,
-          fontStyle: optionsSetup.tooltipFontStyle,
-          fontFamily: optionsSetup.tooltipFontFamily,
-        },
-        formatter: function (params) {
-          if (params.seriesType == 'scatter') {
-            return params.data.name + "" + params.data.value[2];
-          } else {
-            return params.name;
-          }
-        },
-      };
-      this.options.tooltip = tooltip;
-    },
     setOptionsGeo() {
-      this.options.geo['map'] = this.optionsSetup.mapName == '' ? "china" : this.optionsSetup.mapName;
-      this.options.series[0]['map'] = this.optionsSetup.mapName == '' ? "china" : this.optionsSetup.mapName;
-    },
-    // 地图设置
-    setOptionsMap() {
       const optionsSetup = this.optionsSetup;
-      const label = {
-        normal: {
+      const geo = {
+        map: this.optionsSetup.mapName == '' ? "china" : this.optionsSetup.mapName,
+        show: true,
+        roam: true,
+        layoutSize: "80%",
+        label: {
           //调整数值
-          position: "right",
           // 地图省市区显隐
           show: optionsSetup.isShowMap,
           color: optionsSetup.fontColor,
@@ -424,54 +328,64 @@ export default {
           fontStyle: optionsSetup.fontStyle,
           fontFamily: optionsSetup.fontFamily,
         },
-        emphasis: {
-          show: false,
-        },
-      }
-      const itemStyle = {
-        normal: {
-          //地图块颜色
-          areaColor: {
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [
-              {
-                offset: 0,
-                color: optionsSetup.font0PreColor, // 0% 处的颜色
-              },
-              {
-                offset: 1,
-                color: optionsSetup.font100PreColor, // 100% 处的颜色
-              },
-            ],
+        itemStyle: {
+          normal: {
+            //地图块颜色
+            areaColor: {
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: optionsSetup.fontColor0, // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: optionsSetup.fontColor100, // 100% 处的颜色
+                },
+              ],
+            },
+            borderType: optionsSetup.borderType,
+            borderColor: optionsSetup.borderColor,
+            borderWidth: optionsSetup.borderWidth,
+            shadowColor: optionsSetup.shadowColor,
+            shadowBlur: optionsSetup.shadowBlur,
+            opacity: optionsSetup.opacity / 100,
           },
-          borderColor: optionsSetup.borderColor,
-          borderWidth: optionsSetup.borderWidth,
         },
         //鼠标放置颜色加深
         emphasis: {
-          areaColor: {
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [
-              {
-                offset: 0,
-                color: "#073684", // 0% 处的颜色
-              },
-              {
-                offset: 1,
-                color: optionsSetup.fontHighlightColor, // 100% 处的颜色
-              },
-            ],
+          label: {
+            show: optionsSetup.isShowEmphasisLabel,
+            color: optionsSetup.emphasisLabelFontColor,
+            fontSize: optionsSetup.emphasisLabelFontSize,
+            fontWeight: optionsSetup.emphasisLabelFontWeight,
+            fontStyle: optionsSetup.emphasisLabelFontStyle,
+            fontFamily: optionsSetup.emphasisLabelFontFamily,
+          },
+          itemStyle: {
+            areaColor: {
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: optionsSetup.emphasisLabelFontColor0, // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: optionsSetup.emphasisLabelFontColor100, // 100% 处的颜色
+                },
+              ],
+            },
           },
         },
       }
-      this.options.series[0]['label'] = label;
-      this.options.series[0]['itemStyle'] = itemStyle;
+      this.options.geo = geo;
     },
     // 计算柱图的高度比例
     calMaxHeight(val, heightRate) {

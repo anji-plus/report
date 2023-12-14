@@ -3,7 +3,7 @@ export const widgetBarMap = {
   type: 'mapChart',
   tabName: '地图',
   label: '柱形地图',
-  icon: 'iconzhongguoditu',
+  icon: 'icon-ditu1',
   options: {
     // 配置
     setup: [
@@ -30,42 +30,42 @@ export const widgetBarMap = {
         required: false,
         placeholder: '',
         selectOptions: [
-          { code: 'world', name: '世界' },
-          { code: 'china', name: '中国' },
-          { code: '安徽', name: '安徽' },
-          { code: '澳门', name: '澳门' },
-          { code: '北京', name: '北京' },
-          { code: '重庆', name: '重庆' },
-          { code: '福建', name: '福建' },
-          { code: '甘肃', name: '甘肃' },
-          { code: '广东', name: '广东' },
-          { code: '广西', name: '广西' },
-          { code: '贵州', name: '贵州' },
-          { code: '海南', name: '海南' },
-          { code: '河北', name: '河北' },
-          { code: '黑龙江', name: '黑龙江' },
-          { code: '河南', name: '河南' },
-          { code: '湖北', name: '湖北' },
-          { code: '湖南', name: '湖南' },
-          { code: '江苏', name: '江苏' },
-          { code: '江西', name: '江西' },
-          { code: '吉林', name: '吉林' },
-          { code: '辽宁', name: '辽宁' },
-          { code: '内蒙古', name: '内蒙古' },
-          { code: '宁夏', name: '宁夏' },
-          { code: '青海', name: '青海' },
-          { code: '山东', name: '山东' },
-          { code: '上海', name: '上海' },
-          { code: '山西', name: '山西' },
-          { code: '陕西', name: '陕西' },
-          { code: '四川', name: '四川' },
-          { code: '台湾', name: '台湾' },
-          { code: '天津', name: '天津' },
-          { code: '香港', name: '香港' },
-          { code: '新疆', name: '新疆' },
-          { code: '西藏', name: '西藏' },
-          { code: '云南', name: '云南' },
-          { code: '浙江', name: '浙江' },
+          {code: 'world', name: '世界'},
+          {code: 'china', name: '中国'},
+          {code: '安徽', name: '安徽'},
+          {code: '澳门', name: '澳门'},
+          {code: '北京', name: '北京'},
+          {code: '重庆', name: '重庆'},
+          {code: '福建', name: '福建'},
+          {code: '甘肃', name: '甘肃'},
+          {code: '广东', name: '广东'},
+          {code: '广西', name: '广西'},
+          {code: '贵州', name: '贵州'},
+          {code: '海南', name: '海南'},
+          {code: '河北', name: '河北'},
+          {code: '黑龙江', name: '黑龙江'},
+          {code: '河南', name: '河南'},
+          {code: '湖北', name: '湖北'},
+          {code: '湖南', name: '湖南'},
+          {code: '江苏', name: '江苏'},
+          {code: '江西', name: '江西'},
+          {code: '吉林', name: '吉林'},
+          {code: '辽宁', name: '辽宁'},
+          {code: '内蒙古', name: '内蒙古'},
+          {code: '宁夏', name: '宁夏'},
+          {code: '青海', name: '青海'},
+          {code: '山东', name: '山东'},
+          {code: '上海', name: '上海'},
+          {code: '山西', name: '山西'},
+          {code: '陕西', name: '陕西'},
+          {code: '四川', name: '四川'},
+          {code: '台湾', name: '台湾'},
+          {code: '天津', name: '天津'},
+          {code: '香港', name: '香港'},
+          {code: '新疆', name: '新疆'},
+          {code: '西藏', name: '西藏'},
+          {code: '云南', name: '云南'},
+          {code: '浙江', name: '浙江'},
         ],
         value: 'china'
       },
@@ -276,10 +276,10 @@ export const widgetBarMap = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -311,6 +311,22 @@ export const widgetBarMap = {
               value: 'sans-serif'
             },
             {
+              type: 'vue-color',
+              label: '0%渐变色',
+              name: 'fontColor0',
+              required: false,
+              placeholder: '',
+              value: '#073684'
+            },
+            {
+              type: 'vue-color',
+              label: '100%渐变色',
+              name: 'fontColor100',
+              required: false,
+              placeholder: '',
+              value: '#061E3D'
+            },
+            {
               type: 'el-input-number',
               label: '边界线宽度',
               name: 'borderWidth',
@@ -325,6 +341,129 @@ export const widgetBarMap = {
               required: false,
               placeholder: '',
               value: '#fff'
+            },
+            {
+              type: 'el-select',
+              label: '边界线类型',
+              name: 'borderType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'solid', name: '实线'},
+                {code: 'dashed', name: '虚线'},
+                {code: 'dotted', name: '斑点'},
+              ],
+              value: 'solid'
+            },
+            {
+              type: 'vue-color',
+              label: '阴影颜色',
+              name: 'shadowColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(10,76,139,1)'
+            },
+            {
+              type: 'el-input-number',
+              label: '阴影模糊系数',
+              name: 'shadowBlur',
+              required: false,
+              placeholder: '',
+              value: 10
+            },
+            {
+              type: 'el-slider',
+              label: '透明度',
+              name: 'opacity',
+              required: false,
+              placeholder: '',
+              value: 100
+            },
+          ]
+        },
+        {
+          name: '地图高亮设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '文字显示',
+              name: 'isShowEmphasisLabel',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-input-number',
+              label: '文字大小',
+              name: 'emphasisLabelFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'vue-color',
+              label: '文字颜色',
+              name: 'emphasisLabelFontColor',
+              required: false,
+              placeholder: '',
+              value: '#D4EEFF'
+            },
+            {
+              type: 'el-select',
+              label: '文字粗细',
+              name: 'emphasisLabelFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '文字风格',
+              name: 'emphasisLabelFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '文字字体',
+              name: 'emphasisLabelFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+            {
+              type: 'vue-color',
+              label: '0%渐变色',
+              name: 'emphasisLabelFontColor0',
+              required: false,
+              placeholder: '',
+              value: '#073684'
+            },
+            {
+              type: 'vue-color',
+              label: '100%渐变色',
+              name: 'emphasisLabelFontColor100',
+              required: false,
+              placeholder: '',
+              value: 'rgba(199, 21, 133, 1)'
             },
           ]
         },
@@ -397,9 +536,9 @@ export const widgetBarMap = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -454,9 +593,9 @@ export const widgetBarMap = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
@@ -477,105 +616,6 @@ export const widgetBarMap = {
           ],
         },
         {
-          name: '地图块颜色',
-          list: [
-            {
-              type: 'vue-color',
-              label: '0%处颜色',
-              name: 'font0PreColor',
-              required: false,
-              placeholder: '',
-              value: '#073684'
-            },
-            {
-              type: 'vue-color',
-              label: '100%颜色',
-              name: 'font100PreColor',
-              required: false,
-              placeholder: '',
-              value: '#061E3D'
-            },
-            {
-              type: 'vue-color',
-              label: '高亮渐变色',
-              name: 'fontHighlightColor',
-              required: false,
-              placeholder: '',
-              value: '#2B91B7'
-            },
-          ],
-        },
-        {
-          name: '提示语设置',
-          list: [
-            {
-              type: 'el-switch',
-              label: '显示',
-              name: 'isShowTooltip',
-              required: false,
-              placeholder: '',
-              value: true
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'tooltipFontSize',
-              required: false,
-              placeholder: '',
-              value: 16
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'tooltipColor',
-              required: false,
-              placeholder: '',
-              value: '#00FEFF'
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'tooltipFontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-select',
-              label: '字体风格',
-              name: 'tooltipFontStyle',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-select',
-              label: '字体系列',
-              name: 'tooltipFontFamily',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'sans-serif', name: 'sans-serif'},
-                {code: 'serif', name: 'serif'},
-                {code: 'Arial', name: 'Arial'},
-                {code: 'Courier New', name: 'Courier New'},
-              ],
-              value: 'sans-serif'
-            },
-          ],
-        },
-        {
           name: '自定义配色',
           list: [
             {
@@ -583,7 +623,7 @@ export const widgetBarMap = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
+              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
             },
           ],
         },
