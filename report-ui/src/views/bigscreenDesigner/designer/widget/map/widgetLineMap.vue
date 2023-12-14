@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 <script>
@@ -42,7 +42,8 @@ import "../../../../../../node_modules/echarts/map/js/province/yunnan";
 import "../../../../../../node_modules/echarts/map/js/province/zhejiang";
 import "echarts/map/js/china.js";
 import echarts from "echarts";
-import { conversionCity } from "@/utils/china";
+import {conversionCity} from "@/utils/china";
+
 let geoCoordMap = conversionCity;
 let planePath =
   "path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z";
@@ -100,87 +101,32 @@ export default {
           roam: true,
           itemStyle: {
             normal: {
-              areaColor: "#323c48",
-              borderColor: "#404a59",
+              borderColor: new echarts.graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                  {
+                    offset: 0,
+                    color: "#00F6FF",
+                  },
+                  {
+                    offset: 1,
+                    color: "#53D9FF",
+                  },
+                ],
+                false
+              ),
               borderWidth: 1,
-            },
-            emphasis: {
-              areaColor: "#2a333d",
+              shadowColor: "rgba(10,76,139,1)",
+              shadowOffsetY: 0,
+              shadowBlur: 60,
             },
           },
         },
         series: [
           {
-            aspectScale: 0.75,
-            type: 'map',
-            map: 'china',
-            //roam: true,
-            effect: {
-              show: false,
-              period: 6,
-              trailLength: 0.7,
-              color: "#fff",
-              symbolSize: 3,
-            },
-            label: {
-              normal: {
-                //调整数值
-                position: "right",
-                // 地图省市区显隐
-                show: false,
-                color: "#53D9FF",
-                fontSize: 20,
-              },
-              emphasis: {
-                show: true,
-              },
-            },
-            itemStyle: {
-              normal: {
-                //地图块颜色
-                areaColor: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "#073684", // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: "#061E3D", // 100% 处的颜色
-                    },
-                  ],
-                },
-                borderColor: "#215495",
-                borderWidth: 1,
-              },
-              //鼠标放置颜色加深
-              emphasis: {
-                areaColor: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "#073684", // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: "#2B91B7", // 100% 处的颜色
-                    },
-                  ],
-                },
-              },
-            },
-            data: []
-          },
-          {
-            //name: tempData[0],
             type: "lines",
             zlevel: 1,
             effect: {
@@ -224,7 +170,6 @@ export default {
           },
           {
             // 起点
-            //name: tempData[0],
             type: "effectScatter",
             coordinateSystem: "geo",
             zlevel: 2,
@@ -251,7 +196,6 @@ export default {
           },
           {
             // 终点
-            //name: tempData[0],
             type: "effectScatter",
             coordinateSystem: "geo",
             zlevel: 2,
@@ -340,10 +284,9 @@ export default {
       this.setOptionsGeo();
       this.setOptionsSource();
       this.setOptionsTarget();
-      this.setOptionsMap();
       this.setOptionsSymbol();
       this.setOptionsLine();
-      this.setOptionsColor();
+      this.setOptionsTooltip();
       this.setOptionsData();
     },
     // 标题设置
@@ -373,17 +316,16 @@ export default {
       };
       this.options.title = title;
     },
-    setOptionsGeo(){
-      this.options.geo['map'] = this.optionsSetup.mapName == ''? "china" : this.optionsSetup.mapName;
-      this.options.series[0]['map'] = this.optionsSetup.mapName == ''? "china" : this.optionsSetup.mapName;
-    },
     // 地图设置
-    setOptionsMap() {
+    setOptionsGeo() {
       const optionsSetup = this.optionsSetup;
-      const label = {
-        normal: {
+      const geo = {
+        map: this.optionsSetup.mapName == '' ? "china" : this.optionsSetup.mapName,
+        show: true,
+        roam: true,
+        layoutSize: "80%",
+        label: {
           //调整数值
-          position: "right",
           // 地图省市区显隐
           show: optionsSetup.isShowMap,
           color: optionsSetup.fontColor,
@@ -392,16 +334,69 @@ export default {
           fontStyle: optionsSetup.fontStyle,
           fontFamily: optionsSetup.fontFamily,
         },
+        itemStyle: {
+          normal: {
+            //地图块颜色
+            areaColor: {
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: optionsSetup.fontColor0, // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: optionsSetup.fontColor100, // 100% 处的颜色
+                },
+              ],
+            },
+            borderType: optionsSetup.borderType,
+            borderColor: optionsSetup.borderColor,
+            borderWidth: optionsSetup.borderWidth,
+            shadowColor: optionsSetup.shadowColor,
+            shadowBlur: optionsSetup.shadowBlur,
+            opacity: optionsSetup.opacity / 100,
+          },
+        },
+        //鼠标放置颜色加深
         emphasis: {
-          show: false,
+          label: {
+            show: optionsSetup.isShowEmphasisLabel,
+            color: optionsSetup.emphasisLabelFontColor,
+            fontSize: optionsSetup.emphasisLabelFontSize,
+            fontWeight: optionsSetup.emphasisLabelFontWeight,
+            fontStyle: optionsSetup.emphasisLabelFontStyle,
+            fontFamily: optionsSetup.emphasisLabelFontFamily,
+          },
+          itemStyle: {
+            areaColor: {
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: optionsSetup.emphasisLabelFontColor0, // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: optionsSetup.emphasisLabelFontColor100, // 100% 处的颜色
+                },
+              ],
+            },
+          },
         },
       }
-      this.options.series[0]['label'] = label;
+      this.options.geo = geo;
     },
     // 起点设置
     setOptionsSource() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series[3];
+      const series = this.options.series[2];
       const normal = {
         show: optionsSetup.isShowSource,
         position: optionsSetup.sourceFontPosition,
@@ -423,7 +418,7 @@ export default {
     // 终点设置
     setOptionsTarget() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series[4];
+      const series = this.options.series[3];
       const normal = {
         show: optionsSetup.isShowTarget,
         position: optionsSetup.targetFontPosition,
@@ -445,7 +440,7 @@ export default {
     // 图标设置
     setOptionsSymbol() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series[2];
+      const series = this.options.series[1];
       const effect = {
         show: true,
         period: this.setPeriod(optionsSetup),
@@ -477,7 +472,7 @@ export default {
     // 线设置
     setOptionsLine() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series[2];
+      const series = this.options.series[1];
       const lineStyle = {
         normal: {
           // 线条颜色
@@ -489,52 +484,36 @@ export default {
       };
       series["lineStyle"] = lineStyle;
     },
-    // 地图颜色设置
-    setOptionsColor() {
+    // tooltip 设置
+    setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
-      const itemStyle = this.options.series[0]["itemStyle"];
-      const normal = {
-        //地图块颜色
-        areaColor: {
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [
-            {
-              offset: 0,
-              color: optionsSetup.font0PreColor, // 0% 处的颜色
-            },
-            {
-              offset: 1,
-              color: optionsSetup.font100PreColor, // 100% 处的颜色
-            },
-          ],
+      const tooltip = {
+        trigger: "item",
+        show: optionsSetup.isShowTooltip,
+        textStyle: {
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
-        borderColor: optionsSetup.borderColor,
-        borderWidth: optionsSetup.borderWidth,
-      };
-      //鼠标放置颜色加深
-      const emphasis = {
-        areaColor: {
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [
-            {
-              offset: 0,
-              color: "#073684", // 0% 处的颜色
-            },
-            {
-              offset: 1,
-              color: optionsSetup.fontHighlightColor, // 100% 处的颜色
-            },
-          ],
+        formatter: function (params, ticket, callback) {
+          if (params.seriesType == "effectScatter") {
+            return "线路：" + params.data.name + "" + params.data.value[2];
+          } else if (params.seriesType == "lines") {
+            return (
+              params.data.fromName +
+              ">" +
+              params.data.toName +
+              "<br />" +
+              params.data.value
+            );
+          } else {
+            return params.name;
+          }
         },
       };
-      itemStyle["normal"] = normal;
-      itemStyle["emphasis"] = emphasis;
+      this.options.tooltip = tooltip;
     },
     //数据解析
     setOptionsData(e, paramsConfig) {
@@ -562,9 +541,9 @@ export default {
     },
     staticDataFn(val) {
       const series = this.options.series;
+      series[0]["data"] = this.convertData(val);
       series[1]["data"] = this.convertData(val);
-      series[2]["data"] = this.convertData(val);
-      series[3]["data"] = val.map(function (dataItem) {
+      series[2]["data"] = val.map(function (dataItem) {
         if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.source,
@@ -572,7 +551,7 @@ export default {
           };
         }
       });
-      series[4]["data"] = val.map(function (dataItem) {
+      series[3]["data"] = val.map(function (dataItem) {
         if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.target,
@@ -600,9 +579,9 @@ export default {
     },
     renderingFn(val) {
       const series = this.options.series;
+      series[0]["data"] = this.convertData(val);
       series[1]["data"] = this.convertData(val);
-      series[2]["data"] = this.convertData(val);
-      series[3]["data"] = val.map(function (dataItem) {
+      series[2]["data"] = val.map(function (dataItem) {
         if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.source,
@@ -610,7 +589,7 @@ export default {
           };
         }
       });
-      series[4]["data"] = val.map(function (dataItem) {
+      series[3]["data"] = val.map(function (dataItem) {
         if (geoCoordMap[dataItem.source] && geoCoordMap[dataItem.target]) {
           return {
             name: dataItem.target,

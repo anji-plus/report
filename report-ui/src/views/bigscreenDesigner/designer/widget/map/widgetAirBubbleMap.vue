@@ -264,7 +264,7 @@ export default {
         geo: {
           map: "china",
           show: true,
-          roam: false,
+          roam: true,
           label: {
             emphasis: {
               show: false,
@@ -290,7 +290,7 @@ export default {
                 ],
                 false
               ),
-              borderWidth: 0,
+              borderWidth: 1,
               shadowColor: "rgba(10,76,139,1)",
               shadowOffsetY: 0,
               shadowBlur: 60,
@@ -298,66 +298,6 @@ export default {
           },
         },
         series: [
-          {
-            type: "map",
-            map: "china",
-            aspectScale: 0.75,
-            label: {
-              normal: {
-                //调整数值
-                position: "right",
-                show: true,
-                color: "#53D9FF",
-                fontSize: 20,
-              },
-              emphasis: {
-                show: true,
-              },
-            },
-            itemStyle: {
-              normal: {
-                //地图块颜色
-                areaColor: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "#073684", // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: "#061E3D", // 100% 处的颜色
-                    },
-                  ],
-                },
-                borderColor: "#215495",
-                borderWidth: 1,
-              },
-              //鼠标放置颜色加深
-              emphasis: {
-                areaColor: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "#073684", // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: "#2B91B7", // 100% 处的颜色
-                    },
-                  ],
-                },
-              },
-            },
-            data: data,
-          },
           {
             type: "effectScatter",
             coordinateSystem: "geo",
@@ -469,7 +409,6 @@ export default {
       this.optionsSetup,
       this.optionsData,
       (dynamicData, optionsSetup) => {
-        console.log("dynamicData", dynamicData);
         this.getEchartData(dynamicData, optionsSetup);
       }
     );
@@ -480,14 +419,10 @@ export default {
     editorOptions() {
       this.setOptionsTitle();
       this.setOptionsGeo();
-      this.setOptionTextValue();
-      //this.setOptionDataValue();
       this.setOptionsData();
       this.setOptionAirSize();
       this.setOptionsTooltip();
-      this.setOptionMapBlock();
     },
-
     // 标题设置
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
@@ -515,15 +450,16 @@ export default {
       };
       this.options.title = title;
     },
-    setOptionsGeo(){
-      this.options.geo['map'] = this.optionsSetup.mapName == ''? "china" : this.optionsSetup.mapName;
-      this.options.series[0]['map'] = this.optionsSetup.mapName == ''? "china" : this.optionsSetup.mapName;
-    },
-    setOptionTextValue() {
+    setOptionsGeo() {
       const optionsSetup = this.optionsSetup;
-      const label = {
-        normal: {
-          position: "right",
+      const geo = {
+        map: this.optionsSetup.mapName == '' ? "china" : this.optionsSetup.mapName,
+        show: true,
+        roam: true,
+        layoutSize: "80%",
+        label: {
+          //调整数值
+          // 地图省市区显隐
           show: optionsSetup.isShowMap,
           color: optionsSetup.fontColor,
           fontSize: optionsSetup.fontSize,
@@ -531,58 +467,64 @@ export default {
           fontStyle: optionsSetup.fontStyle,
           fontFamily: optionsSetup.fontFamily,
         },
+        itemStyle: {
+          normal: {
+            //地图块颜色
+            areaColor: {
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: optionsSetup.fontColor0, // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: optionsSetup.fontColor100, // 100% 处的颜色
+                },
+              ],
+            },
+            borderType: optionsSetup.borderType,
+            borderColor: optionsSetup.borderColor,
+            borderWidth: optionsSetup.borderWidth,
+            shadowColor: optionsSetup.shadowColor,
+            shadowBlur: optionsSetup.shadowBlur,
+            opacity: optionsSetup.opacity / 100,
+          },
+        },
+        //鼠标放置颜色加深
         emphasis: {
-          show: false,
-          color: '#fff',
+          label: {
+            show: optionsSetup.isShowEmphasisLabel,
+            color: optionsSetup.emphasisLabelFontColor,
+            fontSize: optionsSetup.emphasisLabelFontSize,
+            fontWeight: optionsSetup.emphasisLabelFontWeight,
+            fontStyle: optionsSetup.emphasisLabelFontStyle,
+            fontFamily: optionsSetup.emphasisLabelFontFamily,
+          },
+          itemStyle: {
+            areaColor: {
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: optionsSetup.emphasisLabelFontColor0, // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: optionsSetup.emphasisLabelFontColor100, // 100% 处的颜色
+                },
+              ],
+            },
+          },
         },
-      };
-      this.options.series[0]["label"] = label;
-    },
-    setOptionMapBlock() {
-      const optionsSetup = this.optionsSetup;
-      const itemStyle = this.options.series[0]["itemStyle"];
-      const normal = {
-        //地图块颜色
-        areaColor: {
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [
-            {
-              offset: 0,
-              color: optionsSetup.font0PreColor, // 0% 处的颜色
-            },
-            {
-              offset: 1,
-              color: optionsSetup.font100PreColor, // 100% 处的颜色
-            },
-          ],
-        },
-        borderColor: optionsSetup.borderColor,
-        borderWidth: optionsSetup.borderWidth,
-      };
-      //鼠标放置颜色加深
-      const emphasis = {
-        areaColor: {
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [
-            {
-              offset: 0,
-              color: "#073684", // 0% 处的颜色
-            },
-            {
-              offset: 1,
-              color: optionsSetup.fontHighlightColor, // 100% 处的颜色
-            },
-          ],
-        },
-      };
-      itemStyle["normal"] = normal;
-      itemStyle["emphasis"] = emphasis;
+      }
+      this.options.geo = geo;
     },
     setOptionAirSize() {
       maxSize4Pin = this.optionsSetup.fontmaxSize4Pin;
@@ -603,7 +545,7 @@ export default {
         },
         formatter: function (params) {
           if (params.value.length > 1) {
-            return params.data.name + "" + params.data.value[2];
+            return params.data.name + " " + params.data.value[2];
           } else {
             return params.name;
           }
@@ -636,9 +578,8 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      this.options.series[0]["data"] = val;
       const optionsSetup = this.optionsSetup;
-      const label = this.options.series[1]["label"];
+      const label = this.options.series[0]["label"];
       const normal = {
         show: optionsSetup.isShowData,
         color: "#fff",
@@ -658,7 +599,7 @@ export default {
         },
       };
       const data = convertData(val);
-      this.options.series[1]["data"] = data;
+      this.options.series[0]["data"] = data;
       label["normal"] = normal;
     },
     dynamicDataFn(val, refreshTime) {
@@ -679,9 +620,8 @@ export default {
       });
     },
     renderingFn(val) {
-      this.options.series[0]["data"] = val;
       const optionsSetup = this.optionsSetup;
-      const label = this.options.series[1]["label"];
+      const label = this.options.series[0]["label"];
       const normal = {
         show: optionsSetup.isShowData,
         color: "#fff",
@@ -701,7 +641,7 @@ export default {
         },
       };
       const data = convertData(val);
-      this.options.series[1]["data"] = data;
+      this.options.series[0]["data"] = data;
       label["normal"] = normal;
     },
   },
