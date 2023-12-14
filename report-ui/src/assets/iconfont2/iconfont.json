@@ -1,0 +1,23 @@
+{
+  "id": "4369261",
+  "name": "report",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1236837",
+      "name": "地图",
+      "font_class": "03",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "2076231",
+      "name": "地图",
+      "font_class": "ditu",
+      "unicode": "e884",
+      "unicode_decimal": 59524
+    }
+  ]
+}

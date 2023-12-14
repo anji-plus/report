@@ -6,6 +6,7 @@
 
 <script>
 import "@/assets/iconfont/iconfont.css";
+import "@/assets/iconfont2/iconfont.css";
 import { initDictToLocalstorage } from "@/api/dict-data";
 export default {
   name: "App",
