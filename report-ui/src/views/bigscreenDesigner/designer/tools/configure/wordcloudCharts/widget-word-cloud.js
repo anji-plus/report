@@ -30,7 +30,7 @@ export const widgetWordCloud = {
             {
               type: 'el-switch',
               label: '标题显示',
-              name: 'isNoTitle',
+              name: 'isShowTitle',
               required: false,
               placeholder: '',
               value: true,
@@ -38,7 +38,7 @@ export const widgetWordCloud = {
             {
               type: 'el-input-text',
               label: '标题名',
-              name: 'titleText',
+              name: 'text',
               required: false,
               placeholder: '',
               value: '',
@@ -66,10 +66,10 @@ export const widgetWordCloud = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -80,29 +80,30 @@ export const widgetWordCloud = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
             {
               type: 'el-select',
-              label: '字体位置',
-              name: 'textAlign',
+              label: '字体系列',
+              name: 'textFontFamily',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'center'
+              value: 'sans-serif'
             },
             {
               type: 'el-input-text',
               label: '副标题名',
-              name: 'subText',
+              name: 'subtext',
               required: false,
               placeholder: '',
               value: ''
@@ -110,7 +111,7 @@ export const widgetWordCloud = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'subTextColor',
+              name: 'subtextColor',
               required: false,
               placeholder: '',
               value: 'rgba(30, 144, 255, 1)'
@@ -118,7 +119,7 @@ export const widgetWordCloud = {
             {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'subTextFontSize',
+              name: 'subtextFontSize',
               required: false,
               placeholder: '',
               value: 20
@@ -126,29 +127,72 @@ export const widgetWordCloud = {
             {
               type: 'el-select',
               label: '字体粗细',
-              name: 'subTextFontWeight',
+              name: 'subtextFontWeight',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
             {
               type: 'el-select',
               label: '字体风格',
-              name: 'subTextFontStyle',
+              name: 'subtextFontStyle',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'subtextFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+            {
+              type: 'el-select',
+              label: '左右位置',
+              name: 'titleLeft',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-slider',
+              label: '上下间距',
+              name: 'titleTop',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'el-input-number',
+              label: '主副标题间距',
+              name: 'titleItemGap',
+              required: false,
+              placeholder: '',
+              value: 0
             },
           ],
         },
@@ -198,9 +242,17 @@ export const widgetWordCloud = {
           name: '提示语设置',
           list: [
             {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowTooltip',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'tipsFontSize',
+              name: 'tooltipFontSize',
               required: false,
               placeholder: '',
               value: 16
@@ -208,10 +260,51 @@ export const widgetWordCloud = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'tipsColor',
+              name: 'tooltipColor',
               required: false,
               placeholder: '',
               value: '#00FEFF'
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'tooltipFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'tooltipFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'tooltipFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
           ],
         },
