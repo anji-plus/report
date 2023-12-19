@@ -341,7 +341,7 @@ export default {
         type: "value",
         show: optionsSetup.isShowXLeft,
         inverse: true,
-        position: optionsSetup.positionXLeft,
+        position: "bottom",
         axisLabel: {
           // x轴
           show: optionsSetup.isShowAxisLabelXLeft,
@@ -388,10 +388,10 @@ export default {
       const xAxisRight = {
         max: optionsSetup.maxXRight !== "" ? optionsSetup.maxXRight : null,
         gridIndex: 2,
-        splitNumber: optionsSetup.splitNumberRight,
+        splitNumber: optionsSetup.splitNumberXRight,
         show: optionsSetup.isShowXRight,
         type: "value",
-        position: optionsSetup.positionXRight,
+        position: "bottom",
         axisLabel: {
           // x轴
           show: optionsSetup.isShowAxisLabelXRight,
@@ -405,14 +405,14 @@ export default {
         },
         axisLine: {
           //X轴线
-          show: optionsSetup.isShowAxisLineXLeft,
+          show: optionsSetup.isShowAxisLineXRight,
           lineStyle: {
             color: optionsSetup.lineColorXRight,
             width: optionsSetup.lineWidthXRight,
           },
         },
         axisTick: {
-          show: optionsSetup.isShowAxisLineXLeft,
+          show: optionsSetup.isShowAxisLineXRight,
           lineStyle: {
             color: optionsSetup.lineColorXRight,
             width: optionsSetup.lineWidthXRight,
@@ -438,8 +438,7 @@ export default {
         gridIndex: 1,
         type: "category",
         inverse: true,
-        position: "left",
-        show: optionsSetup.isShowY,
+        show: true,
         axisLabel: {
           show: optionsSetup.isShowAxisLabelY,
           interval: optionsSetup.textIntervalY,
@@ -453,18 +452,10 @@ export default {
           },
         },
         axisLine: {
-          show: optionsSetup.isShowAxisLineY,
-          lineStyle: {
-            color: optionsSetup.lineColorY,
-            width: optionsSetup.lineWidthY,
-          },
+          show: false,
         },
         axisTick: {
-          show: optionsSetup.isShowAxisLineY,
-          lineStyle: {
-            color: optionsSetup.lineColorY,
-            width: optionsSetup.lineWidthY,
-          },
+          show: false,
         },
       };
       this.options.yAxis[1] = yAxis;

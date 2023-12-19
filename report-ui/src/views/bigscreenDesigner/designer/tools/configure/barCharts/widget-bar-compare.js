@@ -322,18 +322,6 @@ export const widgetBarCompare = {
               value: '',
             },
             {
-              type: 'el-select',
-              label: '数值位置',
-              name: 'positionXLeft',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'bottom', name: '底部' },
-                { code: 'top', name: '顶部' },
-              ],
-              value: 'bottom'
-            },
-            {
               type: 'vue-color',
               label: '数值颜色',
               name: 'textColorXLeft',
@@ -500,18 +488,6 @@ export const widgetBarCompare = {
               value: '',
             },
             {
-              type: 'el-select',
-              label: '数值位置',
-              name: 'positionXRight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'bottom', name: '底部' },
-                { code: 'top', name: '顶部' },
-              ],
-              value: 'bottom'
-            },
-            {
               type: 'vue-color',
               label: '数值颜色',
               name: 'textColorXRight',
@@ -579,7 +555,7 @@ export const widgetBarCompare = {
             {
               type: 'el-switch',
               label: '坐标轴显示',
-              name: 'lineXRight',
+              name: 'isShowAxisLineXRight',
               require: false,
               placeholder: '',
               value: false,
@@ -653,14 +629,14 @@ export const widgetBarCompare = {
         {
           name: 'Y轴设置',
           list: [
-            {
+/*            {
               type: 'el-switch',
               label: 'Y轴显示',
               name: 'isShowY',
               require: false,
               placeholder: '',
               value: true,
-            },
+            },*/
             {
               type: 'el-switch',
               label: '数值显示',
@@ -733,30 +709,6 @@ export const widgetBarCompare = {
               required: false,
               placeholder: '',
               value: ''
-            },
-            {
-              type: 'el-switch',
-              label: '坐标轴显示',
-              name: 'isShowAxisLineY',
-              require: false,
-              placeholder: '',
-              value: false,
-            },
-            {
-              type: 'vue-color',
-              label: '坐标轴颜色',
-              name: 'lineColorY',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '坐标轴宽度',
-              name: 'lineWidthY',
-              required: false,
-              placeholder: '',
-              value: 1,
             },
           ],
         },
