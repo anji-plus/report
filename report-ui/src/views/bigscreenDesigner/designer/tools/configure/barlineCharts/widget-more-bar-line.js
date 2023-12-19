@@ -413,8 +413,8 @@ export const widgetMoreBarLine = {
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'top', name: '上'},
-                {code: 'bottom', name: '下'},
+                {code: 'top', name: '顶'},
+                {code: 'bottom', name: '底'},
               ],
               value: 'bottom'
             },
