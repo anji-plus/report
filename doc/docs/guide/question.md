@@ -126,20 +126,36 @@
 ## V1.3.0版本
 
 V1.3.0为多张图表新增了配置项，有部分配置项直接和图表展示相关联，当旧版本升级至此版本后会有部分图表不能正常显示，可参考以下内容进行调整。<br>
-如果以下方案皆不能使图表正常显示，可选择删除原有图表重新拖出配置。<br>
+以下方式本质上都是重新载入新图表的配置，如果按以下等方式对图表进行编辑仍不能正常显示图表，建议删了旧图表从新配置。<br>
 
-- 双Y柱图Y轴不显示 <br>
+- X轴，Y轴不显示-柱体，折线图等含有Y轴配置的的图表 <br>
   ![img8](../picture/qusetion/img_8.png) <br>
+  解决方案：<br>
+  打开Y轴配置项，左Y轴，右Y轴都可以，按图切换“显示”按钮，直到图表Y轴显示，X轴同理。<br>
+  ![img9](../picture/qusetion/img_9.png) <br>
 
-解决方案：<br>
-打开Y轴配置项，左Y轴，右Y轴都可以，按图切换“显示”按钮，直到图表Y轴显示。<br>
-![img9](../picture/qusetion/img_9.png) <br>
-
-- 柱状图(全部)柱子不显示 <br>
+- 柱状图柱子不显示，或整个图表空白 <br>
   ![img10](../picture/qusetion/img_10.png) <br>
+  解决方案：<br>
+  打开柱体设置，找到“间距”，来回拖动，默认间距值：10。<br>
+  ![img11](../picture/qusetion/img_11.png) <br>
 
-解决方案：<br>
-打开柱体设置，找到“间距”，来回拖动，直到图表柱体显示。<br>
-![img11](../picture/qusetion/img_11.png) <br>
+- 饼图图不显示 <br>
+  如图示，整个图表空白。<br>
+  ![img2](../picture/qusetion/img_12.png) <br>
+  解决方案：<br>
+  打开饼图设置，拖动"内半径"或者"外半径"。<br>
+  ![img13](../picture/qusetion/img_13.png) <br>
+
+- 堆叠图图不显示 <br>
+  解决方案：<br>
+  选择堆叠样式，进行切换. <br>
+  ![img14](../picture/qusetion/img_14.png)
+
+- 地图图不显示 <br>
+  解决方案：<br>
+  打开地图设置，切换文字显示。<br>
+  ![img15](../picture/qusetion/img_15.png)
+
 
 
