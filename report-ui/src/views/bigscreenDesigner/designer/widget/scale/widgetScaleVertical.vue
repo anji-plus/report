@@ -244,22 +244,27 @@ export default {
     // 标题设置
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
     },
@@ -298,7 +303,7 @@ export default {
       // 显示
       if (optionsSetup.isShowScale) {
         series.data = scale;
-      }else {
+      } else {
         series.data = 0;
       }
       series.barWidth = optionsSetup.scaleBarWidth;
@@ -312,10 +317,12 @@ export default {
         normal: {
           show: true,
           position: 'left',
-          distance: 10,
+          distance: optionsSetup.scaleDistance,
           fontSize: optionsSetup.scaleFontSize,
-          color: optionsSetup.scaleDataColor,
+          color: optionsSetup.scaleFontColor,
           fontWeight: optionsSetup.scaleFontWeight,
+          fontStyle: optionsSetup.scaleFontStyle,
+          fontFamily: optionsSetup.scaleFontFamily,
           formatter: function (params) {
             if (params.dataIndex % 10 === 0) {
               return params.dataIndex;
@@ -416,19 +423,6 @@ export default {
       }
       return showValue;
     },
-    // 提示语设置 tooltip
-    setOptionsTooltip() {
-      const optionsSetup = this.optionsSetup;
-      const tooltip = {
-        trigger: "item",
-        show: true,
-        textStyle: {
-          color: optionsSetup.lineColor,
-          fontSize: optionsSetup.tipFontSize,
-        },
-      };
-      this.options.tooltip = tooltip;
-    },
     // 边距设置
     setOptionsMargin() {
       const optionsSetup = this.optionsSetup;
@@ -476,7 +470,7 @@ export default {
         label: {
           normal: {
             show: optionsSetup.isShow,
-            position: "top",
+            position: optionsSetup.fontPosition,
             distance: optionsSetup.fontDistance,
             width: 10,
             height: 50,
@@ -488,6 +482,8 @@ export default {
                 fontSize: optionsSetup.fontSize,
                 fontWeight: optionsSetup.fontWeight,
                 color: gradient[gradient.length - 1].color,
+                fontStyle: optionsSetup.fontStyle,
+                fontFamily: optionsSetup.fontFamily,
               },
             }
           }
