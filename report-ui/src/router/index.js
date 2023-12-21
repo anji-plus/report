@@ -32,7 +32,7 @@ export const constantRouterMap = [
   },
   {
     path: '/aj/**',
-    component: () => import('@/views/bigscreenDesigner/share/shareLink'),
+    component: () => import('@/views/bigScreenDesigner/share/shareLink'),
     hidden: true
   },
   {
@@ -160,7 +160,7 @@ export const constantRouterMap = [
       {
         path: 'bigscreen',
         name: 'bigscreen',
-        component: () => import('@/views/bigscreenDesigner/index'),
+        component: () => import('@/views/bigScreenDesigner/index'),
         meta: {
           title: '大屏报表',
           icon: 'iconchufaqipeizhi-hui',
