@@ -1,6 +1,6 @@
 import { Revoke } from "@/utils/revoke";
 import { getToken } from "@/utils/auth";
-import { getToolByCode } from "@/views/bigscreenDesigner/designer/tools/index";
+import { getToolByCode } from "@/views/bigScreenDesigner/designer/tools/index";
 import { insertDashboard, detailDashboard, exportDashboard, } from "@/api/bigscreen";
 const mixin = {
   data() {
