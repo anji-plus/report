@@ -255,7 +255,7 @@ export const constantRouterMap = [
   },
   {
     path: '/bigscreen/designer',
-    component: () => import('@/views/bigsSreenDesigner/designer'),
+    component: () => import('@/views/bigScreenDesigner/designer'),
     hidden: true,
     meta: {
       requireAuth: true
