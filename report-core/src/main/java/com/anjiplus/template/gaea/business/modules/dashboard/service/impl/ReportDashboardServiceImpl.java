@@ -152,6 +152,7 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
         dashboard.setReportCode(reportCode);
         if (null == reportDashboard) {
             //新增
+            dashboard.setId(null);
             this.insert(dashboard);
         } else {
             //更新
@@ -181,7 +182,7 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
             reportDashboardWidget.setEnableFlag(1);
             reportDashboardWidget.setDeleteFlag(0);
             reportDashboardWidget.setSort((long) (i + 1));
-
+            reportDashboardWidget.setId(null);
             //兼容底层，不采用批量插入
             reportDashboardWidgetService.insert(reportDashboardWidget);
 

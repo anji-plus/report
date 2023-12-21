@@ -1,8 +1,9 @@
 <!--
- * @Author: lide1202@hotmail.com
- * @Date: 2021-3-13 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24
+ * @Descripttion: 大屏分享链接--解析识别入口
+ * @Author: qianlishi
+ * @Date: 2021-12-13 13:04:24
+ * @Last Modified by:   qianlishi
+ * @Last Modified time: 2023-9-8 11:04:24
  !-->
 <template>
   <div>
@@ -25,7 +26,7 @@
 import { reportShareDetailByCode } from "@/api/reportShare";
 import { setShareToken } from "@/utils/auth";
 export default {
-  name: "Excel",
+  name: "Report",
   components: {},
   data() {
     return {
@@ -43,7 +44,7 @@ export default {
   methods: {
     async handleOpen() {
       const url = window.location.href;
-      const shareCode = url.substring(url.lastIndexOf("/") + 1);
+      const shareCode = url.split('?')[0].substring(url.lastIndexOf("/") + 1);
       const { code, data } = await reportShareDetailByCode(shareCode);
       if (code != "200") return;
       this.reportCode = data.reportCode;
@@ -52,26 +53,33 @@ export default {
       if (this.sharePassword) {
         this.dialogVisible = true;
       } else {
-        this.pushEl();
+        this.pushAj();
       }
     },
     checkPassword() {
       const md5 = require("js-md5");
       const inputPassword = md5(this.password);
       if (inputPassword == this.sharePassword) {
-        this.pushEl();
+        this.pushAj();
       } else {
         this.$message.error("分享码输入不正确");
       }
     },
-    pushEl() {
+    pushAj() {
       setShareToken(this.shareToken);
+      const url = window.location.href;
+      const urlParamsObj = this.toUrlParamsMap(url.split('?')[1])
+      const queryParams = { ...urlParamsObj, reportCode: this.reportCode }
       this.$router.push({
-        path: "/excelreport/viewer",
-        query: {
-          reportCode: this.reportCode
-        }
+        path: "/bigscreen/viewer",
+        query: queryParams
       });
+    },
+    toUrlParamsMap(params) {
+      if(!params) return {}
+      const urlObj = {}
+      params.split("&").map(item => urlObj[item.split("=")[0]] = item.split("=")[1])
+      return urlObj
     },
     handleClose(done) {
       this.$confirm("确认关闭？")

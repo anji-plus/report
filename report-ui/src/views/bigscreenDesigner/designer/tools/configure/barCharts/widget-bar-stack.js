@@ -46,12 +46,184 @@ export const widgetBarStack = {
         required: false,
         placeholder: '',
         selectOptions: [
-          { code: 'leftRight', name: '左右堆叠' },
-          { code: 'upDown', name: '上下堆叠' },
+          {code: 'leftRight', name: '左右堆叠'},
+          {code: 'upDown', name: '上下堆叠'},
         ],
         value: 'leftRight'
       },
       [
+        {
+          name: '标题设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '标题显示',
+              name: 'isShowTitle',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '标题名',
+              name: 'text',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'textColor',
+              required: false,
+              placeholder: '',
+              value: '#FFD700'
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'textFontSize',
+              required: false,
+              placeholder: '',
+              value: 20
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'textFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'textFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'textFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+            {
+              type: 'el-input-text',
+              label: '副标题名',
+              name: 'subtext',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'subtextColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(30, 144, 255, 1)'
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'subtextFontSize',
+              required: false,
+              placeholder: '',
+              value: 20
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'subtextFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'subtextFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'subtextFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+            {
+              type: 'el-select',
+              label: '左右位置',
+              name: 'titleLeft',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-slider',
+              label: '上下间距',
+              name: 'titleTop',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'el-input-number',
+              label: '主副标题间距',
+              name: 'titleItemGap',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+          ],
+        },
         {
           name: '柱体设置',
           list: [
@@ -61,7 +233,7 @@ export const widgetBarStack = {
               name: 'maxWidth',
               required: false,
               placeholder: '',
-              value: 20,
+              value: 15,
             },
             {
               type: 'el-slider',
@@ -70,6 +242,22 @@ export const widgetBarStack = {
               require: false,
               placeholder: '',
               value: 5,
+            },
+            {
+              type: 'el-slider',
+              label: '间距',
+              name: 'barGap',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'el-slider',
+              label: '最小高度',
+              name: 'minHeight',
+              require: false,
+              placeholder: '',
+              value: 0,
             },
             {
               type: 'el-switch',
@@ -110,9 +298,9 @@ export const widgetBarStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'solid', name: '实线' },
-                { code: 'dashed', name: '虚线' },
-                { code: 'dotted', name: '斑点' },
+                {code: 'solid', name: '实线'},
+                {code: 'dashed', name: '虚线'},
+                {code: 'dotted', name: '斑点'},
               ],
               value: 'dashed'
             },
@@ -143,254 +331,48 @@ export const widgetBarStack = {
           ],
         },
         {
-          name: '标题设置',
-          list: [
-            {
-              type: 'el-switch',
-              label: '标题显示',
-              name: 'isNoTitle',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-input-text',
-              label: '标题名',
-              name: 'titleText',
-              required: false,
-              placeholder: '',
-              value: '',
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'textColor',
-              required: false,
-              placeholder: '',
-              value: '#FFD700'
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'textFontSize',
-              required: false,
-              placeholder: '',
-              value: 20
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'textFontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-select',
-              label: '字体风格',
-              name: 'textFontStyle',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-select',
-              label: '字体位置',
-              name: 'textAlign',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
-              ],
-              value: 'center'
-            },
-            {
-              type: 'el-input-text',
-              label: '副标题名',
-              name: 'subText',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'subTextColor',
-              required: false,
-              placeholder: '',
-              value: 'rgba(30, 144, 255, 1)'
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'subTextFontSize',
-              required: false,
-              placeholder: '',
-              value: 20
-            },
-            {
-              type: 'el-select',
-              label: '字体粗细',
-              name: 'subTextFontWeight',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-select',
-              label: '字体风格',
-              name: 'subTextFontStyle',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
-              ],
-              value: 'normal'
-            },
-          ],
-        },
-        {
-          name: '图例操作',
-          list: [
-            {
-              type: 'el-switch',
-              label: '图例显示',
-              name: 'isShowLegend',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-input-text',
-              label: '名称( | 分隔)',
-              name: 'legendName',
-              required: false,
-              placeholder: '多值以' | '隔开',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'legendColor',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'legendFontSize',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'el-input-number',
-              label: '图例宽度',
-              name: 'legendWidth',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'el-select',
-              label: '横向位置',
-              name: 'lateralPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
-              ],
-              value: 'center'
-            },
-            {
-              type: 'el-select',
-              label: '纵向位置',
-              name: 'longitudinalPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'top', name: '顶部' },
-                { code: 'bottom', name: '底部' },
-              ],
-              value: 'top'
-            },
-            {
-              type: 'el-select',
-              label: '布局前置',
-              name: 'layoutFront',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                { code: 'vertical', name: '竖排' },
-                { code: 'horizontal', name: '横排' },
-              ],
-              value: 'horizontal'
-            },
-          ],
-        },
-        {
           name: 'X轴设置',
           list: [
             {
               type: 'el-switch',
-              label: '显示',
-              name: 'hideX',
+              label: 'X轴显示',
+              name: 'isShowX',
               required: false,
               placeholder: '',
               value: true,
             },
             {
-              type: 'el-input-text',
-              label: '坐标名',
-              name: 'nameX',
-              required: false,
+              type: 'el-switch',
+              label: '数值显示',
+              name: 'isShowAxisLabelX',
+              require: false,
               placeholder: '',
-              value: ''
+              value: true,
             },
             {
-              type: 'vue-color',
-              label: '坐标名颜色',
-              name: 'nameColorX',
+              type: 'el-select',
+              label: '数值位置',
+              name: 'positionX',
               required: false,
               placeholder: '',
-              value: '#fff'
+              selectOptions: [
+                {code: 'top', name: '顶'},
+                {code: 'bottom', name: '底'},
+              ],
+              value: 'bottom'
             },
             {
               type: 'el-input-number',
-              label: '坐标名字号',
-              name: 'nameFontSizeX',
+              label: '数值距离',
+              name: 'offsetX',
               required: false,
               placeholder: '',
-              value: 14
+              value: 0
             },
             {
               type: 'vue-color',
               label: '数值颜色',
-              name: 'colorX',
+              name: 'textColorX',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -398,10 +380,51 @@ export const widgetBarStack = {
             {
               type: 'el-input-number',
               label: '数值字号',
-              name: 'fontSizeX',
+              name: 'textFontSizeX',
               required: false,
               placeholder: '',
               value: 14,
+            },
+            {
+              type: 'el-select',
+              label: '数值粗细',
+              name: 'textFontWeightX',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '数值风格',
+              name: 'textFontStyleX',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '数值字体',
+              name: 'textFontFamilyX',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
             {
               type: 'el-switch',
@@ -422,18 +445,26 @@ export const widgetBarStack = {
             {
               type: 'el-input-number',
               label: '数值间隔',
-              name: 'textInterval',
+              name: 'textIntervalX',
               required: false,
               placeholder: '',
               value: ''
             },
             {
-              type: 'el-slider',
+              type: 'el-input-number',
               label: '数值角度',
               name: 'textAngleX',
               required: false,
               placeholder: '',
               value: 0
+            },
+            {
+              type: 'el-switch',
+              label: '坐标轴显示',
+              name: 'isShowAxisLineX',
+              require: false,
+              placeholder: '',
+              value: true,
             },
             {
               type: 'el-switch',
@@ -458,6 +489,84 @@ export const widgetBarStack = {
               required: false,
               placeholder: '',
               value: 1,
+            },
+            {
+              type: 'el-input-text',
+              label: '坐标名',
+              name: 'nameX',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'el-select',
+              label: '坐标名位置',
+              name: 'nameLocationX',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'start', name: '起点'},
+                {code: 'center', name: '中间'},
+                {code: 'end', name: '终点'},
+              ],
+              value: 'end'
+            },
+            {
+              type: 'vue-color',
+              label: '坐标名颜色',
+              name: 'nameColorX',
+              required: false,
+              placeholder: '',
+              value: '#fff'
+            },
+            {
+              type: 'el-input-number',
+              label: '坐标名字号',
+              name: 'nameFontSizeX',
+              required: false,
+              placeholder: '',
+              value: 14
+            },
+            {
+              type: 'el-select',
+              label: '坐标名粗细',
+              name: 'nameFontWeightX',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '坐标名风格',
+              name: 'nameFontStyleX',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '坐标名字体',
+              name: 'nameFontFamilyX',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
             {
               type: 'el-switch',
@@ -490,8 +599,16 @@ export const widgetBarStack = {
           list: [
             {
               type: 'el-switch',
-              label: '显示',
+              label: 'Y轴显示',
               name: 'isShowY',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '数值显示',
+              name: 'isShowAxisLabelY',
               require: false,
               placeholder: '',
               value: true,
@@ -505,33 +622,29 @@ export const widgetBarStack = {
               value: '',
             },
             {
-              type: 'el-input-text',
-              label: '坐标名',
-              name: 'textNameY',
-              require: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '坐标名颜色',
-              name: 'nameColorY',
+              type: 'el-select',
+              label: '数值位置',
+              name: 'positionY',
               required: false,
               placeholder: '',
-              value: '#fff',
+              selectOptions: [
+                {code: 'left', name: '左'},
+                {code: 'right', name: '右'},
+              ],
+              value: 'left'
             },
             {
               type: 'el-input-number',
-              label: '坐标名字号',
-              name: 'nameFontSizeY',
+              label: '数值距离',
+              name: 'offsetY',
               required: false,
               placeholder: '',
-              value: 14,
+              value: 0
             },
             {
               type: 'vue-color',
               label: '数值颜色',
-              name: 'colorY',
+              name: 'textColorY',
               required: false,
               placeholder: '',
               value: '#fff',
@@ -539,11 +652,60 @@ export const widgetBarStack = {
             {
               type: 'el-input-number',
               label: '数值字号',
-              name: 'fontSizeY',
+              name: 'textFontSizeY',
               required: false,
               placeholder: '',
               value: 14,
             },
+            {
+              type: 'el-select',
+              label: '数值粗细',
+              name: 'textFontWeightY',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '数值风格',
+              name: 'textFontStyleY',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '数值字体',
+              name: 'textFontFamilyY',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+            /*            {
+                          type: 'el-input-number',
+                          label: '数值间隔',
+                          name: 'textIntervalY',
+                          required: false,
+                          placeholder: '',
+                          value: 0
+                        },*/
             {
               type: 'el-switch',
               label: '缩放',
@@ -561,12 +723,20 @@ export const widgetBarStack = {
               value: ''
             },
             {
-              type: 'el-slider',
+              type: 'el-input-number',
               label: '数值角度',
               name: 'textAngleY',
               required: false,
               placeholder: '',
               value: 0
+            },
+            {
+              type: 'el-switch',
+              label: '坐标轴显示',
+              name: 'isShowAxisLineY',
+              require: false,
+              placeholder: '',
+              value: true,
             },
             {
               type: 'el-switch',
@@ -591,6 +761,84 @@ export const widgetBarStack = {
               required: false,
               placeholder: '',
               value: 1,
+            },
+            {
+              type: 'el-input-text',
+              label: '坐标名',
+              name: 'textNameY',
+              require: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'el-select',
+              label: '坐标名位置',
+              name: 'nameLocationY',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'start', name: '起点'},
+                {code: 'center', name: '中间'},
+                {code: 'end', name: '终点'},
+              ],
+              value: 'end'
+            },
+            {
+              type: 'vue-color',
+              label: '坐标名颜色',
+              name: 'nameColorY',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '坐标名字号',
+              name: 'nameFontSizeY',
+              required: false,
+              placeholder: '',
+              value: 14,
+            },
+            {
+              type: 'el-select',
+              label: '坐标名粗细',
+              name: 'nameFontWeightY',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '坐标名风格',
+              name: 'nameFontStyleY',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '坐标名字体',
+              name: 'nameFontFamilyY',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
             {
               type: 'el-switch',
@@ -619,6 +867,137 @@ export const widgetBarStack = {
           ],
         },
         {
+          name: '图例操作',
+          list: [
+            {
+              type: 'el-switch',
+              label: '图例显示',
+              name: 'isShowLegend',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '名称( | 分隔)',
+              name: 'legendName',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'legendColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'legendFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'legendFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'legendFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'legendFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+            {
+              type: 'el-input-number',
+              label: '图例宽度',
+              name: 'legendWidth',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例高度',
+              name: 'legendHeight',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '横向位置',
+              name: 'lateralPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-select',
+              label: '纵向位置',
+              name: 'longitudinalPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'top', name: '顶部'},
+                {code: 'bottom', name: '底部'},
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-select',
+              label: '布局前置',
+              name: 'layoutFront',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'vertical', name: '竖排'},
+                {code: 'horizontal', name: '横排'},
+              ],
+              value: 'horizontal'
+            },
+          ],
+        },
+        {
           name: '数值设定',
           list: [
             {
@@ -638,20 +1017,46 @@ export const widgetBarStack = {
               value: false
             },
             {
+              type: 'el-select',
+              label: '位置',
+              name: 'fontPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'top', name: '上'},
+                {code: 'left', name: '左'},
+                {code: 'right', name: '右'},
+                {code: 'inside', name: '里'},
+                {code: 'insideTop', name: '里顶'},
+                {code: 'insideLeft', name: '里左'},
+                {code: 'insideRight', name: '里右'},
+                {code: 'insideBottom', name: '里底'},
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-input-number',
+              label: '距离',
+              name: 'fontDistance',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'fontColor',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
               name: 'fontSize',
               required: false,
               placeholder: '',
-              value: 14
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'dataColor',
-              required: false,
-              placeholder: '',
-              value: ''
+              value: 12
             },
             {
               type: 'el-select',
@@ -660,12 +1065,39 @@ export const widgetBarStack = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '数值风格',
+              name: 'fontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '数值字体',
+              name: 'fontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
           ],
         },
@@ -673,9 +1105,43 @@ export const widgetBarStack = {
           name: '提示语设置',
           list: [
             {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowTooltip',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-select',
+              label: '触发类型',
+              name: 'tooltipTrigger',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'item', name: '数据项'},
+                {code: 'axis', name: '坐标轴'},
+              ],
+              value: 'axis'
+            },
+            {
+              type: 'el-select',
+              label: '指示器类型',
+              name: 'tooltipAxisPointerType',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'none', name: '无'},
+                {code: 'line', name: '直线'},
+                {code: 'shadow', name: '阴影'},
+                {code: 'cross', name: '十字准星'},
+              ],
+              value: 'shadow'
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'tipsFontSize',
+              name: 'tooltipFontSize',
               required: false,
               placeholder: '',
               value: 16
@@ -683,10 +1149,51 @@ export const widgetBarStack = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'tipsColor',
+              name: 'tooltipColor',
               required: false,
               placeholder: '',
               value: '#00FEFF'
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'tooltipFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'tooltipFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'tooltipFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
           ],
         },
@@ -700,21 +1207,24 @@ export const widgetBarStack = {
               required: false,
               placeholder: '',
               value: 10,
-            }, {
+            },
+            {
+              type: 'el-slider',
+              label: '右边距(像素)',
+              name: 'marginRight',
+              required: false,
+              placeholder: '',
+              value: 50,
+            },
+            {
               type: 'el-slider',
               label: '顶边距(像素)',
               name: 'marginTop',
               required: false,
               placeholder: '',
               value: 50,
-            }, {
-              type: 'el-slider',
-              label: '右边距(像素)',
-              name: 'marginRight',
-              required: false,
-              placeholder: '',
-              value: 40,
-            }, {
+            },
+            {
               type: 'el-slider',
               label: '底边距(像素)',
               name: 'marginBottom',
@@ -732,7 +1242,7 @@ export const widgetBarStack = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{ color: '#ff7f50' }, { color: '#87cefa' }, { color: '#da70d6' }, { color: '#32cd32' }, { color: '#6495ed' }],
+              value: [{color: '#ff7f50'}, {color: '#87cefa'}, {color: '#da70d6'}, {color: '#32cd32'}, {color: '#6495ed'}],
             },
           ],
         },
@@ -776,11 +1286,11 @@ export const widgetBarStack = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          { "axis": "2021-07-25", "name": "A", "data": "12" },
-          { "axis": "2021-07-25", "name": "B", "data": "20" },
-          { "axis": "2021-07-26", "name": "B", "data": "5" },
-          { "axis": "2021-07-27", "name": "A", "data": "15" },
-          { "axis": "2021-07-27", "name": "B", "data": "30" },
+          {"axis": "2021-07-25", "name": "A", "data": "12"},
+          {"axis": "2021-07-25", "name": "B", "data": "20"},
+          {"axis": "2021-07-26", "name": "B", "data": "5"},
+          {"axis": "2021-07-27", "name": "A", "data": "15"},
+          {"axis": "2021-07-27", "name": "B", "data": "30"},
         ],
       },
       {

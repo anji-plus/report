@@ -295,14 +295,6 @@ export const widgetRadar = {
               value: true,
             },
             {
-              type: 'el-input-text',
-              label: '名称( | 分隔)',
-              name: 'legendName',
-              required: false,
-              placeholder: '多值以' | '隔开',
-              value: ''
-            },
-            {
               type: 'vue-color',
               label: '字体颜色',
               name: 'legendColor',
@@ -319,9 +311,58 @@ export const widgetRadar = {
               value: 12,
             },
             {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'legendFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'legendFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'legendFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'Microsoft YaHei', name: '微软雅黑' },
+                { code: 'serif', name: 'serif字体' },
+                { code: 'Arial', name: 'Arial字体' },
+                { code: 'Courier New', name: 'Courier New字体' },
+              ],
+              value: 'Microsoft YaHei'
+            },
+            {
               type: 'el-input-number',
               label: '图例宽度',
               name: 'legendWidth',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例高度',
+              name: 'legendHeight',
               required: false,
               placeholder: '',
               value: 12,
@@ -377,6 +418,32 @@ export const widgetRadar = {
               value: false
             },
             {
+              type: 'el-select',
+              label: '位置',
+              name: 'fontPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'top', name: '上' },
+                { code: 'left', name: '左' },
+                { code: 'right', name: '右' },
+                { code: 'inside', name: '里' },
+                { code: 'insideTop', name: '里顶' },
+                { code: 'insideLeft', name: '里左' },
+                { code: 'insideRight', name: '里右' },
+                { code: 'insideBottom', name: '里底' },
+              ],
+              value: 'insideTop'
+            },
+            {
+              type: 'el-input-number',
+              label: '距离',
+              name: 'fontDistance',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
               name: 'fontSize',
@@ -387,10 +454,10 @@ export const widgetRadar = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'dataColor',
+              name: 'fontColor',
               required: false,
               placeholder: '',
-              value: '#fff'
+              value: ''
             },
             {
               type: 'el-select',
@@ -407,12 +474,47 @@ export const widgetRadar = {
               value: 'normal'
             },
             {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'fontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'fontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'Microsoft YaHei', name: '微软雅黑' },
+                { code: 'serif', name: 'serif字体' },
+                { code: 'Arial', name: 'Arial字体' },
+                { code: 'Courier New', name: 'Courier New字体' },
+              ],
+              value: 'Microsoft YaHei'
+            },
+            {
               type: 'el-input-number',
               label: '点大小',
               name: 'symbolSize',
               required: false,
               placeholder: '',
               value: 5
+            },
+            {
+              type: 'el-input-number',
+              label: '线条宽度',
+              name: 'lineWidth',
+              required: false,
+              placeholder: '',
+              value: 1,
             },
             {
               type: 'el-select',
@@ -422,8 +524,8 @@ export const widgetRadar = {
               placeholder: '',
               selectOptions: [
                 { code: 'solid', name: '实线' },
-                { code: 'dashed', name: '线型虚线' },
-                { code: 'dotted', name: '点型虚线' },
+                { code: 'dashed', name: '虚线' },
+                { code: 'dotted', name: '斑点' },
               ],
               value: 'solid'
             },
@@ -441,9 +543,17 @@ export const widgetRadar = {
           name: '提示语设置',
           list: [
             {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowTooltip',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'tipsFontSize',
+              name: 'tooltipFontSize',
               required: false,
               placeholder: '',
               value: 16
@@ -451,10 +561,51 @@ export const widgetRadar = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'tipsColor',
+              name: 'tooltipColor',
               required: false,
               placeholder: '',
               value: '#00FEFF'
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'tooltipFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'tooltipFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: 'italic斜体' },
+                { code: 'oblique', name: 'oblique斜体' },
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'tooltipFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'Microsoft YaHei', name: '微软雅黑' },
+                { code: 'serif', name: 'serif字体' },
+                { code: 'Arial', name: 'Arial字体' },
+                { code: 'Courier New', name: 'Courier New字体' },
+              ],
+              value: 'Microsoft YaHei'
             },
           ],
         },

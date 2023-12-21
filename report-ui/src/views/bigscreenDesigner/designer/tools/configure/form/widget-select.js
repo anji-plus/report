@@ -23,6 +23,14 @@ export const widgetSelect = {
         value: '下拉框',
       },
       {
+        type: 'el-input-text',
+        label: '提示内容',
+        name: 'select_text',
+        require: false,
+        placeholder: '',
+        value: '请选择'
+      },
+      {
         type: 'vue-color',
         label: '字体颜色',
         name: 'select_color',

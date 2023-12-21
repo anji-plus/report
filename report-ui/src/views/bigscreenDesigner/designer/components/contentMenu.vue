@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 组件右键菜单
+ * @Author: qianlishi
+ * @Date: 2021-6-25 14:48:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2023-3-6 17:38:44
+-->
 <template>
   <div v-show="visible" class="contentmenu" :style="styleObj">
     <div class="contentmenu__item" @click="deleteLayer">

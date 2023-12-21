@@ -46,7 +46,7 @@ export const widgetFunnel = {
             {
               type: 'el-switch',
               label: '标题显示',
-              name: 'isNoTitle',
+              name: 'isShowTitle',
               required: false,
               placeholder: '',
               value: true,
@@ -54,7 +54,7 @@ export const widgetFunnel = {
             {
               type: 'el-input-text',
               label: '标题名',
-              name: 'titleText',
+              name: 'text',
               required: false,
               placeholder: '',
               value: '',
@@ -82,10 +82,10 @@ export const widgetFunnel = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -96,29 +96,30 @@ export const widgetFunnel = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
             {
               type: 'el-select',
-              label: '字体位置',
-              name: 'textAlign',
+              label: '字体系列',
+              name: 'textFontFamily',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'center'
+              value: 'sans-serif'
             },
             {
               type: 'el-input-text',
               label: '副标题名',
-              name: 'subText',
+              name: 'subtext',
               required: false,
               placeholder: '',
               value: ''
@@ -126,7 +127,7 @@ export const widgetFunnel = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'subTextColor',
+              name: 'subtextColor',
               required: false,
               placeholder: '',
               value: 'rgba(30, 144, 255, 1)'
@@ -134,7 +135,7 @@ export const widgetFunnel = {
             {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'subTextFontSize',
+              name: 'subtextFontSize',
               required: false,
               placeholder: '',
               value: 20
@@ -142,72 +143,72 @@ export const widgetFunnel = {
             {
               type: 'el-select',
               label: '字体粗细',
-              name: 'subTextFontWeight',
+              name: 'subtextFontWeight',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
             {
               type: 'el-select',
               label: '字体风格',
-              name: 'subTextFontStyle',
+              name: 'subtextFontStyle',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
-            },
-          ],
-        },
-        {
-          name: '数值设置',
-          list: [
-            {
-              type: 'el-switch',
-              label: '显示',
-              name: 'isShow',
-              require: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'fontSize',
-              require: false,
-              placeholder: '',
-              value: 14,
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'color',
-              require: false,
-              placeholder: '',
-              value: '#fff',
             },
             {
               type: 'el-select',
-              label: '字体粗细',
-              name: 'fontWeight',
-              require: false,
+              label: '字体系列',
+              name: 'subtextFontFamily',
+              required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'normal'
+              value: 'sans-serif'
+            },
+            {
+              type: 'el-select',
+              label: '左右位置',
+              name: 'titleLeft',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-slider',
+              label: '上下间距',
+              name: 'titleTop',
+              required: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'el-input-number',
+              label: '主副标题间距',
+              name: 'titleItemGap',
+              required: false,
+              placeholder: '',
+              value: 0
             },
           ],
         },
@@ -216,11 +217,19 @@ export const widgetFunnel = {
           list: [
             {
               type: 'el-switch',
-              label: '显示',
+              label: '图例显示',
               name: 'isShowLegend',
               required: false,
               placeholder: '',
               value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '名称( | 分隔)',
+              name: 'legendName',
+              required: false,
+              placeholder: '',
+              value: ''
             },
             {
               type: 'vue-color',
@@ -236,7 +245,48 @@ export const widgetFunnel = {
               name: 'legendFontSize',
               required: false,
               placeholder: '',
-              value: 16,
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'legendFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'legendFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'legendFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
             {
               type: 'el-input-number',
@@ -244,7 +294,15 @@ export const widgetFunnel = {
               name: 'legendWidth',
               required: false,
               placeholder: '',
-              value: 15,
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例高度',
+              name: 'legendHeight',
+              required: false,
+              placeholder: '',
+              value: 12,
             },
             {
               type: 'el-select',
@@ -253,9 +311,9 @@ export const widgetFunnel = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
               ],
               value: 'center'
             },
@@ -266,8 +324,8 @@ export const widgetFunnel = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'top', name: '顶部' },
-                { code: 'bottom', name: '底部' },
+                {code: 'top', name: '顶部'},
+                {code: 'bottom', name: '底部'},
               ],
               value: 'top'
             },
@@ -278,10 +336,114 @@ export const widgetFunnel = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'vertical', name: '竖排' },
-                { code: 'horizontal', name: '横排' },
+                {code: 'vertical', name: '竖排'},
+                {code: 'horizontal', name: '横排'},
               ],
               value: 'horizontal'
+            },
+          ],
+        },
+        {
+          name: '数值设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShow',
+              require: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-switch',
+              label: '百分比符号显示',
+              name: 'percentSign',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-select',
+              label: '位置',
+              name: 'fontPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'top', name: '上'},
+                {code: 'left', name: '左'},
+                {code: 'right', name: '右'},
+                {code: 'inside', name: '里'},
+                {code: 'insideTop', name: '里顶'},
+                {code: 'insideLeft', name: '里左'},
+                {code: 'insideRight', name: '里右'},
+                {code: 'insideBottom', name: '里底'},
+              ],
+              value: 'inside'
+            },
+            {
+              type: 'el-input-number',
+              label: '距离',
+              name: 'fontDistance',
+              required: false,
+              placeholder: '',
+              value: 0
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'fontColor',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'fontSize',
+              required: false,
+              placeholder: '',
+              value: 12
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'fontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '数值风格',
+              name: 'fontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '数值字体',
+              name: 'fontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
           ],
         },
@@ -289,9 +451,17 @@ export const widgetFunnel = {
           name: '提示语设置',
           list: [
             {
+              type: 'el-switch',
+              label: '显示',
+              name: 'isShowTooltip',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'tipsFontSize',
+              name: 'tooltipFontSize',
               required: false,
               placeholder: '',
               value: 16
@@ -299,10 +469,51 @@ export const widgetFunnel = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'tipsColor',
+              name: 'tooltipColor',
               required: false,
               placeholder: '',
               value: '#00FEFF'
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'tooltipFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'tooltipFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'tooltipFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
           ],
         },
@@ -314,7 +525,7 @@ export const widgetFunnel = {
               label: '',
               name: 'customColor',
               required: false,
-              value: [{ color: '#0CD2E6' }, { color: '#00BFA5' }, { color: '#FFC722' }, { color: '#886EFF' }, { color: '#008DEC' }],
+              value: [{color: '#0CD2E6'}, {color: '#00BFA5'}, {color: '#FFC722'}, {color: '#886EFF'}, {color: '#008DEC'}],
             },
           ],
         },
@@ -358,11 +569,11 @@ export const widgetFunnel = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          { "value": 2, "name": "访问" },
-          { "value": 5, "name": "咨询" },
-          { "value": 20, "name": "订单" },
-          { "value": 40, "name": "点击" },
-          { "value": 125, "name": "展现" }
+          {"value": 2, "name": "访问"},
+          {"value": 5, "name": "咨询"},
+          {"value": 20, "name": "订单"},
+          {"value": 40, "name": "点击"},
+          {"value": 125, "name": "展现"}
         ],
       },
       {

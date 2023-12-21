@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 为角色分配权限
+ * @version:
+ * @Author: Devli
+ * @Date: 2021-7-17 10:46:31
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2021-12-13 12:14:58
+-->
 <template>
   <el-dialog
     class="tree_dialog"

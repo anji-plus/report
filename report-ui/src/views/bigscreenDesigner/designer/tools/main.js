@@ -48,6 +48,7 @@ import {widgetBorder} from "./configure/styleWidget/widget-border";
 import {widgetDecorateFlowLine} from "./configure/styleWidget/widget-decorate-flow-line";
 import {widgetDecoration} from "./configure/styleWidget/widget-decoration";
 import {widgetBarMap} from "./configure/mapCharts/widget-bar-map";
+import {widgetBarStackMoreShow} from "./configure/barCharts/widget-bar-stack-more-show";
 
 export const widgetTool = [
   // type=html类型的组件
@@ -91,5 +92,6 @@ export const widgetTool = [
   // widgetInput,
   widgetFormTime,
   widgetBarDoubleYaxis,
-  widgetBarMap
+  widgetBarMap,
+  widgetBarStackMoreShow
 ]

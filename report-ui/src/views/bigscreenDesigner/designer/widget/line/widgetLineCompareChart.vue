@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -302,22 +302,27 @@ export default {
     // 标题修改
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
     },
@@ -326,32 +331,44 @@ export default {
       const optionsSetup = this.optionsSetup;
       const xAxis0 = {
         gridIndex: 0,
+        type: "category",
         show: optionsSetup.isShowX,
         name: optionsSetup.nameX, // 坐标轴名称
+        nameLocation: optionsSetup.nameLocationX,
         nameTextStyle: {
           color: optionsSetup.nameColorX,
           fontSize: optionsSetup.nameFontSizeX,
+          fontWeight: optionsSetup.nameFontWeightX,
+          fontStyle: optionsSetup.nameFontStyleX,
+          fontFamily: optionsSetup.nameFontFamilyX,
         },
-        type: "category",
-        boundaryGap: optionsSetup.boundaryX, // 值居中
+        boundaryGap: true, // 值居中
+        axisLabel: {
+          // X轴数据
+          show: optionsSetup.isShowAxisLabelX,
+          interval: optionsSetup.textIntervalX,
+          textStyle: {
+            color: optionsSetup.textColorX,
+            fontSize: optionsSetup.textFontSizeX,
+            fontWeight: optionsSetup.textFontWeightX,
+            fontStyle: optionsSetup.textFontStyleX,
+            fontFamily: optionsSetup.textFontFamilyX,
+          },
+        },
         axisLine: {
           //x轴线
-          show: optionsSetup.lineX,
+          show: optionsSetup.isShowAxisLineX,
           lineStyle: {
             color: optionsSetup.lineColorX,
+            width: optionsSetup.lineWidthX,
           },
         },
         axisTick: {
           // 刻度
-          show: optionsSetup.tickLineX,
-        },
-        axisLabel: {
-          // X轴数据
-          show: true,
-          interval: optionsSetup.splitNumberX,
-          textStyle: {
-            color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX,
+          show: optionsSetup.isShowAxisLineX,
+          lineStyle: {
+            color: optionsSetup.lineColorX,
+            width: optionsSetup.lineWidthX,
           },
         },
       };
@@ -360,21 +377,25 @@ export default {
         show: optionsSetup.isShowX,
         type: "category",
         position: "top",
-        boundaryGap: optionsSetup.boundaryX, // 值居中
+        boundaryGap: true, // 值居中
+        axisLabel: {
+          show: false,
+        },
         axisLine: {
-          // x轴线
-          show: optionsSetup.lineX,
+          //x轴线
+          show: optionsSetup.isShowAxisLineX,
           lineStyle: {
             color: optionsSetup.lineColorX,
+            width: optionsSetup.lineWidthX,
           },
         },
         axisTick: {
           // 刻度
-          show: optionsSetup.tickLineX,
-        },
-        axisLabel: {
-          show: false,
-          interval: optionsSetup.splitNumberX,
+          show: optionsSetup.isShowAxisLineX,
+          lineStyle: {
+            color: optionsSetup.lineColorX,
+            width: optionsSetup.lineWidthX,
+          },
         },
       };
       this.options.xAxis[0] = xAxis0;
@@ -384,38 +405,56 @@ export default {
     setOptionsYTop() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
+        max: optionsSetup.maxYTop !== "" ? optionsSetup.maxYTop : null,
         gridIndex: 0,
         splitNumber: optionsSetup.splitNumberYTop,
         show: optionsSetup.isShowYTop,
-        scale: optionsSetup.scaleYTop, // 缩放
-        name: optionsSetup.textNameY, // 坐标轴名称
+        // 缩放
+        scale: optionsSetup.scaleYTop,
+        position: optionsSetup.positionYTop,
+        offset: optionsSetup.offsetYTop,
+        // 坐标轴名称
+        name: optionsSetup.textNameY,
+        nameLocation: "end",
         nameTextStyle: {
           color: optionsSetup.nameColorY,
           fontSize: optionsSetup.nameFontSizeY,
+          fontWeight: optionsSetup.nameFontWeightY,
+          fontStyle: optionsSetup.nameFontStyleY,
+          fontFamily: optionsSetup.nameFontFamilyY,
         },
         axisLabel: {
-          show: true,
+          show: optionsSetup.isShowAxisLabelYTop,
+          rotate: optionsSetup.textAngleYTop,
           textStyle: {
-            color: optionsSetup.colorYTop,
-            fontSize: optionsSetup.fontSizeYTop,
+            color: optionsSetup.textColorYTop,
+            fontSize: optionsSetup.textFontSizeYTop,
+            fontWeight: optionsSetup.textFontWeightYTop,
+            fontStyle: optionsSetup.textFontStyleYTop,
+            fontFamily: optionsSetup.textFontFamilyYTop,
+          },
+        },
+        axisLine: {
+          // 轴线
+          show: optionsSetup.isShowAxisLineYTop,
+          lineStyle: {
+            color: optionsSetup.lineColorYTop,
+            width: optionsSetup.lineWidthYTop,
           },
         },
         axisTick: {
           // 刻度
-          show: optionsSetup.tickLineYTop,
-        },
-        axisLine: {
-          // 轴线
-          show: optionsSetup.lineYTop,
+          show: optionsSetup.isShowAxisLineYTop,
           lineStyle: {
             color: optionsSetup.lineColorYTop,
+            width: optionsSetup.lineWidthYTop,
           },
         },
         splitLine: {
-          show: optionsSetup.splitLineYTop,
+          show: optionsSetup.isShowSplitLineYTop,
           lineStyle: {
-            width: optionsSetup.splitLineFontWidthYTop,
             color: optionsSetup.splitLineColorYTop,
+            width: optionsSetup.splitLineWidthYTop,
           },
         },
         axisPointer: {
@@ -428,39 +467,55 @@ export default {
     setOptionsYBottom() {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
+        max: optionsSetup.maxYBottom !== "" ? optionsSetup.maxYBottom : null,
         gridIndex: 1,
         splitNumber: optionsSetup.splitNumberYBottom,
         show: optionsSetup.isShowYBottom,
-        scale: optionsSetup.scaleYBottom, // 缩放
-        name: optionsSetup.textNameY, // 坐标轴名称
+        // 缩放
+        scale: optionsSetup.scaleYBottom,
+        // 坐标轴名称
+        name: optionsSetup.textNameY,
+        nameLocation: "end",
         nameTextStyle: {
           color: optionsSetup.nameColorY,
           fontSize: optionsSetup.nameFontSizeY,
+          fontWeight: optionsSetup.nameFontWeightY,
+          fontStyle: optionsSetup.nameFontStyleY,
+          fontFamily: optionsSetup.nameFontFamilyY,
         },
         inverse: true, // 翻转
         axisLabel: {
-          show: true,
+          show: optionsSetup.isShowAxisLabelYBottom,
+          rotate: optionsSetup.textAngleYBottom,
           textStyle: {
-            color: optionsSetup.colorYBottom,
-            fontSize: optionsSetup.fontSizeYBottom,
+            color: optionsSetup.textColorYBottom,
+            fontSize: optionsSetup.textFontSizeYBottom,
+            fontWeight: optionsSetup.textFontWeightYBottom,
+            fontStyle: optionsSetup.textFontStyleYBottom,
+            fontFamily: optionsSetup.textFontFamilyYBottom,
+          },
+        },
+        axisLine: {
+          // 轴线
+          show: optionsSetup.isShowAxisLineYBottom,
+          lineStyle: {
+            color: optionsSetup.lineColorYBottom,
+            width: optionsSetup.lineWidthYBottom,
           },
         },
         axisTick: {
           // 刻度
-          show: optionsSetup.tickLineYBottom,
-        },
-        axisLine: {
-          // 轴线
-          show: optionsSetup.lineYBottom,
+          show: optionsSetup.isShowAxisLineYBottom,
           lineStyle: {
             color: optionsSetup.lineColorYBottom,
+            width: optionsSetup.lineWidthYBottom,
           },
         },
         splitLine: {
-          show: optionsSetup.splitLineYBottom,
+          show: optionsSetup.isShowSplitLineYTop,
           lineStyle: {
-            width: optionsSetup.splitLineFontWidthYBottom,
             color: optionsSetup.splitLineColorYBottom,
+            width: optionsSetup.splitLineWidthYBottom,
           },
         },
         axisPointer: {
@@ -493,19 +548,25 @@ export default {
       if (series[0].type == "line") {
         series[0].label = {
           position: "top",
-          distance: 10,
+          distance: optionsSetup.fontDistance,
           show: optionsSetup.isShow,
-          color: optionsSetup.dataColor,
+          color: optionsSetup.fontColor,
           fontSize: optionsSetup.fontSize,
           fontWeight: optionsSetup.fontWeight,
+          formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}',
+          fontStyle: optionsSetup.fontStyle,
+          fontFamily: optionsSetup.fontFamily,
         };
         series[1].label = {
           position: "bottom",
-          distance: 10,
+          distance: optionsSetup.fontDistance,
           show: optionsSetup.isShow,
-          color: optionsSetup.dataColor,
+          color: optionsSetup.fontColor,
           fontSize: optionsSetup.fontSize,
           fontWeight: optionsSetup.fontWeight,
+          formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}',
+          fontStyle: optionsSetup.fontStyle,
+          fontFamily: optionsSetup.fontFamily,
         };
       }
     },
@@ -569,17 +630,24 @@ export default {
     // 图例操作
     setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
-      const legend = this.options.legend;
-      legend.show = optionsSetup.isShowLegend;
-      legend.left = optionsSetup.lateralPosition;
-      legend.top = optionsSetup.longitudinalPosition;
-      legend.bottom = optionsSetup.longitudinalPosition;
-      legend.orient = optionsSetup.layoutFront;
-      legend.textStyle = {
-        color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize,
+      const legend = {
+        show: optionsSetup.isShowLegend,
+        left: optionsSetup.lateralPosition,
+        //right: optionsSetup.lateralPosition,
+        top: optionsSetup.longitudinalPosition,
+        //bottom: optionsSetup.longitudinalPosition,
+        orient: optionsSetup.layoutFront,
+        textStyle: {
+          color: optionsSetup.legendColor,
+          fontSize: optionsSetup.legendFontSize,
+          fontWeight: optionsSetup.legendFontWeight,
+          fontStyle: optionsSetup.legendFontStyle,
+          fontFamily: optionsSetup.legendFontFamily,
+        },
+        itemHeight: optionsSetup.legendHeight,
+        itemWidth: optionsSetup.legendWidth,
       };
-      legend.itemWidth = optionsSetup.legendWidth;
+      this.options.legend = legend;
     },
     // 图例名称设置
     setOptionsLegendName(name) {
@@ -646,10 +714,10 @@ export default {
       optionsData.dataType == "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(
-            optionsData.dynamicData,
-            optionsData.refreshTime,
-            optionsSetup
-          );
+          optionsData.dynamicData,
+          optionsData.refreshTime,
+          optionsSetup
+        );
     },
     //去重
     setUnique(arr) {

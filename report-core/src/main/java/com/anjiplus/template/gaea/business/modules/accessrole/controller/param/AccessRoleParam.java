@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
 * @desc AccessRole 角色管理查询输入类
-* @author 木子李·De <lide1202@hotmail.com>
+* @author Devli
 * @date 2019-02-17 08:50:14.136
 **/
 @Data

@@ -53,7 +53,7 @@ export const widgetPiePercentage = {
             },
             {
               type: 'el-select',
-              label: '字体粗细',
+              label: '数值粗细',
               name: 'textNumFontWeight',
               required: false,
               placeholder: '',
@@ -64,6 +64,33 @@ export const widgetPiePercentage = {
                 { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '数值风格',
+              name: 'textNumFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '数值字体',
+              name: 'textNumFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
             {
               type: 'vue-color',
@@ -94,7 +121,34 @@ export const widgetPiePercentage = {
                 { code: 'lighter', name: '细体' }
               ],
               value: 'normal'
-            }
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'textPerFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'textPerFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
           ],
         },
         {
@@ -106,7 +160,7 @@ export const widgetPiePercentage = {
               name: 'lineNumber',
               required: false,
               placeholder: '',
-              value: 8
+              value: 12
             },
             {
               type: 'el-input-number',
@@ -114,7 +168,7 @@ export const widgetPiePercentage = {
               name: 'lineLength',
               required: false,
               placeholder: '',
-              value: 19
+              value: 20
             },
             {
               type: 'el-input-number',

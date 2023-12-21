@@ -98,7 +98,7 @@ export default {
     queryEchartsData(params) {
       const queryParams = this.toEchartsDataQueryParams(params)
       return new Promise(async (resolve) => {
-        const { code, data } = await getData(queryParams);
+        const {code, data} = await getData(queryParams);
         if (code != 200) return
         const analysisData = this.analysisChartsData(params, data);
         resolve(analysisData)
@@ -116,17 +116,17 @@ export default {
     toEchartsDataQueryParams(params) {
       const queryParams = this.deepClone(params)
       const query = this.$route.query
-      if(!this.isIncludePoints(query)) {
-        queryParams.contextData = { ...queryParams.contextData, ...query }
+      if (!this.isIncludePoints(query)) {
+        queryParams.contextData = {...queryParams.contextData, ...query}
       } else {
         Object.keys(query).forEach(item => {
-          if(item.indexOf('.') > -1) {
+          if (item.indexOf('.') > -1) {
             const obj = {}
             const key1 = item.split('.')[0]
             const key2 = item.split('.')[1]
             obj[key2] = query[item]
             if (queryParams.setCode == key1) {
-              const newObj = { ...queryParams.contextData, ...obj }
+              const newObj = {...queryParams.contextData, ...obj}
               queryParams.contextData = newObj
             }
           }
@@ -139,7 +139,7 @@ export default {
     isIncludePoints(query) {
       let isPoints = false
       Object.keys(query).forEach(item => {
-        if(item.indexOf('.') > -1) {
+        if (item.indexOf('.') > -1) {
           isPoints = true
         }
       })
@@ -156,6 +156,7 @@ export default {
       // widget-mapline 中国地图-路线图
       // widget-radar 雷达图
       // widget-select 下拉框
+      // widget-stackMoreShowChart 堆叠多显图
       const chartType = params.chartType
       if (
         chartType == "widget-barchart" ||
@@ -183,6 +184,8 @@ export default {
         return this.selectChartFn(params.chartProperties, data)
       } else if (chartType == "widget-mapv2chart") {
         return this.mapLLChartFn(params.chartProperties, data)
+      } else if (chartType == "widget-stackMoreShowChart") {
+        return this.stackMoreShowFn(params.chartProperties, data);
       } else {
         return data
       }
@@ -387,6 +390,45 @@ export default {
         }
         analysisData.push(obj);
       }
+      return analysisData;
+    },
+    // 堆叠图多显示
+    stackMoreShowFn(chartProperties, data) {
+      console.log(data)
+      const analysisData = {};
+      //全部字段字典值
+      const types = Object.values(chartProperties)
+      //x轴字段、y轴字段名、数值
+      const xAxisField = Object.keys(chartProperties)[types.indexOf('xAxis')]
+      const yAxisField = Object.keys(chartProperties)[types.indexOf('yAxis')]
+      const bar = Object.keys(chartProperties)[types.indexOf('bar')]
+      // 显示值1、显示值2
+      const display1 = Object.keys(chartProperties)[types.indexOf('display1')]
+      const display2 = Object.keys(chartProperties)[types.indexOf('display2')]
+      const displayName = [display1, display2, bar];
+      const legendName = [];
+      const axisList = Array.from(new Set(data.map((item) => item[xAxisField])))
+      const names = Array.from(new Set(data.map((item) => item[yAxisField])))
+      const dataValue = []
+      for (let i = 0; i < names.length; i++) {
+        const list = []
+        const name = names[i]
+        for (let j = 0; j < axisList.length; j++) {
+          const date = axisList[j]
+          const find = data.find((item) => item[xAxisField] == date && item[yAxisField] == name)
+          if (find) {
+            list.push({data: find[bar], display1: find[display1], display2: find[display2]})
+          } else {
+            list.push({})
+          }
+        }
+        legendName.push(name)
+        dataValue.push({prod: name, list: list})
+      }
+      analysisData['displayName'] = displayName;
+      analysisData['legendName'] = legendName;
+      analysisData['xAxis'] = axisList;
+      analysisData['series'] = dataValue;
       return analysisData;
     },
     setUnique(arr) {

@@ -1,10 +1,10 @@
 /*
- * @Descripttion: 主文件
+ * @Descripttion: 大屏设置项
  * @version:
- * @Author: qianlishi
- * @Date: 2021-08-29 06:43:07
- * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-03-06 16:00:09
+ * @Author: Devli
+ * @Date: 2021-3-23 13:01:07
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2023-3-9 15:00:35
  */
 import { widgetTool } from "./main"
 const screenConfig = {
@@ -61,6 +61,20 @@ const screenConfig = {
         required: false,
         placeholder: '',
         value: '',
+      },
+      {
+        type: 'el-slider',
+        label: '刷新间隔(秒)',
+        name: 'refreshSeconds',
+        require: false,
+        placeholder: '',
+        value: 0,
+        options: {
+          step: 1800,
+          min: 0,
+          max: 14400,
+          showStops: true,
+        }
       },
     ],
     data: [],

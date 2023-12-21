@@ -2,6 +2,7 @@
   <anji-select
     ref="select"
     :style="styleObj"
+    :placeholder="placeholder"
     v-model="selectValue"
     :localOptions="options"
     label="label"
@@ -35,7 +36,6 @@ export default {
   },
   computed: {
     styleObj() {
-      console.log(this.optionsSetup);
       return {
         position: this.ispreview ? "absolute" : "static",
         width: this.optionsStyle.width + "px",
@@ -45,6 +45,9 @@ export default {
         background: this.optionsSetup.select_background,
         color: this.optionsSetup.select_color,
       };
+    },
+    placeholder(){
+      return this.optionsSetup.select_text;
     },
     eventChange() {
       return "change";
@@ -74,7 +77,6 @@ export default {
   },
   methods: {
     change(event, item) {
-      console.log(item);
       originWidgetLinkageLogic(this, true, {
         currentData: item,
       }); // 联动-源组件逻辑

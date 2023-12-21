@@ -1,11 +1,45 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 <script>
 import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
-
+import "../../../../../../node_modules/echarts/map/js/china.js";
+import "../../../../../../node_modules/echarts/map/js/world.js";
+import "../../../../../../node_modules/echarts/map/js/province/anhui";
+import "../../../../../../node_modules/echarts/map/js/province/aomen";
+import "../../../../../../node_modules/echarts/map/js/province/beijing";
+import "../../../../../../node_modules/echarts/map/js/province/chongqing";
+import "../../../../../../node_modules/echarts/map/js/province/fujian";
+import "../../../../../../node_modules/echarts/map/js/province/gansu";
+import "../../../../../../node_modules/echarts/map/js/province/guangxi";
+import "../../../../../../node_modules/echarts/map/js/province/guizhou";
+import "../../../../../../node_modules/echarts/map/js/province/hainan";
+import "../../../../../../node_modules/echarts/map/js/province/hebei";
+import "../../../../../../node_modules/echarts/map/js/province/heilongjiang";
+import "../../../../../../node_modules/echarts/map/js/province/henan";
+import "../../../../../../node_modules/echarts/map/js/province/hubei";
+import "../../../../../../node_modules/echarts/map/js/province/hunan";
+import "../../../../../../node_modules/echarts/map/js/province/jiangsu";
+import "../../../../../../node_modules/echarts/map/js/province/jiangxi";
+import "../../../../../../node_modules/echarts/map/js/province/jilin";
+import "../../../../../../node_modules/echarts/map/js/province/liaoning";
+import "../../../../../../node_modules/echarts/map/js/province/neimenggu";
+import "../../../../../../node_modules/echarts/map/js/province/ningxia";
+import "../../../../../../node_modules/echarts/map/js/province/qinghai";
+import "../../../../../../node_modules/echarts/map/js/province/shandong";
+import "../../../../../../node_modules/echarts/map/js/province/shanghai";
+import "../../../../../../node_modules/echarts/map/js/province/shanxi";
+import "../../../../../../node_modules/echarts/map/js/province/shanxi1";
+import "../../../../../../node_modules/echarts/map/js/province/sichuan";
+import "../../../../../../node_modules/echarts/map/js/province/taiwan";
+import "../../../../../../node_modules/echarts/map/js/province/tianjin";
+import "../../../../../../node_modules/echarts/map/js/province/xianggang";
+import "../../../../../../node_modules/echarts/map/js/province/xinjiang";
+import "../../../../../../node_modules/echarts/map/js/province/xizang";
+import "../../../../../../node_modules/echarts/map/js/province/yunnan";
+import "../../../../../../node_modules/echarts/map/js/province/zhejiang";
 import echarts from "echarts";
 import "../../../../../../node_modules/echarts/map/js/china.js";
 //https://www.makeapie.com/editor.html?c=x2yaz6dfRw
@@ -205,7 +239,8 @@ let max = 6000,
   min = 10;
 let maxSize4Pin = 100,
   minSize4Pin = 20;
-import { eventBusParams } from "@/utils/screen";
+import {eventBusParams} from "@/utils/screen";
+
 export default {
   name: "widgetAirBubbleMap",
   props: {
@@ -229,7 +264,7 @@ export default {
         geo: {
           map: "china",
           show: true,
-          roam: false,
+          roam: true,
           label: {
             emphasis: {
               show: false,
@@ -255,7 +290,7 @@ export default {
                 ],
                 false
               ),
-              borderWidth: 3,
+              borderWidth: 1,
               shadowColor: "rgba(10,76,139,1)",
               shadowOffsetY: 0,
               shadowBlur: 60,
@@ -263,66 +298,6 @@ export default {
           },
         },
         series: [
-          {
-            type: "map",
-            map: "china",
-            aspectScale: 0.75,
-            label: {
-              normal: {
-                //调整数值
-                position: "right",
-                show: true,
-                color: "#53D9FF",
-                fontSize: 20,
-              },
-              emphasis: {
-                show: true,
-              },
-            },
-            itemStyle: {
-              normal: {
-                //地图块颜色
-                areaColor: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "#073684", // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: "#061E3D", // 100% 处的颜色
-                    },
-                  ],
-                },
-                borderColor: "#215495",
-                borderWidth: 1,
-              },
-              //鼠标放置颜色加深
-              emphasis: {
-                areaColor: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "#073684", // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: "#2B91B7", // 100% 处的颜色
-                    },
-                  ],
-                },
-              },
-            },
-            data: data,
-          },
           {
             type: "effectScatter",
             coordinateSystem: "geo",
@@ -382,7 +357,7 @@ export default {
                 ((maxSize4Pin - minSize4Pin) / (max - min)) * val[2] +
                 (maxSize4Pin -
                   ((maxSize4Pin - minSize4Pin) / (max - min)) * max) *
-                  1.2
+                1.2
               );
             },
             data: convertData(data),
@@ -434,7 +409,6 @@ export default {
       this.optionsSetup,
       this.optionsData,
       (dynamicData, optionsSetup) => {
-        console.log("dynamicData", dynamicData);
         this.getEchartData(dynamicData, optionsSetup);
       }
     );
@@ -444,92 +418,113 @@ export default {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
-      this.setOptionTextValue();
-      //this.setOptionDataValue();
+      this.setOptionsGeo();
       this.setOptionsData();
       this.setOptionAirSize();
       this.setOptionsTooltip();
-      this.setOptionMapBlock();
     },
     // 标题设置
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
     },
-    setOptionTextValue() {
+    setOptionsGeo() {
       const optionsSetup = this.optionsSetup;
-      const label = this.options.series[0]["label"];
-      const normal = {
-        position: "right",
-        show: optionsSetup.isShowMap,
-        color: optionsSetup.fontTextColor,
-        fontSize: optionsSetup.fontTextSize,
-        fontWeight: optionsSetup.fontTextWeight,
-      };
-      label["normal"] = normal;
-    },
-    setOptionMapBlock() {
-      const optionsSetup = this.optionsSetup;
-      const itemStyle = this.options.series[0]["itemStyle"];
-      const normal = {
-        //地图块颜色
-        areaColor: {
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [
-            {
-              offset: 0,
-              color: optionsSetup.font0PreColor, // 0% 处的颜色
-            },
-            {
-              offset: 1,
-              color: optionsSetup.font100PreColor, // 100% 处的颜色
-            },
-          ],
+      const geo = {
+        map: this.optionsSetup.mapName == '' ? "china" : this.optionsSetup.mapName,
+        show: true,
+        roam: true,
+        layoutSize: "80%",
+        label: {
+          //调整数值
+          // 地图省市区显隐
+          show: optionsSetup.isShowMap,
+          color: optionsSetup.fontColor,
+          fontSize: optionsSetup.fontSize,
+          fontWeight: optionsSetup.fontWeight,
+          fontStyle: optionsSetup.fontStyle,
+          fontFamily: optionsSetup.fontFamily,
         },
-        borderColor: "#215495",
-        borderWidth: 1,
-      };
-      //鼠标放置颜色加深
-      const emphasis = {
-        areaColor: {
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [
-            {
-              offset: 0,
-              color: "#073684", // 0% 处的颜色
+        itemStyle: {
+          normal: {
+            //地图块颜色
+            areaColor: {
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: optionsSetup.fontColor0, // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: optionsSetup.fontColor100, // 100% 处的颜色
+                },
+              ],
             },
-            {
-              offset: 1,
-              color: optionsSetup.fontHighlightColor, // 100% 处的颜色
-            },
-          ],
+            borderType: optionsSetup.borderType,
+            borderColor: optionsSetup.borderColor,
+            borderWidth: optionsSetup.borderWidth,
+            shadowColor: optionsSetup.shadowColor,
+            shadowBlur: optionsSetup.shadowBlur,
+            opacity: optionsSetup.opacity / 100,
+          },
         },
-      };
-      itemStyle["normal"] = normal;
-      itemStyle["emphasis"] = emphasis;
+        //鼠标放置颜色加深
+        emphasis: {
+          label: {
+            show: optionsSetup.isShowEmphasisLabel,
+            color: optionsSetup.emphasisLabelFontColor,
+            fontSize: optionsSetup.emphasisLabelFontSize,
+            fontWeight: optionsSetup.emphasisLabelFontWeight,
+            fontStyle: optionsSetup.emphasisLabelFontStyle,
+            fontFamily: optionsSetup.emphasisLabelFontFamily,
+          },
+          itemStyle: {
+            areaColor: {
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: optionsSetup.emphasisLabelFontColor0, // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: optionsSetup.emphasisLabelFontColor100, // 100% 处的颜色
+                },
+              ],
+            },
+          },
+        },
+      }
+      this.options.geo = geo;
     },
     setOptionAirSize() {
       maxSize4Pin = this.optionsSetup.fontmaxSize4Pin;
@@ -540,14 +535,17 @@ export default {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
-        show: true,
+        show: optionsSetup.isShowTooltip,
         textStyle: {
-          color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize,
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
         formatter: function (params) {
           if (params.value.length > 1) {
-            return params.data.name + "" + params.data.value[2];
+            return params.data.name + " " + params.data.value[2];
           } else {
             return params.name;
           }
@@ -580,11 +578,10 @@ export default {
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
-      this.options.series[0]["data"] = val;
       const optionsSetup = this.optionsSetup;
-      const label = this.options.series[1]["label"];
+      const label = this.options.series[0]["label"];
       const normal = {
-        show: true,
+        show: optionsSetup.isShowData,
         color: "#fff",
         fontWeight: "bold",
         position: "inside",
@@ -596,11 +593,13 @@ export default {
             fontSize: optionsSetup.fontDataSize,
             color: optionsSetup.fontDataColor,
             fontWeight: optionsSetup.fontDataWeight,
+            fontStyle: optionsSetup.fontDataStyle,
+            fontFamily: optionsSetup.fontDataFamily,
           },
         },
       };
       const data = convertData(val);
-      this.options.series[1]["data"] = data;
+      this.options.series[0]["data"] = data;
       label["normal"] = normal;
     },
     dynamicDataFn(val, refreshTime) {
@@ -621,11 +620,10 @@ export default {
       });
     },
     renderingFn(val) {
-      this.options.series[0]["data"] = val;
       const optionsSetup = this.optionsSetup;
-      const label = this.options.series[1]["label"];
+      const label = this.options.series[0]["label"];
       const normal = {
-        show: true,
+        show: optionsSetup.isShowData,
         color: "#fff",
         fontWeight: "bold",
         position: "inside",
@@ -637,11 +635,13 @@ export default {
             fontSize: optionsSetup.fontDataSize,
             color: optionsSetup.fontDataColor,
             fontWeight: optionsSetup.fontDataWeight,
+            fontStyle: optionsSetup.fontDataStyle,
+            fontFamily: optionsSetup.fontDataFamily,
           },
         },
       };
       const data = convertData(val);
-      this.options.series[1]["data"] = data;
+      this.options.series[0]["data"] = data;
       label["normal"] = normal;
     },
   },

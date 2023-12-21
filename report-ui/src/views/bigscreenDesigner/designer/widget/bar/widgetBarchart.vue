@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 大屏报表设计器-动态组件
+ * @Author: qianlishi
+ * @Date: 2021-4-15 16:38:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2023-3-9 17:38:44
+-->
 <template>
   <div :style="styleObj">
     <v-chart ref="myVChart" :options="options" autoresize/>
@@ -117,22 +124,27 @@ export default {
     // 标题修改
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
     },
@@ -142,33 +154,52 @@ export default {
       const xAxis = {
         type: "category",
         // 坐标轴是否显示
-        show: optionsSetup.hideX,
+        show: optionsSetup.isShowX,
+        position: optionsSetup.positionX,
+        offset: optionsSetup.offsetX,
         // 坐标轴名称
         name: optionsSetup.nameX,
+        nameLocation: optionsSetup.nameLocationX,
         nameTextStyle: {
           color: optionsSetup.nameColorX,
           fontSize: optionsSetup.nameFontSizeX,
+          fontWeight: optionsSetup.nameFontWeightX,
+          fontStyle: optionsSetup.nameFontStyleX,
+          fontFamily: optionsSetup.nameFontFamilyX,
         },
         // 轴反转
         inverse: optionsSetup.reversalX,
         axisLabel: {
-          show: true,
-          interval: optionsSetup.textInterval,
+          show: optionsSetup.isShowAxisLabelX,
+          interval: optionsSetup.textIntervalX,
           // 文字角度
           rotate: optionsSetup.textAngleX,
           textStyle: {
             // 坐标文字颜色
-            color: optionsSetup.colorX,
-            fontSize: optionsSetup.fontSizeX,
+            color: optionsSetup.textColorX,
+            fontSize: optionsSetup.textFontSizeX,
+            fontWeight: optionsSetup.textFontWeightX,
+            fontStyle: optionsSetup.textFontStyleX,
+            fontFamily: optionsSetup.textFontFamilyX,
           },
         },
+        // X轴线
         axisLine: {
-          show: true,
+          show: optionsSetup.isShowAxisLineX,
           lineStyle: {
             color: optionsSetup.lineColorX,
             width: optionsSetup.lineWidthX,
           },
         },
+        // X轴刻度线
+        axisTick: {
+          show: optionsSetup.isShowAxisLineX,
+          lineStyle: {
+            color: optionsSetup.lineColorX,
+            width: optionsSetup.lineWidthX,
+          },
+        },
+        // X轴分割线
         splitLine: {
           show: optionsSetup.isShowSplitLineX,
           lineStyle: {
@@ -190,26 +221,43 @@ export default {
         splitNumber: optionsSetup.splitNumberY,
         // 坐标轴是否显示
         show: optionsSetup.isShowY,
+        position: optionsSetup.positionY,
+        offset: optionsSetup.offsetY,
         // 坐标轴名称
         name: optionsSetup.textNameY,
+        nameLocation: optionsSetup.nameLocationY,
         nameTextStyle: {
           color: optionsSetup.nameColorY,
           fontSize: optionsSetup.nameFontSizeY,
+          fontWeight: optionsSetup.nameFontWeightY,
+          fontStyle: optionsSetup.nameFontStyleY,
+          fontFamily: optionsSetup.nameFontFamilyY,
         },
         // 轴反转
         inverse: optionsSetup.reversalY,
         axisLabel: {
-          show: true,
+          show: optionsSetup.isShowAxisLabelY,
           // 文字角度
           rotate: optionsSetup.textAngleY,
+          //interval: optionsSetup.textIntervalY,
           textStyle: {
             // 坐标文字颜色
-            color: optionsSetup.colorY,
-            fontSize: optionsSetup.fontSizeY,
+            color: optionsSetup.textColorY,
+            fontSize: optionsSetup.textFontSizeY,
+            fontWeight: optionsSetup.textFontWeightY,
+            fontStyle: optionsSetup.textFontStyleY,
+            fontFamily: optionsSetup.textFontFamilyY,
           },
         },
         axisLine: {
-          show: true,
+          show: optionsSetup.isShowAxisLineY,
+          lineStyle: {
+            color: optionsSetup.lineColorY,
+            width: optionsSetup.lineWidthY,
+          },
+        },
+        axisTick: {
+          show: optionsSetup.isShowAxisLineY,
           lineStyle: {
             color: optionsSetup.lineColorY,
             width: optionsSetup.lineWidthY,
@@ -229,11 +277,17 @@ export default {
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
-        trigger: "item",
-        show: true,
+        show: optionsSetup.isShowTooltip,
+        trigger: optionsSetup.tooltipTrigger,
+        axisPointer: {
+          type: optionsSetup.tooltipAxisPointerType,
+        },
         textStyle: {
-          color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize,
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
       };
       this.options.tooltip = tooltip;
@@ -253,17 +307,24 @@ export default {
     // 图例
     setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
-      const legend = this.options.legend;
-      legend.show = optionsSetup.isShowLegend;
-      legend.left = optionsSetup.lateralPosition;
-      legend.top = optionsSetup.longitudinalPosition;
-      legend.bottom = optionsSetup.longitudinalPosition;
-      legend.orient = optionsSetup.layoutFront;
-      legend.textStyle = {
-        color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize,
+      const legend = {
+        show: optionsSetup.isShowLegend,
+        left: optionsSetup.lateralPosition,
+        //right: optionsSetup.lateralPosition,
+        top: optionsSetup.longitudinalPosition,
+        //bottom: optionsSetup.longitudinalPosition,
+        orient: optionsSetup.layoutFront,
+        textStyle: {
+          color: optionsSetup.legendColor,
+          fontSize: optionsSetup.legendFontSize,
+          fontWeight: optionsSetup.legendFontWeight,
+          fontStyle: optionsSetup.legendFontStyle,
+          fontFamily: optionsSetup.legendFontFamily,
+        },
+        itemHeight: optionsSetup.legendHeight,
+        itemWidth: optionsSetup.legendWidth,
       };
-      legend.itemWidth = optionsSetup.legendWidth;
+      this.options.legend = legend;
     },
     // 图例名称设置
     setOptionsLegendName(name) {
@@ -292,17 +353,6 @@ export default {
         style = "total";
       }
       return style;
-    },
-    // 获得位置
-    getOptionsPosition() {
-      const optionsSetup = this.optionsSetup;
-      let position = "";
-      if (optionsSetup.verticalShow) {
-        position = "right";
-      } else {
-        position = "top";
-      }
-      return position;
     },
     // 数据解析
     setOptionsData(e, paramsConfig) {
@@ -349,17 +399,19 @@ export default {
       for (const i in series) {
         if (series[i].type == "bar") {
           series[i].type = "bar";
-          series[i].barGap = "0%";
+          series[i].barGap = optionsSetup.barGap + "%";
           series[i].barWidth = optionsSetup.maxWidth;
           series[i].barMinHeight = optionsSetup.minHeight;
           series[i].label = {
             show: optionsSetup.isShow,
-            position: this.getOptionsPosition(),
-            distance: optionsSetup.distance,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
+            color: optionsSetup.fontColor,
             fontWeight: optionsSetup.fontWeight,
-            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}',
+            fontStyle: optionsSetup.fontStyle,
+            fontFamily: optionsSetup.fontFamily,
           };
           // 获取颜色样式
           if (optionsSetup.colorStyle == 'same') {
@@ -394,16 +446,19 @@ export default {
         }
       }
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
-      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / axis.length) / optionsSetup.fontSizeX)
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / axis.length) / optionsSetup.textFontSizeX)
       const axisLabel = {
-        show: true,
-        interval: optionsSetup.textInterval,
+        show: optionsSetup.isShowAxisLabelX,
+        interval: optionsSetup.textIntervalX,
         // 文字角度
         rotate: optionsSetup.textAngleX,
         textStyle: {
           // 坐标文字颜色
-          color: optionsSetup.colorX,
-          fontSize: optionsSetup.fontSizeX,
+          color: optionsSetup.textColorX,
+          fontSize: optionsSetup.textFontSizeX,
+          fontWeight: optionsSetup.textFontWeightX,
+          fontStyle: optionsSetup.textFontStyleX,
+          fontFamily: optionsSetup.textFontFamilyX,
         },
         // 自动换行
         formatter: function (value, index) {
@@ -469,18 +524,20 @@ export default {
         const obj = {};
         if (val.series[i].type == "bar") {
           obj.type = "bar";
-          obj.barGap = "0%";
+          obj.barGap = optionsSetup.barGap + "%";
           obj.stack = this.getStackStyle();
           obj.barWidth = optionsSetup.maxWidth;
           obj.barMinHeight = optionsSetup.minHeight;
           obj.label = {
             show: optionsSetup.isShow,
-            position: this.getOptionsPosition(),
-            distance: optionsSetup.distance,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
+            color: optionsSetup.fontColor,
             fontWeight: optionsSetup.fontWeight,
-            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}',
+            fontStyle: optionsSetup.fontStyle,
+            fontFamily: optionsSetup.fontFamily,
           };
           // 获取颜色样式
           if (optionsSetup.colorStyle == 'same') {
@@ -517,16 +574,19 @@ export default {
       }
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
       const xAxisDataLength = val.length !== 0 ? val.xAxis.length : 1;
-      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.fontSizeX);
+      const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.textFontSizeX);
       const axisLabel = {
-        show: true,
-        interval: optionsSetup.textInterval,
+        show: optionsSetup.isShowAxisLabelX,
+        interval: optionsSetup.textIntervalX,
         // 文字角度
         rotate: optionsSetup.textAngleX,
         textStyle: {
           // 坐标文字颜色
-          color: optionsSetup.colorX,
-          fontSize: optionsSetup.fontSizeX,
+          color: optionsSetup.textColorX,
+          fontSize: optionsSetup.textFontSizeX,
+          fontWeight: optionsSetup.textFontWeightX,
+          fontStyle: optionsSetup.textFontStyleX,
+          fontFamily: optionsSetup.textFontFamilyX,
         },
         // 自动换行
         formatter: function (value, index) {

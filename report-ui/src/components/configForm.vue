@@ -4,6 +4,13 @@
 * @property placeholder
 * @property style
 */
+ <!--
+ * @Descripttion: 动态表单组件
+ * @Author: Devli
+ * @Date: 2021-2-10 10:17:24
+ * @Last Modified by:   yanzili
+ * @Last Modified time: 2021-6-24 11:20:24
+ !-->
 <template>
 <span>
   <span class="grid-content" v-for="(item, index) in formItemsArr" :key="index" style="">

@@ -255,7 +255,7 @@
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
-## 中国地图
+## 地图
 
 ### 路线地图
 

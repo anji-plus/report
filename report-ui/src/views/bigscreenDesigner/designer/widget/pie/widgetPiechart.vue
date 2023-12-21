@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 
@@ -9,6 +9,7 @@ import {
   originWidgetLinkageLogic,
   targetWidgetLinkageLogic,
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
+
 export default {
   name: "WidgetPiechart",
   components: {},
@@ -95,79 +96,131 @@ export default {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
+      this.setOptionsPie();
       this.setOptionsValue();
       this.setOptionsTooltip();
       this.setOptionsLegend();
       this.setOptionsColor();
       this.setOptionsData();
-      this.setOptionsPiechartStyle();
-    },
-    // 饼图样式
-    setOptionsPiechartStyle() {
-      if (this.optionsSetup.piechartStyle == "shixin") {
-        this.options.series[0]["radius"] = "50%";
-      } else if (this.optionsSetup.piechartStyle == "kongxin") {
-        this.options.series[0]["radius"] = ["40%", "70%"];
-      } else {
-      }
     },
     // 标题设置
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
+    },
+    // 饼图设置
+    setOptionsPie() {
+      const optionsSetup = this.optionsSetup;
+      const series = {
+        type: "pie",
+        center: ["50%", "50%"],
+        left: optionsSetup.left,
+        top: optionsSetup.top,
+        right: optionsSetup.right,
+        bottom: optionsSetup.bottom,
+        radius: [optionsSetup.innerNumber + "%", optionsSetup.outerNumber + "%"],
+        clockwise: optionsSetup.clockwise,
+        startAngle: optionsSetup.startAngle,
+        minAngle: optionsSetup.minAngle,
+        minShowLabelAngle: optionsSetup.minShowLabelAngle,
+        percentPrecision: optionsSetup.percentPrecision,
+        // echarts v5.0.0开始支持
+        /*        itemStyle: {
+                  borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
+                },
+                */
+        // 高亮的扇区
+        emphasis: {
+          label: {
+            show: optionsSetup.isShowEmphasisLabel,
+            color: optionsSetup.emphasisLabelFontColor == '' ? null : optionsSetup.EmphasisLabelFontColor,
+            fontSize: optionsSetup.emphasisLabelFontSize,
+            fontWeight: optionsSetup.emphasisLabelFontWeight,
+            fontStyle: optionsSetup.emphasisLabelFontStyle,
+            fontFamily: optionsSetup.emphasisLabelFontFamily,
+          },
+          // 视觉引导线
+          labelLine: {
+            show: false,
+          },
+          // 色块描边
+          itemStyle: {
+            borderColor: optionsSetup.borderColor == '' ? null : optionsSetup.borderColor,
+            borderWidth: optionsSetup.borderWidth,
+            borderType: optionsSetup.borderType,
+            shadowBlur: optionsSetup.shadowBlur,
+            shadowColor: optionsSetup.shadowColor,
+          },
+        },
+      };
+      this.options.series[0] = series;
     },
     // 数值设定
     setOptionsValue() {
       const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      const numberValue = optionsSetup.numberValue ? "{c}" : "";
-      const percentage = optionsSetup.percentage ? "({d})%" : "";
+      const numberValue = optionsSetup.numberValue ? "\n{c}" : "";
+      const percentage = optionsSetup.percentage ? "\n({d}%)" : "";
       const label = {
         show: optionsSetup.isShow,
-        formatter: `{a|{b}：${numberValue} ${percentage}}`,
-        rich: {
-          a: {
-            padding: [-30, 15, -20, 15],
-            color: optionsSetup.dataColor,
-            fontSize: optionsSetup.fontSize,
-            fontWeight: optionsSetup.fontWeight,
-          },
-        },
+        position: optionsSetup.position,
+        rotate: optionsSetup.rotate,
+        formatter: `{b}${numberValue}${percentage}`,
+        padding: optionsSetup.padding,
         fontSize: optionsSetup.fontSize,
-        fontWeight: optionsSetup.optionsSetup,
+        color: optionsSetup.fontColor == '' ? null : optionsSetup.fontColor,
+        fontWeight: optionsSetup.fontWeight,
+        fontStyle: optionsSetup.fontStyle,
+        fontFamily: optionsSetup.fontFamily,
       };
-      for (const key in series) {
-        if (series[key].type == "pie") {
-          series[key].label = label;
-          series[key].labelLine = { show: optionsSetup.isShow };
+      // 引导线
+      const labelLine = {
+        show: optionsSetup.isShowLabelLine,
+        length: optionsSetup.labelLineLength,
+        length2: optionsSetup.labelLineLength2,
+        smooth: optionsSetup.labelLineSmooth,
+        lineStyle: {
+          color: optionsSetup.lineStyleColor == '' ? null : optionsSetup.lineStyleColor,
+          width: optionsSetup.lineStyleWidth,
+          type: optionsSetup.lineStyleType,
         }
       }
+      this.options.series[0].label = label;
+      this.options.series[0].labelLine = labelLine;
     },
     // 提示语设置 tooltip
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
+        show: optionsSetup.isShowTooltip,
         textStyle: {
-          color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize,
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
       };
       this.options.tooltip = tooltip;
@@ -175,19 +228,24 @@ export default {
     // 图例操作 legend
     setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
-      const legend = this.options.legend;
-      legend.show = optionsSetup.isShowLegend;
-      legend.left = optionsSetup.lateralPosition;
-      legend.right = optionsSetup.lateralPosition;
-      legend.top = optionsSetup.longitudinalPosition;
-      legend.bottom =
-        optionsSetup.longitudinalPosition;
-      legend.orient = optionsSetup.layoutFront;
-      legend.textStyle = {
-        color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize,
+      const legend = {
+        show: optionsSetup.isShowLegend,
+        left: optionsSetup.lateralPosition,
+        //right: optionsSetup.lateralPosition,
+        top: optionsSetup.longitudinalPosition,
+        //bottom: optionsSetup.longitudinalPosition,
+        orient: optionsSetup.layoutFront,
+        textStyle: {
+          color: optionsSetup.legendColor,
+          fontSize: optionsSetup.legendFontSize,
+          fontWeight: optionsSetup.legendFontWeight,
+          fontStyle: optionsSetup.legendFontStyle,
+          fontFamily: optionsSetup.legendFontFamily,
+        },
+        itemHeight: optionsSetup.legendHeight,
+        itemWidth: optionsSetup.legendWidth,
       };
-      legend.itemWidth = optionsSetup.legendWidth;
+      this.options.legend = legend;
     },
     // 图例颜色修改
     setOptionsColor() {

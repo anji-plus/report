@@ -1,4 +1,3 @@
-
 export const widgetScaleHorizontal = {
   code: 'widget-scale-horizontal',
   type: 'scaleCharts',
@@ -31,7 +30,7 @@ export const widgetScaleHorizontal = {
             {
               type: 'el-switch',
               label: '标题显示',
-              name: 'isNoTitle',
+              name: 'isShowTitle',
               required: false,
               placeholder: '',
               value: true,
@@ -39,7 +38,7 @@ export const widgetScaleHorizontal = {
             {
               type: 'el-input-text',
               label: '标题名',
-              name: 'titleText',
+              name: 'text',
               required: false,
               placeholder: '',
               value: '',
@@ -67,10 +66,10 @@ export const widgetScaleHorizontal = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
@@ -81,29 +80,30 @@ export const widgetScaleHorizontal = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
             },
             {
               type: 'el-select',
-              label: '字体位置',
-              name: 'textAlign',
+              label: '字体系列',
+              name: 'textFontFamily',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'center', name: '居中' },
-                { code: 'left', name: '左对齐' },
-                { code: 'right', name: '右对齐' },
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
               ],
-              value: 'center'
+              value: 'sans-serif'
             },
             {
               type: 'el-input-text',
               label: '副标题名',
-              name: 'subText',
+              name: 'subtext',
               required: false,
               placeholder: '',
               value: ''
@@ -111,7 +111,7 @@ export const widgetScaleHorizontal = {
             {
               type: 'vue-color',
               label: '字体颜色',
-              name: 'subTextColor',
+              name: 'subtextColor',
               required: false,
               placeholder: '',
               value: 'rgba(30, 144, 255, 1)'
@@ -119,7 +119,7 @@ export const widgetScaleHorizontal = {
             {
               type: 'el-input-number',
               label: '字体字号',
-              name: 'subTextFontSize',
+              name: 'subtextFontSize',
               required: false,
               placeholder: '',
               value: 20
@@ -127,29 +127,72 @@ export const widgetScaleHorizontal = {
             {
               type: 'el-select',
               label: '字体粗细',
-              name: 'subTextFontWeight',
+              name: 'subtextFontWeight',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
             },
             {
               type: 'el-select',
               label: '字体风格',
-              name: 'subTextFontStyle',
+              name: 'subtextFontStyle',
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'italic', name: 'italic斜体' },
-                { code: 'oblique', name: 'oblique斜体' },
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
               ],
               value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'subtextFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+            {
+              type: 'el-select',
+              label: '左右位置',
+              name: 'titleLeft',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-slider',
+              label: '上下间距',
+              name: 'titleTop',
+              required: false,
+              placeholder: '',
+              value: 30,
+            },
+            {
+              type: 'el-input-number',
+              label: '主副标题间距',
+              name: 'titleItemGap',
+              required: false,
+              placeholder: '',
+              value: 0
             },
           ],
         },
@@ -190,19 +233,27 @@ export const widgetScaleHorizontal = {
             },
             {
               type: 'el-input-number',
+              label: '刻度值距离',
+              name: 'scaleDistance',
+              required: false,
+              placeholder: '',
+              value: 10
+            },
+            {
+              type: 'vue-color',
+              label: '刻度值颜色',
+              name: 'scaleFontColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(56, 128, 138,1)'
+            },
+            {
+              type: 'el-input-number',
               label: '刻度值字号',
               name: 'scaleFontSize',
               required: false,
               placeholder: '',
               value: 16,
-            },
-            {
-              type: 'vue-color',
-              label: '刻度值颜色',
-              name: 'scaleDataColor',
-              required: false,
-              placeholder: '',
-              value: 'rgba(56, 128, 138,1)'
             },
             {
               type: 'el-select',
@@ -211,12 +262,39 @@ export const widgetScaleHorizontal = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '刻度值风格',
+              name: 'scaleFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '刻度值字体',
+              name: 'scaleFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
           ],
         },
@@ -290,12 +368,30 @@ export const widgetScaleHorizontal = {
               value: true,
             },
             {
-              type: 'el-input-number',
+              type: 'el-select',
               label: '位置',
+              name: 'fontPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'top', name: '上'},
+                {code: 'left', name: '左'},
+                {code: 'right', name: '右'},
+                {code: 'inside', name: '里'},
+                {code: 'insideTop', name: '里顶'},
+                {code: 'insideLeft', name: '里左'},
+                {code: 'insideRight', name: '里右'},
+                {code: 'insideBottom', name: '里底'},
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-input-number',
+              label: '距离',
               name: 'fontDistance',
               required: false,
               placeholder: '',
-              value: 20,
+              value: 10,
             },
             {
               type: 'el-input-number',
@@ -312,12 +408,39 @@ export const widgetScaleHorizontal = {
               required: false,
               placeholder: '',
               selectOptions: [
-                { code: 'normal', name: '正常' },
-                { code: 'bold', name: '粗体' },
-                { code: 'bolder', name: '特粗体' },
-                { code: 'lighter', name: '细体' }
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
               ],
               value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'fontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'fontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
           ],
         },
@@ -359,27 +482,6 @@ export const widgetScaleHorizontal = {
           ],
         },
         {
-          name: '提示语设置',
-          list: [
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'tipFontSize',
-              required: false,
-              placeholder: '',
-              value: 16
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'tipsColor',
-              required: false,
-              placeholder: '',
-              value: '#00FEFF'
-            },
-          ],
-        },
-        {
           name: '坐标轴边距设置',
           list: [
             {
@@ -389,27 +491,30 @@ export const widgetScaleHorizontal = {
               required: false,
               placeholder: '',
               value: 10,
-            }, {
-              type: 'el-slider',
-              label: '顶边距(像素)',
-              name: 'marginTop',
-              required: false,
-              placeholder: '',
-              value: 0,
-            }, {
+            },
+            {
               type: 'el-slider',
               label: '右边距(像素)',
               name: 'marginRight',
               required: false,
               placeholder: '',
-              value: 0,
-            }, {
+              value: 10,
+            },
+            {
+              type: 'el-slider',
+              label: '顶边距(像素)',
+              name: 'marginTop',
+              required: false,
+              placeholder: '',
+              value: 50,
+            },
+            {
               type: 'el-slider',
               label: '底边距(像素)',
               name: 'marginBottom',
               required: false,
               placeholder: '',
-              value: 40,
+              value: 10,
             },
           ],
         },
@@ -452,7 +557,7 @@ export const widgetScaleHorizontal = {
         placeholder: '',
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
-        value: [{"num": 50 }]
+        value: [{"num": 50}]
       },
       {
         type: 'dycustComponents',

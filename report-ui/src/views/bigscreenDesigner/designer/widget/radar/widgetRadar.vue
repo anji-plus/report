@@ -78,22 +78,27 @@ export default {
     // 标题修改
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
     },
@@ -134,13 +139,18 @@ export default {
       const legend = {
         show: optionsSetup.isShowLegend,
         left: optionsSetup.lateralPosition,
+        //right: optionsSetup.lateralPosition,
         top: optionsSetup.longitudinalPosition,
-        bottom: optionsSetup.longitudinalPosition,
+        //bottom: optionsSetup.longitudinalPosition,
         orient: optionsSetup.layoutFront,
         textStyle: {
           color: optionsSetup.legendColor,
           fontSize: optionsSetup.legendFontSize,
+          fontWeight: optionsSetup.legendFontWeight,
+          fontStyle: optionsSetup.legendFontStyle,
+          fontFamily: optionsSetup.legendFontFamily,
         },
+        itemHeight: optionsSetup.legendHeight,
         itemWidth: optionsSetup.legendWidth,
       };
       this.options.legend = legend;
@@ -169,10 +179,13 @@ export default {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
         trigger: "item",
-        show: true,
+        show: optionsSetup.isShowTooltip,
         textStyle: {
-          color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize,
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
       };
       this.options.tooltip = tooltip;
@@ -249,14 +262,17 @@ export default {
           value: values,
           label: {
             show: optionsSetup.isShow,
-            position: "top",
-            distance: 10,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
+            color: optionsSetup.fontColor == '' ? null : optionsSetup.fontColor,
             fontWeight: optionsSetup.fontWeight,
+            fontStyle: optionsSetup.fontStyle,
+            fontFamily: optionsSetup.fontFamily,
           },
           lineStyle: {
             normal: {
+              width: optionsSetup.lineWidth,
               type: optionsSetup.lineType,
               color: arrColor[i],
             },
@@ -331,11 +347,13 @@ export default {
           value: values,
           label: {
             show: optionsSetup.isShow,
-            position: "top",
-            distance: 10,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
+            color: optionsSetup.fontColor == '' ? null : optionsSetup.fontColor,
             fontWeight: optionsSetup.fontWeight,
+            fontStyle: optionsSetup.fontStyle,
+            fontFamily: optionsSetup.fontFamily,
           },
           lineStyle: {
             normal: {

@@ -23,27 +23,6 @@ export const widgetTable = {
         value: '表格',
       },
       {
-        type: 'el-select',
-        label: '字体位置',
-        name: 'textAlign',
-        required: false,
-        placeholder: '',
-        selectOptions: [
-          { code: 'center', name: '居中' },
-          { code: 'left', name: '左对齐' },
-          { code: 'right', name: '右对齐' },
-        ],
-        value: 'center'
-      },
-      {
-        type: 'el-input-number',
-        label: '字体字号',
-        name: 'fontSize',
-        required: false,
-        placeholder: '',
-        value: '16'
-      },
-      {
         type: 'el-input-number',
         label: '显示行数',
         name: 'vis',
@@ -59,6 +38,116 @@ export const widgetTable = {
         placeholder: '',
         value: '50'
       },
+      [
+        {
+          name: '表头设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '表头显隐',
+              name: 'isHeader',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-select',
+              label: '文字位置',
+              name: 'textAlignHeader',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-input-number',
+              label: '文字字号',
+              name: 'fontSizeHeader',
+              required: false,
+              placeholder: '',
+              value: '16'
+            },
+            {
+              type: 'vue-color',
+              label: '文字颜色',
+              name: 'headColor',
+              require: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'vue-color',
+              label: '表头背景色',
+              name: 'headBackColor',
+              require: false,
+              placeholder: '',
+              value: '#0a73ff',
+            },
+          ],
+        },
+        {
+          name: '表体设置',
+          list: [
+            {
+              type: 'el-select',
+              label: '文字位置',
+              name: 'textAlignBody',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'center', name: '居中' },
+                { code: 'left', name: '左对齐' },
+                { code: 'right', name: '右对齐' },
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-input-number',
+              label: '文字字号',
+              name: 'fontSizeBody',
+              required: false,
+              placeholder: '',
+              value: '16'
+            },
+            {
+              type: 'vue-color',
+              label: '文字颜色',
+              name: 'bodyColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'vue-color',
+              label: '表体背景色',
+              name: 'tableBgColor',
+              require: false,
+              placeholder: '',
+              value: '',
+            },
+            {
+              type: 'vue-color',
+              label: '奇行颜色',
+              name: 'oldColor',
+              require: false,
+              placeholder: '',
+              value: '#0a2732',
+            },
+            {
+              type: 'vue-color',
+              label: '偶行颜色',
+              name: 'eventColor',
+              required: false,
+              placeholder: '',
+              value: '#003b51'
+            }
+          ],
+        },
+      ],
       {
         type: 'el-switch',
         label: '开启滚动',
@@ -127,74 +216,6 @@ export const widgetTable = {
         placeholder: '',
         value: '#fff'
       },
-      [
-        {
-          name: '表头设置',
-          list: [
-            {
-              type: 'el-switch',
-              label: '表头显隐',
-              name: 'isHeader',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'vue-color',
-              label: '表头颜色',
-              name: 'headColor',
-              require: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'vue-color',
-              label: '表头背景',
-              name: 'headBackColor',
-              require: false,
-              placeholder: '',
-              value: '#0a73ff',
-            },
-          ],
-        },
-        {
-          name: '表体设置',
-          list: [
-            {
-              type: 'vue-color',
-              label: '文字颜色',
-              name: 'bodyColor',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'vue-color',
-              label: '表格背景色',
-              name: 'tableBgColor',
-              require: false,
-              placeholder: '',
-              value: '',
-            },
-            {
-              type: 'vue-color',
-              label: '奇行颜色',
-              name: 'oldColor',
-              require: false,
-              placeholder: '',
-              value: '#0a2732',
-            },
-            {
-              type: 'vue-color',
-              label: '偶行颜色',
-              name: 'eventColor',
-              required: false,
-              placeholder: '',
-              value: '#003b51'
-            }
-          ],
-        },
-      ],
       {
         type: 'dynamic-add-table',
         label: '',
@@ -204,9 +225,8 @@ export const widgetTable = {
         value: [
           { name: '日期', key: 'date', width: '50%' },
           { name: '姓名', key: 'name', width: '50%' },
-          {
-            name: '地址', key: 'address', width: '200%',
-          }]
+          {name: '地址', key: 'address', width: '200%',}
+          ]
       }
     ],
     data: [

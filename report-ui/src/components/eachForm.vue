@@ -1,3 +1,10 @@
+ <!--
+ * @Descripttion: 参数-动态表单组件
+ * @Author: Devli
+ * @Date: 2021-2-10 10:17:24
+ * @Last Modified by:   yanzili
+ * @Last Modified time: 2021-6-24 11:20:24
+ !-->
 <template>
   <span>
     <!-- input 输入框-->

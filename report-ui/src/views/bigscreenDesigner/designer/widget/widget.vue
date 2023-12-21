@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 大屏报表设计器-动态组件
+ * @Author: Devli
+ * @Date: 2021-3-26 16:38:27
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2023-3-9 17:38:44
+-->
 <template>
   <avue-draggable
     :step="step"
@@ -57,6 +64,7 @@ import widgetBorder from "./styleWidget/widgetBorder.vue";
 import widgetDecorateFlowLine from "./styleWidget/widgetDecorateFlowLine.vue";
 import widgetDecoration from "./styleWidget/widgetDecoration.vue";
 import widgetBarMap from "./map/widgetBarMap.vue";
+import widgetBarStackMoreShowChart from "./bar/widgetBarStackMoreShowChart.vue";
 
 export default {
   name: "Widget",
@@ -100,7 +108,8 @@ export default {
     //widgetInput,
     widgetFormTime,
     widgetBarDoubleYaxisChart,
-    widgetBarMap
+    widgetBarMap,
+    widgetBarStackMoreShowChart
   },
   model: {
     prop: "value",

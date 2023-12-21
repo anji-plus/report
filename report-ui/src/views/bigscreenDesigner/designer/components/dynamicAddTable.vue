@@ -12,7 +12,7 @@
       <el-table-column prop="name" label="名称" width="60" />
       <el-table-column prop="key" label="key值" width="70" />
       <el-table-column prop="width" label="宽度" width="50" />
-      <el-table-column label="操作" width="100">
+      <el-table-column label="操作" width="90">
         <template slot-scope="scope">
           <div class="button-group">
             <el-button

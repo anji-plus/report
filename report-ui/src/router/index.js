@@ -32,12 +32,12 @@ export const constantRouterMap = [
   },
   {
     path: '/aj/**',
-    component: () => import('@/views/bigScreenReport/aj'),
+    component: () => import('@/views/bigScreenDesigner/share/shareLink'),
     hidden: true
   },
   {
     path: '/el/**',
-    component: () => import('@/views/excelreport/el'),
+    component: () => import('@/views/excelreport/share/shareLink'),
     hidden: true
   },
   {
@@ -160,7 +160,7 @@ export const constantRouterMap = [
       {
         path: 'bigscreen',
         name: 'bigscreen',
-        component: () => import('@/views/bigScreenReport/index'),
+        component: () => import('@/views/bigScreenDesigner/index'),
         meta: {
           title: '大屏报表',
           icon: 'iconchufaqipeizhi-hui',
@@ -182,9 +182,9 @@ export const constantRouterMap = [
         }
       },
       {
-        path: 'reportshare',
-        name: 'reportshare',
-        component: () => import('@/views/reportShare/index'),
+        path: 'shareManage',
+        name: 'shareManage',
+        component: () => import('@/views/shareManage/index'),
         meta: {
           title: '报表分享',
           icon: 'iconfenxiang1',

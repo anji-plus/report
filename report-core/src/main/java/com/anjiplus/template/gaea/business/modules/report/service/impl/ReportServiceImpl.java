@@ -165,6 +165,7 @@ public class ReportServiceImpl implements ReportService {
         GaeaBeanUtils.copyAndFormatter(report, copyReport);
         copyReport.setReportCode(dto.getReportCode());
         copyReport.setReportName(dto.getReportName());
+        copyReport.setId(null);
         return copyReport;
     }
 

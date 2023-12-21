@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
 * @desc AccessAuthority 权限管理服务接口
-* @author 木子李·De <lide1202@hotmail.com>
+* @author Devli
 * @date 2019-02-17 08:50:10.009
 **/
 public interface AccessAuthorityService extends GaeaBaseService<AccessAuthorityParam, AccessAuthority> {

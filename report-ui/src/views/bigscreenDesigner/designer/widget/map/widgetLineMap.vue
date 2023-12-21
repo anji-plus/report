@@ -1,130 +1,49 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :options="options" autoresize/>
   </div>
 </template>
 <script>
 import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
-
+import "../../../../../../node_modules/echarts/map/js/china.js";
+import "../../../../../../node_modules/echarts/map/js/world.js";
+import "../../../../../../node_modules/echarts/map/js/province/anhui";
+import "../../../../../../node_modules/echarts/map/js/province/aomen";
+import "../../../../../../node_modules/echarts/map/js/province/beijing";
+import "../../../../../../node_modules/echarts/map/js/province/chongqing";
+import "../../../../../../node_modules/echarts/map/js/province/fujian";
+import "../../../../../../node_modules/echarts/map/js/province/gansu";
+import "../../../../../../node_modules/echarts/map/js/province/guangxi";
+import "../../../../../../node_modules/echarts/map/js/province/guizhou";
+import "../../../../../../node_modules/echarts/map/js/province/hainan";
+import "../../../../../../node_modules/echarts/map/js/province/hebei";
+import "../../../../../../node_modules/echarts/map/js/province/heilongjiang";
+import "../../../../../../node_modules/echarts/map/js/province/henan";
+import "../../../../../../node_modules/echarts/map/js/province/hubei";
+import "../../../../../../node_modules/echarts/map/js/province/hunan";
+import "../../../../../../node_modules/echarts/map/js/province/jiangsu";
+import "../../../../../../node_modules/echarts/map/js/province/jiangxi";
+import "../../../../../../node_modules/echarts/map/js/province/jilin";
+import "../../../../../../node_modules/echarts/map/js/province/liaoning";
+import "../../../../../../node_modules/echarts/map/js/province/neimenggu";
+import "../../../../../../node_modules/echarts/map/js/province/ningxia";
+import "../../../../../../node_modules/echarts/map/js/province/qinghai";
+import "../../../../../../node_modules/echarts/map/js/province/shandong";
+import "../../../../../../node_modules/echarts/map/js/province/shanghai";
+import "../../../../../../node_modules/echarts/map/js/province/shanxi";
+import "../../../../../../node_modules/echarts/map/js/province/shanxi1";
+import "../../../../../../node_modules/echarts/map/js/province/sichuan";
+import "../../../../../../node_modules/echarts/map/js/province/taiwan";
+import "../../../../../../node_modules/echarts/map/js/province/tianjin";
+import "../../../../../../node_modules/echarts/map/js/province/xianggang";
+import "../../../../../../node_modules/echarts/map/js/province/xinjiang";
+import "../../../../../../node_modules/echarts/map/js/province/xizang";
+import "../../../../../../node_modules/echarts/map/js/province/yunnan";
+import "../../../../../../node_modules/echarts/map/js/province/zhejiang";
 import "echarts/map/js/china.js";
 import echarts from "echarts";
-import { conversionCity } from "@/utils/china";
-/*let geoCoordMap = {
-  上海市: [121.4648, 31.2891],
-  东莞市: [113.8953, 22.901],
-  东营市: [118.7073, 37.5513],
-  中山市: [113.4229, 22.478],
-  临汾市: [111.4783, 36.1615],
-  临沂市: [118.3118, 35.2936],
-  丹东市: [124.541, 40.4242],
-  丽水市: [119.5642, 28.1854],
-  乌鲁木齐市: [87.9236, 43.5883],
-  佛山市: [112.8955, 23.1097],
-  保定市: [115.0488, 39.0948],
-  兰州市: [103.5901, 36.3043],
-  包头市: [110.3467, 41.4899],
-  北京市: [116.4551, 40.2539],
-  北海市: [109.314, 21.6211],
-  南京市: [118.8062, 31.9208],
-  南宁市: [108.479, 23.1152],
-  南昌市: [116.0046, 28.6633],
-  南通市: [121.1023, 32.1625],
-  厦门市: [118.1689, 24.6478],
-  台州市: [121.1353, 28.6688],
-  合肥市: [117.29, 32.0581],
-  呼和浩特市: [111.4124, 40.4901],
-  咸阳市: [108.4131, 34.8706],
-  哈尔滨市: [127.9688, 45.368],
-  唐山市: [118.4766, 39.6826],
-  嘉兴市: [120.9155, 30.6354],
-  大同市: [113.7854, 39.8035],
-  大连市: [122.2229, 39.4409],
-  天津市: [117.4219, 39.4189],
-  太原市: [112.3352, 37.9413],
-  威海市: [121.9482, 37.1393],
-  宁波市: [121.5967, 29.6466],
-  宝鸡市: [107.1826, 34.3433],
-  宿迁市: [118.5535, 33.7775],
-  常州市: [119.4543, 31.5582],
-  广州市: [113.5107, 23.2196],
-  廊坊市: [116.521, 39.0509],
-  延安市: [109.1052, 36.4252],
-  张家口市: [115.1477, 40.8527],
-  徐州市: [117.5208, 34.3268],
-  德州市: [116.6858, 37.2107],
-  惠州市: [114.6204, 23.1647],
-  成都市: [103.9526, 30.7617],
-  扬州市: [119.4653, 32.8162],
-  承德市: [117.5757, 41.4075],
-  拉萨市: [91.1865, 30.1465],
-  无锡市: [120.3442, 31.5527],
-  日照市: [119.2786, 35.5023],
-  昆明市: [102.9199, 25.4663],
-  杭州市: [119.5313, 29.8773],
-  枣庄市: [117.323, 34.8926],
-  柳州市: [109.3799, 24.9774],
-  株洲市: [113.5327, 27.0319],
-  武汉市: [114.3896, 30.6628],
-  汕头市: [117.1692, 23.3405],
-  江门市: [112.6318, 22.1484],
-  沈阳市: [123.1238, 42.1216],
-  沧州市: [116.8286, 38.2104],
-  河源市: [114.917, 23.9722],
-  泉州市: [118.3228, 25.1147],
-  泰安市: [117.0264, 36.0516],
-  泰州市: [120.0586, 32.5525],
-  济南市: [117.1582, 36.8701],
-  济宁市: [116.8286, 35.3375],
-  海口市: [110.3893, 19.8516],
-  淄博市: [118.0371, 36.6064],
-  淮安市: [118.927, 33.4039],
-  深圳市: [114.5435, 22.5439],
-  清远市: [112.9175, 24.3292],
-  温州市: [120.498, 27.8119],
-  渭南市: [109.7864, 35.0299],
-  湖州市: [119.8608, 30.7782],
-  湘潭市: [112.5439, 27.7075],
-  滨州市: [117.8174, 37.4963],
-  潍坊市: [119.0918, 36.524],
-  烟台市: [120.7397, 37.5128],
-  玉溪市: [101.9312, 23.8898],
-  珠海市: [113.7305, 22.1155],
-  盐城市: [120.2234, 33.5577],
-  盘锦市: [121.9482, 41.0449],
-  石家庄市: [114.4995, 38.1006],
-  福州市: [119.4543, 25.9222],
-  秦皇岛市: [119.2126, 40.0232],
-  绍兴市: [120.564, 29.7565],
-  聊城市: [115.9167, 36.4032],
-  肇庆市: [112.1265, 23.5822],
-  舟山市: [122.2559, 30.2234],
-  苏州市: [120.6519, 31.3989],
-  莱芜市: [117.6526, 36.2714],
-  菏泽市: [115.6201, 35.2057],
-  营口市: [122.4316, 40.4297],
-  葫芦岛市: [120.1575, 40.578],
-  衡水市: [115.8838, 37.7161],
-  衢州市: [118.6853, 28.8666],
-  西宁市: [101.4038, 36.8207],
-  西安市: [109.1162, 34.2004],
-  贵阳市: [106.6992, 26.7682],
-  连云港市: [119.1248, 34.552],
-  邢台市: [114.8071, 37.2821],
-  邯郸市: [114.4775, 36.535],
-  郑州市: [113.4668, 34.6234],
-  鄂尔多斯市: [108.9734, 39.2487],
-  重庆市: [107.7539, 30.1904],
-  金华市: [120.0037, 29.1028],
-  铜川市: [109.0393, 35.1947],
-  银川市: [106.3586, 38.1775],
-  镇江市: [119.4763, 31.9702],
-  长春市: [125.8154, 44.2584],
-  长沙市: [113.0823, 28.2568],
-  长治市: [112.8625, 36.4746],
-  阳泉市: [113.4778, 38.0951],
-  青岛市: [120.4651, 36.3373],
-  韶关市: [113.7964, 24.7028]
-};*/
+import {conversionCity} from "@/utils/china";
+
 let geoCoordMap = conversionCity;
 let planePath =
   "path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z";
@@ -182,18 +101,32 @@ export default {
           roam: true,
           itemStyle: {
             normal: {
-              areaColor: "#323c48",
-              borderColor: "#404a59",
+              borderColor: new echarts.graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                  {
+                    offset: 0,
+                    color: "#00F6FF",
+                  },
+                  {
+                    offset: 1,
+                    color: "#53D9FF",
+                  },
+                ],
+                false
+              ),
               borderWidth: 1,
-            },
-            emphasis: {
-              areaColor: "#2a333d",
+              shadowColor: "rgba(10,76,139,1)",
+              shadowOffsetY: 0,
+              shadowBlur: 60,
             },
           },
         },
         series: [
           {
-            //name: tempData[0],
             type: "lines",
             zlevel: 1,
             effect: {
@@ -237,7 +170,6 @@ export default {
           },
           {
             // 起点
-            //name: tempData[0],
             type: "effectScatter",
             coordinateSystem: "geo",
             zlevel: 2,
@@ -264,7 +196,6 @@ export default {
           },
           {
             // 终点
-            //name: tempData[0],
             type: "effectScatter",
             coordinateSystem: "geo",
             zlevel: 2,
@@ -350,34 +281,117 @@ export default {
     },
     editorOptions() {
       this.setOptionsTitle();
+      this.setOptionsGeo();
       this.setOptionsSource();
       this.setOptionsTarget();
       this.setOptionsSymbol();
       this.setOptionsLine();
-      this.setOptionsColor();
+      this.setOptionsTooltip();
       this.setOptionsData();
     },
     // 标题设置
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
+    },
+    // 地图设置
+    setOptionsGeo() {
+      const optionsSetup = this.optionsSetup;
+      const geo = {
+        map: this.optionsSetup.mapName == '' ? "china" : this.optionsSetup.mapName,
+        show: true,
+        roam: true,
+        layoutSize: "80%",
+        label: {
+          //调整数值
+          // 地图省市区显隐
+          show: optionsSetup.isShowMap,
+          color: optionsSetup.fontColor,
+          fontSize: optionsSetup.fontSize,
+          fontWeight: optionsSetup.fontWeight,
+          fontStyle: optionsSetup.fontStyle,
+          fontFamily: optionsSetup.fontFamily,
+        },
+        itemStyle: {
+          normal: {
+            //地图块颜色
+            areaColor: {
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: optionsSetup.fontColor0, // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: optionsSetup.fontColor100, // 100% 处的颜色
+                },
+              ],
+            },
+            borderType: optionsSetup.borderType,
+            borderColor: optionsSetup.borderColor,
+            borderWidth: optionsSetup.borderWidth,
+            shadowColor: optionsSetup.shadowColor,
+            shadowBlur: optionsSetup.shadowBlur,
+            opacity: optionsSetup.opacity / 100,
+          },
+        },
+        //鼠标放置颜色加深
+        emphasis: {
+          label: {
+            show: optionsSetup.isShowEmphasisLabel,
+            color: optionsSetup.emphasisLabelFontColor,
+            fontSize: optionsSetup.emphasisLabelFontSize,
+            fontWeight: optionsSetup.emphasisLabelFontWeight,
+            fontStyle: optionsSetup.emphasisLabelFontStyle,
+            fontFamily: optionsSetup.emphasisLabelFontFamily,
+          },
+          itemStyle: {
+            areaColor: {
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: optionsSetup.emphasisLabelFontColor0, // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: optionsSetup.emphasisLabelFontColor100, // 100% 处的颜色
+                },
+              ],
+            },
+          },
+        },
+      }
+      this.options.geo = geo;
     },
     // 起点设置
     setOptionsSource() {
@@ -385,10 +399,12 @@ export default {
       const series = this.options.series[2];
       const normal = {
         show: optionsSetup.isShowSource,
-        position: "right",
-        color: optionsSetup.sourceFontTextColor,
-        fontSize: optionsSetup.sourceFontTextSize,
-        fontWeight: optionsSetup.sourceFontTextWeight,
+        position: optionsSetup.sourceFontPosition,
+        color: optionsSetup.sourceFontColor,
+        fontSize: optionsSetup.sourceFontSize,
+        fontWeight: optionsSetup.sourceFontWeight,
+        fontStyle: optionsSetup.sourceFontStyle,
+        fontFamily: optionsSetup.sourceFontFamily
       };
       const itemStyle = {
         normal: {
@@ -405,10 +421,12 @@ export default {
       const series = this.options.series[3];
       const normal = {
         show: optionsSetup.isShowTarget,
-        position: "right",
-        color: optionsSetup.targetFontTextColor,
-        fontSize: optionsSetup.targetFontTextSize,
-        fontWeight: optionsSetup.targetFontTextWeight,
+        position: optionsSetup.targetFontPosition,
+        color: optionsSetup.targetFontColor,
+        fontSize: optionsSetup.targetFontSize,
+        fontWeight: optionsSetup.targetFontWeight,
+        fontStyle: optionsSetup.sourceFontStyle,
+        fontFamily: optionsSetup.sourceFontFamily
       };
       const itemStyle = {
         normal: {
@@ -466,21 +484,36 @@ export default {
       };
       series["lineStyle"] = lineStyle;
     },
-    // 地图颜色设置
-    setOptionsColor() {
+    // tooltip 设置
+    setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
-      const itemStyle = {
-        normal: {
-          // 地图的颜色
-          areaColor: optionsSetup.blockColor,
-          borderColor: optionsSetup.borderColor,
+      const tooltip = {
+        trigger: "item",
+        show: optionsSetup.isShowTooltip,
+        textStyle: {
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
-        emphasis: {
-          // 地图块颜色
-          areaColor: optionsSetup.highlightColor,
+        formatter: function (params, ticket, callback) {
+          if (params.seriesType == "effectScatter") {
+            return "线路：" + params.data.name + "" + params.data.value[2];
+          } else if (params.seriesType == "lines") {
+            return (
+              params.data.fromName +
+              ">" +
+              params.data.toName +
+              "<br />" +
+              params.data.value
+            );
+          } else {
+            return params.name;
+          }
         },
       };
-      this.options.geo["itemStyle"] = itemStyle;
+      this.options.tooltip = tooltip;
     },
     //数据解析
     setOptionsData(e, paramsConfig) {

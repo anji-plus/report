@@ -1,9 +1,9 @@
 <!--
  * @Descripttion: 大屏设计器 -- 预览
- * @Author: lide1202@hotmail.com
+ * @Author: Devli
  * @Date: 2021-3-13 11:04:24
- * @Last Modified by:   lide1202@hotmail.com
- * @Last Modified time: 2021-3-13 11:04:24
+ * @Last Modified by:   Raod
+ * @Last Modified time: 2022-5-6 11:04:24
  !-->
 <template>
   <div class="layout">
@@ -69,6 +69,11 @@ export default {
         }
       })
       this.widgets = data.dashboard.widgets;
+
+      // 定时刷新
+      if(data.dashboard.refreshSeconds>0) {
+        setTimeout(function(){ window.location.reload(); }, data.dashboard.refreshSeconds*1000);
+      }
     }
   }
 };
