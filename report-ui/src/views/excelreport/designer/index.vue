@@ -1,8 +1,8 @@
 <!--
- * @Author: yanzili
- * @Date: 2021-6-24 11:04:24
- * @Last Modified by:   qianlishi
- * @Last Modified time: 2021-12-13 11:04:24
+ * @Author: lide1202@hotmail.com
+ * @Date: 2021-3-13 11:04:24
+ * @Last Modified by:   lide1202@hotmail.com
+ * @Last Modified time: 2021-3-13 11:04:24
  !-->
 <template>
   <div class="layout">
@@ -59,30 +59,37 @@
     </div>
     <div class="layout-middle">
       <div class="push_btn">
-        <el-tooltip
-          class="item"
-          effect="dark"
-          content="预览"
-          placement="bottom-start"
-        >
+        <el-tooltip class="item" effect="dark" content="预览" placement="bottom-start">
           <el-button type="text" @click="preview()">
             <i class="iconfont iconfuzhi"></i>
           </el-button>
         </el-tooltip>
-        <el-tooltip
-          class="item"
-          effect="dark"
-          content="保存"
-          placement="bottom-start"
-        >
+        <el-tooltip class="item" effect="dark" content="保存" placement="bottom-start">
           <el-button type="text" @click="save()">
             <i class="iconfont iconsave"></i>
           </el-button>
         </el-tooltip>
+        <el-tooltip
+          class="item"
+          effect="dark"
+          content="导入xlsx"
+          placement="bottom-start"
+        >
+          <input style="font-size: 16px" type="file" @change="uploadExcel" />
+        </el-tooltip>
       </div>
       <div
         id="luckysheet"
-        style="margin:0px;padding:0px;position:absolute;width:100%;height:95vh;left: 0px;top: 30px;bottom:0px;"
+        style="
+          margin: 0px;
+          padding: 0px;
+          position: absolute;
+          width: 100%;
+          height: 95vh;
+          left: 0px;
+          top: 45px;
+          bottom: 0px;
+        "
       />
       <div id="qrCode" ref="qrCodeDiv" />
       <img id="barCode" />
@@ -100,13 +107,16 @@
             </el-form-item>
             <el-form-item label="自动扩展" v-if="rightForm.autoIsShow">
               <el-col :span="12">
-                <el-switch
-                v-model="rightForm.auto"
-                @change="autoChangeFunc($event)" />
+                <el-switch v-model="rightForm.auto" @change="autoChangeFunc($event)" />
               </el-col>
               <el-col :span="12">
-                <el-tooltip class="item" effect="dark" content="只针对静态数据的单元格，具体参考文档" placement="top">
-                <i class="el-icon-question"> </i>
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  content="只针对静态数据的单元格，具体参考文档"
+                  placement="top"
+                >
+                  <i class="el-icon-question"> </i>
                 </el-tooltip>
               </el-col>
             </el-form-item>
@@ -120,17 +130,13 @@
         ref="multipleTable"
         :data="dataSetData"
         tooltip-effect="dark"
-        style="width: 100%;height: 60vh;overflow-y: scroll;"
+        style="width: 100%; height: 60vh; overflow-y: scroll"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />
         <el-table-column label="数据集名称" width="120" prop="setName" />
         <el-table-column prop="setDesc" label="数据集描述" width="180" />
-        <el-table-column
-          prop="setCode"
-          label="数据集编码"
-          show-overflow-tooltip
-        />
+        <el-table-column prop="setCode" label="数据集编码" show-overflow-tooltip />
       </el-table>
 
       <div slot="footer" class="dialog-footer">
@@ -152,10 +158,11 @@ export default {
   name: "Excels",
   components: {
     draggable,
-    ColorPicker
+    ColorPicker,
   },
   data() {
     return {
+      luckysheet,
       activeName: "first",
       activeNames: ["1"],
       reportId: null,
@@ -170,7 +177,7 @@ export default {
         jsonStr: "",
         setCodes: "",
         setParam: "",
-        reportCode: ""
+        reportCode: "",
       },
       multipleSelection: [],
       rightForm: {
@@ -179,7 +186,7 @@ export default {
         r: "",
         c: "",
         auto: false,
-        autoIsShow: false
+        autoIsShow: false,
       },
       qrCodeForm: {
         type: "QRCode",
@@ -191,7 +198,7 @@ export default {
         // correctLevel: QRCode.CorrectLevel.L, // 容错率，L/M/H
         ri: 0,
         ci: 0,
-        currentSrc: ""
+        currentSrc: "",
       },
       barCodeForm: {
         type: "BarCode",
@@ -204,19 +211,19 @@ export default {
         height: 40,
         ri: 0,
         ci: 0,
-        currentSrc: ""
+        currentSrc: "",
       },
       formPrintSetting: {
         size: "",
         pixel1: "",
-        pixel2: ""
+        pixel2: "",
       },
       pixelList: [
         { paper: "A4", width: 210, height: 297 },
         { paper: "A3", width: 297, height: 420 },
         { paper: "Letter", width: 216, height: 279 },
         { paper: "Legal", width: 216, height: 355 },
-        { paper: "Executive", width: 184, height: 266 }
+        { paper: "Executive", width: 184, height: 266 },
       ],
       dataSet: [],
       outerVisible: false,
@@ -245,8 +252,8 @@ export default {
       qrCodeList: [],
       moveDataelse: {
         x: null,
-        y: null
-      }
+        y: null,
+      },
     };
   },
   mounted() {},
@@ -257,6 +264,44 @@ export default {
     this.design();
   },
   methods: {
+    uploadExcel(evt) {
+      const files = evt.target.files;
+      if (files == null || files.length == 0) {
+        this.$message.error("没有文件被上传");
+        return;
+      }
+
+      let name = files[0].name;
+      let suffixArr = name.split("."),
+        suffix = suffixArr[suffixArr.length - 1];
+      if (suffix != "xlsx") {
+        this.$message.error("现在只支持上传xlsx文件");
+        return;
+      }
+      let that=this;
+      LuckyExcel.transformExcelToLucky(
+        files[0],
+        function (exportJson, luckysheetfile) {
+          if (exportJson.sheets == null || exportJson.sheets.length == 0) {
+            that.$message.error("Failed to read the content of the excel file, currently does not support xls files!");
+            return;
+          }
+          that.luckysheet.destroy();
+          // that.luckysheet.refresh({
+          //   container: "luckysheet", 
+          //   showinfobar: false,
+          //   data: exportJson.sheets,
+          //   title: exportJson.info.name,
+          //   userInfo: exportJson.info.name.creator,
+          // });
+          that.createSheet(exportJson)
+        },
+        function (error) {
+          // 如果抛出任何错误，则处理错误
+          that.$message.error(error);
+        }
+      );
+    },
     handleClose() {
       this.printVisible = false;
     },
@@ -275,8 +320,8 @@ export default {
       if (data != null) {
         if (data.setCodes != null && data.setCodes !== "") {
           let dataSetList = data.setCodes.split("|");
-          dataSetList.forEach(code => {
-            this.dataSetData.forEach(setData => {
+          dataSetList.forEach((code) => {
+            this.dataSetData.forEach((setData) => {
               if (code === setData.setCode) {
                 this.detail(setData.id);
               }
@@ -286,7 +331,7 @@ export default {
       }
     },
     //初始化表格
-    createSheet() {
+    createSheet(exportJson) {
       //将vue对象传入
       const that = this;
       const options = {
@@ -295,39 +340,34 @@ export default {
         lang: "zh", // 设定表格语言
         plugins: ["chart"],
         hook: {
-          cellDragStop: function(cell, postion, sheetFile, ctx, event) {
+          cellDragStop: function (cell, postion, sheetFile, ctx, event) {
             // console.info("cellDragStop-cell",cell);
             // console.info("cellDragStop-postion", postion);
             // console.info("cellDragStop-sheetFile", sheetFile);
             // console.info("cellDragStop-ctx",ctx);
             // console.info("cellDragStop-event", event);
             // console.log("cellDragStop-draggableFieldLabel", that);
-            luckysheet.setCellValue(
-              postion.r,
-              postion.c,
-              that.draggableFieldLabel
-            );
+            that.luckysheet.setCellValue(postion.r, postion.c, that.draggableFieldLabel);
           },
-          cellMousedown: function(cell, postion, sheetFile, ctx) {
-
+          cellMousedown: function (cell, postion, sheetFile, ctx) {
             //单元格点击事件
             that.rightForm.coordinate = postion.r + "," + postion.c;
             that.rightForm.r = postion.r;
             that.rightForm.c = postion.c;
             that.rightForm.value = cell == null ? "" : cell.v;
-            that.rightForm.autoIsShow = true
+            that.rightForm.autoIsShow = true;
             //判断单元格是否是静态数据并且是合并单元格
-            if(cell != null && ( cell.v == undefined || cell.v.indexOf('#{') === -1)){
-                that.rightForm.autoIsShow = true
-                if(cell.auto != null && cell.auto == '1'){
-                  that.rightForm.auto = true
-                }else{
-                  that.rightForm.auto = false
-                }
-            }else{
-              that.rightForm.auto = false
+            if (cell != null && (cell.v == undefined || cell.v.indexOf("#{") === -1)) {
+              that.rightForm.autoIsShow = true;
+              if (cell.auto != null && cell.auto == "1") {
+                that.rightForm.auto = true;
+              } else {
+                that.rightForm.auto = false;
+              }
+            } else {
+              that.rightForm.auto = false;
             }
-          }
+          },
         },
         data: [
           {
@@ -349,7 +389,7 @@ export default {
               rowhidden: {}, //隐藏行
               colhidden: {}, //隐藏列
               borderInfo: {}, //边框
-              authority: {} //工作表保护
+              authority: {}, //工作表保护
             },
             scrollLeft: 0, //左右滚动条位置
             scrollTop: 315, //上下滚动条位置
@@ -367,14 +407,25 @@ export default {
             zoomRatio: 1, // 缩放比例
             image: [], //图片
             showGridLines: 1, //是否显示网格线
-            dataVerification: {} //数据验证配置
-          }
-        ]
+            dataVerification: {}, //数据验证配置
+          },
+        ],
       };
+      this.sheetData = this.sheetData.map((val) => {
+        if (!val.name) {
+          val.name = "Sheet1";
+        }
+        return val;
+      });
       options.data = this.sheetData;
-
-      $(function() {
-        luckysheet.create(options);
+      $(function () {
+        if(exportJson){
+          options.data= exportJson.sheets;
+          options.title= exportJson.info.name;
+          options.userInfo= exportJson.info.name.creator;
+        }
+        console.log(options);
+        that.luckysheet.create(options);
       });
     },
     onStart(setCode, evt) {
@@ -405,14 +456,11 @@ export default {
       this.reportExcelDto.jsonStr = JSON.stringify(luckysheet.getAllSheets());
       let setCodeList = [];
       let setParams = {};
-      this.dataSet.forEach(code => {
+      this.dataSet.forEach((code) => {
         setCodeList.push(code.setCode);
-        if (
-          code.dataSetParamDtoList != null &&
-          code.dataSetParamDtoList.length > 0
-        ) {
+        if (code.dataSetParamDtoList != null && code.dataSetParamDtoList.length > 0) {
           let dataSetParam = {};
-          code.dataSetParamDtoList.forEach(value => {
+          code.dataSetParamDtoList.forEach((value) => {
             dataSetParam[value.paramName] = value.sampleItem;
           });
           setParams[code.setCode] = dataSetParam;
@@ -443,7 +491,7 @@ export default {
     async preview() {
       let routeUrl = this.$router.resolve({
         path: "/excelreport/viewer",
-        query: { reportCode: this.reportCode }
+        query: { reportCode: this.reportCode },
       });
       window.open(routeUrl.href, "_blank");
     },
@@ -458,7 +506,7 @@ export default {
       if (this.multipleSelection.length > 1) {
         this.$message({
           message: "一次最多勾选一个数据集",
-          type: "warning"
+          type: "warning",
         });
         this.outerVisible = true;
       } else {
@@ -469,7 +517,7 @@ export default {
       const { code, data } = await detail(id);
       if (code != 200) return;
       let flag = true;
-      this.dataSet.forEach(value => {
+      this.dataSet.forEach((value) => {
         if (value.setCode === data.setCode) {
           flag = false;
         }
@@ -485,14 +533,14 @@ export default {
         }
       }
     },
-    autoChangeFunc(auto){
-      if(auto){
-        luckysheet.setCellValue(this.rightForm.r, this.rightForm.c, { auto: "1"})
-      }else{
-        luckysheet.setCellValue(this.rightForm.r, this.rightForm.c, { auto: "0"})
+    autoChangeFunc(auto) {
+      if (auto) {
+        luckysheet.setCellValue(this.rightForm.r, this.rightForm.c, { auto: "1" });
+      } else {
+        luckysheet.setCellValue(this.rightForm.r, this.rightForm.c, { auto: "0" });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

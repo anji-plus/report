@@ -48,7 +48,9 @@ import {widgetBorder} from "./configure/styleWidget/widget-border";
 import {widgetDecorateFlowLine} from "./configure/styleWidget/widget-decorate-flow-line";
 import {widgetDecoration} from "./configure/styleWidget/widget-decoration";
 import {widgetBarMap} from "./configure/mapCharts/widget-bar-map";
-import {widgetBarStackMoreShow} from "./configure/barCharts/widget-bar-stack-more-show";
+import {widgetChinaMap} from "./configure/mapCharts/widget-china-map";
+import {widgetGlobalMap} from "./configure/mapCharts/widget-global-map";
+import {widgetScatter} from "./configure/scatterCharts/widget-scatter";
 
 export const widgetTool = [
   // type=html类型的组件
@@ -93,5 +95,7 @@ export const widgetTool = [
   widgetFormTime,
   widgetBarDoubleYaxis,
   widgetBarMap,
-  widgetBarStackMoreShow
+  widgetChinaMap,
+  widgetGlobalMap,
+  widgetScatter
 ]
