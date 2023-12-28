@@ -12,7 +12,7 @@
     @blur="handleBlur"
   >
     <!-- :z-index="-1" -->
-    <component :is="type" :widget-index="index" :value="value" />
+    <component :is="type" :widget-index="index" :value="value"/>
   </avue-draggable>
 </template>
 
@@ -60,6 +60,7 @@ import widgetDecoration from "./styleWidget/widgetDecoration.vue";
 import widgetBarMap from "./map/widgetBarMap.vue";
 import widgetChinaMap from "./map/widgetChinaMap.vue";
 import widgetGlobalMap from "./map/widgetGlobalMap.vue";
+import widgetBarStackMoreShowChart from "./bar/widgetBarStackMoreShowChart.vue";
 
 export default {
   name: "Widget",
@@ -106,7 +107,8 @@ export default {
     widgetBarMap,
     widgetChinaMap,
     widgetGlobalMap,
-    widgetScatter
+    widgetScatter,
+    widgetBarStackMoreShowChart
   },
   model: {
     prop: "value",
@@ -122,7 +124,8 @@ export default {
     bigscreen: Object,
     value: {
       type: [Object],
-      default: () => {},
+      default: () => {
+      },
     },
     step: Number,
   },
@@ -157,25 +160,27 @@ export default {
       return this.value.position.disabled || false;
     },
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
-    handleFocus({ index, left, top, width, height }) {},
-    handleBlur({ index, left, top, width, height }) {
-      this.$emit("onActivated", { index, left, top, width, height });
+    handleFocus({index, left, top, width, height}) {
+    },
+    handleBlur({index, left, top, width, height}) {
+      this.$emit("onActivated", {index, left, top, width, height});
       this.$refs.draggable.setActive(true);
       // 处理widget超出workbench的问题
       //this.handleBoundary({ index, left, top, width, height })
     },
-    handleBoundary({ index, left, top, width, height }) {
+    handleBoundary({index, left, top, width, height}) {
       // 计算workbench的X轴边界值
       // 组件距离左侧宽度 + 组件宽度 > 大屏总宽度时，右侧边界值 = (大屏宽度 - 组件宽度)；左侧边界值 = 0
-      const { bigscreenWidth, bigscreenHeight } = this.bigscreen;
+      const {bigscreenWidth, bigscreenHeight} = this.bigscreen;
       const xBoundaryValue =
         left + width > bigscreenWidth
           ? bigscreenWidth - width
           : left < 0
-          ? 0
-          : left;
+            ? 0
+            : left;
       // 初始化X轴边界值
       this.leftMargin = left;
       // 计算Y轴边界值
@@ -183,8 +188,8 @@ export default {
         top + height > bigscreenHeight
           ? bigscreenHeight - height
           : top < 0
-          ? 0
-          : top;
+            ? 0
+            : top;
       // 初始化Y轴边界值
       this.topMargin = top;
       // 若位置超出边界值则重新设置位置

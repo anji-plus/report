@@ -45,6 +45,7 @@ import widgetInput from "./form/widgetInput.vue";
 import widgetFormTime from "./form/widgetFormTime.vue";
 import widgetScaleVertical from "./scale/widgetScaleVertical.vue";
 import widgetScaleHorizontal from "./scale/widgetScaleHorizontal.vue";
+import widgetScatter from "./scatter/widgetScatter.vue";
 import widgetBarDoubleYaxisChart from "./bar/widgetBarDoubleYaxisChart.vue";
 import widgetDecorateFlowLine from "./styleWidget/widgetDecorateFlowLine.vue";
 import widgetBorder from "./styleWidget/widgetBorder.vue";
@@ -52,7 +53,7 @@ import widgetDecoration from "./styleWidget/widgetDecoration.vue";
 import widgetBarMap from "./map/widgetBarMap.vue";
 import widgetChinaMap from "./map/widgetChinaMap.vue";
 import widgetGlobalMap from "./map/widgetGlobalMap.vue";
-import widgetScatter from "./scatter/widgetScatter.vue";
+import widgetBarStackMoreShowChart from "./bar/widgetBarStackMoreShowChart.vue";
 
 export default {
   name: "WidgetTemp",
@@ -99,7 +100,8 @@ export default {
     widgetBarMap,
     widgetChinaMap,
     widgetGlobalMap,
-    widgetScatter
+    widgetScatter,
+    widgetBarStackMoreShowChart,
   },
   model: {
     prop: "value",
@@ -109,7 +111,8 @@ export default {
     type: String,
     value: {
       type: [Object],
-      default: () => {},
+      default: () => {
+      },
     },
     index: {
       type: Number,
@@ -119,7 +122,8 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {},
 };
 </script>
