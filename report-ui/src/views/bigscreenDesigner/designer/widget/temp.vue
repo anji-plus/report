@@ -1,10 +1,3 @@
-<!--
- * @Descripttion: 大屏报表设计器-组件注册
- * @Author: Devli
- * @Date: 2021-3-19 10:23:27
- * @LastEditors: qianlishi
- * @LastEditTime: 2023-2-7 17:38:44
--->
 <template>
   <div>
     <component
@@ -57,7 +50,9 @@ import widgetDecorateFlowLine from "./styleWidget/widgetDecorateFlowLine.vue";
 import widgetBorder from "./styleWidget/widgetBorder.vue";
 import widgetDecoration from "./styleWidget/widgetDecoration.vue";
 import widgetBarMap from "./map/widgetBarMap.vue";
-import widgetBarStackMoreShowChart from "./bar/widgetBarStackMoreShowChart.vue";
+import widgetChinaMap from "./map/widgetChinaMap.vue";
+import widgetGlobalMap from "./map/widgetGlobalMap.vue";
+import widgetScatter from "./scatter/widgetScatter.vue";
 
 export default {
   name: "WidgetTemp",
@@ -102,7 +97,9 @@ export default {
     widgetFormTime,
     widgetBarDoubleYaxisChart,
     widgetBarMap,
-    widgetBarStackMoreShowChart
+    widgetChinaMap,
+    widgetGlobalMap,
+    widgetScatter
   },
   model: {
     prop: "value",

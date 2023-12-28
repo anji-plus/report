@@ -299,6 +299,12 @@
                   v-model="formData[itemChildList.name]"
                   @change="changed($event, itemChildList.name)"
                 />
+                <customNameComponents
+                  v-if="itemChildList.type == 'customName'"
+                  :key="'b-' + idx"
+                  v-model="formData[itemChildList.name]"
+                  @change="changed($event, itemChildList.name)"
+                />
                 <componentLinkage
                   v-if="itemChildList.type == 'componentLinkage'"
                   :key="'cl-' + idx"
@@ -329,6 +335,7 @@ import "codemirror/mode/sql/sql.js";
 import "codemirror/mode/shell/shell.js";
 import dynamicComponents from "./dynamicComponents.vue";
 import customColorComponents from "./customColorComponents";
+import customNameComponents from "./customNameComponents";
 import dynamicAddTable from "./dynamicAddTable.vue";
 import customUpload from "./customUpload.vue";
 import dynamicAddRadar from "./dynamicAddRadar";
@@ -341,6 +348,7 @@ export default {
     vueJsonEditor,
     dynamicComponents,
     customColorComponents,
+    customNameComponents,
     dynamicAddTable,
     customUpload,
     dynamicAddRadar,

@@ -1,3 +1,4 @@
+
 ## 简介
 
 &emsp; &emsp; AJ-Report是全开源的一个BI平台，酷炫大屏展示，能随时随地掌控业务动态，让每个决策都有数据支撑。<br>
@@ -174,19 +175,30 @@ aj_report（存放系统基础数据）数据库 <br>
 登记并提供贵公司、组织、学校的logo，我们将把贵方的logo放在项目首页进行展示并优先进行技术支持 <br>
 
 <a href='http://www.anji-plus.com/'> <img src="https://ajreport.beliefteam.cn/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/> </a>
-<a href='https://www.yunstech.cn/'><img src="https://www.yunstech.cn/images/logo.png" width = "130" height = "50" /> </a>
+<a href='https://www.yunstech.cn/'><img src="https://ajreport.beliefteam.cn/file/download/d9020e78-cd51-404d-9996-ef32a3654beb" width = "130" height = "50" /> </a>
 <a href='http://www.fgkb.net/'><img src="https://ajreport.beliefteam.cn/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
 <a href='http://www.turingoal.com/'><img src="https://ajreport.beliefteam.cn/file/download/cda7bf68-376b-45dc-9a55-c52b21e4a8c8" width = "130" height = "50" /> </a>
+<br>
 <a href='https://www.gykjweb.com/'><img src="https://ajreport.beliefteam.cn/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a> 
-<img src="https://ajreport.beliefteam.cn/file/download/7fb4731c-a697-4049-b386-396a6c1f9270" width = "130" height = "130" /> <br>
+<img src="https://ajreport.beliefteam.cn/file/download/7fb4731c-a697-4049-b386-396a6c1f9270" width = "130" height = "130" />
+<img src="https://foruda.gitee.com/images/1694349610486939594/f2cd89ab_7349845.png" width = "130" height = "130" /> 
+<a href='https://soft.pusdn.com/'><img src="https://foruda.gitee.com/images/1694967000938437067/9f2f7fcf_868742.png" width = "130" height = "130" /> </a>  
+<br>
 <a href='http://www.plian.net/'><img src="https://ajreport.beliefteam.cn/file/download/7838f2c2-fdce-4ca7-8373-14d13dcda5cc" width = "130" height = "50" /> </a>
 <a href='https://www.zjjcl.cn/'><img src="https://ajreport.beliefteam.cn/file/download/8df07663-60c9-4e32-a0f2-0ea7d5c46ff9" width = "130" height = "50" /> </a>
 <a href='http://www.jiuyinkj.com/'><img src="https://ajreport.beliefteam.cn/file/download/5889f0e6-ba08-4990-ac89-eabfbb8af8bd" width = "130" height = "50" /> </a>
-<a href='http://www.yourongyun.cn/'><img src="https://ajreport.beliefteam.cn/file/download/90e15ed9-5594-4c14-b318-72aeb6816fb9" width = "130" height = "50" /> </a> </br>
+<a href='http://www.yourongyun.cn/'><img src="https://ajreport.beliefteam.cn/file/download/90e15ed9-5594-4c14-b318-72aeb6816fb9" width = "130" height = "50" /> </a> 
+</br>
 <a href='https://www.wenkai.net/'><img src="https://ajreport.beliefteam.cn/file/download/ec788c55-bffd-4809-ae3c-0ce2cbd1a9d0" width = "130" height = "50" /> </a>
 <a href='http://www.sungcor.com/'><img src="https://ajreport.beliefteam.cn/file/download/0514a4a6-787b-4e25-be94-03ff94309553" width = "130" height = "50" /> </a>
 <a href='http://www.jtit.com.cn/'><img src="https://ajreport.beliefteam.cn/file/download/1dc47a36-a515-4775-af44-262225b3662b" width = "130" height = "50" /> </a>
-<img src="https://foruda.gitee.com/images/1674127216326288249/5a251727_10057706.png" width = "130" height = "50" /> <br>
+<img src="https://foruda.gitee.com/images/1674127216326288249/5a251727_10057706.png" width = "130" height = "50" /> 
+<br>
+<img src="https://foruda.gitee.com/images/1691410310696414681/4d929a1f_9924966.png" width = "130" height = "50" /> 
+<img src="https://foruda.gitee.com/images/1699350359035432620/d6f9fe27_12173106.jpeg" width = "130" height = "50" /> 
+<br>
+<img src="https://foruda.gitee.com/images/1696254998043055555/67afe17a_4817562.png" width = "130" height = "130" /> 
+<img src="https://ajreport.beliefteam.cn/file/download/38efc241-02db-404e-a181-e5f7632ff2f6" width = "130" height = "130" /> 
 
 ## 已知问题
 
@@ -220,9 +232,18 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
-个人企业微信：加微信进群备注 **AJ-Report** 或者 **Report**，**一定要加备注 ！！！**<br>
-如果不是为了进群，请直接说明来意，每天加群的都很多，企微也是我们自己的工作企微，会有很多消息会被刷下去，如果半天没有回复你，请过段时间再发送。 <br>
-<img src="https://images.gitee.com/uploads/images/2021/0729/130901_1672e6c5_7492051.jpeg" width = "300" height = "300" align=left/>
+AJ-Report技术交流六群，新群可直接加，有问题都可以在群里问 <br>
+如果不能直接加进去或者群二维码过期了，请添加下面个人微信<br>
+<img src="https://ajreport.beliefteam.cn/file/download/856c9469-e306-406a-b2b9-e196050f3dd5" width = "300" height = "450" align=left/> <br>
+
+
+个人微信：个人微信，不闲聊，加群、咨询请备注，备注格式不限但最好是：“项目名 + 问题” ，项目名可以是**AJ-Report**、**Report**、**大屏**，只要能一眼分辨就行 <br>
+例1：大屏 加群 <br>
+例2：report 有个问题xxxx <br>
+有问题，不管是技术问题还是使用问题，都尽量在群里问，没啥特殊问题尽量别加个人微信。加个人微信记得**一定要加备注 ！！！**<br>
+
+<img src="https://ajreport.beliefteam.cn/file/download/a3440fb7-e20c-42fa-b7af-805f5523c746" width = "300" height = "450" align=left/>
+
 
 ## 更多支持
 
