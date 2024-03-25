@@ -1,12 +1,10 @@
 import { dataArr } from "@/utils/word";
-
-
 export const widgetGlobalMap = {
   code: 'widgetGlobalMap',
   type: 'mapChart',
   tabName: '地图',
   label: '世界色阶图',
-  icon: 'iconglobalditu',
+  icon: 'icon-ditu1',
   options: {
     // 配置
     setup: [

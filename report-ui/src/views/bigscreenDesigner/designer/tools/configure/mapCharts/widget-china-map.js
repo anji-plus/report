@@ -3,7 +3,7 @@ export const widgetChinaMap = {
   type: 'mapChart',
   tabName: '地图',
   label: '中国色阶图',
-  icon: 'iconzhongguoditu',
+  icon: 'icon-ditu1',
   options: {
     // 配置
     setup: [

@@ -11,7 +11,7 @@ export const widgetScatter = {
   type: 'scatter',
   tabName: '散点图',
   label: '散点图',
-  icon: 'icon-sandiantu',
+  icon: 'icon-24gf-chartScatter',
   options: {
     // 配置
     setup: [
