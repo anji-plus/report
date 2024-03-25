@@ -4,7 +4,7 @@ services:
   aj-report:
     container_name: aj-report
     build:
-      context: .
+      context: ../..
     restart: always
     ports:
       - 9095:9095
