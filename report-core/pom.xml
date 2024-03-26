@@ -14,7 +14,7 @@
 
     <groupId>com.anji-plus</groupId>
     <artifactId>aj-report</artifactId>
-    <version>1.3.0.RELEASE</version>
+    <version>1.4.0.RELEASE</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
