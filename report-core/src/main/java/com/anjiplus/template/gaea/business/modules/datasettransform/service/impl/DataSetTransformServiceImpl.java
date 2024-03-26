@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
 * @desc DataSetTransform 数据集数据转换服务实现
@@ -47,9 +49,8 @@ public class DataSetTransformServiceImpl implements DataSetTransformService, Ini
     public void afterPropertiesSet() {
         Map<String, TransformStrategy> beanMap = applicationContext.getBeansOfType(TransformStrategy.class);
         //遍历该接口的所有实现，将其放入map中
-        for (TransformStrategy serviceImpl : beanMap.values()) {
-            queryServiceImplMap.put(serviceImpl.type(), serviceImpl);
-        }
+        queryServiceImplMap.putAll(beanMap.values().stream()
+                .collect(Collectors.toMap(TransformStrategy::type, Function.identity())));
     }
 
     @Override

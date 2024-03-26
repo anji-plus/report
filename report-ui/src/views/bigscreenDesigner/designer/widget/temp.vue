@@ -1,10 +1,3 @@
-<!--
- * @Descripttion: 大屏报表设计器-组件注册
- * @Author: Devli
- * @Date: 2021-3-19 10:23:27
- * @LastEditors: qianlishi
- * @LastEditTime: 2023-2-7 17:38:44
--->
 <template>
   <div>
     <component
@@ -52,11 +45,14 @@ import widgetInput from "./form/widgetInput.vue";
 import widgetFormTime from "./form/widgetFormTime.vue";
 import widgetScaleVertical from "./scale/widgetScaleVertical.vue";
 import widgetScaleHorizontal from "./scale/widgetScaleHorizontal.vue";
+import widgetScatter from "./scatter/widgetScatter.vue";
 import widgetBarDoubleYaxisChart from "./bar/widgetBarDoubleYaxisChart.vue";
 import widgetDecorateFlowLine from "./styleWidget/widgetDecorateFlowLine.vue";
 import widgetBorder from "./styleWidget/widgetBorder.vue";
 import widgetDecoration from "./styleWidget/widgetDecoration.vue";
 import widgetBarMap from "./map/widgetBarMap.vue";
+import widgetChinaMap from "./map/widgetChinaMap.vue";
+import widgetGlobalMap from "./map/widgetGlobalMap.vue";
 import widgetBarStackMoreShowChart from "./bar/widgetBarStackMoreShowChart.vue";
 
 export default {
@@ -102,7 +98,10 @@ export default {
     widgetFormTime,
     widgetBarDoubleYaxisChart,
     widgetBarMap,
-    widgetBarStackMoreShowChart
+    widgetChinaMap,
+    widgetGlobalMap,
+    widgetScatter,
+    widgetBarStackMoreShowChart,
   },
   model: {
     prop: "value",
@@ -112,7 +111,8 @@ export default {
     type: String,
     value: {
       type: [Object],
-      default: () => {},
+      default: () => {
+      },
     },
     index: {
       type: Number,
@@ -122,7 +122,8 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {},
 };
 </script>

@@ -5,27 +5,26 @@ import com.alibaba.fastjson.JSONObject;
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
 import com.anji.plus.gaea.utils.GaeaAssert;
-import com.anji.plus.gaea.utils.GaeaBeanUtils;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.anjiplus.template.gaea.business.modules.dashboard.controller.dto.ChartDto;
 import com.anjiplus.template.gaea.business.modules.dashboard.controller.dto.ReportDashboardDto;
 import com.anjiplus.template.gaea.business.modules.dashboard.controller.dto.ReportDashboardObjectDto;
 import com.anjiplus.template.gaea.business.modules.dashboard.dao.ReportDashboardMapper;
+import com.anjiplus.template.gaea.business.modules.dashboard.dao.entity.ReportDashboard;
 import com.anjiplus.template.gaea.business.modules.dashboard.service.ChartStrategy;
 import com.anjiplus.template.gaea.business.modules.dashboard.service.ReportDashboardService;
-import com.anjiplus.template.gaea.business.modules.file.entity.GaeaFile;
-import com.anjiplus.template.gaea.business.modules.file.service.GaeaFileService;
-import com.anjiplus.template.gaea.business.modules.file.util.FileUtils;
-import com.anjiplus.template.gaea.business.modules.report.service.ReportService;
-import com.anjiplus.template.gaea.business.util.DateUtil;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.controller.dto.ReportDashboardWidgetDto;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.controller.dto.ReportDashboardWidgetValueDto;
-import com.anjiplus.template.gaea.business.modules.dashboard.dao.entity.ReportDashboard;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.dao.entity.ReportDashboardWidget;
 import com.anjiplus.template.gaea.business.modules.dashboardwidget.service.ReportDashboardWidgetService;
 import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.DataSetDto;
 import com.anjiplus.template.gaea.business.modules.dataset.controller.dto.OriginalDataDto;
 import com.anjiplus.template.gaea.business.modules.dataset.service.DataSetService;
+import com.anjiplus.template.gaea.business.modules.file.entity.GaeaFile;
+import com.anjiplus.template.gaea.business.modules.file.service.GaeaFileService;
+import com.anjiplus.template.gaea.business.modules.file.util.FileUtils;
+import com.anjiplus.template.gaea.business.modules.report.service.ReportService;
+import com.anjiplus.template.gaea.business.util.DateUtil;
 import com.anjiplus.template.gaea.business.util.FileUtil;
 import com.anjiplus.template.gaea.business.util.RequestUtil;
 import com.anjiplus.template.gaea.business.util.UuidUtil;
@@ -50,7 +49,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -100,12 +98,12 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
     @Override
     public ReportDashboardObjectDto getDetail(String reportCode) {
         ReportDashboardObjectDto result = new ReportDashboardObjectDto();
-        ReportDashboardDto reportDashboardDto = new ReportDashboardDto();
         ReportDashboard reportDashboard = this.selectOne("report_code", reportCode);
         if (null == reportDashboard) {
-            return new ReportDashboardObjectDto();
+            return result;
         }
-        GaeaBeanUtils.copyAndFormatter(reportDashboard, reportDashboardDto);
+        ReportDashboardDto reportDashboardDto = new ReportDashboardDto();
+        BeanUtils.copyProperties(reportDashboard, reportDashboardDto);
 
         List<ReportDashboardWidget> list = reportDashboardWidgetService.list(
                 new QueryWrapper<ReportDashboardWidget>().lambda()
@@ -147,7 +145,6 @@ public class ReportDashboardServiceImpl implements ReportDashboardService, Initi
         //查询ReportDashboard
         ReportDashboard reportDashboard = this.selectOne("report_code", reportCode);
         ReportDashboard dashboard = new ReportDashboard();
-        GaeaBeanUtils.copyAndFormatter(dto.getDashboard(), dashboard);
         BeanUtils.copyProperties(dto.getDashboard(), dashboard);
         dashboard.setReportCode(reportCode);
         if (null == reportDashboard) {

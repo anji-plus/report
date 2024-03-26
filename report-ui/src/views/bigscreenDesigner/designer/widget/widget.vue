@@ -1,10 +1,3 @@
-<!--
- * @Descripttion: 大屏报表设计器-动态组件
- * @Author: Devli
- * @Date: 2021-3-26 16:38:27
- * @LastEditors: qianlishi
- * @LastEditTime: 2023-3-9 17:38:44
--->
 <template>
   <avue-draggable
     :step="step"
@@ -19,7 +12,7 @@
     @blur="handleBlur"
   >
     <!-- :z-index="-1" -->
-    <component :is="type" :widget-index="index" :value="value" />
+    <component :is="type" :widget-index="index" :value="value"/>
   </avue-draggable>
 </template>
 
@@ -33,6 +26,7 @@ import widgetSlider from "./texts/widgetSlider.vue";
 import widgetVideo from "./texts/widgetVideo.vue";
 import WidgetIframe from "./texts/widgetIframe.vue";
 import widgetBarchart from "./bar/widgetBarchart.vue";
+import widgetScatter from "./scatter/widgetScatter.vue";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
 import widgetLinechart from "./line/widgetLinechart.vue";
 import widgetBarlinechart from "./barline/widgetBarlinechart";
@@ -64,6 +58,8 @@ import widgetBorder from "./styleWidget/widgetBorder.vue";
 import widgetDecorateFlowLine from "./styleWidget/widgetDecorateFlowLine.vue";
 import widgetDecoration from "./styleWidget/widgetDecoration.vue";
 import widgetBarMap from "./map/widgetBarMap.vue";
+import widgetChinaMap from "./map/widgetChinaMap.vue";
+import widgetGlobalMap from "./map/widgetGlobalMap.vue";
 import widgetBarStackMoreShowChart from "./bar/widgetBarStackMoreShowChart.vue";
 
 export default {
@@ -109,6 +105,9 @@ export default {
     widgetFormTime,
     widgetBarDoubleYaxisChart,
     widgetBarMap,
+    widgetChinaMap,
+    widgetGlobalMap,
+    widgetScatter,
     widgetBarStackMoreShowChart
   },
   model: {
@@ -125,7 +124,8 @@ export default {
     bigscreen: Object,
     value: {
       type: [Object],
-      default: () => {},
+      default: () => {
+      },
     },
     step: Number,
   },
@@ -160,25 +160,27 @@ export default {
       return this.value.position.disabled || false;
     },
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
-    handleFocus({ index, left, top, width, height }) {},
-    handleBlur({ index, left, top, width, height }) {
-      this.$emit("onActivated", { index, left, top, width, height });
+    handleFocus({index, left, top, width, height}) {
+    },
+    handleBlur({index, left, top, width, height}) {
+      this.$emit("onActivated", {index, left, top, width, height});
       this.$refs.draggable.setActive(true);
       // 处理widget超出workbench的问题
       //this.handleBoundary({ index, left, top, width, height })
     },
-    handleBoundary({ index, left, top, width, height }) {
+    handleBoundary({index, left, top, width, height}) {
       // 计算workbench的X轴边界值
       // 组件距离左侧宽度 + 组件宽度 > 大屏总宽度时，右侧边界值 = (大屏宽度 - 组件宽度)；左侧边界值 = 0
-      const { bigscreenWidth, bigscreenHeight } = this.bigscreen;
+      const {bigscreenWidth, bigscreenHeight} = this.bigscreen;
       const xBoundaryValue =
         left + width > bigscreenWidth
           ? bigscreenWidth - width
           : left < 0
-          ? 0
-          : left;
+            ? 0
+            : left;
       // 初始化X轴边界值
       this.leftMargin = left;
       // 计算Y轴边界值
@@ -186,8 +188,8 @@ export default {
         top + height > bigscreenHeight
           ? bigscreenHeight - height
           : top < 0
-          ? 0
-          : top;
+            ? 0
+            : top;
       // 初始化Y轴边界值
       this.topMargin = top;
       // 若位置超出边界值则重新设置位置

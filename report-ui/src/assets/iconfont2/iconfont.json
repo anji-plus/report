@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "7542469",
+      "name": "24gf-chartScatter",
+      "font_class": "24gf-chartScatter",
+      "unicode": "e849",
+      "unicode_decimal": 59465
+    },
+    {
       "icon_id": "7463933",
       "name": "地图",
       "font_class": "ditu1",
