@@ -132,8 +132,10 @@ public class DataSetServiceImpl implements DataSetService {
         if (StringUtils.isNotBlank(dto.getCaseResult())) {
             try {
                 JSONArray jsonArray = JSONArray.parseArray(dto.getCaseResult());
-                JSONObject jsonObject = jsonArray.getJSONObject(0);
-                dto.setSetParamList(jsonObject.keySet());
+                if (!jsonArray.isEmpty()) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    dto.setSetParamList(jsonObject.keySet());
+                }
             } catch (Exception e) {
                 log.error("error", e);
             }
