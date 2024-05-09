@@ -1,4 +1,3 @@
-
 package com.anjiplus.template.gaea.business.modules.datasetparam.service.impl;
 
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
@@ -10,6 +9,8 @@ import com.anjiplus.template.gaea.business.modules.datasetparam.service.DataSetP
 import com.anjiplus.template.gaea.business.modules.datasetparam.util.ParamsResolverHelper;
 import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Sets;
+import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,10 @@ import org.springframework.stereotype.Service;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
 * @desc DataSetParam 数据集动态参数服务实现
@@ -31,11 +32,12 @@ import java.util.Map;
 //@RequiredArgsConstructor
 @Slf4j
 public class DataSetParamServiceImpl implements DataSetParamService {
+    static final Set<String> blackList = Sets.newHashSet("java.lang.ProcessBuilder", "java.lang.Runtime", "java.lang.ProcessImpl");
 
     private ScriptEngine engine;
     {
-        ScriptEngineManager manager = new ScriptEngineManager();
-        engine = manager.getEngineByName("JavaScript");
+        NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
+        engine = factory.getScriptEngine(clz -> !blackList.contains(clz));
     }
 
     @Autowired
