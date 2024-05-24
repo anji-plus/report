@@ -32,6 +32,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -215,6 +216,8 @@ public class ReportExcelServiceImpl implements ReportExcelService {
     // 将Excel文件转换为PDF
     public File convertExcelToPdf(String excelFilePath, String pdfFilePath, List<List<ReportExcelStyleDto>> reportExcelStyleList) {
         try {
+            //  解决excel转换为pdf zipboom问题
+            ZipSecureFile.setMinInflateRatio(0);
             // 读取Excel文件
             Workbook workbook = new XSSFWorkbook(excelFilePath);
             Sheet sheet = workbook.getSheetAt(0);
