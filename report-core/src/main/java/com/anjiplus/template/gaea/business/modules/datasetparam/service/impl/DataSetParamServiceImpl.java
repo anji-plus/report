@@ -33,11 +33,13 @@ import java.util.Set;
 @Slf4j
 public class DataSetParamServiceImpl implements DataSetParamService {
     static final Set<String> blackList = Sets.newHashSet("java.lang.ProcessBuilder", "java.lang.Runtime", "java.lang.ProcessImpl");
-
-    private ScriptEngine engine;
-    {
+    private static final ThreadLocal<ScriptEngine> engineHolder = ThreadLocal.withInitial(() -> {
         NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
-        engine = factory.getScriptEngine(clz -> !blackList.contains(clz));
+        ScriptEngine engine = factory.getScriptEngine(clz -> !blackList.contains(clz));
+        return engine;
+    });
+    public static ScriptEngine getEngine() {
+        return engineHolder.get();
     }
 
     @Autowired
@@ -96,10 +98,10 @@ public class DataSetParamServiceImpl implements DataSetParamService {
      */
     @Override
     public Object verification(DataSetParamDto dataSetParamDto) {
-
         String validationRules = dataSetParamDto.getValidationRules();
         if (StringUtils.isNotBlank(validationRules)) {
             try {
+                ScriptEngine engine = getEngine();
                 engine.eval(validationRules);
                 if(engine instanceof Invocable){
                     Invocable invocable = (Invocable) engine;
