@@ -288,7 +288,7 @@ export default {
           }
           that.luckysheet.destroy();
           // that.luckysheet.refresh({
-          //   container: "luckysheet", 
+          //   container: "luckysheet",
           //   showinfobar: false,
           //   data: exportJson.sheets,
           //   title: exportJson.info.name,
@@ -503,15 +503,9 @@ export default {
     },
     checkDataSet() {
       this.outerVisible = false;
-      if (this.multipleSelection.length > 1) {
-        this.$message({
-          message: "一次最多勾选一个数据集",
-          type: "warning",
-        });
-        this.outerVisible = true;
-      } else {
-        this.detail(this.multipleSelection[0].id);
-      }
+      this.multipleSelection.forEach((value => {
+        this.detail(value.id)
+      }))
     },
     async detail(id) {
       const { code, data } = await detail(id);
