@@ -27,6 +27,11 @@
 			<fileMode>0755</fileMode>
 		</fileSet>
 		<fileSet>
+			<directory>lib/postgresql</directory>
+			<outputDirectory>lib</outputDirectory>
+			<fileMode>0755</fileMode>
+		</fileSet>
+		<fileSet>
 			<directory>src/main/assembly/bin</directory>
 			<outputDirectory>bin</outputDirectory>
 			<fileMode>0755</fileMode>
