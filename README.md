@@ -12,6 +12,8 @@
 
 #### &emsp; [在线文档（暂时下线）](https://ajreport.beliefteam.cn/report-doc/ "doc"): https://ajreport.beliefteam.cn/report-doc/ <br>
 
+#### &emsp; [模板下载](https://pan.baidu.com/s/1o08pJETfTCMa0B6kSfkquw "temp"): https://pan.baidu.com/s/1o08pJETfTCMa0B6kSfkquw 提取码：psnb<br>
+
 #### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
 ## 发行版本
