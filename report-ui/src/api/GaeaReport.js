@@ -1,5 +1,6 @@
 import request from '@/utils/request'
 import {getShareToken, getToken} from "@/utils/auth";
+import axios from "axios";
 
 // 设计报表
 export function design(data) {
@@ -22,10 +23,23 @@ export function preview(data) {
 
 // 导出报表
 export function exportExcel(data) {
-  return request({
+/*  return request({
     url: 'reportExcel/exportExcel',
     method: 'post',
     data,
+  })*/
+  return new Promise((resolve) =>{
+    axios({
+      method:'post',
+      url: process.env.BASE_API + '/reportExcel/exportExcel',
+      headers: { 'Authorization': getToken() },
+      data,
+      responseType:'blob'
+    }).then(res =>{
+      resolve(res.data);
+    }).catch(err =>{
+      resolve('error');
+    })
   })
 }
 
