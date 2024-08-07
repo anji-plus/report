@@ -80,6 +80,47 @@ export const widgetTable = {
               value: '#fff',
             },
             {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'headTextFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'headTextFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'headTextFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+            {
               type: 'vue-color',
               label: '表头背景色',
               name: 'headBackColor',
@@ -120,6 +161,47 @@ export const widgetTable = {
               required: false,
               placeholder: '',
               value: '#fff',
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'bodyTextFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'bodyTextFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'bodyTextFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
             },
             {
               type: 'vue-color',

@@ -82,6 +82,9 @@ export default {
       return {
         "text-align": headStyle.textAlignHeader,
         "font-size": headStyle.fontSizeHeader + "px",
+        "font-weight": headStyle.headTextFontWeight,
+        "font-style": headStyle.headTextFontStyle,
+        "font-family": headStyle.headTextFontFamily,
         "border-style": headStyle.isLine ? "solid" : "none",
         "border-width": headStyle.borderWidth + "px",
         "border-color": headStyle.borderColor,
@@ -96,6 +99,9 @@ export default {
       return {
         "text-align": bodyStyle.textAlignBody,
         "font-size": bodyStyle.fontSizeBody + "px",
+        "font-weight": bodyStyle.bodyTextFontWeight,
+        "font-style": bodyStyle.bodyTextFontStyle,
+        "font-family": bodyStyle.bodyTextFontFamily,
         "border-style": bodyStyle.isLine ? "solid" : "none",
         "border-width": bodyStyle.borderWidth + "px",
         "border-color": bodyStyle.borderColor,
