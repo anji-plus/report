@@ -22,23 +22,60 @@ export const widgetTable = {
         placeholder: '',
         value: '表格',
       },
-      {
-        type: 'el-input-number',
-        label: '显示行数',
-        name: 'vis',
-        required: false,
-        placeholder: '',
-        value: '5'
-      },
-      {
-        type: 'el-input-number',
-        label: '行高',
-        name: 'rowHeight',
-        required: false,
-        placeholder: '',
-        value: '50'
-      },
       [
+        {
+          name: '表格设置',
+          list: [
+            {
+              type: 'el-input-number',
+              label: '显示行数',
+              name: 'vis',
+              required: false,
+              placeholder: '',
+              value: '5'
+            },
+            {
+              type: 'el-input-number',
+              label: '行高',
+              name: 'rowHeight',
+              required: false,
+              placeholder: '',
+              value: '50'
+            },
+            {
+              type: 'vue-color',
+              label: '背景色',
+              name: 'tableBgColor',
+              require: false,
+              placeholder: '',
+              value: '',
+            },
+            {
+              type: 'el-switch',
+              label: '边框线',
+              name: 'isLine',
+              required: false,
+              placeholder: '',
+              value: false
+            },
+            {
+              type: 'el-input-number',
+              label: '边框宽度',
+              name: 'borderWidth',
+              required: false,
+              placeholder: '',
+              value: 1
+            },
+            {
+              type: 'vue-color',
+              label: '边框颜色',
+              name: 'borderColor',
+              required: false,
+              placeholder: '',
+              value: '#fff'
+            },
+          ]
+        },
         {
           name: '表头设置',
           list: [
@@ -122,7 +159,7 @@ export const widgetTable = {
             },
             {
               type: 'vue-color',
-              label: '表头背景色',
+              label: '背景色',
               name: 'headBackColor',
               require: false,
               placeholder: '',
@@ -205,14 +242,6 @@ export const widgetTable = {
             },
             {
               type: 'vue-color',
-              label: '表体背景色',
-              name: 'tableBgColor',
-              require: false,
-              placeholder: '',
-              value: '',
-            },
-            {
-              type: 'vue-color',
               label: '奇行颜色',
               name: 'oldColor',
               require: false,
@@ -229,75 +258,56 @@ export const widgetTable = {
             }
           ],
         },
+        {
+          name: '动画设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '开启滚动',
+              name: 'isRoll',
+              required: false,
+              placeholder: '',
+              value: true
+            },
+            {
+              type: 'el-select',
+              label: '动画效果',
+              name: 'effect',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'top', name: '上滚动' },
+                { code: 'topLoop', name: '上循环滚动' },
+              ],
+              value: 'topLoop'
+            },
+            {
+              type: 'el-input-number',
+              label: '滚动间隔(毫秒)',
+              name: 'interTime',
+              required: false,
+              placeholder: '',
+              value: 2500
+            },
+            {
+              type: 'el-input-number',
+              label: '动效时间(毫秒)',
+              name: 'delayTime',
+              required: false,
+              placeholder: '',
+              value: 500
+            },
+            {
+              type: 'el-input-number',
+              label: '滚动个数',
+              name: 'scroll',
+              required: false,
+              placeholder: '',
+              value: 1
+            },
+          ]
+        }
       ],
-      {
-        type: 'el-switch',
-        label: '开启滚动',
-        name: 'isRoll',
-        required: false,
-        placeholder: '',
-        value: true
-      },
-      {
-        type: 'el-select',
-        label: '动画效果',
-        name: 'effect',
-        required: false,
-        placeholder: '',
-        selectOptions: [
-          { code: 'top', name: '上滚动' },
-          { code: 'topLoop', name: '上循环滚动' },
-        ],
-        value: 'topLoop'
-      },
-      {
-        type: 'el-input-number',
-        label: '滚动间隔(毫秒)',
-        name: 'interTime',
-        required: false,
-        placeholder: '',
-        value: 2500
-      },
-      {
-        type: 'el-input-number',
-        label: '动效时间(毫秒)',
-        name: 'delayTime',
-        required: false,
-        placeholder: '',
-        value: 500
-      },
-      {
-        type: 'el-input-number',
-        label: '滚动个数',
-        name: 'scroll',
-        required: false,
-        placeholder: '',
-        value: 1
-      },
-      {
-        type: 'el-switch',
-        label: '边框线',
-        name: 'isLine',
-        required: false,
-        placeholder: '',
-        value: false
-      },
-      {
-        type: 'el-input-number',
-        label: '边框宽度',
-        name: 'borderWidth',
-        required: false,
-        placeholder: '',
-        value: 1
-      },
-      {
-        type: 'vue-color',
-        label: '边框颜色',
-        name: 'borderColor',
-        required: false,
-        placeholder: '',
-        value: '#fff'
-      },
       {
         type: 'dynamic-add-table',
         label: '',
@@ -308,7 +318,7 @@ export const widgetTable = {
           { name: '日期', key: 'date', width: '50%' },
           { name: '姓名', key: 'name', width: '50%' },
           {name: '地址', key: 'address', width: '200%',}
-          ]
+        ]
       }
     ],
     data: [

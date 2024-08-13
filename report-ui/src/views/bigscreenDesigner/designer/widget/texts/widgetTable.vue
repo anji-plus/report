@@ -4,7 +4,7 @@
       <!--表头-->
       <div class="title">
         <div v-for="(item, index) in header" :key="index"
-          :style="[headerTableStyle, tableFiledWidth(index), tableRowHeight()]">
+             :style="[headerTableStyle, tableFiledWidth(index), tableRowHeight()]">
           {{ item.name }}
         </div>
       </div>
@@ -13,8 +13,8 @@
         <ul class="infoList">
           <li v-for="(item, index) in list" :key="index" :style="tableRowHeight()">
             <div v-for="(itemChild, idx) in header"
-              :key="idx"
-              :style="[
+                 :key="idx"
+                 :style="[
                 bodyTableStyle,
                 bodyTable(index),
                 tableFiledWidth(idx),
@@ -106,7 +106,6 @@ export default {
         "border-width": bodyStyle.borderWidth + "px",
         "border-color": bodyStyle.borderColor,
         "color": bodyStyle.bodyColor,
-        "background-color": bodyStyle.tableBgColor
       };
     }
   },
