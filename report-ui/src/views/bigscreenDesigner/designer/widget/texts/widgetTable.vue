@@ -4,7 +4,7 @@
       <!--表头-->
       <div class="title">
         <div v-for="(item, index) in header" :key="index"
-          :style="[headerTableStyle, tableFiledWidth(index), tableRowHeight()]">
+             :style="[headerTableStyle, tableFiledWidth(index), tableRowHeight()]">
           {{ item.name }}
         </div>
       </div>
@@ -13,8 +13,8 @@
         <ul class="infoList">
           <li v-for="(item, index) in list" :key="index" :style="tableRowHeight()">
             <div v-for="(itemChild, idx) in header"
-              :key="idx"
-              :style="[
+                 :key="idx"
+                 :style="[
                 bodyTableStyle,
                 bodyTable(index),
                 tableFiledWidth(idx),
@@ -82,6 +82,9 @@ export default {
       return {
         "text-align": headStyle.textAlignHeader,
         "font-size": headStyle.fontSizeHeader + "px",
+        "font-weight": headStyle.headTextFontWeight,
+        "font-style": headStyle.headTextFontStyle,
+        "font-family": headStyle.headTextFontFamily,
         "border-style": headStyle.isLine ? "solid" : "none",
         "border-width": headStyle.borderWidth + "px",
         "border-color": headStyle.borderColor,
@@ -96,11 +99,13 @@ export default {
       return {
         "text-align": bodyStyle.textAlignBody,
         "font-size": bodyStyle.fontSizeBody + "px",
+        "font-weight": bodyStyle.bodyTextFontWeight,
+        "font-style": bodyStyle.bodyTextFontStyle,
+        "font-family": bodyStyle.bodyTextFontFamily,
         "border-style": bodyStyle.isLine ? "solid" : "none",
         "border-width": bodyStyle.borderWidth + "px",
         "border-color": bodyStyle.borderColor,
         "color": bodyStyle.bodyColor,
-        "background-color": bodyStyle.tableBgColor
       };
     }
   },

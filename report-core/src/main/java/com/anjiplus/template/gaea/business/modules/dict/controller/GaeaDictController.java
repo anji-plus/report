@@ -57,8 +57,12 @@ public class GaeaDictController extends GaeaBaseController<GaeaDictParam, GaeaDi
     @PostMapping("/freshDict")
     @Permission(code = "fresh",name = "刷新")
     public ResponseBean refreshDict(@RequestBody List<String> dictCodes) {
+        //语言
+        Locale locale = LocaleContextHolder.getLocale();
+        String language = locale.getLanguage();
+
         //刷新
-        gaeaDictService.refreshCache(dictCodes);
+        gaeaDictService.refreshCache(dictCodes, language);
         return responseSuccess();
     }
 
@@ -69,8 +73,8 @@ public class GaeaDictController extends GaeaBaseController<GaeaDictParam, GaeaDi
     @GetMapping("/select/{dictCode}")
     @Permission(code = "query",name = "下拉")
     public ResponseBean select(@PathVariable("dictCode") String dictName){
-        Locale locale = LocaleContextHolder.getLocale();
         //语言
+        Locale locale = LocaleContextHolder.getLocale();
         String language = locale.getLanguage();
 
         List<KeyValue> keyValues = gaeaDictService.select(dictName,language);

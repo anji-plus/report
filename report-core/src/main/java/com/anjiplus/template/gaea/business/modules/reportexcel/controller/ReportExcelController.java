@@ -14,8 +14,13 @@ import com.anjiplus.template.gaea.business.modules.reportshare.controller.dto.Re
 import com.anjiplus.template.gaea.business.modules.reportshare.service.ReportShareService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author chenkening
@@ -64,15 +69,11 @@ public class ReportExcelController extends GaeaBaseController<ReportExcelParam, 
         return ResponseBean.builder().data(result).build();
     }
 
-
     @PostMapping("/exportExcel")
+    @GaeaAuditLog(pageTitle = "excel导出")
     @Permission(code = "export", name = "导出")
-    @GaeaAuditLog(pageTitle = "报表导出")
-    public ResponseBean exportExcel(@RequestBody ReportExcelDto reportExcelDto) {
-
-        return ResponseBean.builder().code(ResponseCode.SUCCESS_CODE)
-                .data(reportExcelService.exportExcel(reportExcelDto))
-                .message("导出成功，请稍后在文件管理中查看").build();
+    public ResponseEntity<byte[]> export(HttpServletRequest request, HttpServletResponse response, @RequestBody ReportExcelDto reportExcelDto) throws IOException {
+        return reportExcelService.exportExcel(request, response, reportExcelDto);
     }
 
 //    @PostMapping("/exportPdf")

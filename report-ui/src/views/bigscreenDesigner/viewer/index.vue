@@ -30,17 +30,20 @@ export default {
   data() {
     return {
       bigScreenStyle: {},
+      dashboard:{},
       widgets: []
     };
   },
   mounted() {
     this.getData();
+    window.onresize=this.Debounce(this.setScale,500);
   },
   methods: {
     async getData() {
       const reportCode = this.$route.query.reportCode;
       const { code, data } = await detailDashboard(reportCode);
       if (code != 200) return;
+      this.dashboard=data.dashboard||{};
       const equipment = document.body.clientWidth;
       const ratioEquipment = equipment / data.dashboard.width;
       this.bigScreenStyle = {
@@ -74,7 +77,32 @@ export default {
       if(data.dashboard.refreshSeconds>0) {
         setTimeout(function(){ window.location.reload(); }, data.dashboard.refreshSeconds*1000);
       }
-    }
+    },
+    Debounce:(fn,t)=>{
+      const delay=t||500;
+      let timer=null;
+      return(...args)=>{
+        if(timer){
+          clearTimeout(timer);
+        }
+        const context=this
+        timer=setTimeout(()=>{
+          fn.apply(context,args);
+        },delay);
+      }
+    },
+    setScale(){
+      const scale=this.getScale();
+      this.bigScreenStyle.transform='scale('+scale.scalex+','+scale.scaley+')'
+    },
+    getScale(){
+      let width=this.dashboard.width;
+      let height=this.dashboard.height;
+      return{
+        scalex:(window.innerWidth)/width,
+        scaley:(window.innerHeight)/height,
+      }
+    },
   }
 };
 </script>
