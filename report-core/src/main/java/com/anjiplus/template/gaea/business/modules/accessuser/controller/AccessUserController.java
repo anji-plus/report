@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import io.swagger.annotations.Api;
 
 import java.util.Map;
 
@@ -30,7 +29,6 @@ import java.util.Map;
 * @date 2019-02-17 08:50:11.902
 **/
 @RestController
-@Api(tags = "用户管理管理")
 @RequestMapping("/accessUser")
 @Permission(code = "userManage", name = "用户管理")
 public class AccessUserController extends GaeaBaseController<AccessUserParam, AccessUser, AccessUserDto> {
