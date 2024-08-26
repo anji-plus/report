@@ -67,24 +67,24 @@ public class TokenFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String uri = request.getRequestURI();
 
-        // TODO 暂时先不校验 直接放行
-        /*if (true) {
-            filterChain.doFilter(request, response);
-            return;
-        }*/
-
         //OPTIONS直接放行
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             filterChain.doFilter(request, response);
             return;
         }
 
+        /** 修复 国家信息安全漏洞共享平台披露的漏洞 CNVD-2024-34975
+         * 避免，通过/dataSetParam/verification;swagger-ui，方式，绕过TokenFilter
+         * 当初在开发期，为方便前后联调，引入了swagger-ui，目前前后端接口基本稳定，同时考虑目前大部分aj-report没有二开能力，
+         * 我们再三斟酌，删除swagger-ui，二开的同学如有需要，自己添加。
+         */
         // swagger相关的直接放行
+        /*
         if (uri.contains("swagger-ui") || uri.contains("swagger-resources")) {
             filterChain.doFilter(request, response);
             return;
         }
-
+        */
 
         if (SLASH.equals(uri) || SLASH.concat(BusinessConstant.SLASH).equals(uri)) {
             if (BusinessConstant.SLASH.equals(uri)) {
