@@ -1,12 +1,9 @@
 
 package com.anjiplus.template.gaea.business.modules.accessauthority.dao.entity;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import com.anji.plus.gaea.curd.entity.GaeaBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
-import javax.validation.constraints.*;
-import java.util.Date;
 /**
 * @description 权限管理 entity
 * @author Devli
@@ -37,7 +34,5 @@ public class AccessAuthority extends GaeaBaseEntity {
     private Integer enableFlag;
 
     private Integer sort;
-
-
 
 }
