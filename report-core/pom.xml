@@ -88,6 +88,10 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-data-redis</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>com.spring4all</groupId>
+                    <artifactId>swagger-spring-boot-starter</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
