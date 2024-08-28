@@ -240,7 +240,7 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 例2：report 有个问题xxxx <br>
 有问题，不管是技术问题还是使用问题，都尽量在群里问。加个人微信记得**一定要加备注 ！！！**<br>
 
-<img src="https://ajreport.beliefteam.cn/file/download/a3440fb7-e20c-42fa-b7af-805f5523c746" width = "300" height = "450" align=left/>
+<img src="https://foruda.gitee.com/images/1724817510954363329/305a6044_7492051.jpeg" width = "300" height = "450" align=left/>
 
 
 ## 更多支持
