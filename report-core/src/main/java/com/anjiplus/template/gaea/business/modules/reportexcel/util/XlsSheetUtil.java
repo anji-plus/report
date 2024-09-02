@@ -48,11 +48,13 @@ public class XlsSheetUtil {
             List<JSONObject> cells_json = (List<JSONObject>) dbObject.get("celldata");
             Map<Integer, List<JSONObject>> cellMap = cellGroup(cells_json);
             //循环每一行
+            // 样式创建放到循环外层，防止样式过多，超出excel最大样式限制
+            CellStyle style = wb.createCellStyle();
             for (Integer r : cellMap.keySet()) {
                 Row row = sheet.createRow(r);
                 //循环每一列
                 for (JSONObject col : cellMap.get(r)) {
-                    createCell(wb, sheet, row, col);
+                    createCell(wb, sheet, row, col,style);
                 }
             }
         }
@@ -73,7 +75,7 @@ public class XlsSheetUtil {
      * @param row
      * @param dbObject
      */
-    private static void createCell(Workbook wb, Sheet sheet, Row row, JSONObject dbObject) {
+    private static void createCell(Workbook wb, Sheet sheet, Row row, JSONObject dbObject, CellStyle style) {
         if (dbObject.containsKey("c")) {
             Integer c = getStrToInt(dbObject.get("c"));
             if (c != null) {
@@ -97,7 +99,6 @@ public class XlsSheetUtil {
                     //转换v为对象(v是一个对象)
                     JSONObject v_json = (JSONObject) obj;
                     //样式
-                    CellStyle style = wb.createCellStyle();
                     cell.setCellStyle(style);
 
 

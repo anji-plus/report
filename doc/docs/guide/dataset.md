@@ -96,8 +96,37 @@ function verification(data) {
     return data;
 }
 ```
+- 示例三 <br>
+  in 和 not in
 
-**注：** 当前V1.0.0版本示例值是不可为空的，所以实际使用可能会麻烦点
+```js
+// 输入 a,b ，输出 ('a','b')
+function verification(data) {
+    // 获取示例值
+    data = data.sampleItem;
+    if (data == null || data == '') {
+        return ''
+    }else{
+        var arr = []
+        if (data.indexOf(',')){
+            arr = data.split(',')
+        }
+        if (data.indexOf('，')){
+            arr = data.split('，')
+        }
+        var dataarr = []
+        for(j = 0,len=arr.length; j < len; j++) {
+           var ac = "'" + arr[j] + "'"
+           dataarr[j] = ac
+        }
+        data = dataarr.toString()
+    }
+    data = 'where name in (' + data + ') '
+    return data;
+}
+```
+
+**注：** 当前版本示例值是不可为空的，但是如果不填示例值也是可以保存的，可以先填上示例值来测试自己写的js有没有问题，数据集保存的时候再去掉。
 
 ### 数据转换
 

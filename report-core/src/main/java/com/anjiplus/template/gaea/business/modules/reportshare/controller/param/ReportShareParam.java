@@ -4,7 +4,6 @@ package com.anjiplus.template.gaea.business.modules.reportshare.controller.param
 import com.anji.plus.gaea.annotation.Query;
 import com.anji.plus.gaea.constant.QueryEnum;
 import com.anji.plus.gaea.curd.params.PageParam;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;

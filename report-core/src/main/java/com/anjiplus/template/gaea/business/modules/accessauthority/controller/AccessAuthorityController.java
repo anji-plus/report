@@ -2,27 +2,21 @@
 package com.anjiplus.template.gaea.business.modules.accessauthority.controller;
 
 import com.anji.plus.gaea.annotation.Permission;
-import com.anji.plus.gaea.annotation.AccessKey;
-import com.anji.plus.gaea.bean.KeyValue;
 import com.anji.plus.gaea.bean.ResponseBean;
 import com.anji.plus.gaea.bean.TreeNode;
 import com.anji.plus.gaea.curd.controller.GaeaBaseController;
 import com.anji.plus.gaea.curd.service.GaeaBaseService;
 import com.anji.plus.gaea.holder.UserContentHolder;
-import com.anji.plus.gaea.utils.GaeaBeanUtils;
-import com.anji.plus.gaea.utils.GaeaUtils;
-import com.anjiplus.template.gaea.business.modules.accessauthority.dao.entity.AccessAuthority;
-import com.anjiplus.template.gaea.business.modules.accessauthority.service.AccessAuthorityService;
 import com.anjiplus.template.gaea.business.modules.accessauthority.controller.dto.AccessAuthorityDto;
 import com.anjiplus.template.gaea.business.modules.accessauthority.controller.param.AccessAuthorityParam;
+import com.anjiplus.template.gaea.business.modules.accessauthority.dao.entity.AccessAuthority;
+import com.anjiplus.template.gaea.business.modules.accessauthority.service.AccessAuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.web.bind.annotation.*;
-import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 /**
 * @desc 权限管理 controller
@@ -30,7 +24,6 @@ import java.util.Map;
 * @date 2019-02-17 08:50:10.009
 **/
 @RestController
-@Api(tags = "权限管理管理")
 @RequestMapping("/accessAuthority")
 @Permission(code = "authorityManage", name = "权限管理")
 public class AccessAuthorityController extends GaeaBaseController<AccessAuthorityParam, AccessAuthority, AccessAuthorityDto> {

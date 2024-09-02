@@ -72,6 +72,9 @@ spring:
         #  secret-key: secret-key
         #  bucket-name: AJ-Report
         #若minio和amazonS3都没有，使用服务器高可用的nfs共享盘
+    Security:
+      # jwt密钥，生产环境请自行修改，避免被远程伪造登录攻击
+      jwtSecret: TybmmfrgsIqpPsBOYxvygCMVJWKNfDJU
 
 mybatis-plus:
   configuration:

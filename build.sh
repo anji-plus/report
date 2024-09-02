@@ -16,7 +16,7 @@ echo "npm run build"
 npm run build:prod
 
 echo "publish web to springboot src/main/resources/static"
-
+rm -rf $BuildDir/report-core/src/main/resources/static
 mkdir -p $BuildDir/report-core/src/main/resources/static
 mv $BuildDir/report-ui/dist/* $BuildDir/report-core/src/main/resources/static/
 

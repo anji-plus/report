@@ -1,5 +1,5 @@
 <!--
- * @Descripttion: 
+ * @Descripttion:
  * @Author: qianlishi
  * @Date: 2021-3-19 10:23:24
  * @Last Modified by:   Raod
@@ -91,16 +91,16 @@ export default {
       this.reportName = JSON.parse(data.jsonStr).name;
       // 渲染查询表单
       this.params.setParam = JSON.parse(data.setParam);
-      const extendArry = [];
+      const extendArray = [];
       const extendObj = this.params.setParam;
       for (const i in extendObj) {
         const children = [];
         for (const y in extendObj[i]) {
           children.push({ name: y, value: extendObj[i][y] });
         }
-        extendArry.push({ name: i, children: children });
+        extendArray.push({ name: i, children: children });
       }
-      this.tableData2 = extendArry;
+      this.tableData2 = extendArray;
 
       this.excelData = data.jsonStr;
       this.sheetData = data == null ? [{}] : JSON.parse(data.jsonStr);
@@ -120,9 +120,34 @@ export default {
         result["exportType"] = val;
       }
       this.getCellStyleData(result);
-      const { code, message } = await exportExcel(result);
-      if (code != 200) return;
-      this.$message.success(message);
+      const fileName = this.reportCode + ".xlsx";
+      exportExcel(result).then(res=>{
+        const that = this;
+        const type = res.type;
+        if (type == "application/json") {
+          let reader = new FileReader();
+          reader.readAsText(res, "utf-8");
+          reader.onload = function() {
+            const data = JSON.parse(reader.result);
+            that.$message.error(data.message);
+          };
+          return;
+        }
+
+        const blob = new Blob([res], {
+          type: "application/octet-stream"
+        });
+        if (window.navigator.msSaveOrOpenBlob) {
+          //msSaveOrOpenBlob方法返回bool值
+          navigator.msSaveBlob(blob, fileName); //本地保存
+        } else {
+          const link = document.createElement("a"); //a标签下载
+          link.href = window.URL.createObjectURL(blob);
+          link.download = fileName;
+          link.click();
+          window.URL.revokeObjectURL(link.href);
+        }
+      })
     },
     // 表单封装json
     toObject(val) {

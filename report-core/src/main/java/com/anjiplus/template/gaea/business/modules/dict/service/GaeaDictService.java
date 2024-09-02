@@ -22,7 +22,7 @@ public interface GaeaDictService extends GaeaBaseService<GaeaDictParam, GaeaDict
      * 刷新全部缓存
      * @param dictCodes
      */
-    void refreshCache(List<String> dictCodes);
+    void refreshCache(List<String> dictCodes, String language);
 
 
     /**
@@ -33,11 +33,6 @@ public interface GaeaDictService extends GaeaBaseService<GaeaDictParam, GaeaDict
      */
     List<KeyValue> select(String dictCode, String language);
 
-    /**
-     * 获取所有字典项
-     * @return
-     */
-    List<GaeaDictItem> findItems(List<String> dictCodes);
     /**
      * 获取所有 typecode
      * @param system

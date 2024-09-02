@@ -1,5 +1,7 @@
 package com.anjiplus.template.gaea.business.modules.dict.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.anji.plus.gaea.bean.KeyValue;
 import com.anji.plus.gaea.cache.CacheHelper;
 import com.anji.plus.gaea.constant.Enabled;
@@ -50,22 +52,20 @@ public class GaeaDictServiceImpl implements GaeaDictService {
      * @param dictCodes
      */
     @Override
-    public void refreshCache(List<String> dictCodes) {
-
-        //查询指定字典项
-        List<GaeaDictItem> gaeaDictItems = findItems(dictCodes);
-
-        //对数据字典项进行分组，分组key=语言标识:字典编码
-        Map<String, Map<String, String>> dictItemMap = gaeaDictItems.stream()
-                .collect(Collectors
-                        .groupingBy(item -> item.getLocale() + GaeaConstant.REDIS_SPLIT +item.getDictCode(),
-                                Collectors.toMap(GaeaDictItem::getItemValue, GaeaDictItem::getItemName,(v1,v2)-> v2)));
+    public void refreshCache(List<String> dictCodes, String language) {
+        // 查询指定字典项
+        List<GaeaDictItem> gaeaDictItems = findItems(dictCodes, language);
+        // 对数据字典项进行分组，分组key=语言标识:字典编码
+        Map<String, List<GaeaDictItem>> dictItemMap = gaeaDictItems.stream().collect(
+                Collectors.groupingBy(item -> item.getLocale() + GaeaConstant.REDIS_SPLIT +item.getDictCode(), Collectors.toList())
+        );
 
         //遍历并保持到Redis中
         dictItemMap.entrySet().stream().forEach(entry -> {
             String key = GaeaKeyConstant.DICT_PREFIX  + entry.getKey();
-            cacheHelper.delete(key);
-            cacheHelper.hashSet(key, entry.getValue());
+            List<GaeaDictItem> dictItems = entry.getValue();
+            // 转换成KeyValue后缓存
+            List<KeyValue> keyValues = convertToKeyValueAndCache(dictItems, key);
         });
     }
 
@@ -78,59 +78,63 @@ public class GaeaDictServiceImpl implements GaeaDictService {
      */
     @Override
     public List<KeyValue> select(String dictCode, String language) {
-
-        //缓存字典Key
+        // 先看缓存中是否存在
         String dictKey = GaeaKeyConstant.DICT_PREFIX  + language + GaeaConstant.REDIS_SPLIT + dictCode;
-
-        Map<String, String> dictMap = cacheHelper.hashGet(dictKey);
-
-        //当查询的字典为空时
-        if (CollectionUtils.isEmpty(dictMap)) {
-            LambdaQueryWrapper<GaeaDictItem> wrapper = Wrappers.lambdaQuery();
-            wrapper.eq(GaeaDictItem::getDictCode, dictCode)
-                    .eq(GaeaDictItem::getEnabled, Enabled.YES.getValue())
-                    .eq(GaeaDictItem::getLocale, language)
-                    .orderByAsc(GaeaDictItem::getSort);
-
-            List<GaeaDictItem> list = gaeaDictItemMapper.selectList(wrapper);
-
-            List<KeyValue> keyValues = list.stream()
-                    .map(dictItemEntity -> new KeyValue(dictItemEntity.getItemValue(), dictItemEntity.getItemName(), dictItemEntity.getItemExtend()))
-                    .collect(Collectors.toList());
-            //当缓存不存在时，刷新缓存
-            List<String> dictCodes = new ArrayList<>();
-            dictCodes.add(dictCode);
-            refreshCache(dictCodes);
+        String keyValueListStr = cacheHelper.stringGet(dictKey);
+        if(StringUtils.isNoneBlank(keyValueListStr)){
+            List<KeyValue> keyValues = JSONArray.parseArray(keyValueListStr, KeyValue.class);
             return keyValues;
         }
 
-        List<KeyValue> keyValues = GaeaUtils.formatKeyValue(dictMap);
-
-        //添加扩展字段
-        LambdaQueryWrapper<GaeaDictItem> gaeaDictItemWrapper = Wrappers.lambdaQuery();
-        gaeaDictItemWrapper.eq(GaeaDictItem::getDictCode, dictCode);
-        gaeaDictItemWrapper.isNotNull(GaeaDictItem::getItemExtend);
-
-        Map<String, String> extendMap = gaeaDictItemMapper.selectList(gaeaDictItemWrapper).stream()
-                .filter(gaeaDictItem -> StringUtils.isNotBlank(gaeaDictItem.getItemExtend()))
-                .collect(Collectors.toMap(GaeaDictItem::getItemValue, GaeaDictItem::getItemExtend, (v1, v2) -> v2));
-        if (!CollectionUtils.isEmpty(extendMap)) {
-            keyValues.stream().forEach(keyValue -> keyValue.setExtend(extendMap.get(keyValue.getId())));
-        }
+        // 缓存中没有，从数据库中查询
+        List<String> dictCodes = new ArrayList<>();
+        dictCodes.add(dictCode);
+        List<GaeaDictItem> list = findItems(dictCodes, language);
+        List<KeyValue> keyValues = convertToKeyValueAndCache(list, dictKey);
         return keyValues;
     }
 
-    @Override
-    public List<GaeaDictItem> findItems(List<String> dictCodes) {
-
-        LambdaQueryWrapper<GaeaDictItem> gaeaDictItemQueryWrapper = Wrappers.lambdaQuery();
-        gaeaDictItemQueryWrapper.eq(GaeaDictItem::getEnabled, Enabled.YES.getValue());
+    private List<GaeaDictItem> findItems(List<String> dictCodes, String language) {
+        LambdaQueryWrapper<GaeaDictItem> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(GaeaDictItem::getEnabled, Enabled.YES.getValue())
+                .eq(GaeaDictItem::getLocale, language);
         if (!CollectionUtils.isEmpty(dictCodes)) {
-            gaeaDictItemQueryWrapper.in(GaeaDictItem::getDictCode, dictCodes);
+            wrapper.in(GaeaDictItem::getDictCode, dictCodes);
         }
-        return gaeaDictItemMapper.selectList(gaeaDictItemQueryWrapper);
+        wrapper.orderByAsc(GaeaDictItem::getSort);
+
+        List<GaeaDictItem> list = gaeaDictItemMapper.selectList(wrapper);
+        return list;
     }
 
+    /**
+     * 将一个字典的所有项，转换成KeyValue并缓存
+     * @param list
+     * @return
+     *
+     * @author Devli
+     * @date 2024-07-17 16:15:11.902
+     */
+    private List<KeyValue> convertToKeyValueAndCache(List<GaeaDictItem> list, String cacheKey){
+        // 入参数校验
+        List<KeyValue> keyValues = new ArrayList<>();
+        if(CollectionUtils.isEmpty(list)){
+            return keyValues;
+        }
+
+        // 数据类型转换
+        keyValues = list.stream()
+                .map(dictItemEntity -> new KeyValue(dictItemEntity.getItemValue(), dictItemEntity.getItemName(), dictItemEntity.getItemExtend()))
+                .collect(Collectors.toList());
+
+        // 缓存
+        if(StringUtils.isNoneBlank(cacheKey)){
+            String cacheValue = JSONArray.toJSONString(keyValues);
+            cacheHelper.delete(cacheKey);
+            cacheHelper.stringSet(cacheKey, cacheValue);
+        }
+        return keyValues;
+    }
 
     @Override
     public Collection<KeyValue> selectTypeCode(String system, String language) {

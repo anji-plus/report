@@ -15,7 +15,9 @@ public class JdbcConstants {
    public final static String SQL_SERVER = "mssqlserver";
    public final static String JDBC = "jdbc";
    public final static String POSTGRESQL = "postgresql";
-
+   public final static String DAMENG = "dameng";
+   public final static String OPENGAUSS = "openGauss";
+   public final static String KINGBASE = "Kingbase";
 
    public final static String JTDS = "jtds";
    public final static String MOCK = "mock";
@@ -44,7 +46,6 @@ public class JdbcConstants {
    public final static String H2_DRIVER = "org.h2.Driver";
    public final static String DM = "dm";
    public final static String DM_DRIVER = "dm.jdbc.driver.DmDriver";
-   public final static String KINGBASE = "kingbase";
    public final static String KINGBASE_DRIVER = "com.kingbase.Driver";
    public final static String GBASE = "gbase";
    public final static String GBASE_DRIVER = "com.gbase.jdbc.Driver";

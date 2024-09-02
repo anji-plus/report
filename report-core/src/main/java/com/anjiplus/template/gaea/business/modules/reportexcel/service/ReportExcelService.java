@@ -5,6 +5,11 @@ import com.anji.plus.gaea.curd.service.GaeaBaseService;
 import com.anjiplus.template.gaea.business.modules.reportexcel.controller.dto.ReportExcelDto;
 import com.anjiplus.template.gaea.business.modules.reportexcel.controller.param.ReportExcelParam;
 import com.anjiplus.template.gaea.business.modules.reportexcel.dao.entity.ReportExcel;
+import org.springframework.http.ResponseEntity;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * TODO
@@ -30,14 +35,14 @@ public interface ReportExcelService extends GaeaBaseService<ReportExcelParam, Re
      */
     ReportExcelDto preview(ReportExcelDto reportExcelDto);
 
-
     /**
      * 导出为excel
      *
      * @param reportExcelDto
      * @return
      */
-    Boolean exportExcel(ReportExcelDto reportExcelDto);
+
+    ResponseEntity<byte[]> exportExcel(HttpServletRequest request, HttpServletResponse response,ReportExcelDto reportExcelDto) throws IOException;
 
 //    Boolean exportPdf(ReportExcelDto reportExcelDto);
 }

@@ -101,6 +101,9 @@ public class DataSourceServiceImpl implements DataSourceService {
             case JdbcConstants.SQL_SERVER:
             case JdbcConstants.JDBC:
             case JdbcConstants.POSTGRESQL:
+            case JdbcConstants.DAMENG:
+            case JdbcConstants.OPENGAUSS:
+            case JdbcConstants.KINGBASE:
                 testRelationalDb(dto);
                 break;
             case JdbcConstants.HTTP:
@@ -126,6 +129,9 @@ public class DataSourceServiceImpl implements DataSourceService {
             case JdbcConstants.SQL_SERVER:
             case JdbcConstants.JDBC:
             case JdbcConstants.POSTGRESQL:
+            case JdbcConstants.DAMENG:
+            case JdbcConstants.OPENGAUSS:
+            case JdbcConstants.KINGBASE:
                 return executeRelationalDb(dto);
             case JdbcConstants.HTTP:
                 return executeHttp(dto);

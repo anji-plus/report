@@ -25,8 +25,8 @@
       :default-checked-keys="checkedKeys"
     />
     <div slot="footer" style="text-align: center">
-      <el-button type="primary" plain @click="saveTreeData">保存</el-button>
       <el-button type="danger" plain @click="closeDialog">取消</el-button>
+      <el-button type="primary" plain @click="saveTreeData">保存</el-button>
     </div>
   </el-dialog>
 </template>
