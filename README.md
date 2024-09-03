@@ -8,11 +8,11 @@
 
 ## 在线体验
 
-#### &emsp; [在线体验（暂时下线）](https://ajreport.beliefteam.cn/index.html "链接"): https://ajreport.beliefteam.cn/index.html  &emsp;体验账号：guest 密码：guest
+#### &emsp; [在线体验](https://ajreport.beliefteam.cn/index.html "链接"): https://ajreport.beliefteam.cn/index.html  &emsp;体验账号：guest 密码：guest
 
-#### &emsp; [在线文档（暂时下线）](https://ajreport.beliefteam.cn/report-doc/ "doc"): https://ajreport.beliefteam.cn/report-doc/ <br>
+#### &emsp; [在线文档](https://ajreport.beliefteam.cn/report-doc/ "doc"): https://ajreport.beliefteam.cn/report-doc/ <br>
 
-#### &emsp; [模板下载](https://pan.baidu.com/s/1o08pJETfTCMa0B6kSfkquw "temp"): https://pan.baidu.com/s/1o08pJETfTCMa0B6kSfkquw 提取码：psnb<br>
+#### &emsp; [模板下载](https://ajreport.beliefteam.cn/download "temp"): https://ajreport.beliefteam.cn/download<br>
 
 #### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
