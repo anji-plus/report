@@ -67,4 +67,6 @@ public interface DataSetService extends GaeaBaseService<DataSetParam, DataSet> {
      * @return
      */
     List<DataSet> queryAllDataSet();
+
+    void copy(DataSetDto dto);
 }

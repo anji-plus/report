@@ -380,6 +380,33 @@ public class DataSetServiceImpl implements DataSetService {
         return dataSetMapper.selectList(wrapper);
     }
 
+    @Override
+    public void copy(DataSetDto dto) {
+        if (null == dto.getId()) {
+            throw BusinessExceptionBuilder.build(ResponseCode.NOT_NULL, "id");
+        }
+        if (com.baomidou.mybatisplus.core.toolkit.StringUtils.isBlank(dto.getSetCode())) {
+            throw BusinessExceptionBuilder.build(ResponseCode.NOT_NULL, "数据集编码");
+        }
+        String setCode = dto.getSetCode();
+        DataSet ds = new DataSet();
+        GaeaBeanUtils.copyAndFormatter(ds,dto);
+        insert(ds);
+        String copySetCode = ds.getSetCode();
+        DataSetParam dataSetParam = dataSetParamService.selectOne("set_code", setCode);
+        if (null != dataSetParam){
+            dataSetParam.setId(null);
+            dataSetParam.setSetCode(copySetCode);
+            dataSetParamService.insert(dataSetParam);
+        }
+        DataSetTransform dataSetTransform = dataSetTransformService.selectOne("set_code", setCode);
+        if (null != dataSetTransform){
+            dataSetTransform.setId(null);
+            dataSetTransform.setSetCode(copySetCode);
+            dataSetTransformService.insert(dataSetTransform);
+        }
+    }
+
     public void dataSetParamBatch(List<DataSetParamDto> dataSetParamDtoList, String setCode) {
         dataSetParamService.delete(
                 new QueryWrapper<DataSetParam>()
