@@ -44,6 +44,11 @@ export default {
             field: "reportCode"
           },
           {
+            inputType: "input",
+            label: "报表名称",
+            field: "reportName"
+          },
+          {
             inputType: "anji-select",
             anjiSelectOption: {
               dictCode: "SHARE_VAILD"
@@ -126,6 +131,17 @@ export default {
             placeholder: '',
             field: 'reportCode',
             editField: 'reportCode',
+            inputType: 'input',
+            rules: [
+              { min: 1, max: 50, message: '不超过50个字符', trigger: 'blur' }
+            ],
+            disabled: false,
+          },
+          {
+            label: '报表名称',
+            placeholder: '',
+            field: 'reportName',
+            editField: 'reportName',
             inputType: 'input',
             rules: [
               { min: 1, max: 50, message: '不超过50个字符', trigger: 'blur' }
