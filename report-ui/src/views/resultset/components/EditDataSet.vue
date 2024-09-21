@@ -957,7 +957,7 @@ public class DemoGroovyHandler implements IGroovyHandler {
 </script>
 <style lang="scss" scoped>
 .code-mirror-form {
-  /deep/ .el-form-item__content {
+  ::v-deep .el-form-item__content {
     height: 200px;
     overflow: hidden;
   }
@@ -1085,7 +1085,7 @@ public class DemoGroovyHandler implements IGroovyHandler {
   top: 15px;
 }
 
-.filterTextarea /deep/ .el-textarea__inner {
+.filterTextarea ::v-deep .el-textarea__inner {
   min-height: 300px !important;
 }
 
@@ -1094,7 +1094,7 @@ public class DemoGroovyHandler implements IGroovyHandler {
   margin-top: 4px;
 }
 
-.filterBox /deep/ .el-input--suffix .el-input__inner {
+.filterBox ::v-deep .el-input--suffix .el-input__inner {
   background: #f4f7ff;
   border-radius: 3px;
   border: 1px solid #b8caff;

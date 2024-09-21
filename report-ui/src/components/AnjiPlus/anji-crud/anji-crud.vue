@@ -942,32 +942,32 @@ export default {
     position: relative;
   }
 }
-/deep/.button {
+::v-deep.button {
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.08);
   border-radius: 6px;
 }
-/deep/.el-table th > .cell {
+::v-deep.el-table th > .cell {
   text-align: center;
 }
-/deep/.el-table .cell {
+::v-deep.el-table .cell {
   text-align: center;
 }
-/deep/.elTable {
+::v-deep.elTable {
   margin: 10px 0 50px;
 }
 .el-table {
   // 看这里！！！
   // 深度选择器，去除默认的padding
-  /deep/ th {
+  ::v-deep th {
     padding: 0;
     height: 36px;
   }
-  /deep/ td {
+  ::v-deep td {
     padding: 0;
     height: 36px;
   }
 }
-/deep/.el-table--striped .el-table__body tr.el-table__row--striped td {
+::v-deep.el-table--striped .el-table__body tr.el-table__row--striped td {
   background: #f9fbfd;
 }
 .screenFlex {
@@ -1029,7 +1029,7 @@ export default {
   &:hover {
     background: none !important;
   }
-  /deep/.el-button--text:hover,
+  ::v-deep.el-button--text:hover,
   .el-button--text:focus {
     color: #799ffc !important;
     background-color: #ecf5ff !important;
@@ -1048,7 +1048,7 @@ export default {
     float: right;
   }
 }
-/deep/.el-pagination.is-background .btn-prev,
+::v-deep.el-pagination.is-background .btn-prev,
 .el-pagination.is-background .btn-next,
 .el-pagination.is-background .el-pager li {
   margin: 0 5px;
@@ -1058,7 +1058,7 @@ export default {
   min-width: 30px;
   border-radius: 2px;
 }
-/deep/.el-pagination.is-background .el-pager li:not(.disabled).active {
+::v-deep.el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #5887fb;
   color: #ffffff;
   border-radius: 4px;
@@ -1075,26 +1075,26 @@ export default {
   margin-bottom: 14px;
   margin-right: 20px;
 }
-.el-table /deep/ .warning-row {
+.el-table ::v-deep .warning-row {
   color: red !important;
 }
-.el-table /deep/ .bgColor {
+.el-table ::v-deep .bgColor {
   background: #d9ecff;
 }
-/deep/.edit_button {
+::v-deep.edit_button {
   width: 22px;
   height: 22px;
   padding: 0;
   margin: 0;
   margin-right: 5px;
-  /deep/ i {
+  ::v-deep i {
     font-size: 30px;
   }
 }
 .el-form-item--mini.el-form-item {
   margin-bottom: 12px;
 }
-.el-table /deep/ .success-row {
+.el-table ::v-deep .success-row {
   background: #f9fbfd !important;
 }
 

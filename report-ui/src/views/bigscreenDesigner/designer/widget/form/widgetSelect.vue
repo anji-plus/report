@@ -115,7 +115,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-/deep/ .el-select {
+::v-deep .el-select {
   height: 100%;
 
   .el-input {

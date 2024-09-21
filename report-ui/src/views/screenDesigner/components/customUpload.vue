@@ -90,8 +90,8 @@ export default {
   top: 0;
   opacity: 0;
 }
-/deep/.el-input-group__append,
-/deep/.el-input-group__prepend {
+::v-deep.el-input-group__append,
+::v-deep.el-input-group__prepend {
   padding: 0 10px !important;
   overflow: hidden;
 }

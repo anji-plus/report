@@ -501,10 +501,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-/deep/ .el-form-item {
+::v-deep .el-form-item {
   margin-bottom: 5px;
 }
-/deep/ .el-form-item__label {
+::v-deep .el-form-item__label {
   font-size: 12px;
   color: #fff;
 }
@@ -516,7 +516,7 @@ export default {
   border-top: none;
   border-bottom: none;
 }
-/deep/.el-collapse-item__header {
+::v-deep.el-collapse-item__header {
   height: 40px;
   line-height: 40px;
   background: transparent;
@@ -525,11 +525,11 @@ export default {
   font-size: 12px;
   border-color: #282e3a;
 }
-/deep/.el-collapse-item__wrap {
+::v-deep.el-collapse-item__wrap {
   background: transparent;
   border: none;
 }
-/deep/.el-collapse-item__content {
+::v-deep.el-collapse-item__content {
   padding-bottom: 0;
 }
 </style>

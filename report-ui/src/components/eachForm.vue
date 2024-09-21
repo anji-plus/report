@@ -9,11 +9,11 @@
   <span>
     <!-- input 输入框-->
     <el-form-item :label="item.label"  v-if="item.type == 'input'" :rules="[{required:item.required}]">
-      <el-input 
-      :name="item.name" 
+      <el-input
+      :name="item.name"
       clearable
       :show-password ="item.name == 'password'?true:false"
-      :placeholder="item.placeholder" 
+      :placeholder="item.placeholder"
       v-model.trim="ConfigData[item.name]"
       @change="drivreConfigChange($event,item.name)"
       ></el-input>
@@ -45,11 +45,11 @@
     </el-form-item>
     <!-- textarea 文本框-->
     <el-form-item :label="item.label" v-if="item.type == 'textarea'" :rules="[{required:item.required}]">
-      <el-input 
+      <el-input
         type="textarea"
         clearable
         autosize
-        :placeholder="item.placeholder" 
+        :placeholder="item.placeholder"
         v-model="ConfigData[item.name]"
         @change="drivreConfigChange($event,item.name)"
       ></el-input>
@@ -168,7 +168,7 @@ export default {
       }else{
         this.$set(ConfigData,key,val);
       }
-      this.$emit('input', ConfigData) 
+      this.$emit('input', ConfigData)
       this.$emit('eachChange', ConfigData)
     },
 
@@ -186,16 +186,16 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.elForm /deep/ .el-upload--picture-card{
+.elForm ::v-deep .el-upload--picture-card{
   width: 80px;
   height: 80px;
   line-height: 83px;
 }
-.elForm /deep/ .el-upload-list__item {
+.elForm ::v-deep .el-upload-list__item {
   width: 80px;
   height: 80px;
 }
-.hide_box /deep/ .el-upload--picture-card{
+.hide_box ::v-deep .el-upload--picture-card{
   display: none;
 }
 </style>

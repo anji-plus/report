@@ -1,5 +1,5 @@
 <!--
- * @Descripttion: 
+ * @Descripttion:
  * @Author: yanzili
  * @Date: 2021-6-24 10:23:24
  * @Last Modified by:   qianlishi
@@ -70,8 +70,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-/deep/.el-color-picker--mini,
-/deep/.el-color-picker--mini .el-color-picker__trigger {
+::v-deep.el-color-picker--mini,
+::v-deep.el-color-picker--mini .el-color-picker__trigger {
   width: 23px;
   height: 23px;
 }

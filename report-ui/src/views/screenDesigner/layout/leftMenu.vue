@@ -1,6 +1,6 @@
 <!--
  * @Descripttion: 大屏左侧工具栏
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2022-05-12 11:05:21
  * @LastEditors: qianlishi
@@ -74,7 +74,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-/deep/.el-dropdown-menu__item {
+::v-deep.el-dropdown-menu__item {
   max-width: none;
 }
 .layout-left {
@@ -90,7 +90,7 @@ export default {
       width: 100%;
       height: calc(100vh - 80px);
       text-align: center;
-      /deep/.el-tabs__header {
+      ::v-deep.el-tabs__header {
         width: 30%;
         margin-right: 0;
         .el-tabs__nav-wrap {
@@ -105,7 +105,7 @@ export default {
           }
         }
       }
-      /deep/.el-tabs__content {
+      ::v-deep.el-tabs__content {
         width: 70%;
       }
     }
@@ -137,7 +137,7 @@ export default {
     .tools-item-text {
     }
   }
-  /deep/.el-tabs__content {
+  ::v-deep.el-tabs__content {
     padding: 0;
   }
 }

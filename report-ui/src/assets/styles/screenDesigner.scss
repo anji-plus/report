@@ -28,7 +28,7 @@
       width: 300px;
     }
 
-    /deep/ .el-tabs--border-card {
+    ::v-deep .el-tabs--border-card {
       border: 0;
       .el-tabs__header {
         background: transparent;
