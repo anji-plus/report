@@ -41,7 +41,7 @@ import "../../../../../../node_modules/echarts/map/js/province/xizang";
 import "../../../../../../node_modules/echarts/map/js/province/yunnan";
 import "../../../../../../node_modules/echarts/map/js/province/zhejiang";
 import "echarts/map/js/china.js";
-import echarts from "echarts";
+import * as echarts from "echarts";
 import {conversionCity} from "@/utils/china";
 
 let geoCoordMap = conversionCity;

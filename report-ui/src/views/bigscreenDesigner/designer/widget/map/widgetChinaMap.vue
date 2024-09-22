@@ -7,7 +7,7 @@
 import { targetWidgetLinkageLogic } from "@/views/bigscreenDesigner/designer/linkageLogic";
 
 import "../../../../../../node_modules/echarts/map/js/china.js";
-import echarts from "echarts";
+import * as echarts from "echarts";
 
 export default {
   name: "widgetChinaMap",

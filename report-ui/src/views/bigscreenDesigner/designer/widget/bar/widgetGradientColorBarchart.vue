@@ -9,7 +9,7 @@ import {
   originWidgetLinkageLogic,
   targetWidgetLinkageLogic,
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
-import echarts from "echarts";
+import * as echarts from "echarts";
 
 export default {
   name: "WidgetGradientColorBarchart", //渐变色，参考https://www.makeapie.com/editor.html?c=x0oZWoncE

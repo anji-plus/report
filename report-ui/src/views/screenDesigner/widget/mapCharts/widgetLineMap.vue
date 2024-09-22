@@ -1,11 +1,11 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :option="options" autoresize/>
   </div>
 </template>
 <script>
 import "echarts/map/js/china.js";
-import echarts from "echarts";
+import * as echarts from "echarts";
 import {conversionCity} from '@/utils/china';
 /*let geoCoordMap = {
   上海市: [121.4648, 31.2891],

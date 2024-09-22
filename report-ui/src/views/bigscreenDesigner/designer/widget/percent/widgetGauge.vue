@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import echarts from "echarts";
+import * as echarts from "echarts";
 import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
 
 export default {
