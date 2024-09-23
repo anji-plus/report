@@ -12,7 +12,7 @@
     <div class="login_title">
       <div class="left">
         <div class="box">
-          <img src="../../static/logo-dp.png" alt="" />
+          <img src="static/logo-dp.png" alt="" />
         </div>
         <div class="name">AJ-Report</div>
       </div>
