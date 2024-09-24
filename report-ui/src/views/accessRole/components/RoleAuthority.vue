@@ -93,7 +93,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-::v-deep.el-dialog__body {
+:deep().el-dialog__body {
   height: 400px;
   overflow-y: scroll;
 }

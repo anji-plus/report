@@ -149,30 +149,30 @@ export default {
     flex-direction: row;
   }
 }
-::v-deep.el-table,
-::v-deep.el-table__expanded-cell,
-::v-deep.el-table th,
-::v-deep.el-table tr {
+:deep().el-table,
+:deep().el-table__expanded-cell,
+:deep().el-table th,
+:deep().el-table tr {
   background-color: transparent !important;
   color: #859094 !important;
 }
-::v-deep.el-table td,
-::v-deep.el-table th.is-leaf {
+:deep().el-table td,
+:deep().el-table th.is-leaf {
   border-bottom: none;
   line-height: 26px;
 }
-::v-deep.el-table tbody tr:hover > td {
+:deep().el-table tbody tr:hover > td {
   background-color: #263445 !important;
 }
-::v-deep.el-table::before {
+:deep().el-table::before {
   height: 0;
 }
-::v-deep.el-color-picker--mini,
-::v-deep.el-color-picker--mini .el-color-picker__trigger {
+:deep().el-color-picker--mini,
+:deep().el-color-picker--mini .el-color-picker__trigger {
   width: 23px;
   height: 23px;
 }
-::v-deep.el-dialog {
+:deep().el-dialog {
   background: #1b1e25;
   .el-dialog__title {
     color: #fff;

@@ -226,9 +226,9 @@
     height: 100%;
   }
 
+
    .el-tabs--border-card {
     border: 0;
-
     .el-tabs__header {
       .el-tabs__nav {
         .el-tabs__item {
@@ -416,11 +416,11 @@ li {
   padding: 5px;
 }
 
- .vue-ruler-h {
+.vue-ruler-h {
   opacity: 0.3;
 }
 
- .vue-ruler-v {
+.vue-ruler-v {
   opacity: 0.3;
 }
 
@@ -458,7 +458,6 @@ li {
           }
         }
       }
-
       .el-tabs__content {
         width: 70%;
       }
@@ -494,6 +493,7 @@ li {
       font-size: 12px !important;
     }
   }
+
 
   .el-tabs__content {
     padding: 0;

@@ -134,7 +134,7 @@ export default {
 </script>
 
 <style scoped>
-.main ::v-deep .view-lines * {
+.main :deep() .view-lines * {
   font-family: Consolas, "Courier New", monospace !important;
 }
 </style>

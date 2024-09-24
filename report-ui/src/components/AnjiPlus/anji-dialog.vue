@@ -158,7 +158,7 @@ export default {
 
 <style scoped lang="scss">
 .notfull-screen {
-  ::v-deep.el-dialog__body {
+  :deep().el-dialog__body {
     background-color: rgb(240, 242, 245);
     padding: 5px;
     max-height: 60vh;
@@ -166,7 +166,7 @@ export default {
   }
 }
 .full-screen {
-  ::v-deep.el-dialog__body {
+  :deep().el-dialog__body {
     background-color: rgb(240, 242, 245);
     padding: 5px;
     height: calc(100vh - 110px);
@@ -210,7 +210,7 @@ export default {
 .addForm {
   text-align: center;
 }
-.activeColor ::v-deep.el-form-item__label {
+.activeColor :deep().el-form-item__label {
   color: #5887fb;
 }
 </style>

@@ -74,7 +74,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-::v-deep.el-dropdown-menu__item {
+:deep().el-dropdown-menu__item {
   max-width: none;
 }
 .layout-left {
@@ -90,7 +90,7 @@ export default {
       width: 100%;
       height: calc(100vh - 80px);
       text-align: center;
-      ::v-deep.el-tabs__header {
+      :deep().el-tabs__header {
         width: 30%;
         margin-right: 0;
         .el-tabs__nav-wrap {
@@ -105,7 +105,7 @@ export default {
           }
         }
       }
-      ::v-deep.el-tabs__content {
+      :deep().el-tabs__content {
         width: 70%;
       }
     }
@@ -137,7 +137,7 @@ export default {
     .tools-item-text {
     }
   }
-  ::v-deep.el-tabs__content {
+  :deep().el-tabs__content {
     padding: 0;
   }
 }
