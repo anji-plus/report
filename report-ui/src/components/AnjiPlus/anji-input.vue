@@ -175,10 +175,10 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-::v-deep.el-input__suffix {
+:deep().el-input__suffix {
   padding: 0 6px;
 }
-.anji-input ::v-deep .el-input__inner {
+.anji-input :deep() .el-input__inner {
   padding-right: 0 !important;
 }
 </style>

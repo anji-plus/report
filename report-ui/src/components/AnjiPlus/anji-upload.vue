@@ -177,7 +177,7 @@ export default {
   width: 60px;
   height: 60px;
 }
-.hide_box ::v-deep.el-upload--picture-card {
+.hide_box :deep().el-upload--picture-card {
   display: none;
 }
 .el-upload-list__item {

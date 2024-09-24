@@ -186,16 +186,16 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.elForm ::v-deep .el-upload--picture-card{
+.elForm :deep() .el-upload--picture-card{
   width: 80px;
   height: 80px;
   line-height: 83px;
 }
-.elForm ::v-deep .el-upload-list__item {
+.elForm :deep() .el-upload-list__item {
   width: 80px;
   height: 80px;
 }
-.hide_box ::v-deep .el-upload--picture-card{
+.hide_box :deep() .el-upload--picture-card{
   display: none;
 }
 </style>

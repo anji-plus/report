@@ -138,38 +138,38 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-::v-deep::-webkit-scrollbar-track-piece {
+:deep()::-webkit-scrollbar-track-piece {
   background-color: transparent;
 }
-::v-deep .el-table__body-wrapper::-webkit-scrollbar {
+:deep() .el-table__body-wrapper::-webkit-scrollbar {
   width: 0; // 横向滚动条
   height: 8px; // 纵向滚动条 必写
 }
 // 滚动条的滑块
-::v-deep .el-table__body-wrapper::-webkit-scrollbar-thumb {
+:deep() .el-table__body-wrapper::-webkit-scrollbar-thumb {
   border-radius: 5px;
   background-color: rgba(144, 146, 152, 0.3);
 }
-::v-deep.el-table,
-::v-deep.el-table__expanded-cell,
-::v-deep.el-table th,
-::v-deep.el-table tr {
+:deep().el-table,
+:deep().el-table__expanded-cell,
+:deep().el-table th,
+:deep().el-table tr {
   background-color: transparent !important;
   color: #859094 !important;
   font-size: 12px !important;
 }
-::v-deep.el-table td,
-::v-deep.el-table th.is-leaf {
+:deep().el-table td,
+:deep().el-table th.is-leaf {
   border-bottom: none;
   line-height: 26px;
 }
-::v-deep.el-table tbody tr:hover {
+:deep().el-table tbody tr:hover {
   background-color: #263445 !important;
 }
-::v-deep.el-table tbody tr:hover > td {
+:deep().el-table tbody tr:hover > td {
   background-color: #263445 !important;
 }
-::v-deep.el-table::before {
+:deep().el-table::before {
   height: 0;
 }
 .button-group .el-button {
