@@ -7,9 +7,8 @@ import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 import 'normalize.css/normalize.css'// A modern alternative to CSS resets
 import '@/assets/styles/common.css'
 import '@/assets/styles/index.scss'// custome global css
-
 // app router vuex filter mixins
-import App from './App'
+import App from './App.vue'
 import router from './router'
 import store from './store'
 import * as filter from './filter'

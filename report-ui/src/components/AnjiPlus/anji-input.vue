@@ -174,11 +174,11 @@ export default {
   },
 }
 </script>
-<style lang="less" scoped>
-:deep().el-input__suffix {
+<style lang="less">
+.el-input__suffix {
   padding: 0 6px;
 }
-.anji-input :deep() .el-input__inner {
+.anji-input .el-input__inner {
   padding-right: 0 !important;
 }
 </style>

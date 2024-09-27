@@ -148,37 +148,37 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .color-box {
   .title {
     display: flex;
     flex-direction: row;
   }
 }
-:deep().el-table,
-:deep().el-table__expanded-cell,
-:deep().el-table th,
-:deep().el-table tr {
+.el-table,
+.el-table__expanded-cell,
+.el-table th,
+.el-table tr {
   background-color: transparent !important;
   color: #859094 !important;
 }
-:deep().el-table td,
-:deep().el-table th.is-leaf {
+.el-table td,
+.el-table th.is-leaf {
   border-bottom: none;
   line-height: 26px;
 }
-:deep().el-table tbody tr:hover > td {
+.el-table tbody tr:hover > td {
   background-color: #263445 !important;
 }
-:deep().el-table::before {
+.el-table::before {
   height: 0;
 }
-:deep().el-color-picker--mini,
-:deep().el-color-picker--mini .el-color-picker__trigger {
+.el-color-picker--mini,
+.el-color-picker--mini .el-color-picker__trigger {
   width: 23px;
   height: 23px;
 }
-:deep().el-dialog {
+.el-dialog {
   background: #1b1e25;
   .el-dialog__title {
     color: #fff;

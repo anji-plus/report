@@ -81,7 +81,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .file {
   position: absolute;
   width: 100%;
@@ -90,8 +90,8 @@ export default {
   top: 0;
   opacity: 0;
 }
-:deep().el-input-group__append,
-:deep().el-input-group__prepend {
+.el-input-group__append,
+.el-input-group__prepend {
   padding: 0 10px !important;
   overflow: hidden;
 }

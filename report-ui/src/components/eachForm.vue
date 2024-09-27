@@ -185,17 +185,17 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.elForm :deep() .el-upload--picture-card{
+<style lang="scss">
+.elForm  .el-upload--picture-card{
   width: 80px;
   height: 80px;
   line-height: 83px;
 }
-.elForm :deep() .el-upload-list__item {
+.elForm  .el-upload-list__item {
   width: 80px;
   height: 80px;
 }
-.hide_box :deep() .el-upload--picture-card{
+.hide_box  .el-upload--picture-card{
   display: none;
 }
 </style>
