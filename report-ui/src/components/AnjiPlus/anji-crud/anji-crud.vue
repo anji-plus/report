@@ -958,11 +958,11 @@ export default {
 .el-table {
   // 看这里！！！
   // 深度选择器，去除默认的padding
-   th {
+   ::v-deep th {
     padding: 0;
     height: 36px;
   }
-   td {
+   ::v-deep td {
     padding: 0;
     height: 36px;
   }
