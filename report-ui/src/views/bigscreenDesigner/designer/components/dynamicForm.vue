@@ -526,7 +526,7 @@ export default {
   border-color: #282e3a;
 }
 .el-collapse-item__wrap {
-  background: #282e3a;
+  background: transparent;
   border: none;
 }
 .el-collapse-item__content {
