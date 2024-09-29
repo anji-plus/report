@@ -1032,7 +1032,7 @@ export const widgetBarchart = {
                 {code: 'insideRight', name: '里右'},
                 {code: 'insideBottom', name: '里底'},
               ],
-              value: 'insideTop'
+              value: 'top'
             },
             {
               type: 'el-input-number',
@@ -1040,7 +1040,7 @@ export const widgetBarchart = {
               name: 'fontDistance',
               required: false,
               placeholder: '',
-              value: 0
+              value: 10
             },
             {
               type: 'vue-color',
