@@ -429,6 +429,9 @@ export default {
         axisPointer: {
           type: optionsSetup.tooltipAxisPointerType,
         },
+        backgroundColor: optionsSetup.tooltipBackgroundColor,
+        borderColor: optionsSetup.tooltipBorderColor,
+        borderWidth: optionsSetup.tooltipBorderWidth,
         textStyle: {
           color: optionsSetup.tooltipColor,
           fontSize: optionsSetup.tooltipFontSize,

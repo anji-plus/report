@@ -128,6 +128,9 @@ export default {
       const tooltip = {
         trigger: "item",
         show: optionsSetup.isShowTooltip,
+        backgroundColor: optionsSetup.tooltipBackgroundColor,
+        borderColor: optionsSetup.tooltipBorderColor,
+        borderWidth: optionsSetup.tooltipBorderWidth,
         textStyle: {
           color: optionsSetup.tooltipColor,
           fontSize: optionsSetup.tooltipFontSize,

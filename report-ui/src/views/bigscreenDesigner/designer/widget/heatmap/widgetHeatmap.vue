@@ -341,6 +341,9 @@ export default {
         trigger: "item",
         position: "top",
         show: optionsSetup.isShowTooltip,
+        backgroundColor: optionsSetup.tooltipBackgroundColor,
+        borderColor: optionsSetup.tooltipBorderColor,
+        borderWidth: optionsSetup.tooltipBorderWidth,
         textStyle: {
           color: optionsSetup.tooltipColor,
           fontSize: optionsSetup.tooltipFontSize,
