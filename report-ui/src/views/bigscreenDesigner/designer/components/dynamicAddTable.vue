@@ -163,6 +163,10 @@ export default {
   border-bottom: none;
   line-height: 26px;
 }
+.el-table td.el-table__cell,
+.el-table th.el-table__cell.is-leaf {
+  border-bottom: 0px;
+}
 .el-table tbody tr:hover {
   background-color: #263445 !important;
 }
