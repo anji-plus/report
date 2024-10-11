@@ -274,14 +274,14 @@ export const widgetPieNightingale = {
               placeholder: '',
               value: 0,
             },
-/*            {
+            {
               type: 'el-slider',
               label: '圆角属性',
               name: 'borderRadius',
               required: false,
               placeholder: '',
               value: 10,
-            },*/
+            },
           ]
         },
         {
