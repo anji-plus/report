@@ -33,6 +33,67 @@ export const widgetPiePercentage = {
       },
       [
         {
+          name: '圆环设置',
+          list: [
+            {
+              type: 'el-slider',
+              label: '内半径',
+              name: 'innerNumber',
+              required: false,
+              placeholder: '',
+              value: 65,
+            },
+            {
+              type: 'el-slider',
+              label: '外半径',
+              name: 'outerNumber',
+              required: false,
+              placeholder: '',
+              value: 80,
+            },
+            {
+              type: 'el-input-number',
+              label: '刻度数量',
+              name: 'lineNumber',
+              required: false,
+              placeholder: '',
+              value: 12
+            },
+            {
+              type: 'el-input-number',
+              label: '刻度长度',
+              name: 'lineLength',
+              required: false,
+              placeholder: '',
+              value: 20
+            },
+            {
+              type: 'el-input-number',
+              label: '刻度宽度',
+              name: 'lineWidth',
+              required: false,
+              placeholder: '',
+              value: 2
+            },
+            {
+              type: 'el-input-number',
+              label: '圆环刻度距离',
+              name: 'lineDistance',
+              required: false,
+              placeholder: '',
+              value: -10
+            },
+            {
+              type: 'vue-color',
+              label: '刻度颜色',
+              name: 'lineColor',
+              required: false,
+              placeholder: '',
+              value: '#061740'
+            },
+          ]
+        },
+        {
           name: '数值设置',
           list: [
             {
@@ -150,43 +211,6 @@ export const widgetPiePercentage = {
               value: 'sans-serif'
             },
           ],
-        },
-        {
-          name: '圆环设置',
-          list: [
-            {
-              type: 'el-input-number',
-              label: '刻度数量',
-              name: 'lineNumber',
-              required: false,
-              placeholder: '',
-              value: 12
-            },
-            {
-              type: 'el-input-number',
-              label: '刻度长度',
-              name: 'lineLength',
-              required: false,
-              placeholder: '',
-              value: 20
-            },
-            {
-              type: 'el-input-number',
-              label: '刻度宽度',
-              name: 'lineWidth',
-              required: false,
-              placeholder: '',
-              value: 2
-            },
-            {
-              type: 'vue-color',
-              label: '刻度颜色',
-              name: 'lineColor',
-              required: false,
-              placeholder: '',
-              value: '#061740'
-            },
-          ]
         },
         {
           name: '渐变色',
