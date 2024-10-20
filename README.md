@@ -128,7 +128,9 @@ http://serverip:9095
 在Linux上先准备好maven、node.js、jdk
 
 - [Apache Maven] 3.5 <br>
-- [Node.js] v14.16.0 <br>
+- [Node.js] 
+  - report1.5以下版本请使用 node<= V14 
+  - report1.5及以上版本请使用 node>= V16 
 - [Jdk] 1.8
 
 简易步骤
@@ -188,7 +190,7 @@ aj_report（存放系统基础数据）数据库 <br>
 <a href='https://www.zjjcl.cn/'><img src="https://ajreport.beliefteam.cn/file/download/8df07663-60c9-4e32-a0f2-0ea7d5c46ff9" width = "130" height = "50" /> </a>
 <a href='http://www.jiuyinkj.com/'><img src="https://ajreport.beliefteam.cn/file/download/5889f0e6-ba08-4990-ac89-eabfbb8af8bd" width = "130" height = "50" /> </a>
 <a href='http://www.yourongyun.cn/'><img src="https://ajreport.beliefteam.cn/file/download/90e15ed9-5594-4c14-b318-72aeb6816fb9" width = "130" height = "50" /> </a> 
-</br>
+<br>
 <a href='https://www.wenkai.net/'><img src="https://ajreport.beliefteam.cn/file/download/ec788c55-bffd-4809-ae3c-0ce2cbd1a9d0" width = "130" height = "50" /> </a>
 <a href='http://www.sungcor.com/'><img src="https://ajreport.beliefteam.cn/file/download/0514a4a6-787b-4e25-be94-03ff94309553" width = "130" height = "50" /> </a>
 <a href='http://www.jtit.com.cn/'><img src="https://ajreport.beliefteam.cn/file/download/1dc47a36-a515-4775-af44-262225b3662b" width = "130" height = "50" /> </a>
@@ -208,7 +210,7 @@ aj_report（存放系统基础数据）数据库 <br>
 
 已知以下版本存在兼容性问题，请不要使用
 
-- Node.js V16及以上
+- Node.js 请根据实际使用的report版本调整
 - openJdk
 - Jdk 1.7及以下/11及以上（jdk11部分版本有问题）
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
