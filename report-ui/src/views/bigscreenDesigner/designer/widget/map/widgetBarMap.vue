@@ -15,6 +15,7 @@ import "../../../../../../node_modules/echarts/map/js/province/chongqing";
 import "../../../../../../node_modules/echarts/map/js/province/fujian";
 import "../../../../../../node_modules/echarts/map/js/province/gansu";
 import "../../../../../../node_modules/echarts/map/js/province/guangxi";
+import "../../../../../../node_modules/echarts/map/js/province/guangdong";
 import "../../../../../../node_modules/echarts/map/js/province/guizhou";
 import "../../../../../../node_modules/echarts/map/js/province/hainan";
 import "../../../../../../node_modules/echarts/map/js/province/hebei";
