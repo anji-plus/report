@@ -52,6 +52,8 @@ import {widgetBarMap} from "./configure/mapCharts/widget-bar-map";
 import {widgetChinaMap} from "./configure/mapCharts/widget-china-map";
 import {widgetGlobalMap} from "./configure/mapCharts/widget-global-map";
 import {widgetBarStackMoreShow} from "./configure/barCharts/widget-bar-stack-more-show";
+import {widgetBarLineSingle} from "./configure/barlineCharts/widget-bar-line-single-chart";
+
 export const widgetTool = [
   // type=html类型的组件
   widgetText,
@@ -98,5 +100,6 @@ export const widgetTool = [
   widgetBarMap,
   widgetChinaMap,
   widgetGlobalMap,
-  widgetBarStackMoreShow
+  widgetBarStackMoreShow,
+  widgetBarLineSingle
 ]
