@@ -29,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'index',
-        name: 'dashboard',
+        name: 'index',
         meta: {
           title: '首页',
         },
