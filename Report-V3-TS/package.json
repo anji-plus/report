@@ -1,9 +1,9 @@
 {
-  "name": "pms-web",
+  "name": "Report",
   "version": "0.1.0",
   "author": {
     "name": "qianlishi",
-    "email": ""
+    "email": "1432731663@qq.com"
   },
   "private": true,
   "scripts": {
