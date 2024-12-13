@@ -5,5 +5,5 @@ export const websiteConfig = Object.freeze({
   title: 'Report',
   logo: logoImage,
   loginImage: loginImage,
-  loginDesc: 'Report 拖拽数据大屏',
+  loginDesc: 'Report数据大屏',
 });
