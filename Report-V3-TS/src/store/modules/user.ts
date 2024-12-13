@@ -3,13 +3,14 @@ import { store } from '@/store';
 import { ACCESS_TOKEN, CURRENT_USER, IS_SCREENLOCKED } from '@/store/mutation-types';
 import { ResultEnum } from '@/enums/httpEnum';
 
-import { getUserInfo as getUserInfoApi, login } from '@/api/system/user';
+// import { getUserInfo as getUserInfoApi, login } from '@/api/system/user';
+import { login } from '@/api/login/index';
 import { storage } from '@/utils/Storage';
 
 export type UserInfoType = {
   // TODO: add your own data
-  username: string;
-  email: string;
+  loginName: string;
+  realName: string;
 };
 
 export interface IUserState {
@@ -64,36 +65,40 @@ export const useUserStore = defineStore({
     // 登录
     async login(params: any) {
       const response = await login(params);
-      const { result, code } = response;
+      const { data, code } = response;
       if (code === ResultEnum.SUCCESS) {
         const ex = 7 * 24 * 60 * 60;
-        storage.set(ACCESS_TOKEN, result.token, ex);
-        storage.set(CURRENT_USER, result, ex);
+        storage.set(ACCESS_TOKEN, data.token, ex);
+        storage.set(CURRENT_USER, data, ex);
         storage.set(IS_SCREENLOCKED, false);
-        this.setToken(result.token);
-        this.setUserInfo(result);
+        this.setPermissions(data.authorities || []);
+        this.setToken(data.token);
+        this.setUserInfo(data);
+        console.log('aa', data);
       }
       return response;
     },
 
     // 获取用户信息
     async getInfo() {
-      const result = await getUserInfoApi();
-      if (result.permissions && result.permissions.length) {
-        const permissionsList = result.permissions;
+      // const result = await getUserInfoApi();
+      const result = storage.get(CURRENT_USER);
+      if (result.authorities && result.authorities.length) {
+        const permissionsList = result.authorities;
         this.setPermissions(permissionsList);
         this.setUserInfo(result);
       } else {
         throw new Error('getInfo: permissionsList must be a non-null array !');
       }
       this.setAvatar(result.avatar);
+      console.log('aa', result);
       return result;
     },
 
     // 登出
     async logout() {
       this.setPermissions([]);
-      this.setUserInfo({ name: '', email: '' });
+      this.setUserInfo({ loginName: '', realName: '' });
       storage.remove(ACCESS_TOKEN);
       storage.remove(CURRENT_USER);
     },

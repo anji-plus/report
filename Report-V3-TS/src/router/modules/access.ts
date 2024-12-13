@@ -24,6 +24,7 @@ const routes: Array<RouteRecordRaw> = [
       title: '用户权限',
       icon: renderIcon(AccountBookFilled),
       sort: 2,
+      permission: 'authorityManage|roleManage|userManage',
     },
     children: [
       {
@@ -31,6 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'authority',
         meta: {
           title: '权限管理',
+          permission: 'authorityManage',
         },
         component: () => import('@/views/access/accessAuthority/index.vue'),
       },
@@ -39,6 +41,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'role',
         meta: {
           title: '角色管理',
+          permission: 'roleManage',
         },
         component: () => import('@/views/access/accessRole/index.vue'),
       },
@@ -47,6 +50,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'user',
         meta: {
           title: '用户管理',
+          permission: 'userManage',
         },
         component: () => import('@/views/access/accessUser/index.vue'),
       },

@@ -77,7 +77,7 @@
               </template>
             </n-avatar>
             <n-divider vertical />
-            <span>{{ username }}</span>
+            <span>{{ username }}{{ [loginName] }}</span>
           </div>
         </n-dropdown>
       </div>
@@ -133,7 +133,8 @@ export default defineComponent({
     const drawerSetting = ref();
 
     const state = reactive({
-      username: userStore?.info?.username ?? '',
+      username: userStore?.info?.realName ?? '',
+      loginName: userStore?.info?.loginName ?? '',
       fullscreenIcon: 'FullscreenOutlined',
       navMode,
       navTheme,

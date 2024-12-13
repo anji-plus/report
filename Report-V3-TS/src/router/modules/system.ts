@@ -1,10 +1,3 @@
-/*
- * @Description:
- * @Author: qianlishi
- * @Date: 2024-12-08 16:58:25
- * @LastEditors: qianlishi
- * @LastEditTime: 2024-12-08 17:03:07
- */
 import { RouteRecordRaw } from 'vue-router';
 import { Layout } from '@/router/base/index';
 import { SettingOutlined } from '@vicons/antd';
@@ -31,6 +24,7 @@ const routes: Array<RouteRecordRaw> = [
       title: '系统设置',
       icon: renderIcon(SettingOutlined),
       sort: 4,
+      permission: 'fileManage|dictManage|dictItemManage',
     },
     children: [
       {
@@ -38,6 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'fileManage',
         meta: {
           title: '文件管理',
+          permission: 'fileManage',
         },
         component: () => import('@/views/system/fileManage/index.vue'),
       },
@@ -46,6 +41,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'dictManage',
         meta: {
           title: '数据字典',
+          permission: 'dictManage',
         },
         component: () => import('@/views/system/dictManage/index.vue'),
       },

@@ -26,6 +26,7 @@ export interface IAsyncRouteState {
   routersAdded: any[];
   keepAliveComponents: string[];
   isDynamicRouteAdded: boolean;
+  isStaticRoute: boolean;
 }
 
 function filter<T = any>(
@@ -47,6 +48,10 @@ function filter<T = any>(
 
   return listFilter(tree);
 }
+// 判断是否包含竖线
+function isIncludeVerticalLine(str: string) {
+  return str.indexOf('|') !== -1;
+}
 
 export const useAsyncRouteStore = defineStore({
   id: 'app-async-route',
@@ -57,6 +62,8 @@ export const useAsyncRouteStore = defineStore({
     keepAliveComponents: [],
     // Whether the route has been dynamically added
     isDynamicRouteAdded: false,
+    // 是否是静态路由
+    isStaticRoute: true,
   }),
   getters: {
     getMenus(): RouteRecordRaw[] {
@@ -64,6 +71,9 @@ export const useAsyncRouteStore = defineStore({
     },
     getIsDynamicRouteAdded(): boolean {
       return this.isDynamicRouteAdded;
+    },
+    getIsStaticRoute(): boolean {
+      return this.isStaticRoute;
     },
   },
   actions: {
@@ -88,13 +98,20 @@ export const useAsyncRouteStore = defineStore({
     },
     async generateRoutes(data) {
       let accessedRouters;
-      const permissionsList = data.permissions ?? [];
+      const permissionsList = data.authorities ?? [];
       const routeFilter = (route) => {
         const { meta } = route;
-        const { permissions } = meta || {};
-        if (!permissions) return true;
-        return permissionsList.some((item) => permissions.includes(item.value));
+        const { permission } = meta || {};
+        if (!permission) return true;
+        if (isIncludeVerticalLine(permission)) {
+          const permissions = permission.split('|');
+          return permissionsList.some((item) => {
+            return permissions.some((permissionChild) => item.includes(permissionChild));
+          });
+        }
+        return permissionsList.some((item) => item.includes(permission));
       };
+
       const { permissionMode } = useProjectSetting();
       if (unref(permissionMode) === 'BACK') {
         // 动态获取菜单
@@ -111,7 +128,8 @@ export const useAsyncRouteStore = defineStore({
           console.log(error);
         }
       }
-      accessedRouters = accessedRouters.filter(routeFilter);
+
+      accessedRouters = filter(asyncRoutes, routeFilter);
       this.setRouters(accessedRouters);
       this.setMenus(accessedRouters);
       return toRaw(accessedRouters);

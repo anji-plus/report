@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: qianlishi
+ * @Date: 2024-12-08 17:49:23
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2024-12-13 15:58:45
+-->
 <template>
   <div class="index-container">
     <div class="bg"></div>

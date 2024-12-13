@@ -54,6 +54,7 @@ export function createRouterGuards(router: Router) {
       return;
     }
 
+    // 动态路由
     if (asyncRouteStore.getIsDynamicRouteAdded) {
       next();
       return;

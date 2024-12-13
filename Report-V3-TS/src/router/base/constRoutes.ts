@@ -33,4 +33,20 @@ export const constRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: '/',
+    name: 'other',
+    component: Layout,
+    meta: {},
+    children: [
+      {
+        path: 'dictItem',
+        name: 'dictItem',
+        component: () => import('@/views/system/dictItem/index.vue'),
+        meta: {
+          title: '字典项',
+        },
+      },
+    ],
+  },
 ];

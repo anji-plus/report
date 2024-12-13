@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: qianlishi
+ * @Date: 2024-12-08 17:38:28
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2024-12-13 18:36:32
+ */
 import { App } from 'vue';
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { RedirectRoute } from '@/router/base/index';

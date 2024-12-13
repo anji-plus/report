@@ -24,6 +24,7 @@ const routes: Array<RouteRecordRaw> = [
       title: '报表设计',
       icon: renderIcon(DatabaseOutlined),
       sort: 3,
+      permission: 'datasourceManage|resultsetManage|reportManage|bigScreenManage|excelManage'
     },
     children: [
       {
@@ -31,6 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'dataSource',
         meta: {
           title: '数据源',
+          permission: 'datasourceManage'
         },
         component: () => import('@/views/report/dataSource/index.vue'),
       },
@@ -39,6 +41,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'resultSet',
         meta: {
           title: '数据集',
+          permission: 'resultsetManage'
         },
         component: () => import('@/views/report/resultSet/index.vue'),
       },
@@ -47,6 +50,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'reportManage',
         meta: {
           title: '报表管理',
+          permission: 'reportManage'
         },
         component: () => import('@/views/report/reportManage/index.vue'),
       },
@@ -55,6 +59,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'bigScreen',
         meta: {
           title: '大屏报表',
+          permission: 'bigScreenManage'
         },
         component: () => import('@/views/report/bigScreen/index.vue'),
       },
@@ -63,6 +68,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'excelReport',
         meta: {
           title: '表格报表',
+          permission: 'excelManage'
         },
         component: () => import('@/views/report/excelReport/index.vue'),
       },
@@ -71,6 +77,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'shareManage',
         meta: {
           title: '报表分享',
+          permission: 'reportShareManage'
         },
         component: () => import('@/views/report/shareManage/index.vue'),
       },
