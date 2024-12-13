@@ -32,6 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'index',
         meta: {
           title: '首页',
+          affix: true,
         },
         component: () => import('@/views/dashboard/index.vue'),
       },

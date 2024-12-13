@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: qianlishi
+ * @Date: 2024-12-08 17:38:28
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2024-12-13 15:33:45
+ */
 import { ref, unref, getCurrentInstance, watch } from 'vue';
 import { isProdMode } from '@/utils/env';
 import { ModalMethods, UseModalReturnType } from '../type';
@@ -31,7 +38,7 @@ export function useModal(props): UseModalReturnType {
       {
         immediate: true,
         deep: true,
-      }
+      },
     );
   };
 

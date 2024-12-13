@@ -1,17 +1,8 @@
-/*
- * @Description:
- * @Author: qianlishi
- * @Date: 2024-12-08 03:56:09
- * @LastEditors: qianlishi
- * @LastEditTime: 2024-12-08 16:57:02
- */
 import { RouteRecordRaw } from 'vue-router';
 import { Layout } from '@/router/base/index';
-import { ExclamationCircleOutlined } from '@vicons/antd';
-import { renderIcon } from '@/utils/index';
 
 /**
- * @descipt 异常页面
+ * @descript 没有权限露路由
  * @param name 路由名称, 必须设置,且不能重名
  * @param meta 路由元信息（路由附带扩展信息）
  * @param redirect 重定向地址, 访问这个路由时,自定进行重定向
@@ -22,26 +13,16 @@ import { renderIcon } from '@/utils/index';
  * @param meta.sort 排序越小越排前
  *
  * */
-const routes: Array<RouteRecordRaw> = [
+export const constRoutes: Array<RouteRecordRaw> = [
   {
-    path: '/exception',
+    path: '/404',
     name: 'Exception',
-    redirect: '/exception/403',
     component: Layout,
     meta: {
       title: '异常页面',
-      icon: renderIcon(ExclamationCircleOutlined),
       sort: 10,
     },
     children: [
-      {
-        path: '403',
-        name: 'exception-403',
-        meta: {
-          title: '403',
-        },
-        component: () => import('@/views/exception/403.vue'),
-      },
       {
         path: '404',
         name: 'exception-404',
@@ -50,16 +31,6 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import('@/views/exception/404.vue'),
       },
-      {
-        path: '500',
-        name: 'exception-500',
-        meta: {
-          title: '500',
-        },
-        component: () => import('@/views/exception/500.vue'),
-      },
     ],
   },
 ];
-
-export default routes;

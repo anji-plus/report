@@ -1,7 +1,8 @@
 import { App } from 'vue';
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { RedirectRoute } from '@/router/base/index';
-// import { PageEnum } from '@/enums/pageEnum';
+import { constRoutes } from '@/router/base/constRoutes';
+import { PageEnum } from '@/enums/pageEnum';
 import { createRouterGuards } from './guards/index';
 import type { IModuleType } from './types/index';
 
@@ -19,14 +20,14 @@ function sortRoute(a, b) {
 
 routeModuleList.sort(sortRoute);
 
-// export const RootRoute: RouteRecordRaw = {
-//   path: '/',
-//   name: 'Root',
-//   redirect: PageEnum.BASE_HOME,
-//   meta: {
-//     title: 'Root',
-//   },
-// };
+export const RootRoute: RouteRecordRaw = {
+  path: '/',
+  name: 'Root',
+  redirect: PageEnum.BASE_HOME,
+  meta: {
+    title: 'Root',
+  },
+};
 
 export const LoginRoute: RouteRecordRaw = {
   path: '/login',
@@ -41,7 +42,12 @@ export const LoginRoute: RouteRecordRaw = {
 export const asyncRoutes = [...routeModuleList];
 
 //普通路由 无需验证权限
-export const constantRouter: RouteRecordRaw[] = [LoginRoute, RedirectRoute];
+export const constantRouter: RouteRecordRaw[] = [
+  LoginRoute,
+  RootRoute,
+  RedirectRoute,
+  ...constRoutes,
+];
 
 const router = createRouter({
   history: createWebHistory(),
