@@ -74,7 +74,6 @@ export const useUserStore = defineStore({
         this.setPermissions(data.authorities || []);
         this.setToken(data.token);
         this.setUserInfo(data);
-        console.log('aa', data);
       }
       return response;
     },
@@ -91,7 +90,6 @@ export const useUserStore = defineStore({
         throw new Error('getInfo: permissionsList must be a non-null array !');
       }
       this.setAvatar(result.avatar);
-      console.log('aa', result);
       return result;
     },
 

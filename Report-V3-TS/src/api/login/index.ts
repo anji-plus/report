@@ -15,13 +15,6 @@ export function login(data) {
   });
 }
 
-export function logout() {
-  return http.request({
-    url: 'accessUser/logout',
-    method: 'post',
-  });
-}
-
 // 登录之后   根据旧修改密码
 export function reqUpdatePassword(data) {
   return http.request({
