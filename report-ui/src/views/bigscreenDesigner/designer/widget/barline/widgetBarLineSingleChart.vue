@@ -458,6 +458,7 @@ export default {
             };
           }
           series[i].lineStyle = {
+            color: arrColor[i],
             width: optionsSetup.lineWidth,
           };
           series[i].itemStyle.borderRadius = optionsSetup.radius;
@@ -590,6 +591,7 @@ export default {
             };
           }
           obj.lineStyle = {
+            color: arrColor[i],
             width: optionsSetup.lineWidth,
           };
           obj.itemStyle.borderRadius = optionsSetup.radius;
