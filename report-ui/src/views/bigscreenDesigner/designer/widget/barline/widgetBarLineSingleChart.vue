@@ -126,13 +126,10 @@ export default {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
-/*      this.setOptionsLine();
-      this.setOptionsBar();*/
       this.setOptionsTooltip();
       this.setOptionsData();
       this.setOptionsMargin();
       this.setOptionsLegend();
-      this.setOptionsColor();
     },
     // 标题修改
     setOptionsTitle() {
@@ -287,79 +284,6 @@ export default {
       ];
       this.options.yAxis = yAxis;
     },
-    // 折线设置 数值设置
-    setOptionsLine() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "line") {
-          series[key].symbol = optionsSetup.symbol;
-          series[key].showSymbol = optionsSetup.markPoint;
-          series[key].symbolSize = optionsSetup.pointSize;
-          series[key].smooth = optionsSetup.smoothCurve;
-          if (optionsSetup.area) {
-            series[key].areaStyle = {
-              opacity: optionsSetup.areaThickness / 100,
-            };
-          } else {
-            series[key].areaStyle = {
-              opacity: 0,
-            };
-          }
-          series[key].lineStyle = {
-            width: optionsSetup.lineWidth,
-          };
-          series[key].itemStyle.borderRadius = optionsSetup.radius;
-          series[key].label = {
-            show: optionsSetup.isShowLine,
-            position: optionsSetup.fontPositionLine,
-            distance: optionsSetup.fontDistanceLine,
-            fontSize: optionsSetup.fontSizeLine,
-            color: optionsSetup.fontColorLine,
-            fontWeight: optionsSetup.fontWeightLine,
-            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}',
-            fontStyle: optionsSetup.fontStyleLine,
-            fontFamily: optionsSetup.fontFamilyLine,
-          };
-        }
-      }
-      this.options.series = series;
-    },
-    // 柱体设置 数值设置
-    setOptionsBar() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "bar") {
-          series[key].label = {
-            show: optionsSetup.isShowBar,
-            position: optionsSetup.fontPositionBar,
-            distance: optionsSetup.fontDistanceBar,
-            fontSize: optionsSetup.fontSizeBar,
-            color: optionsSetup.fontColorBar,
-            fontWeight: optionsSetup.fontWeightBar,
-            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}',
-            fontStyle: optionsSetup.fontStyleBar,
-            fontFamily: optionsSetup.fontFamilyBar,
-          };
-          //柱体背景属性
-          series[key].showBackground = optionsSetup.isShowBackground;
-          series[key].backgroundStyle = {
-            color: optionsSetup.backgroundStyleColor,
-            borderColor: optionsSetup.backgroundStyleBorderColor,
-            borderWidth: optionsSetup.backgroundStyleBorderWidth,
-            borderType: optionsSetup.backgroundStyleBorderType,
-            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
-            shadowColor: optionsSetup.backgroundStyleShadowColor,
-            opacity: optionsSetup.backgroundStyleOpacity / 100,
-          };
-          series[key].barWidth = optionsSetup.maxWidth;
-          series[key].barMinHeight = optionsSetup.minHeight;
-          series[key].itemStyle.barBorderRadius = optionsSetup.radius;
-        }
-      }
-      this.options.series = series;
-    },
     // tooltip 设置
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
@@ -435,17 +359,6 @@ export default {
       }
     },
     // 图例颜色修改
-    setOptionsColor() {
-      const optionsSetup = this.optionsSetup;
-      const customColor = optionsSetup.customColor;
-      if (!customColor) return;
-      const arrColor = [];
-      for (let i = 0; i < customColor.length; i++) {
-        arrColor.push(customColor[i].color);
-      }
-      this.options.color = arrColor;
-      this.options = Object.assign({}, this.options);
-    },
     // 数据处理
     setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
