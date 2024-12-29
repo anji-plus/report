@@ -2,8 +2,8 @@
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <div class="admin-title" @click="goBigScreen">
       <div class="con">
-        <img src="../../../../../static/logo-dp.png" width="50" />
-        <span class="version">V1.4.2</span>
+        <img src="/static/logo-dp.png" width="50" />
+        <span class="version">V1.5.0</span>
       </div>
     </div>
     <el-menu

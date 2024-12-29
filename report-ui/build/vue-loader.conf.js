@@ -1,5 +1,11 @@
 'use strict'
 
 module.exports = {
-  //You can set the vue-loader configuration by yourself.
+  css: {
+    loaderOptions: {
+      sass: {
+        implementation: require('sass'), // This line must in sass option
+      },
+    },
+  }
 }

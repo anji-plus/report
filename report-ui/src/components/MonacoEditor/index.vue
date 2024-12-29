@@ -126,7 +126,7 @@ export default {
 </script>
 
 <style scoped>
-.main /deep/ .view-lines * {
+.main .view-lines * {
   font-family: Consolas, "Courier New", monospace !important;
 }
 </style>

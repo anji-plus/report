@@ -1,5 +1,5 @@
  <!--
- * @Descripttion: 
+ * @Descripttion:
  * @Author: qianlishi
  * @Date: 2021-12-13 10:17:24
  * @Last Modified by:   qianlishi
@@ -156,9 +156,9 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .notfull-screen {
-  /deep/.el-dialog__body {
+  .el-dialog__body {
     background-color: rgb(240, 242, 245);
     padding: 5px;
     max-height: 60vh;
@@ -166,7 +166,7 @@ export default {
   }
 }
 .full-screen {
-  /deep/.el-dialog__body {
+  .el-dialog__body {
     background-color: rgb(240, 242, 245);
     padding: 5px;
     height: calc(100vh - 110px);
@@ -210,7 +210,7 @@ export default {
 .addForm {
   text-align: center;
 }
-.activeColor /deep/.el-form-item__label {
+.activeColor .el-form-item__label {
   color: #5887fb;
 }
 </style>

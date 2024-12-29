@@ -149,30 +149,30 @@ export default {
     flex-direction: row;
   }
 }
-/deep/.el-table,
-/deep/.el-table__expanded-cell,
-/deep/.el-table th,
-/deep/.el-table tr {
+:deep().el-table,
+:deep().el-table__expanded-cell,
+:deep().el-table th,
+:deep().el-table tr {
   background-color: transparent !important;
   color: #859094 !important;
 }
-/deep/.el-table td,
-/deep/.el-table th.is-leaf {
+:deep().el-table td,
+:deep().el-table th.is-leaf {
   border-bottom: none;
   line-height: 26px;
 }
-/deep/.el-table tbody tr:hover > td {
+:deep().el-table tbody tr:hover > td {
   background-color: #263445 !important;
 }
-/deep/.el-table::before {
+:deep().el-table::before {
   height: 0;
 }
-/deep/.el-color-picker--mini,
-/deep/.el-color-picker--mini .el-color-picker__trigger {
+:deep().el-color-picker--mini,
+:deep().el-color-picker--mini .el-color-picker__trigger {
   width: 23px;
   height: 23px;
 }
-/deep/.el-dialog {
+:deep().el-dialog {
   background: #1b1e25;
   .el-dialog__title {
     color: #fff;

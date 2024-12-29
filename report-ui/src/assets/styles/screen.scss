@@ -19,8 +19,7 @@
 }
 
 .is-active {
-  background: #31455d !important;
-  color: #bfcbd9 !important;
+  color: #fff !important;
 }
 
 .layout {
@@ -226,9 +225,9 @@
     height: 100%;
   }
 
-  /deep/ .el-tabs--border-card {
-    border: 0;
 
+   .el-tabs--border-card {
+    border: 0;
     .el-tabs__header {
       .el-tabs__nav {
         .el-tabs__item {
@@ -335,7 +334,7 @@ li {
   float: left;
   padding: 12px 30px;
   color: #999;
-  font: bold 12px;
+  font-size: 12px;
   text-decoration: none;
 }
 
@@ -416,11 +415,11 @@ li {
   padding: 5px;
 }
 
-/deep/ .vue-ruler-h {
+.vue-ruler-h {
   opacity: 0.3;
 }
 
-/deep/ .vue-ruler-v {
+.vue-ruler-v {
   opacity: 0.3;
 }
 
@@ -440,7 +439,7 @@ li {
       height: calc(100vh - 80px);
       text-align: center;
 
-      /deep/.el-tabs__header {
+      .el-tabs__header {
         width: 30%;
         margin-right: 0;
 
@@ -458,8 +457,7 @@ li {
           }
         }
       }
-
-      /deep/.el-tabs__content {
+      .el-tabs__content {
         width: 70%;
       }
     }
@@ -495,7 +493,8 @@ li {
     }
   }
 
-  /deep/.el-tabs__content {
+
+  .el-tabs__content {
     padding: 0;
   }
 }

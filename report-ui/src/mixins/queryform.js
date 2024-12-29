@@ -161,7 +161,8 @@ export default {
       if (
         chartType == "widget-barchart" ||
         chartType == "widget-linechart" ||
-        chartType == "widget-barlinechart"
+        chartType == "widget-barlinechart" ||
+        chartType == "widget-scatter"
       ) {
         return this.barOrLineChartFn(params.chartProperties, data);
       } else if (

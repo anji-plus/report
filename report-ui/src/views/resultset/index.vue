@@ -334,8 +334,8 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-/deep/.el-dropdown {
+<style lang="scss">
+.el-dropdown {
   margin-right: 20px;
 }
 </style>
