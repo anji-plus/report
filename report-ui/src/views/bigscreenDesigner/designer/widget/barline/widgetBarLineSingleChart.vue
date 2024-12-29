@@ -358,7 +358,6 @@ export default {
         this.options.legend["data"] = arr;
       }
     },
-    // 图例颜色修改
     // 数据处理
     setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
@@ -385,6 +384,7 @@ export default {
     },
     staticDataFn(val) {
       const series = this.options.series;
+      const optionsSetup = this.optionsSetup;
       //颜色
       const customColor = optionsSetup.customColor;
       const arrColor = [];
@@ -441,7 +441,7 @@ export default {
               barBorderRadius: optionsSetup.radius,
             },
           };
-        } else {
+        } else if (series[i].type == "line") {
           series[i].name = legendName[i];
           series[i].type = "line";
           series[i].data = line;
@@ -461,7 +461,6 @@ export default {
             color: arrColor[i],
             width: optionsSetup.lineWidth,
           };
-          series[i].itemStyle.borderRadius = optionsSetup.radius;
           series[i].label = {
             show: optionsSetup.isShowLine,
             position: optionsSetup.fontPositionLine,
@@ -475,7 +474,6 @@ export default {
           };
         }
       }
-      const optionsSetup = this.optionsSetup;
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
       const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / axis.length) / optionsSetup.textFontSizeX);
       const axisLabel = {
@@ -526,15 +524,15 @@ export default {
       });
     },
     renderingFn(val) {
-      this.options.xAxis.data = val.xAxis;
-      // series
+      const optionsSetup = this.optionsSetup;
       //颜色
       const customColor = optionsSetup.customColor;
       const arrColor = [];
       for (let i = 0; i < customColor.length; i++) {
         arrColor.push(customColor[i].color);
       }
-      const series = this.options.series;
+      this.options.xAxis.data = val.xAxis;
+      const series = [];
       const legendName = [];
       for (const i in val.series) {
         legendName.push(val.series[i].name);
@@ -575,9 +573,10 @@ export default {
           };
           obj.data = val.series[i].data;
           series.push(obj);
-        }else if(val.series[i].type == "line"){
+        } else if (val.series[i].type == "line") {
           obj.name = val.series[i].name;
           obj.type = "line";
+          obj.symbol = optionsSetup.symbol;
           obj.showSymbol = optionsSetup.markPoint;
           obj.symbolSize = optionsSetup.pointSize;
           obj.smooth = optionsSetup.smoothCurve;
@@ -594,7 +593,6 @@ export default {
             color: arrColor[i],
             width: optionsSetup.lineWidth,
           };
-          obj.itemStyle.borderRadius = optionsSetup.radius;
           obj.label = {
             show: optionsSetup.isShowLine,
             position: optionsSetup.fontPositionLine,
@@ -610,7 +608,6 @@ export default {
           series.push(obj);
         }
       }
-      const optionsSetup = this.optionsSetup;
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
       const xAxisDataLength = val.length !== 0 ? val.xAxis.length : 1;
       const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.textFontSizeX);
@@ -641,6 +638,7 @@ export default {
       if (optionsSetup.textRowsBreakAuto) {
         this.options.xAxis.axisLabel = axisLabel;
       }
+      this.options.series = series;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },

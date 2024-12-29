@@ -225,6 +225,14 @@ export const widgetBarLineSingle = {
             },
             {
               type: 'el-slider',
+              label: '间距',
+              name: 'barGap',
+              required: false,
+              placeholder: '',
+              value: 10,
+            },
+            {
+              type: 'el-slider',
               label: '最小高度',
               name: 'minHeight',
               require: false,
