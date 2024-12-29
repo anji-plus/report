@@ -205,133 +205,27 @@ export const widgetScatter = {
           ],
         },
         {
-          name: '图例操作',
+          name: '散点设置',
           list: [
             {
-              type: 'el-switch',
-              label: '图例显示',
-              name: 'isShowLegend',
-              required: false,
-              placeholder: '',
-              value: true,
-            },
-            {
-              type: 'el-input-text',
-              label: '名称( | 分隔)',
-              name: 'legendName',
-              required: false,
-              placeholder: '',
-              value: ''
-            },
-            {
-              type: 'vue-color',
-              label: '字体颜色',
-              name: 'legendColor',
-              required: false,
-              placeholder: '',
-              value: '#fff',
-            },
-            {
-              type: 'el-input-number',
-              label: '字体字号',
-              name: 'legendFontSize',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
               type: 'el-select',
-              label: '字体粗细',
-              name: 'legendFontWeight',
+              label: '点样式',
+              name: 'symbol',
               required: false,
               placeholder: '',
               selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'bold', name: '粗体'},
-                {code: 'bolder', name: '特粗体'},
-                {code: 'lighter', name: '细体'}
+                { code: 'circle', name: '实心点' },
+                { code: 'emptyCircle', name: '空心点' },
               ],
-              value: 'normal'
+              value: 'circle'
             },
             {
-              type: 'el-select',
-              label: '字体风格',
-              name: 'legendFontStyle',
+              type: 'el-slider',
+              label: '点大小',
+              name: 'pointSize',
               required: false,
               placeholder: '',
-              selectOptions: [
-                {code: 'normal', name: '正常'},
-                {code: 'italic', name: 'italic斜体'},
-                {code: 'oblique', name: 'oblique斜体'},
-              ],
-              value: 'normal'
-            },
-            {
-              type: 'el-select',
-              label: '字体系列',
-              name: 'legendFontFamily',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'sans-serif', name: 'sans-serif'},
-                {code: 'serif', name: 'serif'},
-                {code: 'Arial', name: 'Arial'},
-                {code: 'Courier New', name: 'Courier New'},
-              ],
-              value: 'sans-serif'
-            },
-            {
-              type: 'el-input-number',
-              label: '图例宽度',
-              name: 'legendWidth',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'el-input-number',
-              label: '图例高度',
-              name: 'legendHeight',
-              required: false,
-              placeholder: '',
-              value: 12,
-            },
-            {
-              type: 'el-select',
-              label: '横向位置',
-              name: 'lateralPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'center', name: '居中'},
-                {code: 'left', name: '左对齐'},
-                {code: 'right', name: '右对齐'},
-              ],
-              value: 'center'
-            },
-            {
-              type: 'el-select',
-              label: '纵向位置',
-              name: 'longitudinalPosition',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'top', name: '顶部'},
-                {code: 'bottom', name: '底部'},
-              ],
-              value: 'top'
-            },
-            {
-              type: 'el-select',
-              label: '布局前置',
-              name: 'layoutFront',
-              required: false,
-              placeholder: '',
-              selectOptions: [
-                {code: 'vertical', name: '竖排'},
-                {code: 'horizontal', name: '横排'},
-              ],
-              value: 'horizontal'
+              value: 5,
             },
           ],
         },
@@ -598,6 +492,137 @@ export const widgetScatter = {
               required: false,
               placeholder: '',
               value: 1,
+            },
+          ],
+        },
+        {
+          name: '图例操作',
+          list: [
+            {
+              type: 'el-switch',
+              label: '图例显示',
+              name: 'isShowLegend',
+              required: false,
+              placeholder: '',
+              value: true,
+            },
+            {
+              type: 'el-input-text',
+              label: '名称( | 分隔)',
+              name: 'legendName',
+              required: false,
+              placeholder: '',
+              value: ''
+            },
+            {
+              type: 'vue-color',
+              label: '字体颜色',
+              name: 'legendColor',
+              required: false,
+              placeholder: '',
+              value: '#fff',
+            },
+            {
+              type: 'el-input-number',
+              label: '字体字号',
+              name: 'legendFontSize',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '字体粗细',
+              name: 'legendFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'bold', name: '粗体'},
+                {code: 'bolder', name: '特粗体'},
+                {code: 'lighter', name: '细体'}
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体风格',
+              name: 'legendFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'normal', name: '正常'},
+                {code: 'italic', name: 'italic斜体'},
+                {code: 'oblique', name: 'oblique斜体'},
+              ],
+              value: 'normal'
+            },
+            {
+              type: 'el-select',
+              label: '字体系列',
+              name: 'legendFontFamily',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'sans-serif', name: 'sans-serif'},
+                {code: 'serif', name: 'serif'},
+                {code: 'Arial', name: 'Arial'},
+                {code: 'Courier New', name: 'Courier New'},
+              ],
+              value: 'sans-serif'
+            },
+            {
+              type: 'el-input-number',
+              label: '图例宽度',
+              name: 'legendWidth',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-input-number',
+              label: '图例高度',
+              name: 'legendHeight',
+              required: false,
+              placeholder: '',
+              value: 12,
+            },
+            {
+              type: 'el-select',
+              label: '横向位置',
+              name: 'lateralPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'center', name: '居中'},
+                {code: 'left', name: '左对齐'},
+                {code: 'right', name: '右对齐'},
+              ],
+              value: 'center'
+            },
+            {
+              type: 'el-select',
+              label: '纵向位置',
+              name: 'longitudinalPosition',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'top', name: '顶部'},
+                {code: 'bottom', name: '底部'},
+              ],
+              value: 'top'
+            },
+            {
+              type: 'el-select',
+              label: '布局前置',
+              name: 'layoutFront',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                {code: 'vertical', name: '竖排'},
+                {code: 'horizontal', name: '横排'},
+              ],
+              value: 'horizontal'
             },
           ],
         },

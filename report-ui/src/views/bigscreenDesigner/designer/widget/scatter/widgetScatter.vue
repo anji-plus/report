@@ -355,6 +355,8 @@ export default {
       for (const i in series) {
         if (series[i].type == "scatter") {
           series[i].type = "scatter";
+          series[i].symbol = optionsSetup.symbol;
+          series[i].symbolSize = optionsSetup.pointSize;
           series[i].label = {
             show: optionsSetup.isShow,
             position: optionsSetup.fontPosition,
@@ -462,6 +464,8 @@ export default {
         const obj = {};
         if (val.series[i].type == "scatter") {
           obj.type = "scatter";
+          obj.symbol = optionsSetup.symbol;
+          obj.symbolSize = optionsSetup.pointSize;
           obj.label = {
             show: optionsSetup.isShow,
             position: optionsSetup.fontPosition,
