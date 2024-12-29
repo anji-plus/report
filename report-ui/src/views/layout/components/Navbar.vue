@@ -9,7 +9,6 @@
       <breadcrumb />
       <div class="right-menu">
         <div class="item-men">
-          <div class="item" @click="centerDialogVisible = true">说明</div>
           <div class="item">
             <a href="https://ajreport.beliefteam.cn/report-doc/" target="blank"
             >文档</a
@@ -80,30 +79,6 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="wordVisible = false">取 消</el-button>
         <el-button type="primary" @click="confrimUpdate">确 定</el-button>
-      </span>
-    </el-dialog>
-
-    <!--说明弹出框-->
-    <el-dialog
-      title="说明"
-      :visible.sync="centerDialogVisible"
-      width="34%"
-      center
-    >
-      <div style="font-size: 20px; line-height: 50px; margin-bottom: 50px">
-        AJ-Report由<a href="http://www.anji-plus.com/" target="_blank" style="text-decoration: underline"><b>安吉加加信息技术有限公司</b></a
-      >遵循 <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank" style="text-decoration: underline; word-wrap: break-word"><strong style="color: orangered" >Apache2.0开源协议</strong></a
-      >在<a href="https://gitee.com/explore" target="_blank" style="text-decoration: underline; word-wrap: break-word"><b>Gitee平台</b></a
-      >进行开源。
-      </div>
-      <div style="font-size: 20px; line-height: 50px">
-        <strong> 个人/商业使用须遵循Apache2.0开源协议。</strong>
-        <strong style="color: orangered">禁止将AJ-Report产品用于违法违规业务。</strong>
-      </div>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="centerDialogVisible = false"
-        >确 定</el-button
-        >
       </span>
     </el-dialog>
   </div>

@@ -96,7 +96,7 @@ export const widgetText = {
         name: 'whiteSpace',
         required: false,
         placeholder: '',
-        value: true,
+        value: false,
       }
     ],
     // 数据

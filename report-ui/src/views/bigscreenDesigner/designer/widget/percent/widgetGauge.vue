@@ -1,11 +1,11 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize/>
+    <v-chart ref="myVChart" :option="options" autoresize/>
   </div>
 </template>
 
 <script>
-import echarts from "echarts";
+import * as echarts from "echarts";
 import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
 
 export default {
@@ -272,7 +272,7 @@ export default {
         const axisTick = {
           show: optionsSetup.tickShow,
           splitNumber: optionsSetup.tickSplitNumber,
-          //distance: optionsSetup.tickDistance, echartsV5.0.0开始支持
+          distance: optionsSetup.tickDistance,
           length: optionsSetup.tickLength,
           lineStyle: {
             color: "auto",
@@ -283,7 +283,7 @@ export default {
         // 分隔线-指标线
         const splitLine = {
           show: optionsSetup.splitShow,
-          // distance: optionsSetup.splitDistance,echartsV5.0.0开始支持
+          distance: optionsSetup.splitDistance,
           length: optionsSetup.splitLength,
           lineStyle: {
             color: "auto",

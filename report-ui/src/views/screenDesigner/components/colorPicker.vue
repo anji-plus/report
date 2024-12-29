@@ -63,8 +63,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-/deep/.el-color-picker--mini,
-/deep/.el-color-picker--mini .el-color-picker__trigger {
+:deep().el-color-picker--mini,
+:deep().el-color-picker--mini .el-color-picker__trigger {
   width: 23px;
   height: 23px;
 }

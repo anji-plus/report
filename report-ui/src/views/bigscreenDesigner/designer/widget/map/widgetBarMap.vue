@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize/>
+    <v-chart ref="myVChart" :option="options" autoresize/>
   </div>
 </template>
 <script>
@@ -15,6 +15,7 @@ import "../../../../../../node_modules/echarts/map/js/province/chongqing";
 import "../../../../../../node_modules/echarts/map/js/province/fujian";
 import "../../../../../../node_modules/echarts/map/js/province/gansu";
 import "../../../../../../node_modules/echarts/map/js/province/guangxi";
+import "../../../../../../node_modules/echarts/map/js/province/guangdong";
 import "../../../../../../node_modules/echarts/map/js/province/guizhou";
 import "../../../../../../node_modules/echarts/map/js/province/hainan";
 import "../../../../../../node_modules/echarts/map/js/province/hebei";
@@ -42,7 +43,7 @@ import "../../../../../../node_modules/echarts/map/js/province/xizang";
 import "../../../../../../node_modules/echarts/map/js/province/yunnan";
 import "../../../../../../node_modules/echarts/map/js/province/zhejiang";
 import {conversionProvince} from "@/utils/china";
-import echarts from "echarts";
+import * as echarts from "echarts";
 
 let geoCoordMap = conversionProvince;
 

@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize/>
+    <v-chart ref="myVChart" :option="options" autoresize/>
   </div>
 </template>
 
@@ -134,6 +134,9 @@ export default {
       const tooltip = {
         trigger: "item",
         show: optionsSetup.isShowTooltip,
+        backgroundColor: optionsSetup.tooltipBackgroundColor,
+        borderColor: optionsSetup.tooltipBorderColor,
+        borderWidth: optionsSetup.tooltipBorderWidth,
         textStyle: {
           color: optionsSetup.tooltipColor,
           fontSize: optionsSetup.tooltipFontSize,
@@ -220,10 +223,9 @@ export default {
         minShowLabelAngle: optionsSetup.minShowLabelAngle,
         percentPrecision: optionsSetup.percentPrecision,
         // echarts v5.0.0开始支持
-        /*        itemStyle: {
-                  borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
-                },
-                */
+        itemStyle: {
+          borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
+        },
         // 高亮的扇区
         emphasis: {
           label: {
@@ -240,7 +242,7 @@ export default {
           },
           // 色块描边
           itemStyle: {
-            borderColor: optionsSetup.borderColor == '' ? null : optionsSetup.borderColor,
+            borderColor: optionsSetup.borderColor == '' ? "inherit" : optionsSetup.borderColor,
             borderWidth: optionsSetup.borderWidth,
             borderType: optionsSetup.borderType,
             shadowBlur: optionsSetup.shadowBlur,
@@ -254,7 +256,7 @@ export default {
           formatter: `{b}${numberValue}${percentage}`,
           padding: optionsSetup.padding,
           fontSize: optionsSetup.fontSize,
-          color: optionsSetup.fontColor == '' ? null : optionsSetup.fontColor,
+          color: optionsSetup.fontColor == '' ? "inherit" : optionsSetup.fontColor,
           fontWeight: optionsSetup.fontWeight,
           fontStyle: optionsSetup.fontStyle,
           fontFamily: optionsSetup.fontFamily,
@@ -309,10 +311,9 @@ export default {
         minShowLabelAngle: optionsSetup.minShowLabelAngle,
         percentPrecision: optionsSetup.percentPrecision,
         // echarts v5.0.0开始支持
-        /*        itemStyle: {
-                  borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
-                },
-                */
+        itemStyle: {
+          borderRadius: [optionsSetup.borderRadius + "%", optionsSetup.borderRadius + "%"],
+        },
         // 高亮的扇区
         emphasis: {
           label: {
@@ -329,7 +330,7 @@ export default {
           },
           // 色块描边
           itemStyle: {
-            borderColor: optionsSetup.borderColor == '' ? null : optionsSetup.borderColor,
+            borderColor: optionsSetup.borderColor == '' ? "inherit" : optionsSetup.borderColor,
             borderWidth: optionsSetup.borderWidth,
             borderType: optionsSetup.borderType,
             shadowBlur: optionsSetup.shadowBlur,
@@ -343,7 +344,7 @@ export default {
           formatter: `{b}${numberValue}${percentage}`,
           padding: optionsSetup.padding,
           fontSize: optionsSetup.fontSize,
-          color: optionsSetup.fontColor == '' ? null : optionsSetup.fontColor,
+          color: optionsSetup.fontColor == '' ? "inherit" : optionsSetup.fontColor,
           fontWeight: optionsSetup.fontWeight,
           fontStyle: optionsSetup.fontStyle,
           fontFamily: optionsSetup.fontFamily,

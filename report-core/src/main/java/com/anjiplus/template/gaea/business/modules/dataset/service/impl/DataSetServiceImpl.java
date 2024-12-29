@@ -26,6 +26,8 @@ import com.anjiplus.template.gaea.business.modules.datasettransform.service.Data
 import com.anjiplus.template.gaea.business.modules.datasource.controller.dto.DataSourceDto;
 import com.anjiplus.template.gaea.business.modules.datasource.dao.entity.DataSource;
 import com.anjiplus.template.gaea.business.modules.datasource.service.DataSourceService;
+import com.anjiplus.template.gaea.business.modules.report.controller.dto.ReportDto;
+import com.anjiplus.template.gaea.business.modules.report.dao.entity.Report;
 import com.anjiplus.template.gaea.business.util.JdbcConstants;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -380,6 +382,33 @@ public class DataSetServiceImpl implements DataSetService {
         return dataSetMapper.selectList(wrapper);
     }
 
+    @Override
+    public void copy(DataSetDto dto) {
+        if (null == dto.getId()) {
+            throw BusinessExceptionBuilder.build(ResponseCode.NOT_NULL, "id");
+        }
+        if (com.baomidou.mybatisplus.core.toolkit.StringUtils.isBlank(dto.getSetCode())) {
+            throw BusinessExceptionBuilder.build(ResponseCode.NOT_NULL, "数据集编码");
+        }
+        DataSet dataSet = selectOne(dto.getId());
+        String setCode = dataSet.getSetCode();
+        DataSet dateSetCopy = copyDataSet(dataSet, dto);
+        insert(dateSetCopy);
+        String copySetCode = dateSetCopy.getSetCode();
+        DataSetParam dataSetParam = dataSetParamService.selectOne("set_code", setCode);
+        if (null != dataSetParam){
+            dataSetParam.setId(null);
+            dataSetParam.setSetCode(copySetCode);
+            dataSetParamService.insert(dataSetParam);
+        }
+        DataSetTransform dataSetTransform = dataSetTransformService.selectOne("set_code", setCode);
+        if (null != dataSetTransform){
+            dataSetTransform.setId(null);
+            dataSetTransform.setSetCode(copySetCode);
+            dataSetTransformService.insert(dataSetTransform);
+        }
+    }
+
     public void dataSetParamBatch(List<DataSetParamDto> dataSetParamDtoList, String setCode) {
         dataSetParamService.delete(
                 new QueryWrapper<DataSetParam>()
@@ -436,6 +465,16 @@ public class DataSetServiceImpl implements DataSetService {
             dataSetParamDtoList.forEach(dataSetParamDto -> map.put(dataSetParamDto.getParamName(), dataSetParamDto.getSampleItem()));
         }
         return map;
+    }
+
+    private DataSet copyDataSet(DataSet dataSet, DataSetDto dto){
+        //复制主表数据
+        DataSet copyDataSet = new DataSet();
+        GaeaBeanUtils.copyAndFormatter(dataSet, copyDataSet);
+        copyDataSet.setSetCode(dto.getSetCode());
+        copyDataSet.setSetName(dto.getSetName());
+        copyDataSet.setId(null);
+        return copyDataSet;
     }
 
 }

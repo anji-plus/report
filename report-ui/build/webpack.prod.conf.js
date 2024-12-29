@@ -97,11 +97,20 @@ const webpackConfig = merge(baseWebpackConfig, {
     // keep module.id stable when vender modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // copy custom static assets
-    new CopyWebpackPlugin([{
+/*    new CopyWebpackPlugin([{
       from: path.resolve(__dirname, '../static'),
       to: config.build.assetsSubDirectory,
       ignore: ['.*']
-    }])
+    }])*/
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../static'),
+          to: config.build.assetsSubDirectory,
+          ignore: ['.*']
+        }
+      ]
+    }),
   ],
   optimization: {
     splitChunks: {
@@ -126,7 +135,12 @@ const webpackConfig = merge(baseWebpackConfig, {
         uglifyOptions: {
           mangle: {
             safari10: true
-          }
+          },
+          compress: {
+            drop_debugger: true, //去掉debugger
+            drop_console: true, // 去掉console
+            pure_funcs: ['console.log', 'console.info', 'console.warn', 'console.debug'] //drop_console 设置false,需要特殊清除的
+          },
         },
         sourceMap: config.build.productionSourceMap,
         cache: true,

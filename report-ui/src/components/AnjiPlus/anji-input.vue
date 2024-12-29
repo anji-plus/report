@@ -1,5 +1,5 @@
 <!--
- * @Descripttion: 
+ * @Descripttion:
  * @Author: qianlishi
  * @Date: 2021-12-13 10:17:24
  * @Last Modified by:   qianlishi
@@ -174,11 +174,11 @@ export default {
   },
 }
 </script>
-<style lang="less" scoped>
-/deep/.el-input__suffix {
+<style lang="less">
+.el-input__suffix {
   padding: 0 6px;
 }
-.anji-input /deep/ .el-input__inner {
+.anji-input .el-input__inner {
   padding-right: 0 !important;
 }
 </style>

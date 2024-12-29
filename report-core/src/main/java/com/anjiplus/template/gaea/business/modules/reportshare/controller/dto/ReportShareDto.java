@@ -38,6 +38,8 @@ public class ReportShareDto extends GaeaBaseDTO implements Serializable {
     /** 报表编码 */
     @NotEmpty(message = "6002")
     private String reportCode;
+    /** 报表名称 */
+    private String reportName;
 
     /** 0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG */
     private Integer enableFlag;

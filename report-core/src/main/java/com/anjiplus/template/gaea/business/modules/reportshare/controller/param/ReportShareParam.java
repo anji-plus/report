@@ -23,6 +23,10 @@ public class ReportShareParam extends PageParam implements Serializable {
     @Query(value = QueryEnum.LIKE)
     private String reportCode;
 
+    /** 报表名称 */
+    @Query(value = QueryEnum.LIKE)
+    private String reportName;
+
     /** 分享有效期类型 */
     @Query(value = QueryEnum.EQ)
     private String shareValidType;

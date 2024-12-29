@@ -1,11 +1,11 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :option="options" autoresize/>
   </div>
 </template>
 
 <script>
-import echarts from "echarts";
+import * as echarts from "echarts";
 
 export default {
   name: "WidgetGradientColorBarchart", //渐变色，参考https://www.makeapie.com/editor.html?c=x0oZWoncE

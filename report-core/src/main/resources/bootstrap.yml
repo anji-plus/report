@@ -16,20 +16,46 @@ spring:
       max-file-size: 10MB #上传图片大小限制为10MB
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   messages:
     basename: i18n/messages
   datasource:
     url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: appuser@anji
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      connection-timeout: 300000  # 连接超时时间 - 默认值：30秒。
-      validation-timeout: 5000  # 连接被测试活动的最长时间 - 默认值：5秒。
-      idle-timeout: 60000  # 连接池中允许闲置的最长时间 - 默认值：10分钟
-      max-lifetime: 1800000  # 一个连接生命时长（毫秒），超时而没被使用则被释放 - 默认值：30分钟
-      maximum-pool-size: 10  #连接池中允许的最大连接数，包括闲置和使用中的连接 - 默认值：10
-      minimum-idle: 5  # 连接池中允许的最小空闲连接数 - 默认值：10。
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  #数据源连接池配置
+  druid:
+    initial-size: 50
+    min-idle: 50
+    max-active: 100
+    # 获取连接等待超时的时间
+    max-wait: 5000
+    # 配置间隔多久才进行一次检测
+    time-between-eviction-runs-millis: 60000
+    # 配置一个连接在池中最小生存时间
+    min-evictable-idle-time-millis: 300000
+    validation-query: select 1
+    # 获取连接时执行检测，每次检测timeBetweenEvictionRunsMillis，空闲时间超过了minEvictableIdleTimeMillis则会直接剔除
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    # 是否开启PSCache，PSCache对支持游标的数据库性能提升巨大，oracle建议开启，mysql下建议关闭
+    pool-prepared-statements: false
+    max-pool-prepared-statement-per-connection-size: 50
+    filters: stat,wall
+    connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    use-global-data-source-stat: true
+    #StatViewServlet配置
+    stat-view-servlet.enabled: false
+    #注意：账号密码需修改
+    stat-view-servlet.login-username: admin
+    stat-view-servlet.login-password: admin
+    stat-view-servlet.allow: ""
+    connectionErrorRetryAttempts: 3 # 连接出错后再尝试连接三次
+    breakAfterAcquireFailure: true # 数据库服务宕机自动重连机制
+    timeBetweenConnectErrorMillis: 300000 # 连接出错后重试时间间隔
 
   #如果要使用redis，请参考report-core目录下的README.md文件中写的进行调整
 #  redis:
@@ -38,7 +64,7 @@ spring:
 #    password: root
 #    database: 1
   flyway:
-    enabled: true    #是否开启flyway，默认true.
+    enabled: false    #是否开启flyway（自动执行sql脚本），默认false
     baseline-on-migrate: true
     #数据库连接配置
     url: ${spring.datasource.url}
@@ -94,7 +120,7 @@ logging:
 # 本应用自定义参数
 customer:
   # 跳过token验证和权限验证的url清单
-  skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html, /favicon.ico, /reportShare/detailByCode, /v2/api-docs
+  skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html, /favicon.ico, /reportShare/detailByCode, /v2/api-docs, /reportExcel/exportExcel
   file:
     #导入导出临时文件夹 默认.代表当前目录，拼接/tmp_zip/目录
     tmpPath: .
