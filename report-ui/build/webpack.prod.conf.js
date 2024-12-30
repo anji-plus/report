@@ -135,7 +135,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         },
         sourceMap: config.build.productionSourceMap,
         cache: true,
-        parallel: true
+        parallel: true,
       }),
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.
