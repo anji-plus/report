@@ -12,7 +12,7 @@ export const useSelect = (props?: props): UseSelectReturnType => {
   const getSelect = async () => {
     const select = unref(selectRef);
     if (!select) {
-      console.error('tree节点尚未获取');
+      console.error('select节点尚未获取');
     }
     await nextTick();
     return select as selectActionType;

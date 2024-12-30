@@ -19,6 +19,10 @@
     return { ...props, ...(unref(propsRef) as any) };
   });
 
+  /**
+   * 下拉框数据源优先级
+   *  静态数据 > 数字字典 > 接口
+   * */
   const getOptions = computed(() => {
     const { api, dictCode, localOptions } = unref(getProps);
     const options = localOptions
@@ -44,10 +48,16 @@
   watch(
     () => unref(getProps).api,
     (old, val) => {
-      console.log(old);
-      console.log(val);
+      loadData();
     },
   );
+
+  const loadData = async () => {
+    const requestApi = unref(getProps).api;
+    if (!requestApi) return;
+    const { data } = await requestApi();
+    selectOptions.value = data;
+  };
 
   onMounted(() => {
     emit('register', selectMethods);
