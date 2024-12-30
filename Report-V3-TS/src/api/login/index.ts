@@ -23,3 +23,11 @@ export function reqUpdatePassword(data) {
     data,
   });
 }
+
+// 数字字典
+export function getAllDict() {
+  return http.request({
+    url: '/gaeaDict/all',
+    method: 'GET',
+  });
+}

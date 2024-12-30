@@ -4,6 +4,8 @@ import { NIcon, NTag } from 'naive-ui';
 import { PageEnum } from '@/enums/pageEnum';
 import { isObject } from './is/index';
 import { cloneDeep } from 'lodash-es';
+import { storage } from './Storage';
+import { GLOBAL_DICT_CODE_NAME } from '@/enums/common';
 /**
  * render 图标
  * */
@@ -47,7 +49,7 @@ export function renderNew(type = 'warning', text = 'New', color: object = newTag
         size: 'small',
         color,
       },
-      { default: () => text }
+      { default: () => text },
     );
 }
 
@@ -228,7 +230,7 @@ export function lighten(color: string, amount: number) {
   amount = Math.trunc((255 * amount) / 100);
   return `#${addLight(color.substring(0, 2), amount)}${addLight(
     color.substring(2, 4),
-    amount
+    amount,
   )}${addLight(color.substring(4, 6), amount)}`;
 }
 
@@ -237,4 +239,28 @@ export function lighten(color: string, amount: number) {
  * */
 export function isUrl(url: string) {
   return /^(http|https):\/\//g.test(url);
+}
+
+/**
+ * 删除树节点 children为 null | [] 字段
+ */
+export function removeTreeNotValChildren(data: any) {
+  for (let i = 0; i < data.length; i++) {
+    const item = data[i];
+    if (item.children && item.children.length > 0) {
+      removeTreeNotValChildren(item.children);
+    } else {
+      delete item.children;
+    }
+  }
+  return data;
+}
+
+// 根据数字字典名称获取数据
+export function getDictName(dictName: string) {
+  if (!dictName) {
+    console.error('必须要传递数字字典名称');
+  }
+  const allDictCode = storage.get(GLOBAL_DICT_CODE_NAME);
+  return allDictCode[dictName];
 }

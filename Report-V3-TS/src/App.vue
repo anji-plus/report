@@ -25,6 +25,9 @@
   import { useRoute } from 'vue-router';
   import { useDesignSettingStore } from '@/store/modules/designSetting';
   import { lighten } from '@/utils/index';
+  import { getAllDict } from '@/api/login';
+  import { storage } from '@/utils/Storage';
+  import { GLOBAL_DICT_CODE_NAME } from '@/enums/common'
 
   const route = useRoute();
   const useScreenLock = useScreenLockStore();
@@ -73,7 +76,15 @@
     }, 1000);
   };
 
+  // 初始化字典项
+  const getAllDictData = async () => {
+    const { code, data } = await getAllDict();
+    if (code != 200) return;
+    storage.set(GLOBAL_DICT_CODE_NAME, data);
+  };
+
   onMounted(() => {
+    getAllDictData();
     document.addEventListener('mousedown', timekeeping);
   });
 

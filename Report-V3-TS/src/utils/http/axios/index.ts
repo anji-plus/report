@@ -63,6 +63,7 @@ const transform: AxiosTransform = {
 
     //  这里 code，result，message为 后台统一的字段，需要修改为项目自己的接口返回格式
     const { code, message } = data;
+
     // 请求成功
     const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
     // 是否显示提示信息
