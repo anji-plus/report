@@ -11,7 +11,8 @@ echo "build web"
 cd $BuildDir/report-ui
 echo "npm install"
 npm install
-echo ""
+echo "cp echarts map js"
+cp -r node_modules_echarts_need/* node_modules/echarts/
 echo "npm run build"
 npm run build:prod
 
