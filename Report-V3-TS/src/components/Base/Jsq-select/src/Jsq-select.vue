@@ -47,7 +47,7 @@
 
   watch(
     () => unref(getProps).api,
-    (old, val) => {
+    () => {
       loadData();
     },
   );
