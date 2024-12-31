@@ -187,3 +187,13 @@ V1.3.0为多张图表新增了配置项，有部分配置项直接和图表渲�
 
   如果你的图表配了动态数据，在尝试了上面这些配置修改后依旧没显示图表，手动切到动态数据，点击‘刷新’。<br>
 
+## 升级到V1.5
+
+- 前端打包后地图组件不显示 <br>
+  原因：因为echarts v5.0之后的版本不在包含map文件夹，目前直接通过build.sh脚本也无法打包一个完整的前端，少地图配置 <br>
+  解决方法：
+  1、执行完npm install后需要将map文件夹拷贝到node_modules/echarts/文件夹下
+  2、执行完1之后需要修改 report-ui/node_modules/echarts目录下的package.json
+  在“sideEffects”追加"map/js/china.js"
+  不明白可参考：https://blog.csdn.net/m0_45159572/article/details/130077091
+
