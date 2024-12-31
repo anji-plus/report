@@ -194,6 +194,6 @@ V1.3.0为多张图表新增了配置项，有部分配置项直接和图表渲�
   解决方法：
   1、执行完npm install后需要将map文件夹拷贝到node_modules/echarts/文件夹下
   2、执行完1之后需要修改 report-ui/node_modules/echarts目录下的package.json
-  在“sideEffects”追加"map/js/china.js"
+  在“sideEffects”追加"map/js/*.js"
   不明白可参考：https://blog.csdn.net/m0_45159572/article/details/130077091
 
