@@ -28,7 +28,7 @@ if [ ! -e "$BuildDir/report-ui/dist" ];then
 fi
 
 echo ""
-cp $BuildDir/report-ui/dist/* $BuildDir/report-core/src/main/resources/static/
+cp -r $BuildDir/report-ui/dist/* $BuildDir/report-core/src/main/resources/static/
 echo "build springboot"
 cd $BuildDir/report-core
 echo "mvn clean package"
