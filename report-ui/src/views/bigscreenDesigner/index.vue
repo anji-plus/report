@@ -208,7 +208,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .main-layout {
   padding: 20px;
   position: relative;

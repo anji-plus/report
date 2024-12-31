@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize v-if="show"/>
+    <v-chart ref="myVChart" :option="options" autoresize v-if="show"/>
   </div>
 </template>
 
@@ -121,22 +121,27 @@ export default {
     // 标题修改
     setOptionsTitle() {
       const optionsSetup = this.optionsSetup;
-      const title = {};
-      title.text = optionsSetup.titleText;
-      title.show = optionsSetup.isNoTitle;
-      title.left = optionsSetup.textAlign;
-      title.textStyle = {
-        color: optionsSetup.textColor,
-        fontSize: optionsSetup.textFontSize,
-        fontWeight: optionsSetup.textFontWeight,
-        fontStyle: optionsSetup.textFontStyle,
-      };
-      title.subtext = optionsSetup.subText;
-      title.subtextStyle = {
-        color: optionsSetup.subTextColor,
-        fontWeight: optionsSetup.subTextFontWeight,
-        fontSize: optionsSetup.subTextFontSize,
-        fontStyle: optionsSetup.subTextFontStyle,
+      const title = {
+        text: optionsSetup.text,
+        show: optionsSetup.isShowTitle,
+        left: optionsSetup.titleLeft,
+        top: optionsSetup.titleTop + "%",
+        itemGap: optionsSetup.titleItemGap,
+        textStyle: {
+          color: optionsSetup.textColor,
+          fontSize: optionsSetup.textFontSize,
+          fontWeight: optionsSetup.textFontWeight,
+          fontStyle: optionsSetup.textFontStyle,
+          fontFamily: optionsSetup.textFontFamily,
+        },
+        subtext: optionsSetup.subtext,
+        subtextStyle: {
+          color: optionsSetup.subtextColor,
+          fontWeight: optionsSetup.subtextFontWeight,
+          fontSize: optionsSetup.subtextFontSize,
+          fontStyle: optionsSetup.subtextFontStyle,
+          fontFamily: optionsSetup.subtextFontFamily
+        },
       };
       this.options.title = title;
     },
@@ -233,11 +238,20 @@ export default {
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       const tooltip = {
-        trigger: "item",
-        show: true,
+        show: optionsSetup.isShowTooltip,
+        trigger: optionsSetup.tooltipTrigger,
+        axisPointer: {
+          type: optionsSetup.tooltipAxisPointerType,
+        },
+        backgroundColor: optionsSetup.tooltipBackgroundColor,
+        borderColor: optionsSetup.tooltipBorderColor,
+        borderWidth: optionsSetup.tooltipBorderWidth,
         textStyle: {
-          color: optionsSetup.tipsColor,
-          fontSize: optionsSetup.tipsFontSize,
+          color: optionsSetup.tooltipColor,
+          fontSize: optionsSetup.tooltipFontSize,
+          fontWeight: optionsSetup.tooltipFontWeight,
+          fontStyle: optionsSetup.tooltipFontStyle,
+          fontFamily: optionsSetup.tooltipFontFamily,
         },
       };
       this.options.tooltip = tooltip;
@@ -257,26 +271,30 @@ export default {
     // 图例
     setOptionsLegend() {
       const optionsSetup = this.optionsSetup;
-      const legend = this.options.legend;
-      legend.show = optionsSetup.isShowLegend;
-      legend.left = optionsSetup.lateralPosition;
-      legend.top = optionsSetup.longitudinalPosition;
-      legend.bottom = optionsSetup.longitudinalPosition;
-      legend.orient = optionsSetup.layoutFront;
-      legend.textStyle = {
-        color: optionsSetup.legendColor,
-        fontSize: optionsSetup.legendFontSize,
+      const legend = {
+        show: optionsSetup.isShowLegend,
+        left: optionsSetup.lateralPosition,
+        //right: optionsSetup.lateralPosition,
+        top: optionsSetup.longitudinalPosition,
+        //bottom: optionsSetup.longitudinalPosition,
+        orient: optionsSetup.layoutFront,
+        textStyle: {
+          color: optionsSetup.legendColor,
+          fontSize: optionsSetup.legendFontSize,
+          fontWeight: optionsSetup.legendFontWeight,
+          fontStyle: optionsSetup.legendFontStyle,
+          fontFamily: optionsSetup.legendFontFamily,
+        },
+        itemHeight: optionsSetup.legendHeight,
+        itemWidth: optionsSetup.legendWidth,
       };
-      legend.itemWidth = optionsSetup.legendWidth;
+      this.options.legend = legend;
     },
     // 图例名称设置
     setOptionsLegendName(name) {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
-      if(series.length==0){
-        return;
-      }
       // 图例没有手动写则显示原值，写了则显示新值
       if (null == legendName || legendName == "") {
         for (let i = 0; i < name.length; i++) {
@@ -290,26 +308,6 @@ export default {
         }
         this.options.legend["data"] = arr;
       }
-    },
-    //获取堆叠样式
-    getStackStyle() {
-      const optionsSetup = this.optionsSetup;
-      let style = "";
-      if (optionsSetup.stackStyle == "upDown") {
-        style = "total";
-      }
-      return style;
-    },
-    // 获得位置
-    getOptionsPosition() {
-      const optionsSetup = this.optionsSetup;
-      let position = "";
-      if (optionsSetup.verticalShow) {
-        position = "right";
-      } else {
-        position = "top";
-      }
-      return position;
     },
     // 数据解析
     setOptionsData(e, paramsConfig) {
@@ -357,14 +355,18 @@ export default {
       for (const i in series) {
         if (series[i].type == "scatter") {
           series[i].type = "scatter";
+          series[i].symbol = optionsSetup.symbol;
+          series[i].symbolSize = optionsSetup.pointSize;
           series[i].label = {
             show: optionsSetup.isShow,
-            position: this.getOptionsPosition(),
-            distance: optionsSetup.distance,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
+            color: optionsSetup.dataColor == '' ? "inherit" : optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
-            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}',
+            fontStyle: optionsSetup.fontStyle,
+            fontFamily: optionsSetup.fontFamily,
           };
           // 获取颜色样式
           if (optionsSetup.colorStyle == 'same') {
@@ -420,19 +422,9 @@ export default {
         }
       };
       // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = axis;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = axis;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-        if (optionsSetup.textRowsBreakAuto) {
-          this.options.xAxis.axisLabel = axisLabel;
-        }
+      this.options.xAxis.data = axis;
+      if (optionsSetup.textRowsBreakAuto) {
+        this.options.xAxis.axisLabel = axisLabel;
       }
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
@@ -470,18 +462,20 @@ export default {
       for (const i in val.series) {
         legendName.push(val.series[i].name);
         const obj = {};
-        console.log(val.series[i]);
-        if (val.series[i].type == "point") {
+        if (val.series[i].type == "scatter") {
           obj.type = "scatter";
-          obj.stack = this.getStackStyle();
+          obj.symbol = optionsSetup.symbol;
+          obj.symbolSize = optionsSetup.pointSize;
           obj.label = {
             show: optionsSetup.isShow,
-            position: this.getOptionsPosition(),
-            distance: optionsSetup.distance,
+            position: optionsSetup.fontPosition,
+            distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor,
+            color: optionsSetup.dataColor == '' ? "inherit" : optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
-            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}'
+            formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}',
+            fontStyle: optionsSetup.fontStyle,
+            fontFamily: optionsSetup.fontFamily,
           };
           // 获取颜色样式
           if (optionsSetup.colorStyle == 'same') {
@@ -539,25 +533,12 @@ export default {
         }
       };
       // x轴
-      if (optionsSetup.verticalShow) {
-        this.options.xAxis.data = [];
-        this.options.yAxis.data = val.xAxis;
-        this.options.xAxis.type = "value";
-        this.options.yAxis.type = "category";
-      } else {
-        this.options.xAxis.data = val.xAxis;
-        this.options.yAxis.data = [];
-        this.options.xAxis.type = "category";
-        this.options.yAxis.type = "value";
-        if (optionsSetup.textRowsBreakAuto) {
-          this.options.xAxis.axisLabel = axisLabel;
-        }
+      this.options.xAxis.data = val.xAxis;
+      if (optionsSetup.textRowsBreakAuto) {
+        this.options.xAxis.axisLabel = axisLabel;
       }
       this.options.series = series;
       this.options.legend["data"] = legendName;
-      let data2=JSON.parse(JSON.stringify(this.options))
-      this.options={}
-      this.options=data2
       this.setOptionsLegendName(legendName);
     },
   },

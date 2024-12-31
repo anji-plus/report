@@ -1,5 +1,5 @@
  <!--
- * @Descripttion: 
+ * @Descripttion:
  * @Author: qianlishi
  * @Date: 2021-8-4 10:17:24
  * @Last Modified by:   qianlishi
@@ -177,7 +177,7 @@ export default {
   width: 60px;
   height: 60px;
 }
-.hide_box /deep/.el-upload--picture-card {
+.hide_box .el-upload--picture-card {
   display: none;
 }
 .el-upload-list__item {

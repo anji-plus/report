@@ -99,7 +99,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .contentmenu {
   width: 160px;
   position: fixed;

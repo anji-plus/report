@@ -1,11 +1,11 @@
 <template>
   <div :style="styleObj">
-    <v-chart :options="options" autoresize/>
+    <v-chart :option="options" autoresize/>
   </div>
 </template>
 
 <script>
-import echarts from "echarts";
+import * as echarts from "echarts";
 
 export default {
   name: "WidgetGauge",

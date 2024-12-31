@@ -39,4 +39,12 @@ export function reportDataSetDetail(data) {
   })
 }
 
+export function reportDataSetCopy(data) {
+  return request({
+    url: '/dataSet/copy',
+    method: 'post',
+    data
+  })
+}
+
 export default { reportDataSetList, reportDataSetAdd, reportDataSetDeleteBatch, reportDataSetUpdate, reportDataSetDetail }

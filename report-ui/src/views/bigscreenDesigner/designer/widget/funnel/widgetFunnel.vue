@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize />
+    <v-chart ref="myVChart" :option="options" autoresize />
   </div>
 </template>
 
@@ -187,6 +187,9 @@ export default {
       const tooltip = {
         trigger: "item",
         show: optionsSetup.isShowTooltip,
+        backgroundColor: optionsSetup.tooltipBackgroundColor,
+        borderColor: optionsSetup.tooltipBorderColor,
+        borderWidth: optionsSetup.tooltipBorderWidth,
         textStyle: {
           color: optionsSetup.tooltipColor,
           fontSize: optionsSetup.tooltipFontSize,

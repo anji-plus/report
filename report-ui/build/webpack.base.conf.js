@@ -22,9 +22,10 @@ module.exports = {
     publicPath: config.build.assetsPublicPath //process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['mjs', '.js', '.vue', '.json'],
     alias: {
-      '@': resolve('src')
+      '@': resolve('src'),
+      'vue$': 'vue/dist/vue.runtime.esm.js'
     }
   },
   module: {
@@ -55,6 +56,7 @@ module.exports = {
         loader: 'url-loader',
         exclude: [resolve('src/icons')],
         options: {
+          //esModule: false,
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
@@ -74,7 +76,12 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
+      {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto'
+      },
     ]
   },
   plugins: [new VueLoaderPlugin()],

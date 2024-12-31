@@ -57,7 +57,6 @@ export default {
       handler(val) {
         this.options = val;
         this.optionsData = val.data;
-        targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
         this.setOptionsData();
       },
       deep: true
@@ -66,6 +65,7 @@ export default {
   mounted() {
     this.options = this.value;
     this.optionsData = this.value.data;
+    targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
     this.setOptionsData();
   },
   methods: {

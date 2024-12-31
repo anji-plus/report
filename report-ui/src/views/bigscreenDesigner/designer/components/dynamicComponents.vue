@@ -103,6 +103,7 @@ export default {
       const { code, data } = await detailBysetId(this.dataSetValue);
       this.userNameList = data.dataSetParamDtoList;
       this.setParamList = data.setParamList;
+      this.chartProperties = {};
       if (code != "200") return;
     },
     async saveDataBtn() {

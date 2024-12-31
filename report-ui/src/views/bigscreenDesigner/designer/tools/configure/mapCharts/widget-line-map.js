@@ -751,6 +751,14 @@ export const widgetLineMap = {
               value: true
             },
             {
+              type: 'vue-color',
+              label: '背景颜色',
+              name: 'tooltipBackgroundColor',
+              required: false,
+              placeholder: '',
+              value: '#333'
+            },
+            {
               type: 'el-input-number',
               label: '字体字号',
               name: 'tooltipFontSize',
@@ -806,6 +814,22 @@ export const widgetLineMap = {
                 {code: 'Courier New', name: 'Courier New'},
               ],
               value: 'sans-serif'
+            },
+            {
+              type: 'vue-color',
+              label: '边框颜色',
+              name: 'tooltipBorderColor',
+              required: false,
+              placeholder: '',
+              value: '#333'
+            },
+            {
+              type: 'el-input-number',
+              label: '边框宽度',
+              name: 'tooltipBorderWidth',
+              required: false,
+              placeholder: '',
+              value: 0
             },
           ],
         },

@@ -1,6 +1,6 @@
 <!--
  * @Descripttion: 用户权限--数据集
- * @version: 
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
@@ -34,6 +34,7 @@
         :visib="dialogCaseResult"
         @handleClose="dialogCaseResult = false"
       />
+      <copyDialog :visib.sync="copyVisible" :rowData="rowData" @close="close" />
     </template>
   </anji-crud>
 </template>
@@ -43,16 +44,19 @@ import {
   reportDataSetAdd,
   reportDataSetDeleteBatch,
   reportDataSetUpdate,
-  reportDataSetDetail
+  reportDataSetDetail,
+  reportDataSetCopy
 } from "@/api/reportDataSet";
 import EditDataSet from "./components/EditDataSet";
 import DataView from "./components/DataView";
+import copyDialog from "./components/copyDialog.vue";
 
 export default {
   name: "ReportDataSet",
   components: {
     EditDataSet: EditDataSet,
-    DataView: DataView
+    DataView: DataView,
+    copyDialog
   },
   data() {
     return {
@@ -122,6 +126,11 @@ export default {
             label: "数据预览",
             permission: "resultsetManage:query",
             click: this.dataView
+          },
+          {
+            label: "复制",
+            permission: "resultsetManage:copy",
+            click: this.copyDataSet
           },
           {
             label: "删除",
@@ -284,7 +293,11 @@ export default {
             disabled: false
           }
         ]
-      }
+      },
+
+      // 复制
+      copyVisible: false,
+      rowData: {}
     };
   },
 
@@ -308,12 +321,21 @@ export default {
         prop.setName,
         JSON.parse(prop.caseResult)
       );
+    },
+    //复制
+    async copyDataSet(val) {
+      this.copyVisible = true;
+      this.rowData = val;
+    },
+    close() {
+      this.copyVisible = false;
+      this.$refs.listPage.handleQueryForm("query");
     }
   }
 };
 </script>
-<style lang="scss" scoped>
-/deep/.el-dropdown {
+<style lang="scss">
+.el-dropdown {
   margin-right: 20px;
 }
 </style>

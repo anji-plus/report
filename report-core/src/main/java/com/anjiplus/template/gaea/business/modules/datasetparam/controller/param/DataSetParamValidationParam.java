@@ -12,7 +12,6 @@ import java.io.Serializable;
 public class DataSetParamValidationParam implements Serializable {
 
     /** 参数示例项 */
-    @NotBlank(message = "sampleItem not empty")
     private String sampleItem;
 
 

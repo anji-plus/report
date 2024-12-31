@@ -1276,7 +1276,7 @@ export const widgetBarDoubleYaxis = {
               name: 'fontDistance',
               required: false,
               placeholder: '',
-              value: 0
+              value: 10
             },
             {
               type: 'vue-color',
@@ -1284,7 +1284,7 @@ export const widgetBarDoubleYaxis = {
               name: 'fontColor',
               required: false,
               placeholder: '',
-              value: ''
+              value: '#fff'
             },
             {
               type: 'el-input-number',
@@ -1373,6 +1373,14 @@ export const widgetBarDoubleYaxis = {
                 {code: 'cross', name: '十字准星'},
               ],
               value: 'shadow'
+            },
+            {
+              type: 'vue-color',
+              label: '背景颜色',
+              name: 'tooltipBackgroundColor',
+              required: false,
+              placeholder: '',
+              value: '#333'
             },
             {
               type: 'el-input-number',

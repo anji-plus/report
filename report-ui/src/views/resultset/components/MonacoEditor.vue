@@ -1,6 +1,6 @@
 <!--
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: qianlishi
  * @Date: 2021-8-6 14:48:27
  * @LastEditors: qianlishi
@@ -133,8 +133,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.main /deep/ .view-lines * {
+<style lang="scss">
+.main .view-lines * {
   font-family: Consolas, "Courier New", monospace !important;
 }
 </style>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.Set;
@@ -63,10 +64,8 @@ public class UrlDecodeFilter implements Filter {
 
         @Override
         public Enumeration<String> getParameterNames() {
-
             Set<String> keySet = parameterMap.keySet();
-            IteratorEnumeration iteratorEnumeration = new IteratorEnumeration(keySet.iterator());
-            return iteratorEnumeration;
+            return Collections.enumeration(keySet);
         }
 
         @Override

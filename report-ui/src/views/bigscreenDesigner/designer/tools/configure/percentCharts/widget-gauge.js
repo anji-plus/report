@@ -272,20 +272,20 @@ export const widgetGauge = {
             },
             {
               type: 'el-input-number',
+              label: '圆环刻度距离',
+              name: 'tickDistance',
+              require: false,
+              placeholder: '',
+              value: 5,
+            },
+            {
+              type: 'el-input-number',
               label: '刻度数',
               name: 'tickSplitNumber',
               required: false,
               placeholder: '',
               value: 5,
             },
-            /*            {
-              type: 'el-input-number',
-              label: '距离',
-              name: 'tickDistance',
-              require: false,
-              placeholder: '',
-              value: 0,
-            },*/
             {
               type: 'el-input-number',
               label: '长度',
@@ -323,14 +323,14 @@ export const widgetGauge = {
               placeholder: '',
               value: true,
             },
-/*            {
+            {
               type: 'el-input-number',
-              label: '距离',
+              label: '指标刻度距离',
               name: 'splitDistance',
               require: false,
               placeholder: '',
-              value: 0,
-            },*/
+              value: 10,
+            },
             {
               type: 'el-input-number',
               label: '长度',
@@ -345,7 +345,7 @@ export const widgetGauge = {
               name: 'splitWidth',
               require: false,
               placeholder: '',
-              value: 4,
+              value: 5,
             },
             {
               type: 'el-select',
@@ -452,7 +452,7 @@ export const widgetGauge = {
               name: 'labelDistance',
               require: false,
               placeholder: '',
-              value: 5,
+              value: 10,
             },
             {
               type: 'vue-color',
@@ -468,7 +468,7 @@ export const widgetGauge = {
               name: 'labelFontSize',
               require: false,
               placeholder: '',
-              value: 10,
+              value: 12,
             },
             {
               type: 'el-select',

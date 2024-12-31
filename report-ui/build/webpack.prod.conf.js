@@ -126,11 +126,16 @@ const webpackConfig = merge(baseWebpackConfig, {
         uglifyOptions: {
           mangle: {
             safari10: true
-          }
+          },
+          compress: {
+            drop_debugger: true, //去掉debugger
+            drop_console: true, // 去掉console
+            pure_funcs: ['console.log', 'console.info', 'console.warn', 'console.debug'] //drop_console 设置false,需要特殊清除的
+          },
         },
         sourceMap: config.build.productionSourceMap,
         cache: true,
-        parallel: true
+        parallel: true,
       }),
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.

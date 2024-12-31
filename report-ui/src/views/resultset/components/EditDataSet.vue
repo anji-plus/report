@@ -1,6 +1,6 @@
 <!--
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: yanzili
  * @Date: 2021-6-24 14:48:27
  * @LastEditors: qianlishi
@@ -13,6 +13,8 @@
       :visible.sync="visib"
       :close-on-click-modal="false"
       :before-close="closeDialog"
+      top="5vh"
+      center
       width="65%"
     >
       <el-form
@@ -763,7 +765,6 @@ export default {
     },
     // js 脚本编辑
     async filterScriptBtn(item) {
-      console.log(item);
       this.isItemFilterType = item;
       this.dialogSwitchVisible = true;
       this.jsScriptVisible = true
@@ -838,16 +839,14 @@ public class DemoGroovyHandler implements IGroovyHandler {
         }
       }
     },
-    // --查询参数-----------------///////////////////////////////////////////////////////////////////////
+    //查询参数
     permissionClick(row, index) {
       this.title = "自定义高级规则";
-      if (this.isRowData.sampleItem != "") {
-        this.isRowData = row;
-        const fnCont = `function verification(data){\n\t//自定义脚本内容\n\t//可返回true/false单纯校验键入的data正确性\n\t//可返回文本，实时替换,比如当前时间等\n\t//return "2099-01-01 00:00:00";\n\treturn true;\n}`;
-        this.validationRules = row.validationRules
-          ? row.validationRules
-          : fnCont;
-      }
+      this.isRowData = row;
+      const fnCont = `function verification(data){\n\t//自定义脚本内容\n\t//可返回true/false单纯校验键入的data正确性\n\t//可返回文本，实时替换,比如当前时间等\n\t//return "2099-01-01 00:00:00";\n\treturn true;\n}`;
+      this.validationRules = row.validationRules
+        ? row.validationRules
+        : fnCont;
       this.dialogPermissionVisible = true;
     },
     dialogValidationRules() {
@@ -874,13 +873,11 @@ public class DemoGroovyHandler implements IGroovyHandler {
       }
       rows.splice(index, 1);
     },
-    // -------------------------------------------------------------------------------
     // 数据源下拉切换
     changeSource() {},
     // 自定义高级规则
     async testResultset() {
       this.isRowData.validationRules = this.validationRules;
-      console.log(this.isRowData, "12345678");
       const { code, message, data } = await verificationSet(this.isRowData);
       if (code == "200") {
         if (data) {
@@ -911,7 +908,6 @@ public class DemoGroovyHandler implements IGroovyHandler {
     async submit(formName) {
       if (this.setType == "http") {
         //针对http数据源
-        console.log("http数据集" + this.httpForm);
         this.formData.dynSentence = JSON.stringify(this.httpForm);
       }
       this.formData.setType = this.setType;
@@ -959,9 +955,9 @@ public class DemoGroovyHandler implements IGroovyHandler {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .code-mirror-form {
-  /deep/ .el-form-item__content {
+   .el-form-item__content {
     height: 200px;
     overflow: hidden;
   }
@@ -1089,7 +1085,7 @@ public class DemoGroovyHandler implements IGroovyHandler {
   top: 15px;
 }
 
-.filterTextarea /deep/ .el-textarea__inner {
+.filterTextarea  .el-textarea__inner {
   min-height: 300px !important;
 }
 
@@ -1098,7 +1094,7 @@ public class DemoGroovyHandler implements IGroovyHandler {
   margin-top: 4px;
 }
 
-.filterBox /deep/ .el-input--suffix .el-input__inner {
+.filterBox  .el-input--suffix .el-input__inner {
   background: #f4f7ff;
   border-radius: 3px;
   border: 1px solid #b8caff;

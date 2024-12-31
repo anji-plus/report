@@ -7,7 +7,7 @@
 -->
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize/>
+    <v-chart ref="myVChart" :option="options" autoresize/>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import {
   originWidgetLinkageLogic,
   targetWidgetLinkageLogic,
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
-
+import * as echarts from 'echarts';
 export default {
   name: "WidgetBarchart",
   components: {},
@@ -282,6 +282,9 @@ export default {
         axisPointer: {
           type: optionsSetup.tooltipAxisPointerType,
         },
+        backgroundColor: optionsSetup.tooltipBackgroundColor,
+        borderColor: optionsSetup.tooltipBorderColor,
+        borderWidth: optionsSetup.tooltipBorderWidth,
         textStyle: {
           color: optionsSetup.tooltipColor,
           fontSize: optionsSetup.tooltipFontSize,

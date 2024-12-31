@@ -54,6 +54,7 @@ import widgetBarMap from "./map/widgetBarMap.vue";
 import widgetChinaMap from "./map/widgetChinaMap.vue";
 import widgetGlobalMap from "./map/widgetGlobalMap.vue";
 import widgetBarStackMoreShowChart from "./bar/widgetBarStackMoreShowChart.vue";
+import widgetBarLineSingleChart from "./barline/widgetBarLineSingleChart.vue";
 
 export default {
   name: "WidgetTemp",
@@ -102,6 +103,7 @@ export default {
     widgetGlobalMap,
     widgetScatter,
     widgetBarStackMoreShowChart,
+    widgetBarLineSingleChart
   },
   model: {
     prop: "value",

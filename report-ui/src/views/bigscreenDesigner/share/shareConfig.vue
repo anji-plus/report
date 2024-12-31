@@ -139,6 +139,7 @@ export default {
       dialogForm: {
         shareValidType: 0,
         reportCode: "",
+        reportName: "",
         reportType: "",
         shareUrl: "",
         shareCode: "",
@@ -182,6 +183,7 @@ export default {
     async createShare() {
       this.dialogForm.reportType = this.reportType;
       this.dialogForm.reportCode = this.reportCode;
+      this.dialogForm.reportName = this.reportName;
       this.dialogForm.shareUrl = window.location.href;
       const { code, data } = await reportShareAdd(this.dialogForm);
       if (code != "200") return;

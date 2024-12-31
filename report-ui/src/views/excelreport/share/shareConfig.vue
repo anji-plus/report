@@ -1,5 +1,5 @@
 <!--
- * @Descripttion: 
+ * @Descripttion:
  * @Author: Devli
  * @Date: 2021-7-18 18:23:24
  * @Last Modified by:   qianlishi
@@ -138,6 +138,7 @@ export default {
       dialogForm: {
         shareValidType: 0,
         reportCode: "",
+        reportName: "",
         reportType: "",
         shareUrl: "",
         shareCode: "",
@@ -181,6 +182,7 @@ export default {
     async createShare() {
       this.dialogForm.reportType = this.reportType;
       this.dialogForm.reportCode = this.reportCode;
+      this.dialogForm.reportName = this.reportName;
       this.dialogForm.shareUrl = window.location.href;
       const { code, data } = await excelShareAdd(this.dialogForm);
       if (code != "200") return;

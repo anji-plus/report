@@ -500,11 +500,11 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-/deep/ .el-form-item {
+<style lang="scss">
+.el-form-item {
   margin-bottom: 5px;
 }
-/deep/ .el-form-item__label {
+.el-form-item__label {
   font-size: 12px;
   color: #fff;
 }
@@ -516,7 +516,7 @@ export default {
   border-top: none;
   border-bottom: none;
 }
-/deep/.el-collapse-item__header {
+.el-collapse-item__header {
   height: 40px;
   line-height: 40px;
   background: transparent;
@@ -525,11 +525,12 @@ export default {
   font-size: 12px;
   border-color: #282e3a;
 }
-/deep/.el-collapse-item__wrap {
+.el-collapse-item__wrap {
   background: transparent;
   border: none;
 }
-/deep/.el-collapse-item__content {
+.el-collapse-item__content {
+  background: transparent;
   padding-bottom: 0;
 }
 </style>

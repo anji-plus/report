@@ -14,7 +14,6 @@ import com.anjiplus.template.gaea.business.modules.dataset.controller.param.Data
 import com.anjiplus.template.gaea.business.modules.dataset.controller.param.DataSetTestTransformParam;
 import com.anjiplus.template.gaea.business.modules.dataset.dao.entity.DataSet;
 import com.anjiplus.template.gaea.business.modules.dataset.service.DataSetService;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -142,4 +141,11 @@ public class DataSetController extends GaeaBaseController<DataSetParam, DataSet,
     }
 
 
+    @PostMapping("/copy")
+    @Permission(code = "copy", name = "复制")
+    @GaeaAuditLog(pageTitle = "复制")
+    public ResponseBean copy(@RequestBody DataSetDto dto) {
+        dataSetService.copy(dto);
+        return ResponseBean.builder().build();
+    }
 }

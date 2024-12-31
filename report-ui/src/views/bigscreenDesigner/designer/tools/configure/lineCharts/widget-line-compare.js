@@ -1107,7 +1107,7 @@ export const widgetLineCompare = {
               name: 'fontColor',
               required: false,
               placeholder: '',
-              value: ''
+              value: '#fff'
             },
             {
               type: 'el-input-number',

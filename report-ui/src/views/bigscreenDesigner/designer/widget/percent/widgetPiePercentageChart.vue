@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :options="options" autoresize/>
+    <v-chart ref="myVChart" :option="options" autoresize/>
   </div>
 </template>
 
@@ -75,12 +75,11 @@ export default {
           {
             //name: '圆环',
             type: "pie",
-            radius: ["58%", "45%"],
+            radius: ["80%", "65%"],
             silent: true,
             clockwise: true,
             startAngle: 90,
             z: 0,
-            zlevel: 0,
             label: {
               normal: {
                 position: "center",
@@ -128,19 +127,20 @@ export default {
           {
             name: "percent",
             type: "gauge",
-            radius: "58%",
+            radius: "80%",
             center: ["50%", "50%"],
             startAngle: 0,
-            endAngle: 359.9,
-            splitNumber: 8,
+            endAngle: 360,
             hoverAnimation: true,
+            splitNumber: 12,
             axisTick: {
               show: false,
             },
             splitLine: {
               length: 15,
+              distance: -10,
               lineStyle: {
-                width: 5,
+                width: 2,
                 color: "#061740",
               },
             },
@@ -217,6 +217,7 @@ export default {
       this.setOptionsColor();
       this.setOptionsData();
       this.setOptionLine();
+      this.setOptionRadius();
       this.setOptionSurplusColor();
     },
     setOptionsTitle() {
@@ -273,15 +274,22 @@ export default {
     },
     setOptionLine() {
       const optionsSetup = this.optionsSetup;
-      const line = this.options.series[1]["splitLine"];
-      const num = this.options.series[1];
-      num.splitNumber = optionsSetup.lineNumber;
-      line.length = optionsSetup.lineLength;
-      const lineStyle = {
-        width: optionsSetup.lineWidth,
-        color: optionsSetup.lineColor,
-      };
-      line["lineStyle"] = lineStyle;
+      const series = this.options.series[1];
+      const splitLine= {
+        length: optionsSetup.lineLength,
+        distance: optionsSetup.lineDistance,
+          lineStyle: {
+            width: optionsSetup.lineWidth,
+            color: optionsSetup.lineColor,
+        },
+      }
+      series.splitNumber = optionsSetup.lineNumber;
+      series.splitLine = splitLine;
+    },
+    setOptionRadius(){
+      const optionsSetup = this.optionsSetup;
+      this.options.series[0].radius = [optionsSetup.innerNumber + "%", optionsSetup.outerNumber + "%"]
+      this.options.series[1].radius = optionsSetup.outerNumber + "%"
     },
     // 数据解析
     setOptionsData(e, paramsConfig) {

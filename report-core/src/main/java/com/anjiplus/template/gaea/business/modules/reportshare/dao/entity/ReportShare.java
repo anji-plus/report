@@ -32,6 +32,8 @@ public class ReportShare extends GaeaBaseEntity {
 
     /** 报表编码 */
     private String reportCode;
+    /** 报表编码 */
+    private String reportName;
 
     /** 0--已禁用 1--已启用  DIC_NAME=ENABLE_FLAG */
     private Integer enableFlag;

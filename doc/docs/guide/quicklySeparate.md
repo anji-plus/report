@@ -27,14 +27,15 @@ npm run build
 ### 编译环境
 
 - [Apache Maven] 3.5 <br>
-- [Node.js] v14.16.0 <br>
+- [Node.js]
+    - report1.5以下版本请使用 node<= V14
+    - report1.5及以上版本请使用 node>= V16
 - [Jdk] 1.8 <br>
 
 ### 版本问题
 
 已知以下版本存在兼容性问题，请不要使用
 
-- Node.js V16及以上
 - openJdk
 - Jdk 1.7及以下/11及以上（jdk11部分版本有问题）
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
@@ -105,6 +106,43 @@ OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->
 
 ### 前端部署
 
-使用nginx做转发
+使用nginx做转发，以下内容仅供参考
+```text
+server {
+    listen       443 ssl;
+    server_name  xxx;
+    access_log  "/var/log/nginx/report.access.log"  main;
+    error_log   "/var/log/nginx/report.cn.error.log"  info;
+    ssl_certificate      cert/xxx.report.pem;
+    ssl_certificate_key  cert/xxx.report.key;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+    ssl_session_cache    shared:SSL:1m;
+    ssl_session_timeout  5m;
+
+    client_max_body_size 600M;
+    client_body_buffer_size 10M;
+    client_header_buffer_size 512k;
+    large_client_header_buffers 16 512k;
+    proxy_buffer_size 1024k;
+    proxy_buffers 16 1024k;
+    proxy_busy_buffers_size 2048k;
+    proxy_temp_file_write_size 2048k;
+    
+    location / {
+	index index.html;
+        proxy_pass     http://127.0.0.1:9095;
+	try_files $uri $uri /index.html =404;
+    }
+
+    error_page 404 /404.html;
+        location = /40x.html {
+    }
+
+    error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+    }
+}
+```
 
 
