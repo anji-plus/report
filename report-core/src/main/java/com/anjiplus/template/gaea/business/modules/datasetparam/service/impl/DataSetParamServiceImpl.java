@@ -2,26 +2,22 @@ package com.anjiplus.template.gaea.business.modules.datasetparam.service.impl;
 
 import com.anji.plus.gaea.curd.mapper.GaeaBaseMapper;
 import com.anji.plus.gaea.exception.BusinessExceptionBuilder;
+import com.anjiplus.template.gaea.business.code.ResponseCode;
 import com.anjiplus.template.gaea.business.modules.datasetparam.controller.dto.DataSetParamDto;
 import com.anjiplus.template.gaea.business.modules.datasetparam.dao.DataSetParamMapper;
 import com.anjiplus.template.gaea.business.modules.datasetparam.dao.entity.DataSetParam;
 import com.anjiplus.template.gaea.business.modules.datasetparam.service.DataSetParamService;
 import com.anjiplus.template.gaea.business.modules.datasetparam.util.ParamsResolverHelper;
-import com.anjiplus.template.gaea.business.code.ResponseCode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Sets;
-import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
+import com.anjiplus.template.gaea.business.util.JsEngineUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
 * @desc DataSetParam 数据集动态参数服务实现
@@ -32,15 +28,6 @@ import java.util.Set;
 //@RequiredArgsConstructor
 @Slf4j
 public class DataSetParamServiceImpl implements DataSetParamService {
-    static final Set<String> blackList = Sets.newHashSet("java.lang.ProcessBuilder", "java.lang.Runtime", "java.lang.ProcessImpl");
-    private static final ThreadLocal<ScriptEngine> engineHolder = ThreadLocal.withInitial(() -> {
-        NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
-        ScriptEngine engine = factory.getScriptEngine(clz -> !blackList.contains(clz));
-        return engine;
-    });
-    public static ScriptEngine getEngine() {
-        return engineHolder.get();
-    }
 
     @Autowired
     private DataSetParamMapper dataSetParamMapper;
@@ -50,6 +37,8 @@ public class DataSetParamServiceImpl implements DataSetParamService {
       return dataSetParamMapper;
     }
 
+    @Resource
+    private JsEngineUtil jsEngineUtil;
     /**
      * 参数替换
      *
@@ -101,24 +90,10 @@ public class DataSetParamServiceImpl implements DataSetParamService {
         String validationRules = dataSetParamDto.getValidationRules();
         if (StringUtils.isNotBlank(validationRules)) {
             try {
-                ScriptEngine engine = getEngine();
-                engine.eval(validationRules);
-                if(engine instanceof Invocable){
-                    Invocable invocable = (Invocable) engine;
-                    Object exec = invocable.invokeFunction("verification", dataSetParamDto);
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    if (exec instanceof Boolean) {
-                        return objectMapper.convertValue(exec, Boolean.class);
-                    }else {
-                        return objectMapper.convertValue(exec, String.class);
-                    }
-
-                }
-
+                return jsEngineUtil.verification(validationRules,dataSetParamDto);
             } catch (Exception ex) {
                 throw BusinessExceptionBuilder.build(ResponseCode.EXECUTE_JS_ERROR, ex.getMessage());
             }
-
         }
         return true;
     }
