@@ -12,6 +12,8 @@
 
 #### &emsp; [在线文档](https://ajreport.beliefteam.cn/report-doc/ "doc"): https://ajreport.beliefteam.cn/report-doc/ <br>
 
+#### &emsp; [模板下载](https://ajreport.beliefteam.cn/download "temp"): https://ajreport.beliefteam.cn/download<br>
+
 #### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
 ## 发行版本
@@ -234,17 +236,15 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
-AJ-Report技术交流六群，新群可直接加，有问题都可以在群里问 <br>
-如果不能直接加进去或者群二维码过期了，请添加下面个人微信<br>
-<img src="https://ajreport.beliefteam.cn/file/download/856c9469-e306-406a-b2b9-e196050f3dd5" width = "300" height = "450" align=left/> <br>
-
+技术交流群八，可直接扫码进<br>
+<img src="https://ajreport.beliefteam.cn/file/download/ab5e6ddd-8a54-4aea-85b1-9da6937cce9b" width = "300" height = "450" align=left/>
 
 个人微信：个人微信，不闲聊，加群、咨询请备注，备注格式不限但最好是：“项目名 + 问题” ，项目名可以是**AJ-Report**、**Report**、**大屏**，只要能一眼分辨就行 <br>
 例1：大屏 加群 <br>
 例2：report 有个问题xxxx <br>
-有问题，不管是技术问题还是使用问题，都尽量在群里问，没啥特殊问题尽量别加个人微信。加个人微信记得**一定要加备注 ！！！**<br>
+有问题，不管是技术问题还是使用问题，都尽量在群里问。加个人微信记得**一定要加备注 ！！！**<br>
 
-<img src="https://ajreport.beliefteam.cn/file/download/a3440fb7-e20c-42fa-b7af-805f5523c746" width = "300" height = "450" align=left/>
+<img src="https://foruda.gitee.com/images/1724817510954363329/305a6044_7492051.jpeg" width = "300" height = "450" align=left/>
 
 
 ## 更多支持
@@ -259,10 +259,10 @@ AJ-Report技术交流六群，新群可直接加，有问题都可以在群里�
   · PR可以包含新功能、现有功能的改进。<br>
   . PR请提交到dev分支 <br>
 - 提供文档原文或者文档链接:<br>
-  . 文档原文的话，请放在doc/docs/guide/community目录下，可直接提交pr <br>
+  . 文档原文的话，请放在doc/docs/guide/community目录下，也可直接提交pr <br>
   . 文档链接的话，文档需要完全的公开，不掺杂收费等相关内容，审核通过会放在首页 <br>
 - 提供大屏模板:<br>
-  . 可将自己设计好的大屏进行导出(不包含数据集)，将导出产生的压缩包提供给我们（加个人企微） <br>
+  . 可将自己设计好的大屏进行导出(不包含数据集)，将导出产生的压缩包提供给我们 <br>
   . 提供的大屏将会在AJ-Report在线演示环境进行展示和供其他人下载 <br>
 
 #### 开源不易，劳烦各位star ☺
