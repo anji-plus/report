@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
@@ -22,19 +21,35 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.test.skip>true</maven.test.skip>
+        <spring-cloud.version>3.1.5</spring-cloud.version>
+        <log4j.version>1.2.17</log4j.version>
+        <spring-boot-gaea.version>2.9.4.RELEASE</spring-boot-gaea.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <aspectj.version>1.9.7</aspectj.version>
+        <mysql.version>8.0.28</mysql.version>
+        <druid.version>1.2.4</druid.version>
+        <flyway.version>5.2.1</flyway.version>
+        <ehcache.version>2.10.6</ehcache.version>
+        <httpclient.version>4.5.13</httpclient.version>
+        <lombok.version>1.18.34</lombok.version>
+        <itextpdf.version>5.5.13.2</itextpdf.version>
+        <itext-asian.version>5.2.0</itext-asian.version>
+        <poi.version>4.1.2</poi.version>
+        <groovy.version>3.0.9</groovy.version>
+        <core-renderer.version>R8</core-renderer.version>
+        <xmlworker.version>5.5.13</xmlworker.version>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
-            <version>3.1.5</version>
+            <version>${spring-cloud.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>
-            <version>3.1.5</version>
+            <version>${spring-cloud.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -50,7 +65,7 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <version>${log4j.version}</version>
         </dependency>
 
         <dependency>
@@ -78,7 +93,7 @@
         <dependency>
             <groupId>com.anji-plus</groupId>
             <artifactId>spring-boot-gaea</artifactId>
-            <version>2.9.4.RELEASE</version>
+            <version>${spring-boot-gaea.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -94,12 +109,12 @@
         <dependency>
             <groupId>com.anji-plus</groupId>
             <artifactId>spring-boot-starter-gaea-oss</artifactId>
-            <version>2.9.4.RELEASE</version>
+            <version>${spring-boot-gaea.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.2</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -108,86 +123,86 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.9.7</version>
+            <version>${aspectj.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.28</version>
+            <version>${mysql.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.2.4</version>
+            <version>${druid.version}</version>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>5.2.1</version>
+            <version>${flyway.version}</version>
         </dependency>
 
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>2.10.6</version>
+            <version>${ehcache.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.13</version>
+            <version>${httpclient.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.34</version>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
 
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
-            <version>5.5.13.2</version>
+            <version>${itextpdf.version}</version>
         </dependency>
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itext-asian</artifactId>
-            <version>5.2.0</version>
+            <version>${itext-asian.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>4.1.2</version>
+            <version>${poi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>4.1.2</version>
+            <version>${poi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml-schemas</artifactId>
-            <version>4.1.2</version>
+            <version>${poi.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>3.0.9</version>
+            <version>${groovy.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.xhtmlrenderer</groupId>
             <artifactId>core-renderer</artifactId>
-            <version>R8</version>
+            <version>${core-renderer.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.itextpdf.tool</groupId>
             <artifactId>xmlworker</artifactId>
-            <version>5.5.13</version>
+            <version>${xmlworker.version}</version>
         </dependency>
     </dependencies>
 
@@ -241,7 +256,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <!--<version>3.3.0</version>-->
                 <configuration>
                     <descriptors>
                         <descriptor>src/main/assembly/assembly.xml</descriptor>
