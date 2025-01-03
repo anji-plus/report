@@ -3,57 +3,22 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 17:38:28
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-03 03:07:27
+ * @LastEditTime: 2025-01-03 22:37:11
 -->
 <template>
   <div class="view-container">
-    <div class="view-container-left">
-      <JsqTree
-        default-expand-all
-        key-field="id"
-        label-field="label"
-        @register="register"
-        :node-props="nodeProps"
-      />
-    </div>
-    <div class="view-container-right">
-      <!-- <JsqSelect @register="register1" /> -->
-      <JsqSearchForm @register="register2" />
-      <Test v-bind="obj" />
-    </div>
+    <JsqCrud @register="register" />
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, onMounted } from 'vue';
-  import { useTree, JsqTree } from '@/components/Base/Jsq-tree';
-  import { useSelect, JsqSelect } from '@/components/Base/Jsq-select';
-  import { useJsqSearchForm, JsqSearchForm } from '@/components/Base/Jsq-searchForm';
-  import Test from './components/test.vue';
+  import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
+  import { formSchemas, treeOptions } from './utils/schemas';
 
-  import { getAuthorityTree } from '@/api/access/accessAuthority';
-  import { formSchemas } from './components/schemas';
-
-  const [register2, {}] = useJsqSearchForm({
-    schemas: formSchemas({}),
-  });
-
-  const [register1, {}] = useSelect({});
-
-  const obj = ref({ a: 1, b: 2, c: 3 });
-
-  const [register, { loadData }] = useTree({
-    api: getAuthorityTree,
-  });
-  const nodeProps = ({ option }: { option: any }) => {
-    return {
-      onClick() {
-        console.log(11, option);
-        console.log(22, option);
-      },
-    };
-  };
-  onMounted(() => {
-    loadData({ a: 1 });
+  const [register, {}] = useCrud({
+    treeOptions: treeOptions(), // 左侧树
+    searchFormOption: {         // 搜索条件
+      schemas: formSchemas({}).value,
+    },
   });
 </script>
 <style lang="less" scoped>

@@ -1,7 +1,17 @@
 import { computed } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
-import { FormSchema } from '@/components/Base/Jsq-searchForm';
+import { FormSchema } from '@/components/Base/Jsq-crud/components/Jsq-searchForm';
+import { getAuthorityTree } from '@/api/access/accessAuthority';
+
+// tree配置
+export const treeOptions = () => {
+  return {
+    api: getAuthorityTree,
+    'key-field': 'id',
+    'label-field': 'label',
+  }
+}
 
 // 表单配置
 export const formSchemas = ({ params }: Record<string, any>) => {
@@ -56,6 +66,6 @@ export const formSchemas = ({ params }: Record<string, any>) => {
     });
     return formItems;
   });
-  return schemas
-}
+  return schemas;
+};
 

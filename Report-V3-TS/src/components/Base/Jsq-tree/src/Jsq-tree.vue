@@ -54,6 +54,7 @@
   };
 
   onMounted(() => {
+    loadData()
     emit('register', TreeMethods);
   });
 
