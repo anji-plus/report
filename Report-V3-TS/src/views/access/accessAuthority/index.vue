@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 17:38:28
  * @LastEditors: qianlishi
- * @LastEditTime: 2024-12-30 20:36:36
+ * @LastEditTime: 2025-01-03 03:07:27
 -->
 <template>
   <div class="view-container">
@@ -17,25 +17,27 @@
       />
     </div>
     <div class="view-container-right">
-      <JsqSelect @register="register1" />
+      <!-- <JsqSelect @register="register1" /> -->
+      <JsqSearchForm @register="register2" />
       <Test v-bind="obj" />
     </div>
   </div>
 </template>
 <script lang="ts" setup>
   import { ref, onMounted } from 'vue';
-  import JsqTree from '@/components/Base/Jsq-tree/src/Jsq-tree.vue';
-  import JsqSelect from '@/components/Base/Jsq-select/src/Jsq-select.vue';
+  import { useTree, JsqTree } from '@/components/Base/Jsq-tree';
+  import { useSelect, JsqSelect } from '@/components/Base/Jsq-select';
+  import { useJsqSearchForm, JsqSearchForm } from '@/components/Base/Jsq-searchForm';
   import Test from './components/test.vue';
 
   import { getAuthorityTree } from '@/api/access/accessAuthority';
+  import { formSchemas } from './components/schemas';
 
-  import { useTree } from '@/components/Base/Jsq-tree';
-  import { useSelect } from '@/components/Base/Jsq-select';
-
-  const [register1, {}] = useSelect({
-    api: getAuthorityTree,
+  const [register2, {}] = useJsqSearchForm({
+    schemas: formSchemas({}),
   });
+
+  const [register1, {}] = useSelect({});
 
   const obj = ref({ a: 1, b: 2, c: 3 });
 

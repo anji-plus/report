@@ -5,5 +5,15 @@
  * @LastEditors: qianlishi
  * @LastEditTime: 2024-12-30 20:55:07
  */
-export { default as JsqSearchForm } from './src/Jsq-searchForm.vue';
-export { useJsqSearchForm } from './hooks/useSearchForm';
+import type { PropType } from 'vue';
+import { FormSchema } from './types/searchForm';
+import { formProps } from 'naive-ui';
+
+export const basicProps = {
+  ...formProps,
+  // 表单配置规则
+  schemas: {
+    type: [Array] as PropType<FormSchema[]>,
+    default: () => [],
+  },
+};

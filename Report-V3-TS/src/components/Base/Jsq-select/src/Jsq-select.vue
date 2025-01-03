@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: qianlishi
+ * @Date: 2024-12-30 18:49:41
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2025-01-03 00:08:44
+-->
 <template>
   <n-select v-bind="getBindValue" />
 </template>
@@ -16,7 +23,7 @@
   const propsRef = ref<Partial<SelectProps>>({});
   // 将标签传递的属性与hooks传递的参数合并
   const getProps = computed(() => {
-    return { ...props, ...(unref(propsRef) as any) };
+    return { ...props, ...attrs, ...(unref(propsRef) as any) };
   });
 
   /**
@@ -24,7 +31,7 @@
    *  静态数据 > 数字字典 > 接口
    * */
   const getOptions = computed(() => {
-    const { api, dictCode, localOptions } = unref(getProps);
+    const { dictCode, localOptions } = unref(getProps);
     const options = localOptions
       ? localOptions
       : dictCode
@@ -45,19 +52,22 @@
     setProps,
   };
 
-  watch(
-    () => unref(getProps).api,
-    (old, val) => {
-      loadData();
-    },
-  );
-
   const loadData = async () => {
     const requestApi = unref(getProps).api;
     if (!requestApi) return;
     const { data } = await requestApi();
     selectOptions.value = data;
   };
+
+  watch(
+    () => unref(getProps).api,
+    () => {
+      loadData();
+    },
+    {
+      immediate: true,
+    },
+  );
 
   onMounted(() => {
     emit('register', selectMethods);
