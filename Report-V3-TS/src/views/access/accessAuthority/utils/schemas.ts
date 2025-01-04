@@ -1,13 +1,21 @@
+/*
+ * @Description: 
+ * @Author: qianlishi
+ * @Date: 2025-01-03 01:01:14
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2025-01-04 16:01:51
+ */
 import { computed } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
-import { FormSchema } from '@/components/Base/Jsq-crud/components/Jsq-searchForm';
+import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 import { getAuthorityTree } from '@/api/access/accessAuthority';
 
 // tree配置
 export const treeOptions = () => {
   return {
     api: getAuthorityTree,
+    field: "target",
     'key-field': 'id',
     'label-field': 'label',
   }
@@ -69,3 +77,29 @@ export const formSchemas = ({ params }: Record<string, any>) => {
   return schemas;
 };
 
+
+// 批量操作
+export const tableButtons = () => {
+  return computed(() => {
+    return [
+      {
+        label: '新增',
+        type: '',
+        permission: '', // 权限嘛
+        plain: true,
+        click: () => {
+          console.log(11)
+        }
+      },
+      {
+        label: '删除',
+        type: 'warning',
+        permission: '', // 权限嘛
+        plain: true,
+        click: () => {}
+      }
+    ]
+  })
+}
+
+// 表格

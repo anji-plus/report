@@ -5,6 +5,8 @@
     </div>
     <div class="view-container-right">
       <JsqSearchForm v-bind="getBindValue.searchFormOption" />
+      <JsqButtons v-bind="getBindValue.tableButtonsOptions" class="view-container-right-btn"/>
+      <JsqTable />
     </div>
   </div>
 </template>
@@ -13,8 +15,11 @@
   import { basicProps } from './props';
   import { CrudActionType } from './types';
   import { deepMerge } from '@/utils';
+
   import { JsqTree } from '@/components/Base/Jsq-tree';
-  import { JsqSearchForm } from '@/components/Base/Jsq-crud/components/Jsq-searchForm';
+  import { JsqTable } from '@/components/Base/Jsq-table'
+  import { JsqSearchForm } from './components/Jsq-searchForm';
+  import { JsqButtons } from './components/Jsq-buttons'
 
   // props传递参数
   const props = defineProps({ ...basicProps });
@@ -64,6 +69,9 @@
       flex: 1;
       padding: 20px 10px;
       margin-left: 6px;
+      &-btn {
+        margin-top: 10px;
+      }
     }
   }
 </style>

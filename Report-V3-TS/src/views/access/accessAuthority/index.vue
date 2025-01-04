@@ -12,13 +12,17 @@
 </template>
 <script lang="ts" setup>
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
-  import { formSchemas, treeOptions } from './utils/schemas';
+  import { formSchemas, treeOptions, tableButtons } from './utils/schemas';
 
   const [register, {}] = useCrud({
     treeOptions: treeOptions(), // 左侧树
     searchFormOption: {         // 搜索条件
       schemas: formSchemas({}).value,
     },
+    tableButtonsOptions: {
+      // 添加naive table 其他属性
+      tableButtons: tableButtons()
+    }
   });
 </script>
 <style lang="less" scoped>

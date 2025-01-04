@@ -1,12 +1,12 @@
-import { FormProps } from '../../components/Jsq-searchForm';
+import { FormProps } from '../components/Jsq-searchForm';
 import { JsqTreeProps } from '@/components/Base/Jsq-tree'
 
 // crud配置项
 export type CurdProps = {
   treeOptions: JsqTreeProps; // tree配置
   searchFormOption: FormProps; // 搜索表单配置项
-  tableButtons: any; // 批量操作按钮
-  rowButtons: any; // 行操作按钮
+  tableButtonsOptions: any; // 批量操作按钮
+  rowButtonsOptions: any; // 行操作按钮
   tableOptions: any; // 表格配置项
   queryApi: () => Promise<void>; // 查询表格
   addApi: () => Promise<void>; // 新增表格

@@ -6,7 +6,7 @@
  * @LastEditors: qianlishi
  * @LastEditTime: 2023-11-23 14:52:17
 -->
-<template>
+ <template>
   <anji-crud ref="listPage" :option="crudOption" />
 </template>
 <script>
