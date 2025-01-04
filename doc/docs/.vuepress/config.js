@@ -87,7 +87,8 @@ module.exports = {
                     collapsable: false,
                     children: [
                         {title: '说明', path: '/guide/community/report'},
-                        {title: '搭建AJ-Report开发环境', path: '/guide/community/AC1688/搭建aj-report开发环境'}
+                        {title: '搭建AJ-Report开发环境', path: '/guide/community/AC1688/搭建aj-report开发环境'},
+                        {title: '大屏组件对齐和拖拽实现', path: '/guide/community/JiangHH/AJ_Report大屏设计时多组件对齐和拖拽移动实现'}
                     ]
                 }
             ],

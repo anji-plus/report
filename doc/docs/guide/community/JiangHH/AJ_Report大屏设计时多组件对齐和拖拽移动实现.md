@@ -21,7 +21,7 @@
 
 测试截图：
 
-![](.\picture\img_01.png)
+![](./picture/img_01.png)
 
 #### 方式2  鼠标框选实现多选
 说明：
@@ -40,42 +40,42 @@
 
 测试截图：
 
-![](.\picture\img_02.png)
+![](./picture/img_02.png)
 
-![](.\picture\img_03.png)
+![](./picture/img_03.png)
 
-![](.\picture\img_04.png)
+![](./picture/img_04.png)
 
 ### 2、多组件对齐
 
 单选右键菜单
 
-![](.\picture\img_05.png)
+![](./picture/img_05.png)
 
 多选右键菜单
 
-![](.\picture\img_06.png)
+![](./picture/img_06.png)
 
 #### 左对齐/右对齐/居中对齐
 
 选择左对齐 （以最上边的组件为标准对齐）---不合适自己可以修改代码
 
-![](.\picture\img_07.png)
+![](./picture/img_07.png)
 
 #### 上对齐/下对齐/居中对齐
 
 选择上对齐（以最左边的组件为标准对齐）----不合适自己可以修改代码
 
-![](.\picture\img_08.png)
+![](./picture/img_08.png)
 
-![](.\picture\img_09.png)
+![](./picture/img_09.png)
 
 ### 3、多组件移动拖拽
 
 #### 多选状态
 
-![](.\picture\img_10.png)
+![](./picture/img_10.png)
 
 #### 拖拽后
 
-![](.\picture\img_11.png)
+![](./picture/img_11.png)
