@@ -6,7 +6,7 @@
     <div class="view-container-right">
       <JsqSearchForm v-bind="getBindValue.searchFormOption" />
       <JsqButtons v-bind="getBindValue.tableButtonsOptions" class="view-container-right-btn"/>
-      <JsqTable />
+      <JsqTable v-bind="getBindValue.tableOptions" />
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@
   });
 
   const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) } as Recordable));
-  console.log('value', getBindValue)
+  console.log('111', getBindValue)
   const setProps = async (curdProps: any): Promise<void> => {
     propsRef.value = deepMerge(unref(propsRef) || {}, curdProps);
   };

@@ -7,10 +7,56 @@
  */
 import { http } from '@/utils/http/axios';
 
+// 获取所属菜单树结构
 export function getAuthorityTree(data = {}) {
   return http.request({
     url: 'accessAuthority/menuTree',
     method: 'get',
     data,
   });
+}
+
+// 列表查询数据
+export function getPageList(params) {
+  return http.request({
+    url: 'accessAuthority/pageList',
+    method: 'GET',
+    params,
+  })
+}
+
+// 新增
+export function addAccessAuthority(data) {
+  return http.request({
+    url: 'accessAuthority',
+    method: 'post',
+    data
+  })
+}
+
+// 修改
+export function updateAccessAuthority(data) {
+  return http.request({
+    url: 'accessAuthority',
+    method: 'put', 
+    data,
+  })
+}
+
+// 批量删除
+export function deleteBatchAccessAuthority(data) {
+  return http.request({
+    url: 'accessAuthority/delete/batch',
+    method: 'post',
+    data
+  })
+}
+
+// 查询详情页
+export function getDetail(data) {
+  return http.request({
+    url: 'accessAuthority/' + data.id,
+    method: 'get',
+    params: { accessKey: data.accessKey }
+  })
 }
