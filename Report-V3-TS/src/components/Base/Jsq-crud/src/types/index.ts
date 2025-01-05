@@ -1,6 +1,10 @@
 import { FormProps } from '../components/Jsq-searchForm';
 import { JsqTreeProps } from '@/components/Base/Jsq-tree'
 
+export type serachFormProps = {
+  [key: string]: any
+} 
+
 // crud配置项
 export type CurdProps = {
   treeOptions: JsqTreeProps; // tree配置

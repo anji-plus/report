@@ -73,8 +73,8 @@
             <n-button v-if="getSchema.length > 3" size="small" @click="handleToggleMoreSearch">{{
               formModel.showMoreSearch ? '收起' : '展开'
             }}</n-button>
-            <n-button size="small">重置</n-button>
-            <n-button type="primary" size="small">查询</n-button>
+            <n-button size="small" @click="toRestForm">重置</n-button>
+            <n-button type="primary" size="small" @click="emit('toQuery')">查询</n-button>
           </n-space>
         </div>
       </div>
@@ -94,7 +94,7 @@
   const props = defineProps({ ...basicProps });
   // 收集父节点传递的数据
   const attrs = useAttrs();
-  const emit = defineEmits(['register', 'change']);
+  const emit = defineEmits(['register', 'change', 'toRestForm', 'toQuery']);
 
   // 表单对象
   const formModel = reactive<Recordable>({});
@@ -102,6 +102,9 @@
   // useSearchForm传递过来的参数
   const propsRef = ref<Partial<FormProps>>({});
   const schemaRef = ref<Nullable<FormSchema[]>>(null);
+
+  const searchForm = defineModel()
+  searchForm.value = formModel
 
   const getProps = computed(() => {
     return { ...props, ...attrs, ...(unref(propsRef) as any) };
@@ -153,6 +156,13 @@
     formModel.showMoreSearch = !formModel.showMoreSearch;
   };
 
+  const toRestForm = () => {
+    Object.keys(formModel).forEach((key) => {
+      formModel[key] = null;
+    });
+    emit('toRestForm')
+  }
+  
   const formActionType = {
     setProps,
     setSchema,

@@ -4,7 +4,7 @@
       <JsqTree default-expand-all v-bind="getTreeBindValue" :node-props="toClickTree" />
     </div>
     <div class="view-container-right">
-      <JsqSearchForm v-bind="getSearchFormOption" @change='change'/>
+      <JsqSearchForm v-model="formModel" v-bind="getSearchFormOption" @toRestForm='toRestForm' @toQuery="toQuery"/>
       <JsqButtons v-bind="getTableButtonsOptions" class="view-container-right-btn"/>
       <JsqTable v-bind="getTableOptions" />
     </div>
@@ -13,17 +13,26 @@
 <script lang="ts" setup>
   import { onMounted, ref, unref, useAttrs, computed, watch } from 'vue';
   import { basicProps } from './props';
-  import { CrudActionType } from './types';
+  import { CrudActionType, serachFormProps } from './types';
   import { deepMerge } from '@/utils';
 
   import type { TreeOption } from 'naive-ui'
+  import { useDialog, useMessage } from 'naive-ui'
 
   import { JsqTree } from '@/components/Base/Jsq-tree';
   import { JsqTable } from '@/components/Base/Jsq-table'
   import { JsqSearchForm } from './components/Jsq-searchForm';
   import { JsqButtons } from './components/Jsq-buttons'
 
+  const message = useMessage()
+  const dialog = useDialog()
+
   const formModel = ref({})
+  const selectIds = ref<string[]>([])
+  const selectSections = ref<serachFormProps[]>([])
+  const treePrams = ref<serachFormProps>({})
+  let pageNumber = ref<number>(1)
+  let pageSize = ref<number>(10) 
   // props传递参数
   const props = defineProps({ ...basicProps });
   const attrs = useAttrs();
@@ -51,6 +60,7 @@
  
   const getTableOptions = computed(() => {
     const tableOptions = setTableOptions(unref(getBindValue).tableOptions)
+    console.log('tabls', tableOptions)
     return tableOptions
   })
 
@@ -58,6 +68,8 @@
     const tableOptions = options || {}
     tableOptions['row-key'] = (row: any) => row.id
     tableOptions['on-update:checked-row-keys'] = handleCheck
+    tableOptions['page'] = unref(pageNumber)
+    tableOptions['page-size'] = unref(pageSize)
     tableOptions['on-update:page'] = handlePage
     tableOptions['on-update:page-size'] = handlePageSize
     return tableOptions
@@ -65,18 +77,20 @@
 
   // 表格复选框选中
   const handleCheck = (val, rows) => {
-    console.log(val)
-    console.log(rows)
+    selectIds.value = val
+    selectSections.value = rows
   }
 
   // 分页页码
   const handlePage = (page: number) => {
-    console.log('page', page)
+    pageNumber.value = page
+    loadData()
   }
 
   // 分页条数
-  const handlePageSize = (pageSize: number) => {
-    console.log('pageSize', pageSize)
+  const handlePageSize = (pageSizes: number) => {
+    pageSize.value = pageSizes
+    loadData()
   }
   
   const setProps = async (curdProps: any): Promise<void> => {
@@ -86,13 +100,12 @@
   const toClickTree = ({ option }: { option: TreeOption }) => {
     return { 
       onClick() {
-        console.log(option)
+        const filed = unref(getTreeBindValue)?.['field']
+        const keyField = unref(getTreeBindValue)?.['keyField']
+        unref(treePrams)[filed] = option[keyField]
+        loadData()
       }
     }
-  } 
-
-  const change = (form) => {
-    formModel.value = deepMerge(unref(propsRef) || {}, form);
   }
 
   watch(() => unref(getTableOptions)?.queryApi, 
@@ -100,16 +113,38 @@
     loadData()
   })
 
+  // 获取查询参数
+  const getSearchForm = (searchForm?: serachFormProps) => {
+    const params = deepMerge(unref(formModel), searchForm || {})
+    params['pageSize'] = unref(pageSize)
+    params['pageNumber'] = unref(pageNumber)
+    return deepMerge(params, unref(treePrams))
+  }
+
   const loadData = async () => {
-    const { code, data } = await unref(getTableOptions)?.queryApi()
+    const params = getSearchForm()
+    const { code, data } = await unref(getTableOptions)?.queryApi(params)
     if(code != 200) return
     const { records, total } = data
     unref(getTableOptions)['data'] = records
     unref(getTableOptions)['pageCount'] = total
   }
 
+  const toQuery = () => {
+    loadData()
+  }
+
+  const toRestForm = () => {
+    formModel.value = {}
+    treePrams.value = {}
+    pageNumber.value = 1
+    pageSize.value = 10
+    loadData()
+  }
+
   // 新增
   const toAdd = () => {
+    console.log(getSearchForm())
     console.log('新增')
   }
 
@@ -121,14 +156,39 @@
 
   // 批量删除
   const toRemoveAll = () => {
-
-    console.log('批量删除')
+    dialog.warning({
+      title: '提示！',
+      content: '你确定删除选中的数据？',
+      positiveText: '确定',
+      negativeText: '取消',
+      onPositiveClick: async () => {
+        const { code, message } = await unref(getTableOptions)?.removeApi(selectIds)
+        if(code != 200) return
+         message.success(message)
+      },
+      onNegativeClick: () => {
+        message.error('取消成功')
+      }
+    })
   }
 
   // 删除
-  const toRemove = (row) => {
-    console.log(row)
-    console.log('删除')
+  const toRemove = (row) => {    
+    const ids = [row.id]
+    dialog.warning({
+      title: '提示！',
+      content: '你确定删除该条数据？',
+      positiveText: '确定',
+      negativeText: '取消',
+      onPositiveClick: async () => {
+        const { code, message } = await unref(getTableOptions)?.removeApi(ids)
+        if(code != 200) return
+         message.success(message)
+      },
+      onNegativeClick: () => {
+        message.error('取消成功')
+      }
+    })
   }
 
   const crudMethods: CrudActionType = {

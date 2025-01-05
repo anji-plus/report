@@ -17,8 +17,8 @@ export const getTreeOptions = () => {
   return {
     api: getAuthorityTree,
     field: "target",
-    'key-field': 'id',
-    'label-field': 'label',
+    keyField: 'id',
+    labelField: 'label',
   }
 }
 
