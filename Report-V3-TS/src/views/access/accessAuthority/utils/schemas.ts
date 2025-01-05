@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-04 18:17:52
+ * @LastEditTime: 2025-01-05 01:40:39
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -32,6 +32,7 @@ export const getFormSchemas = ({ params }: Record<string, any>) => {
         field: 'enableFlag',
         componentProps: {
           dictCode: 'ENABLE_FLAG',
+          defaultValue: 1
         },
       },
       {
@@ -80,16 +81,16 @@ export const getFormSchemas = ({ params }: Record<string, any>) => {
 
 
 // 批量操作
-export const getTableButtons = () => {
-  return computed(() => {
+export const getTableButtons = ({ addClick, removeAll }) => {
+  const rowsButtons = computed(() => {
     return [
       {
         label: '新增',
         type: '',
-        permission: '', // 权限嘛
+        permission: 'asd', // 权限嘛
         plain: true,
         click: () => {
-          console.log(11)
+          addClick()
         }
       },
       {
@@ -97,19 +98,36 @@ export const getTableButtons = () => {
         type: 'warning',
         permission: '', // 权限嘛
         plain: true,
-        click: () => {}
+        click: () => {
+          removeAll()
+        }
       }
     ]
   })
+  return {rowsButtons}
 }
 
 // 表格
-export const getTableColumns = () => {
+export const getTableColumns = ({ updateClick, removeSingle }) => {
   const columns = computed(() => {
     return [
       {
         type: 'selection',
         align: 'center'
+      },
+      {
+        type: 'expand',
+        width: '40px',
+        align: 'center',
+        renderExpand: (rowData) => {
+          const { createBy, createTime, updateBy, updateTime } = rowData
+          return `
+            创建人： ${createBy}
+            创建时间：${createTime}
+            修改人：${updateBy}
+            修改时间：${updateTime}
+          `
+        }
       },
       {
         title: '序号',
@@ -121,31 +139,37 @@ export const getTableColumns = () => {
         }
       },
       {
-        type: 'expand',
-        width: '40px',
+        title: '菜单代码',
+        key: 'target', // 字段名称
         align: 'center',
-        renderExpand: (rowData) => {
-          return `${rowData.name} is a good guy.`
-        }
+        editKey: 'target', // 编辑展示的字段
+        tableHide: true, // 表格不显示
+        inputType: "input", // 表单类型
+        editHide: true, // 编辑不显示
+        rules: [
+          { required: true, message: "目标菜单必填", trigger: "blur" },
+          { min: 1, max: 64, message: "不超过64个字符", trigger: "blur" }
+        ],
+        disabled: false
       },
       {
         title: '菜单名称',
-        key: 'checkInOrderNo',
-        align: 'center',
+        key: 'targetName',
+        align: 'center', 
       },
       {
         title: '按钮名称',
-        key: 'roomNo',
+        key: 'actionName',
         align: 'center',
       },
       {
         title: '启用状态',
-        key: 'roomTypeName',
+        key: 'enableFlag',
         align: 'center',
       },
       {
         title: '排序',
-        key: 'customerTypeName',
+        key: 'sort',
         align: 'center',
       },
       {
@@ -161,7 +185,9 @@ export const getTableColumns = () => {
                 size: 'small',
                 quaternary: true,
                 type:"primary",
-                onClick: () => {}
+                onClick: () => {
+                  updateClick(row)
+                }
               },
               { default: () => '编辑' }
             ),
@@ -170,8 +196,11 @@ export const getTableColumns = () => {
               {
                 size: 'small',
                 quaternary: true,
+                'v-permission': 'asd',
                 type:"primary",
-                onClick: () => {}
+                onClick: () => {
+                  removeSingle(row)
+                }
               },
               { default: () => '删除' }
             )
@@ -180,5 +209,5 @@ export const getTableColumns = () => {
       }
     ];
   });
-  return columns;
+  return { columns };
 };

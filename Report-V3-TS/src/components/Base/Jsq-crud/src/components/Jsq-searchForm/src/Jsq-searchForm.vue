@@ -82,7 +82,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { onMounted, ref, reactive, unref, useAttrs, computed } from 'vue';
+  import { onMounted, ref, reactive, unref, useAttrs, computed, watch } from 'vue';
   import { FormProps, FormActionType, FormSchema } from './types/searchForm';
   import { JsqSelect } from '@/components/Base/Jsq-select';
   import { basicProps } from './props';
@@ -94,7 +94,7 @@
   const props = defineProps({ ...basicProps });
   // 收集父节点传递的数据
   const attrs = useAttrs();
-  const emit = defineEmits(['register']);
+  const emit = defineEmits(['register', 'change']);
 
   // 表单对象
   const formModel = reactive<Recordable>({});
@@ -107,6 +107,11 @@
     return { ...props, ...attrs, ...(unref(propsRef) as any) };
   });
 
+  watch(() => formModel, () => {
+    emit('change', formModel)
+  }, {
+    deep: true
+  })
   // 获取表单配置项
   const getSchema = computed(() => {
     const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);

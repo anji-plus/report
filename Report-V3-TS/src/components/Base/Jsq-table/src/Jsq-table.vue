@@ -3,25 +3,14 @@
  * @Author: qianlishi
  * @Date: 2024-12-30 18:16:00
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-04 18:23:35
+ * @LastEditTime: 2025-01-04 23:37:00
 -->
 <template>
   <div class="table">
-    <n-data-table
-      v-bind="getBindValue"
-      :single-line="false"
-      :max-height="300"
-      :columns="getBindValue.columns"
-      default-expand-all
-    />
+    <n-data-table v-bind="getBindValue" />
   </div>
   <div class="pagination">
-    <n-pagination
-      :display-order="['pages', 'quick-jumper', 'size-picker']"
-      :page-count="100"
-      show-quick-jumper
-      show-size-picker
-    />
+    <n-pagination  v-bind="getBindValue" />
   </div>
 
 </template>
@@ -31,8 +20,8 @@ import { basicProps } from './props'
 
 const props = defineProps({ ...basicProps })
 const attrs = useAttrs()
+const emit = defineEmits(['handlePage', 'handlePageSize'])
 const getBindValue = computed(() => ({  ...props, ...attrs } as Recordable));
-console.log('table', getBindValue)
 
 </script>
 <style lang='less' scoped>

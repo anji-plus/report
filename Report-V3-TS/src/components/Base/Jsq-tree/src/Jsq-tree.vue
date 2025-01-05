@@ -33,7 +33,7 @@
   const getProps = computed(() => {
     return { ...props, ...(unref(propsRef) as any) };
   });
-  const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) } as Recordable));
+  const getBindValue = computed(() => ({ ...props, ...attrs, ...unref(getProps) } as Recordable));
 
   const setProps = async (treeProps: Partial<TreeProps>): Promise<void> => {
     propsRef.value = deepMerge(unref(propsRef) || {}, treeProps);

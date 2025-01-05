@@ -50,6 +50,22 @@ export const useCrud = (props?: props): UseCrudReturnType => {
       const crud = await getCurd();
       await crud.setProps(crudProps);
     },
+    toAdd: async (row?: any) => {
+      const crud = await getCurd()
+      await crud.toAdd(row)
+    },
+    toUpdate: async (row?: any) => {
+      const crud = await getCurd()
+      await crud.toUpdate(row)
+    },
+    toRemoveAll: async (row?: any) => {
+      const crud = await getCurd()
+      await crud.toRemoveAll(row)
+    },
+    toRemove: async (row?: any) => {
+      const crud = await getCurd()
+      await crud.toRemove(row)
+    }
   };
 
   return [register, methods];

@@ -17,6 +17,10 @@ export type CurdProps = {
 
 export interface CrudActionType {
   setProps: (curdProps: Partial<CurdProps>) => Promise<void>;
+  toAdd: (row?: any) => void
+  toUpdate: (row: any) => void
+  toRemoveAll: (row?: any) => void
+  toRemove: (row?: any) => void
 }
 
 export type crudRegisterFn = (treeInstance: CrudActionType) => void;
