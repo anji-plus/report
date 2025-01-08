@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: qianlishi
+ * @Date: 2024-12-30 18:16:00
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2025-01-08 23:50:09
+-->
 <template>
   <div class="view-container">
     <div v-if="getBindValue.treeOptions" class="view-container-left">
@@ -9,12 +16,15 @@
       <JsqTable v-bind="getTableOptions" />
     </div>
   </div>
+  <JsqDialog ref="dialogRef" v-bind='getTableOptions'/>
 </template>
 <script lang="ts" setup>
-  import { onMounted, ref, unref, useAttrs, computed, watch } from 'vue';
+  import { onMounted, ref, unref, useAttrs, computed, watch, onBeforeMount } from 'vue';
   import { basicProps } from './props';
   import { CrudActionType, serachFormProps } from './types';
   import { deepMerge } from '@/utils';
+  import { cloneDeep } from 'lodash-es'
+  import { editFormShow } from '@/enums/common';
 
   import type { TreeOption } from 'naive-ui'
   import { useDialog, useMessage } from 'naive-ui'
@@ -23,14 +33,18 @@
   import { JsqTable } from '@/components/Base/Jsq-table'
   import { JsqSearchForm } from './components/Jsq-searchForm';
   import { JsqButtons } from './components/Jsq-buttons'
+  import JsqDialog from './components/jsq-dialog.vue'
 
   const message = useMessage()
   const dialog = useDialog()
 
+  const dialogRef = ref<InstanceType<typeof JsqDialog> | null>(null)
+  const tableColumnsCache = ref()
   const formModel = ref({})
   const selectIds = ref<string[]>([])
   const selectSections = ref<serachFormProps[]>([])
   const treePrams = ref<serachFormProps>({})
+
   let pageNumber = ref<number>(1)
   let pageSize = ref<number>(10) 
   // props传递参数
@@ -59,13 +73,39 @@
   })
  
   const getTableOptions = computed(() => {
-    const tableOptions = setTableOptions(unref(getBindValue).tableOptions)
-    console.log('tabls', tableOptions)
-    return tableOptions
+    return setTableAndEditOptions(unref(getBindValue).tableOptions)
   })
 
-  const setTableOptions = (options) => {
+  /**
+   * 将table 编辑数据进行处理
+   */
+  onBeforeMount(() => {
+    setTimeout(() => {
+      const tableOptions = unref(getTableOptions)
+      tableColumnsCache.value = cloneDeep(tableOptions.columns)
+      if(tableOptions && tableOptions.columns) {
+        const tableColumns = unref(tableColumnsCache).filter(item => !item.tableHide)
+        const editColumns = unref(tableColumnsCache).filter(item => isEditShow(item.editHide))
+        tableOptions.columns = tableColumns
+        tableOptions.editColumns = editColumns
+      }
+    })
+  });
+
+  const isEditShow = (val: editFormShow | boolean) => {
+    if(typeof val === 'boolean' || typeof val === 'undefined') {
+      return !val
+    }
+    return Object.values(editFormShow).includes(val)
+  }
+
+  /**
+   * columns 分开编辑配置，表格配置
+   * 分页配置
+   * */ 
+  const setTableAndEditOptions = (options) => {
     const tableOptions = options || {}
+
     tableOptions['row-key'] = (row: any) => row.id
     tableOptions['on-update:checked-row-keys'] = handleCheck
     tableOptions['page'] = unref(pageNumber)
@@ -89,6 +129,7 @@
 
   // 分页条数
   const handlePageSize = (pageSizes: number) => {
+    pageNumber.value = 1
     pageSize.value = pageSizes
     loadData()
   }
@@ -125,9 +166,9 @@
     const params = getSearchForm()
     const { code, data } = await unref(getTableOptions)?.queryApi(params)
     if(code != 200) return
-    const { records, total } = data
+    const { records, pages } = data
     unref(getTableOptions)['data'] = records
-    unref(getTableOptions)['pageCount'] = total
+    unref(getTableOptions)['pageCount'] = pages
   }
 
   const toQuery = () => {
@@ -145,13 +186,14 @@
   // 新增
   const toAdd = () => {
     console.log(getSearchForm())
-    console.log('新增')
+    dialogRef.value?.initModel()  
   }
 
   // 编辑
   const toUpdate = (row) => {
     console.log(row)
     console.log('编辑')
+    dialogRef.value?.initModel()
   }
 
   // 批量删除
