@@ -1,11 +1,14 @@
-import { NModal } from 'naive-ui';
+import { modalProps } from 'naive-ui';
 
 export const basicProps = {
-  ...NModal.props,
-  // 确认按钮文字
-  subBtuText: {
+  ...modalProps,
+  subBtnText: {
     type: String,
     default: '确认',
+  },
+  cancelBtnText: {
+    type: String,
+    default: '取消',
   },
   showIcon: {
     type: Boolean,
@@ -26,5 +29,14 @@ export const basicProps = {
   preset: {
     type: String,
     default: 'dialog',
+  },
+  isDraggable: {
+    type: Boolean,
+    default: true,
+  },
+  // 只支持直接绑定在 basicModal 组件上
+  showAction: {
+    type: Boolean,
+    default: true,
   },
 };

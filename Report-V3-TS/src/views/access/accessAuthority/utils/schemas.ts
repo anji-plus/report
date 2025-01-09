@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-08 23:15:58
+ * @LastEditTime: 2025-01-09 13:18:33
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -109,14 +109,129 @@ export const getTableButtons = ({ addClick, removeAll }) => {
   return {rowsButtons}
 }
 
+// 新增表单数据
+export const getDialogRecordingSchemas = () => {
+  const schemas = [
+    {
+      label: '菜单代码',
+      field: 'target',
+      component: "NInput", // 表单类型
+      componentProps: {  // 组件配置
+        placeholder: '',
+      },
+      rules: [
+        { required: true, message: "目标菜单必填", trigger: "blur" },
+        { min: 1, max: 64, message: "不超过64个字符", trigger: "blur" }
+      ],
+    },
+    {
+      label: '菜单名称',
+      field: 'targetName',
+      component: 'NInput',
+      componentProps: {  // 组件配置
+        placeholder: '',
+      },
+      rules: [
+        { required: true, message: "目标菜单名称必填", trigger: "blur" },
+        { min: 1, max: 128, message: "不超过128个字符", trigger: "blur" }
+      ],
+    },
+    {
+      label: '按钮代码',
+      field: 'action',
+      component: 'NInput',
+      componentProps: {  // 组件配置
+        placeholder: '',
+      },
+      rules: [
+        { required: true, message: "目标必填", trigger: "blur" },
+        { min: 1, max: 64, message: "不超过64个字符", trigger: "blur" }
+      ],
+    },
+    {
+      label: '按钮名称',
+      field: 'actionName',
+      component: 'NInput',
+      componentProps: {  // 组件配置
+        placeholder: '',
+      },
+      rules: [
+        { required: true, message: "目标按钮名称必填", trigger: "blur" },
+        { min: 1, max: 128, message: "不超过128个字符", trigger: "blur" }
+      ],
+    },
+    {
+      label: '启用状态',
+      field: "enableFlag",
+      component: 'JsqSelect',
+      componentProps: {  // 组件配置
+        placeholder: '',
+        dictCode: 'ENABLE_FLAG',
+      },
+      rules: [
+        { required: true, message: "启用状态必填", trigger: "blur" }
+      ],
+    },
+    {
+      label: '排序',
+      field: "sort",
+      component: "NInput",
+      componentProps: {  // 组件配置
+        placeholder: '',
+      },
+      rules: [],
+    },
+    {
+      label: '创建人',
+      field: 'createBy',
+      component: "NInput",
+      componentProps: {  // 组件配置
+        placeholder: '',
+        disabled: true
+      },
+      editHide: editFormShow.HIDE_ON_ADD,
+    },
+    {
+      label: '创建时间',
+      field: 'createTime',
+      component: "NInput",
+      componentProps: {  // 组件配置
+        placeholder: '',
+        disabled: true
+      },
+      editHide: editFormShow.HIDE_ON_ADD,
+    },
+    {
+      label: '修改人',
+      field: 'updateBy',
+      component: "NInput",
+      componentProps: {  // 组件配置
+        placeholder: '',
+        disabled: true
+      },
+      editHide: editFormShow.HIDE_ON_ADD,
+    },
+    {
+      label: '修改时间',
+      field: 'updateTime',
+      component: "NInput",
+      componentProps: {  // 组件配置
+        placeholder: '',
+        disabled: true
+      },
+      editHide: editFormShow.HIDE_ON_ADD,
+    },
+  ]
+
+  return schemas
+}
+
 // 表格
 export const getTableColumns = ({ updateClick, removeSingle }) => {
   const columns= [
     {
       type: 'selection',
       align: 'center',
-
-      editHide: true,
     },
     {
       type: 'expand',
@@ -131,8 +246,6 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
           修改时间：${updateTime}
         `
       },
-
-      editHide: true,
     },
     {
       title: '序号',
@@ -142,152 +255,36 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       render: (_, index) => {
         return `${index + 1}`
       },
-
-      editHide: true,
     },
     {
       title: '菜单代码',
       key: 'target', // 表格展示字段
       align: 'center',
-      // 新增、编辑、查看
-      editKey: 'target', // 编辑展示的字段
-      tableHide: true, // 表格不显示
-      component: "NInput", // 表单类型
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-      // editHide: true, // 编辑不显示
-      rules: [
-        { required: true, message: "目标菜单必填", trigger: "blur" },
-        { min: 1, max: 64, message: "不超过64个字符", trigger: "blur" }
-      ],
     },
     {
       title: '菜单名称',
       key: 'targetName',
-      align: 'center', 
-
-      editKey: 'targetName',
-      component: 'NInput',
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-      rules: [
-        { required: true, message: "目标菜单名称必填", trigger: "blur" },
-        { min: 1, max: 128, message: "不超过128个字符", trigger: "blur" }
-      ],
+      align: 'center',
     },
     {
       title: '按钮代码',
       key: 'action',
-
-      tableHide: true,
-      editKey: 'action',
-      component: 'NInput',
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-      rules: [
-        { required: true, message: "目标必填", trigger: "blur" },
-        { min: 1, max: 64, message: "不超过64个字符", trigger: "blur" }
-      ],
+      align: 'center'
     },
     {
       title: '按钮名称',
       key: 'actionName',
       align: 'center',
-
-      editKey: 'actionName',
-      component: 'NInput',
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-      rules: [
-        { required: true, message: "目标按钮名称必填", trigger: "blur" },
-        { min: 1, max: 128, message: "不超过128个字符", trigger: "blur" }
-      ],
     },
     {
       title: '启用状态',
       key: 'enableFlag',
       align: 'center',
-      
-      editKey: "enableFlag",
-      component: 'JsqSelect',
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-      rules: [
-        { required: true, message: "启用状态必填", trigger: "blur" }
-      ],
     },
     {
       title: '排序',
       key: 'sort',
       align: 'center',
-
-      editKey: "sort",
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-      rules: [],
-    },
-    {
-      title: '创建人',
-      key: 'createBy',
-      align: 'center',
-
-      tableHide: true,
-      editKey: 'createBy',
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-        disabled: true
-      },
-      editHide: editFormShow.HIDE_ON_ADD,
-    },
-    {
-      title: '创建时间',
-      key: 'createTime',
-      align: 'center',
-
-      tableHide: true,
-      editKey: 'createTime',
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-        disabled: true
-      },
-      editHide: editFormShow.HIDE_ON_ADD,
-    },
-    {
-      title: '修改人',
-      key: 'updateBy',
-      align: 'center',
-
-      tableHide: true,
-      editKey: 'updateBy',
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-        disabled: true
-      },
-      editHide: editFormShow.HIDE_ON_ADD,
-    },
-    {
-      title: '修改时间',
-      key: 'updateTime',
-      align: 'center',
-
-      tableHide: true,
-      editKey: 'updateTime',
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-        disabled: true
-      },
-      editHide: editFormShow.HIDE_ON_ADD,
     },
     {
       title: '操作',

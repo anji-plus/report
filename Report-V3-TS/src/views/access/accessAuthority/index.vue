@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 17:38:28
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-05 01:24:51
+ * @LastEditTime: 2025-01-09 20:11:15
 -->
 <template>
   <div class="view-container">
@@ -12,7 +12,7 @@
 </template>
 <script lang="ts" setup>
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
-  import { getFormSchemas, getTreeOptions, getTableButtons, getTableColumns } from './utils/schemas';
+  import { getFormSchemas, getTreeOptions, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
   import { getPageList, addAccessAuthority, updateAccessAuthority, deleteBatchAccessAuthority, getDetail } from '@/api/access/accessAuthority'
 
   // 新增
@@ -44,11 +44,18 @@
       schemas: getFormSchemas({}).value,
     },
     tableButtonsOptions: {
-      // 添加naive table 其他属性
+      // 添加naive 按钮其他属性
       tableButtons: rowsButtons
     },
+    dialogRecordingData: {
+      width: 1200,
+      schemas: getDialogRecordingSchemas()
+    },
     tableOptions: {
+      // navie table配置
       columns: columns, // 表格配置
+    },
+    apiOptions: {
       queryApi: getPageList, // 查询
       addApi: addAccessAuthority, // 新增
       removeApi: deleteBatchAccessAuthority, // 删除

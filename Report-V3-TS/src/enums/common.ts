@@ -9,3 +9,9 @@ export enum editFormShow { // 新增、编辑、查看展示类型
   HIDE_ON_VIEW = 'HIDE_ON_VIEW',
   HIDE_ON_EDIT = 'HIDE_ON_EDIT'
 }
+
+export enum DialogType { // 弹框类型
+  ADD = 'ADD',
+  EDIT = 'EDIT',
+  VIEW = 'VIEW'
+}

@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-30 18:16:00
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-08 23:50:09
+ * @LastEditTime: 2025-01-09 20:16:16
 -->
 <template>
   <div class="view-container">
@@ -16,15 +16,14 @@
       <JsqTable v-bind="getTableOptions" />
     </div>
   </div>
-  <JsqDialog ref="dialogRef" v-bind='getTableOptions'/>
+  <JsqDialog ref="dialogRef" v-bind='getDialogRecordingOptions'/>
 </template>
 <script lang="ts" setup>
-  import { onMounted, ref, unref, useAttrs, computed, watch, onBeforeMount } from 'vue';
+  import { onMounted, ref, unref, useAttrs, computed, watch } from 'vue';
   import { basicProps } from './props';
   import { CrudActionType, serachFormProps } from './types';
   import { deepMerge } from '@/utils';
-  import { cloneDeep } from 'lodash-es'
-  import { editFormShow } from '@/enums/common';
+  import { editFormShow, DialogType } from '@/enums/common';
 
   import type { TreeOption } from 'naive-ui'
   import { useDialog, useMessage } from 'naive-ui'
@@ -39,7 +38,6 @@
   const dialog = useDialog()
 
   const dialogRef = ref<InstanceType<typeof JsqDialog> | null>(null)
-  const tableColumnsCache = ref()
   const formModel = ref({})
   const selectIds = ref<string[]>([])
   const selectSections = ref<serachFormProps[]>([])
@@ -60,37 +58,36 @@
   
   const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) } as Recordable));
 
+  // 获取树形属性
   const getTreeBindValue = computed(() => {
     return unref(getBindValue).treeOptions
   })
 
+  // 获取条件搜索属性
   const getSearchFormOption = computed(() => {
     return unref(getBindValue).searchFormOption
   })
 
+  // 获取批量操作按钮属性
   const getTableButtonsOptions = computed(() => {
     return unref(getBindValue).tableButtonsOptions
   })
+
+  // 获取新增、编辑、弹框配置
+  const getDialogRecordingOptions = computed(() => {
+    return unref(getBindValue).dialogRecordingData
+  })
  
+  // 获取表格配置属性
   const getTableOptions = computed(() => {
     return setTableAndEditOptions(unref(getBindValue).tableOptions)
   })
 
-  /**
-   * 将table 编辑数据进行处理
-   */
-  onBeforeMount(() => {
-    setTimeout(() => {
-      const tableOptions = unref(getTableOptions)
-      tableColumnsCache.value = cloneDeep(tableOptions.columns)
-      if(tableOptions && tableOptions.columns) {
-        const tableColumns = unref(tableColumnsCache).filter(item => !item.tableHide)
-        const editColumns = unref(tableColumnsCache).filter(item => isEditShow(item.editHide))
-        tableOptions.columns = tableColumns
-        tableOptions.editColumns = editColumns
-      }
-    })
-  });
+  // 获取接口
+  const getApiOptions = computed(() => {
+    return unref(getBindValue).apiOptions
+  })
+
 
   const isEditShow = (val: editFormShow | boolean) => {
     if(typeof val === 'boolean' || typeof val === 'undefined') {
@@ -149,7 +146,7 @@
     }
   }
 
-  watch(() => unref(getTableOptions)?.queryApi, 
+  watch(() => unref(getApiOptions)?.queryApi, 
   () => {
     loadData()
   })
@@ -164,7 +161,7 @@
 
   const loadData = async () => {
     const params = getSearchForm()
-    const { code, data } = await unref(getTableOptions)?.queryApi(params)
+    const { code, data } = await unref(getApiOptions)?.queryApi(params)
     if(code != 200) return
     const { records, pages } = data
     unref(getTableOptions)['data'] = records
@@ -186,14 +183,14 @@
   // 新增
   const toAdd = () => {
     console.log(getSearchForm())
-    dialogRef.value?.initModel()  
+    dialogRef.value?.initModel({ type: DialogType.ADD })  
   }
 
   // 编辑
   const toUpdate = (row) => {
     console.log(row)
     console.log('编辑')
-    dialogRef.value?.initModel()
+    dialogRef.value?.initModel({type: DialogType.EDIT, row })
   }
 
   // 批量删除
