@@ -221,6 +221,9 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '图片缩略图',
       key: 'urlPath', // 表格展示字段
       align: 'center',
+      ellipsis: {
+        tooltip: true
+      }
     },
     {
       title: '文件类型',
@@ -230,17 +233,26 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
     {
       title: '文件路径',
       key: 'filePath',
-      align: 'center'
+      align: 'center',
+      ellipsis: {
+        tooltip: true
+      }
     },
     {
       title: 'url路径',
       key: 'urlPath',
       align: 'center',
+      ellipsis: {
+        tooltip: true
+      }
     },
     {
       title: '内容说明',
       key: 'fileInstruction',
       align: 'center',
+      ellipsis: {
+        tooltip: true
+      }
     },
     {
       title: '操作',

@@ -213,6 +213,9 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '分享url',
       key: 'shareUrl',
       align: 'center',
+      ellipsis: {
+        tooltip: true
+      }
     },
     {
       title: '分享码',
