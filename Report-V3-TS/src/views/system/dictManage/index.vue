@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 17:38:28
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 16:11:24
+ * @LastEditTime: 2025-01-10 16:34:21
 -->
 <template>
   <div class="view-container">
@@ -14,6 +14,9 @@
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
   import { getFormSchemas, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
   import { toGetPageList, toAddApi, toUpdateApi, toDeleteApi, toGetDataDetailApi } from '@/api/system/dictManage'
+
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
 
   // 新增
   const addClick = () => {
@@ -35,8 +38,19 @@
     toRemove(row)
   }
 
+  // 编辑字典项
+  const toDictItem = (row) => {
+    const { dictCode } = row
+    router.push({
+      path: '/dictItem',
+      query: {
+        dictCode
+      }
+    })
+  }
+
   const { rowsButtons } = getTableButtons({ addClick, removeAll })
-  const { columns } = getTableColumns({ updateClick, removeSingle })
+  const { columns } = getTableColumns({ updateClick, removeSingle, toDictItem })
 
   const [register, { toAdd, toUpdate, toRemoveAll, toRemove }] = useCrud({
     searchFormOption: {

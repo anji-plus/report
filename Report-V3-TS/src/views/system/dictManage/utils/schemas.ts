@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 16:15:29
+ * @LastEditTime: 2025-01-10 16:32:51
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -124,7 +124,7 @@ export const getDialogRecordingSchemas = () => {
 }
 
 // 表格
-export const getTableColumns = ({ updateClick, removeSingle }) => {
+export const getTableColumns = ({ updateClick, removeSingle, toDictItem }) => {
   const columns= [
     {
       type: 'selection',
@@ -178,7 +178,7 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '操作',
       key: 'actions',
       align: 'center',
-      width: "120px",
+      width: "220px",
       editHide: true,
       render(row) {
         return [
@@ -193,6 +193,18 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
               }
             },
             { default: () => '编辑' }
+          ),
+          h(
+            NButton,
+            {
+              size: 'small',
+              quaternary: true,
+              type:"primary",
+              onClick: () => {
+                toDictItem(row)
+              }
+            },
+            { default: () => '编辑字典项' }
           ),
           h(
             NButton,
