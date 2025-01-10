@@ -18,12 +18,12 @@
           <n-grid :x-gap="12" :y-gap="8" :cols="3">
             <n-gi>
               <n-form-item label="姓名">
-                <n-input v-model:value="formModel.reportCode" placeholder="名称" />
+                <n-input v-model:value="formModel.reportName" placeholder="名称" />
               </n-form-item>
             </n-gi>
             <n-gi>
               <n-form-item label="报表编码">
-                <n-input v-model:value="formModel.reportName" placeholder="报表编码" />
+                <n-input v-model:value="formModel.reportCode" placeholder="报表编码" />
               </n-form-item>
             </n-gi>
             <n-gi>
