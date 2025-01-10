@@ -3,12 +3,12 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-09 22:26:28
+ * @LastEditTime: 2025-01-10 21:13:58
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
-import { NButton } from 'naive-ui'
+import { NButton, NImage } from 'naive-ui'
 import { editFormShow } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 
@@ -201,7 +201,7 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       width: '40px',
       align: 'center',
       renderExpand: (rowData) => {
-        const { createBy, createTime, updateBy, updateTime } = rowData
+        const { createBy, createTime } = rowData
         return `
           创建人： ${createBy}
           创建时间：${createTime}
@@ -221,6 +221,12 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '图片缩略图',
       key: 'urlPath', // 表格展示字段
       align: 'center',
+      render(row) {
+        return h(NImage, {
+          height: 48,
+          src: row.urlPath,
+        });
+      },
       ellipsis: {
         tooltip: true
       }
