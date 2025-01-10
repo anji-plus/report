@@ -12,9 +12,13 @@ import { NButton, NTag } from 'naive-ui'
 import { enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 import { getDictLabelByCode } from '@/utils'
+import { useRoute } from 'vue-router';
+
 
 // 表单配置
 export const getFormSchemas = ({ params }: Record<string, any>) => {
+  const route = useRoute();
+  const { query } = route
   const schemas = computed<FormSchema[]>(() => {
     const formItems: FormSchema[] = [
       {
@@ -23,6 +27,8 @@ export const getFormSchemas = ({ params }: Record<string, any>) => {
         component: 'NInput',
         componentProps: {
           placeholder: '请输入字典编码',
+          defaultValue: query.dictCode,
+          disabled: true
         },
       },
       {
