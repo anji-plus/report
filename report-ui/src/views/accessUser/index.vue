@@ -4,7 +4,7 @@
  * @Author: Devli
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
- * @LastEditTime: 2022-3-9 14:56:10
+ * @LastEditTime: 2025-01-10 14:43:26
 -->
 <template>
   <anji-crud ref="listPage" :option="crudOption">

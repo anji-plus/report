@@ -1,45 +1,38 @@
-/*
- * @Description:
- * @Author: qianlishi
- * @Date: 2023-11-16 19:18:55
- * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 14:45:42
- */
-import request from '@/utils/request'
+import { http } from '@/utils/http/axios';
 
-export function accessUserList (params) {
-  return request({
+export function toGetPageList (params) {
+  return http.request({
     url: 'accessUser/pageList',
     method: 'GET',
     params,
   })
 }
 
-export function accessUserAdd (data) {
-  return request({
+export function toAddApi (data) {
+  return http.request({
     url: 'accessUser',
     method: 'post',
     data
   })
 }
 
-export function accessUserDeleteBatch (data) {
-  return request({
+export function toDeleteApi (data) {
+  return http.request({
     url: 'accessUser/delete/batch',
     method: 'post',
     data
   })
 }
 
-export function accessUserUpdate (data) {
-  return request({
+export function toUpdateApi (data) {
+  return http.request({
     url: 'accessUser',
     method: 'put', data,
   })
 }
 
-export function accessUserDetail (data) {
-  return request({
+export function toGetDataDetailApi (data) {
+  return http.request({
     url: 'accessUser/' + data.id,
     method: 'get',
     params: { accessKey: data.accessKey }
@@ -48,14 +41,14 @@ export function accessUserDetail (data) {
 
 
 export function getRoleTree (loginName) {
-  return request({
+  return http.request({
     url: 'accessUser/roleTree/' + loginName,
     method: 'get',
   })
 }
 
 export function saveRoleTree (data) {
-  return request({
+  return http.request({
     url: 'accessUser/saveRoleTree',
     method: 'post',
     data
@@ -63,10 +56,9 @@ export function saveRoleTree (data) {
 }
 
 export function resetPassword (data) {
-  return request({
+  return http.request({
     url: 'accessUser/resetPassword',
     method: 'post',
     data
   })
 }
-export default { accessUserList, accessUserAdd, accessUserDeleteBatch, accessUserUpdate, accessUserDetail, getRoleTree, saveRoleTree, resetPassword }
