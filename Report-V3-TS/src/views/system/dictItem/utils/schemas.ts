@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 16:26:48
+ * @LastEditTime: 2025-01-10 17:20:47
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -11,6 +11,7 @@ import { isObject } from '@/utils/is';
 import { NButton, NTag } from 'naive-ui'
 import { enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
+import { getDictLabelByCode } from '@/utils'
 
 // 表单配置
 export const getFormSchemas = ({ params }: Record<string, any>) => {
@@ -223,8 +224,8 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       align: 'center',
     },
     {
-      title: '字典名称',
-      key: 'dictName', // 表格展示字段
+      title: '字典项名称',
+      key: 'itemName', // 表格展示字段
       align: 'center',
     },
     {
@@ -236,6 +237,9 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '语言标识',
       key: 'locale',
       align: 'center',
+      render(row) {
+        return getDictLabelByCode("LOCALE", row["locale"]);
+      }
     },
     {
       title: '状态',
