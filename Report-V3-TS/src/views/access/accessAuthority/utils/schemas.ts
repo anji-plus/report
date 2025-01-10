@@ -280,7 +280,6 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       key: 'enableFlag',
       align: 'center',
       render(row) {
-        console.log('11', row)
         return h(
           NTag,
           {
