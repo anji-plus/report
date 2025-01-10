@@ -8,8 +8,8 @@
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
-import { NButton } from 'naive-ui'
-import { editFormShow } from '@/enums/common'
+import { NButton, NTag } from 'naive-ui'
+import { enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 
 // 表单配置
@@ -241,6 +241,21 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '状态',
       key: 'enabled',
       align: 'center',
+      render(row) {
+        return h(
+          NTag,
+          {
+            style: {
+              marginRight: '6px'
+            },
+            type: row.enabled ? 'success' : 'error',
+            bordered: false
+          },
+          {
+            default: () => enable[row.enabled]
+          }
+        )
+      }
     },
     {
       title: '排序',
