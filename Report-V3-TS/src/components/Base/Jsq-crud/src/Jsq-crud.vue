@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-30 18:16:00
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-09 22:20:55
+ * @LastEditTime: 2025-01-10 19:30:31
 -->
 <template>
   <div class="view-container">
@@ -141,7 +141,7 @@
 
   watch(() => unref(getApiOptions)?.queryApi, 
   () => {
-    loadData()
+    toQuery()
   })
 
   // 获取查询参数

@@ -94,7 +94,7 @@
   const props = defineProps({ ...basicProps });
   // 收集父节点传递的数据
   const attrs = useAttrs();
-  const emit = defineEmits(['register', 'change', 'toRestForm', 'toQuery']);
+  const emit = defineEmits(['register','input', 'change', 'toRestForm', 'toQuery']);
 
   // 表单对象
   const defaultFormModel = ref<any>({});
@@ -174,7 +174,6 @@
         formModel[item.field] = defaultValue
       }
     })
-
     defaultFormModel.value = obj
   }
 
@@ -191,7 +190,6 @@
   };
 
   onMounted(() => {
-    initDefault()
     emit('register', formActionType);
   });
 
