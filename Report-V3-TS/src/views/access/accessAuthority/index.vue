@@ -13,7 +13,7 @@
 <script lang="ts" setup>
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
   import { getFormSchemas, getTreeOptions, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
-  import { getPageList, addAccessAuthority, updateAccessAuthority, deleteBatchAccessAuthority, getDetail } from '@/api/access/accessAuthority'
+  import { toGetPageList, toAddApi, toUpdateApi, toDeleteApi, toGetDataDetailApi } from '@/api/access/accessAuthority'
 
   // 新增
   const addClick = () => {
@@ -59,34 +59,14 @@
       columns: columns, // 表格配置
     },
     apiOptions: {
-      queryApi: getPageList, // 查询
-      addApi: addAccessAuthority, // 新增
-      removeApi: deleteBatchAccessAuthority, // 删除
-      updateApi: updateAccessAuthority, // 修改
-      getDataByIdApi: getDetail // 查询详情页
+      queryApi: toGetPageList, // 查询
+      addApi: toAddApi, // 新增
+      removeApi: toDeleteApi, // 删除
+      updateApi: toUpdateApi, // 修改
+      getDataByIdApi: toGetDataDetailApi // 查询详情页
     }
   });
   
 </script>
 <style lang="less" scoped>
-  .view-container {
-    width: 100%;
-    height: calc(100vh - 118px);
-    display: flex;
-    flex-direction: row;
-    &-left {
-      width: 20%;
-      height: calc(100vh - 118px);
-      overflow-y: auto;
-      background: #fff;
-      padding: 20px 10px;
-      box-sizing: border-box;
-    }
-    &-right {
-      background: #fff;
-      flex: 1;
-      padding: 20px 10px;
-      margin-left: 6px;
-    }
-  }
 </style>

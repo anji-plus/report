@@ -17,7 +17,7 @@ export function getAuthorityTree(data = {}) {
 }
 
 // 列表查询数据
-export function getPageList(params) {
+export function toGetPageList(params) {
   return http.request({
     url: 'accessAuthority/pageList',
     method: 'GET',
@@ -26,7 +26,7 @@ export function getPageList(params) {
 }
 
 // 新增
-export function addAccessAuthority(data) {
+export function toAddApi(data) {
   return http.request({
     url: 'accessAuthority',
     method: 'post',
@@ -35,7 +35,7 @@ export function addAccessAuthority(data) {
 }
 
 // 修改
-export function updateAccessAuthority(data) {
+export function toUpdateApi(data) {
   return http.request({
     url: 'accessAuthority',
     method: 'put', 
@@ -44,7 +44,7 @@ export function updateAccessAuthority(data) {
 }
 
 // 批量删除
-export function deleteBatchAccessAuthority(data) {
+export function toDeleteApi(data) {
   return http.request({
     url: 'accessAuthority/delete/batch',
     method: 'post',
@@ -53,7 +53,7 @@ export function deleteBatchAccessAuthority(data) {
 }
 
 // 查询详情页
-export function getDetail(data) {
+export function toGetDataDetailApi(data) {
   return http.request({
     url: 'accessAuthority/' + data.id,
     method: 'get',
