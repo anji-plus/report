@@ -3,15 +3,14 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-09 22:26:28
+ * @LastEditTime: 2025-01-10 16:47:20
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
-import { NButton } from 'naive-ui'
-import { editFormShow } from '@/enums/common'
+import { NButton, NTag } from 'naive-ui'
+import { editFormShow, enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
-import { TableColumns } from '@/components/Base/Jsq-table'
 import { getAuthorityTree } from '@/api/access/accessAuthority';
 
 // tree配置
@@ -280,6 +279,22 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '启用状态',
       key: 'enableFlag',
       align: 'center',
+      render(row) {
+        console.log('11', row)
+        return h(
+          NTag,
+          {
+            style: {
+              marginRight: '6px'
+            },
+            type: row.enableFlag ? 'success' : 'error',
+            bordered: false
+          },
+          {
+            default: () => enable[row.enableFlag]
+          }
+        )
+      }
     },
     {
       title: '排序',

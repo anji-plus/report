@@ -21,3 +21,7 @@ export enum DialogTitle {
   EDIT = '编辑',
   VIEW = '查看'
 }
+
+export enum enable {
+  '禁用','启用'
+}
