@@ -264,3 +264,32 @@ export function getDictName(dictName: string) {
   const allDictCode = storage.get(GLOBAL_DICT_CODE_NAME);
   return allDictCode[dictName];
 }
+
+// 根据数据字典，查询指定字典dict指定值code的，返回整个dictItem{id, text, extend}
+export function getDictItemByCode(dictName: string, code: string | number) {
+  let dicts = storage.get(GLOBAL_DICT_CODE_NAME)
+  if (!dicts.hasOwnProperty(dictName)) {
+    return null
+  }
+  let dictItems = dicts[dictName]
+  for (let i = 0; i < dictItems.length; i++) {
+    let dictItem = dictItems[i]
+    if (typeof (code) == 'number') {
+      code = code.toString()
+    }
+    if (dictItem['id'].toString() == code) {
+      return dictItem
+    }
+  }
+  return null
+}
+
+// 根据数据字典，查询指定字典dict指定值code的dictItem.text
+export function getDictLabelByCode(dictName: string, code: string | number) {
+  let dictItem = getDictItemByCode(dictName, code)
+  if (dictItem != null) {
+    return dictItem['text']
+  } else {
+    return ''
+  }
+}

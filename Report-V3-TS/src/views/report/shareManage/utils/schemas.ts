@@ -3,13 +3,14 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 15:46:21
+ * @LastEditTime: 2025-01-10 17:15:14
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
 import { NButton } from 'naive-ui'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
+import { getDictName, getDictLabelByCode } from '@/utils';
 
 // 表单配置
 export const getFormSchemas = ({ params }: Record<string, any>) => {
@@ -199,6 +200,9 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '分享类型',
       key: 'shareValidType',
       align: 'center',
+      render(row) {
+        return getDictLabelByCode("SHARE_VAILD", row["shareValidType"]);
+      }
     },
     {
       title: '分享过期时间',
