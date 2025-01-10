@@ -168,7 +168,7 @@
     const schemas = unref(getSchema)
     const obj: Recordable = {}
     schemas.forEach(item => {
-      const { defaultValue } = item.componentProps!
+      const { defaultValue } = item.componentProps
       if(!isNullOrUnDef(defaultValue)) {
         obj[item.field] = defaultValue
         formModel[item.field] = defaultValue
@@ -180,7 +180,7 @@
 
   const toRestForm = () => {
     Object.keys(formModel).forEach((key) => {
-      formModel[key] = defaultFormModel[key] || null;
+      formModel[key] = unref(defaultFormModel)[key] || null;
     });
     emit('toRestForm')
   }

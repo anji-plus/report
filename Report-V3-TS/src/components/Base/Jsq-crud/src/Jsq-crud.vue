@@ -39,7 +39,7 @@
 
   const dialogRef = ref<InstanceType<typeof JsqDialog> | null>(null)
   const JsqTreeRef = ref<InstanceType<typeof JsqTree> | null>(null)
-  const formModel = ref({})
+  const formModel = ref<Recordable>({})
   const selectIds = ref<string[]>([])
   const selectSections = ref<serachFormProps[]>([])
   const treePrams = ref<serachFormProps>({})
@@ -168,7 +168,6 @@
   }
 
   const toRestForm = () => {
-    formModel.value = {}
     treePrams.value = {}
     pageNumber.value = 1
     pageSize.value = 10
