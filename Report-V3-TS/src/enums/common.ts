@@ -15,3 +15,9 @@ export enum DialogType { // 弹框类型
   EDIT = 'EDIT',
   VIEW = 'VIEW'
 }
+
+export enum DialogTitle {
+  ADD = '新增',
+  EDIT = '编辑',
+  VIEW = '查看'
+}

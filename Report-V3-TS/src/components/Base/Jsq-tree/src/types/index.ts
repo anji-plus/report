@@ -6,7 +6,7 @@ export type JsqTreeProps = {
 // 对外暴露的方法
 export interface TreeActionType {
   setProps: (treeProps: Partial<TreeProps>) => Promise<void>;
-  loadData: (params: any) => Promise<void>;
+  loadData: (params?: any) => Promise<void>;
 }
 
 export type TreeRegisterFn = (treeInstance: TreeActionType) => void

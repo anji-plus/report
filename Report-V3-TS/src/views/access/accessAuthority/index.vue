@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 17:38:28
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-09 20:11:15
+ * @LastEditTime: 2025-01-09 22:22:16
 -->
 <template>
   <div class="view-container">
@@ -39,8 +39,8 @@
   const { columns } = getTableColumns({ updateClick, removeSingle })
 
   const [register, { toAdd, toUpdate, toRemoveAll, toRemove }] = useCrud({
-    treeOptions: getTreeOptions(), // 左侧树
-    searchFormOption: {         // 搜索条件
+    treeOptions: getTreeOptions(),
+    searchFormOption: {
       schemas: getFormSchemas({}).value,
     },
     tableButtonsOptions: {
@@ -48,7 +48,10 @@
       tableButtons: rowsButtons
     },
     dialogRecordingData: {
-      width: 1200,
+      width: 800,
+      size: "small",
+      labelPlacement: "left",
+      labelWidth: 100,
       schemas: getDialogRecordingSchemas()
     },
     tableOptions: {

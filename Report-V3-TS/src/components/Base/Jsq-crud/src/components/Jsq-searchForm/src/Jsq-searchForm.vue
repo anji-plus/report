@@ -88,7 +88,7 @@
   import { basicProps } from './props';
   import { deepMerge } from '@/utils';
 
-  import { isFunction } from '@/utils/is';
+  import { isFunction, isNullOrUnDef } from '@/utils/is';
 
   // 通过props传递的参数
   const props = defineProps({ ...basicProps });
@@ -97,6 +97,7 @@
   const emit = defineEmits(['register', 'change', 'toRestForm', 'toQuery']);
 
   // 表单对象
+  const defaultFormModel = ref<any>({});
   const formModel = reactive<Recordable>({});
   const formElRef = ref<Nullable<FormActionType>>(null);
   // useSearchForm传递过来的参数
@@ -156,9 +157,30 @@
     formModel.showMoreSearch = !formModel.showMoreSearch;
   };
 
+  watch(() => getSchema.value, (schema)=> {
+    if(schema?.length) {
+      initDefault()
+    }
+  })
+
+   // 初始化默认值
+   const initDefault = () => {
+    const schemas = unref(getSchema)
+    const obj: Recordable = {}
+    schemas.forEach(item => {
+      const { defaultValue } = item.componentProps!
+      if(!isNullOrUnDef(defaultValue)) {
+        obj[item.field] = defaultValue
+        formModel[item.field] = defaultValue
+      }
+    })
+
+    defaultFormModel.value = obj
+  }
+
   const toRestForm = () => {
     Object.keys(formModel).forEach((key) => {
-      formModel[key] = null;
+      formModel[key] = defaultFormModel[key] || null;
     });
     emit('toRestForm')
   }
@@ -169,6 +191,7 @@
   };
 
   onMounted(() => {
+    initDefault()
     emit('register', formActionType);
   });
 

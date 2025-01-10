@@ -3,12 +3,12 @@
  * @Author: qianlishi
  * @Date: 2024-12-30 18:16:00
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-09 20:16:16
+ * @LastEditTime: 2025-01-09 22:20:55
 -->
 <template>
   <div class="view-container">
-    <div v-if="getBindValue.treeOptions" class="view-container-left">
-      <JsqTree default-expand-all v-bind="getTreeBindValue" :node-props="toClickTree" />
+    <div v-if="getTreeBindValue" class="view-container-left">
+      <JsqTree default-expand-all v-bind="getTreeBindValue" :node-props="toClickTree" ref="JsqTreeRef"/>
     </div>
     <div class="view-container-right">
       <JsqSearchForm v-model="formModel" v-bind="getSearchFormOption" @toRestForm='toRestForm' @toQuery="toQuery"/>
@@ -16,14 +16,14 @@
       <JsqTable v-bind="getTableOptions" />
     </div>
   </div>
-  <JsqDialog ref="dialogRef" v-bind='getDialogRecordingOptions'/>
+  <JsqDialog ref="dialogRef" v-bind='getDialogRecordingOptions' :api="getApiOptions" @refresh="toQuery"/>
 </template>
 <script lang="ts" setup>
   import { onMounted, ref, unref, useAttrs, computed, watch } from 'vue';
   import { basicProps } from './props';
   import { CrudActionType, serachFormProps } from './types';
   import { deepMerge } from '@/utils';
-  import { editFormShow, DialogType } from '@/enums/common';
+  import { DialogType } from '@/enums/common';
 
   import type { TreeOption } from 'naive-ui'
   import { useDialog, useMessage } from 'naive-ui'
@@ -34,10 +34,11 @@
   import { JsqButtons } from './components/Jsq-buttons'
   import JsqDialog from './components/jsq-dialog.vue'
 
-  const message = useMessage()
+  const messages = useMessage()
   const dialog = useDialog()
 
   const dialogRef = ref<InstanceType<typeof JsqDialog> | null>(null)
+  const JsqTreeRef = ref<InstanceType<typeof JsqTree> | null>(null)
   const formModel = ref({})
   const selectIds = ref<string[]>([])
   const selectSections = ref<serachFormProps[]>([])
@@ -87,14 +88,6 @@
   const getApiOptions = computed(() => {
     return unref(getBindValue).apiOptions
   })
-
-
-  const isEditShow = (val: editFormShow | boolean) => {
-    if(typeof val === 'boolean' || typeof val === 'undefined') {
-      return !val
-    }
-    return Object.values(editFormShow).includes(val)
-  }
 
   /**
    * columns 分开编辑配置，表格配置
@@ -170,6 +163,8 @@
 
   const toQuery = () => {
     loadData()
+    // 查询左侧树
+    getTreeBindValue && JsqTreeRef.value?.loadData()
   }
 
   const toRestForm = () => {
@@ -177,19 +172,16 @@
     treePrams.value = {}
     pageNumber.value = 1
     pageSize.value = 10
-    loadData()
+    toQuery()
   }
 
   // 新增
   const toAdd = () => {
-    console.log(getSearchForm())
     dialogRef.value?.initModel({ type: DialogType.ADD })  
   }
 
   // 编辑
   const toUpdate = (row) => {
-    console.log(row)
-    console.log('编辑')
     dialogRef.value?.initModel({type: DialogType.EDIT, row })
   }
 
@@ -201,12 +193,13 @@
       positiveText: '确定',
       negativeText: '取消',
       onPositiveClick: async () => {
-        const { code, message } = await unref(getTableOptions)?.removeApi(selectIds)
+        const { code, message } = await unref(getApiOptions)?.removeApi(selectIds)
         if(code != 200) return
-         message.success(message)
+        messages.success(message)
+        toQuery()
       },
       onNegativeClick: () => {
-        message.error('取消成功')
+        messages.error('取消成功')
       }
     })
   }
@@ -220,12 +213,13 @@
       positiveText: '确定',
       negativeText: '取消',
       onPositiveClick: async () => {
-        const { code, message } = await unref(getTableOptions)?.removeApi(ids)
+        const { code, message } = await unref(getApiOptions)?.removeApi(ids)
         if(code != 200) return
-         message.success(message)
+        messages.success(message)
+        toQuery()
       },
       onNegativeClick: () => {
-        message.error('取消成功')
+        messages.error('取消成功')
       }
     })
   }
