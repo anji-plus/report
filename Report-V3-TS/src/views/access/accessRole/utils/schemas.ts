@@ -193,6 +193,9 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '角色名称',
       key: 'roleName', // 表格展示字段
       align: 'center',
+      render(row) {
+        return `${row["roleName"]}[${row["roleCode"]}]`
+      }
     },
     {
       title: '启用状态',

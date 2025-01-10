@@ -1,6 +1,6 @@
 import { http } from '@/utils/http/axios';
 
-export function getPageList (params) {
+export function toGetPageList(params) {
   return http.request({
     url: 'accessRole/pageList',
     method: 'GET',
@@ -8,7 +8,7 @@ export function getPageList (params) {
   })
 }
 
-export function toAddApi (data) {
+export function toAddApi(data) {
   return http.request({
     url: 'accessRole',
     method: 'post',
@@ -16,7 +16,7 @@ export function toAddApi (data) {
   })
 }
 
-export function toDeleteApi (data) {
+export function toDeleteApi(data) {
   return http.request({
     url: 'accessRole/delete/batch',
     method: 'post',
@@ -24,14 +24,14 @@ export function toDeleteApi (data) {
   })
 }
 
-export function toUpdateApi (data) {
+export function toUpdateApi(data) {
   return http.request({
     url: 'accessRole',
     method: 'put', data,
   })
 }
 
-export function toGetDataDetailApi (data) {
+export function toGetDataDetailApi(data) {
   return http.request({
     url: 'accessRole/' + data.id,
     method: 'get',
@@ -39,14 +39,14 @@ export function toGetDataDetailApi (data) {
   })
 }
 
-export function accessRoleAuthorityTree (roleCode) {
+export function accessRoleAuthorityTree(roleCode) {
   return http.request({
     url: 'accessRole/authorityTree/' + roleCode,
     method: 'get',
   })
 }
 
-export function saveAuthorityTree (data) {
+export function saveAuthorityTree(data) {
   return http.request({
     url: 'accessRole/saveAuthorityTree',
     method: 'post',

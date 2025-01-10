@@ -6,7 +6,7 @@
 <script lang="ts" setup>
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
   import { getFormSchemas, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
-  import { toGetPageList, toAddApi, toDeleteApi, toUpdateApi, toGetDataDetailApi } from '@/api/access/accessAuthority'
+  import { toGetPageList, toAddApi, toDeleteApi, toUpdateApi, toGetDataDetailApi } from '@/api/access/accessRole'
 
   // 新增
   const addClick = () => {
