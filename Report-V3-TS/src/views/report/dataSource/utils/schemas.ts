@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 15:02:09
+ * @LastEditTime: 2025-01-11 21:38:32
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -124,7 +124,7 @@ export const getDialogRecordingSchemas = () => {
         dictCode: 'ENABLE_FLAG',
       },
       rules: [
-        { required: true, message: "启用状态必填", trigger: ['blur', 'change'] }
+        { required: true, type: 'number', message: "启用状态必填", trigger: ['blur', 'change'] }
       ],
     },
     {
