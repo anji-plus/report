@@ -49,19 +49,19 @@
             <footer>
               {{ item.updateTime }}
               <div class="operation">
-                <n-button quaternary circle type="success">
+                <n-button quaternary circle>
                   <template #icon>
-                    <n-icon><CashIcon /></n-icon>
+                    <jsqIcon name='icon-fenxiang1' color='#fff' />
                   </template>
                 </n-button>
-                <n-button quaternary circle type="warning">
+                <n-button quaternary circle>
                   <template #icon>
-                    <n-icon><CashIcon /></n-icon>
+                    <jsqIcon name='icon-chakan' color='#fff' />
                   </template>
                 </n-button>
-                <n-button quaternary circle type="error">
+                <n-button quaternary circle>
                   <template #icon>
-                    <n-icon><CashIcon /></n-icon>
+                    <jsqIcon name='icon-bianji' color='#fff' />
                   </template>
                 </n-button>
               </div>
@@ -84,9 +84,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
   import { reactive, onMounted, ref } from 'vue'
   import { getPageList } from '@/api/report/bigScreen'
+  import jsqIcon from '@/components/Base/Jsq-icon/index.vue'
 
   interface formProps {
     reportCode: string;
