@@ -1,5 +1,5 @@
 <template>
-  <basicModal @register="register" @onOk='handleSubmit' @onClose="close">
+  <basicModal @register="register" @onOk='validateForm(formElRef, handleSubmit)' @onClose="close">
     <n-form
       class="form"
       v-bind="getBindValue"
@@ -79,6 +79,7 @@
   import { DialogType, DialogTitle } from '@/enums/common'
   import { JsqSelect } from '@/components/Base/Jsq-select';
 
+  import  type { FormInst } from 'naive-ui'
   import { useMessage } from 'naive-ui'
 
   import { isFunction, isNullOrUnDef } from '@/utils/is';
@@ -96,7 +97,7 @@
   const defaultFormModel = ref<any>({});
   const formModel = reactive<Recordable>({})
   const dialogType = ref<DialogType>(DialogType.ADD)
-  const formElRef = ref()
+  const formElRef = ref<FormInst | null>(null)
   const rowData = ref<object>({})
 
   const getBindValue = computed(() => ({ ...attrs} as Recordable));
@@ -143,6 +144,19 @@
     emit('refresh')
     messages.success(message)
     handleClose()
+  }
+
+  // 校验
+  const validateForm = (formRefName: FormInst | null, callback: () => void) => {
+    formRefName?.validate((errors) => {
+      if (!errors) {
+        callback()
+      }
+      else {
+        console.log(errors)
+        messages.error('验证失败')
+      }
+    })
   }
 
   const handleClose = () => {

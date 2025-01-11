@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 16:49:28
+ * @LastEditTime: 2025-01-11 21:34:22
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -12,6 +12,7 @@ import { NButton, NTag } from 'naive-ui'
 import { editFormShow, enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 import { getAuthorityTree } from '@/api/access/accessAuthority';
+import { number } from 'vue-types';
 
 // tree配置
 export const getTreeOptions = () => {
@@ -168,7 +169,7 @@ export const getDialogRecordingSchemas = () => {
         dictCode: 'ENABLE_FLAG',
       },
       rules: [
-        { required: true, message: "启用状态必填", trigger: ['blur', 'change'] }
+        { required: true, type: 'number', message: "启用状态必填", trigger: 'change' }
       ],
     },
     {
