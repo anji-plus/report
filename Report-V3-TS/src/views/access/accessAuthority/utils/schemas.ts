@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-11 21:34:22
+ * @LastEditTime: 2025-01-11 23:55:41
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -12,7 +12,6 @@ import { NButton, NTag } from 'naive-ui'
 import { editFormShow, enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 import { getAuthorityTree } from '@/api/access/accessAuthority';
-import { number } from 'vue-types';
 
 // tree配置
 export const getTreeOptions = () => {
@@ -326,7 +325,6 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
             {
               size: 'small',
               quaternary: true,
-              'v-permission': 'asd',
               type:"primary",
               onClick: () => {
                 removeSingle(row)

@@ -28,8 +28,14 @@
     toRemove(row)
   }
 
+  // 分配权限
+  const toSetPermission = (row) => {
+    console.log(row)
+    console.log('分配权限')
+  }
+
   const { rowsButtons } = getTableButtons({ addClick, removeAll })
-  const { columns } = getTableColumns({ updateClick, removeSingle })
+  const { columns } = getTableColumns({ updateClick, removeSingle, toSetPermission })
 
   const [register, { toAdd, toUpdate, toRemoveAll, toRemove }] = useCrud({
     searchFormOption: {

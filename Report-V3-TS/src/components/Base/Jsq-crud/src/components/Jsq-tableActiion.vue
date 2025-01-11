@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-11 22:50:26
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-11 23:51:23
+ * @LastEditTime: 2025-01-12 00:20:42
 -->
 <template>
   <div class="flex items-center justify-center">
@@ -30,32 +30,45 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { computed } from 'vue'
-import jsqIcon from '@/components/Base/Jsq-icon/index.vue'
+  import { computed } from 'vue'
+  import jsqIcon from '@/components/Base/Jsq-icon/index.vue'
 
-interface action {
-  label: string; // 按钮文本
-  key?: string | number, // 按钮标记
-  onClick: () => void; // 按钮点击事件
-  isShow?: (row?: object) => boolean; // 根据业务场景按钮是否显示 row当前行数据
-  permission?: string; // 目前只考虑一个按钮只绑定一个权限码
-}
+  interface action {
+    label: string; // 按钮文本
+    key?: string | number, // 按钮标记
+    onClick: () => void; // 按钮点击事件
+    isShow?: (row?: object) => boolean; // 根据业务场景按钮是否显示 row当前行数据
+    permission?: string; // 目前只考虑一个按钮只绑定一个权限码
+  }
 
-interface actionsProps {
-  actions: {
-    type: action[],
-    default: []
-  },
-  select: {
-    type: Function,
-    default: () => void,
-  },
-} 
-const props =  defineProps<actionsProps>()
-  console.log('111', props.actions)
-const getActions = computed<action[]>(() => {
-  return props.actions
-})
+  interface actionsProps {
+    actions: action[]
+    select: () => void
+  } 
+  const props =  defineProps<actionsProps>()
+    
+  // 添加一层 props 为什么要添加 -> https://www.naiveui.com/zh-CN/light/components/dropdown
+  const getActions = computed(() => {
+    /**
+     * 按钮根据权限和当前业务场景过滤后剩下的个数
+     * 目前没过滤
+     **/
+    let filterActions = props.actions
+    // 默认按钮进行过滤
+    if(filterActions?.length > 2) {
+      filterActions = filterActions.map((item, index) => {
+        return {
+          ...item,
+          key: index,
+          props: {
+            onClick: item.onClick
+          }
+        }
+      })
+    }
+    return filterActions
+  })
 
+  
 </script>
 <style lang='less' scoped></style>
