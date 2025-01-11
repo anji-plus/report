@@ -168,7 +168,7 @@
     resetFields()
   }
 
-  const [register, { openModal, closeModal }] = useModal({
+  const [register, { openModal, closeModal, setProps }] = useModal({
     title: DialogTitle[dialogType.value]
   })
 
@@ -177,6 +177,7 @@
     const { type, row } = props
     dialogType.value = type
     rowData.value = row || {}
+    setProps({ title: DialogTitle[dialogType.value] })
     if(dialogType.value !== DialogType.ADD) {
       getDetailData(row)
     }
