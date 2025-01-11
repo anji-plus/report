@@ -1,5 +1,6 @@
 import './styles/tailwind.css';
 import './styles/index.less';
+import '@/font/iconfont.js';
 import { createApp } from 'vue';
 import { setupNaiveDiscreteApi, setupNaive, setupDirectives } from '@/plugins';
 import App from './App.vue';
