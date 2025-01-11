@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: qianlishi
+ * @Date: 2024-12-30 18:16:00
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2025-01-11 22:10:56
+ */
 import './styles/tailwind.css';
 import './styles/index.less';
 import '@/font/iconfont.js';

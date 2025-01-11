@@ -70,9 +70,11 @@
         </div>
         <div class="search-box-btn">
           <n-space justify="center">
-            <n-button v-if="getSchema.length > 3" size="small" @click="handleToggleMoreSearch">{{
-              formModel.showMoreSearch ? '收起' : '展开'
-            }}</n-button>
+            <n-button v-if="getSchema.length > 3" size="small" @click="handleToggleMoreSearch">
+              <template #icon>
+                <jsq-icon :name="formModel.showMoreSearch ? 'icon-icon_function_shouqi' : 'icon-zhankai'" :size='16'/>
+              </template>
+              {{ formModel.showMoreSearch ? '收起' : '展开' }}</n-button>
             <n-button size="small" @click="toRestForm">重置</n-button>
             <n-button type="primary" size="small" @click="emit('toQuery')">查询</n-button>
           </n-space>
@@ -85,6 +87,7 @@
   import { onMounted, ref, reactive, unref, useAttrs, computed, watch } from 'vue';
   import { FormProps, FormActionType, FormSchema } from './types/searchForm';
   import { JsqSelect } from '@/components/Base/Jsq-select';
+  import jsqIcon from '@/components/Base/Jsq-icon/index.vue'
   import { basicProps } from './props';
   import { deepMerge } from '@/utils';
 
