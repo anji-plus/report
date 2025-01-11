@@ -125,7 +125,7 @@ export const getDialogRecordingSchemas = () => {
         dictCode: 'ENABLE_FLAG',
       },
       rules: [
-        { required: true, message: "启用状态必填", trigger: ['blur', 'change'] }
+        { required: true, type: 'number', message: "启用状态必填", trigger: ['blur', 'change'] }
       ],
     },
     {
