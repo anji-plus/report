@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 17:20:47
+ * @LastEditTime: 2025-01-12 22:09:17
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -113,6 +113,8 @@ export const getTableButtons = ({ addClick, removeAll }) => {
 
 // 新增表单数据
 export const getDialogRecordingSchemas = () => {
+  const route = useRoute();
+  const { query } = route
   const schemas = [
     {
       label: '字典编码',
@@ -120,6 +122,8 @@ export const getDialogRecordingSchemas = () => {
       component: "NInput", // 表单类型
       componentProps: {  // 组件配置
         placeholder: '',
+        defaultValue: query.dictCode,
+        disabled: true
       },
       rules: [
         { required: true, message: "字典编码不能为空", trigger: "blur" },
@@ -159,7 +163,8 @@ export const getDialogRecordingSchemas = () => {
       field: 'locale',
       component: 'JsqSelect',
       componentProps: {  // 组件配置
-        dictCode: "LOCALE"
+        dictCode: "LOCALE",
+        defaultValue: 'zh'
       },
       rules: [
         { required: true, message: "语言标识不能为空", trigger: "blur" }
@@ -170,7 +175,8 @@ export const getDialogRecordingSchemas = () => {
       field: 'enabled',
       component: 'JsqSelect',
       componentProps: {  // 组件配置
-        dictCode: "ENABLE_FLAG"
+        dictCode: "ENABLE_FLAG",
+        defaultValue: 1
       },
       rules: [
         { required: true, message: "状态不能为空", trigger: "blur" }
