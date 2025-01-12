@@ -1,6 +1,6 @@
 <template>
   <n-space vertical :size="12">
-    <n-input v-model:value="pattern" placeholder="搜索" clearable />
+    <n-input v-model:value="pattern" v-if='getBindValue.inputShow' placeholder="搜索" clearable />
     <h3>{{ treeTitle }}</h3>
     <n-tree
       v-bind="getBindValue"

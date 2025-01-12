@@ -1,6 +1,7 @@
 import type { TreeProps } from 'naive-ui/lib/tree';
 export type JsqTreeProps = {
-  api?: () => Promise<any>; // api接口
+  inputShow?: boolean,
+  api?: (params?: any) => Promise<any>; // api接口
 };
 
 // 对外暴露的方法

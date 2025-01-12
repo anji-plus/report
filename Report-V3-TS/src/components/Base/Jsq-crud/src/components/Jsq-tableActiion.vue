@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-11 22:50:26
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-12 00:20:42
+ * @LastEditTime: 2025-01-12 18:50:45
 -->
 <template>
   <div class="flex items-center justify-center">
@@ -43,7 +43,7 @@
 
   interface actionsProps {
     actions: action[]
-    select: () => void
+    select?: () => void
   } 
   const props =  defineProps<actionsProps>()
     

@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-12 00:00:55
+ * @LastEditTime: 2025-01-12 18:14:21
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -12,6 +12,7 @@ import { NTag } from 'naive-ui'
 import { editFormShow, enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 import JsqTableAction from '@/components/Base/Jsq-crud/src/components/Jsq-tableActiion.vue';
+
 // 表单配置
 export const getFormSchemas = ({ params }: Record<string, any>) => {
   const schemas = computed<FormSchema[]>(() => {
