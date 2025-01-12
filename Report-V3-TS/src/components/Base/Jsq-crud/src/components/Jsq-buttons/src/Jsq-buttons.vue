@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 23:45:51
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-04 16:26:43
+ * @LastEditTime: 2025-01-12 21:33:34
 -->
 <template>
   <n-space>
@@ -17,16 +17,19 @@
 <script lang="ts" setup>
 import { useAttrs, unref, computed } from 'vue';
 import { baseProps } from './props'
+import { omit } from 'lodash-es';
 
 const props = defineProps({ ...baseProps })
 const attrs = useAttrs()
 
-const getBindValue = computed(
+const getProps = computed(
   () => ({ ...attrs, ...props } as Recordable),
 );
 
+const getBindValue = computed(() => omit(unref(getProps), ['tableButtons', 'tableSelectIds', 'tableSelectSections']))
+
 const getSchema = computed(() => {
-  return unref(getBindValue).tableButtons || []
+  return unref(getProps).tableButtons || []
 })
 
 </script>

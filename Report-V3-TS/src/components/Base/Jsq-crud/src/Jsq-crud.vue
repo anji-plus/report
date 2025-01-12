@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-30 18:16:00
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 19:30:31
+ * @LastEditTime: 2025-01-12 21:23:13
 -->
 <template>
   <div class="view-container">
@@ -71,7 +71,12 @@
 
   // 获取批量操作按钮属性
   const getTableButtonsOptions = computed(() => {
-    return unref(getBindValue).tableButtonsOptions
+    const tableButtons = unref(getBindValue).tableButtonsOptions
+    if(tableButtons) {
+      tableButtons['tableSelectIds'] = unref(selectIds) || []
+      tableButtons['tableSelectSections'] = unref(selectSections) || []
+    }
+    return tableButtons
   })
 
   // 获取新增、编辑、弹框配置
