@@ -25,10 +25,10 @@
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
   import { basicModal, useModal } from '@/components/Modal'
 
-  import { useMessage } from 'naive-ui'
+  import { useMessage, useDialog } from 'naive-ui'
 
   import { getFormSchemas, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
-  import { toGetPageList, toAddApi, toUpdateApi, toDeleteApi, toGetDataDetailApi, getRoleTree, saveRoleTree } from '@/api/access/accessUser'
+  import { toGetPageList, toAddApi, toUpdateApi, toDeleteApi, toGetDataDetailApi, getRoleTree, saveRoleTree, resetPassword } from '@/api/access/accessUser'
 
   
   interface rowProps {
@@ -54,6 +54,7 @@
   }
 
   const messages = useMessage()
+  const dialog = useDialog()
   const treeData = ref<TreeOption[]>([])
   const checkedKeys = ref<string[]>([])
   const rowData = ref<Partial<rowProps> | null>(null)
@@ -107,12 +108,30 @@
     getTreeData(row.loginName)
   }
 
+  // 重置密码
+  const toResetPassword = (row) => {
+    dialog.warning({
+      title: '提示',
+      content: '你确定需要重置密码？',
+      positiveText: '确定',
+      negativeText: '取消',
+      onPositiveClick: async () => {
+        const { code, message } = await resetPassword(row)
+        if(code != 200) return
+        messages.success(message)
+      },
+      onNegativeClick: () => {
+        messages.error('取消成功')
+      }
+    })
+  }
+
   const [registerModal, { openModal, closeModal }] = useModal({
     title: '为用户分配权限'
   })
 
   const { rowsButtons } = getTableButtons({ addClick, removeAll })
-  const { columns } = getTableColumns({ updateClick, removeSingle, toSetPermission })
+  const { columns } = getTableColumns({ updateClick, removeSingle, toSetPermission, toResetPassword })
 
   const [register, { toAdd, toUpdate, toRemoveAll, toRemove }] = useCrud({
     searchFormOption: {

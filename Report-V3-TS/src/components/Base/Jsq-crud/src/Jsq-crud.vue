@@ -187,7 +187,7 @@
   // 批量删除
   const toRemoveAll = () => {
     dialog.warning({
-      title: '提示！',
+      title: '提示',
       content: '你确定删除选中的数据？',
       positiveText: '确定',
       negativeText: '取消',
@@ -207,7 +207,7 @@
   const toRemove = (row) => {    
     const ids = [row.id]
     dialog.warning({
-      title: '提示！',
+      title: '提示',
       content: '你确定删除该条数据？',
       positiveText: '确定',
       negativeText: '取消',

@@ -197,7 +197,7 @@ export const getDialogRecordingSchemas = () => {
 }
 
 // 表格
-export const getTableColumns = ({ updateClick, removeSingle, toSetPermission }) => {
+export const getTableColumns = ({ updateClick, removeSingle, toSetPermission, toResetPassword }) => {
   const columns= [
     {
       type: 'selection',
@@ -299,6 +299,14 @@ export const getTableColumns = ({ updateClick, removeSingle, toSetPermission }) 
               type:"primary",
               onClick: () => {
                 toSetPermission(row)
+              }
+            },
+            {
+              label: '重置密码',
+              quaternary: true,
+              type:"primary",
+              onClick: () => {
+                toResetPassword(row)
               }
             },
             {
