@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-30 18:16:00
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-12 21:23:13
+ * @LastEditTime: 2025-01-12 22:03:10
 -->
 <template>
   <div class="view-container">
@@ -191,6 +191,7 @@
 
   // 批量删除
   const toRemoveAll = () => {
+    if(!unref(selectIds).length) return messages.warning('至少选中一条数据！')
     dialog.warning({
       title: '提示',
       content: '你确定删除选中的数据？',
