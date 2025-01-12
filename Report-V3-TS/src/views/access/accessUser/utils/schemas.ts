@@ -8,9 +8,10 @@
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
-import { NButton, NTag } from 'naive-ui'
+import { NTag } from 'naive-ui'
 import { editFormShow, enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
+import JsqTableAction from '@/components/Base/Jsq-crud/src/components/Jsq-tableActiion.vue';
 
 // 表单配置
 export const getFormSchemas = ({ params }: Record<string, any>) => {
@@ -196,7 +197,7 @@ export const getDialogRecordingSchemas = () => {
 }
 
 // 表格
-export const getTableColumns = ({ updateClick, removeSingle }) => {
+export const getTableColumns = ({ updateClick, removeSingle, toSetPermission }) => {
   const columns= [
     {
       type: 'selection',
@@ -282,33 +283,37 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       width: "120px",
       editHide: true,
       render(row) {
-        return [
-          h(
-            NButton,
+        return h(JsqTableAction as any, {
+          actions: [
             {
-              size: 'small',
+              label: '编辑',
               quaternary: true,
               type:"primary",
               onClick: () => {
                 updateClick(row)
               }
             },
-            { default: () => '编辑' }
-          ),
-          h(
-            NButton,
             {
-              size: 'small',
+              label: '分配权限',
               quaternary: true,
-              'v-permission': 'asd',
+              type:"primary",
+              onClick: () => {
+                toSetPermission(row)
+              }
+            },
+            {
+              label: '删除',
+              quaternary: true,
               type:"primary",
               onClick: () => {
                 removeSingle(row)
               }
             },
-            { default: () => '删除' }
-          )
-        ]
+          ],
+          // select: (key) => {
+          //   window['$message'].info(`您点击了，${key} 按钮`);
+          // },
+        })
       }
     }
   ];

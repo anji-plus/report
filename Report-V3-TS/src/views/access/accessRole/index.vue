@@ -109,7 +109,7 @@
   }
 
   const [registerModal, { openModal, closeModal }] = useModal({
-    title: '分配权限'
+    title: '为角色分配权限'
   })
 
   const { rowsButtons } = getTableButtons({ addClick, removeAll })
