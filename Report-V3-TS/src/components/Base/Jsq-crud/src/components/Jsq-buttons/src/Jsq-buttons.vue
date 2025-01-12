@@ -9,7 +9,7 @@
   <n-space>
     <n-button v-for="(item, index) in getSchema"
       v-bind="getBindValue"
-      v-permission="item.permission" :key="index" :type="item.type" size="small" @click="item.click()">
+      v-permission="item.permission" :key="index" :type="item.type" size="small" @click="item.click({ selectIds, selectSections })">
       {{ item.label }}
     </n-button>
   </n-space>
@@ -25,6 +25,11 @@ const attrs = useAttrs()
 const getProps = computed(
   () => ({ ...attrs, ...props } as Recordable),
 );
+
+// 表格批量选中的id
+const selectIds = computed(() => unref(getProps).tableSelectIds)
+// 表格批量选中的数据
+const selectSections = computed(() => unref(getProps).tableSelectSections)
 
 const getBindValue = computed(() => omit(unref(getProps), ['tableButtons', 'tableSelectIds', 'tableSelectSections']))
 

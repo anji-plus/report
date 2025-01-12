@@ -50,6 +50,10 @@ export const useCrud = (props?: props): UseCrudReturnType => {
       const crud = await getCurd();
       await crud.setProps(crudProps);
     },
+    toQuery: async (row?: any) => {
+      const crud = await getCurd()
+      await crud.toQuery(row)
+    },
     toAdd: async (row?: any) => {
       const crud = await getCurd()
       await crud.toAdd(row)

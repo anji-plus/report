@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 17:38:28
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 16:34:21
+ * @LastEditTime: 2025-01-12 21:57:32
 -->
 <template>
   <div class="view-container">
@@ -12,11 +12,25 @@
 </template>
 <script lang="ts" setup>
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
-  import { getFormSchemas, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
-  import { toGetPageList, toAddApi, toUpdateApi, toDeleteApi, toGetDataDetailApi } from '@/api/system/dictManage'
+  import { useMessage } from 'naive-ui'
+  import { useRouter } from 'vue-router'
+  import { isObject } from '@/utils/is'
 
-  import { useRouter } from 'vue-router';
+  import { getFormSchemas, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
+  import { toGetPageList, toAddApi, toUpdateApi, toDeleteApi, toGetDataDetailApi, freshDict } from '@/api/system/dictManage'
+
+
   const router = useRouter();
+  const messages = useMessage()
+
+  // 刷新数字字典
+  const toDictRefresh = async (data) => {
+    const dictCodes = isObject(data) ? [data['dictCode']] : data.map(item => item.dictCode)
+    const { code, message } = await freshDict(dictCodes)
+    if(code != 200) return
+    toQuery()
+    messages.success(message)
+  }
 
   // 新增
   const addClick = () => {
@@ -49,10 +63,10 @@
     })
   }
 
-  const { rowsButtons } = getTableButtons({ addClick, removeAll })
-  const { columns } = getTableColumns({ updateClick, removeSingle, toDictItem })
+  const { rowsButtons } = getTableButtons({ toDictRefresh, addClick, removeAll })
+  const { columns } = getTableColumns({ updateClick, removeSingle, toDictItem, toDictRefresh })
 
-  const [register, { toAdd, toUpdate, toRemoveAll, toRemove }] = useCrud({
+  const [register, { toAdd, toUpdate, toRemoveAll, toRemove, toQuery }] = useCrud({
     searchFormOption: {
       schemas: getFormSchemas({}).value,
     },

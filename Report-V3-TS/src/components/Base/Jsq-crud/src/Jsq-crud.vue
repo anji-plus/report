@@ -234,6 +234,7 @@
     toUpdate,
     toRemoveAll,
     toRemove,
+    toQuery
   };
 
   onMounted(() => {

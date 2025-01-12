@@ -25,6 +25,7 @@ export type CurdProps = {
 
 export interface CrudActionType {
   setProps: (curdProps: Partial<CurdProps>) => Promise<void>;
+  toQuery: (row?: any) => void
   toAdd: (row?: any) => void
   toUpdate: (row: any) => void
   toRemoveAll: (row?: any) => void
