@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-11 21:42:13
+ * @LastEditTime: 2025-01-12 22:23:35
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -11,6 +11,7 @@ import { isObject } from '@/utils/is';
 import { NButton, NImage } from 'naive-ui'
 import { editFormShow } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
+import JsqTableAction from '@/components/Base/Jsq-crud/src/components/Jsq-tableActiion.vue';
 
 // 表单配置
 export const getFormSchemas = ({ params }: Record<string, any>) => {
@@ -21,7 +22,7 @@ export const getFormSchemas = ({ params }: Record<string, any>) => {
         field: 'filePath',
         component: 'NInput',
         componentProps: {
-          placeholder: '请输入菜单名称',
+          placeholder: '请输入文件路径',
         },
       },
     ].map((item: any) => {
@@ -190,7 +191,7 @@ export const getDialogRecordingSchemas = () => {
 }
 
 // 表格
-export const getTableColumns = ({ updateClick, removeSingle }) => {
+export const getTableColumns = ({ removeSingle, toCopyUrl, toDownLoad }) => {
   const columns= [
     {
       type: 'selection',
@@ -264,36 +265,40 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '操作',
       key: 'actions',
       align: 'center',
-      width: "120px",
+      width: "160px",
       editHide: true,
       render(row) {
-        return [
-          h(
-            NButton,
+        return h(JsqTableAction as any, {
+          actions: [
             {
-              size: 'small',
+              label: '复url制',
               quaternary: true,
               type:"primary",
               onClick: () => {
-                updateClick(row)
+                toCopyUrl(row)
               }
             },
-            { default: () => '编辑' }
-          ),
-          h(
-            NButton,
             {
-              size: 'small',
+              label: '下载',
               quaternary: true,
-              'v-permission': 'asd',
+              type:"primary",
+              onClick: () => {
+                toDownLoad(row)
+              }
+            },
+            {
+              label: '删除',
+              quaternary: true,
               type:"primary",
               onClick: () => {
                 removeSingle(row)
               }
             },
-            { default: () => '删除' }
-          )
-        ]
+          ],
+          // select: (key) => {
+          //   window['$message'].info(`您点击了，${key} 按钮`);
+          // },
+        })
       }
     }
   ];

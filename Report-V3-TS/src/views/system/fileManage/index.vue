@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 17:38:28
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 15:54:36
+ * @LastEditTime: 2025-01-12 22:21:53
 -->
 <template>
   <div class="view-container">
@@ -14,7 +14,9 @@
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
   import { getFormSchemas, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
   import { toGetPageList, toAddApi, toUpdateApi, toDeleteApi, toGetDataDetailApi } from '@/api/system/fileManage'
-
+  import { useMessage } from 'naive-ui'
+  
+  const messages = useMessage()
   // 新增
   const addClick = () => {
     toAdd()
@@ -25,9 +27,15 @@
     toRemoveAll()
   }
 
-  // 编辑
-  const updateClick = (row) => {
-    toUpdate(row)
+  // 复制url
+  const toCopyUrl = (row) => {
+    copyToClip(row.urlPath);
+    messages.success('已将url路径复制至剪切板！')
+  }
+
+  // 下载
+  const toDownLoad = (row) => {
+    window.open(row.urlPath);
   }
 
   // 删除
@@ -35,10 +43,19 @@
     toRemove(row)
   }
 
-  const { rowsButtons } = getTableButtons({ addClick, removeAll })
-  const { columns } = getTableColumns({ updateClick, removeSingle })
+  const copyToClip = (content) => {
+    let aux = document.createElement("input");
+    aux.setAttribute("value", content);
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand("copy");
+    document.body.removeChild(aux);
+  }
 
-  const [register, { toAdd, toUpdate, toRemoveAll, toRemove }] = useCrud({
+  const { rowsButtons } = getTableButtons({ addClick, removeAll })
+  const { columns } = getTableColumns({ toCopyUrl, removeSingle, toDownLoad })
+
+  const [register, { toAdd, toRemoveAll, toRemove }] = useCrud({
     searchFormOption: {
       schemas: getFormSchemas({}).value,
     },
