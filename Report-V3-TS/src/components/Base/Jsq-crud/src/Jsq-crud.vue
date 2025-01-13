@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-30 18:16:00
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-13 20:05:33
+ * @LastEditTime: 2025-01-13 20:18:38
 -->
 <template>
   <div class="view-container">
@@ -194,6 +194,8 @@
     const params = deepMerge(unref(formModel), searchForm || {})
     params['pageSize'] = unref(pageSize)
     params['pageNumber'] = unref(pageNumber)
+    params['sort'] = "create_time",
+    params['order'] = "DESC"
     return deepMerge(params, unref(treePrams))
   }
 

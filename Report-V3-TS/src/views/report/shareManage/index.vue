@@ -12,7 +12,7 @@
 </template>
 <script lang="ts" setup>
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
-  import { getFormSchemas, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
+  import { getFormSchemas, getTableButtons, getTableColumns } from './utils/schemas';
   import { toGetPageList, toAddApi, toDeleteApi, toUpdateApi, toGetDataDetailApi } from '@/api/report/shareManage'
 
   // 新增
@@ -45,13 +45,6 @@
     tableButtonsOptions: {
       // 添加naive 按钮其他属性
       tableButtons: rowsButtons
-    },
-    dialogRecordingData: {
-      width: 800,
-      size: "small",
-      labelPlacement: "left",
-      labelWidth: 100,
-      schemas: getDialogRecordingSchemas()
     },
     tableOptions: {
       // navie table配置

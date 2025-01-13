@@ -74,15 +74,6 @@ export const getTableButtons = ({ addClick, removeAll }) => {
   const rowsButtons = computed(() => {
     return [
       {
-        label: '新增',
-        type: '',
-        permission: 'asd', // 权限嘛
-        plain: true,
-        click: () => {
-          addClick()
-        }
-      },
-      {
         label: '删除',
         type: 'warning',
         permission: '', // 权限嘛
@@ -94,75 +85,6 @@ export const getTableButtons = ({ addClick, removeAll }) => {
     ]
   })
   return {rowsButtons}
-}
-
-// 新增表单数据
-export const getDialogRecordingSchemas = () => {
-  const schemas = [
-    {
-      label: '报表名称',
-      field: 'reportName',
-      component: "NInput", // 表单类型
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-      rules: [
-        { required: true, message: "请输入报表名称", trigger: "blur" },
-        { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" }
-      ],
-    },
-    {
-      label: '报表编码',
-      field: 'reportCode',
-      component: 'NInput',
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-      rules: [
-        { required: true, message: "请输入报表编码", trigger: "blur" },
-        { min: 1, max: 100, message: "不超过100个字符", trigger: "blur" },
-      ],
-    },
-    {
-      label: '报表类型',
-      field: "reportType",
-      component: 'JsqSelect',
-      componentProps: {  // 组件配置
-        placeholder: '',
-        dictCode: 'REPORT_TYPE',
-      },
-      rules: [
-        { required: true, message: "请输入报表类型", trigger: "blur" },
-        { min: 1, max: 20, message: "不超过20个字符", trigger: "blur" }
-      ],
-    },
-    {
-      label: '制作人',
-      field: 'reportDesc',
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-    },
-    {
-      label: '描述',
-      field: 'createTime',
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-    },
-    {
-      label: '状态',
-      field: 'enableFlag',
-      component: "JsqSelect",
-      componentProps: {  // 组件配置
-        dictCode: "ENABLE_FLAG"
-      },
-    },
-  ]
-
-  return schemas
 }
 
 // 表格
@@ -230,18 +152,6 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       editHide: true,
       render(row) {
         return [
-          h(
-            NButton,
-            {
-              size: 'small',
-              quaternary: true,
-              type:"primary",
-              onClick: () => {
-                updateClick(row)
-              }
-            },
-            { default: () => '编辑' }
-          ),
           h(
             NButton,
             {
