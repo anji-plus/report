@@ -3,24 +3,50 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 17:38:28
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-13 17:23:17
+ * @LastEditTime: 2025-01-13 19:49:39
 -->
 <template>
   <div class="view-container">
     <JsqCrud @register="register">
       <template #tabBtn-fileUpload>
-        <n-button class='111'>1111</n-button>
+        <n-upload
+          :show-file-list="false"
+          :action="uploadImgs"
+          :headers="headers"
+          @finish="uploadFinish"
+        >
+          <n-button type="primary" size="small">文件上传</n-button>
+        </n-upload>
       </template>
     </JsqCrud>
   </div>
 </template>
 <script lang="ts" setup>
+  import { ref } from 'vue'
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
   import { getFormSchemas, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
   import { toGetPageList, toAddApi, toUpdateApi, toDeleteApi, toGetDataDetailApi } from '@/api/system/fileManage'
   import { useMessage } from 'naive-ui'
+  import { useGlobSetting } from '@/hooks/setting';
+  import { useUserStore } from '@/store/modules/user';
   
   const messages = useMessage()
+  const userStore = useUserStore();
+
+  const globSetting = useGlobSetting();
+  const uploadImgs = globSetting.apiUrl + '/file/upload'
+  const headers = ref({
+    'authorization': userStore.token
+  })
+
+  const uploadFinish = ({ event: Event }) => {
+    const { code, message } = eval('(' + Event.target.response + ')');
+    if(code == 200){
+      toQuery()
+      return messages.success('文件上传成功')
+    }
+    return messages.success(message)
+  }
 
   // 批量删除
   const removeAll = () => {
@@ -55,7 +81,7 @@
   const { rowsButtons } = getTableButtons({ removeAll })
   const { columns } = getTableColumns({ toCopyUrl, removeSingle, toDownLoad })
 
-  const [register, { toRemoveAll, toRemove }] = useCrud({
+  const [register, { toRemoveAll, toRemove, toQuery }] = useCrud({
     searchFormOption: {
       schemas: getFormSchemas({}).value,
     },
