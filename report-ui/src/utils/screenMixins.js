@@ -9,6 +9,7 @@ const mixin = {
       uploadUrl: process.env.BASE_API + "/reportDashboard/import/" + this.$route.query.reportCode,
       revoke: null, //处理历史记录
       rightClickIndex: -1,
+      rightClickWidget: null,
     }
   },
   computed: {
@@ -249,6 +250,7 @@ const mixin = {
     // 右键
     rightClick(event, index) {
       this.rightClickIndex = index;
+      this.rightClickWidget = this.widgets[index];
       const left = event.clientX;
       const top = event.clientY;
       if (left || top) {
@@ -310,12 +312,16 @@ const mixin = {
         const temp = this.widgets.splice(this.rightClickIndex, 1)[0];
         this.widgets.push(temp);
       }
+      this.widgetIndex = this.widgets.indexOf(this.rightClickWidget);
+      this.widgetsClickFocus(this.widgetIndex);
     },
     // 置底
     setlowLayer() {
       if (this.rightClickIndex != 0) {
         this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
       }
+      this.widgetIndex = this.widgets.indexOf(this.rightClickWidget);
+      this.widgetsClickFocus(this.widgetIndex);
     },
     // 上移一层
     moveupLayer() {
@@ -328,6 +334,8 @@ const mixin = {
       } else {
         this.widgets.push(this.widgets.shift());
       }
+      this.widgetIndex = this.widgets.indexOf(this.rightClickWidget);
+      this.widgetsClickFocus(this.widgetIndex);
     },
     // 下移一层
     movedownLayer() {
@@ -340,6 +348,8 @@ const mixin = {
       } else {
         this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
       }
+      this.widgetIndex = this.widgets.indexOf(this.rightClickWidget);
+      this.widgetsClickFocus(this.widgetIndex);
     },
     //对齐
     alignment(align) {

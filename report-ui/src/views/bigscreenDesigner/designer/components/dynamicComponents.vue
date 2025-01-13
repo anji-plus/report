@@ -150,6 +150,13 @@ export default {
       const chartProperties = this.deepClone(val.chartProperties);
       this.chartProperties = chartProperties;
       if (this.userNameList.length > 0) {
+        for (let i = 0; i < this.userNameList.length; i++) {
+          const item = this.userNameList[i];
+          //处理默认值
+          if(item.paramName in val.contextData){
+            this.userNameList[i].sampleItem= val.contextData[item.paramName];
+          }
+        }
       }
       if (this.setParamList.length > 0) {
         for (let i = 0; i < this.setParamList.length; i++) {
