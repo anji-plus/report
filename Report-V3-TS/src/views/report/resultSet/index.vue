@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 16:34:50
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 15:17:45
+ * @LastEditTime: 2025-01-13 23:50:38
 -->
 <template>
   <div class="view-container">
@@ -12,22 +12,28 @@
 </template>
 <script lang="ts" setup>
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
-  import { getFormSchemas, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
+  import { getFormSchemas, getTableButtons, getTableColumns } from './utils/schemas';
   import { toGetPageList, toAddApi, toDeleteApi, toUpdateApi, toGetDataDetailApi } from '@/api/report/resultSet'
 
   // 新增
   const addClick = () => {
-    toAdd()
-  }
-
-  // 批量删除
-  const removeAll = () => {
-    toRemoveAll()
+    // todo
   }
 
   // 编辑
   const updateClick = (row) => {
-    toUpdate(row)
+    // todo
+  }
+
+  // 数据预览
+  const toLookData = () => {}
+
+  // 复制
+  const toCopy = () => {}
+
+  // 批量删除
+  const removeAll = () => {
+    toRemoveAll()
   }
 
   // 删除
@@ -36,22 +42,15 @@
   }
 
   const { rowsButtons } = getTableButtons({ addClick, removeAll })
-  const { columns } = getTableColumns({ updateClick, removeSingle })
+  const { columns } = getTableColumns({ updateClick, removeSingle, toLookData, toCopy })
 
-  const [register, { toAdd, toUpdate, toRemoveAll, toRemove }] = useCrud({
+  const [register, { toRemoveAll, toRemove }] = useCrud({
     searchFormOption: {
       schemas: getFormSchemas({}).value,
     },
     tableButtonsOptions: {
       // 添加naive 按钮其他属性
       tableButtons: rowsButtons
-    },
-    dialogRecordingData: {
-      width: 800,
-      size: "small",
-      labelPlacement: "left",
-      labelWidth: 100,
-      schemas: getDialogRecordingSchemas()
     },
     tableOptions: {
       // navie table配置
