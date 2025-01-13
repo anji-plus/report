@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 16:55:03
+ * @LastEditTime: 2025-01-13 22:34:35
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -11,6 +11,10 @@ import { isObject } from '@/utils/is';
 import { NButton, NTag } from 'naive-ui'
 import { enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
+import { useGlobSetting } from '@/hooks/setting';
+import { useUserStore } from '@/store/modules/user';
+const globSetting = useGlobSetting();
+const userStore = useUserStore();
 
 // 表单配置
 export const getFormSchemas = ({ params }: Record<string, any>) => {
@@ -160,6 +164,18 @@ export const getDialogRecordingSchemas = () => {
         dictCode: "ENABLE_FLAG"
       },
     },
+    {
+      label: '报表缩略图',
+      field: 'reportImage',
+      component: "BasicUpload",
+      componentProps: {
+        action:  globSetting.apiUrl + '/file/upload',
+        headers: {
+          'authorization': userStore.token
+        },
+        max: 1
+      }
+    }
   ]
 
   return schemas

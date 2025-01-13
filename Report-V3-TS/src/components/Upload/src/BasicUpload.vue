@@ -1,3 +1,6 @@
+<!-- 
+  此组件问题很多后面有时间重写
+-->
 <template>
   <div class="w-full">
     <div class="upload">
@@ -87,7 +90,7 @@
     props: {
       ...basicProps,
     },
-    emits: ['uploadChange', 'delete'],
+    emits: ['uploadChange', 'delete', 'update:value'],
     setup(props, { emit }) {
       const getCSSProperties = computed(() => {
         return {
@@ -110,9 +113,7 @@
       watch(
         () => props.value,
         () => {
-          state.imgList = props.value.map((item) => {
-            return getImgUrl(item);
-          });
+          state.imgList = props.value ? [props.value] : []
         },
         { immediate: true }
       );
@@ -135,6 +136,7 @@
             state.originalImgList.splice(index, 1);
             emit('uploadChange', state.originalImgList);
             emit('delete', state.originalImgList);
+            emit('update:value', '')
           },
           onNegativeClick: () => {},
         });
@@ -179,12 +181,14 @@
         const { code } = res;
         const message = res.msg || res.message || '上传失败';
         const result = res[infoField];
+        console.log('asd', result)
         //成功
         if (code === ResultEnum.SUCCESS) {
-          let imgUrl: string = getImgUrl(result.photo);
+          let imgUrl: string = getImgUrl(result.urlPath);
           state.imgList.push(imgUrl);
-          state.originalImgList.push(result.photo);
+          state.originalImgList.push(result.urlPath);
           emit('uploadChange', state.originalImgList);
+          emit('update:value', state.originalImgList[0])
         } else message.error(message);
       }
 
