@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-30 18:16:00
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-13 19:06:18
+ * @LastEditTime: 2025-01-13 19:55:57
 -->
 <template>
   <div class="view-container">
@@ -186,7 +186,7 @@
 
   watch(() => unref(getApiOptions)?.queryApi, 
   () => {
-    toQuery()
+    getBindValue.value?.autoLoad && toQuery()
   })
 
   // 获取查询参数
@@ -197,8 +197,8 @@
     return deepMerge(params, unref(treePrams))
   }
 
-  const loadData = async () => {
-    const params = getSearchForm()
+  const loadData = async (searchForm?: serachFormProps) => {
+    const params = getSearchForm(searchForm)
     const { code, data } = await unref(getApiOptions)?.queryApi(params)
     if(code != 200) return
     const { records, pages } = data
@@ -206,8 +206,8 @@
     unref(getTableOptions)['pageCount'] = pages
   }
 
-  const toQuery = () => {
-    loadData()
+  const toQuery = (searchForm?: serachFormProps) => {
+    loadData(searchForm)
     // 查询左侧树
     getTreeBindValue && JsqTreeRef.value?.loadData()
   }
