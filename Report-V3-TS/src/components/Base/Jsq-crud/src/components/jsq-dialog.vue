@@ -57,6 +57,13 @@
                       clearable
                     />
                   </template>
+                  <!-- BasicUpload -->
+                  <template v-else-if="schema.component === 'BasicUpload'">
+                    <BasicUpload
+                      v-model:value="formModel[schema.field]"
+                      v-bind="getSpecComponentProps(schema)"
+                    />
+                  </template>
                   <!-- 动态渲染表单 -->
                   <component
                     v-else
@@ -78,6 +85,7 @@
   import { basicModal, useModal } from '@/components/Modal'
   import { DialogType, DialogTitle } from '@/enums/common'
   import { JsqSelect } from '@/components/Base/Jsq-select';
+  import { BasicUpload } from '@/components/Upload';
 
   import  type { FormInst } from 'naive-ui'
   import { useMessage } from 'naive-ui'
@@ -113,6 +121,13 @@
       ...compProps,
     };
   };
+
+  const getSpecComponentProps = (schema) => {
+    const compProps = handleComponentProps(schema);
+    return {
+      ...compProps,
+    };
+  }
 
   const handleComponentProps = (schema) => {
     let { componentProps = {} } = schema ?? {};

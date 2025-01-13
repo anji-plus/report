@@ -32,7 +32,6 @@
    * */
   const getOptions = computed(() => {
     const { dictCode, localOptions } = unref(getProps);
-    console.log('1', getDictName(dictCode))
     const options = localOptions
       ? localOptions
       : dictCode
