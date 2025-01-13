@@ -15,6 +15,7 @@ export type ApiProps = {
 
 // crud配置项
 export type CurdProps = {
+  autoLoad: boolean;
   treeOptions: JsqTreeProps; // tree配置
   searchFormOption: FormProps; // 搜索表单配置项
   tableButtonsOptions: any; // 批量操作按钮

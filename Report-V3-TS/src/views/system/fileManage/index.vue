@@ -82,6 +82,7 @@
   const { columns } = getTableColumns({ toCopyUrl, removeSingle, toDownLoad })
 
   const [register, { toRemoveAll, toRemove, toQuery }] = useCrud({
+    autoLoad: false, // 表格是否自动请求
     searchFormOption: {
       schemas: getFormSchemas({}).value,
     },
@@ -97,7 +98,6 @@
       schemas: getDialogRecordingSchemas()
     },
     tableOptions: {
-      autoLoad: false,
       // navie table配置
       columns: columns, // 表格配置
     },
