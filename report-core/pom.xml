@@ -13,7 +13,7 @@
 
     <groupId>com.anji-plus</groupId>
     <artifactId>aj-report</artifactId>
-    <version>1.5.0.RELEASE</version>
+    <version>1.5.1.RELEASE</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
