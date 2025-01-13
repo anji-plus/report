@@ -35,8 +35,28 @@
     toRemove(row)
   }
 
+  // 预览
+  const toView = () => {
+
+  }
+
+  // 设计
+  const toDesign = () => {
+
+  }
+
+  // 分享
+  const toShare = () => {
+
+  }
+
+  // 复制
+  const toCopy = () => {
+    
+  }
+
   const { rowsButtons } = getTableButtons({ addClick, removeAll })
-  const { columns } = getTableColumns({ updateClick, removeSingle })
+  const { columns } = getTableColumns({ updateClick, removeSingle, toView, toDesign, toShare, toCopy })
 
   const [register, { toAdd, toUpdate, toRemoveAll, toRemove }] = useCrud({
     searchFormOption: {

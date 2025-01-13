@@ -8,9 +8,8 @@
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
-import { NButton } from 'naive-ui'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
-import { getDictName, getDictLabelByCode } from '@/utils';
+import { getDictLabelByCode } from '@/utils';
 import JsqTableAction from '@/components/Base/Jsq-crud/src/components/Jsq-tableActiion.vue';
 
 // 表单配置

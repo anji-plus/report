@@ -8,11 +8,13 @@
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
-import { NButton, NTag } from 'naive-ui'
+import { NTag } from 'naive-ui'
 import { enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 import { useGlobSetting } from '@/hooks/setting';
 import { useUserStore } from '@/store/modules/user';
+import JsqTableAction from '@/components/Base/Jsq-crud/src/components/Jsq-tableActiion.vue';
+
 const globSetting = useGlobSetting();
 const userStore = useUserStore();
 
@@ -182,7 +184,7 @@ export const getDialogRecordingSchemas = () => {
 }
 
 // 表格
-export const getTableColumns = ({ updateClick, removeSingle }) => {
+export const getTableColumns = ({ updateClick, removeSingle, toView, toDesign, toShare, toCopy }) => {
   const columns= [
     {
       type: 'selection',
@@ -249,33 +251,61 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       width: "120px",
       editHide: true,
       render(row) {
-        return [
-          h(
-            NButton,
+        return h(JsqTableAction as any, {
+          actions: [
             {
-              size: 'small',
+              label: '编辑',
               quaternary: true,
               type:"primary",
               onClick: () => {
                 updateClick(row)
               }
             },
-            { default: () => '编辑' }
-          ),
-          h(
-            NButton,
             {
-              size: 'small',
+              label: '预览',
               quaternary: true,
-              'v-permission': 'asd',
+              type:"primary",
+              onClick: () => {
+                toView(row)
+              }
+            },
+            {
+              label: '设计',
+              quaternary: true,
+              type:"primary",
+              onClick: () => {
+                toDesign(row)
+              }
+            },
+            {
+              label: '分享',
+              quaternary: true,
+              type:"primary",
+              onClick: () => {
+                toShare(row)
+              }
+            },
+            {
+              label: '复制',
+              quaternary: true,
+              type:"primary",
+              onClick: () => {
+                toCopy(row)
+              }
+            },
+            {
+              label: '删除',
+              quaternary: true,
               type:"primary",
               onClick: () => {
                 removeSingle(row)
               }
             },
-            { default: () => '删除' }
-          )
-        ]
+          ],
+          // select: (key) => {
+          //   window['$message'].info(`您点击了，${key} 按钮`);
+          // },
+        })
       }
     }
   ];
