@@ -186,7 +186,7 @@
 
   watch(() => unref(getApiOptions)?.queryApi, 
   () => {
-    getBindValue.value?.autoLoad && toQuery()
+    unref(getTableOptions)?.autoLoad && toQuery()
   })
 
   // 获取查询参数

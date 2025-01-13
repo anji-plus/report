@@ -22,7 +22,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref } from 'vue'
+  import { onMounted, ref } from 'vue'
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
   import { getFormSchemas, getTableButtons, getDialogRecordingSchemas, getTableColumns } from './utils/schemas';
   import { toGetPageList, toAddApi, toUpdateApi, toDeleteApi, toGetDataDetailApi } from '@/api/system/fileManage'
@@ -97,6 +97,7 @@
       schemas: getDialogRecordingSchemas()
     },
     tableOptions: {
+      autoLoad: false,
       // navie table配置
       columns: columns, // 表格配置
     },
@@ -108,6 +109,10 @@
       getDataByIdApi: toGetDataDetailApi // 查询详情页
     }
   });
+
+  onMounted(() => {
+    toQuery({ 'create_time': 'DESC' })
+  })
   
 </script>
 <style lang="less" scoped>
