@@ -111,7 +111,7 @@
   });
 
   onMounted(() => {
-    toQuery({ 'create_time': 'DESC' })
+    toQuery({ order: 'DESC', sort: 'create_time' })
   })
   
 </script>
