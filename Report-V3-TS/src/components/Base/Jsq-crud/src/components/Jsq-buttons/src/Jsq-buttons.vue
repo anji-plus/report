@@ -3,15 +3,19 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 23:45:51
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-12 21:33:34
+ * @LastEditTime: 2025-01-13 17:27:02
 -->
 <template>
   <n-space>
-    <n-button v-for="(item, index) in getSchema"
-      v-bind="getBindValue"
-      v-permission="item.permission" :key="index" :type="item.type" size="small" @click="item.click({ selectIds, selectSections })">
-      {{ item.label }}
-    </n-button>
+    <template v-for="(item, index) in getSchema">
+      <slot v-if="item.slotName" :name="item.slotName" :selectSections="selectSections" />
+      <n-button 
+        v-else
+        v-bind="getBindValue"
+        v-permission="item.permission" :key="index" :type="item.type" size="small" @click="item.click({ selectIds, selectSections })">
+        {{ item.label }}
+      </n-button>
+    </template>
   </n-space>
 </template>
 <script lang="ts" setup>

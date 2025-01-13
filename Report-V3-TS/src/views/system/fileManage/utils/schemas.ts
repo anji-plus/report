@@ -8,7 +8,7 @@
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
-import { NButton, NImage } from 'naive-ui'
+import { NImage } from 'naive-ui'
 import { editFormShow } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 import JsqTableAction from '@/components/Base/Jsq-crud/src/components/Jsq-tableActiion.vue';
@@ -47,17 +47,11 @@ export const getFormSchemas = ({ params }: Record<string, any>) => {
 
 
 // 批量操作
-export const getTableButtons = ({ addClick, removeAll }) => {
+export const getTableButtons = ({ removeAll }) => {
   const rowsButtons = computed(() => {
     return [
       {
-        label: '新增',
-        type: '',
-        permission: 'asd', // 权限嘛
-        plain: true,
-        click: () => {
-          addClick()
-        }
+        slotName: 'tabBtn-fileUpload'
       },
       {
         label: '删除',

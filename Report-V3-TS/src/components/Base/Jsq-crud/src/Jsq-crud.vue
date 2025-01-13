@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-30 18:16:00
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-12 22:03:10
+ * @LastEditTime: 2025-01-13 19:06:18
 -->
 <template>
   <div class="view-container">
@@ -12,14 +12,20 @@
     </div>
     <div class="view-container-right">
       <JsqSearchForm v-model="formModel" v-bind="getSearchFormOption" @toRestForm='toRestForm' @toQuery="toQuery"/>
-      <JsqButtons v-bind="getTableButtonsOptions" class="view-container-right-btn"/>
+      <JsqButtons v-bind="getTableButtonsOptions" class="view-container-right-btn" >
+        <template v-for="slot in tabBtnSlots" :key="slot.slotName" #[slot.slotName]>
+          <slot :name="slot.slotName"></slot>
+        </template>
+      </JsqButtons>
+    
       <JsqTable v-bind="getTableOptions" />
     </div>
   </div>
+
   <JsqDialog ref="dialogRef" v-bind='getDialogRecordingOptions' :api="getApiOptions" @refresh="toQuery"/>
 </template>
 <script lang="ts" setup>
-  import { onMounted, ref, unref, useAttrs, computed, watch } from 'vue';
+  import { onMounted, ref, unref, useAttrs, useSlots, computed, watch } from 'vue';
   import { basicProps } from './props';
   import { CrudActionType, serachFormProps } from './types';
   import { deepMerge } from '@/utils';
@@ -52,6 +58,40 @@
   const emit = defineEmits(['register']);
 
   const propsRef = ref<Partial<CrudActionType>>({});
+
+      /**
+   * 插槽透传 父 -> 孙
+   * 规则：  1. 表格批量操作按钮以tabBtn-***开头
+   *        2. 搜索条件插槽以searchForm-***开头
+   *        3. 弹框新增编辑以 recordingForm-***开头 
+   */
+  const slots = useSlots()
+
+  const componentsSlots = computed(() => {
+    if (slots) {
+    return Object.keys(slots)
+        .map((t) => {
+          return { slotName: t, slot: slots[t] };
+      });
+    } 
+    return []
+  })
+
+  // 批量操作按钮插槽
+  const tabBtnSlots = computed(() => {
+    return unref(componentsSlots).filter(item => item.slotName.includes('tabBtn-'))
+  })
+
+  // 搜索条件表单插槽
+  const searchFormSlots = computed(() => {
+    return unref(componentsSlots).filter(item => item.slotName.includes('searchForm-'))
+  })
+
+  // 新增、编辑表单插槽
+  const recordingFormSlots = computed(() => {
+    return unref(componentsSlots).filter(item => item.slotName.includes('recordingForm-'))
+  })
+  
   // 将标签传递的属性与hooks传递的参数合并
   const getProps = computed(() => {
     return { ...props, ...attrs, ...(unref(propsRef) as any) };

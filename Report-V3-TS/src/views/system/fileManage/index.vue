@@ -3,11 +3,15 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 17:38:28
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-12 22:21:53
+ * @LastEditTime: 2025-01-13 17:23:17
 -->
 <template>
   <div class="view-container">
-    <JsqCrud @register="register" />
+    <JsqCrud @register="register">
+      <template #tabBtn-fileUpload>
+        <n-button class='111'>1111</n-button>
+      </template>
+    </JsqCrud>
   </div>
 </template>
 <script lang="ts" setup>
@@ -17,10 +21,6 @@
   import { useMessage } from 'naive-ui'
   
   const messages = useMessage()
-  // 新增
-  const addClick = () => {
-    toAdd()
-  }
 
   // 批量删除
   const removeAll = () => {
@@ -52,10 +52,10 @@
     document.body.removeChild(aux);
   }
 
-  const { rowsButtons } = getTableButtons({ addClick, removeAll })
+  const { rowsButtons } = getTableButtons({ removeAll })
   const { columns } = getTableColumns({ toCopyUrl, removeSingle, toDownLoad })
 
-  const [register, { toAdd, toRemoveAll, toRemove }] = useCrud({
+  const [register, { toRemoveAll, toRemove }] = useCrud({
     searchFormOption: {
       schemas: getFormSchemas({}).value,
     },
