@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-08 16:34:50
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 15:45:46
+ * @LastEditTime: 2025-01-13 20:32:32
 -->
 <template>
   <div class="view-container">
@@ -13,21 +13,14 @@
 <script lang="ts" setup>
   import { JsqCrud, useCrud } from '@/components/Base/Jsq-crud';
   import { getFormSchemas, getTableButtons, getTableColumns } from './utils/schemas';
-  import { toGetPageList, toAddApi, toDeleteApi, toUpdateApi, toGetDataDetailApi } from '@/api/report/shareManage'
+  import { toGetPageList, toAddApi, toDeleteApi, toUpdateApi, toGetDataDetailApi, reportShareDelay } from '@/api/report/shareManage'
+  import { useMessage } from 'naive-ui'
 
-  // 新增
-  const addClick = () => {
-    toAdd()
-  }
+  const messages = useMessage()
 
   // 批量删除
   const removeAll = () => {
     toRemoveAll()
-  }
-
-  // 编辑
-  const updateClick = (row) => {
-    toUpdate(row)
   }
 
   // 删除
@@ -35,10 +28,34 @@
     toRemove(row)
   }
 
-  const { rowsButtons } = getTableButtons({ addClick, removeAll })
-  const { columns } = getTableColumns({ updateClick, removeSingle })
+  // 复制url
+  const toCopyUrl = (row) => {
+    copyToClip(row.urlPath);
+    messages.success('已将url路径复制至剪切板！')
+  }
 
-  const [register, { toAdd, toUpdate, toRemoveAll, toRemove }] = useCrud({
+  // 延期 1 7 30
+  const toShareDelay = async (row, day) => {
+    const { code, message } = await reportShareDelay({ id: row.id, shareValidType: day })
+    if(code == 200) {
+      return messages.success('延期成功!')
+    } 
+    return messages.error(message)
+  }
+
+  const copyToClip = (content) => {
+    let aux = document.createElement("input");
+    aux.setAttribute("value", content);
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand("copy");
+    document.body.removeChild(aux);
+  }
+
+  const { rowsButtons } = getTableButtons({ removeAll })
+  const { columns } = getTableColumns({ toCopyUrl, toShareDelay, removeSingle })
+
+  const [register, { toRemoveAll, toRemove }] = useCrud({
     searchFormOption: {
       schemas: getFormSchemas({}).value,
     },

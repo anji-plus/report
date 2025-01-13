@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2025-01-03 01:01:14
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-10 17:15:14
+ * @LastEditTime: 2025-01-13 20:27:11
  */
 import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
@@ -11,6 +11,7 @@ import { isObject } from '@/utils/is';
 import { NButton } from 'naive-ui'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 import { getDictName, getDictLabelByCode } from '@/utils';
+import JsqTableAction from '@/components/Base/Jsq-crud/src/components/Jsq-tableActiion.vue';
 
 // 表单配置
 export const getFormSchemas = ({ params }: Record<string, any>) => {
@@ -70,7 +71,7 @@ export const getFormSchemas = ({ params }: Record<string, any>) => {
 
 
 // 批量操作
-export const getTableButtons = ({ addClick, removeAll }) => {
+export const getTableButtons = ({ removeAll }) => {
   const rowsButtons = computed(() => {
     return [
       {
@@ -84,11 +85,11 @@ export const getTableButtons = ({ addClick, removeAll }) => {
       }
     ]
   })
-  return {rowsButtons}
+  return { rowsButtons }
 }
 
 // 表格
-export const getTableColumns = ({ updateClick, removeSingle }) => {
+export const getTableColumns = ({ toCopyUrl, toShareDelay, removeSingle }) => {
   const columns= [
     {
       type: 'selection',
@@ -148,24 +149,56 @@ export const getTableColumns = ({ updateClick, removeSingle }) => {
       title: '操作',
       key: 'actions',
       align: 'center',
-      width: "120px",
+      width: "160px",
       editHide: true,
       render(row) {
-        return [
-          h(
-            NButton,
+        return h(JsqTableAction as any, {
+          actions: [
             {
-              size: 'small',
+              label: '复制url',
               quaternary: true,
-              'v-permission': 'asd',
+              type:"primary",
+              onClick: () => {
+                toCopyUrl(row)
+              }
+            },
+            {
+              label: '延期1天',
+              quaternary: true,
+              type:"primary",
+              onClick: () => {
+                toShareDelay(row, 1)
+              }
+            },
+            {
+              label: '延期1周',
+              quaternary: true,
+              type:"primary",
+              onClick: () => {
+                toShareDelay(row, 7)
+              }
+            },
+            {
+              label: '延期1月',
+              quaternary: true,
+              type:"primary",
+              onClick: () => {
+                toShareDelay(row, 30)
+              }
+            },
+            {
+              label: '删除',
+              quaternary: true,
               type:"primary",
               onClick: () => {
                 removeSingle(row)
               }
             },
-            { default: () => '删除' }
-          )
-        ]
+          ],
+          // select: (key) => {
+          //   window['$message'].info(`您点击了，${key} 按钮`);
+          // },
+        })
       }
     }
   ];

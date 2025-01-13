@@ -265,7 +265,7 @@ export const getTableColumns = ({ removeSingle, toCopyUrl, toDownLoad }) => {
         return h(JsqTableAction as any, {
           actions: [
             {
-              label: '复url制',
+              label: '复制url',
               quaternary: true,
               type:"primary",
               onClick: () => {
