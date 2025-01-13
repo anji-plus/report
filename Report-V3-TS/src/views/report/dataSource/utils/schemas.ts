@@ -9,7 +9,7 @@ import { computed, h } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import { isObject } from '@/utils/is';
 import { NButton, NTag } from 'naive-ui'
-import { editFormShow, enable } from '@/enums/common'
+import { enable } from '@/enums/common'
 import { FormSchema } from '@/components/Base/Jsq-crud/src/components/Jsq-searchForm';
 
 // 表单配置
@@ -88,89 +88,6 @@ export const getTableButtons = ({ addClick, removeAll }) => {
   return {rowsButtons}
 }
 
-// 新增表单数据
-export const getDialogRecordingSchemas = () => {
-  const schemas = [
-    {
-      label: '角色编码',
-      field: 'roleCode',
-      component: "NInput", // 表单类型
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-      rules: [
-        { required: true, message: "角色编码必填", trigger: "blur" },
-        { min: 1, max: 64, message: "不超过64个字符", trigger: "blur" }
-      ],
-    },
-    {
-      label: '角色名称',
-      field: 'roleName',
-      component: 'NInput',
-      componentProps: {  // 组件配置
-        placeholder: '',
-      },
-      rules: [
-        { required: true, message: "角色名称必填", trigger: "blur" },
-        { min: 1, max: 128, message: "不超过128个字符", trigger: "blur" }
-      ],
-    },
-    {
-      label: '启用状态',
-      field: "enableFlag",
-      component: 'JsqSelect',
-      componentProps: {  // 组件配置
-        placeholder: '',
-        dictCode: 'ENABLE_FLAG',
-      },
-      rules: [
-        { required: true, type: 'number', message: "启用状态必填", trigger: ['blur', 'change'] }
-      ],
-    },
-    {
-      label: '创建人',
-      field: 'createBy',
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-        disabled: true
-      },
-      editHide: editFormShow.HIDE_ON_ADD,
-    },
-    {
-      label: '创建时间',
-      field: 'createTime',
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-        disabled: true
-      },
-      editHide: editFormShow.HIDE_ON_ADD,
-    },
-    {
-      label: '修改人',
-      field: 'updateBy',
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-        disabled: true
-      },
-      editHide: editFormShow.HIDE_ON_ADD,
-    },
-    {
-      label: '修改时间',
-      field: 'updateTime',
-      component: "NInput",
-      componentProps: {  // 组件配置
-        placeholder: '',
-        disabled: true
-      },
-      editHide: editFormShow.HIDE_ON_ADD,
-    },
-  ]
-
-  return schemas
-}
 
 // 表格
 export const getTableColumns = ({ updateClick, removeSingle }) => {

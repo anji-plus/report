@@ -3,7 +3,7 @@
  * @Author: qianlishi
  * @Date: 2024-12-30 18:49:41
  * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-03 00:08:44
+ * @LastEditTime: 2025-01-13 21:26:25
 -->
 <template>
   <n-select v-bind="getBindValue" />
@@ -32,6 +32,7 @@
    * */
   const getOptions = computed(() => {
     const { dictCode, localOptions } = unref(getProps);
+    console.log('1', getDictName(dictCode))
     const options = localOptions
       ? localOptions
       : dictCode
