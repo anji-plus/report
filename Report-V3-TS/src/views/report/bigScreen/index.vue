@@ -61,7 +61,7 @@
                 </n-button>
                 <n-button quaternary circle>
                   <template #icon>
-                    <jsqIcon name='icon-bianji' color='#fff' />
+                    <jsqIcon name='icon-bianji' color='#fff' @click="toDesignScreen"/>
                   </template>
                 </n-button>
               </div>
@@ -87,6 +87,9 @@
   import { reactive, onMounted, ref } from 'vue'
   import { getPageList } from '@/api/report/bigScreen'
   import jsqIcon from '@/components/Base/Jsq-icon/index.vue'
+  import { useRouter } from 'vue-router';
+
+  const router = useRouter();
 
   interface formProps {
     reportCode: string;
@@ -120,7 +123,6 @@
     if(code != 200) return
     list.value = data.records
     pages.value = data.pages
-    console.log(data)
   }
 
   const toRestForm = () => {
@@ -128,6 +130,13 @@
     formModel.pageSize = 8
     formModel.reportCode = ''
     formModel.reportName = ''
+  }
+
+  // 设计大屏
+  const toDesignScreen = () => {
+    router.push({
+      path: '/design/screen'
+    })
   }
 
   const handlePage = (page: number) => {
