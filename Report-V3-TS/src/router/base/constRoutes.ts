@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: qianlishi
+ * @Date: 2024-12-30 18:16:00
+ * @LastEditors: qianlishi
+ * @LastEditTime: 2025-01-14 17:27:31
+ */
 import { RouteRecordRaw } from 'vue-router';
 import { Layout } from '@/router/base/index';
 
@@ -49,4 +56,19 @@ export const constRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: '/design',
+    name: 'design',
+    meta: {},
+    children: [
+      {
+        path: 'screen',
+        name: 'screen',
+        component: () => import('@/views/designScreen/index.vue'),
+        meta: {
+          title: '大屏设计器',
+        },
+      },
+    ]
+  }
 ];
