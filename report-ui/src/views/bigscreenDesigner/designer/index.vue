@@ -681,36 +681,44 @@ export default {
       console.log("widgetsClick");
       //判断是否按住了Ctrl按钮，表示Ctrl多选
       let _this = this;
-      let eventWidget = event.currentTarget.__vue__.$parent;//vue3已经弃用__vue__
-      if(event.ctrlKey){ //Ctrl左键选中或者取消选中
-        if(this.selectedWidgets.includes(eventWidget)){
-          this.selectedWidgets = this.selectedWidgets.filter(w=> w!== eventWidget);
-          this.$refs.widgets.forEach(w=>{
-            if(eventWidget.value.widgetId === w.value.widgetId){
-              setTimeout(function (){
-                _this.$refs.widgets[index].$refs.draggable.setActive(false);
-                console.log("触发取消选中, eventWidget.value.widgetId = " + eventWidget.value.widgetId +", w.value.widgetId= "+ w.value.widgetId);
-              },200); //设置超时，防止效果被覆盖
-            }
-          })
+      let eventWidget = null;
+      if(event.currentTarget.__vue__ != null) { // //解决图层栏点击组件定位问题(批量移动改造导致的问题)
+        eventWidget = event.currentTarget.__vue__.$parent;//vue3已经弃用__vue__
+      }
+      if(eventWidget != null){
+        if(event.ctrlKey){ //Ctrl左键选中或者取消选中
+          if(this.selectedWidgets.includes(eventWidget)){
+            this.selectedWidgets = this.selectedWidgets.filter(w=> w!== eventWidget);
+            this.$refs.widgets.forEach(w=>{
+              if(eventWidget.value.widgetId === w.value.widgetId){
+                setTimeout(function (){
+                  _this.$refs.widgets[index].$refs.draggable.setActive(false);
+                  console.log("触发取消选中, eventWidget.value.widgetId = " + eventWidget.value.widgetId +", w.value.widgetId= "+ w.value.widgetId);
+                },200); //设置超时，防止效果被覆盖
+              }
+            })
+            return;
+          }
+          this.widgetsClickAndCtrl(event, index);
           return;
         }
-        this.widgetsClickAndCtrl(event, index);
-        return;
-      }
-      if(this.selectedWidgets.includes(eventWidget)){  //右键点击菜单的时候 ， 批量拖拽的时候
-        this.openMulDrag = true;
-        this.moveWidgets = {};
-        for (let i = 0; i < this.$refs.widgets.length; i++) {
-          let widget = {
-            left: this.$refs.widgets[i].value.position.left,
-            top: this.$refs.widgets[i].value.position.top
-          };
-          this.moveWidgets[this.$refs.widgets[i].value.widgetId] = widget;
+        if(this.selectedWidgets.includes(eventWidget)){  //右键点击菜单的时候 ， 批量拖拽的时候
+          this.openMulDrag = true;
+          this.moveWidgets = {};
+          for (let i = 0; i < this.$refs.widgets.length; i++) {
+            let widget = {
+              left: this.$refs.widgets[i].value.position.left,
+              top: this.$refs.widgets[i].value.position.top
+            };
+            this.moveWidgets[this.$refs.widgets[i].value.widgetId] = widget;
+          }
+          this.calculateMousePosition(event, true);
+          return;
         }
-        this.calculateMousePosition(event, true);
-        return;
       }
+      this.widgetsClickFocus(index);
+    },
+    widgetsClickFocus(index){
       this.selectedWidgets = []; //单选的时候需要清空
       this.selectedWidgets.push(this.$refs.widgets[index]); //确保第一个选中的组件添加到集合，不需要按住Ctrl键
       const draggableArr = this.$refs.widgets;
