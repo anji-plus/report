@@ -39,7 +39,7 @@ spring:
 #    password: root
 #    database: 1
   flyway:
-    enabled: true    #是否开启flyway，默认true.
+    enabled: false    #是否开启flyway，默认true.
     baseline-on-migrate: true
     #数据库连接配置
     url: ${spring.datasource.url}
