@@ -1,9 +1,9 @@
 # 该文件配置会继承bootstrap.xml，只需要配置数据库等差异配置
 spring:
   datasource:
-    url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
-    username: root
-    password: appuser@anji
+    url: jdbc:mysql://rm-bp1vb7w13g7arc3t2fo.mysql.rds.aliyuncs.com/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: ajreport
+    password: P@ss1234++
   gaea:
     subscribes:
       oss: #文件存储
