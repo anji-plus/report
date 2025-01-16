@@ -49,11 +49,12 @@ public class XlsSheetUtil {
             Map<Integer, List<JSONObject>> cellMap = cellGroup(cells_json);
             //循环每一行
             // 样式创建放到循环外层，防止样式过多，超出excel最大样式限制
-            CellStyle style = wb.createCellStyle();
+           // CellStyle style = wb.createCellStyle();
             for (Integer r : cellMap.keySet()) {
                 Row row = sheet.createRow(r);
                 //循环每一列
                 for (JSONObject col : cellMap.get(r)) {
+                     CellStyle style = wb.createCellStyle();
                     createCell(wb, sheet, row, col,style);
                 }
             }
