@@ -23,7 +23,6 @@
       type: Number,
     },
   });
-
   const computedStyle = computed(() =>
     props.size
       ? { width: props.size + "px", height: props.size + "px", color: props.color }

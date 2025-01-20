@@ -6,12 +6,14 @@ import { isObject } from './is/index';
 import { cloneDeep } from 'lodash-es';
 import { storage } from './Storage';
 import { GLOBAL_DICT_CODE_NAME } from '@/enums/common';
+
 /**
  * render 图标
  * */
 export function renderIcon(icon) {
   return () => h(NIcon, null, { default: () => h(icon) });
 }
+
 /**
  * font 图标(Font class)
  * */

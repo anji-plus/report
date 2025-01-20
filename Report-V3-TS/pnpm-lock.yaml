@@ -88,6 +88,9 @@ dependencies:
   vue-types:
     specifier: ^4.2.1
     version: 4.2.1(vue@3.5.12)
+  vue3-sketch-ruler:
+    specifier: ^2.2.7
+    version: 2.2.7
 
 devDependencies:
   '@types/element-resize-detector':
@@ -3398,6 +3401,7 @@ packages:
 
   /fast-uri@3.0.3:
     resolution: {integrity: sha512-aLrHthzCjH5He4Z2H9YZ+v6Ujb9ocRuW6ZzkJQOrTxleEijANq4v1TsaPaVG1PZcuurEzrLcWRyYBYXD5cEiaw==}
+    requiresBuild: true
     dev: true
 
   /fastest-levenshtein@1.0.16:
@@ -4146,6 +4150,7 @@ packages:
 
   /json-schema-traverse@1.0.0:
     resolution: {integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==}
+    requiresBuild: true
     dev: true
 
   /json-stable-stringify-without-jsonify@1.0.1:
@@ -5292,6 +5297,7 @@ packages:
   /require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
     dev: true
 
   /require-main-filename@2.0.0:
@@ -6433,6 +6439,10 @@ packages:
   /vue-virtual-scroll-list@2.3.5:
     resolution: {integrity: sha512-YFK6u5yltqtAOfTBcij/KGAS2SoZvzbNIAf9qTULauPObEp53xj22tDuohrrM2vNkgoD5kejXICIUBt2Q4ZDqQ==}
     dev: true
+
+  /vue3-sketch-ruler@2.2.7:
+    resolution: {integrity: sha512-vzw/CsMjBgi0rqDz2GpPoTirUXUES+okgJDQGXlUC/mPFHQDvQBa2iEqw+af2L9E8cKjtWBd5IA9oHE7VFTSCg==}
+    dev: false
 
   /vue@3.5.12(typescript@4.9.5):
     resolution: {integrity: sha512-CLVZtXtn2ItBIi/zHZ0Sg1Xkb7+PU32bJJ8Bmy7ts3jxXTcbfsEfBivFYYWz1Hur+lalqGAh65Coin0r+HRUfg==}

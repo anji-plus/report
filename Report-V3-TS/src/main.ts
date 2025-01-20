@@ -2,11 +2,12 @@
  * @Description: 
  * @Author: qianlishi
  * @Date: 2024-12-30 18:16:00
- * @LastEditors: qianlishi
- * @LastEditTime: 2025-01-11 22:10:56
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2025-01-17 02:05:48
  */
 import './styles/tailwind.css';
 import './styles/index.less';
+import '@/assets/stlyes/font.css'
 import '@/font/iconfont.js';
 import { createApp } from 'vue';
 import { setupNaiveDiscreteApi, setupNaive, setupDirectives } from '@/plugins';
