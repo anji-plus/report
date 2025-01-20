@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :option="options" autoresize/>
+    <v-chart v-if="vChartVisible" ref="myVChart" :option="options" autoresize/>
   </div>
 </template>
 
@@ -16,6 +16,7 @@ export default {
   },
   data() {
     return {
+      vChartVisible: true,
       options: {
         grid: {},
         legend: {
@@ -605,9 +606,14 @@ export default {
           this.options.xAxis.axisLabel = axisLabel;
         }
       }
+
       this.options.series = series;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
+      this.vChartVisible = false
+      this.$nextTick(() => {
+        this.vChartVisible = true
+      })
     },
   },
 };
