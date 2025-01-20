@@ -1,5 +1,6 @@
 <template>
   <anji-select
+    class="select"
     ref="select"
     :style="styleObj"
     :placeholder="placeholder"
@@ -115,20 +116,22 @@ export default {
 };
 </script>
 <style scoped lang="scss">
- .el-select {
-  height: 100%;
-
-  .el-input {
+::v-deep.select {
+  .el-select {
     height: 100%;
-
-    .el-input__inner {
+    .el-input {
       height: 100%;
-      background: inherit;
-      color: inherit;
-      &::placeholder {
+
+      .el-input__inner {
+        height: 100%;
+        background: inherit;
         color: inherit;
+        &::placeholder {
+          color: inherit;
+        }
       }
     }
   }
 }
+
 </style>
