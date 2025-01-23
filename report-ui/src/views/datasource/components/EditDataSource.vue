@@ -1,6 +1,6 @@
 <!--
  * @Descripttion: 报表设计--数据源
- * @version: 
+ * @version:
  * @Author: yanzili
  * @Date: 2021-12-11 14:48:27
  * @LastEditors: qianlishi
@@ -148,10 +148,10 @@ export default {
       dataLink: [],
       rules: {
         sourceType: [
-          { required: true, message: "数据集名称必选", trigger: "change" }
+          { required: true, message: "数据源名称必选", trigger: "change" }
         ],
         sourceCode: [
-          { required: true, message: "数据集编码必填", trigger: "blur" },
+          { required: true, message: "数据源编码必填", trigger: "blur" },
           { validator: validateEngOrNum, trigger: "blur" }
         ],
         sourceName: [
