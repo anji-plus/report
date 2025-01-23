@@ -84,7 +84,7 @@ export default {
     },
     setOptions() {
       const optionsData = this.optionsData;
-      return optionsData.dataType == "staticData"
+      return optionsData.dataType === "staticData"
         ? this.staticData(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
@@ -128,6 +128,9 @@ export default {
         color: inherit;
         &::placeholder {
           color: inherit;
+          font-size: 16px;
+          font-weight: normal;
+          font-family: sans-serif;
         }
       }
     }
