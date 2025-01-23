@@ -244,6 +244,7 @@ export default {
       const yAxis = [
         {
           max: optionsSetup.maxYLeft !== "" ? optionsSetup.maxYLeft : null,
+          min: optionsSetup.minYLeft !== "" ? optionsSetup.minYLeft : null,
           type: "value",
           scale: optionsSetup.scaleYLeft,
           // 均分
@@ -364,7 +365,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       for (const key in series) {
-        if (series[key].type == "line") {
+        if (series[key].type === "line") {
           series[key].symbol = optionsSetup.symbol;
           series[key].showSymbol = optionsSetup.markPoint;
           series[key].symbolSize = optionsSetup.pointSize;
@@ -402,7 +403,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       for (const key in series) {
-        if (series[key].type == "bar") {
+        if (series[key].type === "bar") {
           series[key].label = {
             show: optionsSetup.isShowBar,
             position: optionsSetup.fontPositionBar,
@@ -493,7 +494,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -538,7 +539,7 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
@@ -556,7 +557,7 @@ export default {
       this.options.xAxis.data = axis;
       // series
       for (const i in series) {
-        if (series[i].type == "bar") {
+        if (series[i].type === "bar") {
           series[i].data = bar;
         } else {
           series[i].data = line;
@@ -622,7 +623,7 @@ export default {
       const legendName = [];
       for (const i in series) {
         for (const j in val.series) {
-          if (series[i].type == val.series[j].type) {
+          if (series[i].type === val.series[j].type) {
             series[i].data = val.series[j].data;
             legendName.push(val.series[j].name);
           }

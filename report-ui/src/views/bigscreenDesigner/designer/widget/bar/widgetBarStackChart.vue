@@ -199,6 +199,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
+        min: optionsSetup.minY !== "" ? optionsSetup.minY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分

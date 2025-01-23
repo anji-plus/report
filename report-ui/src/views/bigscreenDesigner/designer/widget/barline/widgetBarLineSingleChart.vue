@@ -226,6 +226,7 @@ export default {
       const yAxis = [
         {
           max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
+          min: optionsSetup.minY !== "" ? optionsSetup.minY : null,
           type: "value",
           scale: optionsSetup.scaleY,
           // 均分
@@ -345,7 +346,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -378,7 +379,7 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
@@ -406,7 +407,7 @@ export default {
       this.options.xAxis.data = axis;
       // series
       for (const i in series) {
-        if (series[i].type == "bar") {
+        if (series[i].type === "bar") {
           series[i].name = legendName[i];
           series[i].type = "bar";
           series[i].barGap = optionsSetup.barGap + "%";
@@ -441,7 +442,7 @@ export default {
               barBorderRadius: optionsSetup.radius,
             },
           };
-        } else if (series[i].type == "line") {
+        } else if (series[i].type === "line") {
           series[i].name = legendName[i];
           series[i].type = "line";
           series[i].data = line;
@@ -537,7 +538,7 @@ export default {
       for (const i in val.series) {
         legendName.push(val.series[i].name);
         const obj = {};
-        if (val.series[i].type == "bar") {
+        if (val.series[i].type === "bar") {
           obj.name = val.series[i].name;
           obj.type = "bar";
           obj.barGap = optionsSetup.barGap + "%";
@@ -573,7 +574,7 @@ export default {
           };
           obj.data = val.series[i].data;
           series.push(obj);
-        } else if (val.series[i].type == "line") {
+        } else if (val.series[i].type === "line") {
           obj.name = val.series[i].name;
           obj.type = "line";
           obj.symbol = optionsSetup.symbol;
