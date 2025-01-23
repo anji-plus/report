@@ -315,7 +315,7 @@ export default {
     setOptionsGeo() {
       const optionsSetup = this.optionsSetup;
       const geo = {
-        map: this.optionsSetup.mapName == '' ? "china" : this.optionsSetup.mapName,
+        map: this.optionsSetup.mapName === '' ? "china" : this.optionsSetup.mapName,
         show: true,
         roam: true,
         layoutSize: "80%",

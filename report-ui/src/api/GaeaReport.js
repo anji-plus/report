@@ -32,7 +32,7 @@ export function exportExcel(data) {
     axios({
       method:'post',
       url: process.env.BASE_API + '/reportExcel/exportExcel',
-      headers: { 'Authorization': getToken() },
+      //headers: { 'Authorization': getToken() },
       data,
       responseType:'blob'
     }).then(res =>{

@@ -11,7 +11,7 @@ import {
 } from "@/views/bigscreenDesigner/designer/linkageLogic";
 
 export default {
-  name: "WidgetLinechart",
+  name: "WidgetLineChart",
   components: {},
   props: {
     value: Object,
@@ -215,6 +215,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
+        min: optionsSetup.minY !== "" ? optionsSetup.minY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -335,7 +336,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -366,7 +367,7 @@ export default {
           }
         });
       }
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
@@ -391,7 +392,7 @@ export default {
       this.options.xAxis.data = axis;
       // series
       for (const i in series) {
-        if (series[i].type == "line") {
+        if (series[i].type === "line") {
           series[i].symbol = optionsSetup.symbol;
           series[i].showSymbol = optionsSetup.markPoint;
           series[i].symbolSize = optionsSetup.pointSize;
@@ -492,7 +493,7 @@ export default {
       for (const i in val.series) {
         legendName.push(val.series[i].name);
         const obj = {};
-        if (val.series[i].type == 'line') {
+        if (val.series[i].type === 'line') {
           obj.type = 'line';
           obj.symbol = optionsSetup.symbol;
           obj.showSymbol = optionsSetup.markPoint;

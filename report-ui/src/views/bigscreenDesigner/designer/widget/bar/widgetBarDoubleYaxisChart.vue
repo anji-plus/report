@@ -240,6 +240,7 @@ export default {
       const yAxis = [
         {
           max: optionsSetup.maxYLeft !== "" ? optionsSetup.maxYLeft : null,
+          min: optionsSetup.minYLeft !== "" ? optionsSetup.minYLeft : null,
           type: "value",
           scale: optionsSetup.scaleYLeft,
           // 均分
@@ -297,6 +298,7 @@ export default {
         },
         {
           max: optionsSetup.maxYRight !== "" ? optionsSetup.maxYRight : null,
+          min: optionsSetup.minYRight !== "" ? optionsSetup.minYRight : null,
           type: "value",
           scale: optionsSetup.scaleYRight,
           // 均分
@@ -360,7 +362,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
       for (const key in series) {
-        if (series[key].type == "bar") {
+        if (series[key].type === "bar") {
           series[key].barGap = optionsSetup.barGap + "%";
           series[key].label = {
             show: optionsSetup.isShow,
@@ -452,7 +454,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -497,7 +499,7 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
@@ -578,7 +580,7 @@ export default {
       const legendName = [];
       let k = 0;
       for (const i in val.series) {
-        if (val.series[i].type == "bar") {
+        if (val.series[i].type === "bar") {
           series[k]['data'] = val.series[i].data;
           k++
           legendName.push(val.series[i].name);

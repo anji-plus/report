@@ -281,6 +281,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
+        min: optionsSetup.minY !== "" ? optionsSetup.minY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -343,7 +344,7 @@ export default {
     setOptionsTop() {
       const optionsSetup = this.optionsSetup;
       const series = this.options.series;
-      if (series[0].type == "bar") {
+      if (series[0].type === "bar") {
         series[0].barGap = optionsSetup.barGap + "%";
         series[0].barMinHeight = optionsSetup.minHeight;
         series[0].label = {
@@ -465,7 +466,7 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.refreshTime);
     },
@@ -520,7 +521,7 @@ export default {
           this.options.xAxis.axisLabel = axisLabel;
         }
       }
-      if (series[0].type == "bar") {
+      if (series[0].type === "bar") {
         series[0].data = data;
       }
     },
@@ -589,7 +590,7 @@ export default {
         }
       }
       const series = this.options.series;
-      if (series[0].type == "bar") {
+      if (series[0].type === "bar") {
         series[0].data = val.series[0].data;
       }
     },

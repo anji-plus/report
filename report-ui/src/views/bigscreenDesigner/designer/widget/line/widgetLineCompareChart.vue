@@ -406,6 +406,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         max: optionsSetup.maxYTop !== "" ? optionsSetup.maxYTop : null,
+        min: optionsSetup.minYTop !== "" ? optionsSetup.minYTop : null,
         gridIndex: 0,
         splitNumber: optionsSetup.splitNumberYTop,
         show: optionsSetup.isShowYTop,
@@ -468,6 +469,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         max: optionsSetup.maxYBottom !== "" ? optionsSetup.maxYBottom : null,
+        min: optionsSetup.minYBottom !== "" ? optionsSetup.minYBottom : null,
         gridIndex: 1,
         splitNumber: optionsSetup.splitNumberYBottom,
         show: optionsSetup.isShowYBottom,
@@ -545,7 +547,7 @@ export default {
         }
       }
       // 数值
-      if (series[0].type == "line") {
+      if (series[0].type === "line") {
         series[0].label = {
           position: "top",
           distance: optionsSetup.fontDistance,
@@ -574,7 +576,7 @@ export default {
     setOptionsTooltip() {
       const optionsSetup = this.optionsSetup;
       let tooltip = {};
-      if (optionsSetup.tipsType == "line") {
+      if (optionsSetup.tipsType === "line") {
         tooltip = {
           show: optionsSetup.tipsShow,
           trigger: "axis",
@@ -655,7 +657,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -711,7 +713,7 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(
           optionsData.dynamicData,
@@ -744,8 +746,8 @@ export default {
         const data = new Array(xAxisList.length).fill(0);
         for (const j in xAxisList) {
           for (const k in val) {
-            if (val[k].name == yAxisList[i]) {
-              if (val[k].axis == xAxisList[j]) {
+            if (val[k].name === yAxisList[i]) {
+              if (val[k].axis === xAxisList[j]) {
                 data[j] = val[k].data;
               }
             }
@@ -788,7 +790,7 @@ export default {
       const legendName = [];
       this.options.xAxis[0]["data"] = val.xAxis;
       this.options.xAxis[1]["data"] = val.xAxis;
-      if (val.series[0].type == "line") {
+      if (val.series[0].type === "line") {
         this.options.series[0]["name"] = val.series[0].name;
         this.options.series[0]["data"] = val.series[0].data;
         this.options.series[1]["name"] = val.series[1].name;

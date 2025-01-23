@@ -202,6 +202,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
+        min: optionsSetup.minY !== "" ? optionsSetup.minY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -322,7 +323,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -339,7 +340,7 @@ export default {
     getStackStyle() {
       const optionsSetup = this.optionsSetup;
       let style = "";
-      if (optionsSetup.stackStyle == "upDown") {
+      if (optionsSetup.stackStyle === "upDown") {
         style = "total";
       }
       return style;
@@ -366,7 +367,7 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(
           optionsData.dynamicData,
@@ -393,7 +394,7 @@ export default {
         const name = names[i]
         for (let j = 0; j < axisList.length; j++) {
           const date = axisList[j]
-          const find = val.find((item) => item.axis == date && item.name == name)
+          const find = val.find((item) => item.axis === date && item.name === name)
           if (find) {
             list.push({data: find.data, plan: find.plan, real: find.real})
           } else {

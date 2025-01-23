@@ -215,6 +215,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
+        min: optionsSetup.minY !== "" ? optionsSetup.minY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -335,7 +336,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -352,7 +353,7 @@ export default {
     getStackStyle() {
       const optionsSetup = this.optionsSetup;
       let style = "";
-      if (optionsSetup.stackStyle == "upDown") {
+      if (optionsSetup.stackStyle === "upDown") {
         style = "total";
       }
       return style;
@@ -377,7 +378,7 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.refreshTime);
     },
@@ -400,7 +401,7 @@ export default {
       const legendName = [];
       legendName.push("bar");
       for (const i in series) {
-        if (series[i].type == "bar") {
+        if (series[i].type === "bar") {
           series[i].type = "bar";
           series[i].barGap = optionsSetup.barGap + "%";
           series[i].barWidth = optionsSetup.maxWidth;
@@ -417,7 +418,7 @@ export default {
             fontFamily: optionsSetup.fontFamily,
           };
           // 获取颜色样式
-          if (optionsSetup.colorStyle == 'same') {
+          if (optionsSetup.colorStyle === 'same') {
             series[i].itemStyle = {
               normal: {
                 color: arrColor[i],
@@ -525,7 +526,7 @@ export default {
       for (const i in val.series) {
         legendName.push(val.series[i].name);
         const obj = {};
-        if (val.series[i].type == "bar") {
+        if (val.series[i].type === "bar") {
           obj.type = "bar";
           obj.barGap = optionsSetup.barGap + "%";
           obj.stack = this.getStackStyle();
@@ -543,7 +544,7 @@ export default {
             fontFamily: optionsSetup.fontFamily,
           };
           // 获取颜色样式
-          if (optionsSetup.colorStyle == 'same') {
+          if (optionsSetup.colorStyle === 'same') {
             obj.itemStyle = {
               normal: {
                 color: arrColor[i],

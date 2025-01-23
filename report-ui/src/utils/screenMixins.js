@@ -9,6 +9,7 @@ const mixin = {
       uploadUrl: process.env.BASE_API + "/reportDashboard/import/" + this.$route.query.reportCode,
       revoke: null, //处理历史记录
       rightClickIndex: -1,
+      rightClickWidget: null,
     }
   },
   computed: {
@@ -249,6 +250,7 @@ const mixin = {
     // 右键
     rightClick(event, index) {
       this.rightClickIndex = index;
+      this.rightClickWidget = this.widgets[index];
       const left = event.clientX;
       const top = event.clientY;
       if (left || top) {
@@ -258,6 +260,13 @@ const mixin = {
           display: "block",
         };
       }
+      //设置多选和单选的菜单项展示
+      document.getElementsByName("singleSelect").forEach(e=>{
+        e.style.display= this.selectedWidgets.length >= 2 ?"none":"block";
+      });
+      document.getElementsByName("mulSelect").forEach(e=>{
+        e.style.display= this.selectedWidgets.length >= 2 ?"block":"none";
+      })
       this.visibleContentMenu = true;
       return false;
     },
@@ -268,7 +277,11 @@ const mixin = {
     },
     // 删除
     deletelayer() {
+      let _this = this;
       this.widgets.splice(this.rightClickIndex, 1);
+      this.selectedWidgets.forEach(sw=>{
+        _this.widgets = _this.widgets.filter(w=>w.value.widgetId !== sw.value.widgetId);
+      })
     },
     // 锁定
     lockLayer() {
@@ -299,12 +312,16 @@ const mixin = {
         const temp = this.widgets.splice(this.rightClickIndex, 1)[0];
         this.widgets.push(temp);
       }
+      this.widgetIndex = this.widgets.indexOf(this.rightClickWidget);
+      this.widgetsClickFocus(this.widgetIndex);
     },
     // 置底
     setlowLayer() {
       if (this.rightClickIndex != 0) {
         this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
       }
+      this.widgetIndex = this.widgets.indexOf(this.rightClickWidget);
+      this.widgetsClickFocus(this.widgetIndex);
     },
     // 上移一层
     moveupLayer() {
@@ -317,6 +334,8 @@ const mixin = {
       } else {
         this.widgets.push(this.widgets.shift());
       }
+      this.widgetIndex = this.widgets.indexOf(this.rightClickWidget);
+      this.widgetsClickFocus(this.widgetIndex);
     },
     // 下移一层
     movedownLayer() {
@@ -329,6 +348,71 @@ const mixin = {
       } else {
         this.widgets.unshift(this.widgets.splice(this.rightClickIndex, 1)[0]);
       }
+      this.widgetIndex = this.widgets.indexOf(this.rightClickWidget);
+      this.widgetsClickFocus(this.widgetIndex);
+    },
+    //对齐
+    alignment(align) {
+      if(this.selectedWidgets.length <= 1) {
+        this.$message.error("请至少选择两个组件对齐");
+        return;
+      }
+      console.log("对齐方式：" + align);
+      let topWidget = this.selectedWidgets[0]; //最上组件(左右对齐使用)
+      let leftWidget = this.selectedWidgets[0]; //最左组件(上下对齐使用)
+      let minTop = this.selectedWidgets[0].value.position.top;
+      let minLeft = this.selectedWidgets[0].value.position.left;
+      //如果是框选的话，以【最上组件】【最左组件】为标准对齐;如果是Ctrl多选方式，则以第一个选中的组件为标准对齐，组合多选以框选逻辑为准
+      if(this.kuangSelectFlag){
+        for(let i = 0; i< this.selectedWidgets.length; i++){
+          let widget = this.selectedWidgets[i];
+          if( minTop > widget.value.position.top){
+            minTop = widget.value.position.top;
+            topWidget = widget;
+          }
+          if( minLeft > widget.value.position.left){
+            minLeft = widget.value.position.left;
+            leftWidget = widget;
+          }
+        }
+      }
+      for(let i = 0; i< this.selectedWidgets.length; i++){
+        let widget = this.selectedWidgets[i];
+        this.$refs.widgets.forEach(w=>{
+          if(w.value.widgetId === widget.value.widgetId){
+            w.$refs.draggable.setActive(false);
+          }
+        });
+        this.widgets.forEach(w=>{
+          if(w.value.widgetId === widget.value.widgetId){
+            switch (align){
+              case "left":  //左对齐
+                w.value.position.left = topWidget.value.position.left;
+                break;
+              case "right":  //右对齐
+                w.value.position.left = topWidget.value.position.left + topWidget.value.position.width - w.value.position.width;
+                break;
+              case "horizontal_center":  //左右居中对齐
+                w.value.position.left = topWidget.value.position.left + topWidget.value.position.width/2 - w.value.position.width /2;
+                break;
+              case "top":  //上对齐
+                w.value.position.top = leftWidget.value.position.top;
+                break;
+              case "bottom":  //下对齐
+                w.value.position.top = leftWidget.value.position.top + leftWidget.value.position.height - w.value.position.height;
+                break;
+              case "vertical_center":  //上下居中对齐
+                w.value.position.top = leftWidget.value.position.top + leftWidget.value.position.height/2 - w.value.position.height /2;
+                break;
+            }
+          }
+        });
+      }
+      this.selectedWidgets = [];
+      if(this.rect){
+        document.getElementById("workbench").removeChild(this.rect);
+      }
+      this.kuangSelectFlag = false;
     }
   }
 }

@@ -9,7 +9,7 @@
 linux：
 git clone https://gitee.com/anji-plus/report.git
 后端：report-code
-修改bootstrap.yml 修改数据库连接、上传下载地址等信息
+修改bootstrap.yml 修改数据库连接、上传下载地址、jwt令牌等信息
 maven package
 java -jar
 
@@ -52,18 +52,44 @@ report-core --> src --> main --> resources --> bootstrap.yml <br>
 将图中关于mysql的连接配置信息换成你使用的IP <br>
 
 ![bootstrap.png](../picture/quickly/img_2.png) <br>
+**注**：请确认你的Mysql是否支持远程连接，登陆用户是否有DDL权限 <br>
 
-**注 ：**
-
-```
-1、aj_report库是存放底层基础信息的库，flyway启动时会自动建立，如果你在这里修改了库，将会出错
-2、请确认你的Mysql是否支持远程连接，登陆用户是否有DDL权限
+```yaml
+  datasource:
+    url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: appuser@anji
 ```
 
 ### OSS配置
 
 OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->amazonS3->nfs <br>
 ![file.png](../picture/quickly/img.png) <br>
+
+```yaml
+  gaea:
+    subscribes:
+      oss: #文件存储 都配置的情况下优先级minio->amazonS3->nfs
+        enabled: true
+        ##允许上传的文件后缀
+        file-type-white-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg|.aaa|.svg
+        # 用于文件上传成功后，生成文件的下载公网完整URL，http://serverip:9095/file/download，注意填写IP必须填写后端服务所在的机器IP
+        downloadPath: http://10.108.26.197:9095/file/download
+        nfs:
+          #上传对应本地全路径，注意目录不会自动创建，注意 Win是 \ 且有盘符，linux是 / 无盘符，注意目录权限问题
+          path: /app/disk/upload/
+```
+
+### jwt秘钥
+
+生产环境请自行修改，避免被远程伪造登录攻击 <br>
+[随机密码生成器](http://www.chahuo.com/token-generator.html)
+
+```yaml
+    Security:
+      # jwt密钥，生产环境请自行修改，避免被远程伪造登录攻击
+      jwtSecret: TybmmfrgsIqpPsBOYxvygCMVJWKNfDJU
+```
 
 ### maven打包
 
@@ -74,8 +100,7 @@ OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->
 
 ```
 1、打包之前如果系统用的不止mysql数据源，需要自己在pom文件中加入对应的数据库的驱动，登陆系统之后，数据源提示无驱动，则选择通用JDBC数据源，这里不做演示了
-2、不要使用 maven install
-3、此方式不会打包 lib目录下的驱动，详情可查看 "数据源->扩展"
+2、此方式不会打包 lib目录下的驱动，详情可查看 "数据源->扩展"
 ```
 
 ### linux启动jar包
@@ -84,6 +109,8 @@ OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->
 **注**：请确保你的linux有jdk1.8 <br>
 
 ## 前端编译
+
+**注意:** 每个版本前端可能会有些需要手动调整的部分，这里只写最公共的部分，如果有差异，请看对应版本的release文档。<br>
 
 ### install
 
@@ -107,6 +134,7 @@ OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->
 ### 前端部署
 
 使用nginx做转发，以下内容仅供参考
+
 ```text
 server {
     listen       443 ssl;
