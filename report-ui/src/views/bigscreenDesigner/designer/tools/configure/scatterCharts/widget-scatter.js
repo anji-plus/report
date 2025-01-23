@@ -383,6 +383,14 @@ export const widgetScatter = {
             },
             {
               type: 'el-input-text',
+              label: '最大值',
+              name: 'minY',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
+              type: 'el-input-text',
               label: '坐标名',
               name: 'textNameY',
               require: false,

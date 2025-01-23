@@ -193,6 +193,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
+        min: optionsSetup.minY !== "" ? optionsSetup.minY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -296,7 +297,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -330,7 +331,7 @@ export default {
       }
         // this.options.series =  optionsData.series
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.refreshTime);
     },
@@ -353,7 +354,7 @@ export default {
       const legendName = [];
       legendName.push("scatter");
       for (const i in series) {
-        if (series[i].type == "scatter") {
+        if (series[i].type === "scatter") {
           series[i].type = "scatter";
           series[i].symbol = optionsSetup.symbol;
           series[i].symbolSize = optionsSetup.pointSize;
@@ -362,14 +363,14 @@ export default {
             position: optionsSetup.fontPosition,
             distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor == '' ? "inherit" : optionsSetup.dataColor,
+            color: optionsSetup.dataColor === '' ? "inherit" : optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
             formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}',
             fontStyle: optionsSetup.fontStyle,
             fontFamily: optionsSetup.fontFamily,
           };
           // 获取颜色样式
-          if (optionsSetup.colorStyle == 'same') {
+          if (optionsSetup.colorStyle === 'same') {
             series[i].itemStyle = {
               normal: {
                 color: arrColor[i],
@@ -462,7 +463,7 @@ export default {
       for (const i in val.series) {
         legendName.push(val.series[i].name);
         const obj = {};
-        if (val.series[i].type == "scatter") {
+        if (val.series[i].type === "scatter") {
           obj.type = "scatter";
           obj.symbol = optionsSetup.symbol;
           obj.symbolSize = optionsSetup.pointSize;
@@ -471,14 +472,14 @@ export default {
             position: optionsSetup.fontPosition,
             distance: optionsSetup.fontDistance,
             fontSize: optionsSetup.fontSize,
-            color: optionsSetup.dataColor == '' ? "inherit" : optionsSetup.dataColor,
+            color: optionsSetup.dataColor === '' ? "inherit" : optionsSetup.dataColor,
             fontWeight: optionsSetup.fontWeight,
             formatter: !!optionsSetup.percentSign ? '{c}%' : '{c}',
             fontStyle: optionsSetup.fontStyle,
             fontFamily: optionsSetup.fontFamily,
           };
           // 获取颜色样式
-          if (optionsSetup.colorStyle == 'same') {
+          if (optionsSetup.colorStyle === 'same') {
             obj.itemStyle = {
               normal: {
                 color: arrColor[i],

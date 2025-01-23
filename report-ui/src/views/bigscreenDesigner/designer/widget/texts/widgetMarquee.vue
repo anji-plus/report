@@ -19,6 +19,8 @@ export default {
   data() {
     return {
       options: {},
+      optionsData: {},
+      optionsSetup: {},
       flagInter: null,
     };
   },
@@ -31,7 +33,7 @@ export default {
         position: this.ispreview ? "absolute" : "static",
         color: this.transStyle.color,
         "font-weight": this.transStyle.fontWeight,
-        text: this.transStyle.text,
+        text:  this.transStyle.joinText === "" ? this.transStyle.text : this.transStyle.text + this.transStyle.joinText,
         "font-size": this.transStyle.fontSize + "px",
         "letter-spacing": this.transStyle.letterSpacing + "em",
         background: this.transStyle.background,
@@ -57,6 +59,7 @@ export default {
       handler(val) {
         this.options = val;
         this.optionsData = val.data;
+        this.optionsSetup = val.setup;
         this.setOptionsData();
       },
       deep: true
@@ -65,6 +68,7 @@ export default {
   mounted() {
     this.options = this.value;
     this.optionsData = this.value.data;
+    this.optionsSetup = this.value.setup;
     targetWidgetLinkageLogic(this); // 联动-目标组件逻辑
     this.setOptionsData();
   },
@@ -89,7 +93,7 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      if (optionsData.dataType == "dynamicData") {
+      if (optionsData.dataType === "dynamicData") {
         this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
       } else {};
     },
@@ -107,7 +111,7 @@ export default {
     getEchartData(val) {
       const data = this.queryEchartsData(val);
       data.then(res => {
-        this.styleColor.text = res[0].value;
+        this.styleColor.text = this.optionsSetup.joinText === "" ? res[0].value : res[0].value + this.optionsSetup.joinText;
         this.$forceUpdate();
       });
     }

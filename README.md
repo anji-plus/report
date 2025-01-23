@@ -113,7 +113,7 @@ npm run docs:dev
 ```
 下载最新发行版，解压
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址、jwt令牌等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
@@ -145,7 +145,7 @@ sh build.sh
 
 unzip aj-report-xxxx.zip
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址、jwt令牌等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
@@ -172,6 +172,10 @@ http://serverip:9095
 sql文件的目录在：report-core --> src --> main --> resources -- > db.migration <br>
 系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件，执行完将会创建
 aj_report（存放系统基础数据）数据库 <br>
+
+**注意：** 如果sql初始化有问题，请将bootstrap.yml中flyway改为false，并手动执行这些sql <br>
+
+示例数据sql目录在：doc/example，有需要的请手动执行 <br>
 
 ## 谁在使用
 

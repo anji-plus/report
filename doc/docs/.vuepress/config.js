@@ -33,12 +33,12 @@ module.exports = {
                     title: 'Releases',
                     collapsable: false,
                     children: [
-                        {title: 'V1.0.0', path: '/guide/releases/1.0.0'},
-                        {title: 'V1.1.0', path: '/guide/releases/1.1.0'},
-                        {title: 'V1.2.0', path: '/guide/releases/1.2.0'},
-                        {title: 'V1.3.0', path: '/guide/releases/1.3.0'},
-                        {title: 'V1.4.0', path: '/guide/releases/1.4.0'},
-                        {title: 'V1.5.0', path: '/guide/releases/1.5.0'},
+                        {title: 'V1.0.x', path: '/guide/releases/1.0.x'},
+                        {title: 'V1.1.x', path: '/guide/releases/1.1.x'},
+                        {title: 'V1.2.x', path: '/guide/releases/1.2.x'},
+                        {title: 'V1.3.x', path: '/guide/releases/1.3.x'},
+                        {title: 'V1.4.x', path: '/guide/releases/1.4.x'},
+                        {title: 'V1.5.x', path: '/guide/releases/1.5.x'},
                     ]
                 },
                 {
@@ -79,7 +79,8 @@ module.exports = {
                     title: '其他',
                     collapsable: false,
                     children: [
-                        {title: '常见问题', path: '/guide/question'}
+                        {title: '常见问题', path: '/guide/question'},
+                        {title: '常用知识', path: '/guide/knowledge'}
                     ]
                 },
                 {
@@ -87,7 +88,8 @@ module.exports = {
                     collapsable: false,
                     children: [
                         {title: '说明', path: '/guide/community/report'},
-                        {title: '搭建AJ-Report开发环境', path: '/guide/community/AC1688/搭建aj-report开发环境'}
+                        {title: '搭建AJ-Report开发环境', path: '/guide/community/AC1688/搭建aj-report开发环境'},
+                        {title: '大屏组件对齐和拖拽实现', path: '/guide/community/JiangHH/AJ_Report大屏设计时多组件对齐和拖拽移动实现'}
                     ]
                 }
             ],

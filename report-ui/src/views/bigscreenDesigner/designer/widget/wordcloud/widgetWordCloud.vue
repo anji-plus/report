@@ -1,10 +1,11 @@
 <template>
-  <div :style="styleObj">
+  <div :style="styleObj" :ref="word-cloud" class="flex can-class">
     <v-chart ref="myVChart" :option="options" autoresize />
   </div>
 </template>
 <script>
-import wordCloud from "../../../../../../static/wordCloud/echarts-wordcloud.min.js";
+import * as echarts from "echarts";
+import 'echarts-wordcloud';
 import { targetWidgetLinkageLogic } from "@/views/bigscreenDesigner/designer/linkageLogic";
 
 export default {
@@ -34,18 +35,16 @@ export default {
               minSize: 6,
             },
             textStyle: {
-              normal: {
-                color: function () {
-                  return (
-                    "rgb(" +
-                    [
-                      Math.round(Math.random() * 160),
-                      Math.round(Math.random() * 160),
-                      Math.round(Math.random() * 160),
-                    ].join(",") +
-                    ")"
-                  );
-                },
+              fontFamily: 'sans-serif',
+              color: function () {
+                return (
+                  'rgb(' +
+                  [
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160),
+                    Math.round(Math.random() * 160),
+                  ].join(',') + ')'
+                );
               },
             },
             data: [],
@@ -97,8 +96,7 @@ export default {
     // 修改图标options属性
     editorOptions() {
       this.setOptionsTitle();
-      this.setOptionsSizeRange();
-      this.setOptionsRotationRange();
+      this.setOptionsWordCloud();
       this.setOptionsTooltip();
       this.setOptionsData();
     },
@@ -129,21 +127,41 @@ export default {
       };
       this.options.title = title;
     },
-    // 词云字体范围
-    setOptionsSizeRange() {
+    // 词云设置
+    setOptionsWordCloud() {
       const optionsSetup = this.optionsSetup;
-      this.options.series[0].sizeRange = [
-        optionsSetup.minRangeSize,
-        optionsSetup.maxRangeSize,
-      ];
-    },
-    // 文字角度
-    setOptionsRotationRange() {
-      const optionsSetup = this.optionsSetup;
-      this.options.series[0].rotationRange = [
-        optionsSetup.minRotationRange,
-        optionsSetup.maxRotationRange,
-      ];
+      const series = {
+        type: "wordCloud",
+        size: ["9%", "99%"],
+        sizeRange: [
+          optionsSetup.minRangeSize,
+          optionsSetup.maxRangeSize,
+        ],
+        textRotation: [0, 45, 90, -45],
+        rotationRange: [
+          optionsSetup.minRotationRange,
+          optionsSetup.maxRotationRange,
+        ],
+        shape: "circle",
+        textPadding: 0,
+        autoSize: {
+          enable: true,
+          minSize: 6,
+        },
+        textStyle: {
+          fontWeight: optionsSetup.textFontWeight,
+          color: function () {
+            return (
+              'rgb(' +
+              [
+                Math.round(Math.random() * 160),
+                Math.round(Math.random() * 160),
+                Math.round(Math.random() * 160),
+              ].join(',') + ')'
+            );
+          },
+        },
+      }
     },
     // tooltip 设置
     setOptionsTooltip() {

@@ -305,6 +305,7 @@ export default {
       const yAxis = [
         {
           max: optionsSetup.maxYLeft !== "" ? optionsSetup.maxYLeft : null,
+          min: optionsSetup.minYLeft !== "" ? optionsSetup.minYLeft : null,
           type: "value",
           scale: optionsSetup.scaleYLeft,
           // 均分
@@ -481,7 +482,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -498,7 +499,7 @@ export default {
     getStackStyle() {
       const optionsSetup = this.optionsSetup;
       let style = "";
-      if (optionsSetup.stackStyle == "upDown") {
+      if (optionsSetup.stackStyle === "upDown") {
         style = "total";
       }
       return style;
@@ -523,7 +524,7 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
@@ -554,7 +555,7 @@ export default {
       this.options.xAxis.data = axis;
       // series
       for (const i in series) {
-        if (series[i].type == "bar") {
+        if (series[i].type === "bar") {
           series[i].name = legendName[i];
           series[i].type = "bar";
           series[i].barGap = optionsSetup.barGap + "%";
@@ -585,7 +586,7 @@ export default {
           series[i].barWidth = optionsSetup.maxWidth;
           series[i].itemStyle.normal["barBorderRadius"] = optionsSetup.radius;
           series[i].itemStyle.normal["color"] = arrColor[i];
-        } else if (series[i].type == "line") {
+        } else if (series[i].type === "line") {
           series[i].name = legendName[i];
           series[i].type = "line";
           series[i].yAxisIndex = 1;
@@ -690,7 +691,7 @@ export default {
       for (const i in val.series) {
         legendName.push(val.series[i].name);
         const obj = {};
-        if (val.series[i].type == "bar") {
+        if (val.series[i].type === "bar") {
           obj.name = val.series[i].name;
           obj.type = val.series[i].type;
           obj.barGap = optionsSetup.barGap + "%";
@@ -727,7 +728,7 @@ export default {
           };
           obj.data = val.series[i].data;
           series.push(obj);
-        } else if (val.series[i].type == "line") {
+        } else if (val.series[i].type === "line") {
           obj.name = val.series[i].name;
           obj.type = val.series[i].type;
           obj.yAxisIndex = 1;

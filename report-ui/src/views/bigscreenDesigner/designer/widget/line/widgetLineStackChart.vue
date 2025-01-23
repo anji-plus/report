@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <v-chart ref="myVChart" :option="options" autoresize/>
+    <v-chart  v-if="vChartVisible" ref="myVChart" :option="options" autoresize/>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import {targetWidgetLinkageLogic} from "@/views/bigscreenDesigner/designer/linkageLogic";
 
 export default {
-  name: "WidgetBarStackchart",
+  name: "WidgetLineStackChart",
   components: {},
   props: {
     value: Object,
@@ -16,6 +16,7 @@ export default {
   },
   data() {
     return {
+      vChartVisible: true,
       options: {
         grid: {},
         legend: {
@@ -201,6 +202,7 @@ export default {
       const optionsSetup = this.optionsSetup;
       const yAxis = {
         max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
+        min: optionsSetup.minY !== "" ? optionsSetup.minY : null,
         type: "value",
         scale: optionsSetup.scale,
         // 均分
@@ -336,7 +338,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -383,7 +385,7 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData, optionsSetup)
         : this.dynamicDataFn(
           optionsData.dynamicData,
@@ -423,8 +425,8 @@ export default {
         const data = new Array(xAxisList.length).fill(0);
         for (const j in xAxisList) {
           for (const k in val) {
-            if (val[k].name == yAxisList[i]) {
-              if (val[k].axis == xAxisList[j]) {
+            if (val[k].name === yAxisList[i]) {
+              if (val[k].axis === xAxisList[j]) {
                 data[j] = val[k].data;
               }
             }
@@ -548,7 +550,7 @@ export default {
       const series = [];
       const legendName = [];
       for (const i in val.series) {
-        if (val.series[i].type == "line") {
+        if (val.series[i].type === "line") {
           series.push({
             name: val.series[i].name,
             type: "line",
@@ -618,6 +620,10 @@ export default {
       this.options.series = series;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
+      this.vChartVisible = false
+      this.$nextTick(() => {
+        this.vChartVisible = true
+      })
     },
   },
 };
