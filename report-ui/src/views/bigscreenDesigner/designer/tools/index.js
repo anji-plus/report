@@ -55,7 +55,7 @@ const screenConfig = {
         value: '#1E1E1E',
       },
       {
-        type: 'custom-upload',
+        type: 'image-select',
         label: '图片地址',
         name: 'backgroundImage',
         required: false,
