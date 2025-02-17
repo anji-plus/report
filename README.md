@@ -72,7 +72,7 @@
 - [Jdk] 1.8
 
 ### 后端
-- [aj-gaea](https://gitee.com/anji-plus/gaea) 低代码平台+spring微服务组件.
+
 - [Spring Boot2.3.5.RELEASE](https://spring.io/projects/spring-boot/): Spring Boot是一款开箱即用框架，让我们的Spring应用变的更轻量化、更快的入门。
   在主程序执行main函数就可以运行。你也可以打包你的应用为jar并通过使用java -jar来运行你的Web应用；
 - [Mybatis-plus3.3.2](https://mp.baomidou.com/): MyBatis-plus（简称 MP）是一个 MyBatis (opens new window) 的增强工具。
@@ -113,7 +113,7 @@ npm run docs:dev
 ```
 下载最新发行版，解压
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接、上传下载地址、jwt令牌等信息
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
@@ -130,9 +130,7 @@ http://serverip:9095
 在Linux上先准备好maven、node.js、jdk
 
 - [Apache Maven] 3.5 <br>
-- [Node.js] 
-  - report1.5以下版本请使用 node<= V14 
-  - report1.5及以上版本请使用 node>= V16 
+- [Node.js] v14.16.0 <br>
 - [Jdk] 1.8
 
 简易步骤
@@ -145,7 +143,7 @@ sh build.sh
 
 unzip aj-report-xxxx.zip
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接、上传下载地址、jwt令牌等信息
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
@@ -173,10 +171,6 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件，执行完将会创建
 aj_report（存放系统基础数据）数据库 <br>
 
-**注意：** 如果sql初始化有问题，请将bootstrap.yml中flyway改为false，并手动执行这些sql <br>
-
-示例数据sql目录在：doc/example，有需要的请手动执行 <br>
-
 ## 谁在使用
 
 感谢关注并使用AJ-Report的朋友，如果贵公司、组织、学校等正在使用AJ-Report，希望可以按照此[Issue](https://gitee.com/anji-plus/report/issues/I3ZXT4)
@@ -196,7 +190,7 @@ aj_report（存放系统基础数据）数据库 <br>
 <a href='https://www.zjjcl.cn/'><img src="https://ajreport.beliefteam.cn/file/download/8df07663-60c9-4e32-a0f2-0ea7d5c46ff9" width = "130" height = "50" /> </a>
 <a href='http://www.jiuyinkj.com/'><img src="https://ajreport.beliefteam.cn/file/download/5889f0e6-ba08-4990-ac89-eabfbb8af8bd" width = "130" height = "50" /> </a>
 <a href='http://www.yourongyun.cn/'><img src="https://ajreport.beliefteam.cn/file/download/90e15ed9-5594-4c14-b318-72aeb6816fb9" width = "130" height = "50" /> </a> 
-<br>
+</br>
 <a href='https://www.wenkai.net/'><img src="https://ajreport.beliefteam.cn/file/download/ec788c55-bffd-4809-ae3c-0ce2cbd1a9d0" width = "130" height = "50" /> </a>
 <a href='http://www.sungcor.com/'><img src="https://ajreport.beliefteam.cn/file/download/0514a4a6-787b-4e25-be94-03ff94309553" width = "130" height = "50" /> </a>
 <a href='http://www.jtit.com.cn/'><img src="https://ajreport.beliefteam.cn/file/download/1dc47a36-a515-4775-af44-262225b3662b" width = "130" height = "50" /> </a>
@@ -216,7 +210,7 @@ aj_report（存放系统基础数据）数据库 <br>
 
 已知以下版本存在兼容性问题，请不要使用
 
-- Node.js 请根据实际使用的report版本调整
+- Node.js V16及以上
 - openJdk
 - Jdk 1.7及以下/11及以上（jdk11部分版本有问题）
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
@@ -240,7 +234,7 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
-技术交流群八，可直接扫码进<br>
+技术交流群九，可直接扫码进。目前七群和八群未满，可通过先进九群然后加我，我会直接先拉进七群。也可直接添加下面的微信，多一个备注要进七/八群<br>
 <img src="https://ajreport.beliefteam.cn/file/download/ab5e6ddd-8a54-4aea-85b1-9da6937cce9b" width = "300" height = "450" align=left/>
 
 个人微信：个人微信，不闲聊，加群、咨询请备注，备注格式不限但最好是：“项目名 + 问题” ，项目名可以是**AJ-Report**、**Report**、**大屏**，只要能一眼分辨就行 <br>
