@@ -71,6 +71,11 @@
               @change="changed($event, item.name)"
             />
 
+            <imageSelect
+              v-if="item.type == 'image-select'"
+              v-model="formData[item.name]"
+              @change="changed($event, item.name)"
+            />
             <el-radio-group
               v-if="item.type == 'el-radio-group'"
               v-model="formData[item.name]"
@@ -341,9 +346,11 @@ import customUpload from "./customUpload.vue";
 import dynamicAddRadar from "./dynamicAddRadar";
 import MonacoEditor from "@/components/MonacoEditor/index";
 import componentLinkage from './componentLinkage';
+import imageSelect from './imageSelect';
 export default {
   name: "DynamicForm",
   components: {
+    imageSelect,
     ColorPicker,
     vueJsonEditor,
     dynamicComponents,
