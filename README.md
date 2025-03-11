@@ -198,7 +198,7 @@ aj_report（存放系统基础数据）数据库 <br>
 <a href='http://www.yourongyun.cn/'><img src="doc/docs/picture/WhoIsUsing/12.png" width = "130" height = "50" /> </a> 
 <a href='https://www.yunstech.cn'> <img src="doc/docs/picture/WhoIsUsing/1.png" width = "130" height = "50" align=left/> </a>
 <a href='http://www.fgkb.net/'><img src="doc/docs/picture/WhoIsUsing/2.png" width = "130" height = "50" /> </a>
-<a href='https://soft.pusdn.com/'><img src="doc/docs/picture/WhoIsUsing/15.png" width = "130" height = "130" /> </a> 
+<a href='https://soft.pusdn.com/'><img src="doc/docs/picture/WhoIsUsing/15.png" width = "130" height = "50" /> </a> 
 <br>
 
 <a href='https://www.gykjweb.com/'><img src="https://ajreport.beliefteam.cn/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a> 
