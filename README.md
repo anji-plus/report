@@ -8,9 +8,7 @@
 
 ## 在线体验
 
-#### &emsp; [在线文档](https://ajreport.beliefteam.cn/report-doc/ "doc"): https://gitee.com/anji-plus/report/tree/dev/doc/docs/guide <br>
-
-#### &emsp; [模板下载](https://ajreport.beliefteam.cn/download "temp"): https://ajreport.beliefteam.cn/download<br>
+#### &emsp; [在线文档](https://gitee.com/anji-plus/report/tree/dev/doc/docs/guide "doc"): https://gitee.com/anji-plus/report/tree/dev/doc/docs/guide <br>
 
 #### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
@@ -156,6 +154,17 @@ http://serverip:9095
 ### 前后端分离部署
 
 **[前后端分离部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySeparate.html)** <br>
+
+## 信息安全
+### 修改密钥
+```
+启动前，切记配置文件中修改，修改默认的32位密钥，避免被伪造攻击
+spring.gaea.Security.jwtSecret = 修改32位jwt密钥
+```
+### 慎重公网
+```
+建议内网部署，避免公网攻击
+```
 
 ## 快速入门
 
