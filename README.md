@@ -189,7 +189,7 @@ aj_report（存放系统基础数据）数据库 <br>
 感谢关注并使用AJ-Report的朋友，如果贵公司、组织、学校等正在使用AJ-Report，希望可以按照此[Issue](https://gitee.com/anji-plus/report/issues/I3ZXT4)
 登记并提供贵公司、组织、学校的logo，我们将把贵方的logo放在项目首页进行展示并优先进行技术支持 <br>
 
-<a href='http://www.anji-plus.com/'> <img src="https://ajreport.beliefteam.cn/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/> </a>
+<a href='https://www.yunstech.cn'> <img src="doc/docs/picture/WhoIsUsing/1.png" width = "130" height = "50" align=left/> </a>
 <a href='https://www.yunstech.cn/'><img src="https://ajreport.beliefteam.cn/file/download/d9020e78-cd51-404d-9996-ef32a3654beb" width = "130" height = "50" /> </a>
 <a href='http://www.fgkb.net/'><img src="https://ajreport.beliefteam.cn/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
 <a href='http://www.turingoal.com/'><img src="https://ajreport.beliefteam.cn/file/download/cda7bf68-376b-45dc-9a55-c52b21e4a8c8" width = "130" height = "50" /> </a>
