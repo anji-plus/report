@@ -190,11 +190,7 @@ aj_report（存放系统基础数据）数据库 <br>
 登记并提供贵公司、组织、学校的logo，我们将把贵方的logo放在项目首页进行展示并优先进行技术支持 <br>
 
 <a href='http://www.jtit.com.cn/'><img src="doc/docs/picture/WhoIsUsing/17.png" width = "130" height = "50" /> </a>
-
-![广东南铝建筑机器人科技有限公司](doc/docs/picture/WhoIsUsing/5.png)
-
-<img src="https://foruda.gitee.com/images/1674127216326288249/5a251727_10057706.png" width = "130" height = "50" /> 
-
+<img src="doc/docs/picture/WhoIsUsing/5.png" width = "130" height = "50" alt="广东南铝建筑机器人科技有限公司"/> 
 <a href='https://www.yunstech.cn'> <img src="doc/docs/picture/WhoIsUsing/1.png" width = "130" height = "50" align=left/> </a>
 <a href='http://www.fgkb.net/'><img src="https://ajreport.beliefteam.cn/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
 <a href='http://www.turingoal.com/'><img src="https://ajreport.beliefteam.cn/file/download/cda7bf68-376b-45dc-9a55-c52b21e4a8c8" width = "130" height = "50" /> </a>
