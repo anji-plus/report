@@ -189,8 +189,8 @@ aj_report（存放系统基础数据）数据库 <br>
 感谢关注并使用AJ-Report的朋友，如果贵公司、组织、学校等正在使用AJ-Report，希望可以按照此[Issue](https://gitee.com/anji-plus/report/issues/I3ZXT4)
 登记并提供贵公司、组织、学校的logo，我们将把贵方的logo放在项目首页进行展示并优先进行技术支持 <br>
 
+<a href='http://www.jtit.com.cn/'><img src="doc/docs/picture/WhoIsUsing/17.png" width = "130" height = "50" /> </a>
 <a href='https://www.yunstech.cn'> <img src="doc/docs/picture/WhoIsUsing/1.png" width = "130" height = "50" align=left/> </a>
-<a href='https://www.yunstech.cn/'><img src="https://ajreport.beliefteam.cn/file/download/d9020e78-cd51-404d-9996-ef32a3654beb" width = "130" height = "50" /> </a>
 <a href='http://www.fgkb.net/'><img src="https://ajreport.beliefteam.cn/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
 <a href='http://www.turingoal.com/'><img src="https://ajreport.beliefteam.cn/file/download/cda7bf68-376b-45dc-9a55-c52b21e4a8c8" width = "130" height = "50" /> </a>
 <br>
@@ -206,7 +206,6 @@ aj_report（存放系统基础数据）数据库 <br>
 <br>
 <a href='https://www.wenkai.net/'><img src="https://ajreport.beliefteam.cn/file/download/ec788c55-bffd-4809-ae3c-0ce2cbd1a9d0" width = "130" height = "50" /> </a>
 <a href='http://www.sungcor.com/'><img src="https://ajreport.beliefteam.cn/file/download/0514a4a6-787b-4e25-be94-03ff94309553" width = "130" height = "50" /> </a>
-<a href='http://www.jtit.com.cn/'><img src="https://ajreport.beliefteam.cn/file/download/1dc47a36-a515-4775-af44-262225b3662b" width = "130" height = "50" /> </a>
 <img src="https://foruda.gitee.com/images/1674127216326288249/5a251727_10057706.png" width = "130" height = "50" /> 
 <br>
 <img src="https://foruda.gitee.com/images/1691410310696414681/4d929a1f_9924966.png" width = "130" height = "50" /> 
