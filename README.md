@@ -201,20 +201,18 @@ aj_report（存放系统基础数据）数据库 <br>
 <a href='https://soft.pusdn.com/'><img src="doc/docs/picture/WhoIsUsing/15.png" width = "130" height = "50" /> </a> 
 <br>
 
-<a href='https://www.sandieji.tech/'><img src="doc/docs/picture/WhoIsUsing/9.png" width = "130" height = "130" /> </a>
-<img src="doc/docs/picture/WhoIsUsing/11.png" width = "130" height = "130" alt="北京易盛宁洲科技有限公司"/>
-<img src="doc/docs/picture/WhoIsUsing/10.png" width = "130" height = "130" alt="光引科技"/>   
-<img src="doc/docs/picture/WhoIsUsing/8.png" width = "130" height = "130" alt="武汉微安信息科技有限公司"/>   
+<a href='https://www.sandieji.tech/'><img src="doc/docs/picture/WhoIsUsing/9.png" width = "128" height = "130" /></a>
+<img src="doc/docs/picture/WhoIsUsing/11.png" width = "128" height = "130" alt="北京易盛宁洲科技有限公司"/>
+<img src="doc/docs/picture/WhoIsUsing/10.png" width = "128" height = "130" alt="光引科技"/>
+<img src="doc/docs/picture/WhoIsUsing/8.png" width = "128" height = "130" alt="武汉微安信息科技有限公司"/> 
 <br>
 
-<br>
 <a href='https://www.zjjcl.cn/'><img src="doc/docs/picture/WhoIsUsing/16.png" width = "130" height = "50" /> </a>
 <a href='https://www.wenkai.net/'><img src="doc/docs/picture/WhoIsUsing/13.png" width = "130" height = "50" /> </a>
-
+<img src="doc/docs/picture/WhoIsUsing/7.png" width = "130" height = "50" /> 
+<img src="doc/docs/picture/WhoIsUsing/6.jpeg" width = "130" height = "50" /> 
+<img src="doc/docs/picture/WhoIsUsing/14.png" width = "130" height = "50" /> 
 <br>
-<img src="https://foruda.gitee.com/images/1691410310696414681/4d929a1f_9924966.png" width = "130" height = "50" /> 
-<img src="https://foruda.gitee.com/images/1699350359035432620/d6f9fe27_12173106.jpeg" width = "130" height = "50" /> 
-<img src="https://foruda.gitee.com/images/1696254998043055555/67afe17a_4817562.png" width = "130" height = "130" /> 
 
 ## 已知问题
 
