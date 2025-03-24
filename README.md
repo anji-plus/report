@@ -6,9 +6,15 @@
 多数据源支持，内置mysql、elasticsearch、kudu驱动，支持自定义数据集省去数据接口开发，目前已支持30+种大屏组件/图表，不会开发，照着设计稿也可以制作大屏。<br>
 &emsp; &emsp; 三步轻松完成大屏设计：配置数据源---->写SQL配置数据集---->拖拽配置大屏---->保存发布。欢迎体验。
 
-## 在线体验
+## 在线体验-暂时下线
 
-#### &emsp; [在线文档](https://gitee.com/anji-plus/report/tree/dev/doc/docs/guide "doc"): https://gitee.com/anji-plus/report/tree/dev/doc/docs/guide <br>
+### 文档位置
+源码 doc -> docs -> guide 目录下即所有文档
+
+### 模板链接
+通过百度网盘分享的文件：大屏模板
+链接:https://pan.baidu.com/s/1rkjBiiTpA4DBQdep-uAYzQ?pwd=w3rm 
+提取码:w3rm
 
 #### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
