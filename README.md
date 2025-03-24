@@ -252,9 +252,6 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
 
-技术交流群八，可直接扫码进<br>
-<img src="https://ajreport.beliefteam.cn/file/download/ab5e6ddd-8a54-4aea-85b1-9da6937cce9b" width = "300" height = "450" align=left/>
-
 个人微信：个人微信，不闲聊，加群、咨询请备注，备注格式不限但最好是：“项目名 + 问题” ，项目名可以是**AJ-Report**、**Report**、**大屏**，只要能一眼分辨就行 <br>
 例1：大屏 加群 <br>
 例2：report 有个问题xxxx <br>
