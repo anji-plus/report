@@ -105,7 +105,88 @@ export const widgetText = {
         required: false,
         placeholder: '',
         value: false,
-      }
+      },
+      [
+        {
+          name: '自定义样式设置',
+          list: [
+            {
+              type: 'el-switch',
+              label: '启用条件样式',
+              name: 'useCondition',
+              required: false,
+              placeholder: '',
+              value: false,
+            },
+            {
+              type: 'el-select',
+              label: '条件类型',
+              name: 'conditionOperator',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: '>', name: '大于' },
+                { code: '<', name: '小于' },
+                { code: '=', name: '等于' },
+                { code: '>=', name: '大于等于' },
+                { code: '<=', name: '小于等于' },
+                { code: 'includes', name: '包含' },
+              ],
+              value: '=',
+            },
+            {
+              type: 'el-input-text',
+              label: '条件值',
+              name: 'conditionValue',
+              required: false,
+              placeholder: '输入数值或文本',
+              value: '',
+            },
+            {
+              type: 'vue-color',
+              label: '条件文本颜色',
+              name: 'conditionTextColor',
+              required: false,
+              placeholder: '',
+              value: '#FF0000',
+            },
+            {
+              type: 'vue-color',
+              label: '条件背景色',
+              name: 'conditionBgColor',
+              required: false,
+              placeholder: '',
+              value: 'rgba(255,255,255,0)',
+            },
+            {
+              type: 'el-select',
+              label: '条件文字粗细',
+              name: 'conditionFontWeight',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'bold', name: '粗体' },
+                { code: 'bolder', name: '特粗体' },
+                { code: 'lighter', name: '细体' }
+              ],
+              value: 'bold'
+            },
+            {
+              type: 'el-select',
+              label: '条件字体样式',
+              name: 'conditionFontStyle',
+              required: false,
+              placeholder: '',
+              selectOptions: [
+                { code: 'normal', name: '正常' },
+                { code: 'italic', name: '斜体' }
+              ],
+              value: 'normal'
+            }
+          ]
+        }
+      ]
     ],
     // 数据
     data: [
