@@ -113,14 +113,18 @@ export default {
       //   this.$message("暂不支持pdf");
       //   return;
       // }
+      let extend = '.xlsx';
       const result = {};
       result["reportCode"] = this.reportCode;
       result["setParam"] = JSON.stringify(this.params.setParam);
       if (val != "") {
         result["exportType"] = val;
+        if (val === "gaea_template_pdf") {
+          extend = '.pdf';
+        }
       }
       this.getCellStyleData(result);
-      const fileName = this.reportCode + ".xlsx";
+      const fileName = this.reportCode + extend;
       exportExcel(result).then(res=>{
         const that = this;
         const type = res.type;
