@@ -562,7 +562,7 @@ export const widgetLinechart = {
             },
             {
               type: 'el-input-text',
-              label: '最大值',
+              label: '最小值',
               name: 'minY',
               required: false,
               placeholder: '',

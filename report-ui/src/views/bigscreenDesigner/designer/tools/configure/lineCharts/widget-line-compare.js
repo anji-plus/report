@@ -486,7 +486,7 @@ export const widgetLineCompare = {
             },
             {
               type: 'el-input-text',
-              label: '最大值',
+              label: '最小值',
               name: 'minYTop',
               required: false,
               placeholder: '',
@@ -737,7 +737,7 @@ export const widgetLineCompare = {
             },
             {
               type: 'el-input-text',
-              label: '最大值',
+              label: '最小值',
               name: 'minYBottom',
               required: false,
               placeholder: '',

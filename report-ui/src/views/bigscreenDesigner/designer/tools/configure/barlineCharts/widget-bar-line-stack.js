@@ -676,7 +676,7 @@ export const widgetBarLineStack = {
             },
             {
               type: 'el-input-text',
-              label: '最大值',
+              label: '最小值',
               name: 'minYLeft',
               required: false,
               placeholder: '',
@@ -956,7 +956,7 @@ export const widgetBarLineStack = {
             },
             {
               type: 'el-input-text',
-              label: '最大值',
+              label: '最小值',
               name: 'minYRight',
               required: false,
               placeholder: '',
