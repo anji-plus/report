@@ -387,6 +387,22 @@ export const widgetBarlinechart = {
               value: true,
             },
             {
+              type: 'el-input-text',
+              label: '最大值',
+              name: 'maxX',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
+              type: 'el-input-text',
+              label: '最小值',
+              name: 'minX',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
               type: 'el-select',
               label: '数值位置',
               name: 'positionX',
@@ -660,7 +676,7 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-text',
-              label: '最大值',
+              label: '最小值',
               name: 'minYLeft',
               required: false,
               placeholder: '',
@@ -940,7 +956,7 @@ export const widgetBarlinechart = {
             },
             {
               type: 'el-input-text',
-              label: '最大值',
+              label: '最小值',
               name: 'minYRight',
               required: false,
               placeholder: '',

@@ -184,6 +184,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         File file = null;
         File pdfFile = null;
 
+        String fileExtName = ".xlsx";
         String fileName = report.getReportCode();
         File dir = new File(dictPath + ZIP_PATH);
         if (!dir.exists()) {
@@ -192,19 +193,39 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         String filePath = dir.getAbsolutePath() + File.separator + fileName + ".xlsx";
         file = new File(filePath);
         out = Files.newOutputStream(Paths.get(filePath));
-        XlsUtil.exportXlsFile(out, true, lists);
 
+        XlsUtil.exportXlsFile(out, true, lists);
         ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
-        builder.contentLength(file.length());
         //application/octet-stream 二进制数据流（最常见的文件下载）
         builder.contentType(MediaType.APPLICATION_OCTET_STREAM);
-        if (isIeBrowser) {
-            builder.header("Content-Disposition", "attachment; filename=" + reportCode + ".xlsx");
-        } else {
-            builder.header("Content-Disposition", "attacher; filename*=UTF-8''" + reportCode + ".xlsx");
-        }
-        ResponseEntity<byte[]> body = builder.body(FileUtils.readFileToByteArray(file));
+        ResponseEntity<byte[]> body = null;
+        //
+        if (exportType.equals(ExportTypeEnum.GAEA_TEMPLATE_EXCEL.getCodeValue())) {
+            if (isIeBrowser) {
+                builder.header("Content-Disposition", "attachment; filename=" + reportCode + fileExtName);
+            } else {
+                builder.header("Content-Disposition", "attacher; filename*=UTF-8''" + reportCode + fileExtName);
+            }
+            builder.contentLength(file.length());
+            body = builder.body(FileUtils.readFileToByteArray(file));
+        } else if (exportType.equals(ExportTypeEnum.GAEA_TEMPLATE_PDF.getCodeValue())) {
+            // 将Excel文件转换为PDF
+            fileExtName = ".pdf";
+            if (isIeBrowser) {
+                builder.header("Content-Disposition", "attachment; filename=" + reportCode + fileExtName);
+            } else {
+                builder.header("Content-Disposition", "attacher; filename*=UTF-8''" + reportCode + fileExtName);
+            }
+            String pdfFileName = fileName + fileExtName;
+            String pdfFilePath = dir.getAbsolutePath() + File.separator + pdfFileName;
+            pdfFile = convertExcelToPdf(filePath, pdfFilePath, reportExcelStyleList);
 
+            builder.contentLength(pdfFile.length());
+            body= builder.body(FileUtils.readFileToByteArray(pdfFile));
+        }else{
+            logger.error("不支持的文件后缀");
+            throw new BusinessException(ResponseCode.FILE_SUFFIX_UNSUPPORTED);
+        }
         return body;
     }
 
@@ -286,7 +307,6 @@ public class ReportExcelServiceImpl implements ReportExcelService {
 
             // 设置中文字体
             BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
-            Font font = new Font(baseFont, 10, Font.NORMAL);
 
             // 设置表头
             Row headerRow = sheet.getRow(0);
@@ -295,10 +315,10 @@ public class ReportExcelServiceImpl implements ReportExcelService {
 
                 // 获取单元格样式
                 PdfPCell tableCell = new PdfPCell();
-                tableCell.setPhrase(new Phrase(getStringValue(headerCell), font));
+                //tableCell.setPhrase(new Phrase(getStringValue(headerCell), font));
                 ReportExcelStyleDto reportExcelStyleDto = reportExcelStyleList.get(0).get(i);
                 if (!Objects.isNull(reportExcelStyleDto)) {
-                    processCellStyle(reportExcelStyleDto, tableCell, font);
+                    processCellStyle(reportExcelStyleDto, tableCell, headerCell, baseFont);
                 }
                 table.addCell(tableCell);
             }
@@ -316,10 +336,10 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                         cell.setCellValue(" ");
                     }
                     PdfPCell tableCell = new PdfPCell();
-                    tableCell.setPhrase(new Phrase(getStringValue(cell), font));
+                    //tableCell.setPhrase(new Phrase(getStringValue(cell), font));
                     ReportExcelStyleDto reportExcelStyleDto = reportExcelStyleList.get(i).get(j);
                     if (!Objects.isNull(reportExcelStyleDto)) {
-                        processCellStyle(reportExcelStyleDto, tableCell, font);
+                        processCellStyle(reportExcelStyleDto, tableCell, cell, baseFont);
                     }
                     table.addCell(tableCell);
                 }
@@ -348,13 +368,15 @@ public class ReportExcelServiceImpl implements ReportExcelService {
      *
      * @param tableCell
      */
-    public void processCellStyle(ReportExcelStyleDto reportExcelStyleDto, PdfPCell tableCell, Font font) {
+    public void processCellStyle(ReportExcelStyleDto reportExcelStyleDto, PdfPCell tableCell, Cell cell, BaseFont baseFont) {
         // 处理单元格背景颜色
         String bg = reportExcelStyleDto.getBg();
         java.awt.Color color = null;
         if (!Objects.isNull(bg)) {
             color = parseRGB(bg);
-            tableCell.setBackgroundColor(new BaseColor(color.getRed(), color.getGreen(), color.getBlue()));
+            if(color != null){
+                tableCell.setBackgroundColor(new BaseColor(color.getRed(), color.getGreen(), color.getBlue()));
+            }
         }
         // 处理字体
         String fc = reportExcelStyleDto.getFc();
@@ -366,11 +388,15 @@ public class ReportExcelServiceImpl implements ReportExcelService {
         Integer ht = reportExcelStyleDto.getHt();
         Integer vt = reportExcelStyleDto.getVt();
 
+        //循环外会导致所有单元格共用一个font
+        Font font = new Font(baseFont, 10, Font.NORMAL);
 
         // 设置字体颜色
         if (!Objects.isNull(fc)) {
             color = parseRGB(fc);
-            font.setColor(new BaseColor(color.getRed(), color.getGreen(), color.getBlue()));
+            if(color != null){
+                font.setColor(new BaseColor(color.getRed(), color.getGreen(), color.getBlue()));
+            }
         }
         // 设置字体
         if (!Objects.isNull(ff) && !Objects.equals("0", ff)) {
@@ -429,6 +455,7 @@ public class ReportExcelServiceImpl implements ReportExcelService {
                 tableCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
             }
         }
+        tableCell.setPhrase(new Phrase(getStringValue(cell), font));
         Phrase phrase = tableCell.getPhrase();
         tableCell.setPhrase(new Paragraph(phrase.getContent(), font));
         //处理字体
@@ -438,12 +465,22 @@ public class ReportExcelServiceImpl implements ReportExcelService {
 
     public static java.awt.Color parseRGB(String rgb) {
         try {
-            String[] components = rgb.substring(rgb.indexOf("(") + 1, rgb.indexOf(")")).split(",");
-            int red = Integer.parseInt(components[0].trim());
-            int green = Integer.parseInt(components[1].trim());
-            int blue = Integer.parseInt(components[2].trim());
+            if (rgb.startsWith("#")) {
+                // 处理 #ffffff 格式
+                String hex = rgb.substring(1);
+                int red = Integer.parseInt(hex.substring(0, 2), 16);
+                int green = Integer.parseInt(hex.substring(2, 4), 16);
+                int blue = Integer.parseInt(hex.substring(4, 6), 16);
+                return new java.awt.Color(red, green, blue);
+            }else if (rgb.startsWith("(") || rgb.startsWith("rgb(")) {
+                String[] components = rgb.substring(rgb.indexOf("(") + 1, rgb.indexOf(")")).split(",");
+                int red = Integer.parseInt(components[0].trim());
+                int green = Integer.parseInt(components[1].trim());
+                int blue = Integer.parseInt(components[2].trim());
 
-            return new java.awt.Color(red, green, blue);
+                return new java.awt.Color(red, green, blue);
+            }
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null; // 解析失败，返回null

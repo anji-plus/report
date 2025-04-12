@@ -35,6 +35,15 @@
     password: appuser@anji
 ```
 
+## flyway
+
+flyway是用于自动执行sql，因为mysql版本及配置等问题，flyway可能会执行失败。如果你mysql没问题，注意检查flyway是否开启。<br>
+
+```yaml
+  flyway:
+    enabled: false    #是否开启flyway（自动执行sql脚本），默认false
+```
+
 ## OSS配置
 
 OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->amazonS3->nfs <br>

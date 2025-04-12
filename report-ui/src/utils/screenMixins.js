@@ -295,16 +295,55 @@ const mixin = {
     },
     // 复制
     copylayer() {
-      const obj = this.deepClone(this.widgets[this.rightClickIndex]);
-      obj.value.position.top += 40; // 复制的元素向右下角偏移一点
-      obj.value.position.left += 40;
-      obj.value.widgetId = Number(Math.random().toString().substr(2)).toString(
-        36
-      );
-      this.widgets.splice(this.widgets.length, 0, obj);
-      this.$nextTick(() => {
-        this.layerClick(this.widgets.length - 1); // 复制后定位到最新的组件
-      });
+      if (this.selectedWidgets.length === 1) {
+        // 单选复制
+        const obj = this.deepClone(this.widgets[this.rightClickIndex]);
+        obj.value.position.top += 40; // 复制的元素向右下角偏移一点
+        obj.value.position.left += 40;
+        obj.value.widgetId = Number(
+          Math.random()
+            .toString()
+            .substr(2)
+        ).toString(36);
+        this.widgets.splice(this.widgets.length, 0, obj);
+        this.$nextTick(() => {
+          this.layerClick(this.widgets.length - 1); // 复制后定位到最新的组件
+        });
+      } else {
+        // 多选复制
+        this.handleMouseDown();
+        const selectedWidgets = [];
+        const selectedWidgetsDom = [];
+        this.widgets.filter(c => {
+          this.selectedWidgets.filter(d => {
+            if (c.value.widgetId === d.value.widgetId) {
+              selectedWidgets.push(c)
+              selectedWidgetsDom.push(d)
+            }
+          })
+        })
+        this.selectedWidgets = [];
+        selectedWidgets.map((sw, index) => {
+          const newSw = this.deepClone(sw)
+          newSw.value.position.left += 100;
+          newSw.value.widgetId = Number(
+            Math.random()
+              .toString()
+              .substr(2)
+          ).toString(36);
+          this.widgets.push(newSw);
+          this.$nextTick(() => {
+            this.$refs.widgets.map(select => {
+              if (select.value.widgetId === newSw.value.widgetId) {
+                this.$nextTick(() => {
+                  select.$refs.draggable.setActive(true);
+                  this.selectedWidgets.push(select);
+                });
+              }
+            })
+          })
+        })
+      }
     },
     // 置顶
     istopLayer() {

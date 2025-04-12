@@ -1,5 +1,11 @@
 <template>
-  <video :style="styleColor" :src="styleColor.videoAdress" controls="controls">
+  <video 
+    :style="styleColor" 
+    :src="styleColor.videoAdress" 
+    controls="controls" 
+    :loop="styleColor.loop"
+    :autoplay="styleColor.autoplay"
+    :muted="styleColor.autoplay">
     您的浏览器不支持 video 标签。
   </video>
 </template>
@@ -29,7 +35,9 @@ export default {
         left: this.transStyle.left + "px",
         top: this.transStyle.top + "px",
         right: this.transStyle.right + "px",
-        videoAdress: this.transStyle.videoAdress
+        videoAdress: this.transStyle.videoAdress,
+        loop: this.transStyle.isLoop,
+        autoplay: this.transStyle.autoplay
       };
     }
   },

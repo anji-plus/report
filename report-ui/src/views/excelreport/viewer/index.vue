@@ -6,7 +6,10 @@
  * @Last Modified time: 2022-1-26 11:04:24
  !-->
 <template>
-  <div class="layout">
+  <div class="layout" :class="{ 'collapsed': collapsed }">
+    <div class="layout-toggle" @click="toggleSidebar">
+      <i :class="collapsed ? 'el-icon-d-arrow-right' : 'el-icon-d-arrow-left'"></i>
+    </div>
     <div class="layout-right">
       <div class="block">
         <div class="download">
@@ -64,6 +67,7 @@ export default {
       dataSet: null,
       tableData2: [],
       excelData: {},
+      collapsed: true, // 默认收起侧边栏
       params: {
         reportCode: "",
         setParam: ""
@@ -76,7 +80,23 @@ export default {
   created() {
     this.reportCode = this.$route.query.reportCode;
   },
+  beforeDestroy() {
+    // 移除事件监听器，避免内存泄漏
+    if (this.resizeHandler) {
+      window.removeEventListener('resize', this.resizeHandler);
+    }
+  },
   methods: {
+    // 切换侧边栏显示/隐藏
+    toggleSidebar() {
+      this.collapsed = !this.collapsed;
+      // 在状态变化后重新调整表格大小
+      setTimeout(() => {
+        if (typeof luckysheet !== 'undefined' && luckysheet.resize) {
+          luckysheet.resize();
+        }
+      }, 300);
+    },
     async searchPreview() {
       const arr = this.toObject(this.tableData2);
       this.params.setParam = JSON.stringify(arr);
@@ -113,14 +133,18 @@ export default {
       //   this.$message("暂不支持pdf");
       //   return;
       // }
+      let extend = '.xlsx';
       const result = {};
       result["reportCode"] = this.reportCode;
       result["setParam"] = JSON.stringify(this.params.setParam);
       if (val != "") {
         result["exportType"] = val;
+        if (val === "gaea_template_pdf") {
+          extend = '.pdf';
+        }
       }
       this.getCellStyleData(result);
-      const fileName = this.reportCode + ".xlsx";
+      const fileName = this.reportCode + extend;
       exportExcel(result).then(res=>{
         const that = this;
         const type = res.type;
@@ -219,6 +243,14 @@ export default {
       $(function() {
         luckysheet.create(options);
       });
+
+      // 添加窗口大小变化监听器，以便在窗口大小变化时重新调整表格大小
+      this.resizeHandler = () => {
+        if (typeof luckysheet !== 'undefined' && luckysheet.resize) {
+          luckysheet.resize();
+        }
+      };
+      window.addEventListener('resize', this.resizeHandler);
     },
     getCellStyleData(result) {
       const sheetData = luckysheet.getluckysheetfile(); // 获取整个表格的数据
@@ -281,6 +313,53 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+.layout-toggle {
+  position: absolute;
+  left: 200px;
+  top: 20px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 60px;
+  background-color: #fff;
+  border: 1px solid #e8eaec;
+  border-left: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10001;
+  transition: all 0.2s ease-in-out;
+
+  i {
+    color: #909399;
+  }
+
+  &:hover {
+    background-color: #f5f7fa;
+    i {
+      color: #409EFF;
+    }
+  }
+}
+
+.layout.collapsed {
+  .layout-toggle {
+    left: 0;
+  }
+
+  .layout-right {
+    left: -200px; /* 收起时将面板移出可视区域 */
+  }
+
+  .layout-middle {
+    left: 0;
+    width: 100%;
+  }
+}
+
 .layout-middle {
   display: block;
   position: absolute;
@@ -289,6 +368,7 @@ export default {
   width: calc(100% - 200px);
   margin: 0;
   padding: 0;
+  transition: all 0.2s ease-in-out;
 
   .excel-designer {
     display: block;
@@ -312,5 +392,7 @@ export default {
   font-size: 14px;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  z-index: 10000;
 }
 </style>

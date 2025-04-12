@@ -182,6 +182,8 @@ export default {
         type: "category",
         // 坐标轴是否显示
         show: optionsSetup.isShowX,
+        max: optionsSetup.maxX !== "" ? optionsSetup.maxX : null,
+        min: optionsSetup.minX !== "" ? optionsSetup.minX : null,
         position: optionsSetup.positionX,
         offset: optionsSetup.offsetX,
         // 坐标轴名称

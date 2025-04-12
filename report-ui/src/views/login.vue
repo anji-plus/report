@@ -18,7 +18,7 @@
       </div>
       <div class="right">
         <div class="item">
-          <a href="https://ajreport.beliefteam.cn/report-doc/" target="blank"
+          <a href="https://gitee.com/anji-plus/report/wikis/Home" target="blank"
             >文档</a
           >
         </div>

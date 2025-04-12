@@ -7,12 +7,19 @@
 &emsp; &emsp; 三步轻松完成大屏设计：配置数据源---->写SQL配置数据集---->拖拽配置大屏---->保存发布。欢迎体验。
 
 ## 在线体验
-
 #### &emsp; [在线体验](https://ajreport.beliefteam.cn/index.html "链接"): https://ajreport.beliefteam.cn/index.html  &emsp;体验账号：guest 密码：guest
 
 #### &emsp; [在线文档](https://ajreport.beliefteam.cn/report-doc/ "doc"): https://ajreport.beliefteam.cn/report-doc/ <br>
 
+#### 文档位置
+源码 doc -> docs -> guide 目录下即所有文档
+
 #### &emsp; [模板下载](https://ajreport.beliefteam.cn/download "temp"): https://ajreport.beliefteam.cn/download<br>
+
+#### 模板链接
+通过百度网盘分享的文件：大屏模板
+链接:https://pan.baidu.com/s/1rkjBiiTpA4DBQdep-uAYzQ?pwd=w3rm 
+提取码:w3rm
 
 #### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
 
@@ -72,7 +79,7 @@
 - [Jdk] 1.8
 
 ### 后端
-
+- [aj-gaea](https://gitee.com/anji-plus/gaea) 低代码平台+spring微服务组件.
 - [Spring Boot2.3.5.RELEASE](https://spring.io/projects/spring-boot/): Spring Boot是一款开箱即用框架，让我们的Spring应用变的更轻量化、更快的入门。
   在主程序执行main函数就可以运行。你也可以打包你的应用为jar并通过使用java -jar来运行你的Web应用；
 - [Mybatis-plus3.3.2](https://mp.baomidou.com/): MyBatis-plus（简称 MP）是一个 MyBatis (opens new window) 的增强工具。
@@ -113,7 +120,7 @@ npm run docs:dev
 ```
 下载最新发行版，解压
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址、jwt令牌等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
@@ -130,7 +137,9 @@ http://serverip:9095
 在Linux上先准备好maven、node.js、jdk
 
 - [Apache Maven] 3.5 <br>
-- [Node.js] v14.16.0 <br>
+- [Node.js] 
+  - report1.5以下版本请使用 node<= V14 
+  - report1.5及以上版本请使用 node= V16 
 - [Jdk] 1.8
 
 简易步骤
@@ -143,7 +152,7 @@ sh build.sh
 
 unzip aj-report-xxxx.zip
 cd aj-report-xxxx
-vim conf/bootstrap.yml 修改数据库连接、上传下载地址等信息
+vim conf/bootstrap.yml 修改数据库连接、上传下载地址、jwt令牌等信息
 sh bin/start.sh Linux启动
 bin/start.bat Windows修改第4行的JAVA_HOME后(去掉rem注释)，双击启动
 
@@ -156,6 +165,17 @@ http://serverip:9095
 ### 前后端分离部署
 
 **[前后端分离部署参考文档](https://ajreport.beliefteam.cn/report-doc/guide/quicklySeparate.html)** <br>
+
+## 信息安全
+### 修改密钥
+```
+启动前，切记配置文件中修改，修改默认的32位密钥，避免被伪造攻击，修改admin默认密码
+spring.gaea.Security.jwtSecret = 修改32位jwt密钥
+```
+### 慎重公网
+```
+建议内网部署，避免公网攻击
+```
 
 ## 快速入门
 
@@ -171,36 +191,39 @@ sql文件的目录在：report-core --> src --> main --> resources -- > db.migra
 系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件，执行完将会创建
 aj_report（存放系统基础数据）数据库 <br>
 
+**注意：** 如果sql初始化有问题，请将bootstrap.yml中flyway改为false，并手动执行这些sql <br>
+
+示例数据sql目录在：doc/example，有需要的请手动执行 <br>
+
 ## 谁在使用
 
 感谢关注并使用AJ-Report的朋友，如果贵公司、组织、学校等正在使用AJ-Report，希望可以按照此[Issue](https://gitee.com/anji-plus/report/issues/I3ZXT4)
 登记并提供贵公司、组织、学校的logo，我们将把贵方的logo放在项目首页进行展示并优先进行技术支持 <br>
 
-<a href='http://www.anji-plus.com/'> <img src="https://ajreport.beliefteam.cn/file/download/d287d4d3-d30b-4850-9bac-a6c991409251" width = "130" height = "50" align=left/> </a>
-<a href='https://www.yunstech.cn/'><img src="https://ajreport.beliefteam.cn/file/download/d9020e78-cd51-404d-9996-ef32a3654beb" width = "130" height = "50" /> </a>
-<a href='http://www.fgkb.net/'><img src="https://ajreport.beliefteam.cn/file/download/9ee5b709-5033-4cd5-a784-ebd2877fd373" width = "130" height = "50" /> </a>
-<a href='http://www.turingoal.com/'><img src="https://ajreport.beliefteam.cn/file/download/cda7bf68-376b-45dc-9a55-c52b21e4a8c8" width = "130" height = "50" /> </a>
+<a href='http://www.jtit.com.cn/'><img src="doc/docs/picture/WhoIsUsing/17.png" width = "130" height = "50" /> </a>
+<img src="doc/docs/picture/WhoIsUsing/5.png" width = "130" height = "50" alt="广东南铝建筑机器人科技有限公司"/> 
+<a href='http://www.plian.net/'><img src="doc/docs/picture/WhoIsUsing/4.png" width = "130" height = "50" /> </a>
+<a href='http://www.turingoal.com/'><img src="doc/docs/picture/WhoIsUsing/3.png" width = "130" height = "50" /> </a>
 <br>
-<a href='https://www.gykjweb.com/'><img src="https://ajreport.beliefteam.cn/file/download/d13b03f5-0c20-4878-9a79-f3c76b44bfd9" width = "130" height = "130" /> </a> 
-<img src="https://ajreport.beliefteam.cn/file/download/7fb4731c-a697-4049-b386-396a6c1f9270" width = "130" height = "130" />
-<img src="https://foruda.gitee.com/images/1694349610486939594/f2cd89ab_7349845.png" width = "130" height = "130" /> 
-<a href='https://soft.pusdn.com/'><img src="https://foruda.gitee.com/images/1694967000938437067/9f2f7fcf_868742.png" width = "130" height = "130" /> </a>  
+
+<a href='http://www.yourongyun.cn/'><img src="doc/docs/picture/WhoIsUsing/12.png" width = "130" height = "50" /> </a> 
+<a href='https://www.yunstech.cn'> <img src="doc/docs/picture/WhoIsUsing/1.png" width = "130" height = "50" align=left/> </a>
+<a href='http://www.fgkb.net/'><img src="doc/docs/picture/WhoIsUsing/2.png" width = "130" height = "50" /> </a>
+<a href='https://soft.pusdn.com/'><img src="doc/docs/picture/WhoIsUsing/15.png" width = "130" height = "50" /> </a> 
 <br>
-<a href='http://www.plian.net/'><img src="https://ajreport.beliefteam.cn/file/download/7838f2c2-fdce-4ca7-8373-14d13dcda5cc" width = "130" height = "50" /> </a>
-<a href='https://www.zjjcl.cn/'><img src="https://ajreport.beliefteam.cn/file/download/8df07663-60c9-4e32-a0f2-0ea7d5c46ff9" width = "130" height = "50" /> </a>
-<a href='http://www.jiuyinkj.com/'><img src="https://ajreport.beliefteam.cn/file/download/5889f0e6-ba08-4990-ac89-eabfbb8af8bd" width = "130" height = "50" /> </a>
-<a href='http://www.yourongyun.cn/'><img src="https://ajreport.beliefteam.cn/file/download/90e15ed9-5594-4c14-b318-72aeb6816fb9" width = "130" height = "50" /> </a> 
-</br>
-<a href='https://www.wenkai.net/'><img src="https://ajreport.beliefteam.cn/file/download/ec788c55-bffd-4809-ae3c-0ce2cbd1a9d0" width = "130" height = "50" /> </a>
-<a href='http://www.sungcor.com/'><img src="https://ajreport.beliefteam.cn/file/download/0514a4a6-787b-4e25-be94-03ff94309553" width = "130" height = "50" /> </a>
-<a href='http://www.jtit.com.cn/'><img src="https://ajreport.beliefteam.cn/file/download/1dc47a36-a515-4775-af44-262225b3662b" width = "130" height = "50" /> </a>
-<img src="https://foruda.gitee.com/images/1674127216326288249/5a251727_10057706.png" width = "130" height = "50" /> 
+
+<a href='https://www.sandieji.tech/'><img src="doc/docs/picture/WhoIsUsing/9.png" width = "128" height = "130" /></a>
+<img src="doc/docs/picture/WhoIsUsing/11.png" width = "128" height = "130" alt="北京易盛宁洲科技有限公司"/>
+<img src="doc/docs/picture/WhoIsUsing/10.png" width = "128" height = "130" alt="光引科技"/>
+<img src="doc/docs/picture/WhoIsUsing/8.png" width = "128" height = "130" alt="武汉微安信息科技有限公司"/> 
 <br>
-<img src="https://foruda.gitee.com/images/1691410310696414681/4d929a1f_9924966.png" width = "130" height = "50" /> 
-<img src="https://foruda.gitee.com/images/1699350359035432620/d6f9fe27_12173106.jpeg" width = "130" height = "50" /> 
+
+<a href='https://www.zjjcl.cn/'><img src="doc/docs/picture/WhoIsUsing/16.png" width = "130" height = "50" /> </a>
+<a href='https://www.wenkai.net/'><img src="doc/docs/picture/WhoIsUsing/13.png" width = "130" height = "50" /> </a>
+<img src="doc/docs/picture/WhoIsUsing/7.png" width = "130" height = "50" /> 
+<img src="doc/docs/picture/WhoIsUsing/6.jpeg" width = "130" height = "50" /> 
+<img src="doc/docs/picture/WhoIsUsing/14.png" width = "130" height = "50" /> 
 <br>
-<img src="https://foruda.gitee.com/images/1696254998043055555/67afe17a_4817562.png" width = "130" height = "130" /> 
-<img src="https://ajreport.beliefteam.cn/file/download/38efc241-02db-404e-a181-e5f7632ff2f6" width = "130" height = "130" /> 
 
 ## 已知问题
 
@@ -210,7 +233,7 @@ aj_report（存放系统基础数据）数据库 <br>
 
 已知以下版本存在兼容性问题，请不要使用
 
-- Node.js V16及以上
+- Node.js 请根据实际使用的report版本调整
 - openJdk
 - Jdk 1.7及以下/11及以上（jdk11部分版本有问题）
 - Mysql 8.0（8.0.23/26版本没有问题，8.0.21版本存在问题）
@@ -233,9 +256,6 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 ## 技术支持
 
 **如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
-
-技术交流群九，可直接扫码进。目前七群和八群未满，可通过先进九群然后加我，我会直接先拉进七群。也可直接添加下面的微信，多一个备注要进七/八群<br>
-<img src="https://ajreport.beliefteam.cn/file/download/ab5e6ddd-8a54-4aea-85b1-9da6937cce9b" width = "300" height = "450" align=left/>
 
 个人微信：个人微信，不闲聊，加群、咨询请备注，备注格式不限但最好是：“项目名 + 问题” ，项目名可以是**AJ-Report**、**Report**、**大屏**，只要能一眼分辨就行 <br>
 例1：大屏 加群 <br>
