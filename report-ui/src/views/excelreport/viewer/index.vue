@@ -317,7 +317,7 @@ export default {
 .layout-toggle {
   position: absolute;
   left: 200px;
-  top: 50%;
+  top: 20px;
   transform: translateY(-50%);
   width: 20px;
   height: 60px;
