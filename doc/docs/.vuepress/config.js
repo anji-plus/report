@@ -37,6 +37,7 @@ module.exports = {
                         {title: 'V1.3.x', path: '/guide/releases/1.3.x'},
                         {title: 'V1.4.x', path: '/guide/releases/1.4.x'},
                         {title: 'V1.5.x', path: '/guide/releases/1.5.x'},
+                        {title: 'V1.6.x', path: '/guide/releases/1.6.x'},
                     ]
                 },
                 {
