@@ -16,7 +16,7 @@
     <div class="contentmenu__item" @click="noLockLayer" name="singleSelect">
       <i class="iconfont iconfuzhi1"></i> 解除锁定
     </div>
-    <div class="contentmenu__item" @click="copyLayer" name="singleSelect">
+    <div class="contentmenu__item" @click="copyLayer">
       <i class="iconfont iconfuzhi1"></i> 复制图层
     </div>
     <div class="contentmenu__item" @click="istopLayer" name="singleSelect">

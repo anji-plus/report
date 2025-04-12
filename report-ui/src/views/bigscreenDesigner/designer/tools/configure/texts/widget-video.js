@@ -31,6 +31,22 @@ export const widgetVideo = {
         placeholder: '',
         value: 'https://www.w3school.com.cn//i/movie.ogg',
       },
+      {
+        type: 'el-switch',
+        label: '循环播放',
+        name: 'isLoop',
+        required: false,
+        placeholder: '',
+        value: false,
+      },
+      {
+        type: 'el-switch',
+        label: '自动播放(静音)',
+        name: 'autoplay',
+        required: false,
+        placeholder: '',
+        value: false,
+      },
     ],
     // 数据
     data: [],

@@ -56,12 +56,12 @@ export const widgetImage = {
         value: '0'
       },
       {
-        type: 'custom-upload',
+        type: 'image-select',
         label: '图片地址',
         name: 'imageAdress',
         required: false,
         placeholder: '',
-        value: 'http://10.108.26.197:9095/file/download/fd20d563-00aa-45e2-b5db-aff951f814ec',
+        value: '',
       },
       {
         type: 'vue-color',
