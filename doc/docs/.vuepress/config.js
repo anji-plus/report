@@ -1,6 +1,10 @@
 module.exports = {
     base: '/report-doc/',
     title: 'AJ-Report',
+    head: [
+        ['link', { rel: 'icon', href: '/favicon.ico' }],
+        ['link', { rel: 'shortcut icon', href: '/favicon.ico' }],
+    ],
     description: '使用拖拽快速生成动态大屏报表',
     dest: 'dist',
     lastUpdated: 'Last Updated',
