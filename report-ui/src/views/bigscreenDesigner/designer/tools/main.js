@@ -12,6 +12,7 @@ import {widgetMarquee} from "./configure/texts/widget-marquee"
 import {widgetHref} from "./configure/texts/widget-href"
 import {widgetTime} from "./configure/texts/widget-time"
 import {widgetImage} from "./configure/texts/widget-image"
+import {widgetButton} from "./configure/texts/widget-button"
 import {widgetSliders} from "./configure/texts/widget-slider"
 import {widgetVideo} from "./configure/texts/widget-video"
 import {widgetTable} from "./configure/texts/widget-table"
@@ -64,6 +65,7 @@ export const widgetTool = [
   widgetHref,
   widgetTime,
   widgetImage,
+  widgetButton,
   //  widgetSliders,
   widgetVideo,
   widgetTable,
