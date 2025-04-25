@@ -53,6 +53,11 @@ export const lickageParamsConfig = [
     code: 'WidgetPieNightingaleRoseArea',
     paramsKey: ['name', 'value']
   },
+  {
+    name: '按钮',
+    code: 'widget-button',
+    paramsKey: [] //按钮需要的key来源于要联动的组件所需要的参数
+  },
 ]
 
 export const getOneConfigByCode = function (code) {
@@ -135,6 +140,10 @@ export const targetWidgetLinkageLogic = function (self) {
     if (item.index !== -1 && item.linkageArr.length) {
       item.linkageArr.some(obj => {
         if (obj.targetId === self.value.setup.widgetId) {
+          //如果当前对象是button按钮，需要把传递参数设置给他，方便点击的时候校验表单输入情况
+          if (self.value.setup.widgetCode === 'widget-button') {
+            self.setFormData(obj.paramsConfig); //把要校验的参数传给button表单
+          }
           self.hasLinkage = true
           busEvents.push({
             eventName: `bus_${obj.originId}_${obj.targetId}`,
