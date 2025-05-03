@@ -54,7 +54,7 @@
                 :key="'item' + index"
                 class="tools-item"
                 :class="widgetIndex == index ? 'is-active' : ''"
-                @click="layerClick(index)"
+                @click="layerClick($event,index)"
               >
                 <span class="tools-item-icon">
                   <i class="iconfont" :class="item.icon"></i>
@@ -275,6 +275,9 @@
               @click.self="setOptionsOnClickScreen"
               @drop="widgetOnDragged($event)"
               @dragover="dragOver($event)"
+              @mousedown.self="downEvent($event)"
+              @mouseup="upEvent($event)"
+              @mousemove="moveEvent($event)"
             >
               <div v-if="grade" class="bg-grid"></div>
               <widget
@@ -288,7 +291,7 @@
                 :bigscreen="{ bigscreenWidth, bigscreenHeight }"
                 @onActivated="setOptionsOnClickWidget"
                 @contextmenu.prevent.native="rightClick($event, index)"
-                @mousedown.prevent.native="widgetsClick(index)"
+                @mousedown.prevent.native="widgetsClick($event, index)"
                 @mouseup.prevent.native="grade = false"
               />
             </div>
@@ -351,6 +354,7 @@
       @setlowLayer="setlowLayer"
       @moveupLayer="moveupLayer"
       @movedownLayer="movedownLayer"
+      @alignment="alignment($event)"
     />
   </div>
 </template>
@@ -416,6 +420,18 @@ export default {
       currentSizeRangeIndex: -1, // 当前是哪个缩放比分比,
       currentWidgetTotal: 0,
       widgetParamsConfig: [], // 各组件动态数据集的参数配置情况
+
+      selectedWidgets: [], //多选组件集合
+      moveTimes: 0, //鼠标移动次数
+      selectFlag: false, //选择标识
+      kuangSelectFlag: false, //框选标识
+      downX: 0,  //移动开始X坐标
+      downY: 0,  //移动开始Y坐标
+      downX2: 0, //移动结束X坐标
+      downY2: 0, //移动结束Y坐标
+      rect : null, //框选矩形对象
+      openMulDrag: false, //批量拖拽开关
+      moveWidgets:{},  //记录移动的组件的起始left和top属性
     };
   },
   computed: {
@@ -621,12 +637,20 @@ export default {
         });
       }
     },
-    layerClick(index) {
+    layerClick(event,index) {
       this.widgetIndex = index;
-      this.widgetsClick(index);
+      this.widgetsClick(event,index);
     },
     // 如果是点击大屏设计器中的底层，加载大屏底层属性
     setOptionsOnClickScreen() {
+      console.log("setOptionsOnClickScreen");
+      if(this.selectedWidgets.length > 0  && this.kuangSelectFlag){
+        //如果Ctrl多选过程中，点击了大屏底层，就清空 this.selectedWidgets
+        return;
+      }
+      this.selectFlag = false;
+      this.kuangSelectFlag = false;
+      this.selectedWidgets = [];
       this.screenCode = "screen";
       // 选中不同的组件 右侧都显示第一栏
       this.activeName = "first";
@@ -653,7 +677,50 @@ export default {
       });
       this.widgetOptions = this.deepClone(this.widgets[obj.index]["options"]);
     },
-    widgetsClick(index) {
+    widgetsClick(event,index) {
+      console.log("widgetsClick");
+      //判断是否按住了Ctrl按钮，表示Ctrl多选
+      let _this = this;
+      let eventWidget = null;
+      if(event.currentTarget.__vue__ != null) { // //解决图层栏点击组件定位问题(批量移动改造导致的问题)
+        eventWidget = event.currentTarget.__vue__.$parent;//vue3已经弃用__vue__
+      }
+      if(eventWidget != null){
+        if(event.ctrlKey){ //Ctrl左键选中或者取消选中
+          if(this.selectedWidgets.includes(eventWidget)){
+            this.selectedWidgets = this.selectedWidgets.filter(w=> w!== eventWidget);
+            this.$refs.widgets.forEach(w=>{
+              if(eventWidget.value.widgetId === w.value.widgetId){
+                setTimeout(function (){
+                  _this.$refs.widgets[index].$refs.draggable.setActive(false);
+                  console.log("触发取消选中, eventWidget.value.widgetId = " + eventWidget.value.widgetId +", w.value.widgetId= "+ w.value.widgetId);
+                },200); //设置超时，防止效果被覆盖
+              }
+            })
+            return;
+          }
+          this.widgetsClickAndCtrl(event, index);
+          return;
+        }
+        if(this.selectedWidgets.includes(eventWidget)){  //右键点击菜单的时候 ， 批量拖拽的时候
+          this.openMulDrag = true;
+          this.moveWidgets = {};
+          for (let i = 0; i < this.$refs.widgets.length; i++) {
+            let widget = {
+              left: this.$refs.widgets[i].value.position.left,
+              top: this.$refs.widgets[i].value.position.top
+            };
+            this.moveWidgets[this.$refs.widgets[i].value.widgetId] = widget;
+          }
+          this.calculateMousePosition(event, true);
+          return;
+        }
+      }
+      this.widgetsClickFocus(index);
+    },
+    widgetsClickFocus(index){
+      this.selectedWidgets = []; //单选的时候需要清空
+      this.selectedWidgets.push(this.$refs.widgets[index]); //确保第一个选中的组件添加到集合，不需要按住Ctrl键
       const draggableArr = this.$refs.widgets;
       for (let i = 0; i < draggableArr.length; i++) {
         if (i == index) {
@@ -664,6 +731,15 @@ export default {
       }
       this.setOptionsOnClickWidget(index);
       this.grade = true;
+    },
+    //Ctrl鼠标点击事件
+    widgetsClickAndCtrl(event, index) {
+      const draggableArr = this.$refs.widgets;
+      for (let i = 0; i < draggableArr.length; i++) {
+        if (i === index && ! this.selectedWidgets.includes(this.$refs.widgets[i])) {
+          this.selectedWidgets.push(this.$refs.widgets[i]); //选中的添加到集合
+        }
+      }
     },
     handleMouseDown() {
       const draggableArr = this.$refs.widgets;
@@ -734,6 +810,144 @@ export default {
       evt.preventDefault();
       this.widgets = this.swapArr(this.widgets, evt.oldIndex, evt.newIndex);
     },
+    //计算鼠标坐标
+    calculateMousePosition(event, isStart){
+      let workbenchPosition = this.getDomTopLeftById("workbench");
+      let widgetTopInWorkbench = event.clientY - workbenchPosition.top;
+      let widgetLeftInWorkbench = event.clientX - workbenchPosition.left;
+      const targetScale =
+        this.currentSizeRangeIndex === this.defaultSize.index
+          ? this.bigscreenScaleInWorkbench
+          : this.sizeRange[this.currentSizeRangeIndex] / 100;
+      const x = widgetLeftInWorkbench / targetScale;
+      const y = widgetTopInWorkbench / targetScale;
+      if(isStart){
+        this.downX = x;
+        this.downY = y;
+      }else{
+        this.downX2 = x;
+        this.downY2 = y;
+      }
+    },
+    //鼠标按下事件
+    downEvent(event){
+      console.log("downEvent")
+      this.moveTimes = 0;
+      this.selectedWidgets = [];
+      this.openMulDrag = false;
+      this.selectFlag = true;
+      this.kuangSelectFlag = false; //框选标志
+      //鼠标位置
+      this.calculateMousePosition(event, true)
+
+      if(this.rect != null){
+        document.getElementById("workbench").removeChild(this.rect);
+        this.rect = null;
+      }
+    },
+    //鼠标移动事件
+    moveEvent(event){
+      console.log("moveEvent");
+      //测试的时候发现，每次点击组件，再次点击大屏的时候，偶尔会触发一次moveEvent,导致会生成rect，所以加了移动次数moveTimes 变量控制一下，只有移动多次的情况下，才能说明是框选多选
+      if(this.selectFlag && this.selectedWidgets.length <= 1 && this.moveTimes >= 1){
+        if(this.rect === null){
+          //这里说明一下，为啥不在downEvent方法中创建，是因为
+          this.rect = document.createElement("div");
+          this.rect.style.cssText = "position:absolute; width:0px; height:0px; font-size:0px; margin:0px; border: 1px dashed #0099FF; background-color: #C3D5ED";
+          this.rect.id = "selectedDiv";
+          this.rect.style.left = this.downX +"px";
+          this.rect.style.top = this.downY+"px";
+          this.rect.style.left = this.downX;
+          this.rect.style.top = this.downY;
+        }
+        document.getElementById("workbench").appendChild(this.rect);
+        this.calculateMousePosition(event, false);
+
+        if(this.rect.style.display === "none"){
+          this.rect.style.display = "";
+        }
+        this.rect.style.left = Math.min(this.downX, this.downX2) + "px";
+        this.rect.style.top = Math.min(this.downY, this.downY2) + "px";
+        this.rect.style.width = Math.abs(this.downX -  this.downX2) + "px";
+        this.rect.style.height = Math.abs(this.downY -  this.downY2) + "px";
+        if(this.downX2 < this.downX && this.downY2 < this.downY){
+          this.rect.style.left = this.downX2;
+          this.rect.style.top = this.downY2;
+        }
+        if(this.downX2 > this.downX2 && this.downY2 < this.downY){
+          this.rect.style.left = this.downX;
+          this.rect.style.top = this.downY2;
+        }
+        if(this.downX2 < this.downX && this.downY2 > this.downY){
+          this.rect.style.left = this.downX2;
+          this.rect.style.top = this.downY;
+        }
+        if(this.downX2 > this.downX2 && this.downY2 > this.downY){
+          this.rect.style.left = this.downX;
+          this.rect.style.top = this.downY;
+        }
+      }
+      if (this.openMulDrag) {
+        this.mulWidgetMove(event);
+      }
+      this.moveTimes++;
+    },
+    //批量拖拽移动
+    mulWidgetMove(event){
+      let _this = this;
+      if(this.openMulDrag && this.selectedWidgets.length >= 2){
+        this.calculateMousePosition(event, false);
+        setTimeout(function (){
+          _this.selectedWidgets.forEach(sw=>{
+            for (let i = 0; i < _this.$refs.widgets.length; i++) {
+              if(sw.value.widgetId === _this.$refs.widgets[i].value.widgetId){
+                _this.$refs.widgets[i].value.position.left = _this.moveWidgets[_this.$refs.widgets[i].value.widgetId].left + (_this.downX2 - _this.downX);
+                _this.$refs.widgets[i].value.position.top =  _this.moveWidgets[_this.$refs.widgets[i].value.widgetId].top + (_this.downY2 - _this.downY);
+              }
+            }
+          });
+        },50);
+      }
+    },
+    upEvent(event){
+      console.log("upEvent")
+      if(this.selectFlag && this.selectedWidgets.length === 0 &&  this.rect !== null){
+        this.calculateMousePosition(event, false);
+
+        //计算选择框内的组件
+        const draggableArr = this.$refs.widgets;
+        for (let i = 0; i < draggableArr.length; i++) {
+          //判断组件是否在选择框内
+          let widget = this.$refs.widgets[i];
+          if(this.intersection(widget)){
+            this.selectedWidgets.push(widget);
+            widget.$refs.draggable.setActive(true);
+          }
+        }
+        this.selectFlag = false;
+        this.kuangSelectFlag = true; //框选结束的时候
+      }
+      if(this.rect){
+        document.getElementById("workbench").removeChild(this.rect);
+        this.rect = null;
+      }
+      if(this.openMulDrag){
+        this.mulWidgetMove(event);
+        this.openMulDrag = false;
+      }
+    },
+    //判断矩形框与组件是否相交
+    intersection(widget){
+      return (
+          (widget.value.position.left - this.downX) * (widget.value.position.left - this.downX2) < 0 ||
+          (widget.value.position.left + widget.value.position.width - this.downX) * (widget.value.position.left + widget.value.position.width- this.downX2) < 0
+        )
+        &&
+        (
+          (widget.value.position.top - this.downY) * (widget.value.position.top - this.downY2) < 0 ||
+          (widget.value.position.top + widget.value.position.height - this.downY) * (widget.value.position.top + widget.value.position.height- this.downY2) < 0
+        );
+    }
   },
 };
 </script>

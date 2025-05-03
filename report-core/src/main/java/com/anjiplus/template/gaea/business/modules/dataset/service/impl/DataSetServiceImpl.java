@@ -395,17 +395,23 @@ public class DataSetServiceImpl implements DataSetService {
         DataSet dateSetCopy = copyDataSet(dataSet, dto);
         insert(dateSetCopy);
         String copySetCode = dateSetCopy.getSetCode();
-        DataSetParam dataSetParam = dataSetParamService.selectOne("set_code", setCode);
-        if (null != dataSetParam){
-            dataSetParam.setId(null);
-            dataSetParam.setSetCode(copySetCode);
-            dataSetParamService.insert(dataSetParam);
+
+        List<DataSetParam> dataSetParamList = dataSetParamService.list("set_code", setCode);
+        if (!CollectionUtils.isEmpty(dataSetParamList)){
+            dataSetParamList.forEach(dataSetParam -> {
+                dataSetParam.setId(null);
+                dataSetParam.setSetCode(copySetCode);
+            });
+            dataSetParamService.insertBatch(dataSetParamList);
         }
-        DataSetTransform dataSetTransform = dataSetTransformService.selectOne("set_code", setCode);
-        if (null != dataSetTransform){
-            dataSetTransform.setId(null);
-            dataSetTransform.setSetCode(copySetCode);
-            dataSetTransformService.insert(dataSetTransform);
+
+        List<DataSetTransform> dataSetTransformList = dataSetTransformService.list("set_code", setCode);
+        if (!CollectionUtils.isEmpty(dataSetTransformList)){
+            dataSetTransformList.forEach(dataSetTransform -> {
+                dataSetTransform.setId(null);
+                dataSetTransform.setSetCode(copySetCode);
+            });
+            dataSetTransformService.insertBatch(dataSetTransformList);
         }
     }
 

@@ -20,11 +20,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +39,7 @@ import java.util.UUID;
  */
 @Service
 @Slf4j
-@RefreshScope
+//@RefreshScope
 public class GaeaFileServiceImpl implements GaeaFileService {
 
     @Value("${spring.gaea.subscribes.oss.downloadPath:''}")

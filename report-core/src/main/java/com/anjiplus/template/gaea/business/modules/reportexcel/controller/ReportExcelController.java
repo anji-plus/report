@@ -71,7 +71,7 @@ public class ReportExcelController extends GaeaBaseController<ReportExcelParam, 
 
     @PostMapping("/exportExcel")
     @GaeaAuditLog(pageTitle = "excel导出")
-    @Permission(code = "export", name = "导出")
+    //@Permission(code = "export", name = "导出")
     public ResponseEntity<byte[]> export(HttpServletRequest request, HttpServletResponse response, @RequestBody ReportExcelDto reportExcelDto) throws IOException {
         return reportExcelService.exportExcel(request, response, reportExcelDto);
     }

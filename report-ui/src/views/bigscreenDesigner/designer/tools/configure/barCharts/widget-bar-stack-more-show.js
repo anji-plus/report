@@ -606,6 +606,14 @@ export const widgetBarStackMoreShow = {
               value: '',
             },
             {
+              type: 'el-input-text',
+              label: '最大值',
+              name: 'minY',
+              required: false,
+              placeholder: '',
+              value: '',
+            },
+            {
               type: 'el-select',
               label: '数值位置',
               name: 'positionY',

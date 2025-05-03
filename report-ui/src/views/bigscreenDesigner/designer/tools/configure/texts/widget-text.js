@@ -32,6 +32,14 @@ export const widgetText = {
         value: '文本框',
       },
       {
+        type: 'el-input-text',
+        label: '拼接内容',
+        name: 'joinText',
+        required: false,
+        placeholder: '',
+        value: "",
+      },
+      {
         type: 'el-input-number',
         label: '字体字号',
         name: 'fontSize',

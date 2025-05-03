@@ -10,26 +10,44 @@
     <div class="contentmenu__item" @click="deleteLayer">
       <i class="iconfont iconguanbi"></i> 删除图层
     </div>
-    <div class="contentmenu__item" @click="lockLayer">
+    <div class="contentmenu__item" @click="lockLayer" name="singleSelect">
       <i class="iconfont iconfuzhi1"></i> 锁定图层
     </div>
-    <div class="contentmenu__item" @click="noLockLayer">
+    <div class="contentmenu__item" @click="noLockLayer" name="singleSelect">
       <i class="iconfont iconfuzhi1"></i> 解除锁定
     </div>
-    <div class="contentmenu__item" @click="copyLayer">
+    <div class="contentmenu__item" @click="copyLayer" name="singleSelect">
       <i class="iconfont iconfuzhi1"></i> 复制图层
     </div>
-    <div class="contentmenu__item" @click="istopLayer">
+    <div class="contentmenu__item" @click="istopLayer" name="singleSelect">
       <i class="iconfont iconjinlingyingcaiwangtubiao01"></i> 置顶图层
     </div>
-    <div class="contentmenu__item" @click="setlowLayer">
+    <div class="contentmenu__item" @click="setlowLayer" name="singleSelect">
       <i class="iconfont iconleft-copy"></i> 置底图层
     </div>
-    <div class="contentmenu__item" @click="moveupLayer">
+    <div class="contentmenu__item" @click="moveupLayer" name="singleSelect">
       <i class="iconfont iconjinlingyingcaiwangtubiao01"></i> 上移一层
     </div>
-    <div class="contentmenu__item" @click="movedownLayer">
+    <div class="contentmenu__item" @click="movedownLayer" name="singleSelect">
       <i class="iconfont iconleft-copy"></i> 下移一层
+    </div>
+    <div class="contentmenu__item" @click="alignment('left')" name="mulSelect">
+      <i class="iconfont iconzhankai"></i> 左对齐
+    </div>
+    <div class="contentmenu__item" @click="alignment('right')" name="mulSelect">
+      <i class="iconfont iconzhankai"></i> 右对齐
+    </div>
+    <div class="contentmenu__item" @click="alignment('horizontal_center')" name="mulSelect">
+      <i class="iconfont iconzhankai"></i> 左右居中对齐
+    </div>
+    <div class="contentmenu__item" @click="alignment('top')" name="mulSelect">
+      <i class="iconfont iconzhankai"></i> 上对齐
+    </div>
+    <div class="contentmenu__item" @click="alignment('bottom')" name="mulSelect">
+      <i class="iconfont iconzhankai"></i> 下对齐
+    </div>
+    <div class="contentmenu__item" @click="alignment('vertical_center')" name="mulSelect">
+      <i class="iconfont iconzhankai"></i> 上下居中对齐
     </div>
   </div>
 </template>
@@ -96,6 +114,9 @@ export default {
     movedownLayer() {
       this.$emit("movedownLayer");
     },
+    alignment(align){
+      this.$emit("alignment",align);
+    }
   },
 };
 </script>

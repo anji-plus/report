@@ -126,13 +126,10 @@ export default {
       this.setOptionsTitle();
       this.setOptionsX();
       this.setOptionsY();
-      this.setOptionsLine();
-      this.setOptionsBar();
       this.setOptionsTooltip();
       this.setOptionsData();
       this.setOptionsMargin();
       this.setOptionsLegend();
-      this.setOptionsColor();
     },
     // 标题修改
     setOptionsTitle() {
@@ -229,6 +226,7 @@ export default {
       const yAxis = [
         {
           max: optionsSetup.maxY !== "" ? optionsSetup.maxY : null,
+          min: optionsSetup.minY !== "" ? optionsSetup.minY : null,
           type: "value",
           scale: optionsSetup.scaleY,
           // 均分
@@ -286,79 +284,6 @@ export default {
         },
       ];
       this.options.yAxis = yAxis;
-    },
-    // 折线设置 数值设置
-    setOptionsLine() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "line") {
-          series[key].symbol = optionsSetup.symbol;
-          series[key].showSymbol = optionsSetup.markPoint;
-          series[key].symbolSize = optionsSetup.pointSize;
-          series[key].smooth = optionsSetup.smoothCurve;
-          if (optionsSetup.area) {
-            series[key].areaStyle = {
-              opacity: optionsSetup.areaThickness / 100,
-            };
-          } else {
-            series[key].areaStyle = {
-              opacity: 0,
-            };
-          }
-          series[key].lineStyle = {
-            width: optionsSetup.lineWidth,
-          };
-          series[key].itemStyle.borderRadius = optionsSetup.radius;
-          series[key].label = {
-            show: optionsSetup.isShowLine,
-            position: optionsSetup.fontPositionLine,
-            distance: optionsSetup.fontDistanceLine,
-            fontSize: optionsSetup.fontSizeLine,
-            color: optionsSetup.fontColorLine,
-            fontWeight: optionsSetup.fontWeightLine,
-            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}',
-            fontStyle: optionsSetup.fontStyleLine,
-            fontFamily: optionsSetup.fontFamilyLine,
-          };
-        }
-      }
-      this.options.series = series;
-    },
-    // 柱体设置 数值设置
-    setOptionsBar() {
-      const optionsSetup = this.optionsSetup;
-      const series = this.options.series;
-      for (const key in series) {
-        if (series[key].type == "bar") {
-          series[key].label = {
-            show: optionsSetup.isShowBar,
-            position: optionsSetup.fontPositionBar,
-            distance: optionsSetup.fontDistanceBar,
-            fontSize: optionsSetup.fontSizeBar,
-            color: optionsSetup.fontColorBar,
-            fontWeight: optionsSetup.fontWeightBar,
-            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}',
-            fontStyle: optionsSetup.fontStyleBar,
-            fontFamily: optionsSetup.fontFamilyBar,
-          };
-          //柱体背景属性
-          series[key].showBackground = optionsSetup.isShowBackground;
-          series[key].backgroundStyle = {
-            color: optionsSetup.backgroundStyleColor,
-            borderColor: optionsSetup.backgroundStyleBorderColor,
-            borderWidth: optionsSetup.backgroundStyleBorderWidth,
-            borderType: optionsSetup.backgroundStyleBorderType,
-            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
-            shadowColor: optionsSetup.backgroundStyleShadowColor,
-            opacity: optionsSetup.backgroundStyleOpacity / 100,
-          };
-          series[key].barWidth = optionsSetup.maxWidth;
-          series[key].barMinHeight = optionsSetup.minHeight;
-          series[key].itemStyle.barBorderRadius = optionsSetup.radius;
-        }
-      }
-      this.options.series = series;
     },
     // tooltip 设置
     setOptionsTooltip() {
@@ -421,7 +346,7 @@ export default {
       const series = this.options.series;
       const legendName = optionsSetup.legendName;
       // 图例没有手动写则显示原值，写了则显示新值
-      if (null == legendName || legendName == "") {
+      if (null == legendName || legendName === "") {
         for (let i = 0; i < name.length; i++) {
           series[i].name = name[i];
         }
@@ -433,18 +358,6 @@ export default {
         }
         this.options.legend["data"] = arr;
       }
-    },
-    // 图例颜色修改
-    setOptionsColor() {
-      const optionsSetup = this.optionsSetup;
-      const customColor = optionsSetup.customColor;
-      if (!customColor) return;
-      const arrColor = [];
-      for (let i = 0; i < customColor.length; i++) {
-        arrColor.push(customColor[i].color);
-      }
-      this.options.color = arrColor;
-      this.options = Object.assign({}, this.options);
     },
     // 数据处理
     setOptionsData(e, paramsConfig) {
@@ -466,12 +379,19 @@ export default {
         });
       }
       // 联动接收者逻辑结束
-      optionsData.dataType == "staticData"
+      optionsData.dataType === "staticData"
         ? this.staticDataFn(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
     },
     staticDataFn(val) {
       const series = this.options.series;
+      const optionsSetup = this.optionsSetup;
+      //颜色
+      const customColor = optionsSetup.customColor;
+      const arrColor = [];
+      for (let i = 0; i < customColor.length; i++) {
+        arrColor.push(customColor[i].color);
+      }
       let axis = [];
       let bar = [];
       let line = [];
@@ -480,20 +400,81 @@ export default {
         bar[i] = val[i].bar;
         line[i] = val[i].line;
       }
+      const legendName = [];
+      legendName.push("bar");
+      legendName.push("line");
       // x轴
       this.options.xAxis.data = axis;
       // series
       for (const i in series) {
-        if (series[i].type == "bar") {
+        if (series[i].type === "bar") {
+          series[i].name = legendName[i];
+          series[i].type = "bar";
+          series[i].barGap = optionsSetup.barGap + "%";
           series[i].data = bar;
-        } else {
+          series[i].barWidth = optionsSetup.maxWidth;
+          series[i].barMinHeight = optionsSetup.minHeight;
+          series[i].label = {
+            show: optionsSetup.isShowBar,
+            position: optionsSetup.fontPositionBar,
+            distance: optionsSetup.fontDistanceBar,
+            fontSize: optionsSetup.fontSizeBar,
+            color: optionsSetup.fontColorBar,
+            fontWeight: optionsSetup.fontWeightBar,
+            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}',
+            fontStyle: optionsSetup.fontStyleBar,
+            fontFamily: optionsSetup.fontFamilyBar,
+          };
+          //柱体背景属性
+          series[i].showBackground = optionsSetup.isShowBackground;
+          series[i].backgroundStyle = {
+            color: optionsSetup.backgroundStyleColor,
+            borderColor: optionsSetup.backgroundStyleBorderColor,
+            borderWidth: optionsSetup.backgroundStyleBorderWidth,
+            borderType: optionsSetup.backgroundStyleBorderType,
+            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+            shadowColor: optionsSetup.backgroundStyleShadowColor,
+            opacity: optionsSetup.backgroundStyleOpacity / 100,
+          };
+          series[i].itemStyle = {
+            normal: {
+              color: arrColor[i],
+              barBorderRadius: optionsSetup.radius,
+            },
+          };
+        } else if (series[i].type === "line") {
+          series[i].name = legendName[i];
+          series[i].type = "line";
           series[i].data = line;
+          series[i].showSymbol = optionsSetup.markPoint;
+          series[i].symbolSize = optionsSetup.pointSize;
+          series[i].smooth = optionsSetup.smoothCurve;
+          if (optionsSetup.area) {
+            series[i].areaStyle = {
+              opacity: optionsSetup.areaThickness / 100,
+            };
+          } else {
+            series[i].areaStyle = {
+              opacity: 0,
+            };
+          }
+          series[i].lineStyle = {
+            color: arrColor[i],
+            width: optionsSetup.lineWidth,
+          };
+          series[i].label = {
+            show: optionsSetup.isShowLine,
+            position: optionsSetup.fontPositionLine,
+            distance: optionsSetup.fontDistanceLine,
+            fontSize: optionsSetup.fontSizeLine,
+            color: optionsSetup.fontColorLine,
+            fontWeight: optionsSetup.fontWeightLine,
+            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}',
+            fontStyle: optionsSetup.fontStyleLine,
+            fontFamily: optionsSetup.fontFamilyLine,
+          };
         }
       }
-      const legendName = [];
-      legendName.push("bar");
-      legendName.push("line");
-      const optionsSetup = this.optionsSetup;
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
       const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / axis.length) / optionsSetup.textFontSizeX);
       const axisLabel = {
@@ -544,19 +525,90 @@ export default {
       });
     },
     renderingFn(val) {
+      const optionsSetup = this.optionsSetup;
+      //颜色
+      const customColor = optionsSetup.customColor;
+      const arrColor = [];
+      for (let i = 0; i < customColor.length; i++) {
+        arrColor.push(customColor[i].color);
+      }
       this.options.xAxis.data = val.xAxis;
-      // series
-      const series = this.options.series;
+      const series = [];
       const legendName = [];
-      for (const i in series) {
-        for (const j in val.series) {
-          if (series[i].type == val.series[j].type) {
-            series[i].data = val.series[j].data;
-            legendName.push(val.series[j].name);
+      for (const i in val.series) {
+        legendName.push(val.series[i].name);
+        const obj = {};
+        if (val.series[i].type === "bar") {
+          obj.name = val.series[i].name;
+          obj.type = "bar";
+          obj.barGap = optionsSetup.barGap + "%";
+          obj.barWidth = optionsSetup.maxWidth;
+          obj.barMinHeight = optionsSetup.minHeight;
+          obj.label = {
+            show: optionsSetup.isShowBar,
+            position: optionsSetup.fontPositionBar,
+            distance: optionsSetup.fontDistanceBar,
+            fontSize: optionsSetup.fontSizeBar,
+            color: optionsSetup.fontColorBar,
+            fontWeight: optionsSetup.fontWeightBar,
+            formatter: !!optionsSetup.percentSignBar ? '{c}%' : '{c}',
+            fontStyle: optionsSetup.fontStyleBar,
+            fontFamily: optionsSetup.fontFamilyBar,
+          };
+          //柱体背景属性
+          obj.showBackground = optionsSetup.isShowBackground;
+          obj.backgroundStyle = {
+            color: optionsSetup.backgroundStyleColor,
+            borderColor: optionsSetup.backgroundStyleBorderColor,
+            borderWidth: optionsSetup.backgroundStyleBorderWidth,
+            borderType: optionsSetup.backgroundStyleBorderType,
+            shadowBlur: optionsSetup.backgroundStyleShadowBlur,
+            shadowColor: optionsSetup.backgroundStyleShadowColor,
+            opacity: optionsSetup.backgroundStyleOpacity / 100,
+          };
+          obj.itemStyle = {
+            normal: {
+              color: arrColor[i],
+              barBorderRadius: optionsSetup.radius,
+            },
+          };
+          obj.data = val.series[i].data;
+          series.push(obj);
+        } else if (val.series[i].type === "line") {
+          obj.name = val.series[i].name;
+          obj.type = "line";
+          obj.symbol = optionsSetup.symbol;
+          obj.showSymbol = optionsSetup.markPoint;
+          obj.symbolSize = optionsSetup.pointSize;
+          obj.smooth = optionsSetup.smoothCurve;
+          if (optionsSetup.area) {
+            obj.areaStyle = {
+              opacity: optionsSetup.areaThickness / 100,
+            };
+          } else {
+            obj.areaStyle = {
+              opacity: 0,
+            };
           }
+          obj.lineStyle = {
+            color: arrColor[i],
+            width: optionsSetup.lineWidth,
+          };
+          obj.label = {
+            show: optionsSetup.isShowLine,
+            position: optionsSetup.fontPositionLine,
+            distance: optionsSetup.fontDistanceLine,
+            fontSize: optionsSetup.fontSizeLine,
+            color: optionsSetup.fontColorLine,
+            fontWeight: optionsSetup.fontWeightLine,
+            formatter: !!optionsSetup.percentSignLine ? '{c}%' : '{c}',
+            fontStyle: optionsSetup.fontStyleLine,
+            fontFamily: optionsSetup.fontFamilyLine,
+          };
+          obj.data = val.series[i].data;
+          series.push(obj);
         }
       }
-      const optionsSetup = this.optionsSetup;
       // 根据图表的宽度 x轴的字体大小、长度来估算X轴的label能展示多少个字
       const xAxisDataLength = val.length !== 0 ? val.xAxis.length : 1;
       const rowsNum = optionsSetup.textRowsNum !== "" ? optionsSetup.textRowsNum : parseInt((this.optionsStyle.width / xAxisDataLength) / optionsSetup.textFontSizeX);
@@ -587,6 +639,7 @@ export default {
       if (optionsSetup.textRowsBreakAuto) {
         this.options.xAxis.axisLabel = axisLabel;
       }
+      this.options.series = series;
       this.options.legend["data"] = legendName;
       this.setOptionsLegendName(legendName);
     },

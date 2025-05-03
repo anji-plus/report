@@ -11,23 +11,28 @@ echo "build web"
 cd $BuildDir/report-ui
 echo "npm install"
 npm install
-echo ""
+if [ $? -ne 0 ]; then
+  npm install --registry=https://mirrors.cloud.tencent.com/npm/
+fi
+echo "cp echarts map js"
+cp -r node_modules_echarts_need/* node_modules/echarts/
 echo "npm run build"
 npm run build:prod
 
 echo "publish web to springboot src/main/resources/static"
 rm -rf $BuildDir/report-core/src/main/resources/static
 mkdir -p $BuildDir/report-core/src/main/resources/static
-mv $BuildDir/report-ui/dist/* $BuildDir/report-core/src/main/resources/static/
+if [ ! -e "$BuildDir/report-ui/dist" ];then
+  echo "no build dist exist,web-build-failed"
+  exit 1
+fi
 
 echo ""
+cp -r $BuildDir/report-ui/dist/* $BuildDir/report-core/src/main/resources/static/
 echo "build springboot"
 cd $BuildDir/report-core
-echo "mvn clean"
-mvn clean
-echo ""
-echo "mvn package"
-mvn package -Dmaven.test.skip=true
+echo "mvn clean package"
+mvn clean package -Dmaven.test.skip=true
 
 echo "zip finish in build dir"
 if [ ! -d "$BuildDir/build" ]; then
