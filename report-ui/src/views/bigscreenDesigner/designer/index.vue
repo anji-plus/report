@@ -548,7 +548,8 @@ export default {
           this.layerWidget[this.currentWidgetTotal].widgetId = uuid;
           this.widgets[this.currentWidgetTotal].value.widgetCode = this.dragWidgetCode;
           const index = this.widgets.length - 1;
-          this.layerClick(index); // 选中当前新增的组件
+          this.widgetIndex = index;
+          this.widgetsClickAndCtrl(index); // 选中当前新增的组件
           this.grade = false; // 去除网格线
         }
       });

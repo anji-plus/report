@@ -47,6 +47,7 @@
             size="mini"
             clearable
             placeholder="请选择"
+            @change="handleChange"
           >
             <el-option
               v-for="(item, index) in layerWidget"
@@ -183,6 +184,22 @@ export default {
             targetKey: ''
           }
         })
+      }
+    },
+    handleChange(val){
+      //判断当前源联动组件是否是按钮
+      if('widget-button'=== this.layerWidget[this.widgetIndex].code){
+        //根据目标组件的参数个数来确定按钮组件的参数个数
+        this.linkageForm.paramsConfig = []; //每次切换都置空
+        let paramKeys = Object.keys(this.widgetParamsConfig[this.targetIndex].dynamicData.contextData);
+        paramKeys.forEach(param=>{
+          this.linkageForm.paramsConfig.push({
+            originKey: param,
+            targetKey: ''
+          });
+        });
+        //把参数传给button组件的表单
+        //this.layerWidget[this.widgetIndex].setFormData(paramKeys);
       }
     },
     // 弹出框关闭

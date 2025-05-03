@@ -12,6 +12,7 @@
 <script>
 import widgetHref from "./texts/widgetHref.vue";
 import widgetText from "./texts/widgetText.vue";
+import widgetButton from "./texts/widgetButton.vue";
 import WidgetMarquee from "./texts/widgetMarquee.vue";
 import widgetTime from "./texts/widgetTime.vue";
 import widgetImage from "./texts/widgetImage.vue";
@@ -61,6 +62,7 @@ export default {
   components: {
     widgetHref,
     widgetText,
+    widgetButton,
     widgetBorder,
     widgetDecorateFlowLine,
     widgetDecoration,
