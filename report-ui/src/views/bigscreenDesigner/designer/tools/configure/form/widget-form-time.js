@@ -25,8 +25,8 @@ export const widgetFormTime = {
         required: false,
         placeholder: '',
         selectOptions: [
-          { code: 'datetimerange', name: '日期时间类型' },
-          { code: 'daterange', name: '日期类型' },
+          { code: 'datetimerange', name: 'yyyy-MM-dd HH:mm:ss' },
+          { code: 'daterange', name: 'yyyy-MM-dd' },
         ],
         value: 'datetimerange',
       },
