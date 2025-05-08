@@ -19,6 +19,18 @@ export const widgetFormTime = {
         value: '时间筛选器',
       },
       {
+        type: 'el-select',
+        label: '日期类型',
+        name: 'dateType',
+        required: false,
+        placeholder: '',
+        selectOptions: [
+          { code: 'datetimerange', name: '日期时间类型' },
+          { code: 'daterange', name: '日期类型' },
+        ],
+        value: 'datetimerange',
+      },
+      {
         type: 'vue-color',
         label: '背景',
         name: 'select_background',
