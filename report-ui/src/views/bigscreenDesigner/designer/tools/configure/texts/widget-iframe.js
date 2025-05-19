@@ -50,10 +50,20 @@ export const widgetIframe = {
         label: 'iframe地址管理',
         name: 'iframeUrls',
         required: false,
-        value: [{
-          name: '默认地址',
-          url: 'https://ajreport.beliefteam.cn/index.html'
-        }],
+        value: [
+          {
+            name: '百度地图',
+            url: 'https://map.baidu.com/'
+          },
+          {
+            name: 'gitee',
+            url: 'https://gitee.com/'
+          },
+          {
+            name: 'deepseek',
+            url: 'https://chat.deepseek.com/'
+          }
+        ],
       },
     ],
     // 数据

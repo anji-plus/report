@@ -8,8 +8,8 @@
  */
 export const widgetButton = {
   code: 'widget-button',
-  type: 'text',
-  tabName: '文本栏',
+  type: 'form',
+  tabName: '表单',
   label: '按钮',
   icon: 'iconanniu',
   options: {
@@ -32,14 +32,6 @@ export const widgetButton = {
         value: '按钮',
       },
       {
-        type: 'vue-color',
-        label: '背景颜色',
-        name: 'backgroundColor',
-        required: false,
-        placeholder: '',
-        value: '#0000FF',
-      },
-      {
         type: 'el-input-number',
         label: '字体字号',
         name: 'fontSize',
@@ -56,20 +48,20 @@ export const widgetButton = {
         value: '#FAD400',
       },
       {
+        type: 'vue-color',
+        label: '字体背景',
+        name: 'backgroundColor',
+        required: false,
+        placeholder: '',
+        value: 'rgba(115,170,229,.5)',
+      },
+      {
         type: 'el-input-number',
         label: '字体间距',
         name: 'letterSpacing',
         required: false,
         placeholder: '',
         value: '0',
-      },
-      {
-        type: 'vue-color',
-        label: '字体背景',
-        name: 'background',
-        required: false,
-        placeholder: '',
-        value: 'rgba(115,170,229,.5)',
       },
       {
         type: 'el-select',

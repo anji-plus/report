@@ -61,7 +61,7 @@ export default {
     styleColor() {
       return {
         position: this.ispreview ? "relative" : "static",
-        color: this.transStyle.color || "#00FF00",
+        color: this.transStyle.color,
         text: this.transStyle.text || "按钮",
         width: this.transStyle.width + "px",
         height: this.transStyle.height + "px",
@@ -73,7 +73,7 @@ export default {
         "font-weight": this.transStyle.fontWeight || "600",
         "font-size": this.transStyle.fontSize + "px" || "12px",
         "letter-spacing": this.transStyle.letterSpacing + "em",
-        "background-color": this.transStyle.backgroundColor || "#0000ff",
+        "background-color": this.transStyle.backgroundColor || "rgba(115,170,229,.5)",
         display:
           this.transStyle.hideLayer === undefined
             ? "block"
