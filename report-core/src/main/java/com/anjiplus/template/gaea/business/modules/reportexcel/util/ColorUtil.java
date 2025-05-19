@@ -48,7 +48,7 @@ public class ColorUtil {
         if (colorStr.equals("#000")) {
             colorStr = "#000000";
         }
-        if (colorStr != null && colorStr.length() >= 6) {
+        if (colorStr.length() >= 6) {
             try {
                 if (colorStr.length() == 8) {
                     colorStr = colorStr.substring(2);
