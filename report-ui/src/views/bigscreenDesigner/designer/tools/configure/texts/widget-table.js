@@ -26,6 +26,14 @@ export const widgetTable = {
         {
           name: '表格设置',
           list: [
+              {
+                type: 'el-switch',
+                label: '显示导出按钮',
+                name: 'showExportButton',
+                required: false,
+                placeholder: '',
+                value: false
+              },
             {
               type: 'el-input-number',
               label: '显示行数',
