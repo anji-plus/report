@@ -68,7 +68,7 @@ export default {
         left: this.transStyle.left + "px",
         top: this.transStyle.top + "px",
         right: this.transStyle.right + "px",
-        borderRadius: this.transStyle.isBorderRadius === "true"? this.transStyle.borderRadius +"px" :"0px",
+        borderRadius: this.transStyle.isBorderRadius ? this.transStyle.borderRadius +"px" :"0px",
         "text-align": this.transStyle.textAlign,
         "font-weight": this.transStyle.fontWeight || "600",
         "font-size": this.transStyle.fontSize + "px" || "12px",

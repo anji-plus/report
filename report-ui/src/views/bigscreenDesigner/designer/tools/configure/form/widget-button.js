@@ -37,7 +37,7 @@ export const widgetButton = {
         name: 'fontSize',
         required: false,
         placeholder: '',
-        value: '26',
+        value: '16',
       },
       {
         type: 'vue-color',
@@ -91,15 +91,11 @@ export const widgetButton = {
         value: 'center'
       },
       {
-        type: 'el-select',
+        type: 'el-switch',
         label: '是否圆角边框',
         name: 'isBorderRadius',
         required: false,
         placeholder: '',
-        selectOptions: [
-          { code: 'true',  name: '是' },
-          { code: 'false', name: '否' },
-        ],
         value: 'false',
       },
       {
