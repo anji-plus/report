@@ -46,6 +46,26 @@ export const widgetSelect = {
         placeholder: '',
         value: 'rgba(115,170,229,.5)',
       },
+      {
+        type: 'el-input-text',
+        label: '默认值',
+        name: 'defaultValue',
+        required: false,
+        placeholder: '',
+        value: '',
+      },
+      {
+        type: 'el-select',
+        label: '模式',
+        name: 'model',
+        required: false,
+        placeholder: '',
+        selectOptions: [
+          { code: '1', name: '下拉框' },
+          { code: '2', name: 'TAB按钮' }
+        ],
+        value: '1'
+      },
 /*      {
         type: 'el-select',
         label: '触发事件',
