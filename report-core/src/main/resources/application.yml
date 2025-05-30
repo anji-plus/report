@@ -32,9 +32,9 @@ spring:
   messages:
     basename: i18n/messages
   datasource:
-    url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: appuser@anji
+    password: xxxxxx
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   #数据源连接池配置
