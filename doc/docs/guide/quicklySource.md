@@ -62,9 +62,9 @@ git clone https://gitee.com/anji-plus/report.git <br>
 
 ```yaml
   datasource:
-    url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: appuser@anji
+    password: xxxxxxxx
 ```
 
 ## flyway
