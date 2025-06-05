@@ -173,6 +173,8 @@ export default {
         return this.piechartFn(params.chartProperties, data);
       } else if (chartType == "widget-text") {
         return this.widgettext(params.chartProperties, data)
+      } else if (chartType == "widget-calendar") {
+        return this.widgetcalendar(params.chartProperties, data)
       } else if (chartType == "widget-stackchart") {
         return this.stackChartFn(params.chartProperties, data)
       } else if (chartType == "widget-coord") {
@@ -284,6 +286,9 @@ export default {
         analysisData.push(obj);
       }
       return analysisData;
+    },
+    widgetcalendar (chartProperties, data) {
+      return data
     },
     // 坐标系数据解析
     coordChartFn(chartProperties, data) {
