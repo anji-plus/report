@@ -26,6 +26,7 @@ import widgetImage from "./texts/widgetImage.vue";
 import widgetSlider from "./texts/widgetSlider.vue";
 import widgetVideo from "./texts/widgetVideo.vue";
 import WidgetIframe from "./texts/widgetIframe.vue";
+import widgetCalendar from "./texts/widgetCalendar.vue";
 import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetScatter from "./scatter/widgetScatter.vue";
 import widgetGradientColorBarchart from "./bar/widgetGradientColorBarchart.vue";
@@ -79,6 +80,7 @@ export default {
     widgetSlider,
     widgetVideo,
     WidgetIframe,
+    widgetCalendar,
     widgetBarchart,
     widgetGradientColorBarchart,
     widgetLinechart,

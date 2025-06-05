@@ -17,6 +17,7 @@ import {widgetSliders} from "./configure/texts/widget-slider"
 import {widgetVideo} from "./configure/texts/widget-video"
 import {widgetTable} from "./configure/texts/widget-table"
 import {widgetIframe} from "./configure/texts/widget-iframe"
+import {widgetCalendar} from "./configure/texts/widget-calendar"
 import {widgetUniversal} from "./configure/widget-universal"
 import {widgetBarchart} from "./configure/barCharts/widget-barchart"
 import {widgetGradientBarchart} from "./configure/barCharts/widget-gradient-barchart"
@@ -70,6 +71,7 @@ export const widgetTool = [
   widgetVideo,
   widgetTable,
   widgetIframe,
+  widgetCalendar,
   //  widgetUniversal,
   widgetBarchart,
   widgetGradientBarchart,
