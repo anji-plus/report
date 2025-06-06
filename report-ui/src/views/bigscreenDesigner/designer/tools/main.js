@@ -15,6 +15,7 @@ import {widgetImage} from "./configure/texts/widget-image"
 import {widgetButton} from "./configure/form/widget-button"
 import {widgetSliders} from "./configure/texts/widget-slider"
 import {widgetVideo} from "./configure/texts/widget-video"
+import {widgetVideoMonitor} from "./configure/texts/widget-videoMonitor"
 import {widgetTable} from "./configure/texts/widget-table"
 import {widgetIframe} from "./configure/texts/widget-iframe"
 import {widgetUniversal} from "./configure/widget-universal"
@@ -68,6 +69,7 @@ export const widgetTool = [
   widgetButton,
   //  widgetSliders,
   widgetVideo,
+  widgetVideoMonitor,
   widgetTable,
   widgetIframe,
   //  widgetUniversal,

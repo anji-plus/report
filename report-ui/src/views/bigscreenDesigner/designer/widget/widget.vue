@@ -25,6 +25,7 @@ import widgetTime from "./texts/widgetTime.vue";
 import widgetImage from "./texts/widgetImage.vue";
 import widgetSlider from "./texts/widgetSlider.vue";
 import widgetVideo from "./texts/widgetVideo.vue";
+import widgetVideoMonitor from "./texts/widgetVideoMonitor.vue";
 import WidgetIframe from "./texts/widgetIframe.vue";
 import widgetBarchart from "./bar/widgetBarchart.vue";
 import widgetScatter from "./scatter/widgetScatter.vue";
@@ -78,6 +79,7 @@ export default {
     widgetImage,
     widgetSlider,
     widgetVideo,
+    widgetVideoMonitor,
     WidgetIframe,
     widgetBarchart,
     widgetGradientColorBarchart,
