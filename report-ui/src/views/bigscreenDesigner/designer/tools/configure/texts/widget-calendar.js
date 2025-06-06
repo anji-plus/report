@@ -181,7 +181,7 @@ export const widgetCalendar = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
         chartType: 'widget-calendar',
-        dictKey: 'TEXT_PROPERTIES',
+        dictKey: 'CALENDAR_PROPERTIES',
         value: '',
       }
     ],

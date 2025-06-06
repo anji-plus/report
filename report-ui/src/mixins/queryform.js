@@ -288,7 +288,20 @@ export default {
       return analysisData;
     },
     widgetcalendar (chartProperties, data) {
-      return data
+      const analysisData = [];
+      for (let i = 0; i < data.length; i++) {
+        const obj = {};
+        for (const key in chartProperties) {
+          const value = chartProperties[key];
+          if (value === "date") {
+            obj["date"] = data[i][key];
+          } else {
+            obj["data"] = data[i][key];
+          }
+        }
+        analysisData.push(obj);
+      }
+      return analysisData;
     },
     // 坐标系数据解析
     coordChartFn(chartProperties, data) {
