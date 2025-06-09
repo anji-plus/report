@@ -173,6 +173,8 @@ export default {
         return this.piechartFn(params.chartProperties, data);
       } else if (chartType == "widget-text") {
         return this.widgettext(params.chartProperties, data)
+      } else if (chartType == "widget-calendar") {
+        return this.widgetcalendar(params.chartProperties, data)
       } else if (chartType == "widget-stackchart") {
         return this.stackChartFn(params.chartProperties, data)
       } else if (chartType == "widget-coord") {
