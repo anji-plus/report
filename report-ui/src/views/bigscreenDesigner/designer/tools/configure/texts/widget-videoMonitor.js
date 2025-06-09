@@ -74,6 +74,14 @@ export const widgetVideoMonitor = {
               value: 200
             },
             {
+              type: 'el-input-number',
+              label: '最大宽度',
+              name: 'maxWidth',
+              require: false,
+              placeholder: '',
+              value: 500
+            },
+            {
               type: 'vue-color',
               label: '选中背景色',
               name: 'activeBgColor',

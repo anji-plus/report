@@ -74,6 +74,7 @@ export default {
     videoListStyle2 () {
       return {
         minWidth: this.optionsSetUp.minWidth + 'px',
+        maxWidth: this.optionsSetUp.maxWidth + 'px',
       };
     },
     videoListLiStyle () {
