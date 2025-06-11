@@ -76,7 +76,7 @@ spring:
 #    password: root
 #    database: 1
   flyway:
-    enabled: false   #是否开启flyway（自动执行sql脚本），true，注意部分mysql版本存在自动执行失败的情况，需要改成false并手动执行所有sql文件：report-core --> src --> main --> resources -- > db.migration
+    enabled: true   #是否开启flyway（自动执行sql脚本），true，注意部分mysql版本存在自动执行失败的情况，需要改成false并手动执行所有sql文件：report-core --> src --> main --> resources -- > db.migration
     baseline-on-migrate: true
     #数据库连接配置
     url: ${spring.datasource.url}
