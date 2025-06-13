@@ -173,6 +173,8 @@ export default {
         return this.piechartFn(params.chartProperties, data);
       } else if (chartType == "widget-text") {
         return this.widgettext(params.chartProperties, data)
+      } else if (chartType == "widget-calendar") {
+        return this.widgetcalendar(params.chartProperties, data)
       } else if (chartType == "widget-stackchart") {
         return this.stackChartFn(params.chartProperties, data)
       } else if (chartType == "widget-coord") {
@@ -187,6 +189,8 @@ export default {
         return this.mapLLChartFn(params.chartProperties, data)
       } else if (chartType == "widget-stackMoreShowChart") {
         return this.stackMoreShowFn(params.chartProperties, data);
+      } else if (chartType == "widget-videoMonitor") {
+        return this.widgetVideoMonitor(params.chartProperties, data);
       } else {
         return data
       }
@@ -279,6 +283,38 @@ export default {
           if (value === "name") {
           } else {
             obj["value"] = data[i][key];
+          }
+        }
+        analysisData.push(obj);
+      }
+      return analysisData;
+    },
+    widgetcalendar (chartProperties, data) {
+      const analysisData = [];
+      for (let i = 0; i < data.length; i++) {
+        const obj = {};
+        for (const key in chartProperties) {
+          const value = chartProperties[key];
+          if (value === "date") {
+            obj["date"] = data[i][key];
+          } else {
+            obj["data"] = data[i][key];
+          }
+        }
+        analysisData.push(obj);
+      }
+      return analysisData;
+    },
+    widgetVideoMonitor (chartProperties, data) {
+      const analysisData = [];
+      for (let i = 0; i < data.length; i++) {
+        const obj = {};
+        for (const key in chartProperties) {
+          const value = chartProperties[key];
+          if (value === "name") {
+            obj["name"] = data[i][key];
+          } else {
+            obj["src"] = data[i][key];
           }
         }
         analysisData.push(obj);

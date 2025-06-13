@@ -1,6 +1,6 @@
 {
   "name": "report-ui",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "report-ui",
   "author": "beliefteam",
   "scripts": {
@@ -24,6 +24,7 @@
     "echarts-liquidfill": "^3.1.0",
     "echarts-wordcloud": "^2.1.0",
     "element-ui": "^2.15.14",
+    "flv.js": "^1.6.2",
     "js-cookie": "2.2.0",
     "jsbarcode": "^3.11.4",
     "miment": "^0.0.9",
@@ -45,7 +46,8 @@
     "vue-ruler-tool": "^1.2.4",
     "vue-superslide": "^0.1.1",
     "vuedraggable": "^2.24.1",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "autoprefixer": "8.5.0",

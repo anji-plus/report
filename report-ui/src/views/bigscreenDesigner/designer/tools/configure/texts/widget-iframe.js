@@ -24,12 +24,46 @@ export const widgetIframe = {
         value: 'iframe',
       },
       {
-        type: 'el-input-text',
-        label: '地址',
-        name: 'iframeAdress',
+        type: 'el-select',
+        label: '切换动画',
+        name: 'transitionEffect',
         required: false,
-        placeholder: '',
-        value: 'https://ajreport.beliefteam.cn/index.html',
+        placeholder: '请选择切换动画效果',
+        selectOptions: [
+          {name: '无动画', code: 'none'},
+          {name: '淡入淡出', code: 'fade'},
+          {name: '滑动', code: 'slide'},
+          {name: '缩放', code: 'zoom'}
+        ],
+        value: 'none',
+      },
+      {
+        type: 'el-input-number',
+        label: '切换间隔(秒)',
+        name: 'autoSwitchInterval',
+        required: false,
+        placeholder: '0表示不自动切换',
+        value: 0,
+      },
+      {
+        type: 'multiIframeManager',
+        label: 'iframe地址管理',
+        name: 'iframeUrls',
+        required: false,
+        value: [
+          {
+            name: '百度地图',
+            url: 'https://map.baidu.com/'
+          },
+          {
+            name: 'gitee',
+            url: 'https://gitee.com/'
+          },
+          {
+            name: 'deepseek',
+            url: 'https://chat.deepseek.com/'
+          }
+        ],
       },
     ],
     // 数据

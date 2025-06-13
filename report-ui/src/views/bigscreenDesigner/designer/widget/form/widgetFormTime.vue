@@ -8,9 +8,9 @@
   <el-date-picker
     :style="styleObj"
     v-model="timeValue"
-    value-format="yyyy-MM-dd HH:mm:ss"
+    :value-format="valueFormat"
     :picker-options="datetimeRangePickerOptions"
-    type="datetimerange"
+    :type="dateType"
     @[eventChange]="change"
   />
 </template>
@@ -119,6 +119,12 @@ export default {
     eventChange() {
       return "change";
     },
+    dateType() {
+      return this.optionsSetup.dateType || 'datetimerange';
+    },
+    valueFormat() {
+      return this.dateType === 'daterange' ? 'yyyy-MM-dd' : 'yyyy-MM-dd HH:mm:ss';
+    },
     allComponentLinkage() {
       return this.$store.state.designer.allComponentLinkage;
     },
@@ -153,7 +159,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
- .el-select {
+  .el-select {
   height: 100%;
 
   .el-input {

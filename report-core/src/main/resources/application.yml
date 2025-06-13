@@ -76,7 +76,7 @@ spring:
 #    password: root
 #    database: 1
   flyway:
-    enabled: false   #是否开启flyway（自动执行sql脚本），true，注意部分mysql版本存在自动执行失败的情况，需要改成false并手动执行所有sql文件：report-core --> src --> main --> resources -- > db.migration
+    enabled: true   #是否开启flyway（自动执行sql脚本），true，注意部分mysql版本存在自动执行失败的情况，需要改成false并手动执行所有sql文件：report-core --> src --> main --> resources -- > db.migration
     baseline-on-migrate: true
     #数据库连接配置
     url: ${spring.datasource.url}
@@ -92,7 +92,7 @@ spring:
         ##允许上传的文件后缀
         file-type-white-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg|.aaa|.svg
         # 用于文件上传成功后，生成文件的下载公网完整URL，http://serverip:9095/file/download，注意填写IP必须填写后端服务所在的机器IP
-        downloadPath: http://10.108.26.197:9095/file/download
+        downloadPath: http://127.0.0.1:9095/file/download
         nfs:
           #上传对应本地全路径，注意目录不会自动创建，注意 Win是 \ 且有盘符，linux是 / 无盘符，注意目录权限问题
           path: /app/disk/upload/
