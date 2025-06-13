@@ -1,18 +1,19 @@
 /*
- * @Descripttion: 下拉框
- * @Author: qianlishi qianlishi@anji-plus.com
- * @Date: 2023-01-09 13:02:59
+ * @Descripttion: 超链接文本
+ * @version:
+ * @Author: qianlishi
+ * @Date: 2021-08-29 07:03:58
  * @LastEditors: qianlishi qianlishi@anji-plus.com
- * @LastEditTime: 2023-03-24 10:27:23
+ * @LastEditTime: 2023-01-11 13:16:21
  */
-
-export const widgetSelect = {
-  code: 'widget-select',
+export const widgetButton = {
+  code: 'widget-button',
   type: 'form',
   tabName: '表单',
-  label: '下拉框',
-  icon: 'iconxialakuang1',
+  label: '按钮',
+  icon: 'iconanniu',
   options: {
+    // 配置
     setup: [
       {
         type: 'el-input-text',
@@ -20,20 +21,28 @@ export const widgetSelect = {
         name: 'layerName',
         required: false,
         placeholder: '',
-        value: '下拉框',
+        value: '按钮',
       },
       {
         type: 'el-input-text',
-        label: '提示内容',
-        name: 'select_text',
-        require: false,
+        label: '按钮文本',
+        name: 'text',
+        required: false,
         placeholder: '',
-        value: '请选择'
+        value: '按钮',
+      },
+      {
+        type: 'el-input-number',
+        label: '字体字号',
+        name: 'fontSize',
+        required: false,
+        placeholder: '',
+        value: '16',
       },
       {
         type: 'vue-color',
         label: '字体颜色',
-        name: 'select_color',
+        name: 'color',
         required: false,
         placeholder: '',
         value: '#FAD400',
@@ -41,57 +50,78 @@ export const widgetSelect = {
       {
         type: 'vue-color',
         label: '字体背景',
-        name: 'select_background',
+        name: 'backgroundColor',
         required: false,
         placeholder: '',
         value: 'rgba(115,170,229,.5)',
       },
       {
-        type: 'el-input-text',
-        label: '默认值',
-        name: 'defaultValue',
+        type: 'el-input-number',
+        label: '字体间距',
+        name: 'letterSpacing',
         required: false,
         placeholder: '',
-        value: '',
+        value: '0',
       },
       {
         type: 'el-select',
-        label: '模式',
-        name: 'model',
+        label: '文字粗细',
+        name: 'fontWeight',
         required: false,
         placeholder: '',
         selectOptions: [
-          { code: '1', name: '下拉框' },
-          { code: '2', name: 'TAB按钮' }
+          { code: 'normal', name: '正常' },
+          { code: 'bold', name: '粗体' },
+          { code: 'bolder', name: '特粗体' },
+          { code: 'lighter', name: '细体' }
         ],
-        value: '1'
+        value: 'normal'
       },
-/*      {
+      {
         type: 'el-select',
-        label: '触发事件',
-        name: 'event',
+        label: '对齐方式',
+        name: 'textAlign',
         required: false,
         placeholder: '',
         selectOptions: [
-          { code: 'change', name: 'change' },
-          { code: 'blur', name: 'blur' },
-          { code: 'focus', name: 'focus' },
+          { code: 'center', name: '居中' },
+          { code: 'left', name: '左对齐' },
+          { code: 'right', name: '右对齐' },
         ],
-        value: 'change',
-      },*/
-      [{
-        name: '组件联动',
-        list: [
-          {
-            type: 'componentLinkage',
-            label: '',
-            name: 'componentLinkage',
-            required: false,
-            value: []
-          }
-        ]
-      }]
+        value: 'center'
+      },
+      {
+        type: 'el-switch',
+        label: '是否圆角边框',
+        name: 'isBorderRadius',
+        required: false,
+        placeholder: '',
+        value: 'false',
+      },
+      {
+        type: 'el-input-number',
+        label: '圆角边框设置',
+        name: 'borderRadius',
+        required: false,
+        placeholder: '单位px',
+        value: '10',
+      },
+     [
+       {
+         name: '组件联动',
+         list: [
+           {
+             type: 'componentLinkage',
+             label: '',
+             name: 'componentLinkage',
+             required: false,
+             value: []
+           }
+         ]
+       }
+     ]
     ],
+    // 数据
     data: [
       {
         type: 'el-radio-group',
@@ -118,7 +148,7 @@ export const widgetSelect = {
         name: 'refreshTime',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        value: 600000
+        value: 30000
       },
       {
         type: 'el-button',
@@ -129,11 +159,9 @@ export const widgetSelect = {
         relactiveDom: 'dataType',
         relactiveDomValue: 'staticData',
         value: [
-          { "label": "苹果", "value": 1000 },
-          { "label": "三星", "value": 2229 },
-          { "label": "小米", "value": 3879 },
-          { "label": "oppo", "value": 2379 },
-          { "label": "vivo", "value": 4079 },
+          { paramKey: 'key1', paramValue: 'value1'},
+          { paramKey: 'key2', paramValue: 'value2'},
+          { paramKey: 'key3', paramValue: 'value3'}
         ],
       },
       {
@@ -144,11 +172,12 @@ export const widgetSelect = {
         placeholder: '',
         relactiveDom: 'dataType',
         relactiveDomValue: 'dynamicData',
-        chartType: 'widget-select',
-        dictKey: 'SELECT_PROPERTIES',
+        chartType: 'widget-button',
+        dictKey: 'TEXT_PROPERTIES',
         value: '',
-      },
+      }
     ],
+    // 坐标
     position: [
       {
         type: 'el-input-number',
@@ -172,7 +201,7 @@ export const widgetSelect = {
         name: 'width',
         required: false,
         placeholder: '该容器在1920px大屏中的宽度',
-        value: 200,
+        value: 100,
       },
       {
         type: 'el-input-number',

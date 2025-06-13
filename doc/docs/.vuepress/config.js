@@ -42,6 +42,7 @@ module.exports = {
                         {title: 'V1.4.x', path: '/guide/releases/1.4.x'},
                         {title: 'V1.5.x', path: '/guide/releases/1.5.x'},
                         {title: 'V1.6.x', path: '/guide/releases/1.6.x'},
+                        {title: 'V1.7.x', path: '/guide/releases/1.7.x'},
                     ]
                 },
                 {
@@ -92,7 +93,8 @@ module.exports = {
                     children: [
                         {title: '说明', path: '/guide/community/report'},
                         {title: '搭建AJ-Report开发环境', path: '/guide/community/AC1688/搭建aj-report开发环境'},
-                        {title: '大屏组件对齐和拖拽实现', path: '/guide/community/JiangHH/AJ_Report大屏设计时多组件对齐和拖拽移动实现'}
+                        {title: '大屏组件对齐和拖拽实现', path: '/guide/community/JiangHH/AJ_Report大屏设计时多组件对齐和拖拽移动实现'},
+                        {title: '按钮控制多图表联动实现', path: '/guide/community/JiangHH/按钮组件控制多条件组件联动图表实现'}
                     ]
                 }
             ],

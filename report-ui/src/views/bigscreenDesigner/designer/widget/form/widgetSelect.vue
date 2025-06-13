@@ -1,5 +1,16 @@
 <template>
+  <el-radio-group
+    class="el-radio-button-custom"
+    ref="select"
+    v-model="selectValue"
+    size="medium"
+    :style="styleObj"
+     @[eventChange]="(val) => change(val, options.find(item => item.value === val))"
+    v-if="model === '2'">
+    <el-radio-button v-for="item in options" :key="item.value" :label="item.value">{{ item.label }}</el-radio-button>
+  </el-radio-group>
   <anji-select
+    v-else
     class="select"
     ref="select"
     :style="styleObj"
@@ -10,6 +21,7 @@
     option="value"
     @[eventChange]="(val, item) => change(val, item)"
   />
+  
 </template>
 <script>
 import {
@@ -33,6 +45,7 @@ export default {
       optionsData: {},
       optionsSetup: {},
       options: {},
+      model: '1'
     };
   },
   computed: {
@@ -84,6 +97,9 @@ export default {
     },
     setOptions() {
       const optionsData = this.optionsData;
+      const optionsSetup = this.optionsSetup;
+      this.selectValue = optionsSetup.defaultValue;
+      this.model = optionsSetup.model;
       return optionsData.dataType === "staticData"
         ? this.staticData(optionsData.staticData)
         : this.dynamicDataFn(optionsData.dynamicData, optionsData.refreshTime);
@@ -134,6 +150,32 @@ export default {
         }
       }
     }
+  }
+}
+
+::v-deep.el-radio-button-custom {
+  display: flex;
+  flex-direction: row;
+  .el-radio-button {
+    height: 100%!important;
+    flex: 1;
+  }
+  .el-radio-button__inner {
+    padding: 0!important;
+    height: 100%!important;
+    width: 100%!important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    background: inherit;
+    color: inherit;
+  }
+  .el-radio-button__orig-radio:checked+.el-radio-button__inner {
+    background-color: #40a0ffb3!important;
+    color: #ffffff!important;
+    border: 1px solid #ffffff!important;
   }
 }
 

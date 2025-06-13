@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 
 import java.util.*;
 
@@ -137,15 +139,22 @@ public class XlsSheetUtil {
                     setCellStyleFont(wb, style, v_json);
 
                     //bg 背景颜色
-                    if (v_json.containsKey("bg")) {
+/*                    if (v_json.containsKey("bg")) {
                         String _v = getByDBObject(v_json, "bg");
                         Short _color = ColorUtil.getColorByStr(_v);
                         if (_color != null) {
                             style.setFillForegroundColor(_color);
                             style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
                         }
+                    }*/
+                    if (v_json.containsKey("bg")) {
+                        String _v = getByDBObject(v_json, "bg");
+                        if (_v != null && !_v.isEmpty()) {
+                            XSSFColor color = new XSSFColor(hex2Rgb(_v), null);
+                            ((XSSFCellStyle) style).setFillForegroundColor(color);
+                            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                        }
                     }
-
                     //vt 垂直对齐    垂直对齐方式（0=居中，1=上，2=下）
                     if (v_json.containsKey("vt")) {
                         Integer _v = getIntByDBObject(v_json, "vt");
@@ -204,12 +213,18 @@ public class XlsSheetUtil {
                             }
                         }
                     }
-
-
                 }
-
             }
         }
+    }
+
+    public static byte[] hex2Rgb(String colorStr) {
+        colorStr = colorStr.replace("#", "");
+        return new byte[] {
+                (byte) Integer.parseInt(colorStr.substring(0, 2), 16),
+                (byte) Integer.parseInt(colorStr.substring(2, 4), 16),
+                (byte) Integer.parseInt(colorStr.substring(4, 6), 16)
+        };
     }
 
     /**

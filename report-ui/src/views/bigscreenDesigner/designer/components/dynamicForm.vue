@@ -192,6 +192,11 @@
             :chart-type="item.chartType"
             @change="changed($event, item.name)"
           />
+          <multiIframeManager
+            v-if="item.type == 'multiIframeManager'"
+            v-model="formData[item.name]"
+            @change="(val) => changed(val, item.name)"
+          />
         </div>
         <div v-else-if="isShowForm(item, '[object Array]')" :key="'a-' + index">
           <el-collapse accordion>
@@ -347,6 +352,7 @@ import dynamicAddRadar from "./dynamicAddRadar";
 import MonacoEditor from "@/components/MonacoEditor/index";
 import componentLinkage from './componentLinkage';
 import imageSelect from './imageSelect';
+import multiIframeManager from './multiIframeManager.vue';
 export default {
   name: "DynamicForm",
   components: {
@@ -360,7 +366,8 @@ export default {
     customUpload,
     dynamicAddRadar,
     MonacoEditor,
-    componentLinkage
+    componentLinkage,
+    multiIframeManager
   },
   model: {
     prop: "value",

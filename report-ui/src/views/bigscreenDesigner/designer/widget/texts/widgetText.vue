@@ -46,7 +46,12 @@ export default {
         left: this.transStyle.left + "px",
         top: this.transStyle.top + "px",
         right: this.transStyle.right + "px",
-        whiteSpace: this.transStyle.whiteSpace ? "pre-line": "normal"
+        whiteSpace: this.transStyle.whiteSpace ? "pre-line": "normal",
+        lineHeight:  this.transStyle.lineHeight + "px",
+        borderColor: this.transStyle.borderColor,
+        borderWidth: this.transStyle.borderWidth + "px",
+        borderStyle: this.transStyle.borderStyle,
+        borderRadius: this.transStyle.borderRadius + "px",
       };
     },
     computedStyleColor() {

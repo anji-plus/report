@@ -139,9 +139,9 @@ http://serverip:9095
 在Linux上先准备好maven、node.js、jdk
 
 - [Apache Maven] 3.5 <br>
-- [Node.js]
+- [Node.js] 请使用LTS版本
     - report1.5以下版本请使用 node <= V14
-    - report1.5及以上版本请使用 node = V16
+    - report1.5及以上版本请使用 node >= V14
 - [Jdk] 1.8
 
 简易步骤
