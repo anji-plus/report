@@ -104,7 +104,7 @@ export const widgetText = {
         name: 'lineHeight',
         required: false,
         placeholder: '',
-        value: '0',
+        value: '40',
       },
       {
         type: 'el-input-number',
