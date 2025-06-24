@@ -112,6 +112,21 @@ export const widgetCalendar = {
               required: false,
               placeholder: '',
               value: 'rgb(0, 0, 0)'
+            },{
+              type: 'vue-color',
+              label: '选中背景色',
+              name: 'selectedBackground',
+              required: false,
+              placeholder: '',
+              value: 'rgb(11, 180, 241)'
+            },
+            {
+              type: 'vue-color',
+              label: '选中文字颜色',
+              name: 'selectedTextColor',
+              required: false,
+              placeholder: '',
+              value: 'rgb(0, 0, 0)'
             },
             {
               type: 'el-switch',
@@ -123,7 +138,19 @@ export const widgetCalendar = {
             },
           ]
         }
-      ]
+      ],
+      [{
+        name: '组件联动',
+        list: [
+          {
+            type: 'componentLinkage',
+            label: '',
+            name: 'componentLinkage',
+            required: false,
+            value: []
+          }
+        ]
+      }]
     ],
     data: [
       {
