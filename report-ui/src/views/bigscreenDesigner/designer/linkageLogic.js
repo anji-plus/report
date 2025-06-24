@@ -23,6 +23,11 @@ export const lickageParamsConfig = [
     paramsKey: ['startTime','endTime']
   },
   {
+    name: '日历',
+    code: 'widget-calendar',
+    paramsKey: ['date']
+  },
+  {
     name: '柱图',
     code: 'widget-barchart',
     paramsKey: ['name', 'value']
