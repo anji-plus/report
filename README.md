@@ -193,7 +193,7 @@ spring.gaea.Security.jwtSecret = 修改32位jwt密钥
 
 ## SQL初始化
 
-sql文件的目录在：report-core --> src --> main --> resources -- > db.migration <br>
+sql文件的目录在：report-core --> src --> main --> resources --> db.migration <br>
 系统初始化时flyway会自动的将该目录下的sql文件执行，不需要手动执行sql文件，执行完将会创建
 aj_report（存放系统基础数据）数据库 <br>
 
