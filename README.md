@@ -22,11 +22,11 @@
 通过百度网盘分享的文件：大屏模板
 链接:https://pan.baidu.com/s/1rkjBiiTpA4DBQdep-uAYzQ?pwd=w3rm提取码:w3rm
 
-#### &emsp; [在线提问](https://gitee.com/anji-plus/report/issues "issue"): https://gitee.com/anji-plus/report/issues <br>
+#### &emsp; [在线提问](https://gitee.com/belief-team/report/issues "issue"): https://gitee.com/belief-team/report/issues <br>
 
 ## 发行版本
 
-#### &emsp; [下载链接](https://gitee.com/anji-plus/report/releases "下载链接"): https://gitee.com/anji-plus/report/releases <br>
+#### &emsp; [下载链接](https://gitee.com/belief-team/report/releases "下载链接"): https://gitee.com/belief-team/report/releases <br>
 
 ## 功能概述
 
@@ -147,7 +147,7 @@ http://serverip:9095
 简易步骤
 
 ```
-git clone https://gitee.com/anji-plus/report.git
+git clone https://gitee.com/belief-team/report.git
 cd report
 sh build.sh
 编译完成放在build文件夹 aj-report-xxxx.zip
@@ -261,7 +261,7 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 
 ## 技术支持
 
-**如有问题，请提交 [Issue](https://gitee.com/anji-plus/report/issues) <br>**
+**如有问题，请提交 [Issue](https://gitee.com/belief-team/report/issues) <br>**
 
 个人微信：个人微信，不闲聊，加群、咨询请备注，备注格式不限但最好是：“项目名 + 问题” ，项目名可以是**AJ-Report**、**Report**、**大屏
 **，只要能一眼分辨就行 <br>
@@ -297,6 +297,3 @@ AJ-Report使用[Apache2.0开源协议](http://www.apache.org/licenses/LICENSE-2.
 
 <br>
 
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/anji-plus/report.svg)](https://starchart.cc/anji-plus/report)
