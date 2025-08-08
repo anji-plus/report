@@ -96,11 +96,15 @@ export default {
       this.bigScreenStyle.transform='scale('+scale.scalex+','+scale.scaley+')'
     },
     getScale(){
-      let width=this.dashboard.width;
-      let height=this.dashboard.height;
-      return{
-        scalex:(window.innerWidth)/width,
-        scaley:(window.innerHeight)/height,
+      let width = this.dashboard.width
+      let height = this.dashboard.height
+      // 固定宽度比例
+      const scalex = window.innerWidth / width
+      // 高度按相同比例缩放，但允许超出屏幕高度
+      const scaley = scalex
+      return {
+        scalex,
+        scaley
       }
     },
   }

@@ -6,7 +6,12 @@
 
 新增用户的默认密码是在bootstrap.yml文件中配置的 <br>
 
-![img](../picture/authmanager/img_2.png) <br>
+```yaml
+  user:
+    ##新增用户默认密码
+    default:
+      password: 123456
+```
 
 ## 用户授权
 
@@ -31,7 +36,6 @@
 导入导出的权限是在 角色 --> 分配权限中控制。 <br>
 
 ![img](../picture/authmanager/img_7.png) <br>
-用户绑定了角色，角色则绑定了权限，是这样一层关系。 <br>
 
 
 
