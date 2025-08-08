@@ -18,9 +18,11 @@
           :class="{
             'out-of-range': day.isOutOfRange,
             'current-month': day.isCurrentMonth,
-            'today': day.isToday
+            'today': day.isToday,
+            'selected': day.date === selectDayStr
           }"
-          :style="cellStyle(day.isToday)"
+          :style="cellStyle(day.isToday, day.date === selectDayStr)"
+          @click="selectDay(day)"
         >
           <slot name="day" :day="day">
             <div class="day-number">{{ day.day }}</div>
@@ -34,13 +36,17 @@
 
 <script>
 import moment from 'moment'
-import { targetWidgetLinkageLogic } from "@/views/bigscreenDesigner/designer/linkageLogic";
+import { targetWidgetLinkageLogic, originWidgetLinkageLogic } from "@/views/bigscreenDesigner/designer/linkageLogic";
 
 export default {
   name: 'widgetCalendar',
   props: {
     value: Object,
     ispreview: Boolean,
+    widgetIndex: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
@@ -49,11 +55,12 @@ export default {
       startDate: moment().format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
       options: {},
-      optionsSetUp: {},
+      optionsSetup: {},
       optionsPosition: {},
       optionsData: {},
 
-      text: ''
+      text: '',
+      selectDayStr: moment().format('YYYY-MM-DD')
     }
   },
   computed: {
@@ -64,7 +71,7 @@ export default {
       return moment(this.endDate, 'YYYY-MM-DD').endOf('day')
     },
     showButton () {
-      return this.optionsSetUp.isButton;
+      return this.optionsSetup.isButton;
     },
     styleObj() {
       const allStyle = this.optionsPosition;
@@ -74,33 +81,33 @@ export default {
         height: allStyle.height + "px",
         left: allStyle.left + "px",
         top: allStyle.top + "px",
-        background: this.optionsSetUp.tableBgColor,
-        borderColor: this.optionsSetUp.borderColor
+        background: this.optionsSetup.tableBgColor,
+        borderColor: this.optionsSetup.borderColor
       };
     },
     headerStyle () {
       return {
-        background: this.optionsSetUp.headerBackground,
-        color: this.optionsSetUp.headerTextColor,
-        justifyContent: this.optionsSetUp.isButton ? 'space-between' : 'center'
+        background: this.optionsSetup.headerBackground,
+        color: this.optionsSetup.headerTextColor,
+        justifyContent: this.optionsSetup.isButton ? 'space-between' : 'center'
 
       };
     },
     headerBtnStyle () {
       return {
-        background: this.optionsSetUp.headerBtnBackground,
-        color: this.optionsSetUp.headerBtnTextColor
+        background: this.optionsSetup.headerBtnBackground,
+        color: this.optionsSetup.headerBtnTextColor
       };
     },
     weekStyle () {
       return {
-        background: this.optionsSetUp.weekBackground,
-        color: this.optionsSetUp.weekTextColor
+        background: this.optionsSetup.weekBackground,
+        color: this.optionsSetup.weekTextColor
       };
     },
     dayStyle () {
       return {
-        backgroundColor: this.optionsSetUp.borderColor
+        backgroundColor: this.optionsSetup.borderColor
       }
     },
     currentMonthTitle() {
@@ -138,13 +145,16 @@ export default {
       }
       
       return days
-    }
+    },
+    allComponentLinkage() {
+      return this.$store.state.designer.allComponentLinkage;
+    },
   },
   watch: {
     value: {
       handler(val) {
         this.options = val;
-        this.optionsSetUp = val.setup;
+        this.optionsSetup = val.setup;
         this.optionsPosition = val.position;
         this.optionsData = val.data;
         this.setOptionsData();
@@ -154,13 +164,21 @@ export default {
   },
   mounted() {
     this.options = this.value;
-    this.optionsSetUp = this.value.setup;
+    this.optionsSetup = this.value.setup;
     this.optionsPosition = this.value.position;
     this.optionsData = this.value.data;
     targetWidgetLinkageLogic(this);
     this.setOptionsData();
   },
   methods: {
+    selectDay (data) {
+      this.selectDayStr = data.date
+      const formTimeData = {}
+      formTimeData['date'] = data.date
+      originWidgetLinkageLogic(this, true, {
+        currentData: formTimeData,
+      }); // 联动-源组件逻辑
+    },
     // 数据解析
     setOptionsData(e, paramsConfig) {
       const optionsData = this.optionsData; // 数据类型 静态 or 动态
@@ -214,10 +232,17 @@ export default {
         this.$forceUpdate();
       });
     },
-    cellStyle (isToday) {
-      return {
-        backgroundColor: isToday ? this.optionsSetUp.todayBackground : this.optionsSetUp.dayBackground,
-        color: isToday ? this.optionsSetUp.todayTextColor : this.optionsSetUp.dayTextColor,
+    cellStyle (isToday, isSelected) {
+      if (isSelected) {
+        return {
+          backgroundColor: this.optionsSetup.selectedBackground,
+          color: this.optionsSetup.selectedTextColor,
+        }
+      } else {
+        return {
+          backgroundColor: isToday ? this.optionsSetup.todayBackground : this.optionsSetup.dayBackground,
+          color: isToday ? this.optionsSetup.todayTextColor : this.optionsSetup.dayTextColor,
+        }
       }
     },
     prevMonth() {
@@ -329,12 +354,17 @@ export default {
   width: calc(100% - 0px);
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 /* 当前月份的日期 */
 .day-cell.current-month {
   background-color: rgb(0, 59, 81);
   color: #ffffff;
+}
+
+.day-cell.selected {
+  background-color: rgb(11, 180, 241);
 }
 
 /* 非当前月份的日期 */

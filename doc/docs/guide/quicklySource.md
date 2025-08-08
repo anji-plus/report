@@ -55,9 +55,7 @@ git clone https://gitee.com/anji-plus/report.git <br>
 解压aj-report-xxxx.zip，找到bootstrap.yml <br>
 ![img_1.png](../picture/quickly/img_17.png) <br>
 
-将图中关于mysql的连接配置信息换成你使用的IP:数据库名。如果没有修改flyway为false，那flyway会自动建立aj_report库 <br>
-
-![bootstrap.png](../picture/quickly/img_2.png) <br>
+将关于mysql的连接配置信息换成你使用的IP:数据库名。 <br>
 **注**：请确认你的Mysql是否支持远程连接，登陆用户是否有DDL权限 <br>
 
 ```yaml
@@ -69,7 +67,8 @@ git clone https://gitee.com/anji-plus/report.git <br>
 
 ## flyway
 
-flyway是用于自动执行sql，因为mysql版本及配置等问题，flyway可能会执行失败。如果你mysql没问题，注意检查flyway是否开启。<br>
+flyway是用于自动执行sql，因为mysql版本及配置等问题，flyway可能会执行失败。<br>
+如果日志提示“FlywayInitialization”错误，请修改为false，并手动执行sql（report-core --> src --> main --> resources --> db.migration）<br>
 
 ```yaml
   flyway:
@@ -79,8 +78,7 @@ flyway是用于自动执行sql，因为mysql版本及配置等问题，flyway可
 ## OSS配置
 
 OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->amazonS3->nfs <br>
-![file.png](../picture/quickly/img.png) <br>
-
+需要修改downloadPath和path <br>
 ```yaml
   gaea:
     subscribes:
@@ -89,7 +87,7 @@ OSS底层已支持minio、amazonS3、nfs，都配置的情况下优先级minio->
         ##允许上传的文件后缀
         file-type-white-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg|.aaa|.svg
         # 用于文件上传成功后，生成文件的下载公网完整URL，http://serverip:9095/file/download，注意填写IP必须填写后端服务所在的机器IP
-        downloadPath: http://10.108.26.197:9095/file/download
+        downloadPath: http://127.0.0.1:9095/file/download
         nfs:
           #上传对应本地全路径，注意目录不会自动创建，注意 Win是 \ 且有盘符，linux是 / 无盘符，注意目录权限问题
           path: /app/disk/upload/
